@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Logging;
+using Mapsui.Providers.Wfs;
+using Mapsui.Styles;
+using Mapsui.Widgets.InfoWidgets;
+using System.Net;
+using System.Threading.Tasks;
+
+#pragma warning disable IDISP001 // Dispose created
+
+namespace Mapsui.Samples.Common.Maps.DataFormats;
+
+public class Wfs2_0Sample : ISample
+{
+    public string Name => "WFS 2.0";
+    public string Category => "WFS";
+
+    private const string _crs = "EPSG:31254";
+
+    public async Task<Map> CreateMapAsync()
+    {
+        try
+        {
+            var map = new Map { CRS = _crs };
+            var provider = await CreateWfsProviderAsync();
+            map.Layers.Add(CreateWfsLayer(provider));
+            map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Laser Points"));
+            map.Navigator.OverridePanBounds = new(-34900, 255800, -34700, 256000);
+            map.Navigator.ZoomToPanBounds();
+            return map;
+
+        }
+        catch (WebException ex)
+        {
+            Logger.Log(LogLevel.Warning, ex.Message, ex);
+            throw;
+        }
+    }
+
+    private static ILayer CreateWfsLayer(WFSProvider provider)
+    {
+        return new Layer("Laser Points")
+        {
+            Style = new SymbolStyle()
+            {
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.Red),
+                SymbolScale = 1
+            },
+            DataSource = provider,
+        };
+    }
+
+    private static async Task<WFSProvider> CreateWfsProviderAsync()
+    {
+        var provider = await WFSProvider.CreateAsync(
+            "https://vogis.cnv.at/geoserver/vogis/laser_2002_04_punkte/ows",
+            "vogis",
+            "laser_2002_04_punkte",
+            WFSProvider.WFSVersionEnum.WFS_2_0_0);
+
+        provider.GetFeatureGetRequest = true;
+        provider.CRS = _crs;
+        provider.AxisOrder = [0, 1];
+
+        await provider.InitAsync();
+
+        return provider;
+    }
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>

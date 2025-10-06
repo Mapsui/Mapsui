@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Mapsui.UI;
+
+namespace Mapsui.Samples.Common.Maps.Geometries;
+
+public class VariousSample : ISample, ISampleTest
+{
+    public string Name => "Various geometries";
+    public string Category => "Geometries";
+
+    public Task<Map> CreateMapAsync()
+    {
+        var map = new Map();
+
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(PolygonGeometrySample.CreateLayer());
+        map.Layers.Add(LineStringSample.CreateLineStringLayer(LineStringSample.CreateLineStringStyle()));
+        map.Layers.Add(CreateLayerWithStyleOnLayer(map.Extent, 10));
+        map.Layers.Add(CreateLayerWithStyleOnFeature(map.Extent, 10));
+
+        return Task.FromResult(map);
+    }
+
+    private static ILayer CreateLayerWithStyleOnLayer(MRect? envelope, int count = 25)
+    {
+        return new Layer("Style on Layer")
+        {
+            DataSource = new MemoryProvider(RandomPointsBuilder.GenerateRandomPoints(envelope, count).ToFeatures()),
+            Style = CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
+        };
+    }
+
+    private static ILayer CreateLayerWithStyleOnFeature(MRect? envelope, int count = 25)
+    {
+        var style = CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.loc.png");
+
+        return new Layer("Style on feature")
+        {
+            DataSource = new MemoryProvider(GenerateRandomFeatures(envelope, count, style)),
+            Style = null
+        };
+    }
+
+    private static IEnumerable<IFeature> GenerateRandomFeatures(MRect? envelope, int count, IStyle style)
+    {
+        return RandomPointsBuilder.GenerateRandomPoints(envelope, count, new System.Random(123))
+            .Select(p => new PointFeature(p) { Styles = new List<IStyle> { style } }).ToList();
+    }
+
+    private static ImageStyle CreateBitmapStyle(string embeddedResourcePath)
+    {
+        return new ImageStyle { Image = embeddedResourcePath, SymbolScale = 0.75 };
+    }
+
+    public async Task InitializeTestAsync(IMapControl mapControl)
+    {
+        await Task.Delay(1000);
+    }
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>

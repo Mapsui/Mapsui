@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using System.Threading.Tasks;
+using Mapsui.Layers;
+using Mapsui.Limiting;
+using Mapsui.Providers.Wms;
+using Mapsui.Styles;
+
+namespace Mapsui.Samples.Common.Maps.WMS;
+
+public class WmsBasilicataSample : ISample
+{
+    public string Name => "WMS Basilicata";
+    public string Category => "WMS";
+
+    public async Task<Map> CreateMapAsync()
+    {
+        var map = new Map() { CRS = "EPSG:4326" };
+        // The WMS request needs a CRS
+        map.Layers.Add(await CreateLayerAsync());
+        var panBounds = GetLimitsOfBasilicata();
+        map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
+        map.Navigator.RotationLock = true;
+        map.Navigator.OverridePanBounds = panBounds;
+        map.Navigator.ZoomToBox(panBounds);
+
+        return map;
+    }
+
+    public static async Task<ILayer> CreateLayerAsync()
+    {
+        return new ImageLayer("Basilicata")
+        {
+            DataSource = await CreateWmsProviderAsync(),
+            Style = new RasterStyle()
+        };
+    }
+
+    private static async Task<WmsProvider> CreateWmsProviderAsync()
+    {
+        const string wmsUrl = "http://rsdi.regione.basilicata.it:80/rbgeoserver2016/maps_ctr/LC.LandCoverRaster/ows";
+
+        var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms Basilicata Sample");
+        provider.ContinueOnError = true;
+        provider.TimeOut = 40000;
+        provider.CRS = "EPSG:4326";
+
+        provider.AddLayer("LC.LandCoverRaster");
+        provider.SetImageFormat(provider.OutputFormats[0]);
+        return provider;
+    }
+
+    public static MRect GetLimitsOfBasilicata()
+    {
+        var (minX, minY) = (13.804827, 38.63506);
+        var (maxX, maxY) = (17.804827, 42.63506);
+        return new MRect(minX, minY, maxX, maxY);
+    }
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>

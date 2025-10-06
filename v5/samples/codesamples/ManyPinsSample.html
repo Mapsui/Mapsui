@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using Mapsui.Manipulations;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Styles;
+using Mapsui.UI;
+using Mapsui.UI.Maui;
+using Mapsui.Utilities;
+using System.Diagnostics;
+using System.Reflection;
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
+
+namespace Mapsui.Samples.Maui;
+
+public class ManyPinsSample : IMapViewSample
+{
+    static int markerNum = 1;
+    static Random rnd = new Random(1);
+
+    public string Name => "Add many Pins Sample";
+
+    public string Category => "MapView";
+
+    public bool UpdateLocation => true;
+
+    public bool OnTap(object? s, MapClickedEventArgs e)
+    {
+        var mapView = Caster.TryCastOrThrow<UI.Maui.MapView>(s);
+
+        var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
+        foreach (var str in assembly.GetManifestResourceNames())
+            Debug.WriteLine(str);
+
+        switch (e?.GestureType)
+        {
+            case GestureType.SingleTap:
+                var pin = new Pin(mapView)
+                {
+                    Label = $"PinType.Pin {markerNum++}",
+                    Address = e.Point.ToString(),
+                    Position = e.Point,
+                    Type = PinType.Pin,
+                    Color = new Color(rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f),
+                    Transparency = 0.5f,
+                    Scale = rnd.Next(50, 130) / 100f,
+                };
+                pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
+                pin.Callout.RectRadius = rnd.Next(0, 30);
+                pin.Callout.TailHeight = rnd.Next(0, 20);
+                pin.Callout.TailWidth = rnd.Next(0, 20);
+                pin.Callout.TailAlignment = (TailAlignment)rnd.Next(0, 4);
+                pin.Callout.TailPosition = rnd.Next(0, 100) / 100;
+                pin.Callout.BackgroundColor = KnownColor.White;
+                pin.Callout.Color = pin.Color;
+                if (rnd.Next(0, 3) < 2)
+                {
+                    pin.Callout.Type = CalloutType.Detail;
+                    pin.Callout.TitleFontSize = rnd.Next(15, 30);
+                    pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
+                    pin.Callout.TitleFontColor = new Color(rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f);
+                    pin.Callout.SubtitleFontColor = pin.Color;
+                }
+                else
+                {
+                    pin.Callout.Type = CalloutType.Detail;
+                    pin.Callout.ContentId = "1";
+                }
+                mapView.Pins.Add(pin);
+                pin.ShowCallout();
+                break;
+            case GestureType.DoubleTap:
+                foreach (var r in assembly.GetManifestResourceNames())
+                    System.Diagnostics.Debug.WriteLine(r);
+
+                var resourceName = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
+                mapView?.Pins.Add(new Pin(mapView)
+                {
+                    Label = $"PinType.Svg {markerNum++}",
+                    Position = e.Point,
+                    Type = PinType.ImageSource,
+                    Scale = 0.1f,
+                    ImageSource = resourceName
+                });
+                break;
+            default:
+                throw new Exception($"Unknown {nameof(GestureType)}. This is bug in Mapsui.");
+        }
+
+        return true;
+    }
+
+    public void Setup(IMapControl mapControl)
+    {
+        mapControl.Map = OsmSample.CreateMap();
+
+        ((UI.Maui.MapView)mapControl).UniqueCallout = true;
+
+        var sw = new Stopwatch();
+        sw.Start();
+
+        // Add 1000 pins
+        var list = new List<Pin>();
+        for (var i = 0; i < 1000; i++)
+        {
+            list.Add(CreatePin(i));
+        }
+
+        _ = sw.Elapsed;
+
+        ((ObservableRangeCollection<Pin>)((UI.Maui.MapView)mapControl).Pins).AddRange(list);
+
+        _ = sw.Elapsed;
+
+        sw.Stop();
+    }
+
+    private Pin CreatePin(int num)
+    {
+        var position = new Position(0 + rnd.Next(-85000, +85000) / 1000.0, 0 + rnd.Next(-180000, +180000) / 1000.0);
+
+        var pin = new Pin()
+        {
+            Label = $"PinType.Pin {num++}",
+            Address = position.ToString(),
+            Position = position,
+            Type = PinType.Pin,
+            Color = new Color(rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f),
+            Transparency = 0.5f,
+            Scale = rnd.Next(50, 130) / 100f,
+        };
+        pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
+        pin.Callout.RectRadius = rnd.Next(0, 30);
+        pin.Callout.TailHeight = rnd.Next(0, 20);
+        pin.Callout.TailWidth = rnd.Next(0, 20);
+        pin.Callout.TailAlignment = (TailAlignment)rnd.Next(0, 4);
+        pin.Callout.TailPosition = rnd.Next(0, 100) / 100;
+        pin.Callout.BackgroundColor = KnownColor.White;
+        pin.Callout.Color = pin.Color;
+        if (rnd.Next(0, 3) < 2)
+        {
+            pin.Callout.Type = CalloutType.Detail;
+            pin.Callout.TitleFontSize = rnd.Next(15, 30);
+            pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
+            pin.Callout.TitleFontColor = new Color(rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f);
+            pin.Callout.SubtitleFontColor = pin.Color;
+        }
+        else
+        {
+            pin.Callout.Type = CalloutType.Detail;
+            pin.Callout.ContentId = "1";
+        }
+
+        return pin;
+    }
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>

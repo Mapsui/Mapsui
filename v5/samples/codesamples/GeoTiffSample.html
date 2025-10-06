@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using Mapsui.Extensions.Provider;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Styles;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+#pragma warning disable IDISP001 // Dispose created
+
+namespace Mapsui.Samples.Common.Maps.DataFormats;
+
+public class GeoTiffSample : ISample
+{
+    static GeoTiffSample()
+    {
+        GeoTiffDeployer.CopyEmbeddedResourceToFile("example.shp");
+    }
+
+    public string Name => "Geo Tiff";
+    public string Category => "Data Formats";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        var examplePath = Path.Combine(GeoTiffDeployer.GeoTiffLocation, "example.tif");
+        var gif = new GeoTiffProvider(examplePath, new List<Color> { Color.Red });
+        map.Layers.Add(CreateGifLayer(gif));
+
+        return map;
+    }
+
+    private static ILayer CreateGifLayer(IProvider gifSource)
+    {
+        return new Layer
+        {
+            Name = "GeoGif",
+            DataSource = gifSource,
+            Style = null,
+        };
+    }
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>

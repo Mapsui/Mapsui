@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using System.IO;
+using System.Threading.Tasks;
+using Mapsui.Layers;
+using Mapsui.Nts.Providers;
+using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+
+namespace Mapsui.Samples.Common.Maps.Performance;
+
+public class GeometrySimplifyProviderWithShapefileSample : ISample
+{
+    static GeometrySimplifyProviderWithShapefileSample()
+    {
+        ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
+    }
+
+    public string Name => "GeometrySimplifyProvider with Shapefile";
+    public string Category => "Performance";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+
+        var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+        var countrySource = new ShapeFile(countriesPath, true)
+        {
+            CRS = "EPSG:4326"
+        };
+        var projectedCountrySource = new ProjectingProvider(countrySource)
+        {
+            CRS = "EPSG:3857",
+        };
+
+        var simplifyCountrySource = new GeometrySimplifyProvider(projectedCountrySource, distanceTolerance: 200000);
+        map.Layers.Add(new RasterizingLayer(CreateCountryLayer(simplifyCountrySource)));
+
+        return map;
+    }
+
+    private static ILayer CreateCountryLayer(IProvider countrySource)
+    {
+        return new Layer
+        {
+            Name = "Countries",
+            DataSource = countrySource,
+            Style = CreateCountryTheme()
+        };
+    }
+
+    private static IThemeStyle CreateCountryTheme()
+    {
+        // Set a gradient theme on the countries layer, based on Population density
+        // First create two styles that specify min and max styles
+        // In this case we will just use the default values and override the fill-colors
+        // using a color blender. If different line-widths, line- and fill-colors where used
+        // in the min and max styles, these would automatically get linearly interpolated.
+        var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+        var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+
+        // Create theme using a density from 0 (min) to 400 (max)
+        return new GradientTheme("POPDENS", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+    }
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>

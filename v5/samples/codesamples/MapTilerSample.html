@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using System.IO;
+using BruTile;
+using BruTile.FileSystem;
+using BruTile.Predefined;
+using Mapsui.Layers;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Tiling.Layers;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.DataFormats;
+
+public class MapTilerSample : ISample
+{
+    static MapTilerSample()
+    {
+        MapTilesDeployer.CopyEmbeddedResourceToFile("TrueMarble");
+    }
+
+    public string Name => "Tiles on file system";
+    public string Category => "Data Formats";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        map.Layers.Add(CreateLayer());
+        return map;
+    }
+
+    public static ILayer CreateLayer()
+        => new TileLayer(new FileTileSource(GetTileSchema(), Path.Combine(MapTilesDeployer.MapTileLocation, "TrueMarble"), "png", name: "MapTiler")) { Name = "True Marble in MapTiler" };
+
+    private static GlobalSphericalMercator GetTileSchema()
+    {
+        var schema = new GlobalSphericalMercator(YAxis.TMS);
+        schema.Resolutions.Clear();
+        schema.Resolutions[0] = new Resolution(0, 156543.033900000);
+        schema.Resolutions[1] = new Resolution(1, 78271.516950000);
+        return schema;
+    }
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>

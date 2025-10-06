@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using Mapsui.Layers;
+using Mapsui.Nts;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using NetTopologySuite.Geometries;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Demo;
+
+public class AddPinsSample : ISample
+{
+    public string Name => "Add Pins";
+    public string Category => "Demo";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    private static Map CreateMap()
+    {
+        var features = new List<IFeature>();
+
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreatePinLayer(features));
+        map.Tapped += (m, e) =>
+        {
+            var layer = e.Map.Layers.OfType<MemoryLayer>().First();
+            // Add a point to the layer using the Info position
+            features.Add(new GeometryFeature
+            {
+                Geometry = new Point(e.WorldPosition.X, e.WorldPosition.Y)
+            });
+            // The MemoryLayer needs to update the changed features.
+            layer.FeaturesWereModified();
+            // To notify the map that a redraw is needed.
+            layer.DataHasChanged();
+            e.Handled = true;
+        };
+        return map;
+    }
+
+    private static MemoryLayer CreatePinLayer(IEnumerable<IFeature> features) => new()
+    {
+        Name = "Pin Layer",
+        Features = features,
+        Style = ImageStyles.CreatePinStyle()
+    };
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>

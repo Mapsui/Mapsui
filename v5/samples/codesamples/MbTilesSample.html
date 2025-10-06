@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre[class*="language-"] { margin: 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<pre class="line-numbers"><code class="language-csharp">using BruTile.MbTiles;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Tiling.Layers;
+using SQLite;
+using System.IO;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.DataFormats;
+
+public class MbTilesSample : ISample
+{
+    static MbTilesSample()
+    {
+        MbTilesDeployer.CopyEmbeddedResourceToFile("world.mbtiles");
+    }
+
+    public string Name => "MbTiles";
+    public string Category => "Data Formats";
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        map.Layers.Add(CreateMbTilesLayer(Path.GetFullPath(Path.Combine(MbTilesDeployer.MbTilesLocation, "world.mbtiles")), "regular"));
+        return map;
+    }
+
+    public Task<Map> CreateMapAsync()
+    {
+        return Task.FromResult(CreateMap());
+    }
+
+    public static TileLayer CreateMbTilesLayer(string path, string name)
+    {
+        var mbTilesTileSource = new MbTilesTileSource(new SQLiteConnectionString(path, true));
+        var mbTilesLayer = new TileLayer(mbTilesTileSource) { Name = name };
+        return mbTilesLayer;
+    }
+}
+</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Prism.highlightAll();
+        // Notify parent window that highlighting is complete
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('prism-highlight', '*');
+        }
+    });
+</script>
+</body>
+</html>
