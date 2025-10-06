@@ -15,8 +15,8 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <WasmNativeStrip>true</WasmNativeStrip>
     <EmccCompileOptimizationFlag>-O3</EmccCompileOptimizationFlag>
-    <RunAOTCompilation>true</RunAOTCompilation>
-    <WasmStripILAfterAOT>true</WasmStripILAfterAOT>
+    <!--<RunAOTCompilation>true</RunAOTCompilation>
+    <WasmStripILAfterAOT>true</WasmStripILAfterAOT>-->
   </PropertyGroup>
 
   <ItemGroup>
