@@ -1,0 +1,17 @@
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<pre class="line-numbers"><code class="language-@Language">@Code</code></pre>
+
+@code {
+    [Parameter] public string Code { get; set; } = string.Empty;
+    [Parameter] public string Language { get; set; } = "csharp";
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("highlightCode");
+        }
+    }
+}
