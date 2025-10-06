@@ -39,7 +39,11 @@ public partial class Index
 
             _categoryId = value;
             if (!IsCategoryInRoute())
+            {
                 FillSamples();
+                // Automatically select the first sample from the new category
+                SampleId = MapSamples.FirstOrDefault()?.Name;
+            }
         }
     }
 
