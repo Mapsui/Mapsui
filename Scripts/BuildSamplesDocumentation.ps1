@@ -1,31 +1,18 @@
-$rootFolder = ".\samples"
+$folders = @(".\samples")
 $outputFolder = ".\docs\codesamples"
-$rootPath = Convert-Path .\
 
-Get-ChildItem -Path $rootFolder -Recurse -Filter "*sample.cs" | ForEach-Object {
-    $filePath = $_.FullName
-    $relativePath = $filePath.Substring($rootPath.Length + 1)
-    $relativePath = $relativePath.Replace('\', '/');
-    $fileName = $_.Name -replace '\.cs$'  # Remove the ".cs" extension from the file name
+foreach ($rootFolder in $folders) {
+    $rootPath = Convert-Path .\
 
-    $outputPath = Join-Path -Path $outputFolder -ChildPath "$fileName.md"
-    $outputContent = "[!code-csharp[Main](../../$relativePath `"$fileName`")]"
+    Get-ChildItem -Path $rootFolder -Recurse -Filter "*sample.cs" | ForEach-Object {
+        $filePath = $_.FullName
+        $fileName = $_.Name -replace '\.cs$', ''
+        $outputPath = Join-Path -Path $outputFolder -ChildPath "$fileName.html"
+        $code = Get-Content $filePath -Raw
+        $escapedCode = [System.Net.WebUtility]::HtmlEncode($code)
 
-    $outputContent | Out-File -FilePath $outputPath -Force
-}
+        $outputContent = "<pre><code class=""language-csharp"">$escapedCode</code></pre>"
 
-$rootFolder = ".\Tests"
-$outputFolder = ".\docs\codesamples"
-$rootPath = Convert-Path .\
-
-Get-ChildItem -Path $rootFolder -Recurse -Filter "*sample.cs" | ForEach-Object {
-    $filePath = $_.FullName
-    $relativePath = $filePath.Substring($rootPath.Length + 1)
-    $relativePath = $relativePath.Replace('\', '/');
-    $fileName = $_.Name -replace '\.cs$'  # Remove the ".cs" extension from the file name
-
-    $outputPath = Join-Path -Path $outputFolder -ChildPath "$fileName.md"
-    $outputContent = "[!code-csharp[Main](../../$relativePath `"$fileName`")]"
-
-    $outputContent | Out-File -FilePath $outputPath -Force
+        $outputContent | Out-File -FilePath $outputPath -Force
+    }
 }
