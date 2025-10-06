@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
     <style>
@@ -47,7 +48,7 @@
 </head>
 <body>
 <div class="code-container">
-    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">ðŸ“‹ Copy</button>
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
     <pre class="line-numbers"><code class="language-csharp">using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -177,7 +178,7 @@ public class VariousSample : ISample, ISampleTest
     // Show copy success feedback
     function showCopySuccess(button) {
         const originalText = button.textContent;
-        button.textContent = 'âœ… Copied!';
+        button.textContent = 'Copied!';
         button.classList.add('copied');
         
         setTimeout(() => {
@@ -189,7 +190,7 @@ public class VariousSample : ISample, ISampleTest
     // Show copy error feedback
     function showCopyError(button) {
         const originalText = button.textContent;
-        button.textContent = 'âŒ Failed';
+        button.textContent = 'Failed';
         
         setTimeout(() => {
             button.textContent = originalText;

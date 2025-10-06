@@ -17,6 +17,7 @@ foreach ($rootFolder in $folders) {
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
     <style>
@@ -63,7 +64,7 @@ foreach ($rootFolder in $folders) {
 </head>
 <body>
 <div class="code-container">
-    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">📋 Copy</button>
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
     <pre class="line-numbers"><code class="language-csharp">$code</code></pre>
 </div>
 
@@ -126,7 +127,7 @@ foreach ($rootFolder in $folders) {
     // Show copy success feedback
     function showCopySuccess(button) {
         const originalText = button.textContent;
-        button.textContent = '✅ Copied!';
+        button.textContent = 'Copied!';
         button.classList.add('copied');
         
         setTimeout(() => {
@@ -138,7 +139,7 @@ foreach ($rootFolder in $folders) {
     // Show copy error feedback
     function showCopyError(button) {
         const originalText = button.textContent;
-        button.textContent = '❌ Failed';
+        button.textContent = 'Failed';
         
         setTimeout(() => {
             button.textContent = originalText;
