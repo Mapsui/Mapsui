@@ -1,5 +1,5 @@
 $folders = @(".\samples")
-$outputFolder = ".\docs\codesamples"
+$outputFolder = ".\Samples\Mapsui.Samples.Blazor\wwwroot\codesamples"
 
 foreach ($rootFolder in $folders) {
     $rootPath = Convert-Path .\

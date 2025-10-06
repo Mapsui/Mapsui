@@ -155,7 +155,7 @@ public partial class Index
                 var sample = SampleBase;
                 Title = sample.Name;
                 await sample.SetupAsync(_mapControl);
-                _sourceCodeUrl = $@"../codesamples/{sample.GetType().Name}.html";
+                _sourceCodeUrl = $@"./codesamples/{sample.GetType().Name}.html";
             }
         });
     }
