@@ -6,10 +6,49 @@
     <style>
         body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
         pre[class*="language-"] { margin: 0; border-radius: 8px; }
+        
+        .code-container {
+            position: relative;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            cursor: pointer;
+            color: #495057;
+            transition: all 0.2s ease;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .copy-button:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            color: #212529;
+        }
+        
+        .copy-button.copied {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .copy-button:active {
+            transform: translateY(1px);
+        }
     </style>
 </head>
 <body>
-<pre class="line-numbers"><code class="language-csharp">using Mapsui.Extensions;
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">ðŸ“‹ Copy</button>
+    <pre class="line-numbers"><code class="language-csharp">using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Providers.Shapefile;
@@ -119,6 +158,7 @@ public class ThemeStyleSample : ISample
     };
 }
 </code></pre>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
@@ -132,6 +172,71 @@ public class ThemeStyleSample : ISample
             window.parent.postMessage('prism-highlight', '*');
         }
     });
+    
+    // Copy code functionality using DOM extraction
+    function copyCode(button) {
+        try {
+            // Find the code element (next sibling of button's parent)
+            const codeElement = button.parentElement.querySelector('code');
+            
+            // Extract plain text content (DOM extraction strategy)
+            const codeText = codeElement.textContent || codeElement.innerText;
+            
+            // Use modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                // Fallback for older browsers or non-HTTPS
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    
+    // Fallback copy method for older browsers
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    
+    // Show copy success feedback
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'âœ… Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    
+    // Show copy error feedback
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'âŒ Failed';
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
 </script>
 </body>
 </html>
