@@ -34,12 +34,8 @@
 <div class="tab-content">
     @if (_activeTab == 0)
     {
-        <div class="container">
-            <div class="row">
-                <div class="col canvas-container">
-                    <MapControlComponent @ref="_mapControl" />
-                </div>
-            </div>   
+        <div class="canvas-container">
+            <MapControlComponent @ref="_mapControl" />
         </div>
     }
     else if (_activeTab == 1)
@@ -69,7 +65,6 @@
         margin-top: 10px;
         border: 1px solid #ccc;
         border-top: none;
-        padding: 10px;
         border-radius: 0 5px 5px 5px;
     }
 

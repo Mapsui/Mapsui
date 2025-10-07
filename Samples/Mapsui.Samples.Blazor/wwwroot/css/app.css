@@ -63,9 +63,16 @@ a, .btn-link {
     content: "An error has occurred."
 }
 
+.canvas-container {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
 .canvas-container canvas {
     width: 100%;
-    height: 80vh;
+    height: calc(100vh - 200px);
+    display: block;
 }
 
 /* Prism.js syntax highlighting styles */
