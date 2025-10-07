@@ -74,3 +74,28 @@
         padding: 1rem;
     }
 }
+
+/* DEBUG: Red backgrounds to identify spacing sources */
+.content {
+    background-color: red !important;
+}
+
+.tab-content {
+    background-color: lime !important;
+}
+
+.container {
+    background-color: orange !important;
+}
+
+.row {
+    background-color: yellow !important;
+}
+
+.col {
+    background-color: cyan !important;
+}
+
+.canvas-container {
+    background-color: magenta !important;
+}

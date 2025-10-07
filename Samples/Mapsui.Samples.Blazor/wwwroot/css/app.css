@@ -59,12 +59,8 @@ a, .btn-link {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
-    }
-    
-.canvas-container {
-    line-height: 1;
+.blazor-error-boundary::after {
+    content: "An error has occurred."
 }
 
 .canvas-container canvas {
