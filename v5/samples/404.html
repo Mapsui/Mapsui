@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Mapsui.Samples.Blazor</title>
+    <base href="/v5/samples/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="Mapsui.Samples.Blazor.styles.css" rel="stylesheet" />
+    <!-- Prism CSS for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <div style="position:absolute; top:30vh; width:100%; text-align:center">
+            <h1>Mapsui V5 samples</h1>
+            <div style="display:flex; gap:10px; justify-content:center; align-items:center">
+                <div class="spinner-border" role="status"></div>
+                The samples are loading...
+            </div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <!-- Prism JavaScript for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    
+    <!-- Initialize Prism for dynamic content -->
+    <script>
+        // Function to initialize Prism highlighting
+        function initializePrism() {
+            if (typeof Prism !== 'undefined') {
+                // Configure Prism autoloader
+                Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+                
+                // Highlight all code blocks
+                Prism.highlightAll();
+                
+                // Add line numbers to all pre elements with language classes
+                document.querySelectorAll('pre[class*="language-"]').forEach(function(pre) {
+                    if (!pre.classList.contains('line-numbers')) {
+                        pre.classList.add('line-numbers');
+                    }
+                });
+                
+                // Re-run highlighting and line numbers
+                if (Prism.plugins && Prism.plugins.lineNumbers) {
+                    Prism.plugins.lineNumbers.resize();
+                }
+            }
+        }
+        
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', initializePrism);
+        
+        // Re-initialize when content changes (for iframe content)
+        window.addEventListener('message', function(event) {
+            if (event.data === 'prism-highlight') {
+                setTimeout(initializePrism, 100);
+            }
+        });
+        
+        // Function to be called from iframe content
+        window.highlightCode = initializePrism;
+    </script>
+    
+    <!-- Blazor script -->
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>
