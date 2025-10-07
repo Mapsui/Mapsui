@@ -56,7 +56,7 @@ public class MapRegressionTests
             new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
             new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
             new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
-            new CustomSvgStyleSample(), // Is currently not functioning and should be fixed with a redesign.
+            new CustomSvgColorSample(), // Is currently not functioning and should be fixed with a redesign.
             new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
             new WmsBasilicataSample(), // Times out,
             new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
