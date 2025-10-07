@@ -71,7 +71,7 @@ a, .btn-link {
 
 .canvas-container canvas {
     width: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 220px);
     display: block;
 }
 
