@@ -1,7 +1,7 @@
 .navigation-bar {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.98) 100%);
     border-bottom: 2px solid #e9ecef;
-    padding: 1rem 2rem;
+    padding: 10px 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     /* Establish a predictable height variable (approx). Adjust if needed */
