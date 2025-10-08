@@ -4,12 +4,12 @@
 .responsive-panels .tab-buttons {
 	display: none;
 	gap: 10px;
-	margin-bottom: 20px;
+	margin: 10px;
 }
 
 .responsive-panels .tab-btn {
 	flex: 1;
-	padding: 10px 20px;
+	padding: 10px;
 	background-color: #e0e0e0;
 	border: none;
 	border-radius: 4px;

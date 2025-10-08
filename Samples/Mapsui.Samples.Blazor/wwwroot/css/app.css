@@ -75,37 +75,6 @@ a, .btn-link {
     display: block;
 }
 
-/* Prism.js syntax highlighting styles */
-pre[class*="language-"] {
-    margin: 1em 0;
-    padding: 1em;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-    overflow: auto;
-    background: #f8f9fa !important;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-code[class*="language-"] {
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 14px;
-}
-
-/* Line numbers styling */
-.line-numbers .line-numbers-rows {
-    border-right: 1px solid #d1d5db;
-    padding-right: 12px;
-    margin-right: 12px;
-    color: #6b7280;
-    font-size: 12px;
-}
-
-.line-numbers-rows > span:before {
-    color: #6b7280;
-}
-
 /* Responsive design for code blocks */
 @media (max-width: 768px) {
     pre[class*="language-"] {

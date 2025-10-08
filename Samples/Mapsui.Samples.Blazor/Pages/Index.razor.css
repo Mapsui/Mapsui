@@ -4,14 +4,18 @@
     padding: 1rem 2rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
+    /* Establish a predictable height variable (approx). Adjust if needed */
+    --nav-height: 68px; /* will be used below for container height calculation */
 }
 
 .nav-controls {
     display: flex;
     align-items: center;
     gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0; /* left align inside navigation bar */
+    max-width: none;
+    justify-content: flex-start;
 }
 
 .control-group {
@@ -52,20 +56,18 @@
 /* Responsive design */
 @media (max-width: 768px) {
     .nav-controls {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: stretch;
+        flex-wrap: wrap; /* allow wrapping but keep left alignment */
+        gap: 0.75rem 1.25rem; /* row gap then column gap */
+        align-items: flex-start;
     }
-    
     .control-group {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row; /* keep label and select on one line */
+        align-items: center;
         gap: 0.5rem;
     }
-    
     .form-select {
-        min-width: auto;
-        width: 100%;
+        min-width: 150px;
+        width: auto; /* shrink-to-fit */
     }
 }
 
@@ -75,27 +77,73 @@
     }
 }
 
-/* DEBUG: Red backgrounds to identify spacing sources */
-.content {
-    background-color: red !important;
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 10px; /* left aligned container */
+    width: auto;  /* allow it to span naturally */
+    justify-content: flex-start;
 }
 
-.tab-content {
-    background-color: lime !important;
+.tab-btn {
+    flex: 0 0 auto; /* equal intrinsic width */
+    width: 180px; /* match Page1 */
+    padding: 12px 0;
+    text-align: center;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.2;
+    transition: background-color 0.3s;
 }
 
 .container {
-    background-color: orange !important;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    background-color: white;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    /* Subtract navigation bar height so we don't overflow viewport */
+    height: calc(100vh - var(--nav-height, 68px));
 }
 
-.row {
-    background-color: yellow !important;
+/* Remove thick UA outlines while keeping keyboard accessibility */
+.tab-btn:focus { outline: none; }
+.tab-btn:focus-visible { outline: 2px solid #1d6fb8; outline-offset: 2px; }
+
+.tab-btn:hover {
+    background-color: #d0d0d0;
 }
 
-.col {
-    background-color: cyan !important;
+.tab-btn.active {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Layout for tab content so map or source code fills remaining space */
+.tab-content {
+    flex: 1 1 auto;
+    position: relative;
+    display: flex;
+    overflow: hidden;
 }
 
 .canvas-container {
-    background-color: magenta !important;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+iframe.source-code-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
 }

@@ -25,52 +25,22 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="tab-buttons">
+        <div class="tab-btn @(_activeTab == 0 ? "active" : "")" @onclick="(() => SetActiveTab(0))">Map</div>
+        <div class="tab-btn @(_activeTab == 1 ? "active" : "")" @onclick="(() => SetActiveTab(1))">SourceCode</div>
+    </div>
 
-<div class="tabs">
-    <div class="tab @(_activeTab == 0 ? "active" : "")" @onclick="(() => SetActiveTab(0))">Map</div>
-    <div class="tab @(_activeTab == 1 ? "active" : "")" @onclick="(() => SetActiveTab(1))">SourceCode</div>
+    <div class="tab-content">
+        @if (_activeTab == 0)
+        {
+            <div class="canvas-container">
+                <MapControlComponent @ref="_mapControl" />
+            </div>
+        }
+        else if (_activeTab == 1)
+        {
+            <iframe src="@_sourceCodeUrl" class="source-code-iframe"></iframe>
+        }
+    </div>
 </div>
-
-<div class="tab-content">
-    @if (_activeTab == 0)
-    {
-        <div class="canvas-container">
-            <MapControlComponent @ref="_mapControl" />
-        </div>
-    }
-    else if (_activeTab == 1)
-    {
-        <iframe src="@_sourceCodeUrl" class="source-code-iframe"></iframe>
-    }
-</div>
-
-<style>
-    .tabs {
-        display: flex;
-    }
-
-    .tab {
-        padding: 10px;
-        margin-right: 10px;
-        cursor: pointer;
-        background-color: #eee;
-        border-radius: 5px 5px 0 0;
-    }
-
-    .tab.active {
-        background-color: #ccc;
-    }
-
-    .tab-content {
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-top: none;
-        border-radius: 0 5px 5px 5px;
-    }
-
-    .source-code-iframe {
-        width: 100%;
-        height: calc(100vh - 250px); /* Adjust the height as needed */
-        border: none;
-    }
-</style>

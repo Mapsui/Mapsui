@@ -26,14 +26,16 @@
 <div class="container">
 	<!-- Tab buttons (visible on small screens) -->
 	<div class="tab-buttons">
-		<button class="tab-btn @(ActivePanel == 0 ? "active" : null)" @onclick="(() => SetActivePanel(0))">Map</button>
-		<button class="tab-btn @(ActivePanel == 1 ? "active" : null)" @onclick="(() => SetActivePanel(1))">Source Code</button>
+		<div class="tab-btn @(ActivePanel == 0 ? "active" : null)" @onclick="(() => SetActivePanel(0))">Map</div>
+		<div class="tab-btn @(ActivePanel == 1 ? "active" : null)" @onclick="(() => SetActivePanel(1))">Source Code</div>
 	</div>
 
 	<!-- Panels container -->
 	<div class="panels-container">
 		<div class="panel @(ActivePanel == 0 ? "active" : null)" id="panel1">
-             <MapControlComponent @ref="_mapControl" />
+            <div class="map-panel">
+                <MapControlComponent @ref="_mapControl" />
+            </div>
 		</div>
 
 		<div class="panel @(ActivePanel == 1 ? "active" : null)" id="panel2">

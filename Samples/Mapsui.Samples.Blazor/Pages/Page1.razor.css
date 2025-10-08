@@ -13,16 +13,11 @@
 }
 
 h1 {
-    margin-bottom: 20px;
-/* Hidden by default on large screens; shown via media query below */
-.tab-buttons {
-    display: none;
-    gap: 10px;
-    margin: 0 0 20px 0;
-}
+    margin: 0 0 8px 0;
     padding: 8px 12px;
     background: #ffffff;
     border-bottom: 1px solid #e2e2e2;
+    font-size: 1.1rem;
 }
 
 .dropdown-row {
@@ -56,17 +51,26 @@ h1 {
     min-width: 160px;
 }
 
-/* Tab buttons - hidden on large screens, visible on small screens */
+/* Tab buttons: show as horizontal row when used (we'll hide them again on wide screens below) */
 .tab-buttons {
-    display: none;
+    display: flex;
+    flex-direction: row;
     gap: 10px;
-    margin: 20px;
+    margin: 10px;
+    align-items: stretch;
+}
+
+/* Hide tab buttons on wide screens where panels are side-by-side */
+@media (min-width: 769px) {
+    .tab-buttons { display: none; }
 }
 
 /* Flat buttons like in original static HTML */
 .tab-btn {
-    flex: 1;
-    padding: 12px 24px;
+    flex: 0 0 auto; /* Do not stretch full row */
+    width: 180px; /* Consistent width across pages */
+    padding: 12px 0; /* Center label horizontally */
+    text-align: center;
     background-color: #e0e0e0;
     border: none;
     border-radius: 4px;
@@ -154,19 +158,26 @@ h1 {
 }
 
 /* Map specific sizing */
-.panel .canvas-container, .panel MapControlComponent, .panel .canvas-container > * {
+.map-panel {
     width: 100%;
-    height: 100%;
+    height: 600px; /* Fixed height to ensure visibility */
+    position: relative;
+    border-bottom: 1px solid #ccc;
+}
+.map-panel MapControlComponent,
+.map-panel .canvas-container,
+.map-panel canvas,
+.map-panel > * {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
 }
 
 /* Make first panel dedicate remaining space to the map */
 #panel1 {
     display: flex;
 }
-#panel1 > .canvas-container {
-    flex: 1 1 auto;
-    min-height: 0; /* allow flexbox shrink */
-}
+#panel1 > .map-panel { flex: 1 1 auto; }
 
 /* Optional: If you want a small header above the map, wrap it; currently map takes full panel */
 
@@ -179,7 +190,7 @@ h1 {
 
 /* Media query for small screens - switch to tabs */
 @media (max-width: 768px) {
-    .tab-buttons { display: flex; }
+    /* On narrow screens we stack panels and use the tab buttons */
     .panels-container { display: block; height: calc(100vh - 120px); overflow: hidden; }
     .panel { display: none; height: 100%; border-right: none; border-bottom: 1px solid #ddd; }
     .panel.active { display: block; overflow: auto; }
