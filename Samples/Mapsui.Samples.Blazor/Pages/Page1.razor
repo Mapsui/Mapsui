@@ -1,0 +1,45 @@
+@page "/page1"
+
+<div class="navigation-bar">
+	<div class="dropdown-row">
+		<div class="field-pair">
+			<label for="category">Category:</label>
+			<InputSelect id="category" @bind-Value="CategoryId" class="form-select">
+				@foreach (var cat in Categories)
+				{
+					<option value="@cat">@cat</option>
+				}
+			</InputSelect>
+		</div>
+		<div class="field-pair">
+			<label for="sample">Sample:</label>
+			<InputSelect id="sample" @bind-Value="SampleId" class="form-select">
+				@foreach (var sample in Samples)
+				{
+					<option value="@sample">@sample</option>
+				}
+			</InputSelect>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<!-- Tab buttons (visible on small screens) -->
+	<div class="tab-buttons">
+		<div class="tab-btn @(ActivePanel == 0 ? "active" : null)" @onclick="(() => SetActivePanel(0))">Map</div>
+		<div class="tab-btn @(ActivePanel == 1 ? "active" : null)" @onclick="(() => SetActivePanel(1))">Source Code</div>
+	</div>
+
+	<!-- Panels container -->
+	<div class="panels-container">
+		<div class="panel @(ActivePanel == 0 ? "active" : null)" id="panel1">
+            <div class="map-panel">
+                <MapControlComponent @ref="_mapControl" />
+            </div>
+		</div>
+
+		<div class="panel @(ActivePanel == 1 ? "active" : null)" id="panel2">
+            <iframe src="@_sourceCodeUrl" class="source-code-iframe"></iframe>
+		</div>
+	</div>
+</div>

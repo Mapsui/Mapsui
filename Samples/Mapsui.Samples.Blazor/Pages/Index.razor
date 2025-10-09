@@ -1,83 +1,47 @@
 ﻿@page "/"
 
 <PageTitle>Mapsui</PageTitle>
-   <div class="form-group row">
-        <label for="category" class="col-sm-2 col-form-label">
-            Category
-        </label>
-        <div class="col-sm-10">
-            <InputSelect id="category" @bind-Value="CategoryId" class="form-control">
+
+<div class="navigation-bar">
+    <div class="nav-controls">
+        <div class="control-group">
+            <label for="category">Category:</label>
+            <InputSelect id="category" @bind-Value="CategoryId" class="form-select">
                 @foreach (var cat in Categories)
                 {
                     <option value="@cat">@cat</option>
                 }
             </InputSelect>
         </div>
-    </div>
-<div class="form-group row">
-    <label for="category" class="col-sm-2 col-form-label">
-        Sample
-    </label>
-    <div class="col-sm-10">
-        <InputSelect id="sample" @bind-Value="SampleId" class="form-control">
-            @foreach (var sample in Samples)
-            {
-                <option value="@sample">@sample</option>
-            }
-        </InputSelect>
-    </div>
-</div>
-
-<div class="tabs">
-    <div class="tab @(_activeTab == 0 ? "active" : "")" @onclick="(() => SetActiveTab(0))">Map</div>
-    <div class="tab @(_activeTab == 1 ? "active" : "")" @onclick="(() => SetActiveTab(1))">SourceCode</div>
-</div>
-
-<div class="tab-content">
-    @if (_activeTab == 0)
-    {
-        <div class="container">
-            <div class="row">
-                <div class="col border rounded p-2 canvas-container">
-                    <MapControlComponent @ref="_mapControl" />
-                </div>
-            </div>   
+        <div class="control-group">
+            <label for="sample">Sample:</label>
+            <InputSelect id="sample" @bind-Value="SampleId" class="form-select">
+                @foreach (var sample in Samples)
+                {
+                    <option value="@sample">@sample</option>
+                }
+            </InputSelect>
         </div>
-    }
-    else if (_activeTab == 1)
-    {
-        <iframe src="@_sourceCodeUrl" class="source-code-iframe"></iframe>
-    }
+    </div>
 </div>
 
-<style>
-    .tabs {
-        display: flex;
-    }
+<div class="container">
+    <div class="tab-buttons">
+        <div class="tab-btn @(_activeTab == 0 ? "active" : "")" @onclick="(() => SetActiveTab(0))">Map</div>
+        <div class="tab-btn @(_activeTab == 1 ? "active" : "")" @onclick="(() => SetActiveTab(1))">SourceCode</div>
+    </div>
 
-    .tab {
-        padding: 10px;
-        margin-right: 10px;
-        cursor: pointer;
-        background-color: #eee;
-        border-radius: 5px 5px 0 0;
-    }
-
-    .tab.active {
-        background-color: #ccc;
-    }
-
-    .tab-content {
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-top: none;
-        padding: 10px;
-        border-radius: 0 5px 5px 5px;
-    }
-
-    .source-code-iframe {
-        width: 100%;
-        height: calc(100vh - 250px); /* Adjust the height as needed */
-        border: none;
-    }
-</style>
+    <div class="tab-content">
+        @if (_activeTab == 0)
+        {
+            <div class="canvas-container">
+                <MapControlComponent @ref="_mapControl" />
+            </div>
+        }
+        else if (_activeTab == 1)
+        {
+            // Note, the html files can not be fetched when running this in VS, but it works in VS Code. It is something related to how Kestrel works, says copilot.
+            <iframe src="@_sourceCodeUrl" class="source-code-iframe"></iframe>
+        }
+    </div>
+</div>
