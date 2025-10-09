@@ -1,5 +1,7 @@
-﻿using Mapsui.Extensions.Cache;
+﻿using BruTile;
+using Mapsui.Extensions.Cache;
 using NUnit.Framework;
+using System;
 
 namespace Mapsui.Tests.Cache;
 
@@ -38,5 +40,30 @@ public class UrlCacheTests
 
         var notfound = cache.Find("https://test.com", new byte[] { 1, 2, 3 });
         Assert.That(notfound == null);
+    }
+
+    [Test]
+    public void FindWithExpireTimeReturnsNullForNonExistentUrlEntry()
+    {
+        // This test verifies the fix for NullReferenceException when cache expire time is set
+        var cache = new SqlitePersistentCache("testCacheWithExpiry", TimeSpan.FromMinutes(5));
+
+        // Try to find a non-existent entry - should return null without throwing NullReferenceException
+        var result = cache.Find("https://nonexistent.com", null);
+
+        Assert.That(result, Is.Null);
+    }
+
+    [Test]
+    public void FindWithExpireTimeReturnsNullForNonExistentTileEntry()
+    {
+        // This test verifies the fix for NullReferenceException when cache expire time is set
+        var cache = new SqlitePersistentCache("testCacheWithExpiry2", TimeSpan.FromMinutes(5));
+        var tileIndex = new TileIndex(0, 0, 0);
+
+        // Try to find a non-existent entry - should return null without throwing NullReferenceException
+        var result = cache.Find(tileIndex);
+
+        Assert.That(result, Is.Null);
     }
 }

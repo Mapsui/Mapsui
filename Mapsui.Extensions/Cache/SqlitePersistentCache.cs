@@ -173,7 +173,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         var tile = connection.Table<Tile>().FirstOrDefault(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
         if (_cacheExpireTime != TimeSpan.Zero)
         {
-            if (tile.Created.Add(_cacheExpireTime) < DateTime.Now)
+            if (tile != null && tile.Created.Add(_cacheExpireTime) < DateTime.Now)
             {
                 // expired
                 Remove(index);
@@ -214,7 +214,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         var tile = connection.Table<UrlCache>().FirstOrDefault(f => f.Url == url && f.PostData == postData);
         if (_cacheExpireTime != TimeSpan.Zero)
         {
-            if (tile.Created.Add(_cacheExpireTime) < DateTime.Now)
+            if (tile != null && tile.Created.Add(_cacheExpireTime) < DateTime.Now)
             {
                 // expired
                 Remove(url, postData);
