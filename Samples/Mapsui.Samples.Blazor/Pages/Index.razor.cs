@@ -7,10 +7,11 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace Mapsui.Samples.Blazor.Pages;
 
-public partial class Index
+public sealed partial class Index : IDisposable
 {
     private string? _sourceCodeUrl = null;
     private int _activeTab = 0;
@@ -18,15 +19,13 @@ public partial class Index
     private string? _categoryId;
     private string? _nameId;
     private bool _render;
+    private bool _suppressHash;
     public List<string> SampleNames { get; set; } = [];
     public List<ISampleBase> MapSamples { get; set; } = [];
     public List<string> SampleCategories { get; set; } = [];
 
     [Inject] private NavigationManager Nav { get; set; } = default!;
-
-    // Route parameters (bound from @page templates in Index.razor)
-    [Parameter] public string? Category { get; set; }
-    [Parameter] public string? Name { get; set; }
+    // no registration token needed; we'll unsubscribe in Dispose
 
     [Parameter]
     [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
@@ -63,7 +62,7 @@ public partial class Index
             _nameId = value;
             SampleBase = MapSamples.FirstOrDefault(f => f.Name == SampleName);
             FillMap();
-            NavigateToCanonical(replace: false);
+            UpdateHashFromSelection();
         }
     }
 
@@ -76,55 +75,42 @@ public partial class Index
         Performance.DefaultIsActive = ActiveMode.Yes; // To show performance in release mode
         FillComboBoxWithCategories();
         SampleCategory = SampleCategories[0];
+        // Subscribe to URL changes (hash changes will trigger LocationChanged)
+        Nav.LocationChanged += OnLocationChanged;
+        // Initialize from the current hash, or set the default
+        InitializeFromHashOrDefault();
+    }
 
-        if (IsCategoryInRoute())
+    public void Dispose()
+    {
+        Nav.LocationChanged -= OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        // When the hash changes, update selection if needed
+        if (TryParseHash(e.Location, out var category, out var name))
         {
-            SampleCategory = Category;
-            FillSamples();
-            if (IsNameInRoute())
+            _suppressHash = true;
+            try
             {
-                ThrowIfNameIsNotInRouteOrDoesNotExist();
-                SampleName = Name; // Select the named sample
-                NavigateToCanonical(replace: true); // ensure canonical casing/encoding
+                if (!string.IsNullOrEmpty(category) && SampleCategories.Contains(category) && category != SampleCategory)
+                {
+                    SampleCategory = category; // setter updates samples
+                }
+
+                if (!string.IsNullOrEmpty(name) && SampleNames.Contains(name) && name != SampleName)
+                {
+                    SampleName = name; // setter updates map
+                }
             }
-            else
+            finally
             {
-                // Category-only path: pick first sample in category
-                SampleName = MapSamples.FirstOrDefault()?.Name;
-                NavigateToCanonical(replace: true);
+                _suppressHash = false;
             }
-        }
-        else
-        {
-            SampleCategory = SampleCategories[0]; // Set a default category
-            FillSamples();
-            SampleName = MapSamples.FirstOrDefault()?.Name;
-            NavigateToCanonical(replace: true); // From "/" to "/{Category}/{Name}"
-        }
-    }
 
-    private bool IsCategoryInRoute()
-    {
-        if (!string.IsNullOrEmpty(Category))
-        {
-            if (!SampleCategories.Contains(Category))
-                throw new Exception($"Category '{Category}' does not exist. Choose from: '{string.Join(',', SampleCategories)}'");
-            return true;
+            StateHasChanged();
         }
-        return false;
-    }
-
-    private bool IsNameInRoute()
-    {
-        return !string.IsNullOrEmpty(Name);
-    }
-
-    private void ThrowIfNameIsNotInRouteOrDoesNotExist()
-    {
-        if (string.IsNullOrEmpty(Name))
-            throw new Exception("If a category is specified the name also needs to be specified.");
-        if (!SampleNames.Contains(Name))
-            throw new Exception($"The sample `{Name}` does not exist. Choose from: '{string.Join(',', SampleNames)}'");
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -148,21 +134,89 @@ public partial class Index
         StateHasChanged(); // Add this line
     }
 
-    private void NavigateToCanonical(bool replace)
+    private void InitializeFromHashOrDefault()
     {
-        if (string.IsNullOrWhiteSpace(SampleCategory) || string.IsNullOrWhiteSpace(SampleName)) return;
+        if (TryParseHash(Nav.Uri, out var category, out var name))
+        {
+            _suppressHash = true;
+            try
+            {
+                if (!string.IsNullOrEmpty(category) && SampleCategories.Contains(category))
+                {
+                    SampleCategory = category;
+                }
+                else
+                {
+                    SampleCategory = SampleCategories[0];
+                }
 
+                FillSamples();
+
+                if (!string.IsNullOrEmpty(name) && SampleNames.Contains(name))
+                {
+                    SampleName = name;
+                }
+                else
+                {
+                    SampleName = MapSamples.FirstOrDefault()?.Name;
+                }
+            }
+            finally
+            {
+                _suppressHash = false;
+            }
+
+            // Ensure canonical casing/encoding in hash
+            UpdateHashFromSelection(replace: true);
+        }
+        else
+        {
+            // No hash: set defaults and write hash
+            _suppressHash = true;
+            try
+            {
+                SampleCategory = SampleCategories[0];
+                FillSamples();
+                SampleName = MapSamples.FirstOrDefault()?.Name;
+            }
+            finally
+            {
+                _suppressHash = false;
+            }
+            UpdateHashFromSelection(replace: true);
+        }
+    }
+
+    private bool TryParseHash(string uri, out string? category, out string? name)
+    {
+        category = null;
+        name = null;
+        var u = new Uri(uri);
+        var hash = u.Fragment; // includes leading '#'
+        if (string.IsNullOrEmpty(hash)) return false;
+        if (!hash.StartsWith("#")) return false;
+        var path = hash.Length > 1 ? hash.Substring(1) : string.Empty; // remove '#'
+        // Support both '#/Category/Name' and '#Category/Name'
+        if (path.StartsWith("/")) path = path.Substring(1);
+        if (string.IsNullOrEmpty(path)) return false;
+        var parts = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length >= 1) category = Uri.UnescapeDataString(parts[0]);
+        if (parts.Length >= 2) name = Uri.UnescapeDataString(parts[1]);
+        return true;
+    }
+
+    private void UpdateHashFromSelection(bool replace = false)
+    {
+        if (_suppressHash) return;
+        if (string.IsNullOrWhiteSpace(SampleCategory) || string.IsNullOrWhiteSpace(SampleName)) return;
         var categorySegment = Uri.EscapeDataString(SampleCategory);
         var nameSegment = Uri.EscapeDataString(SampleName);
-        // Build a relative target (no leading slash) so it resolves under the app's base path
-        var targetRelative = $"{categorySegment}/{nameSegment}";
-        // Compose the absolute target using the app's BaseUri to compare with the current location
-        var absoluteTarget = new Uri(new Uri(Nav.BaseUri), targetRelative);
-
-        // Only navigate if different to avoid loops
-        var current = new Uri(Nav.Uri);
-        if (!current.AbsoluteUri.Equals(absoluteTarget.AbsoluteUri, StringComparison.Ordinal))
-            Nav.NavigateTo(targetRelative, replace);
+        var hash = $"#/{categorySegment}/{nameSegment}";
+        if (!string.Equals(new Uri(Nav.Uri).Fragment, hash, StringComparison.Ordinal))
+        {
+            // Navigate keeping us on the same page but updating the fragment
+            Nav.NavigateTo(hash, forceLoad: false, replace: replace);
+        }
     }
 
     private void FillComboBoxWithCategories()
