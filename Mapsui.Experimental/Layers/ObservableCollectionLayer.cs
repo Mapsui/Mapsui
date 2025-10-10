@@ -6,8 +6,9 @@ using Mapsui.Extensions;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using System.Collections.Generic;
+using Mapsui.Layers;
 
-namespace Mapsui.Layers;
+namespace Mapsui.Experimental.Layers;
 
 /// <summary>
 /// Represents a memory-based layer that exposes its data as an observable collection and synchronizes feature changes
