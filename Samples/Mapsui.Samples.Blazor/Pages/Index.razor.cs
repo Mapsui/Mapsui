@@ -154,15 +154,15 @@ public partial class Index
 
         var categorySegment = Uri.EscapeDataString(SampleCategory);
         var nameSegment = Uri.EscapeDataString(SampleName);
-        var target = $"/{categorySegment}/{nameSegment}";
+        // Build a relative target (no leading slash) so it resolves under the app's base path
+        var targetRelative = $"{categorySegment}/{nameSegment}";
+        // Compose the absolute target using the app's BaseUri to compare with the current location
+        var absoluteTarget = new Uri(new Uri(Nav.BaseUri), targetRelative);
 
         // Only navigate if different to avoid loops
         var current = new Uri(Nav.Uri);
-        var currentPathAndQuery = current.PathAndQuery; // includes path and query
-        if (!currentPathAndQuery.Equals(target, StringComparison.Ordinal))
-        {
-            Nav.NavigateTo(target, replace);
-        }
+        if (!current.AbsoluteUri.Equals(absoluteTarget.AbsoluteUri, StringComparison.Ordinal))
+            Nav.NavigateTo(targetRelative, replace);
     }
 
     private void FillComboBoxWithCategories()
