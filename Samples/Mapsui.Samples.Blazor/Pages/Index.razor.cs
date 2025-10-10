@@ -74,7 +74,6 @@ public sealed partial class Index : IDisposable
         LoggingWidget.ShowLoggingInMap = ActiveMode.Yes; // To show logging in release mode
         Performance.DefaultIsActive = ActiveMode.Yes; // To show performance in release mode
         FillComboBoxWithCategories();
-        SampleCategory = SampleCategories[0];
         // Subscribe to URL changes (hash changes will trigger LocationChanged)
         Nav.LocationChanged += OnLocationChanged;
         // Initialize from the current hash, or set the default
