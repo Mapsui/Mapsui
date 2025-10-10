@@ -131,6 +131,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.ArcGIS\Mapsui.ArcGIS.csproj" />
     <ProjectReference Include="..\..\Mapsui.Experimental.VectorTiles\Mapsui.Experimental.VectorTiles.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Experimental\Mapsui.Experimental.csproj" />
     <ProjectReference Include="..\..\Mapsui.Extensions\Mapsui.Extensions.csproj" />
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
