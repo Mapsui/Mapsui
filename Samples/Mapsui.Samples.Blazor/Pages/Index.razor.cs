@@ -16,18 +16,21 @@ public partial class Index
     private int _activeTab = 0;
     private MapControl? _mapControl;
     private string? _categoryId;
-    private string? _sampleId;
+    private string? _nameId;
     private bool _render;
-    public List<string> Samples { get; set; } = [];
+    public List<string> SampleNames { get; set; } = [];
     public List<ISampleBase> MapSamples { get; set; } = [];
-    public List<string> Categories { get; set; } = [];
+    public List<string> SampleCategories { get; set; } = [];
 
-    [Parameter][SupplyParameterFromQuery] public string? Category { get; set; }
-    [Parameter][SupplyParameterFromQuery] public string? Sample { get; set; }
+    [Inject] private NavigationManager Nav { get; set; } = default!;
+
+    // Route parameters (bound from @page templates in Index.razor)
+    [Parameter] public string? Category { get; set; }
+    [Parameter] public string? Name { get; set; }
 
     [Parameter]
     [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
-    public string? CategoryId
+    public string? SampleCategory
     {
         get => _categoryId;
         set
@@ -38,30 +41,29 @@ public partial class Index
             }
 
             _categoryId = value;
-            if (!IsCategoryInRoute())
-            {
-                FillSamples();
-                // Automatically select the first sample from the new category
-                SampleId = MapSamples.FirstOrDefault()?.Name;
-            }
+            // Update the available samples for the selected category
+            FillSamples();
+            // Automatically select the first sample from the new category
+            SampleName = MapSamples.FirstOrDefault()?.Name;
         }
     }
 
     [Parameter]
     [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
-    public string? SampleId
+    public string? SampleName
     {
-        get => _sampleId;
+        get => _nameId;
         set
         {
-            if (_sampleId == value)
+            if (_nameId == value)
             {
                 return;
             }
 
-            _sampleId = value;
-            SampleBase = MapSamples.FirstOrDefault(f => f.Name == SampleId);
+            _nameId = value;
+            SampleBase = MapSamples.FirstOrDefault(f => f.Name == SampleName);
             FillMap();
+            NavigateToCanonical(replace: false);
         }
     }
 
@@ -73,20 +75,31 @@ public partial class Index
         LoggingWidget.ShowLoggingInMap = ActiveMode.Yes; // To show logging in release mode
         Performance.DefaultIsActive = ActiveMode.Yes; // To show performance in release mode
         FillComboBoxWithCategories();
-        CategoryId = Categories[0];
+        SampleCategory = SampleCategories[0];
 
         if (IsCategoryInRoute())
         {
-            CategoryId = Category;
+            SampleCategory = Category;
             FillSamples();
-            ThrowIfSampleIsNotInRouteOrDoesNotExist();
-            SampleId = Sample;
+            if (IsNameInRoute())
+            {
+                ThrowIfNameIsNotInRouteOrDoesNotExist();
+                SampleName = Name; // Select the named sample
+                NavigateToCanonical(replace: true); // ensure canonical casing/encoding
+            }
+            else
+            {
+                // Category-only path: pick first sample in category
+                SampleName = MapSamples.FirstOrDefault()?.Name;
+                NavigateToCanonical(replace: true);
+            }
         }
         else
         {
-            CategoryId = Categories[0]; // Set a default category
+            SampleCategory = SampleCategories[0]; // Set a default category
             FillSamples();
-            SampleId = MapSamples.FirstOrDefault()?.Name;
+            SampleName = MapSamples.FirstOrDefault()?.Name;
+            NavigateToCanonical(replace: true); // From "/" to "/{Category}/{Name}"
         }
     }
 
@@ -94,19 +107,24 @@ public partial class Index
     {
         if (!string.IsNullOrEmpty(Category))
         {
-            if (!Categories.Contains(Category))
-                throw new Exception($"Category '{Category}' does not exist. Choose from: '{string.Join(',', Categories)}'");
+            if (!SampleCategories.Contains(Category))
+                throw new Exception($"Category '{Category}' does not exist. Choose from: '{string.Join(',', SampleCategories)}'");
             return true;
         }
         return false;
     }
 
-    private void ThrowIfSampleIsNotInRouteOrDoesNotExist()
+    private bool IsNameInRoute()
     {
-        if (string.IsNullOrEmpty(Sample))
-            throw new Exception("If a category is specified the sample also needs to be specified.");
-        if (!Samples.Contains(Sample))
-            throw new Exception($"The sample `{Sample}` does not exist. Choose from: '{string.Join(',', Samples)}'");
+        return !string.IsNullOrEmpty(Name);
+    }
+
+    private void ThrowIfNameIsNotInRouteOrDoesNotExist()
+    {
+        if (string.IsNullOrEmpty(Name))
+            throw new Exception("If a category is specified the name also needs to be specified.");
+        if (!SampleNames.Contains(Name))
+            throw new Exception($"The sample `{Name}` does not exist. Choose from: '{string.Join(',', SampleNames)}'");
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -130,6 +148,23 @@ public partial class Index
         StateHasChanged(); // Add this line
     }
 
+    private void NavigateToCanonical(bool replace)
+    {
+        if (string.IsNullOrWhiteSpace(SampleCategory) || string.IsNullOrWhiteSpace(SampleName)) return;
+
+        var categorySegment = Uri.EscapeDataString(SampleCategory);
+        var nameSegment = Uri.EscapeDataString(SampleName);
+        var target = $"/{categorySegment}/{nameSegment}";
+
+        // Only navigate if different to avoid loops
+        var current = new Uri(Nav.Uri);
+        var currentPathAndQuery = current.PathAndQuery; // includes path and query
+        if (!currentPathAndQuery.Equals(target, StringComparison.Ordinal))
+        {
+            Nav.NavigateTo(target, replace);
+        }
+    }
+
     private void FillComboBoxWithCategories()
     {
         Common.Samples.Register();
@@ -137,16 +172,16 @@ public partial class Index
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
         foreach (var category in categories)
         {
-            Categories.Add(category);
+            SampleCategories.Add(category);
         }
     }
 
     private void FillSamples()
     {
-        var list = AllSamples.GetSamples().Where(s => s.Category == CategoryId).OrderBy(c => c.Name);
-        Samples.Clear();
+        var list = AllSamples.GetSamples().Where(s => s.Category == SampleCategory).OrderBy(c => c.Name);
+        SampleNames.Clear();
         MapSamples.Clear();
-        Samples.AddRange(list.Select(f => f.Name));
+        SampleNames.AddRange(list.Select(f => f.Name));
         MapSamples.AddRange(list);
     }
 

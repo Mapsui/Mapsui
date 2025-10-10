@@ -1,24 +1,26 @@
 ﻿@page "/"
+@page "/{Category}"
+@page "/{Category}/{Name}"
 
 <PageTitle>Mapsui</PageTitle>
 
 <div class="navigation-bar">
     <div class="nav-controls">
         <div class="control-group">
-            <label for="category">Category:</label>
-            <InputSelect id="category" @bind-Value="CategoryId" class="form-select">
-                @foreach (var cat in Categories)
+            <label for="sampleCategory">Category:</label>
+            <InputSelect id="sampleCategory" @bind-Value="SampleCategory" class="form-select">
+                @foreach (var sampleCategory in SampleCategories)
                 {
-                    <option value="@cat">@cat</option>
+                    <option value="@sampleCategory">@sampleCategory</option>
                 }
             </InputSelect>
         </div>
         <div class="control-group">
-            <label for="sample">Sample:</label>
-            <InputSelect id="sample" @bind-Value="SampleId" class="form-select">
-                @foreach (var sample in Samples)
+            <label for="sampleName">Name:</label>
+            <InputSelect id="sampleName" @bind-Value="SampleName" class="form-select">
+                @foreach (var sampleName in SampleNames)
                 {
-                    <option value="@sample">@sample</option>
+                    <option value="@sampleName">@sampleName</option>
                 }
             </InputSelect>
         </div>
