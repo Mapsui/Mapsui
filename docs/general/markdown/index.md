@@ -413,8 +413,8 @@ Try the quick-start for your favorite framework below.
 
         ```csharp
         var mapControl = new MapControl();
-		Controls.Add(mapControl);
 		mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+		Controls.Add(mapControl);
         ```
 
         **Step 4:** Run it and you should see a map of the world.
