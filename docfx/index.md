@@ -23,4 +23,4 @@ For documentation for the upcoming **Mapsui v5** look [here](https://mapsui.com/
 If you are looking for paid support in the form of contract work or consultancy please mail [info.mapsui@gmail.com](mailto:info.mapsui@gmail.com).
 
 ## Sponsor
-Become a [Mapsui sponsor](https://github.com/sponsors/USERNAME)
+Become a [Mapsui sponsor](https://github.com/sponsors/pauldendulk)
