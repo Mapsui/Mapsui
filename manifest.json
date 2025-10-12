@@ -3852,46 +3852,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.UI.Android.Resource.Attribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.UI.Android.Resource.Attribute.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.UI.Android.Resource.String.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.UI.Android.Resource.String.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.UI.Android.Resource.Styleable.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.UI.Android.Resource.Styleable.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.UI.Android.Resource.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.UI.Android.Resource.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.UI.Android.SkiaRenderMode.yml",
       "output": {
         ".html": {
