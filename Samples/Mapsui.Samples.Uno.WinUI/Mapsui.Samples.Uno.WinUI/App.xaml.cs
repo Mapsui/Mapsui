@@ -1,4 +1,5 @@
 #pragma warning disable IDE0005 // Using directive is unnecessary.
+#pragma warning disable IDISP004 // Something magically updated somewhere causing a dispose warning on creating the OSLogLoggerProvider.
 using Uno.Resizetizer;
 
 namespace Mapsui.Samples.Uno.WinUI;
