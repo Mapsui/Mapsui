@@ -22,7 +22,7 @@ public sealed class DataFetcher
     public DataFetcher(Func<IEnumerable<IFetchableSource>> getFetchableSources) // The constructor accepts a function so that it works for changes to the layer list.
     {
         _getFetchableSources = getFetchableSources;
-        _ = Task.Run(() => AddConsumerAsync(_channel));
+        _ = Task.Run(() => AddConsumerAsync(_channel).ConfigureAwait(false));
     }
 
     public void ViewportChanged(FetchInfo fetchInfo)
@@ -34,7 +34,7 @@ public sealed class DataFetcher
 
     private async Task AddConsumerAsync(Channel<bool> channel)
     {
-        await foreach (var _ in channel.Reader.ReadAllAsync())
+        await foreach (var _ in channel.Reader.ReadAllAsync().ConfigureAwait(false))
         {
             UpdateFetches();
         }
@@ -74,7 +74,7 @@ public sealed class DataFetcher
                     {
                         try
                         {
-                            await fetchJob.FetchFunc();
+                            await fetchJob.FetchFunc().ConfigureAwait(false);
                         }
                         catch (Exception ex)
                         {
