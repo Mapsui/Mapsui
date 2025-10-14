@@ -161,6 +161,9 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
+            // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
+            _ = UpdateBoundingRectAsync();
+
             var position = e.ToScreenPosition();
 
             _manipulationTracker.Restart([position]);
