@@ -33,7 +33,8 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     private int _numberTilesNeeded;
     private readonly TileFetchPlanner _tileFetchPlanner;
     private readonly MRect? _extent;
-    private readonly HttpClient _httpClient = new();
+    private readonly HttpClient _httpClient;
+    private readonly bool _customHttpClient = false;
 
     public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
@@ -48,9 +49,11 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
     /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
     /// <param name="fetchTileAsFeature">Fetch tile as feature</param>
+    /// <param name="httpClient">A custom HttpClient (may include custom header parameters etc)</param>
     public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
         IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
-        int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Task<IFeature?>>? fetchTileAsFeature = null)
+        int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Task<IFeature?>>? fetchTileAsFeature = null,
+        HttpClient? httpClient = null)
     {
         _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
         MemoryCache = new MemoryCache<IFeature?>(minTiles, maxTiles);
@@ -66,8 +69,18 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
             fetchTileAsFeature ?? ToFeatureAsync, dataFetchStrategy, this);
         _tileFetchPlanner.DataChanged += TileFetchPlanner_OnDataChanged;
         _tileFetchPlanner.PropertyChanged += TileFetchPlanner_OnPropertyChanged;
-        // There should be a way to override the application wide default user agent.
-        _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", HttpClientTools.GetDefaultApplicationUserAgent());
+        if (httpClient != null)
+        {
+            // inject a custom http client
+            _httpClient = httpClient;
+            _customHttpClient = true;
+        }
+        else
+        {
+            _httpClient = new();
+            // use default user agent
+            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", HttpClientTools.GetDefaultApplicationUserAgent());
+        }
     }
 
     /// <summary>
@@ -109,7 +122,10 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         if (disposing)
         {
             MemoryCache.Dispose();
-            _httpClient.Dispose();
+            if (!_customHttpClient)
+#pragma warning disable IDISP007  // avoid warning ("Don't dispose injected")
+                _httpClient?.Dispose();
+#pragma warning restore IDISP007
         }
 
         base.Dispose(disposing);
