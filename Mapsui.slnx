@@ -304,6 +304,10 @@
     <BuildType Solution="Ad-Hoc|*" Project="Release" />
     <BuildType Solution="AppStore|*" Project="Release" />
   </Project>
+  <Project Path="Mapsui.Experimental/Mapsui.Experimental.csproj" Id="59f9003e-ae3d-47e0-bd1c-c9ad596c1507">
+    <BuildType Solution="Ad-Hoc|*" Project="Release" />
+    <BuildType Solution="AppStore|*" Project="Release" />
+  </Project>
   <Project Path="Mapsui.Extensions/Mapsui.Extensions.csproj">
     <BuildType Solution="Ad-Hoc|*" Project="Debug" />
     <BuildType Solution="AppStore|*" Project="Debug" />
