@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
-using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 
@@ -58,31 +57,39 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
 
     private void SourceLayerOnDataChanged(object sender, DataChangedEventArgs e)
     {
-        if (!Enabled) return;
-        if (_fetchInfo == null) return;
-        if (MinVisible > _fetchInfo.Resolution) return;
-        if (MaxVisible < _fetchInfo.Resolution) return;
-        if (_busy) return;
+        if (!Enabled)
+            return;
+        if (_fetchInfo == null)
+            return;
+        if (MinVisible > _fetchInfo.Resolution)
+            return;
+        if (MaxVisible < _fetchInfo.Resolution)
+            return;
+        if (_busy)
+            return;
 
         OnDataChanged(e);
     }
 
-    int _rasterizeCount = 0;
     private async Task RasterizeAsync()
     {
-        if (!Enabled) return;
-        if (_busy) return;
+        if (!Enabled)
+            return;
+        if (_busy)
+            return;
+
         _busy = true;
 
         lock (_syncLock)
         {
             try
             {
-                _rasterizeCount++;
-                Logger.Log(LogLevel.Information, $"RasterizeCount: {_rasterizeCount}");
-                if (_fetchInfo == null) return;
-                if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
-                if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
+                if (_fetchInfo == null)
+                    return;
+                if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0)
+                    return;
+                if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0)
+                    return;
 
                 _currentSection = _fetchInfo.Section;
 
@@ -116,7 +123,6 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
         return features.Where(f => f.Raster != null && f.Raster.Extent.Intersects(biggerBox)).ToList();
     }
 
-
     public void ClearCache()
     {
         if (_sourceLayer is IFetchableSource fetchableSource)
@@ -141,7 +147,8 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
             _fetchInfo = fetchInfo;
 
             if (_sourceLayer is IFetchableSource fetchableSource)
-                return [new FetchJob(_sourceLayer.Id, async () =>
+                return [
+                    new FetchJob(_sourceLayer.Id, async () =>
                     {
                         var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
                         foreach (var fetchJob in fetchJobs)
@@ -149,10 +156,10 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
                             await fetchJob.FetchFunc();
                         }
                         await RasterizeAsync();
-                    })];
+                    })
+                ];
             else
                 return [new FetchJob(_sourceLayer.Id, RasterizeAsync)];
-
         }
         return [];
     }
