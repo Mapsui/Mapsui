@@ -33,8 +33,8 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     private int _numberTilesNeeded;
     private readonly TileFetchPlanner _tileFetchPlanner;
     private readonly MRect? _extent;
-    private readonly HttpClient _httpClient;
-    private readonly bool _customHttpClient = false;
+    private readonly HttpClient? _httpClient = null;
+    private readonly HttpClient? _injectedHttpClient = null;
 
     public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
@@ -72,8 +72,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         if (httpClient != null)
         {
             // inject a custom http client
-            _httpClient = httpClient;
-            _customHttpClient = true;
+            _injectedHttpClient = httpClient;
         }
         else
         {
@@ -91,6 +90,8 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     /// Memory cache for this layer
     /// </summary>
     private MemoryCache<IFeature?> MemoryCache { get; }
+
+    private HttpClient HttpClient { get { return _httpClient ?? _injectedHttpClient; } }
 
     /// <inheritdoc />
     public override IReadOnlyList<double> Resolutions => _tileSource.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
@@ -122,10 +123,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         if (disposing)
         {
             MemoryCache.Dispose();
-            if (!_customHttpClient)
-#pragma warning disable IDISP007  // avoid warning ("Don't dispose injected")
-                _httpClient?.Dispose();
-#pragma warning restore IDISP007
+            _httpClient?.Dispose();
         }
 
         base.Dispose(disposing);
@@ -156,7 +154,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     {
         if (_tileSource is IHttpTileSource httpTileSource)
         {
-            var tileData = await httpTileSource.GetTileAsync(_httpClient, tileInfo).ConfigureAwait(false);
+            var tileData = await httpTileSource.GetTileAsync(HttpClient, tileInfo).ConfigureAwait(false);
             var mRaster = ToRaster(tileInfo, tileData);
             return new RasterFeature(mRaster);
         }
