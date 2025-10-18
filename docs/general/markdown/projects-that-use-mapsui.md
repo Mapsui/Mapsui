@@ -1,5 +1,7 @@
 # Projects That Use Mapsui
 
+Want to know which version of Mapsui these projects are using? Check out our guide on [Identifying Mapsui Versions in Projects](identifying-mapsui-versions.md).
+
 ### Breath Companion
 
 [![Breath Companion website](images/breath-companion.png)](https://software-notion.de/apps/breath-companion)

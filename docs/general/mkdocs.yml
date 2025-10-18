@@ -16,6 +16,7 @@ theme:
 nav:
   - 'index.md'
   - 'projects-that-use-mapsui.md'
+  - 'identifying-mapsui-versions.md'
   - 'samples.md'
   - 'logging.md'
   - 'roadmap.md'
