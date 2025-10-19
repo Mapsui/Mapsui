@@ -3,6 +3,8 @@
     "path": "Mapsui.slnx",
     "projects": [
       "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
+      "Mapsui.Experimental.VectorTiles\\Mapsui.Experimental.VectorTiles.csproj",
+      "Mapsui.Experimental\\Mapsui.Experimental.csproj",
       "Mapsui.Extensions\\Mapsui.Extensions.csproj",
       "Mapsui.Nts\\Mapsui.Nts.csproj",
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
