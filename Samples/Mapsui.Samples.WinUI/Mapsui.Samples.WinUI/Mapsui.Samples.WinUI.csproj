@@ -32,7 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.UI.WinUI\Mapsui.UI.WinUI.csproj" />
-    <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
+    <ProjectReference Include="..\..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
   <ItemGroup>

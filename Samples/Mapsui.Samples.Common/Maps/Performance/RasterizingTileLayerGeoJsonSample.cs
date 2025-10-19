@@ -1,18 +1,18 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
+using Mapsui.Nts.Providers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
-using Mapsui.UI;
-using System.IO;
-using Mapsui.Nts.Providers;
 using Mapsui.Tiling.Layers;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
-public class RasterizingTileLayerGeoJsonSample : IMapControlSample
+public class RasterizingTileLayerGeoJsonSample : ISample
 {
     static RasterizingTileLayerGeoJsonSample()
     {
@@ -22,10 +22,7 @@ public class RasterizingTileLayerGeoJsonSample : IMapControlSample
     public string Name => "RasterizingTileLayer GeoJson VectorStyle";
     public string Category => "Performance";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don\'t ignore created IDisposable")]
     public static Map CreateMap()

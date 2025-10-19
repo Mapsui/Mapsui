@@ -15,8 +15,7 @@ public partial class Window1
 {
     static Window1()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Common.Samples.Register();
     }
 
     public Window1()
@@ -50,7 +49,6 @@ public partial class Window1
 
     private void FillComboBoxWithCategories()
     {
-        Tests.Common.Samples.Register();
         Common.Samples.Register();
 
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);

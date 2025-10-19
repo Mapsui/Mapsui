@@ -57,7 +57,7 @@ jobs:
       with:
          dotnet-version: |
            10.0.100-rc.1.25451.107
-           9.0.304
+           9.0.305           
            8.0.407
     # Open JDK
     - name: Install Open JDK 11
@@ -127,7 +127,7 @@ jobs:
       with:
          dotnet-version: |
            10.0.100-rc.1.25451.107
-           9.0.304
+           9.0.305
            8.0.407
     - name: Set MSBuildEnableWorkloadResolver
       run: echo "MSBuildEnableWorkloadResolver=true" >> $GITHUB_ENV
@@ -202,7 +202,7 @@ jobs:
       with:
          dotnet-version: |
            10.0.100-rc.1.25451.107
-           9.0.304
+           9.0.305           
            8.0.407
     # Java Sdk install 11
     - name: Install Open JDK 11
@@ -259,8 +259,10 @@ jobs:
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.slnx  
     # Samples Build 
-    - name: Mapsui.Samples
-      run: dotnet build --no-restore --configuration Debug Mapsui.slnx
+    - name: Mapsui Samples without MAUI
+      run: dotnet build --no-restore --configuration Debug Mapsui.WithoutMaui.slnf
+    - name: Mapsui Samples MAUI
+      run: dotnet build --no-restore --configuration Debug Mapsui.Maui.slnf
     # Publishing  
     - name: Upload packages
       uses: actions/upload-artifact@v4

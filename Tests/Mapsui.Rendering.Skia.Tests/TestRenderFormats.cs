@@ -1,5 +1,6 @@
 ﻿using System.Threading;
-using Mapsui.Tests.Common.Maps;
+using Mapsui.Rendering.Skia.Tests.Utilities;
+using Mapsui.Samples.Common.Maps.Tests;
 using NUnit.Framework;
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -24,7 +25,7 @@ public class TestRenderFormats
             map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.Jpeg, 90);
 
         // Assert
-        if (MapRendererTests.CompareBitmaps(bitmapPng, bitmapJpeg, 1, 0.995))
+        if (BitmapComparer.Compare(bitmapPng, bitmapJpeg, 1, 0.995))
         {
             Assert.Pass("Png and Jpeg are the same");
         }

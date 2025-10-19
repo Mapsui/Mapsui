@@ -1,0 +1,44 @@
+/* Responsive panels demo styling (adapted from InvestigateCodeSampleStructure) */
+.responsive-panels h1 { margin-bottom: 20px; font-size: 1.4rem; }
+
+.responsive-panels .tab-buttons {
+	display: none;
+	gap: 10px;
+	margin: 10px;
+}
+
+.responsive-panels .tab-btn {
+	flex: 1;
+	padding: 10px;
+	background-color: #e0e0e0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 15px;
+	transition: background-color .25s;
+}
+.responsive-panels .tab-btn:hover { background-color: #d0d0d0; }
+.responsive-panels .tab-btn.active { background-color: #3498db; color:#fff; }
+
+.responsive-panels .panels-container {
+	display: flex;
+	gap: 20px;
+}
+.responsive-panels .panel {
+	flex: 1;
+	padding: 16px 20px;
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+.responsive-panels .panel h2 { margin: 0 0 12px 0; }
+.responsive-panels .panel p { margin: 0 0 12px 0; }
+.responsive-panels .panel ul { margin: 0 0 0 20px; }
+.responsive-panels .panel li { margin: 4px 0; }
+
+@media (max-width: 768px) {
+	.responsive-panels .tab-buttons { display: flex; }
+	.responsive-panels .panels-container { display: block; }
+	.responsive-panels .panel { display: none; }
+	.responsive-panels .panel.active { display: block; }
+}

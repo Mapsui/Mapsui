@@ -16,7 +16,7 @@ Every rendering test that can fail corresponds a sample. You can view any sample
 You need to know the name and the category of the sample. For this you need to look at the error of the failed test. Which could be:
 
 ```
-Failed TestSampleAsync(Mapsui.Tests.Common.Maps.LineSample) [4 s]
+Failed TestSampleAsync(Mapsui.Samples.Common.Maps.Tests.LineSample) [4 s]
 ```
 In this case the sample is in the file `LineSample.cs`. If you open that file you will see it is named `Line` and in category `Tests`.
 
@@ -45,4 +45,4 @@ My way of working is like this. I copy all original files over the original file
 ```ps
 PS> .\Scripts\CopyGeneratedImagesOverOriginalImages.ps1
 ```
-Then there will be many git changes because smaller differences have been accepted by the tests in the past. You need to revert all files that did not cause a test to fail. This is because we want to reduce the number of changes in our git history, especialy if they are binary files.
+Then there will be many git changes because smaller differences have been accepted by the tests in the past. You need to revert all files that did not cause a test to fail. This is because we want to reduce the number of changes in our git history, especially if they are binary files.

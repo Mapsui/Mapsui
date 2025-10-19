@@ -1,5 +1,5 @@
 # Roadmap 
-*Updated Januari 2024*
+*Updated January 2024*
 
 ## Mapsui 4
 
@@ -26,7 +26,7 @@ Focus: More shared code in platforms. This will affect MapControls, Widgets and 
 
 - [x] Lowest supported version to .NET 6 (remove .netstandard)
 - [x] All samples and tests to .NET 8.
-- [ ] Cleanup:
+- [x] Cleanup:
     * [x] Rename master to main.
     * [x] Run dotnet format on the entire solution.
     * [x] Run dotnet style on the entire solution.
@@ -34,11 +34,10 @@ Focus: More shared code in platforms. This will affect MapControls, Widgets and 
     * [x] Always propagate async back to the caller.
     * [x] Remove nuget packages that we previously needed for things now supported in .NET 6.
     * [x] Remove code copies of things now in .NET 6 (in the past we copied some .NET Core things which were not in .NET standard).
-    * [ ] Remove the #if defines we do not need anymore.
+    * [x] Remove the #if defines we do not need anymore.
     * [x] Remove all scripts and configurations we do not use anymore.
-    * [ ] Simplify the build scripts now that we do not need the workarounds.
-    * [ ] Use `<Nullable>enable</Nullable>` everywhere (Add to Directory.Build.props) and revisit all current suppressions.
-    * [ ] Fix the remaining warnings wrt IDispose.
+    * [x] Simplify the build scripts now that we do not need the workarounds.
+    * [x] Use `<Nullable>enable</Nullable>` everywhere (Add to Directory.Build.props) and revisit all current suppressions.
 - [x] Remove older frameworks:
     * [x] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
     * [x] Remove Uno UWP (but not Mapsui.Uno.WinUI)
@@ -48,20 +47,22 @@ Focus: More shared code in platforms. This will affect MapControls, Widgets and 
         * [ ] AddMarkerLayer() extension which adds a layer with symbols and a callout style, which is toggled on click.
         * [ ] AddOpenStreetMapBackgroundLayer() which adds to a specific layer group and sets the Map CRS and perhaps more.
     * [ ] Make MyLocationLayer function property in Mapcontrol.
-    * [ ] Add mechanism for layer grouping. [Here](https://github.com/Mapsui/Mapsui/issues/1491) is a proposal but perhaps we need something simpler.
+    * [x] Add mechanism for layer grouping. [Here](https://github.com/Mapsui/Mapsui/issues/1491) is a proposal but perhaps we need something simpler.
 - [ ] Make Map dispose a layer when create function is used https://github.com/Mapsui/Mapsui/issues/2284.
-- [ ] Dispose the samples if needed.
+- [x] All fetching through a single pipeline https://github.com/Mapsui/Mapsui/issues/2269
 
-## Mapsui 6
+Not (yet) done:
 
-Focus: Rendering.
+- [ ] Dispose the samples if needed: https://github.com/Mapsui/Mapsui/issues/2254
+- [ ] Fix the remaining warnings wrt IDispose.
+
+## Mapsui 6 options:
 
 - [ ] Two step rendering. In the draw loop only draw skia object, create skia object in an earlier step https://github.com/Mapsui/Mapsui/issues/1448
-- [ ] All redering through a single pipeline https://github.com/Mapsui/Mapsui/issues/2269
 - [ ] World wrap https://github.com/Mapsui/Mapsui/issues/518
 - [ ] Add vector tiles https://github.com/Mapsui/Mapsui/issues/1478
-
-Other options:
-
+- [ ] Blazor server side 'rendering' https://github.com/Mapsui/Mapsui/issues/3119
+- [ ] Centralized projections: https://github.com/Mapsui/Mapsui/issues/3122
 - [ ] Add support for GeoParquet https://github.com/Mapsui/Mapsui/issues/2282
+- [ ] Let Map be Disposable but not the MapControl https://github.com/Mapsui/Mapsui/issues/2703
 - [ ] For possible other options you could  browse through the ['design discussion' tags](https://github.com/Mapsui/Mapsui/labels/design%20discussion) .

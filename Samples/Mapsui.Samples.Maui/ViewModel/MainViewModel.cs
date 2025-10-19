@@ -13,8 +13,7 @@ public partial class MainViewModel : ObservableObject
 {
     static MainViewModel()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Common.Samples.Register();
     }
 
     public MainViewModel()
@@ -66,7 +65,9 @@ public partial class MainViewModel : ObservableObject
                 return;
 
             if (SelectedSample is ISample sample)
+#pragma warning disable IDISP003 // Dispose previous before re-assigning
                 Map = await sample.CreateMapAsync();
+#pragma warning restore IDISP003 // Dispose previous before re-assigning
             else if (SelectedSample is IMapControlSample mapControlSample && MapControl != null)
                 mapControlSample.Setup(MapControl);
         }

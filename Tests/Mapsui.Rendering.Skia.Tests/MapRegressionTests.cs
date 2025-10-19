@@ -4,6 +4,7 @@
 
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Tests.Helpers;
+using Mapsui.Rendering.Skia.Tests.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.DataFormats;
@@ -31,8 +32,7 @@ public class MapRegressionTests
 {
     static MapRegressionTests()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Samples.Common.Samples.Register();
     }
 
     private static ISampleBase[]? _excludedSamples;
@@ -56,7 +56,7 @@ public class MapRegressionTests
             new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
             new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
             new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
-            new CustomSvgStyleSample(), // Is currently not functioning and should be fixed with a redesign.
+            new CustomSvgColorSample(), // Is currently not functioning and should be fixed with a redesign.
             new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
             new WmsBasilicataSample(), // Times out,
             new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
@@ -129,7 +129,7 @@ public class MapRegressionTests
                     }
                     else
                     {
-                        Assert.That(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995), Is.True,
+                        Assert.That(BitmapComparer.Compare(originalStream, bitmap, 1, 0.995), Is.True,
                             $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
                     }
                 }

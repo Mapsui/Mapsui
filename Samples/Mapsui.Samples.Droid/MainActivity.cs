@@ -13,8 +13,7 @@ public class MainActivity : AppCompatActivity
 {
     static MainActivity()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Common.Samples.Register();
     }
 
     private MapControl? _mapControl;

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Panels/Tabs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Responsive Panels Demo</h1>
+        
+        <!-- Tab buttons (visible on small screens) -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-panel="panel1">Panel 1</button>
+            <button class="tab-btn" data-panel="panel2">Panel 2</button>
+        </div>
+
+        <!-- Panels container -->
+        <div class="panels-container">
+            <div class="panel active" id="panel1">
+                <h2>Panel 1</h2>
+                <p>This is the content of the first panel.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+            </div>
+            
+            <div class="panel" id="panel2">
+                <h2>Panel 2</h2>
+                <p>This is the content of the second panel.</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <ul>
+                    <li>Feature A</li>
+                    <li>Feature B</li>
+                    <li>Feature C</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -146,6 +146,6 @@ public class InfoLayersSample : ISample, ISampleTest
 
     public async Task InitializeTestAsync(IMapControl mapControl)
     {
-        await Task.Delay(1000).ConfigureAwait(true);
+        await Task.Delay(1000).ConfigureAwait(false);
     }
 }

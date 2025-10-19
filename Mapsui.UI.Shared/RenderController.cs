@@ -7,6 +7,7 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
+using Mapsui.Widgets.InfoWidgets;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -109,7 +110,9 @@ public sealed class RenderController : IDisposable
         if (_firstDraw)
         {
             _firstDraw = false;
-            Logger.Log(LogLevel.Information, $"First call to the Mapsui renderer");
+            Logger.Log(LogLevel.Information, $"First Render cycle.");
+            Logger.Log(LogLevel.Information, $"{nameof(LoggingWidget)}.{nameof(LoggingWidget.ShowLoggingInMap)} is set to '{nameof(ActiveMode)}.{LoggingWidget.ShowLoggingInMap}'.");
+            Logger.Log(LogLevel.Information, $"If you need to remove it in debug mode set: {nameof(LoggingWidget)}.{nameof(LoggingWidget.ShowLoggingInMap)} = {nameof(ActiveMode)}.{ActiveMode.No}.");
         }
 
         // Start stopwatch before updating animations and drawing control

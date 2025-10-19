@@ -134,7 +134,7 @@ Try the quick-start for your favorite framework below.
 
     === "Avalonia"
         
-        **Preperation:** Install the Avalonia templates:
+        **Preparation:** Install the Avalonia templates:
 
         ```console
         dotnet new install Avalonia.Templates
@@ -222,7 +222,7 @@ Try the quick-start for your favorite framework below.
         **Troubleshooting:**
 
         - Text is not displayed
-        Add Follwing to the Blazor project, is a workaround that text is rendered.
+        Add Following to the Blazor project, is a workaround that text is rendered.
 
         ```xml
         <ItemGroup>
@@ -413,8 +413,8 @@ Try the quick-start for your favorite framework below.
 
         ```csharp
         var mapControl = new MapControl();
-		Controls.Add(mapControl);
 		mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+		Controls.Add(mapControl);
         ```
 
         **Step 4:** Run it and you should see a map of the world.
@@ -434,4 +434,4 @@ Try the quick-start for your favorite framework below.
 
 ## Support
 
-For paid support in the form of contract work or consoluting mail: [info.mapsui@gmail.com](mailto:info.mapsui@gmail.com).
+For paid support in the form of contract work or consulting mail: [info.mapsui@gmail.com](mailto:info.mapsui@gmail.com).

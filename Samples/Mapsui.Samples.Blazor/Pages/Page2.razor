@@ -1,0 +1,22 @@
+@page "/page2"
+
+<div class="container responsive-panels">
+	<h1>Responsive Panels (Blazor)</h1>
+
+	<!-- Tab buttons (visible on small screens) -->
+	<div class="tab-buttons">
+		<button class="tab-btn @(ActivePanel == 0 ? "active" : null)" @onclick="() => SetActivePanel(0)">Panel 1</button>
+		<button class="tab-btn @(ActivePanel == 1 ? "active" : null)" @onclick="() => SetActivePanel(1)">Panel 2</button>
+	</div>
+
+	<!-- Panels container -->
+	<div class="panels-container">
+		<div class="panel @(ActivePanel == 0 ? "active" : null)" id="panel1">
+			<h2>Panel 1</h2>
+		</div>
+
+		<div class="panel @(ActivePanel == 1 ? "active" : null)" id="panel2">
+			<h2>Panel 2</h2>
+		</div>
+	</div>
+</div>

@@ -455,9 +455,6 @@ public class Navigator
             return;
         }
 
-        if (RotationLock)
-            return;
-
         var newViewport = Viewport with { Rotation = rotation };
         SetViewport(newViewport, duration, easing);
     }

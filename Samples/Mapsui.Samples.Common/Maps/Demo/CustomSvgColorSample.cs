@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Mapsui.Samples.Common.Maps.Demo;
 
 [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-public class CustomSvgStyleSample : ISample
+public class CustomSvgColorSample : ISample
 {
     private const double _circumferenceOfTheEarth = 40075017;
 
