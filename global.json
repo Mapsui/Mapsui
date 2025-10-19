@@ -1,12 +1,12 @@
 {
   "sdk": {
     "allowPrerelease": true,
-    "version": "10.0.100-rc.1",
+    "version": "10.0.100-rc.2",
     "rollForward": "latestPatch"
   },
   "tools": {
     "allowPrerelease": true,
-    "dotnet": "10.0.100-rc.1",
+    "dotnet": "10.0.100-rc.2",
     "rollForward": "latestPatch"
   },
   "msbuild-sdks": {

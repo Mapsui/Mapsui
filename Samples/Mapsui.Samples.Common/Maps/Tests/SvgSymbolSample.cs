@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.Tests;
+
 public class SvgSymbolSample : ISample
 {
     public string Name => "Svg Symbol";
