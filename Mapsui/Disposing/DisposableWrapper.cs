@@ -3,6 +3,7 @@
 #pragma warning disable IDISP007
 
 namespace Mapsui.Disposing;
+
 public class DisposableWrapper<T>(T wrappedObject, bool ownsObject) : IDisposable
     where T : IDisposable
 {

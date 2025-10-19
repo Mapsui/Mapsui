@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace Mapsui.Features;
+
 public static class FeatureId
 {
     public static long CreateId(int layerId, uint featureId)

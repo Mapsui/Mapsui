@@ -1,6 +1,7 @@
 ﻿using Mapsui.Styles;
 
 namespace Mapsui.Extensions;
+
 public static class BrushExtensions
 {
     public static bool IsVisible(this Brush? brush)

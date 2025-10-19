@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     <Authors>Mapsui Contributers</Authors>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!--For Debugging Source Generated Files uncomment the line below-->
@@ -123,7 +123,6 @@
 
   <ItemGroup>
     <PackageReference Include="BruTile" />
-    <PackageReference Include="System.Text.Json" />
     <PackageReference Include="BruTile.MbTiles" />
     <PackageReference Include="VexTile.TileSource.Mvt" />
   </ItemGroup>

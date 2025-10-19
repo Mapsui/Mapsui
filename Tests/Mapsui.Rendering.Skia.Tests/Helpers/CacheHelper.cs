@@ -10,6 +10,7 @@ using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Tiling;
 
 namespace Mapsui.Rendering.Skia.Tests.Helpers;
+
 internal static class CacheHelper
 {
     /// <summary> Initializes the caches for the samples. </summary>
