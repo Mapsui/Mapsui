@@ -220,14 +220,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public void RefreshData(ChangeType changeType = ChangeType.Discrete, Viewport? viewport = null)
     {
-        var localViewport = viewport ?? Navigator.Viewport;
-
-        if (localViewport.ToExtent() is null)
+        var fetchInfo = ToFetchInfo(viewport ?? Navigator.Viewport, changeType, CRS);
+        if (fetchInfo == null)
             return;
-        if (localViewport.ToExtent().GetArea() <= 0)
-            return;
-
-        var fetchInfo = new FetchInfo(localViewport.ToSection(), CRS, changeType);
 
         foreach (var layer in _layers.ToList())
         {
@@ -237,6 +232,16 @@ public class Map : INotifyPropertyChanged, IDisposable
 
         if (changeType == ChangeType.Discrete)
             _dataFetcher.ViewportChanged(fetchInfo);
+    }
+
+    private static FetchInfo? ToFetchInfo(Viewport viewport, ChangeType changeType, string? CRS)
+    {
+        if (viewport.ToExtent() is null)
+            return null;
+        if (viewport.ToExtent().GetArea() <= 0)
+            return null;
+
+        return new FetchInfo(viewport.ToSection(), CRS, changeType);
     }
 
     public void RefreshGraphics()
