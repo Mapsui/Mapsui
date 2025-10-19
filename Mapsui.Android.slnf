@@ -3,6 +3,8 @@
     "path": "Mapsui.slnx",
     "projects": [
       "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
+      "Mapsui.Experimental.VectorTiles\\Mapsui.Experimental.VectorTiles.csproj",
+      "Mapsui.Experimental\\Mapsui.Experimental.csproj",
       "Mapsui.Extensions\\Mapsui.Extensions.csproj",
       "Mapsui.Nts\\Mapsui.Nts.csproj",
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
@@ -13,7 +15,6 @@
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
       "Samples\\Mapsui.Samples.Droid\\Mapsui.Samples.Droid.csproj",
       "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
-      "SourceGenerators\\Mapsui.SourceGenerator\\Mapsui.SourceGenerator.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
       "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj"

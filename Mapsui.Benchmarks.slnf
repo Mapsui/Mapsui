@@ -4,12 +4,13 @@
     "projects": [
       "Benchmarks\\Mapsui.Rendering.Benchmarks\\Mapsui.Rendering.Benchmarks.csproj",
       "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
+      "Mapsui.Experimental.VectorTiles\\Mapsui.Experimental.VectorTiles.csproj",
+      "Mapsui.Experimental\\Mapsui.Experimental.csproj",
       "Mapsui.Extensions\\Mapsui.Extensions.csproj",
       "Mapsui.Nts\\Mapsui.Nts.csproj",
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
       "Mapsui.Tiling\\Mapsui.Tiling.csproj",
-      "Mapsui\\Mapsui.csproj",
-      "SourceGenerators\\Mapsui.SourceGenerator\\Mapsui.SourceGenerator.csproj"
+      "Mapsui\\Mapsui.csproj"
     ]
   }
 }
