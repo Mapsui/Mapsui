@@ -27,7 +27,7 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
     }
 
     public string Name => "RasterizedVectorTiles";
-    public string Category => "Tiles";
+    public string Category => "VectorTiles";
 
     public Task<Map> CreateMapAsync()
     {
