@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class DynamicSvgStyleSample : ISample
 {
@@ -62,7 +62,7 @@ public class DynamicSvgStyleSample : ISample
                 },
                 RelativeOffset = new RelativeOffset(0.0, 0.0),
                 // 1. Change scale based on the distance
-                SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),
+                SymbolScale = 0.25 + 0.25 * distanceBetweenZeroAndOne,
                 // 2. Change angle pointing to the info click position
                 SymbolRotation = -CalculateAngle(tapPosition, featurePoint) - 90,
                 RotateWithMap = true,

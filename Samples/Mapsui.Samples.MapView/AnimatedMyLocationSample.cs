@@ -1,5 +1,5 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Samples.Common.Maps.Basic;
 using Mapsui.UI;
 using Mapsui.UI.Maui;
 

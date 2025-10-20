@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Basic;
 
 public class InfoLayersSample : ISample, ISampleTest
 {
@@ -20,8 +20,8 @@ public class InfoLayersSample : ISample, ISampleTest
     private const string _polygonLayerName = "Polygon Layer";
     private const string _lineLayerName = "Line Layer";
 
-    public string Name => "Map Info";
-    public string Category => "Demo";
+    public string Name => "MapInfo";
+    public string Category => "Basic";
 
     public static Map CreateMap()
     {

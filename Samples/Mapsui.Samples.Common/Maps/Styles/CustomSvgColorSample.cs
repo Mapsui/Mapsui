@@ -12,7 +12,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Styles;
 
 [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
 public class CustomSvgColorSample : ISample
@@ -26,7 +26,7 @@ public class CustomSvgColorSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        bool _rasterizeSvg = false;
+        var _rasterizeSvg = false;
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new MemoryLayer("Custom Svg Style")

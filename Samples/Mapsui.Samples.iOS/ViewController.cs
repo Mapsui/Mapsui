@@ -1,5 +1,5 @@
 ﻿using Mapsui.UI.iOS;
-using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Samples.Common.Maps.Basic;
 
 namespace Mapsui.Samples.iOS;
 

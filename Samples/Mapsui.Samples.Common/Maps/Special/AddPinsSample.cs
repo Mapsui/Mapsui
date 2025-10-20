@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Special;
 
 public class AddPinsSample : ISample
 {
     public string Name => "Add Pins";
-    public string Category => "Demo";
+    public string Category => "Special";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

@@ -1,6 +1,6 @@
 ﻿using Mapsui.Manipulations;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Samples.Common.Maps.Basic;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Maui;

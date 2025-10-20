@@ -7,7 +7,7 @@ using Mapsui.Styles.Thematics;
 using NetTopologySuite.Geometries;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class DynamicSymbolScaleStyleSample : ISample
 {
@@ -75,7 +75,7 @@ public class DynamicSymbolScaleStyleSample : ISample
 
     private static Polygon CreateSquarePolygon(int width)
     {
-        int halfWidth = width / 2;
+        var halfWidth = width / 2;
         return new Polygon(new LinearRing(new[]
         {
             new Coordinate(-halfWidth, -halfWidth),
