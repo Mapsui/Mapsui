@@ -1,8 +1,9 @@
-﻿using Mapsui.Tiling;
+﻿using System;
+using Mapsui.Tiling;
 
 namespace Mapsui.Samples.Wpf.ViewModels;
 
-public class MainViewModel
+public sealed class MainViewModel : IDisposable
 {
     public Map Map { get; }
 
@@ -10,7 +11,11 @@ public class MainViewModel
     {
         Map = new Map();
 
-        var baseLayer = OpenStreetMap.CreateTileLayer();
-        Map.Layers.Add(baseLayer);
+        Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+    }
+
+    public void Dispose()
+    {
+        Map?.Dispose();
     }
 }
