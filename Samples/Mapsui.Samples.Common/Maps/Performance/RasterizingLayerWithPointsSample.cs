@@ -12,6 +12,8 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingLayerWithPointsSample : IMapControlSample
 {
+    static Layer? _layer;
+
     public string Name => "RasterizingLayer with Points";
     public string Category => "Performance";
 
@@ -22,16 +24,11 @@ public class RasterizingLayerWithPointsSample : IMapControlSample
         mapControl.Map = CreateMap(pixelDensity);
     }
 
-#pragma warning disable IDISP006 // Implement IDisposable
-    static Layer? _layer;
-
     public static Map CreateMap(float pixelDensity)
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-#pragma warning disable IDISP003 // Dispose previous before re-assigning
         _layer = CreateRandomPointLayer();
-#pragma warning restore IDISP003 // Dispose previous before re-assigning
         map.Layers.Add(new RasterizingLayer(_layer, pixelDensity: pixelDensity));
         var extent = map.Layers.Get(1).Extent!.Grow(map.Layers.Get(1).Extent!.Width * 0.1);
         map.Navigator.ZoomToBox(extent);
