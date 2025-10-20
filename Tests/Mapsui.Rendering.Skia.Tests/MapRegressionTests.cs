@@ -9,7 +9,7 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.Maps.FeatureAnimations;
 using Mapsui.Samples.Common.Maps.Geometries;
-using Mapsui.Samples.Common.Maps.Info;
+using Mapsui.Samples.Common.Maps.MapInfo;
 using Mapsui.Samples.Common.Maps.Performance;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Styles;
