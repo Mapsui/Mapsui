@@ -30,16 +30,14 @@ using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-[SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
 public class CustomPointStyleShaderSample : ISample
 {
-    public string Name => $"{nameof(CustomPointStyle)} Shader";
+    public string Name => $"Shader";
     public string Category => $"{nameof(CustomPointStyle)}";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
