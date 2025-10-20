@@ -14,8 +14,8 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class CustomPointStyleBasicSample : ISample
 {
-    public string Name => $"{nameof(CustomPointStyle)}";
-    public string Category => $"Basic";
+    public string Name => $"Basic";
+    public string Category => $"{nameof(CustomPointStyle)}";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
