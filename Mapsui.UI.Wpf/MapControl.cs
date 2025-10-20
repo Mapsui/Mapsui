@@ -17,6 +17,20 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
+    public static readonly DependencyProperty MapProperty = DependencyProperty.Register(
+        nameof(Map),
+        typeof(Map),
+        typeof(MapControl),
+        new PropertyMetadata(null, OnMapPropertyChanged));
+
+    private static void OnMapPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is MapControl mapControl && e.NewValue is Map map)
+        {
+            mapControl.Map = map;
+        }
+    }
+
     private readonly ManipulationTracker _manipulationTracker = new();
 
     public MapControl()
