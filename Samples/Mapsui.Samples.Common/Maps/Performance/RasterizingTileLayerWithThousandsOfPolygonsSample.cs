@@ -21,7 +21,7 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : ISample,
 {
     private Map? _map;
 
-    public string Name => "RasterizingTileLayer with Thousands of Polygons";
+    public string Name => "RasterizingTileLayerWithThousandsOfPolygons";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

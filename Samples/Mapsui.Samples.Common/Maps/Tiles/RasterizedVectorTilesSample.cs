@@ -26,7 +26,7 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
         _sqliteDataSource = CreateSqliteDataSource();
     }
 
-    public string Name => "Rasterized Vector Tiles";
+    public string Name => "RasterizedVectorTiles";
     public string Category => "Tiles";
 
     public Task<Map> CreateMapAsync()

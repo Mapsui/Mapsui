@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class RasterStyleOutlineSample : ISample
 {
-    public string Name => "RasterStyle Outline";
+    public string Name => "RasterStyleOutline";
     public string Category => "Styles";
 
     public Task<Map> CreateMapAsync()

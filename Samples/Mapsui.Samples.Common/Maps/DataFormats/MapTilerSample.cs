@@ -16,7 +16,7 @@ public class MapTilerSample : ISample
         MapTilesDeployer.CopyEmbeddedResourceToFile("TrueMarble");
     }
 
-    public string Name => "Tiles on file system";
+    public string Name => "TilesOnDisk";
     public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

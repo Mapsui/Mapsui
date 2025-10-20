@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Mapsui.Samples.Common.Maps.Tests;
 public class SvgSymbolSample : ISample
 {
-    public string Name => "Svg Symbol";
+    public string Name => "SvgSymbol";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

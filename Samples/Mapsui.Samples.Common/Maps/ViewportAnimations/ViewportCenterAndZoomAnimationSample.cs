@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
 
 public class ViewportCenterAndZoomAnimationSample : ISample
 {
-    public string Name => "Animated Viewport - Zoom On Center";
+    public string Name => "ZoomOnCenter";
     public string Category => "ViewportAnimations";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

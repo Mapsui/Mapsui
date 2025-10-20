@@ -21,7 +21,7 @@ public class ShapefileTileSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "RasterizingTileLayer with Shapefile";
+    public string Name => "RasterizingTileLayerWithShapefile";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

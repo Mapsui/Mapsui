@@ -13,7 +13,7 @@ public class StackedLabelsTestSample : ISample
     private const string _labelColumn = "Label";
 
     public string Category => "Tests";
-    public string Name => "Stacked Labels";
+    public string Name => "StackedLabels";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

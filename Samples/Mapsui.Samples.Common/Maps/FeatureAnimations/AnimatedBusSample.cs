@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.FeatureAnimations;
 
 public class AnimatedBusSample : ISample
 {
-    public string Name => "Animated Bus";
+    public string Name => "AnimatedBus";
 
     public string Category => "FeatureAnimations";
 

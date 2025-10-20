@@ -22,7 +22,7 @@ public sealed class AnimatedPointsSample : ISample, IDisposable
     private bool _disposed;
     readonly AnimatedPointsSampleProvider _animatedPointsSampleProvider = new();
 
-    public string Name => "Animated Points";
+    public string Name => "AnimatedPoints";
     public string Category => "FeatureAnimations";
 
     public Task<Map> CreateMapAsync()

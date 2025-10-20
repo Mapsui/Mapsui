@@ -19,7 +19,7 @@ public class ShapefileProjectionSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "Shapefile with Projection";
+    public string Name => "ShapefileWithProjection";
     public string Category => "Projection";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

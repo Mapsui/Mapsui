@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class BitmapAtlasSample : ISample
 {
-    public string Name => "Bitmap Atlas";
+    public string Name => "BitmapAtlas";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class DynamicSvgStyleSample : ISample
 {
-    public string Name => "Dynamic Svg Style";
+    public string Name => "DynamicSvgStyle";
     public string Category => "Styles";
 
     private string Description => "Tab or click in the map to see the change in symbols. This sample shows you can " +

@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class VectorStyleSample : ISample
 {
-    public string Name => "VectorStyle on points";
+    public string Name => "VectorStyleOnPoints";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

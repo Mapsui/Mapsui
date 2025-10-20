@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingTileLayerWithLineStringSample : IMapControlSample
 {
-    public string Name => "RasterizingTileLayer with LineString";
+    public string Name => "RasterizingTileLayerWithLineString";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)

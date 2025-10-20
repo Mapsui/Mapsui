@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class BitmapSymbolInCollectionSample : ISample
 {
-    public string Name => "Collection with Bitmap Symbol";
+    public string Name => "CollectionWithBitmapSymbol";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
 
 public class ViewportCenterOnAnimationSample : ISample
 {
-    public string Name => "Animated Viewport - Center";
+    public string Name => "Center";
     public string Category => "ViewportAnimations";
 
     public static int mode = 1;

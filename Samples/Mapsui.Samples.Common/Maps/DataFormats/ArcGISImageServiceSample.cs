@@ -14,7 +14,7 @@ public class ArcGISImageServiceSample : ISample
     private const string LandsatGlsImageServer = @"https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer";
     private ArcGISImageCapabilities? _capabilities;
 
-    public string Name => "ArcGIS image";
+    public string Name => "ArcGisImage";
     public string Category => "DataFormats";
 
     public static IUrlPersistentCache? DefaultCache { get; set; }

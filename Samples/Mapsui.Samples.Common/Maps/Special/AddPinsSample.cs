@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Special;
 
 public class AddPinsSample : ISample
 {
-    public string Name => "Add Pins";
+    public string Name => "AddPins";
     public string Category => "Special";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

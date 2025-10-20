@@ -16,7 +16,7 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
     private static readonly Random _random = new(0);
     private static CancellationTokenSource? _cancelationTokenSource;
 
-    public string Name => "Mutating triangle";
+    public string Name => "MutatingTriangle";
     public string Category => "Special";
 
     public Task<Map> CreateMapAsync()

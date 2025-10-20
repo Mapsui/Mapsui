@@ -17,7 +17,7 @@ public class GeometrySimplifyProviderWithShapefileSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
     }
 
-    public string Name => "GeometrySimplifyProvider with Shapefile";
+    public string Name => "GeometrySimplifyProviderWithShapefile";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

@@ -14,7 +14,7 @@ public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
 {
     private Layer? _animationLayer;
     private static bool _repeat = true;
-    public string Name => "Animated Symbols";
+    public string Name => "AnimatedSymbols";
     public string Category => "FeatureAnimations";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

@@ -18,7 +18,7 @@ public sealed class ManyMutatingLayersSample : ISample, IDisposable
 {
     private bool _disposed;
 
-    public string Name => "Many Mutating Layers";
+    public string Name => "ManyMutatingLayers";
     public string Category => "Performance";
 
     private readonly Random _random = new(123);

@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 public class RasterizingTileLayerWithRenderFormatSkpSample : ISample
 {
 
-    public string Name => "RasterizingTileLayer with RenderFormat.Skp";
+    public string Name => "RasterizingTileLayerWithRenderFormatSkp";
 
     static RasterizingTileLayerWithRenderFormatSkpSample()
     {

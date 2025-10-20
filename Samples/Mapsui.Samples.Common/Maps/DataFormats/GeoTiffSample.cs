@@ -16,7 +16,7 @@ public class GeoTiffSample : ISample
         GeoTiffDeployer.CopyEmbeddedResourceToFile("example.shp");
     }
 
-    public string Name => "Geo Tiff";
+    public string Name => "GeoTiff";
     public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

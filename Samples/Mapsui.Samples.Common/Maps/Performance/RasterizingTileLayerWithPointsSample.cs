@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingTileLayerWithPointsSample : ISample
 {
-    public string Name => "RasterizingTileLayer with Points";
+    public string Name => "RasterizingTileLayerWithPoints";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync()

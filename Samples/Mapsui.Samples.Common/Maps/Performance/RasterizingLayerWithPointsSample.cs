@@ -12,7 +12,7 @@ public class RasterizingLayerWithPointsSample : IMapControlSample
 {
     static Layer? _layer;
 
-    public string Name => "RasterizingLayer with Points";
+    public string Name => "RasterizingLayerWithPoints";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)

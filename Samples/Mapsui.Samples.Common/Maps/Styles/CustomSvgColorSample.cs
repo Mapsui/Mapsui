@@ -19,7 +19,7 @@ public class CustomSvgColorSample : ISample
 {
     private const double _circumferenceOfTheEarth = 40075017;
 
-    public string Name => "Custom Svg Color";
+    public string Name => "CustomSvgColor";
     public string Category => "Styles";
     private static string Description => "This samples applies custom colors for a specific element of an SVG." +
         "This allows users to change the fill and outline of an SVG with different colors.";

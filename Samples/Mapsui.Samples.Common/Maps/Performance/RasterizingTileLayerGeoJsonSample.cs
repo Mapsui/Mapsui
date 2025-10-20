@@ -17,7 +17,7 @@ public class RasterizingTileLayerGeoJsonSample : ISample
         GeoJsonDeployer.CopyEmbeddedResourceToFile("cities.geojson");
     }
 
-    public string Name => "RasterizingTileLayer GeoJson VectorStyle";
+    public string Name => "RasterizingTileLayerWithGeoJsonVectorStyle";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

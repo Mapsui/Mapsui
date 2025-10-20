@@ -21,7 +21,7 @@ public class ImageCalloutSample : ISample
 {
     private static readonly Random _random = new(1);
 
-    public string Name => "Image Callout";
+    public string Name => "ImageCallout";
     public string Category => "MapInfo";
 
     private const string _pointLayerName = "Point with callout";

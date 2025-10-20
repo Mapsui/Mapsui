@@ -14,7 +14,7 @@ public class ShapefileZoomSample : ISample
         TestShapeFilesDeployer.CopyEmbeddedResourceToFile("test_file.shp");
     }
 
-    public string Name => "Shapefile Zoom";
+    public string Name => "ShapefileZoom";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync()

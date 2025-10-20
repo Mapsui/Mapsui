@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.WFS;
 
 public class WfsPointsSample : ISample
 {
-    public string Name => "WFS Points";
+    public string Name => "WfsPoints";
     public string Category => "WFS";
 
     private const string _crs = "EPSG:31254";

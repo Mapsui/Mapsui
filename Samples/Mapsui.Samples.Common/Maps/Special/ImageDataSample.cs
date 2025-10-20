@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.Special;
 
 public class ImageDataSample : ISample
 {
-    public string Name => "Image over Map Sample";
+    public string Name => "ImageOverMap";
     public string Category => "Demo";
 
     public Task<Map> CreateMapAsync()

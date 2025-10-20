@@ -19,7 +19,7 @@ public class ShapefileTilingFilteringSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "Filtering on shapefile";
+    public string Name => "FilteringOnShapefile";
     public string Category => "Special";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

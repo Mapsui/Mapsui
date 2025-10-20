@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps.Geometries;
 
 public class VariousSample : ISample, ISampleTest
 {
-    public string Name => "Various geometries";
+    public string Name => "VariousGeometries";
     public string Category => "Geometries";
 
     public Task<Map> CreateMapAsync()

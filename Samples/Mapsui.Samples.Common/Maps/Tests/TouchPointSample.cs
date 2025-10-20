@@ -17,7 +17,7 @@ public sealed class TouchPointSample : ISample, IDisposable
     private Map? _map;
     private TextBoxWidget? _label;
     private TextBoxWidget? _mousePosition;
-    public string Name => "Touch Point";
+    public string Name => "TouchPoint";
 
     public string Category => "Tests";
 
