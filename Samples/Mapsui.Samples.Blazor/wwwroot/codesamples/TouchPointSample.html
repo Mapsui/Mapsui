@@ -29,9 +29,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP003
-#pragma warning disable IDISP001
-
 namespace Mapsui.Samples.Common.Maps.Tests;
 
 public sealed class TouchPointSample : ISample, IDisposable
@@ -39,7 +36,7 @@ public sealed class TouchPointSample : ISample, IDisposable
     private Map? _map;
     private TextBoxWidget? _label;
     private TextBoxWidget? _mousePosition;
-    public string Name => "Touch Point";
+    public string Name => "TouchPoint";
 
     public string Category => "Tests";
 

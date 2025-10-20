@@ -17,7 +17,8 @@
 <body>
 <div class="code-container">
     <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
-    <pre><code class="csharp">using Mapsui.Extensions;
+    <pre><code class="csharp">using Mapsui.Experimental.Layers;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Nts.Extensions;
@@ -32,13 +33,13 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Special;
 
-public class ObservableMemoryLayerSample : ISample
+public class ObservableCollectionLayerSample : ISample
 {
-    private static readonly Color _intermediateColor = new(192, 108, 132);
-    private static readonly Color _lightColor = new(248, 177, 149);
-    private static readonly Color _darkColor = new(108, 91, 123);
+    private static readonly Color _darkColor = new(231, 111, 81);
+    private static readonly Color _intermediateColor = new(234, 152, 87);
+    private static readonly Color _lightColor = new(253, 216, 126);
 
-    public string Name => $"{nameof(ObservableMemoryLayer<BusStop>)}";
+    public string Name => $"{nameof(ObservableCollectionLayer<BusStop>)}";
     public string Category => "Special";
 
     public Task<Map> CreateMapAsync()
@@ -60,7 +61,7 @@ public class ObservableMemoryLayerSample : ISample
         map.Layers.Add(CreateBackgroundWithGraySquare());
 
         // The function to create a feature is the link from your BusStop to a Mapsui feature.
-        map.Layers.Add(CreateObservableMemoryLayer(busStops, (b) => new PointFeature(b.X, b.Y)));
+        map.Layers.Add(CreateObservableCollectionLayer(busStops, (b) => new PointFeature(b.X, b.Y)));
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Navigator.ZoomToBox(map.Extent!.Grow(10000000));
 
@@ -111,7 +112,7 @@ public class ObservableMemoryLayerSample : ISample
         }
     };
 
-    private static ObservableMemoryLayer<BusStop> CreateObservableMemoryLayer(
+    private static ObservableCollectionLayer<BusStop> CreateObservableCollectionLayer(
         ObservableCollection<BusStop> observableCollection, Func<BusStop, IFeature?> createFeature) => new(createFeature)
         {
             Name = "BusStops",

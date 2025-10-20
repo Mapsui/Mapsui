@@ -19,133 +19,151 @@
     <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
     <pre><code class="csharp">using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Styles;
-using Mapsui.Providers;
+using Mapsui.Nts;
 using Mapsui.Samples.Common.DataBuilders;
-using Mapsui.Widgets.InfoWidgets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Timers;
+using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Tiling.Layers;
+using Mapsui.UI;
+using Mapsui.Widgets.InfoWidgets;
+using NetTopologySuite.Geometries;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Geometries;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
-public sealed class ManyMutatingLayersSample : ISample, IDisposable
+public class BasicMapInfoSample : ISample, ISampleTest
 {
-    private bool _disposed;
+    private const string _infoLayerName = "Info Layer";
+    private const string _polygonLayerName = "Polygon Layer";
+    private const string _lineLayerName = "Line Layer";
 
-    public string Name => "ManyMutatingLayers";
-    public string Category => "Performance";
+    public string Name => "BasicMapInfo";
+    public string Category => "MapInfo";
 
-    private readonly Random _random = new(123);
-    private const int _featureCount = 40;
-    private const int _layerCount = 20;
-    private const double _c = 40075017 * 0.5; // Half the circumference of the earth
-    private readonly Timer _timer1 = new(5);
-    private readonly Timer _timer2 = new(6);
-    private readonly Timer _timer3 = new(7);
-    private readonly Timer _timer4 = new(8);
-    private readonly Timer _timer5 = new(9);
-    object _syncLock = new();
-
-    public Task<Map> CreateMapAsync()
+    public static Map CreateMap()
     {
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        var features = RandomPointsBuilder.CreateRandomFeatures(new MRect(-_c, -_c, _c, _c), _featureCount, _random);
-        map.Layers.Add(CreatePointLayers(_random, features).ToArray());
-        map.Navigator.ZoomToBox(map.Layers.Get(0).Extent);
+        map.Layers.Add(CreateInfoLayer(map.Extent));
+        map.Layers.Add(CreatePolygonLayer());
+        map.Layers.Add(CreateLineLayer());
 
         map.Widgets.Add(new MapInfoWidget(map, l => l is not TileLayer));
 
-        InitializeTimer(_timer1, map, features);
-        InitializeTimer(_timer2, map, features);
-        InitializeTimer(_timer3, map, features);
-        InitializeTimer(_timer4, map, features);
-        InitializeTimer(_timer5, map, features);
-
-        return Task.FromResult(map);
+        return map;
     }
 
-    private double GetRandomNextDouble()
+    public Task<Map> CreateMapAsync()
     {
-        lock (_syncLock)
-            return _random.NextDouble();
+        return Task.FromResult(CreateMap());
     }
 
-    private void InitializeTimer(Timer timer, Map map, IEnumerable<PointFeature> features)
+    private static MemoryLayer CreatePolygonLayer() => new()
     {
-        var random = new Random(38445);
-        timer.Elapsed += (s, e) => MutateFeatures(features, () => map.Refresh());
-        timer.Start();
-    }
+        Name = _polygonLayerName,
+        Features = new List<IFeature> { CreatePolygonFeature(), CreateMultiPolygonFeature() },
+        Style = null,
+    };
 
-    private void MutateFeatures(IEnumerable<PointFeature> features, Action refresh)
+    private static MemoryLayer CreateLineLayer() => new()
     {
-        foreach (var feature in features)
+        Name = _lineLayerName,
+        Features = [CreateLineFeature()],
+        Style = null,
+    };
+
+    private static GeometryFeature CreateMultiPolygonFeature() => new()
+    {
+        Geometry = CreateMultiPolygon(),
+        ["Name"] = "Multipolygon 1",
+        Styles = [new VectorStyle { Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black) }]
+    };
+
+    private static GeometryFeature CreatePolygonFeature() => new()
+    {
+        Geometry = CreatePolygon(),
+        ["Name"] = "Polygon 1",
+        Styles = [new VectorStyle()]
+    };
+
+    private static GeometryFeature CreateLineFeature()
+    {
+        return new GeometryFeature
         {
-            feature.Point.X = feature.Point.X + (GetRandomNextDouble() - 0.5) * 4000;
-            feature.Point.Y = feature.Point.Y + (GetRandomNextDouble() - 0.5) * 4000;
-            feature.Modified();
-            refresh();
-        }
-    }
-
-    private static IEnumerable<Layer> CreatePointLayers(Random random, IEnumerable<IFeature> features)
-    {
-        for (var i = 0; i < _layerCount; i++)
-        {
-            yield return CreatePointLayer(i, features, random);
-        }
-    }
-
-    private static Layer CreatePointLayer(int i, IEnumerable<IFeature> features, Random random)
-    {
-        return new Layer
-        {
-            Enabled = true,
-            Name = $"Layer {i}",
-            DataSource = CreateMemoryProvider(features),
-            Style = new SymbolStyle
-            {
-                SymbolType = SymbolType.Ellipse,
-                SymbolScale = i * (1.0 / _layerCount) * 2.0,
-                Outline = new Pen { Color = GenerateRandomColor(random), Width = 1 },
-                Fill = null
-            }
+            Geometry = CreateLine(),
+            ["Name"] = "Line 1",
+            Styles = [new VectorStyle { Line = new Pen(Color.Violet, 6) }]
         };
     }
 
-    private static MemoryProvider CreateMemoryProvider(IEnumerable<IFeature> features)
+    private static MultiPolygon CreateMultiPolygon()
     {
-        return new MemoryProvider(features);
+        return new MultiPolygon([
+            new Polygon(new LinearRing([
+                new Coordinate(4000000, 3000000),
+                new Coordinate(4000000, 2000000),
+                new Coordinate(3000000, 2000000),
+                new Coordinate(3000000, 3000000),
+                new Coordinate(4000000, 3000000)
+            ])),
+
+            new(new LinearRing([
+                new Coordinate(4000000, 5000000),
+                new Coordinate(4000000, 4000000),
+                new Coordinate(3000000, 4000000),
+                new Coordinate(3000000, 5000000),
+                new Coordinate(4000000, 5000000)
+            ]))
+        ]);
     }
 
-    public static Color GenerateRandomColor(Random random)
+    private static Polygon CreatePolygon()
     {
-        byte[] rgb = new byte[3];
-        random.NextBytes(rgb);
-        return new Color(rgb[0], rgb[1], rgb[2]);
+        return new Polygon(new LinearRing(
+        [
+            new Coordinate(1000000, 1000000),
+            new Coordinate(1000000, -1000000),
+            new Coordinate(-1000000, -1000000),
+            new Coordinate(-1000000, 1000000),
+            new Coordinate(1000000, 1000000)
+        ]));
     }
 
-    public void Dispose()
+    private static LineString CreateLine()
     {
-        if (_disposed)
-        {
-            return;
-        }
+        var offsetX = -2000000;
+        var offsetY = -2000000;
+        var stepSize = -2000000;
 
-        _timer1.Dispose();
-        _timer2.Dispose();
-        _timer3.Dispose();
-        _timer4.Dispose();
-        _timer5.Dispose();
+        return new LineString(
+        [
+            new Coordinate(offsetX + stepSize,      offsetY + stepSize),
+            new Coordinate(offsetX + stepSize * 2,  offsetY + stepSize),
+            new Coordinate(offsetX + stepSize * 2,  offsetY + stepSize * 2),
+            new Coordinate(offsetX + stepSize * 3,  offsetY + stepSize * 2),
+            new Coordinate(offsetX + stepSize * 3,  offsetY + stepSize * 3)
+        ]);
+    }
 
-        _disposed = true;
+    private static Layer CreateInfoLayer(MRect? envelope) => new(_infoLayerName)
+    {
+        DataSource = RandomPointsBuilder.CreateProviderWithRandomPoints(envelope, 25, new Random(7)),
+        Style = CreateSymbolStyle(),
+    };
+
+    private static SymbolStyle CreateSymbolStyle() => new()
+    {
+        SymbolScale = 0.8,
+        Fill = new Brush(new Color(213, 234, 194)),
+        Outline = new Pen(Color.Gray, 1f),
+    };
+
+    public async Task InitializeTestAsync(IMapControl mapControl)
+    {
+        await Task.Delay(1000).ConfigureAwait(false);
     }
 }
 </code></pre>

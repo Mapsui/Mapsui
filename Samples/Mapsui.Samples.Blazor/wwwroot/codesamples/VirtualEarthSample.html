@@ -17,66 +17,43 @@
 <body>
 <div class="code-container">
     <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
-    <pre><code class="csharp">using Mapsui.Layers;
+    <pre><code class="csharp">using BruTile.Predefined;
+using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
-using Mapsui.Tiling;
-using Mapsui.UI;
-using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
+using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Performance;
+namespace Mapsui.Samples.Common.Maps.Basic;
 
-public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
+public class VirtualEarthSample : ISample
 {
-    public string Name => "RasterizingTileLayerWithDynamicPoints";
-    public string Category => "Performance";
-
-    public void Setup(IMapControl mapControl)
+    public string Name => "VirtualEarth";
+    public string Category => "Basic";
+    public Task<Map> CreateMapAsync()
     {
-        // PixelDensity is not always known at startup. The RasterizingTileLayer should be initialized later.
-        var pixelDensity = mapControl.GetPixelDensity() ?? 1;
-        mapControl.Map = CreateMap(pixelDensity);
+        return Task.FromResult(CreateMap());
     }
 
-    public static Map CreateMap(float pixelDensity)
+    public static Map CreateMap()
     {
         var map = new Map();
-        map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
-        var extent = map.Layers.Get(1).Extent!.Grow(map.Layers.Get(1).Extent!.Width * 0.1);
-        map.Navigator.ZoomToBox(extent);
+
+        map.Layers.Add(CreateLayer());
+        map.Navigator.CenterOnAndZoomTo(new MPoint(1059114.80157058, 5179580.75916194), map.Navigator.Resolutions[14]);
+        map.BackColor = Color.FromString("#000613");
+
         return map;
     }
 
-    private static ObservableMemoryLayer<MPoint> CreateRandomPointLayer()
+    private static TileLayer CreateLayer()
     {
-        var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
-        var observableCollection = new ObservableCollection<MPoint>();
-
-        var layer = new ObservableMemoryLayer<MPoint>(f => new PointFeature(f))
+        var apiKey = "Enter your api key here"; // Contact Microsoft about how to use this
+        var tileSource = KnownTileSources.Create(KnownTileSource.BingAerial, apiKey, BingArial.DefaultCache);
+        return new TileLayer(tileSource, dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
         {
-            Name = "Points",
-            Style = new SymbolStyle
-            {
-                SymbolType = SymbolType.Triangle,
-                Fill = new Brush(Color.Red)
-            },
-            ObservableCollection = observableCollection,
+            Name = "Bing Aerial",
         };
-
-        _ = Task.Run(async () =>
-        {
-            for (var i = 0; i < 100; i++)
-            {
-                observableCollection.Add(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000)));
-                layer.DataHasChanged();
-                await Task.Delay(100);
-            }
-        });
-
-        return layer;
     }
 }
 </code></pre>
