@@ -11,8 +11,6 @@ using System.Net;
 using System.Threading.Tasks;
 using Mapsui.Providers;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.WFS;
 
 public class WfsGeometryFilterSample : ISample

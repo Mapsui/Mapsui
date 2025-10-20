@@ -3,8 +3,6 @@ using Mapsui.Styles;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.Tests;
 public class SvgSymbolSample : ISample
 {

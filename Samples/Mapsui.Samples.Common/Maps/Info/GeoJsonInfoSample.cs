@@ -9,9 +9,6 @@ using Mapsui.Widgets.InfoWidgets;
 using System.IO;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Info;
 
 public class GeoJsonInfoSample : ISample

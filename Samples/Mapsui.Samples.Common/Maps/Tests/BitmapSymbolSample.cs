@@ -14,14 +14,12 @@ public class BitmapSymbolSample : ISample
 
     public static Map CreateMap()
     {
-#pragma warning disable IDISP001 // Dispose created
         var layer = new MemoryLayer
         {
             Style = null,
             Features = CreateFeatures(),
             Name = "Points with bitmaps"
         };
-#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {

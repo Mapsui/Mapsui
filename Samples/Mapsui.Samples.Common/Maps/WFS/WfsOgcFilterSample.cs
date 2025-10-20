@@ -10,8 +10,6 @@ using System.Threading.Tasks;
 using Mapsui.Providers;
 using Mapsui.Providers.Wfs.Utilities;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.WFS;
 
 public class WfsOgcFilterSample : ISample

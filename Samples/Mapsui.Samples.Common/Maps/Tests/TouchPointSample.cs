@@ -10,9 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP003
-#pragma warning disable IDISP001
-
 namespace Mapsui.Samples.Common.Maps.Tests;
 
 public sealed class TouchPointSample : ISample, IDisposable

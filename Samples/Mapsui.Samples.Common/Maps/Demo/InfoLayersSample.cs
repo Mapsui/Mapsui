@@ -12,8 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class InfoLayersSample : ISample, ISampleTest

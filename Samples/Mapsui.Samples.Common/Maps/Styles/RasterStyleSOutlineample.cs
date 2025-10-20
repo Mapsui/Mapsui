@@ -6,8 +6,6 @@ using System;
 using Mapsui.Styles.Thematics;
 using Mapsui.Styles;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class RasterStyleOutlineSample : ISample

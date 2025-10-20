@@ -21,10 +21,8 @@ public class StackedLabelsTestSample : ISample
     {
         var random = new Random(6);
         var features = RandomPointsBuilder.CreateRandomFeatures(new MRect(-100, -100, 100, 100), 20, random);
-#pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer(features);
         var stackedLabelLayer = CreateStackedLabelLayer(features, _labelColumn);
-#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {

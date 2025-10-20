@@ -5,8 +5,6 @@ using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps.Tests;
 
-#pragma warning disable IDISP001 // Dispose created
-
 public class SymbolTypesSample : ISample
 {
     public string Name => "Symbol Types";

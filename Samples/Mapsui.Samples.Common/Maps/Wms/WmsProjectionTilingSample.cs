@@ -11,8 +11,6 @@ using Mapsui.Tiling.Layers;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 
-#pragma warning disable IDISP001
-
 namespace Mapsui.Samples.Common.Maps.WMS;
 public class WmsProjectionTilingSample : ISample
 {

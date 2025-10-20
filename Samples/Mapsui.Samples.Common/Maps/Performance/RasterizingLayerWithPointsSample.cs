@@ -6,8 +6,6 @@ using Mapsui.UI;
 using System;
 using System.Collections.Generic;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingLayerWithPointsSample : IMapControlSample

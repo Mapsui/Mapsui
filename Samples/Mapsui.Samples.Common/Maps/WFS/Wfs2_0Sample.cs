@@ -7,8 +7,6 @@ using Mapsui.Widgets.InfoWidgets;
 using System.Net;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class Wfs2_0Sample : ISample

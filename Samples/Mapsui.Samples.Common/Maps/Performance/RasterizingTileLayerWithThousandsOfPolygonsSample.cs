@@ -15,9 +15,6 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using NetTopologySuite.Geometries;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Performance;
 
 public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : ISample, IDisposable

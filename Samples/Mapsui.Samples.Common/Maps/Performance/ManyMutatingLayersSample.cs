@@ -12,8 +12,6 @@ using System.Timers;
 using Mapsui.Tiling;
 using Mapsui.Tiling.Layers;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Geometries;
 
 public sealed class ManyMutatingLayersSample : ISample, IDisposable

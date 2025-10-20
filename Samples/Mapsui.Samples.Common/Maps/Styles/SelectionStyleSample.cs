@@ -10,8 +10,6 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-#pragma warning disable IDISP001 // Dispose created
-
 internal class SelectionStyleSample : ISample
 {
     public string Name => "Select a feature";
