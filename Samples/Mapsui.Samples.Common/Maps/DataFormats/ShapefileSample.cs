@@ -18,7 +18,7 @@ public class ShapefileSample : ISample
     }
 
     public string Name => "Shapefile with labels";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

@@ -15,7 +15,7 @@ public class ArcGISImageServiceSample : ISample
     private ArcGISImageCapabilities? _capabilities;
 
     public string Name => "ArcGIS image";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public static IUrlPersistentCache? DefaultCache { get; set; }
 

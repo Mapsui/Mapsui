@@ -17,7 +17,7 @@ public class MbTilesOverlaySample : ISample
     }
 
     public string Name => "MbTiles Overlay";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync()
     {

@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 public class WmtsSample : ISample
 {
     public string Name => "WMTS";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
     public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
     public async Task<Map> CreateMapAsync()

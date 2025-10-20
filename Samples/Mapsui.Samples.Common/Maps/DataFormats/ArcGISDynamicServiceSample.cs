@@ -14,7 +14,7 @@ public class ArcGISDynamicServiceSample : ISample
     private ArcGISDynamicCapabilities? _capabilities;
 
     public string Name => "ArcGIS dynamic";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public static IUrlPersistentCache? DefaultCache { get; set; }
 

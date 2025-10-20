@@ -17,7 +17,7 @@ public class GeoTiffSample : ISample
     }
 
     public string Name => "Geo Tiff";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

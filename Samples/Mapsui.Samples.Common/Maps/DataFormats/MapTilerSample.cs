@@ -17,7 +17,7 @@ public class MapTilerSample : ISample
     }
 
     public string Name => "Tiles on file system";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
