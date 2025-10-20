@@ -7,13 +7,11 @@ using Mapsui.Widgets.InfoWidgets;
 using System.Net;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class Wfs2_0Sample : ISample
 {
-    public string Name => "WFS 2.0";
+    public string Name => "WFS2.0";
     public string Category => "WFS";
 
     private const string _crs = "EPSG:31254";

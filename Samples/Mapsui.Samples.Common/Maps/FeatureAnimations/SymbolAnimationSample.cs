@@ -8,14 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Animations;
+namespace Mapsui.Samples.Common.Maps.FeatureAnimations;
 
 public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
 {
     private Layer? _animationLayer;
     private static bool _repeat = true;
-    public string Name => "Animated Symbols";
-    public string Category => "Animations";
+    public string Name => "AnimatedSymbols";
+    public string Category => "FeatureAnimations";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

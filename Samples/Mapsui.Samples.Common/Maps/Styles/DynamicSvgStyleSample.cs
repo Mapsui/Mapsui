@@ -8,11 +8,11 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class DynamicSvgStyleSample : ISample
 {
-    public string Name => "Dynamic Svg Style";
+    public string Name => "DynamicSvgStyle";
     public string Category => "Styles";
 
     private string Description => "Tab or click in the map to see the change in symbols. This sample shows you can " +
@@ -62,7 +62,7 @@ public class DynamicSvgStyleSample : ISample
                 },
                 RelativeOffset = new RelativeOffset(0.0, 0.0),
                 // 1. Change scale based on the distance
-                SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),
+                SymbolScale = 0.25 + 0.25 * distanceBetweenZeroAndOne,
                 // 2. Change angle pointing to the info click position
                 SymbolRotation = -CalculateAngle(tapPosition, featurePoint) - 90,
                 RotateWithMap = true,

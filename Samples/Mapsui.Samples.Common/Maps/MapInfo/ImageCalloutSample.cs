@@ -15,16 +15,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
-namespace Mapsui.Samples.Common.Maps.Info;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
 public class ImageCalloutSample : ISample
 {
     private static readonly Random _random = new(1);
 
-    public string Name => "Image Callout";
+    public string Name => "ImageCallout";
     public string Category => "MapInfo";
 
     private const string _pointLayerName = "Point with callout";

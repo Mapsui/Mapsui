@@ -16,8 +16,8 @@ public class MbTilesOverlaySample : ISample
         MbTilesDeployer.CopyEmbeddedResourceToFile("torrejon-de-ardoz.mbtiles");
     }
 
-    public string Name => "MbTiles Overlay";
-    public string Category => "Data Formats";
+    public string Name => "MbTilesOverlay";
+    public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync()
     {

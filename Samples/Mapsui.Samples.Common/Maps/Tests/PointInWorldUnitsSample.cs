@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class PointInWorldUnitsSample : ISample
 {
-    public string Name => "Point in World Units";
+    public string Name => "PointInWorldUnits";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

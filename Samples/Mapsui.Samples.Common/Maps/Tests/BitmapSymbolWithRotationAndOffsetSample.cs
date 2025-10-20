@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class BitmapSymbolWithRotationAndOffsetSample : ISample
 {
-    public string Name => "Symbol rotation and offset";
+    public string Name => "SymbolRotationAndOffset";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

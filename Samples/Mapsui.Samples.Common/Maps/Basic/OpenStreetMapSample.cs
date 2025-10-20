@@ -6,12 +6,12 @@ using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
 using Mapsui.Widgets.InfoWidgets;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Basic;
 
-public class OsmSample : ISample
+public class OpenStreetMapSample : ISample
 {
     public string Name => "OpenStreetMap";
-    public string Category => "Demo";
+    public string Category => "Basic";
 
     public Task<Map> CreateMapAsync()
     {

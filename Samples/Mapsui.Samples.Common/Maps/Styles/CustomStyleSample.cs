@@ -18,7 +18,7 @@ public class CustomStyleSample : ISample
 {
     private const string _mapInfoLayerName = "Custom Style Layer";
 
-    public string Name => "Custom Style";
+    public string Name => "CustomStyle";
     public string Category => "Styles";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

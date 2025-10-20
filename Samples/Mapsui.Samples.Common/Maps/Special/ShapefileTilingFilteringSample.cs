@@ -9,9 +9,6 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Special;
 
 public class ShapefileTilingFilteringSample : ISample
@@ -22,7 +19,7 @@ public class ShapefileTilingFilteringSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "Filtering on shapefile";
+    public string Name => "FilteringOnShapefile";
     public string Category => "Special";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

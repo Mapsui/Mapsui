@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 public class WfsSample : ISample
 {
     public string Name => "WFS";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     private const string wfsUri = "https://geoservices1.civis.bz.it/geoserver/p_bz-AdministrativeUnits/ows";
     private const string crs = "EPSG:3857";  // originally: "EPSG:25832"

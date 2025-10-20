@@ -11,15 +11,12 @@ using Mapsui.Tiling.Layers;
 using System.IO;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingTileLayerWithRenderFormatSkpSample : ISample
 {
 
-    public string Name => "RasterizingTileLayer with RenderFormat.Skp";
+    public string Name => "RasterizingTileLayerWithRenderFormatSkp";
 
     static RasterizingTileLayerWithRenderFormatSkpSample()
     {

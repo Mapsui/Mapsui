@@ -7,16 +7,14 @@ namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class BitmapAtlasSample : ISample
 {
-    public string Name => "Bitmap Atlas";
+    public string Name => "BitmapAtlas";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
-#pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer();
-#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {

@@ -11,9 +11,6 @@ using System.IO;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class ShapefileTileSample : ISample
@@ -24,7 +21,7 @@ public class ShapefileTileSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "RasterizingTileLayer with Shapefile";
+    public string Name => "RasterizingTileLayerWithShapefile";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

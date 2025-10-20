@@ -1,5 +1,4 @@
-﻿using Mapsui.Animations;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
@@ -7,12 +6,12 @@ using System.Threading.Tasks;
 using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 
-namespace Mapsui.Samples.Common.Maps.Animations;
+namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
 
-public class ViewportCenterOnAnimationSample : ISample
+public class ViewportFlyToAnimationSample : ISample
 {
-    public string Name => "Animated Viewport - Center";
-    public string Category => "Animations";
+    public string Name => "FlyTo";
+    public string Category => "ViewportAnimations";
 
     public static int mode = 1;
 
@@ -23,11 +22,11 @@ public class ViewportCenterOnAnimationSample : ISample
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
-        map.Widgets.Add(CreateTextBox("Tap on the map to center on that location"));
+        map.Widgets.Add(CreateTextBox("Tap on the map to fly to that location. The fly-to animation zooms out and then in."));
         map.Tapped += (s, e) =>
         {
-            // Animate to the new center.
-            e.Map.Navigator.CenterOn(e.WorldPosition, 500, Easing.CubicOut);
+            // 'FlyTo' is a specific navigation that moves to a new center while moving in and out.
+            e.Map.Navigator.FlyTo(e.WorldPosition, e.Map.Navigator.Viewport.Resolution * 1.5, 500);
             e.Handled = true;
         };
         return map;

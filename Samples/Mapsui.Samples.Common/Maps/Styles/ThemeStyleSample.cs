@@ -21,7 +21,7 @@ public class ThemeStyleSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
     }
 
-    public string Name => "ThemeStyle on shapefile";
+    public string Name => "ThemeStyleOnShapefile";
     public string Category => "Styles";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

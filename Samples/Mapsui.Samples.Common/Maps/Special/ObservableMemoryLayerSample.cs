@@ -11,7 +11,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Special;
 
 public class ObservableMemoryLayerSample : ISample
 {
@@ -41,7 +41,7 @@ public class ObservableMemoryLayerSample : ISample
         map.Layers.Add(CreateBackgroundWithGraySquare());
 
         // The function to create a feature is the link from your BusStop to a Mapsui feature.
-        map.Layers.Add(CreateObservableMemoryLayer(busStops, (BusStop b) => new PointFeature(b.X, b.Y)));
+        map.Layers.Add(CreateObservableMemoryLayer(busStops, (b) => new PointFeature(b.X, b.Y)));
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Navigator.ZoomToBox(map.Extent!.Grow(10000000));
 
@@ -108,7 +108,7 @@ public class ObservableMemoryLayerSample : ISample
     private static ObservableCollection<BusStop> CreateObservableCollectionOfBusStops(int pointCount)
     {
         var busStops = new ObservableCollection<BusStop>();
-        for (int i = 0; i < pointCount; i++)
+        for (var i = 0; i < pointCount; i++)
             busStops.Add(new BusStop("BusStop", i * 1_000_000, i * 1_000_000));
         return busStops;
     }

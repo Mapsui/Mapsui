@@ -11,8 +11,6 @@ using Mapsui.Tiling.Layers;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 
-#pragma warning disable IDISP001
-
 namespace Mapsui.Samples.Common.Maps.WMS;
 public class WmsProjectionTilingSample : ISample
 {
@@ -21,7 +19,7 @@ public class WmsProjectionTilingSample : ISample
         CacheDeployer.CopyEmbeddedResourceToFile("WmsSample.sqlite");
     }
 
-    public string Name => "WMS Projection Tiling";
+    public string Name => "WmsProjectionTiling";
     public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()

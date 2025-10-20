@@ -15,11 +15,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using RTK = Topten.RichTextKit;
 
-namespace Mapsui.Samples.Common.Maps.Styles;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
 public class CustomCalloutStyleSample : ISample
 {
-    public string Name => "Custom Callout Style";
+    public string Name => "CustomCalloutStyle";
     public string Category => "MapInfo";
 
     private const string _customStyleLayerName = "Custom Callout Layer";

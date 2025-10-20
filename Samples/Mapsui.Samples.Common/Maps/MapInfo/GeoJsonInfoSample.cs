@@ -9,10 +9,7 @@ using Mapsui.Widgets.InfoWidgets;
 using System.IO;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
-namespace Mapsui.Samples.Common.Maps.Info;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
 public class GeoJsonInfoSample : ISample
 {
@@ -21,7 +18,7 @@ public class GeoJsonInfoSample : ISample
         GeoJsonDeployer.CopyEmbeddedResourceToFile("cities.geojson");
     }
 
-    public string Name => "GeoJson Info";
+    public string Name => "GeoJsonMapInfo";
     public string Category => "MapInfo";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

@@ -1,4 +1,5 @@
-﻿using Mapsui.Extensions;
+﻿using Mapsui.Animations;
+using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
@@ -6,14 +7,12 @@ using System.Threading.Tasks;
 using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 
-namespace Mapsui.Samples.Common.Maps.Animations;
+namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
 
-public class ViewportFlyToAnimationSample : ISample
+public class ViewportCenterAndZoomAnimationSample : ISample
 {
-    public string Name => "Animated Viewport - Fly To";
-    public string Category => "Animations";
-
-    public static int mode = 1;
+    public string Name => "ZoomOnCenter";
+    public string Category => "ViewportAnimations";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
@@ -22,17 +21,17 @@ public class ViewportFlyToAnimationSample : ISample
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
-        map.Widgets.Add(CreateTextBox("Tap on the map to fly to that location. The fly-to animation zooms out and then in."));
+        map.Widgets.Add(CreateTextBox("Tap on the map to center on that location and zoom in on it"));
         map.Tapped += (s, e) =>
         {
-            // 'FlyTo' is a specific navigation that moves to a new center while moving in and out.
-            e.Map.Navigator.FlyTo(e.WorldPosition, e.Map.Navigator.Viewport.Resolution * 1.5, 500);
+            // Animate to the new center and new resolution
+            e.Map.Navigator.CenterOnAndZoomTo(e.WorldPosition, e.Map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
             e.Handled = true;
         };
         return map;
     }
 
-    private static IWidget CreateTextBox(string text) => new TextBoxWidget()
+    private static TextBoxWidget CreateTextBox(string text) => new()
     {
         Text = text,
         VerticalAlignment = VerticalAlignment.Top,

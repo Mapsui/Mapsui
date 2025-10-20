@@ -5,11 +5,9 @@ using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps.Tests;
 
-#pragma warning disable IDISP001 // Dispose created
-
 public class VectorStyleSample : ISample
 {
-    public string Name => "VectorStyle on points";
+    public string Name => "VectorStyleOnPoints";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

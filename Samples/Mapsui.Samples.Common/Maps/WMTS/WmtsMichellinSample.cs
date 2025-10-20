@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Wmts;
 
 public class WmtsMichelinSample : ISample
 {
-    public string Name => "WMTS Michelin";
+    public string Name => "WmtsMichelin";
     public string Category => "WMTS";
 
     public async Task<Map> CreateMapAsync()

@@ -7,12 +7,12 @@ using Mapsui.Widgets.ScaleBar;
 using System.Threading.Tasks;
 using Mapsui.Styles;
 
-namespace Mapsui.Samples.Common.Maps.Animations;
+namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
 
 public class ViewportZoomToResolutionAnimationSample : ISample
 {
-    public string Name => "Animated Viewport - Zoom";
-    public string Category => "Animations";
+    public string Name => "Zoom";
+    public string Category => "ViewportAnimations";
 
     public static int mode = 1;
 

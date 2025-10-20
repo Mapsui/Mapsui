@@ -5,12 +5,12 @@ using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Basic;
 
-public class BingSample : ISample
+public class VirtualEarthSample : ISample
 {
-    public string Name => "Virtual Earth";
-    public string Category => "Demo";
+    public string Name => "VirtualEarth";
+    public string Category => "Basic";
     public Task<Map> CreateMapAsync()
     {
         return Task.FromResult(CreateMap());

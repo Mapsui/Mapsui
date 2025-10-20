@@ -1,5 +1,5 @@
 ﻿using Mapsui.UI.iOS;
-using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Samples.Common.Maps.MapInfo;
 
 namespace Mapsui.Samples.iOS;
 
@@ -21,7 +21,7 @@ public partial class ViewController : UIViewController
     {
         return new MapControl(bounds)
         {
-            Map = InfoLayersSample.CreateMap()
+            Map = BasicMapInfoSample.CreateMap()
         };
     }
 }

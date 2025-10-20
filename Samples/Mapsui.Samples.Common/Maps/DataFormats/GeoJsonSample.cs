@@ -10,9 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class GeoJsonSample : ISample
@@ -26,7 +23,7 @@ public class GeoJsonSample : ISample
     }
 
     public string Name => "GeoJson";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
