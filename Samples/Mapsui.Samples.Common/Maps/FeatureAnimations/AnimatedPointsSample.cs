@@ -15,7 +15,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Animations;
+namespace Mapsui.Samples.Common.Maps.FeatureAnimations;
 
 public sealed class AnimatedPointsSample : ISample, IDisposable
 {
@@ -23,7 +23,7 @@ public sealed class AnimatedPointsSample : ISample, IDisposable
     readonly AnimatedPointsSampleProvider _animatedPointsSampleProvider = new();
 
     public string Name => "Animated Points";
-    public string Category => "Animations";
+    public string Category => "FeatureAnimations";
 
     public Task<Map> CreateMapAsync()
     {

@@ -10,13 +10,13 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Animations;
+namespace Mapsui.Samples.Common.Maps.FeatureAnimations;
 
 public class AnimatedBusSample : ISample
 {
     public string Name => "Animated Bus";
 
-    public string Category => "Animations";
+    public string Category => "FeatureAnimations";
 
     public Task<Map> CreateMapAsync()
     {
