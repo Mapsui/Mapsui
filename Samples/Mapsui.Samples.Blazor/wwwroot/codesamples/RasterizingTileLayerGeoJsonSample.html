@@ -27,8 +27,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class RasterizingTileLayerGeoJsonSample : ISample
@@ -38,7 +36,7 @@ public class RasterizingTileLayerGeoJsonSample : ISample
         GeoJsonDeployer.CopyEmbeddedResourceToFile("cities.geojson");
     }
 
-    public string Name => "RasterizingTileLayer GeoJson VectorStyle";
+    public string Name => "RasterizingTileLayerWithGeoJsonVectorStyle";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

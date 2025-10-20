@@ -17,66 +17,37 @@
 <body>
 <div class="code-container">
     <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
-    <pre><code class="csharp">using Mapsui.Layers;
-using Mapsui.Styles;
+    <pre><code class="csharp">using Mapsui.Extensions;
 using Mapsui.Tiling;
-using Mapsui.UI;
-using System;
-using System.Collections.ObjectModel;
+using Mapsui.Widgets;
+using Mapsui.Widgets.ScaleBar;
+using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
-using Mapsui.Tiling.Layers;
+using Mapsui.Widgets.InfoWidgets;
 
-namespace Mapsui.Samples.Common.Maps.Performance;
+namespace Mapsui.Samples.Common.Maps.Basic;
 
-public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
+public class OpenStreetMapSample : ISample
 {
-    public string Name => "RasterizingTileLayerWithDynamicPoints";
-    public string Category => "Performance";
+    public string Name => "OpenStreetMap";
+    public string Category => "Basic";
 
-    public void Setup(IMapControl mapControl)
+    public Task<Map> CreateMapAsync()
     {
-        // PixelDensity is not always known at startup. The RasterizingTileLayer should be initialized later.
-        var pixelDensity = mapControl.GetPixelDensity() ?? 1;
-        mapControl.Map = CreateMap(pixelDensity);
+        return Task.FromResult(CreateMap());
     }
 
-    public static Map CreateMap(float pixelDensity)
+    public static Map CreateMap()
     {
-        var map = new Map();
-        map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
-        var extent = map.Layers.Get(1).Extent!.Grow(map.Layers.Get(1).Extent!.Width * 0.1);
-        map.Navigator.ZoomToBox(extent);
-        return map;
-    }
-
-    private static ObservableMemoryLayer<MPoint> CreateRandomPointLayer()
-    {
-        var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
-        var observableCollection = new ObservableCollection<MPoint>();
-
-        var layer = new ObservableMemoryLayer<MPoint>(f => new PointFeature(f))
+        var map = new Map
         {
-            Name = "Points",
-            Style = new SymbolStyle
-            {
-                SymbolType = SymbolType.Triangle,
-                Fill = new Brush(Color.Red)
-            },
-            ObservableCollection = observableCollection,
+            CRS = "EPSG:3857"
         };
-
-        _ = Task.Run(async () =>
-        {
-            for (var i = 0; i < 100; i++)
-            {
-                observableCollection.Add(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000)));
-                layer.DataHasChanged();
-                await Task.Delay(100);
-            }
-        });
-
-        return layer;
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Widgets.Add(new ScaleBarWidget(map) { TextAlignment = Alignment.Center, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Top });
+        map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
+        map.Widgets.Add(new MouseCoordinatesWidget());
+        return map;
     }
 }
 </code></pre>
