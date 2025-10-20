@@ -15,7 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RTK = Topten.RichTextKit;
 
-namespace Mapsui.Samples.Common.Maps.Styles;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
 public class CustomCalloutStyleSample : ISample
 {

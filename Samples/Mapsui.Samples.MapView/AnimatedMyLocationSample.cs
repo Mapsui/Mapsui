@@ -21,7 +21,7 @@ public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
         _newLocation = new Position(54.5424, 25.1912);
 
         _mapView = (UI.Maui.MapView)mapControl;
-        var map = OsmSample.CreateMap();
+        var map = OpenStreetMapSample.CreateMap();
         map.Navigator.CenterOnAndZoomTo(_newLocation.ToMapsui(), map.Navigator.Resolutions[14]);
         mapControl.Map = map;
 

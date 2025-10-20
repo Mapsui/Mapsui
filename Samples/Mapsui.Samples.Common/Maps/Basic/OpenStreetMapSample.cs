@@ -8,9 +8,9 @@ using Mapsui.Widgets.InfoWidgets;
 
 namespace Mapsui.Samples.Common.Maps.Basic;
 
-public class OsmSample : ISample
+public class OpenStreetMapSample : ISample
 {
-    public string Name => "Basic OpenStreetMap";
+    public string Name => "OpenStreetMap";
     public string Category => "Basic";
 
     public Task<Map> CreateMapAsync()

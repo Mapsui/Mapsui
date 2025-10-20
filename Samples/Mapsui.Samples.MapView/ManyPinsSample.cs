@@ -91,7 +91,7 @@ public class ManyPinsSample : IMapViewSample
 
     public void Setup(IMapControl mapControl)
     {
-        mapControl.Map = OsmSample.CreateMap();
+        mapControl.Map = OpenStreetMapSample.CreateMap();
 
         ((UI.Maui.MapView)mapControl).UniqueCallout = true;
 

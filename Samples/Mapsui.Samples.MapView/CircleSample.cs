@@ -39,6 +39,6 @@ public class CircleSample : IMapViewSample
 
     public void Setup(IMapControl mapControl)
     {
-        mapControl.Map = OsmSample.CreateMap();
+        mapControl.Map = OpenStreetMapSample.CreateMap();
     }
 }

@@ -32,7 +32,7 @@ public class MainActivity : AppCompatActivity
 
         var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
         _mapControl.Map.Layers.ClearAllGroups();
-        var sample = new OsmSample();
+        var sample = new OpenStreetMapSample();
 
         Catch.Exceptions(async () =>
         {

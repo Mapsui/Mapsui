@@ -14,11 +14,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Info;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
 public class SingleCalloutSample : ISample
 {
-    public string Name => "Single Callout";
+    public string Name => "SingleCallout";
     public string Category => "MapInfo";
 
     private const string _calloutLayerName = "Cities with callouts";

@@ -12,16 +12,16 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Basic;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
-public class InfoLayersSample : ISample, ISampleTest
+public class BasicMapInfoSample : ISample, ISampleTest
 {
     private const string _infoLayerName = "Info Layer";
     private const string _polygonLayerName = "Polygon Layer";
     private const string _lineLayerName = "Line Layer";
 
-    public string Name => "MapInfo";
-    public string Category => "Basic";
+    public string Name => "BasicMapInfo";
+    public string Category => "MapInfo";
 
     public static Map CreateMap()
     {

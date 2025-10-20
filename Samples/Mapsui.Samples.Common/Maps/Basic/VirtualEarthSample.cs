@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Basic;
 
-public class BingSample : ISample
+public class VirtualEarthSample : ISample
 {
-    public string Name => "Virtual Earth";
+    public string Name => "VirtualEarth";
     public string Category => "Basic";
     public Task<Map> CreateMapAsync()
     {

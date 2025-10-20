@@ -9,7 +9,7 @@ using Mapsui.Widgets.InfoWidgets;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Info;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
 public class GeoJsonInfoSample : ISample
 {

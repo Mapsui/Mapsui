@@ -5,11 +5,11 @@ using Mapsui.Styles;
 using Mapsui.Widgets.InfoWidgets;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Info;
+namespace Mapsui.Samples.Common.Maps.MapInfo;
 
 public class WmsInfoSample : ISample
 {
-    public string Name => "Wms Info";
+    public string Name => "WmsInfo";
     public string Category => "MapInfo";
 
     private const string _mapInfoLayerName = "Windsnelheden (PDOK)";
