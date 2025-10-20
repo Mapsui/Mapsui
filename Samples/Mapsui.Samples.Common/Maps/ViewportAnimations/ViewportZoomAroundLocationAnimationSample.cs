@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 
-namespace Mapsui.Samples.Common.Maps.Animations;
+namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
 
-public class ViewportCenterOnAnimationSample : ISample
+public class ViewportZoomAroundLocationAnimationSample : ISample
 {
-    public string Name => "Animated Viewport - Center";
-    public string Category => "Animations";
+    public string Name => "Animated Viewport - Zoom Around Location";
+    public string Category => "ViewportAnimations";
 
     public static int mode = 1;
 
@@ -23,11 +23,13 @@ public class ViewportCenterOnAnimationSample : ISample
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
-        map.Widgets.Add(CreateTextBox("Tap on the map to center on that location"));
-        map.Tapped += (s, e) =>
+        map.Widgets.Add(CreateTextBox("Tap on the map to zoom in the location where you tapped. " +
+            "The map will stay centered on the place where you tap."));
+        map.Tapped += (m, e) =>
         {
-            // Animate to the new center.
-            e.Map.Navigator.CenterOn(e.WorldPosition, 500, Easing.CubicOut);
+            // Zoom in while keeping centerOfZoom at the same position. If you click somewhere to zoom in the mouse pointer
+            // will still be above the same location in the map. This can be you used for mouse wheel zoom.
+            e.Map.Navigator.ZoomTo(e.Map.Navigator.Viewport.Resolution * 0.5, e.ScreenPosition!, 500, Easing.CubicOut);
             e.Handled = true;
         };
         return map;

@@ -3,16 +3,15 @@ using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using Mapsui.Widgets.ScaleBar;
 using System.Threading.Tasks;
 using Mapsui.Styles;
 
-namespace Mapsui.Samples.Common.Maps.Animations;
+namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
 
-public class ViewportZoomToResolutionAnimationSample : ISample
+public class ViewportRotateAnimationSample : ISample
 {
-    public string Name => "Animated Viewport - Zoom";
-    public string Category => "Animations";
+    public string Name => "Animated Viewport - Rotate";
+    public string Category => "ViewportAnimations";
 
     public static int mode = 1;
 
@@ -21,34 +20,24 @@ public class ViewportZoomToResolutionAnimationSample : ISample
     public static Map CreateMap()
     {
         var map = new Map { CRS = "EPSG:3857" };
-
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Widgets.Add(CreateScaleBar(map));
-        map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
 
-        var rotateButton = CreateButton("Zoom in", VerticalAlignment.Top);
+        var rotateButton = CreateButton("Click to rotate clockwise", VerticalAlignment.Top);
         rotateButton.Tapped += (s, e) =>
         {
-            map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
+            map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
         };
         map.Widgets.Add(rotateButton);
 
-        var rotateBackButton = CreateButton("Zoom out", VerticalAlignment.Bottom);
+        var rotateBackButton = CreateButton("Click to rotate counterclockwise", VerticalAlignment.Bottom);
         rotateBackButton.Tapped += (s, e) =>
         {
-            map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 2, 500, Easing.CubicOut);
+            map.Navigator.RotateTo(map.Navigator.Viewport.Rotation - 45, 500, Easing.CubicIn);
         };
         map.Widgets.Add(rotateBackButton);
 
         return map;
     }
-
-    private static ScaleBarWidget CreateScaleBar(Map map) => new ScaleBarWidget(map)
-    {
-        TextAlignment = Alignment.Center,
-        HorizontalAlignment = HorizontalAlignment.Center,
-        VerticalAlignment = VerticalAlignment.Top
-    };
 
     private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new()
     {
