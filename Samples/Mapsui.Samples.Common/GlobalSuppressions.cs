@@ -5,14 +5,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Animations.AnimatedPointsSample.CreateAnimatedPointLayer~Mapsui.Layers.ILayer")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.ShapefileSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.ShapefileSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.WfsSample.CreateMapAsync~System.Threading.Tasks.Task{Mapsui.Map}")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Geometries.ComplexPolygonSample.CreateMapAsync~System.Threading.Tasks.Task{Mapsui.Map}")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Geometries.LineStringSample.CreateMapAsync~System.Threading.Tasks.Task{Mapsui.Map}")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Performance.GeometrySimplifyProviderWithShapefileSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Performance.GeometrySimplifyProviderWithShapefileSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Projection.MultiPolygonProjectionSample.CreateMapAsync~System.Threading.Tasks.Task{Mapsui.Map}")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.WmsProjectionDotSpatialSample.CreateLayerAsync~System.Threading.Tasks.Task{Mapsui.Layers.ILayer}")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.WmsProjectionTilingSample.CreateLayerAsync~System.Threading.Tasks.Task{Mapsui.Layers.ILayer}")]
+// Assembly-wide suppressions — omit Target to apply to every violation of the diagnostic
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "Assembly-wide suppression while addressing analyzer output")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "Assembly-wide suppression while addressing analyzer output")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning", Justification = "Assembly-wide suppression while addressing analyzer output")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected", Justification = "Assembly-wide suppression while addressing analyzer output")]

@@ -6,8 +6,6 @@ using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class OpacityStyleSample : ISample

@@ -15,7 +15,7 @@ public class MbTilesSample : ISample
     }
 
     public string Name => "MbTiles";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public static Map CreateMap()
     {

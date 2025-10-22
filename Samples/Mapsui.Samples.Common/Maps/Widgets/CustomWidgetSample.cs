@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps.Widgets;
 
 public class CustomWidgetSample : ISample
 {
-    public string Name => "Custom Widget";
+    public string Name => "CustomWidget";
 
     public string Category => "Widgets";
 

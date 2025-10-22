@@ -1,0 +1,49 @@
+﻿using Mapsui.Animations;
+using Mapsui.Extensions;
+using Mapsui.Tiling;
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidgets;
+using System.Threading.Tasks;
+using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidgets;
+
+namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
+
+public class ViewportZoomAroundLocationAnimationSample : ISample
+{
+    public string Name => "ZoomAroundLocation";
+    public string Category => "ViewportAnimations";
+
+    public static int mode = 1;
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map { CRS = "EPSG:3857" };
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
+        map.Widgets.Add(CreateTextBox("Tap on the map to zoom in the location where you tapped. " +
+            "The map will stay centered on the place where you tap."));
+        map.Tapped += (m, e) =>
+        {
+            // Zoom in while keeping centerOfZoom at the same position. If you click somewhere to zoom in the mouse pointer
+            // will still be above the same location in the map. This can be you used for mouse wheel zoom.
+            e.Map.Navigator.ZoomTo(e.Map.Navigator.Viewport.Resolution * 0.5, e.ScreenPosition!, 500, Easing.CubicOut);
+            e.Handled = true;
+        };
+        return map;
+    }
+
+    private static IWidget CreateTextBox(string text) => new TextBoxWidget()
+    {
+        Text = text,
+        VerticalAlignment = VerticalAlignment.Top,
+        HorizontalAlignment = HorizontalAlignment.Left,
+        Margin = new MRect(10),
+        Padding = new MRect(8),
+        CornerRadius = 4,
+        BackColor = new Color(108, 117, 125, 128),
+        TextColor = Color.White,
+    };
+}

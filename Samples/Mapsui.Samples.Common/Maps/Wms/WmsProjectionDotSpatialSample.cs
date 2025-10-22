@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.WMS;
 
 public class WmsProjectionDotSpatialSample : ISample
 {
-    public string Name => "WMS Projection DotSpatial";
+    public string Name => "WmsProjectionDotSpatial";
     public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()

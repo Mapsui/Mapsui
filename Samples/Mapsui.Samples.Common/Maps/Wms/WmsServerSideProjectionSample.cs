@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Wms;
 
 public class WmsServerSideProjectionSample : ISample
 {
-    public string Name => "WMS Server Side Projection";
+    public string Name => "WmsServerSideProjection";
     public string Category => "WMS";
 
     private const string _mapInfoLayerName = "Windspeed in EPSG:3857 (PDOK) ";

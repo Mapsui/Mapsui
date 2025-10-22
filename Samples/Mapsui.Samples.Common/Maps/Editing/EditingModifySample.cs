@@ -5,7 +5,7 @@ namespace Mapsui.Samples.Common.Maps.Editing;
 
 public class EditingModifySample : ISample
 {
-    public string Name => "Editing Modify";
+    public string Name => "Modify";
     public string Category => "Editing";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(EditingSample.CreateMap(EditMode.Modify));

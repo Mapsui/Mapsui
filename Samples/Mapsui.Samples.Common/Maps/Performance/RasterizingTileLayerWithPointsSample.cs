@@ -6,13 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingTileLayerWithPointsSample : ISample
 {
-    public string Name => "RasterizingTileLayer with Points";
+    public string Name => "RasterizingTileLayerWithPoints";
     public string Category => "Performance";
 
     public Task<Map> CreateMapAsync()

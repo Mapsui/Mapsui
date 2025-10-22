@@ -11,13 +11,11 @@ using System.Net;
 using System.Threading.Tasks;
 using Mapsui.Providers;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.WFS;
 
 public class WfsGeometryFilterSample : ISample
 {
-    public string Name => "WFS Geometry Filter";
+    public string Name => "WfsGeometryFilter";
     public string Category => "WFS";
 
     private const string wfsUri = "https://sgx.geodatenzentrum.de/wfs_vg2500";

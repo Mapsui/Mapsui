@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -19,9 +18,7 @@ public class PolygonTestSample : ISample
     {
         var imageSource = "embedded://Mapsui.Samples.Common.Images.avion_silhouette.png";
 
-#pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer(imageSource);
-#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {
@@ -50,7 +47,6 @@ public class PolygonTestSample : ISample
         };
     }
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
     public static IEnumerable<IFeature> CreatePolygonProvider(Image image)
     {
         var wktReader = new WKTReader();

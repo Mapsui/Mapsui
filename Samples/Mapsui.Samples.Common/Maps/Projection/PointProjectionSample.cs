@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Projection;
 
 public class PointProjectionSample : ISample
 {
-    public string Name => "Point projection";
+    public string Name => "PointProjection";
     public string Category => "Projection";
 
     // The region below is used by docfx to include a code snippet in the generated documentation, search for #projectionsample

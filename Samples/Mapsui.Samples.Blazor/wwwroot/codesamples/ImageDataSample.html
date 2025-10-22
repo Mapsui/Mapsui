@@ -29,11 +29,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo;
+namespace Mapsui.Samples.Common.Maps.Special;
 
 public class ImageDataSample : ISample
 {
-    public string Name => "Image over Map Sample";
+    public string Name => "ImageOverMap";
     public string Category => "Demo";
 
     public Task<Map> CreateMapAsync()
@@ -93,9 +93,9 @@ public class ImageDataSample : ISample
     private static byte[] CreateSquareImageData(int dataPointsInX, int dataPointsInY, Func<int, int, SKColor> getColorForDataPoint)
     {
         // Create a bitmap, that contains the image data
-        using SKBitmap bitmap = new SKBitmap(dataPointsInX, dataPointsInY);
-        for (int row = 0; row < dataPointsInY; row++)
-            for (int col = 0; col < dataPointsInX; col++)
+        using var bitmap = new SKBitmap(dataPointsInX, dataPointsInY);
+        for (var row = 0; row < dataPointsInY; row++)
+            for (var col = 0; col < dataPointsInX; col++)
                 bitmap.SetPixel(col, row, getColorForDataPoint(col, row));
 
         using var data = bitmap.Encode(SKEncodedImageFormat.Png, 100);
@@ -137,7 +137,7 @@ public class ImageDataSample : ISample
     private static byte[] CreatePolarImageData(int maxRadius, float stepRadius, float stepAngle, Func<float, float, SKColor> getColorForDataPoint)
     {
         // Create a bitmap, that contains the image data
-        using SKBitmap bitmap = new SKBitmap(maxRadius * 2, maxRadius * 2);
+        using var bitmap = new SKBitmap(maxRadius * 2, maxRadius * 2);
         var center = new SKPoint(maxRadius, maxRadius);
 
         // Create a canvas, so it is possible to use normal SkiaSharp commands to draw

@@ -7,16 +7,14 @@ using Mapsui.Tiling;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-[SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
 public class CustomPointStyleBasicSample : ISample
 {
-    public string Name => $"{nameof(CustomPointStyle)}";
+    public string Name => $"Basic";
     public string Category => $"{nameof(CustomPointStyle)}";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

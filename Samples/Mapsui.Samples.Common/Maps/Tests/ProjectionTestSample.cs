@@ -6,8 +6,6 @@ using Mapsui.Nts;
 using Mapsui.Styles;
 using NetTopologySuite.IO;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class ProjectionTestSample : ISample

@@ -91,8 +91,6 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     /// </summary>
     private MemoryCache<IFeature?> MemoryCache { get; }
 
-    private HttpClient HttpClient { get { return _httpClient ?? _injectedHttpClient; } }
-
     /// <inheritdoc />
     public override IReadOnlyList<double> Resolutions => _tileSource.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
@@ -154,7 +152,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     {
         if (_tileSource is IHttpTileSource httpTileSource)
         {
-            var tileData = await httpTileSource.GetTileAsync(HttpClient, tileInfo).ConfigureAwait(false);
+            var tileData = await httpTileSource.GetTileAsync(GetHttpClient(), tileInfo).ConfigureAwait(false);
             var mRaster = ToRaster(tileInfo, tileData);
             return new RasterFeature(mRaster);
         }
@@ -200,4 +198,12 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     {
         FetchRequested?.Invoke(this, new FetchRequestedEventArgs(ChangeType.Discrete));
     }
+
+    private HttpClient GetHttpClient() => (_httpClient, _injectedHttpClient) switch
+    {
+        (not null, _) => _httpClient!,
+        (null, not null) => _injectedHttpClient!,
+        (null, null) => throw new InvalidOperationException("Both member and injected HttpClient are null. This is a bug in the TileLayer code."),
+    };
+
 }

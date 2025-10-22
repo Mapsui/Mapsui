@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps.WMTS;
 
 public class WmtsZurichSample : ISample
 {
-    public string Name => "WMTS Zurich";
+    public string Name => "WmtsZurich";
     public string Category => "WMTS";
     public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 

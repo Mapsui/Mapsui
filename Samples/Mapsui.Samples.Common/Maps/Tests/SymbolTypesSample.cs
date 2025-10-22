@@ -5,11 +5,9 @@ using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps.Tests;
 
-#pragma warning disable IDISP001 // Dispose created
-
 public class SymbolTypesSample : ISample
 {
-    public string Name => "Symbol Types";
+    public string Name => "SymbolTypes";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

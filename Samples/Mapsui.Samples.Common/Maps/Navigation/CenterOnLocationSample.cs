@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation;
 
 public class CenterOnLocationSample : ISample
 {
-    public string Name => "Center on location";
+    public string Name => "CenterOnLocation";
 
     public string Category => "Navigation";
 
