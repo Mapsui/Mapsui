@@ -51,6 +51,7 @@
     <File Path="docs/general/markdown/touch-and-mouse-handling.md" />
     <File Path="docs/general/markdown/v4.0-upgrade-guide.md" />
     <File Path="docs/general/markdown/v5.0-upgrade-guide.md" />
+    <File Path="docs/general/markdown/experimental-packages.md" />
   </Folder>
   <Folder Name="/GitHubActions/">
     <File Path=".github/workflows/dotnet-docs.yml" />
