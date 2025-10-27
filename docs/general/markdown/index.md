@@ -333,7 +333,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 4:** Run it and you should see a map of the world.
 
-   === ".NET for Android"
+    === ".NET for Android"
 
         **Step 1:** Create 'Blank App (Android)' in Visual Studio
 
@@ -385,7 +385,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 5:** Run it and you should see a map of the world.
 
-=== ".NET for iOS"
+    === ".NET for iOS"
 
         **Step 1:** Create new 'Single View App' in Visual Studio
 
