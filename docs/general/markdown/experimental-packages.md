@@ -17,6 +17,6 @@ We will also add:
 
 - `Mapsui.Experimental.Rendering.Skia` – In this package we will do a substantial rewrite of the rendering.
 
-## Branching before next release
+## Branching before the next release
 
 At some point before the release of v6, we will need to introduce breaking changes in the main Mapsui projects. At that point, we will need to branch the stable version off to develop/5.0. We will try to postpone this for a while and will try to keep the period between branching and releasing short.
