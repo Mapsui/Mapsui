@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MapControl </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MapControl ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.UI.Eto.MapControl">
+
+
+
+  <h1 id="Mapsui_UI_Eto_MapControl" data-uid="Mapsui.UI.Eto.MapControl" class="text-break">Class MapControl</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">Widget</span></div>
+    <div class="level2"><span class="xref">BindableWidget</span></div>
+    <div class="level3"><span class="xref">Control</span></div>
+    <div class="level4"><span class="xref">Container</span></div>
+    <div class="level5"><span class="xref">Panel</span></div>
+    <div class="level6"><span class="xref">Drawable</span></div>
+    <div class="level7"><span class="xref">SkiaDrawable</span></div>
+    <div class="level8"><span class="xref">MapControl</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">IHandlerSource</span></div>
+    <div><span class="xref">IBindable</span></div>
+    <div><span class="xref">IMouseInputSource</span></div>
+    <div><span class="xref">IKeyboardInputSource</span></div>
+    <div><span class="xref">ICallbackSource</span></div>
+    <div><span class="xref">IBindableWidgetContainer</span></div>
+    <div><a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">SkiaDrawable.OnPaint(PaintEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">SkiaDrawable.Paint</span>
+    </div>
+    <div>
+      <span class="xref">Drawable.CreateGraphics()</span>
+    </div>
+    <div>
+      <span class="xref">Drawable.Update(Rectangle)</span>
+    </div>
+    <div>
+      <span class="xref">Drawable.GetCallback()</span>
+    </div>
+    <div>
+      <span class="xref">Drawable.SupportsCreateGraphics</span>
+    </div>
+    <div>
+      <span class="xref">Drawable.CanFocus</span>
+    </div>
+    <div>
+      <span class="xref">Panel.Remove(Control)</span>
+    </div>
+    <div>
+      <span class="xref">Panel.Controls</span>
+    </div>
+    <div>
+      <span class="xref">Panel.Padding</span>
+    </div>
+    <div>
+      <span class="xref">Panel.MinimumSize</span>
+    </div>
+    <div>
+      <span class="xref">Panel.ContextMenu</span>
+    </div>
+    <div>
+      <span class="xref">Panel.Content</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Container.ApplyStyles(object, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Container.OnStyleChanged(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Container.OnPreLoad(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Container.OnLoad(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Container.OnUnLoad(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">Container.Remove(IEnumerable&lt;Control&gt;)</a>
+    </div>
+    <div>
+      <span class="xref">Container.RemoveAll()</span>
+    </div>
+    <div>
+      <span class="xref">Container.RemoveParent(Control)</span>
+    </div>
+    <div>
+      <span class="xref">Container.SetLogicalParent(Control)</span>
+    </div>
+    <div>
+      <span class="xref">Container.RemoveLogicalParent(Control)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Container.SetParent(Control, Action, Control)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Container.FindChild&lt;T&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Container.FindChild(Type, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Container.FindChild(string)</a>
+    </div>
+    <div>
+      <span class="xref">Container.ClientSize</span>
+    </div>
+    <div>
+      <span class="xref">Container.Children</span>
+    </div>
+    <div>
+      <span class="xref">Container.VisualChildren</span>
+    </div>
+    <div>
+      <span class="xref">Container.StyleProvider</span>
+    </div>
+    <div>
+      <span class="xref">Container.Styles</span>
+    </div>
+    <div>
+      <span class="xref">Control.SizeChangedEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.KeyDownEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.KeyUpEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.TextInputEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseDownEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseUpEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseMoveEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseLeaveEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseEnterEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseDoubleClickEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseWheelEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.GotFocusEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.LostFocusEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.ShownEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragDropEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragOverEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragEnterEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragLeaveEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragEndEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.EnabledChangedEvent</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnTextInput(TextInputEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnMouseLeave(MouseEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnMouseEnter(MouseEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnMouseDoubleClick(MouseEventArgs)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Control.OnGotFocus(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Control.OnLostFocus(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Control.OnShown(EventArgs)</a>
+    </div>
+    <div>
+      <span class="xref">Control.OnDragDrop(DragEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnDragOver(DragEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnDragEnter(DragEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnDragLeave(DragEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnDragEnd(DragEventArgs)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Control.OnEnabledChanged(EventArgs)</a>
+    </div>
+    <div>
+      <span class="xref">Control.Invalidate()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Control.Invalidate(bool)</a>
+    </div>
+    <div>
+      <span class="xref">Control.Invalidate(Rectangle)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Control.Invalidate(Rectangle, bool)</a>
+    </div>
+    <div>
+      <span class="xref">Control.UpdateLayout()</span>
+    </div>
+    <div>
+      <span class="xref">Control.GetPreferredSize()</span>
+    </div>
+    <div>
+      <span class="xref">Control.GetPreferredSize(SizeF)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Control.FindParent(Type, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Control.FindParent(string)</a>
+    </div>
+    <div>
+      <span class="xref">Control.Detach()</span>
+    </div>
+    <div>
+      <span class="xref">Control.AttachNative()</span>
+    </div>
+    <div>
+      <span class="xref">Control.DetachNative()</span>
+    </div>
+    <div>
+      <span class="xref">Control.Focus()</span>
+    </div>
+    <div>
+      <span class="xref">Control.SuspendLayout()</span>
+    </div>
+    <div>
+      <span class="xref">Control.ResumeLayout()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Control.MapPlatformCommand(string, Command)</a>
+    </div>
+    <div>
+      <span class="xref">Control.PointFromScreen(PointF)</span>
+    </div>
+    <div>
+      <span class="xref">Control.PointToScreen(PointF)</span>
+    </div>
+    <div>
+      <span class="xref">Control.RectangleToScreen(RectangleF)</span>
+    </div>
+    <div>
+      <span class="xref">Control.RectangleFromScreen(RectangleF)</span>
+    </div>
+    <div>
+      <span class="xref">Control.DoDragDrop(DataObject, DragEffects)</span>
+    </div>
+    <div>
+      <span class="xref">Control.DoDragDrop(DataObject, DragEffects, Image, PointF)</span>
+    </div>
+    <div>
+      <span class="xref">Control.TriggerStyleChanged()</span>
+    </div>
+    <div>
+      <span class="xref">Control.OnApplyCascadingStyles()</span>
+    </div>
+    <div>
+      <span class="xref">Control.Print()</span>
+    </div>
+    <div>
+      <span class="xref">Control.Handler</span>
+    </div>
+    <div>
+      <span class="xref">Control.Loaded</span>
+    </div>
+    <div>
+      <span class="xref">Control.VisualControls</span>
+    </div>
+    <div>
+      <span class="xref">Control.Tag</span>
+    </div>
+    <div>
+      <span class="xref">Control.LogicalParent</span>
+    </div>
+    <div>
+      <span class="xref">Control.IsVisualControl</span>
+    </div>
+    <div>
+      <span class="xref">Control.Size</span>
+    </div>
+    <div>
+      <span class="xref">Control.Width</span>
+    </div>
+    <div>
+      <span class="xref">Control.Height</span>
+    </div>
+    <div>
+      <span class="xref">Control.Enabled</span>
+    </div>
+    <div>
+      <span class="xref">Control.Visible</span>
+    </div>
+    <div>
+      <span class="xref">Control.Parent</span>
+    </div>
+    <div>
+      <span class="xref">Control.VisualParent</span>
+    </div>
+    <div>
+      <span class="xref">Control.IsAttached</span>
+    </div>
+    <div>
+      <span class="xref">Control.BackgroundColor</span>
+    </div>
+    <div>
+      <span class="xref">Control.HasFocus</span>
+    </div>
+    <div>
+      <span class="xref">Control.IsSuspended</span>
+    </div>
+    <div>
+      <span class="xref">Control.ParentWindow</span>
+    </div>
+    <div>
+      <span class="xref">Control.SupportedPlatformCommands</span>
+    </div>
+    <div>
+      <span class="xref">Control.Bounds</span>
+    </div>
+    <div>
+      <span class="xref">Control.Location</span>
+    </div>
+    <div>
+      <span class="xref">Control.Cursor</span>
+    </div>
+    <div>
+      <span class="xref">Control.ToolTip</span>
+    </div>
+    <div>
+      <span class="xref">Control.TabIndex</span>
+    </div>
+    <div>
+      <span class="xref">Control.AllowDrop</span>
+    </div>
+    <div>
+      <span class="xref">Control.SizeChanged</span>
+    </div>
+    <div>
+      <span class="xref">Control.KeyDown</span>
+    </div>
+    <div>
+      <span class="xref">Control.KeyUp</span>
+    </div>
+    <div>
+      <span class="xref">Control.TextInput</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseDown</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseUp</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseMove</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseLeave</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseEnter</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseDoubleClick</span>
+    </div>
+    <div>
+      <span class="xref">Control.MouseWheel</span>
+    </div>
+    <div>
+      <span class="xref">Control.GotFocus</span>
+    </div>
+    <div>
+      <span class="xref">Control.LostFocus</span>
+    </div>
+    <div>
+      <span class="xref">Control.Shown</span>
+    </div>
+    <div>
+      <span class="xref">Control.PreLoad</span>
+    </div>
+    <div>
+      <span class="xref">Control.Load</span>
+    </div>
+    <div>
+      <span class="xref">Control.LoadComplete</span>
+    </div>
+    <div>
+      <span class="xref">Control.UnLoad</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragDrop</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragOver</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragEnter</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragLeave</span>
+    </div>
+    <div>
+      <span class="xref">Control.DragEnd</span>
+    </div>
+    <div>
+      <span class="xref">Control.EnabledChanged</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">BindableWidget.OnDataContextChanged(EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">BindableWidget.FindParent&lt;T&gt;(string)</a>
+    </div>
+    <div>
+      <span class="xref">BindableWidget.Unbind()</span>
+    </div>
+    <div>
+      <span class="xref">BindableWidget.UpdateBindings(BindingUpdateMode)</span>
+    </div>
+    <div>
+      <span class="xref">BindableWidget.Parents</span>
+    </div>
+    <div>
+      <span class="xref">BindableWidget.DataContext</span>
+    </div>
+    <div>
+      <span class="xref">BindableWidget.Bindings</span>
+    </div>
+    <div>
+      <span class="xref">BindableWidget.IsDataContextChanging</span>
+    </div>
+    <div>
+      <span class="xref">BindableWidget.DataContextChanged</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Widget.RegisterEvent&lt;T&gt;(Expression&lt;Action&lt;T&gt;&gt;, string)</a>
+    </div>
+    <div>
+      <span class="xref">Widget.Initialize()</span>
+    </div>
+    <div>
+      <span class="xref">Widget.Dispose()</span>
+    </div>
+    <div>
+      <span class="xref">Widget.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">Widget.Platform</span>
+    </div>
+    <div>
+      <span class="xref">Widget.NativeHandle</span>
+    </div>
+    <div>
+      <span class="xref">Widget.Properties</span>
+    </div>
+    <div>
+      <span class="xref">Widget.ID</span>
+    </div>
+    <div>
+      <span class="xref">Widget.Style</span>
+    </div>
+    <div>
+      <span class="xref">Widget.ControlObject</span>
+    </div>
+    <div>
+      <span class="xref">Widget.IsDisposed</span>
+    </div>
+    <div>
+      <span class="xref">Widget.StyleChanged</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.UI.html">UI</a>.<a class="xref" href="Mapsui.UI.Eto.html">Eto</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.UI.Eto.dll</h6>
+  <h5 id="Mapsui_UI_Eto_MapControl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MapControl : SkiaDrawable, IHandlerSource, IBindable, IMouseInputSource, IKeyboardInputSource, ICallbackSource, IBindableWidgetContainer, IMapControl, INotifyPropertyChanged, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl__ctor.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L17">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl__ctor_" data-uid="Mapsui.UI.Eto.MapControl.#ctor*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl__ctor" data-uid="Mapsui.UI.Eto.MapControl.#ctor">MapControl()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapControl()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.Map%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L300">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_Map_" data-uid="Mapsui.UI.Eto.MapControl.Map*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_Map" data-uid="Mapsui.UI.Eto.MapControl.Map">Map</h4>
+  <div class="markdown level1 summary"><p>Map holding data for which is shown in this MapControl</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Map Map { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_MaxTapGestureMovement.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.MaxTapGestureMovement%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L66">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_MaxTapGestureMovement_" data-uid="Mapsui.UI.Eto.MapControl.MaxTapGestureMovement*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_MaxTapGestureMovement" data-uid="Mapsui.UI.Eto.MapControl.MaxTapGestureMovement">MaxTapGestureMovement</h4>
+  <div class="markdown level1 summary"><p>The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxTapGestureMovement { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_MoveButton.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.MoveButton%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L34">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_MoveButton_" data-uid="Mapsui.UI.Eto.MapControl.MoveButton*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_MoveButton" data-uid="Mapsui.UI.Eto.MapControl.MoveButton">MoveButton</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MouseButtons MoveButton { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MouseButtons</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_MoveCursor.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.MoveCursor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L33">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_MoveCursor_" data-uid="Mapsui.UI.Eto.MapControl.MoveCursor*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_MoveCursor" data-uid="Mapsui.UI.Eto.MapControl.MoveCursor">MoveCursor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Cursor MoveCursor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Cursor</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_MoveModifier.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.MoveModifier%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L35">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_MoveModifier_" data-uid="Mapsui.UI.Eto.MapControl.MoveModifier*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_MoveModifier" data-uid="Mapsui.UI.Eto.MapControl.MoveModifier">MoveModifier</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Keys MoveModifier { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_UseFling.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.UseFling%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L75">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_UseFling_" data-uid="Mapsui.UI.Eto.MapControl.UseFling*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_UseFling" data-uid="Mapsui.UI.Eto.MapControl.UseFling">UseFling</h4>
+  <div class="markdown level1 summary"><p>Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a
+short time after the user has lifted the finger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseFling { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_ZoomButton.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.ZoomButton%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L36">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_ZoomButton_" data-uid="Mapsui.UI.Eto.MapControl.ZoomButton*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_ZoomButton" data-uid="Mapsui.UI.Eto.MapControl.ZoomButton">ZoomButton</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MouseButtons ZoomButton { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MouseButtons</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_ZoomModifier.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.ZoomModifier%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L37">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_ZoomModifier_" data-uid="Mapsui.UI.Eto.MapControl.ZoomModifier*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_ZoomModifier" data-uid="Mapsui.UI.Eto.MapControl.ZoomModifier">ZoomModifier</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Keys ZoomModifier { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L117">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_Dispose_" data-uid="Mapsui.UI.Eto.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_Dispose_System_Boolean_" data-uid="Mapsui.UI.Eto.MapControl.Dispose(System.Boolean)">Dispose(bool)</h4>
+  <div class="markdown level1 summary"><p>Handles the disposal of this control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td><p>True if the caller called <span class="xref">Eto.Widget.Dispose()</span> manually, false if being called from a finalizer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Control.Dispose(bool)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_ForceUpdate.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.ForceUpdate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L130">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_ForceUpdate_" data-uid="Mapsui.UI.Eto.MapControl.ForceUpdate*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_ForceUpdate" data-uid="Mapsui.UI.Eto.MapControl.ForceUpdate">ForceUpdate()</h4>
+  <div class="markdown level1 summary"><p>Force a update of control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ForceUpdate()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_Eto_MapControl_ForceUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control draws itself once</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L372">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_GetMapInfo_" data-uid="Mapsui.UI.Eto.MapControl.GetMapInfo*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetMapInfo(ScreenPosition, IEnumerable&lt;ILayer&gt;)</h4>
+  <div class="markdown level1 summary"><p>Check, if a feature at a given screen position is hit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable&lt;ILayer&gt; layers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td><p>Screen position to check for widgets and features.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>The layers to query.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfo.html">MapInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_GetPixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.GetPixelDensity%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L144">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_GetPixelDensity_" data-uid="Mapsui.UI.Eto.MapControl.GetPixelDensity*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_GetPixelDensity" data-uid="Mapsui.UI.Eto.MapControl.GetPixelDensity">GetPixelDensity()</h4>
+  <div class="markdown level1 summary"><p>Returns the number of pixels per device independent unit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float? GetPixelDensity()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition%2CMapsui.Viewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L378">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_GetRemoteMapInfoAsync_" data-uid="Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable&lt;ILayer&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Task&lt;MapInfo&gt; GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable&lt;ILayer&gt; layers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Viewport.html">Viewport</a></td>
+        <td><span class="parametername">viewport</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Mapsui.MapInfo.html">MapInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CMapsui.Rendering.RenderFormat%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L357">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_GetSnapshot_" data-uid="Mapsui.UI.Eto.MapControl.GetSnapshot*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_" data-uid="Mapsui.UI.Eto.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)">GetSnapshot(IEnumerable&lt;ILayer&gt;?, RenderFormat, int)</h4>
+  <div class="markdown level1 summary"><p>Create a snapshot form map as PNG image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] GetSnapshot(IEnumerable&lt;ILayer&gt;? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>Layers that should be included in snapshot</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.RenderFormat.html">RenderFormat</a></td>
+        <td><span class="parametername">renderFormat</span></td>
+        <td><p>render format</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">quality</span></td>
+        <td><p>default quality is 90 is applicable for webp and jpg</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><p>Byte array with snapshot in png format. If there are any problems than returns null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_InvalidateCanvas.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.InvalidateCanvas%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L23">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_InvalidateCanvas_" data-uid="Mapsui.UI.Eto.MapControl.InvalidateCanvas*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_InvalidateCanvas" data-uid="Mapsui.UI.Eto.MapControl.InvalidateCanvas">InvalidateCanvas()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InvalidateCanvas()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnKeyDown_Eto_Forms_KeyEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnKeyDown(Eto.Forms.KeyEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L132">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnKeyDown_" data-uid="Mapsui.UI.Eto.MapControl.OnKeyDown*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnKeyDown_Eto_Forms_KeyEventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnKeyDown(Eto.Forms.KeyEventArgs)">OnKeyDown(KeyEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">Eto.Forms.Control.KeyDown</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnKeyDown(KeyEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">KeyEventArgs</span></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Key event arguments</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Eto.Forms.Control.OnKeyDown(Eto.Forms.KeyEventArgs)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnKeyUp_Eto_Forms_KeyEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnKeyUp(Eto.Forms.KeyEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L138">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnKeyUp_" data-uid="Mapsui.UI.Eto.MapControl.OnKeyUp*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnKeyUp_Eto_Forms_KeyEventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnKeyUp(Eto.Forms.KeyEventArgs)">OnKeyUp(KeyEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">Eto.Forms.Control.KeyUp</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnKeyUp(KeyEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">KeyEventArgs</span></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Key event arguments</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Eto.Forms.Control.OnKeyUp(Eto.Forms.KeyEventArgs)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnLoadComplete_System_EventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnLoadComplete(System.EventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L83">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnLoadComplete_" data-uid="Mapsui.UI.Eto.MapControl.OnLoadComplete*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnLoadComplete_System_EventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnLoadComplete(System.EventArgs)">OnLoadComplete(EventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">Eto.Forms.Control.LoadComplete</span> event, and recurses to this container's children</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnLoadComplete(EventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Event arguments</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Container.OnLoadComplete(EventArgs)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L350">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMapInfo_" data-uid="Mapsui.UI.Eto.MapControl.OnMapInfo*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)">OnMapInfo(MapInfoEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a></td>
+        <td><span class="parametername">mapInfoEventArgs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.GestureType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L562">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMapPointerMoved_" data-uid="Mapsui.UI.Eto.MapControl.OnMapPointerMoved*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_" data-uid="Mapsui.UI.Eto.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)">OnMapPointerMoved(ScreenPosition, MPoint, GestureType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool OnMapPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.GestureType.html">GestureType</a></td>
+        <td><span class="parametername">gestureType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L548">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMapPointerPressed_" data-uid="Mapsui.UI.Eto.MapControl.OnMapPointerPressed*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_" data-uid="Mapsui.UI.Eto.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)">OnMapPointerPressed(ScreenPosition, MPoint)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool OnMapPointerPressed(ScreenPosition screenPosition, MPoint worldPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L573">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMapPointerReleased_" data-uid="Mapsui.UI.Eto.MapControl.OnMapPointerReleased*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_" data-uid="Mapsui.UI.Eto.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)">OnMapPointerReleased(ScreenPosition, MPoint)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool OnMapPointerReleased(ScreenPosition screenPosition, MPoint worldPosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.GestureType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L534">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMapTapped_" data-uid="Mapsui.UI.Eto.MapControl.OnMapTapped*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_" data-uid="Mapsui.UI.Eto.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)">OnMapTapped(ScreenPosition, MPoint, GestureType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool OnMapTapped(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">worldPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.GestureType.html">GestureType</a></td>
+        <td><span class="parametername">gestureType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMouseDown_Eto_Forms_MouseEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMouseDown(Eto.Forms.MouseEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L47">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMouseDown_" data-uid="Mapsui.UI.Eto.MapControl.OnMouseDown*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMouseDown_Eto_Forms_MouseEventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnMouseDown(Eto.Forms.MouseEventArgs)">OnMouseDown(MouseEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">Eto.Forms.Control.MouseDown</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnMouseDown(MouseEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MouseEventArgs</span></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Event arguments</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Eto.Forms.Control.OnMouseDown(Eto.Forms.MouseEventArgs)</span></div>
+  <h5 id="Mapsui_UI_Eto_MapControl_OnMouseDown_Eto_Forms_MouseEventArgs__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>To override default behaviour of the control, set <span class="xref">Eto.Forms.MouseEventArgs.Handled</span> property to <code>true</code>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMouseMove_Eto_Forms_MouseEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMouseMove(Eto.Forms.MouseEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L60">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMouseMove_" data-uid="Mapsui.UI.Eto.MapControl.OnMouseMove*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMouseMove_Eto_Forms_MouseEventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnMouseMove(Eto.Forms.MouseEventArgs)">OnMouseMove(MouseEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">Eto.Forms.Control.MouseMove</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnMouseMove(MouseEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MouseEventArgs</span></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Mouse event args</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Eto.Forms.Control.OnMouseMove(Eto.Forms.MouseEventArgs)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMouseUp_Eto_Forms_MouseEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMouseUp(Eto.Forms.MouseEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L74">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMouseUp_" data-uid="Mapsui.UI.Eto.MapControl.OnMouseUp*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMouseUp_Eto_Forms_MouseEventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnMouseUp(Eto.Forms.MouseEventArgs)">OnMouseUp(MouseEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">Eto.Forms.Control.MouseUp</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnMouseUp(MouseEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MouseEventArgs</span></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Event arguments</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Eto.Forms.Control.OnMouseUp(Eto.Forms.MouseEventArgs)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnMouseWheel_Eto_Forms_MouseEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnMouseWheel(Eto.Forms.MouseEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L91">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnMouseWheel_" data-uid="Mapsui.UI.Eto.MapControl.OnMouseWheel*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnMouseWheel_Eto_Forms_MouseEventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnMouseWheel(Eto.Forms.MouseEventArgs)">OnMouseWheel(MouseEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">Eto.Forms.Control.MouseWheel</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnMouseWheel(MouseEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MouseEventArgs</span></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Event arguments</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Eto.Forms.Control.OnMouseWheel(Eto.Forms.MouseEventArgs)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnPaint_Eto_SkiaDraw_SKPaintEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L107">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnPaint_" data-uid="Mapsui.UI.Eto.MapControl.OnPaint*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnPaint_Eto_SkiaDraw_SKPaintEventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)">OnPaint(SKPaintEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnPaint(SKPaintEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SKPaintEventArgs</span></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnPropertyChanged(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L150">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnPropertyChanged_" data-uid="Mapsui.UI.Eto.MapControl.OnPropertyChanged*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnPropertyChanged_System_String_" data-uid="Mapsui.UI.Eto.MapControl.OnPropertyChanged(System.String)">OnPropertyChanged(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnPropertyChanged(string propertyName = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OnSizeChanged_System_EventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OnSizeChanged(System.EventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L100">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OnSizeChanged_" data-uid="Mapsui.UI.Eto.MapControl.OnSizeChanged*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OnSizeChanged_System_EventArgs_" data-uid="Mapsui.UI.Eto.MapControl.OnSizeChanged(System.EventArgs)">OnSizeChanged(EventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <span class="xref">Eto.Forms.Control.SizeChanged</span> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnSizeChanged(EventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Event arguments</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">Control.OnSizeChanged(EventArgs)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_OpenInBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.OpenInBrowser(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Eto/MapControl.cs/#L39">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_OpenInBrowser_" data-uid="Mapsui.UI.Eto.MapControl.OpenInBrowser*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_OpenInBrowser_System_String_" data-uid="Mapsui.UI.Eto.MapControl.OpenInBrowser(System.String)">OpenInBrowser(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenInBrowser(string url)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">url</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_Refresh_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.Refresh(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L193">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_Refresh_" data-uid="Mapsui.UI.Eto.MapControl.Refresh*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_Refresh_Mapsui_ChangeType_" data-uid="Mapsui.UI.Eto.MapControl.Refresh(Mapsui.ChangeType)">Refresh(ChangeType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Refresh(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_RefreshData_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.RefreshData(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L345">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_RefreshData_" data-uid="Mapsui.UI.Eto.MapControl.RefreshData*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_RefreshData_Mapsui_ChangeType_" data-uid="Mapsui.UI.Eto.MapControl.RefreshData(Mapsui.ChangeType)">RefreshData(ChangeType)</h4>
+  <div class="markdown level1 summary"><p>Refresh data of Map, but don't paint it</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshData(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.RefreshGraphics%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L198">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_RefreshGraphics_" data-uid="Mapsui.UI.Eto.MapControl.RefreshGraphics*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_RefreshGraphics" data-uid="Mapsui.UI.Eto.MapControl.RefreshGraphics">RefreshGraphics()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshGraphics()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_SetMapRenderer_Mapsui_Rendering_IMapRenderer_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.SetMapRenderer(Mapsui.Rendering.IMapRenderer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L116">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_SetMapRenderer_" data-uid="Mapsui.UI.Eto.MapControl.SetMapRenderer*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_SetMapRenderer_Mapsui_Rendering_IMapRenderer_" data-uid="Mapsui.UI.Eto.MapControl.SetMapRenderer(Mapsui.Rendering.IMapRenderer)">SetMapRenderer(IMapRenderer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetMapRenderer(IMapRenderer mapRenderer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.IMapRenderer.html">IMapRenderer</a></td>
+        <td><span class="parametername">mapRenderer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.Unsubscribe%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L159">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Eto_MapControl_Unsubscribe_" data-uid="Mapsui.UI.Eto.MapControl.Unsubscribe*"></a>
+  <h4 id="Mapsui_UI_Eto_MapControl_Unsubscribe" data-uid="Mapsui.UI.Eto.MapControl.Unsubscribe">Unsubscribe()</h4>
+  <div class="markdown level1 summary"><p>Unsubscribe from map events</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Unsubscribe()</code></pre>
+  </div>
+  <h3 id="events">Events
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.Info%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L84">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Eto_MapControl_Info" data-uid="Mapsui.UI.Eto.MapControl.Info">Info</h4>
+  <div class="markdown level1 summary"><p>Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+the layers that have IsMapInfoLayer set to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapInfoEventArgs&gt;? Info</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_Eto_MapControl_Info_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The Map.Tapped event is preferred over the Info event. This event is kept for backwards compatibility.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_MapPointerMoved.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.MapPointerMoved%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L96">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Eto_MapControl_MapPointerMoved" data-uid="Mapsui.UI.Eto.MapControl.MapPointerMoved">MapPointerMoved</h4>
+  <div class="markdown level1 summary"><p>Event that is triggered when on pointer move. Can be a drag or hover.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapEventArgs&gt;? MapPointerMoved</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapEventArgs.html">MapEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_MapPointerPressed.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.MapPointerPressed%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L92">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Eto_MapControl_MapPointerPressed" data-uid="Mapsui.UI.Eto.MapControl.MapPointerPressed">MapPointerPressed</h4>
+  <div class="markdown level1 summary"><p>Event that is triggered when on pointer down.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapEventArgs&gt;? MapPointerPressed</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapEventArgs.html">MapEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_MapPointerReleased.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.MapPointerReleased%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L100">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Eto_MapControl_MapPointerReleased" data-uid="Mapsui.UI.Eto.MapControl.MapPointerReleased">MapPointerReleased</h4>
+  <div class="markdown level1 summary"><p>Event that is triggered when on pointer up.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapEventArgs&gt;? MapPointerReleased</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapEventArgs.html">MapEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_MapTapped.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.MapTapped%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L88">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Eto_MapControl_MapTapped" data-uid="Mapsui.UI.Eto.MapControl.MapTapped">MapTapped</h4>
+  <div class="markdown level1 summary"><p>Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapEventArgs&gt;? MapTapped</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapEventArgs.html">MapEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl_PropertyChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl.PropertyChanged%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L141">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Eto_MapControl_PropertyChanged" data-uid="Mapsui.UI.Eto.MapControl.PropertyChanged">PropertyChanged</h4>
+  <div class="markdown level1 summary"><p>Called whenever a property is changed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? PropertyChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler">PropertyChangedEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Eto.IHandlerSource</span>
+  </div>
+  <div>
+      <span class="xref">Eto.Forms.IBindable</span>
+  </div>
+  <div>
+      <span class="xref">Eto.Forms.IMouseInputSource</span>
+  </div>
+  <div>
+      <span class="xref">Eto.Forms.IKeyboardInputSource</span>
+  </div>
+  <div>
+      <span class="xref">Eto.ICallbackSource</span>
+  </div>
+  <div>
+      <span class="xref">Eto.Forms.IBindableWidgetContainer</span>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Eto_MapControl.md&amp;value=---%0Auid%3A%20Mapsui.UI.Eto.MapControl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L53" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
