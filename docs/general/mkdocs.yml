@@ -29,6 +29,7 @@ nav:
   - 'performance-widget.md'
   - 'imagesource.md'
   - 'mapinfo.md'
+  - 'experimental-packages.md'
   
   - Upgrade guides:
     - 'v4.0-upgrade-guide.md'
