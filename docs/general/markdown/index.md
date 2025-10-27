@@ -4,15 +4,16 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks.
 | UI Framework | NuGet  |
 | ---------------|-------------:|
 | MAUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat&logo=nuget&label=Mapsui.Maui)](https://www.nuget.org/packages/Mapsui.Maui/) |
-| WPF | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat&logo=nuget&label=Mapsui.Wpf)](https://www.nuget.org/packages/Mapsui.Wpf/) |
 | Avalonia | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat&logo=nuget&label=Mapsui.Avalonia)](https://www.nuget.org/packages/Mapsui.Avalonia/) |
 | Uno Platform | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat&logo=nuget&label=Mapsui.Uno.WinUI)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |
 | Blazor | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat&logo=nuget&label=Mapsui.Blazor)](https://www.nuget.org/packages/Mapsui.Blazor/) |
+| WPF | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat&logo=nuget&label=Mapsui.Wpf)](https://www.nuget.org/packages/Mapsui.Wpf/) |
 | WinUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat&logo=nuget&label=Mapsui.WinUI)](https://www.nuget.org/packages/Mapsui.WinUI/) |
+| Windows Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat&logo=nuget&label=Mapsui.WindowsForms)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |
+| Eto Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat&logo=nuget&label=Mapsui.Eto)](https://www.nuget.org/packages/Mapsui.Eto/) |
 | .NET for Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat&logo=nuget&label=Mapsui.Android)](https://www.nuget.org/packages/Mapsui.Android/) |
 | .NET for iOS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat&logo=nuget&label=Mapsui.iOS)](https://www.nuget.org/packages/Mapsui.iOS/)
-| Eto Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat&logo=nuget&label=Mapsui.Eto)](https://www.nuget.org/packages/Mapsui.Eto/) |
-| Windows Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat&logo=nuget&label=Mapsui.WindowsForms)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |
+
 
 Try the quick-start for your favorite framework below.
 
@@ -61,6 +62,41 @@ Try the quick-start for your favorite framework below.
 
         **Step 5:**
         Run it and you should see a map of the world.
+    
+	=== "Avalonia"
+        
+        **Preparation:** Install the Avalonia templates:
+
+        ```console
+        dotnet new install Avalonia.Templates
+        ```
+
+        **Step 1:** Create a new Avalonia project:
+
+        ```console
+        dotnet new avalonia.app -o MyApp
+        ```
+
+        **Step 2:** Add the Mapsui.Avalonia nuget package:
+
+        ```console
+        dotnet add MyApp package Mapsui.Avalonia
+        ```
+
+        **Step 3:** In MainWindow.axaml.cs add this to the constructor **after** InitializeComponent():
+
+        ```csharp
+        var mapControl = new Mapsui.UI.Avalonia.MapControl();
+        mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+        Content = mapControl;
+        ```
+
+        **Step 4:** Run it and you should see a map of the world.
+
+        ```console
+        cd MyApp
+        dotnet run
+        ```
 
     === "Uno"
 
@@ -131,41 +167,6 @@ Try the quick-start for your favorite framework below.
         https://github.com/unoplatform/uno/issues/9297
         
         Upgrading to the latest Uno.UI Dev Version should help too.
-
-    === "Avalonia"
-        
-        **Preparation:** Install the Avalonia templates:
-
-        ```console
-        dotnet new install Avalonia.Templates
-        ```
-
-        **Step 1:** Create a new Avalonia project:
-
-        ```console
-        dotnet new avalonia.app -o MyApp
-        ```
-
-        **Step 2:** Add the Mapsui.Avalonia nuget package:
-
-        ```console
-        dotnet add MyApp package Mapsui.Avalonia
-        ```
-
-        **Step 3:** In MainWindow.axaml.cs add this to the constructor **after** InitializeComponent():
-
-        ```csharp
-        var mapControl = new Mapsui.UI.Avalonia.MapControl();
-        mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        Content = mapControl;
-        ```
-
-        **Step 4:** Run it and you should see a map of the world.
-
-        ```console
-        cd MyApp
-        dotnet run
-        ```
 
     === "Blazor"
     
@@ -291,43 +292,48 @@ Try the quick-start for your favorite framework below.
         ```
 
         **Step 4:** Run it and you should see a map of the world.
+	
+	=== "Windows Forms"
 
-    === ".NET for iOS"
-
-        **Step 1:** Create new 'Single View App' in Visual Studio
+        **Step 1:** Start a new Windows Forms App in Visual Studio.
 
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.iOS
+        PM> Install-Package Mapsui.WindowsForms
         ```
 
-        **Step 3:** Open ViewController.cs and add namespaces:
+        **Step 3:** In Form1.cs add this to the class constructor:
 
         ```csharp
-        using Mapsui;
-        using Mapsui.UI.iOS;
-        using Mapsui.Utilities;
-        ```
-
-        add code to ViewDidLoad() method:
-
-        ```csharp
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            var mapControl = new MapControl(View.Bounds);
-            var map = new Map();
-            map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            mapControl.Map = map;
-            View = mapControl;
-        }
+        var mapControl = new MapControl();
+		mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+		Controls.Add(mapControl);
         ```
 
         **Step 4:** Run it and you should see a map of the world.
 
-    === ".NET for Android"
+    === "Eto Forms"
+
+        **Step 1:** Start a new [Eto.Forms](https://github.com/picoe/Eto/wiki/Quick-Start) application in Visual Studio.
+
+        **Step 2:** In the package manager console type:
+
+        ```console
+        PM> Install-Package Mapsui.Eto
+        ```
+
+        **Step 3:** In MainForm.cs add this to the class constructor:
+
+        ```csharp
+        var mapControl = new Mapsui.UI.Eto.MapControl();
+        mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+        Content = mapControl;
+        ```
+
+        **Step 4:** Run it and you should see a map of the world.
+
+   === ".NET for Android"
 
         **Step 1:** Create 'Blank App (Android)' in Visual Studio
 
@@ -379,46 +385,40 @@ Try the quick-start for your favorite framework below.
 
         **Step 5:** Run it and you should see a map of the world.
 
-    === "Eto Forms"
+=== ".NET for iOS"
 
-        **Step 1:** Start a new [Eto.Forms](https://github.com/picoe/Eto/wiki/Quick-Start) application in Visual Studio.
-
-        **Step 2:** In the package manager console type:
-
-        ```console
-        PM> Install-Package Mapsui.Eto
-        ```
-
-        **Step 3:** In MainForm.cs add this to the class constructor:
-
-        ```csharp
-        var mapControl = new Mapsui.UI.Eto.MapControl();
-        mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        Content = mapControl;
-        ```
-
-        **Step 4:** Run it and you should see a map of the world.
-		
-	=== "Windows Forms"
-
-        **Step 1:** Start a new Windows Forms App in Visual Studio.
+        **Step 1:** Create new 'Single View App' in Visual Studio
 
         **Step 2:** In the package manager console type:
 
         ```console
-        PM> Install-Package Mapsui.WindowsForms
+        PM> Install-Package Mapsui.iOS
         ```
 
-        **Step 3:** In Form1.cs add this to the class constructor:
+        **Step 3:** Open ViewController.cs and add namespaces:
 
         ```csharp
-        var mapControl = new MapControl();
-		mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-		Controls.Add(mapControl);
+        using Mapsui;
+        using Mapsui.UI.iOS;
+        using Mapsui.Utilities;
+        ```
+
+        add code to ViewDidLoad() method:
+
+        ```csharp
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            var mapControl = new MapControl(View.Bounds);
+            var map = new Map();
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
+            mapControl.Map = map;
+            View = mapControl;
+        }
         ```
 
         **Step 4:** Run it and you should see a map of the world.
-    
 
 ## Functionality
 - Points, Lines and Polygons using [NTS](https://github.com/NetTopologySuite/NetTopologySuite), a mature library which support all kinds of geometric operations. 
