@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using System.Reflection;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.PersistentCaches;
+using Mapsui.Styles;
+using Mapsui.UI;
+using Mapsui.UI.Maui;
+using Mapsui.Manipulations;
+using BruTile.Predefined;
+using Mapsui.Tiling.Layers;
+using Mapsui.Tiling.Fetcher;
+using Color = Microsoft.Maui.Graphics.Color;
+
+namespace Mapsui.Samples.Maui;
+
+public class PinSample : IMapViewSample
+{
+    int _markerNum = 1;
+    readonly Random _random = new(4);
+
+    public string Name => "Add Pin Sample";
+
+    public string Category => "MapView";
+
+    public bool UpdateLocation => true;
+
+    public bool OnTap(object? s, MapClickedEventArgs e)
+    {
+        // The namespace prefix is somehow necessary on Linux.
+        if (s is not UI.Maui.MapView mapView)
+            return false;
+
+        var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
+        foreach (var str in assembly.GetManifestResourceNames())
+            System.Diagnostics.Debug.WriteLine(str);
+
+        var position = e.Point;
+        switch (e.GestureType)
+        {
+            case GestureType.SingleTap:
+                var pin = new Pin(mapView)
+                {
+                    Label = $"PinType.Pin {_markerNum++}",
+                    Position = position,
+                    Address = position.ToString(),
+                    Type = PinType.Pin,
+                    Color = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f),
+                    Transparency = 0.5f,
+                    Scale = _random.Next(50, 130) / 100f,
+                    RotateWithMap = true,
+                };
+                pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
+                pin.Callout.RectRadius = _random.Next(0, 10);
+                pin.Callout.TailHeight = _random.Next(5, 20);
+                pin.Callout.TailWidth = _random.Next(0, 20);
+                pin.Callout.TailAlignment = (TailAlignment)_random.Next(0, 4);
+                pin.Callout.TailPosition = _random.Next(0, 100) / 100.0;
+                pin.Callout.StrokeWidth = _random.Next(0, 10);
+                pin.Callout.Padding = new Thickness(_random.Next(0, 20), _random.Next(0, 20));
+                pin.Callout.BackgroundColor = Colors.White;
+                pin.Callout.RotateWithMap = true;
+                pin.Callout.IsClosableByClick = true;
+                pin.Callout.Color = pin.Color;
+                if (_random.Next(0, 3) < 2)
+                {
+                    pin.Callout.Type = CalloutType.Detail;
+                    pin.Callout.TitleFontSize = _random.Next(15, 30);
+                    pin.Callout.TitleTextAlignment = TextAlignment.Center;
+                    pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
+                    pin.Callout.TitleFontColor = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f);
+                    pin.Callout.SubtitleFontColor = pin.Color;
+                    pin.Callout.SubtitleTextAlignment = TextAlignment.Center;
+                    pin.Callout.Spacing = _random.Next(0, 10);
+                    pin.Callout.MaxWidth = _random.Next(100, 200);
+                }
+                else
+                {
+                    pin.Callout.Type = CalloutType.Detail;
+                    pin.Callout.ContentId = "1";
+                }
+                pin.Callout.CalloutClicked += (s, e) =>
+                {
+                    if (e.GestureType == GestureType.DoubleTap)
+                    {
+                        // Double click on callout moves pin
+                        var p = e.Callout?.Pin;
+                        if (p != null)
+                        {
+                            p.Position = new Position(p.Position.Latitude + 0.01, p.Position.Longitude);
+                            e.Handled = true;
+                        }
+
+                        return;
+                    }
+                    if (e.Callout != null && e.Callout.Title != "You clicked me!")
+                    {
+                        e.Callout.Type = CalloutType.Single;
+                        e.Callout.Title = "You clicked me!";
+                        e.Handled = true;
+                    }
+                };
+                mapView.Pins.Add(pin);
+                pin.ShowCallout();
+                break;
+            case GestureType.DoubleTap:
+                var resourceName = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
+                mapView.Pins.Add(new Pin(mapView)
+                {
+                    Label = $"PinType.Svg {_markerNum++}",
+                    Position = position,
+                    Type = PinType.ImageSource,
+                    Scale = 0.1f,
+                    RotateWithMap = true,
+                    ImageSource = resourceName
+                });
+
+                break;
+        }
+
+        return true;
+    }
+
+    public void Setup(IMapControl mapControl) => mapControl.Map = CreateMap();
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+
+        map.Layers.Add(CreateLayer());
+        map.Navigator.CenterOnAndZoomTo(new MPoint(1059114.80157058, 5179580.75916194), map.Navigator.Resolutions[14]);
+        map.BackColor = Styles.Color.FromString("#000613");
+
+        return map;
+    }
+
+    private static TileLayer CreateLayer()
+    {
+        var apiKey = "Enter your api key here"; // Contact Microsoft about how to use this
+        var tileSource = KnownTileSources.Create(KnownTileSource.BingHybrid, apiKey, BingHybrid.DefaultCache);
+        return new TileLayer(tileSource, dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
+        {
+            Name = "Bing Aerial",
+        };
+    }
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
