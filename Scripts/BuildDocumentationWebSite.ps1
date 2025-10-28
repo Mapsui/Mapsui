@@ -26,3 +26,6 @@ Copy-Item -Path "docs/general/_site/*" -Destination "website" -Recurse -Force
 Write-Output "Copying api '_site' to 'website'"
 Copy-Item -Path "docs/api/_site/*" -Destination "website/api" -Recurse -Force
 
+Write-Output "Copying ''docs/index.html' to 'website/index.html'"
+Copy-Item -Path "docs/index.html" -Destination "website/index.html" -Recurse -Force
+

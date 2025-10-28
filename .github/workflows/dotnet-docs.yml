@@ -53,16 +53,6 @@ jobs:
     - name: Build Blazor Website Sample
       shell: pwsh
       run: ./Scripts/BuildSamplesWebsite.ps1   
-    - name: Copy index.html to ./website root
-      shell: bash
-      run: |
-        echo "Copying docs/index.html to website/index.html"
-        if [ -f docs/index.html ]; then
-          cp -f docs/index.html website/index.html
-          echo "Copied successfully"
-        else
-          echo "Warning: docs/index.html not found; skipping copy"
-        fi
     - name: Checkout gh-pages branch to delete v5 folder
       uses: actions/checkout@v4
       with:
