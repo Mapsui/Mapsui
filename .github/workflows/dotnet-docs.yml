@@ -53,6 +53,16 @@ jobs:
     - name: Build Blazor Website Sample
       shell: pwsh
       run: ./Scripts/BuildSamplesWebsite.ps1   
+    - name: Copy index.html to ./website root
+      shell: bash
+      run: |
+        echo "Copying docs/index.html to website/index.html"
+        if [ -f docs/index.html ]; then
+          cp -f docs/index.html website/index.html
+          echo "Copied successfully"
+        else
+          echo "Warning: docs/index.html not found; skipping copy"
+        fi
     - name: Checkout gh-pages branch to delete v5 folder
       uses: actions/checkout@v4
       with:
@@ -71,16 +81,6 @@ jobs:
         git add -A
         git commit -m "Clean v5 folder before redeploy" || echo "Nothing to commit"
         git push
-    - name: Copy index.html to ./website root
-      shell: bash
-      run: |
-        echo "Copying docs/index.html to website/index.html"
-        if [ -f docs/index.html ]; then
-          cp -f docs/index.html website/index.html
-          echo "Copied successfully"
-        else
-          echo "Warning: docs/index.html not found; skipping copy"
-        fi
     - name: Upload artifact
       uses: peaceiris/actions-gh-pages@v4
       with:
