@@ -71,13 +71,6 @@ jobs:
         git add -A
         git commit -m "Clean v5 folder before redeploy" || echo "Nothing to commit"
         git push
-    - name: Upload artifact
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./website
-        destination_dir: v5
-        keep_files: true
     - name: Copy index.html to ./website root
       shell: bash
       run: |
@@ -88,3 +81,11 @@ jobs:
         else
           echo "Warning: docs/index.html not found; skipping copy"
         fi
+    - name: Upload artifact
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./website
+        destination_dir: v5
+        keep_files: true
+
