@@ -38,8 +38,9 @@ jobs:
       run: |
         ./Scripts/BuildSamplesWebsite.ps1     
     - name: Upload artifact
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./website
+        destination_dir: v4
         keep_files: true
