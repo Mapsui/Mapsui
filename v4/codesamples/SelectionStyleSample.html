@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<pre><code class="lang-csharp" name="Main" title="SelectionStyleSample">using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Tiling;
+using Mapsui.Widgets;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Styles;
+
+internal class SelectionStyleSample : ISample
+{
+    public string Name =&gt; &quot;Selection&quot;;
+    public string Category =&gt; &quot;Styles&quot;;
+
+    public Task&lt;Map&gt; CreateMapAsync()
+    {
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreatePointLayer());
+        map.Info += (s, a) =&gt; SelectionStyleSample.ToggleSelected(a.MapInfo?.Feature);
+
+        map.Widgets.Add(new MapInfoWidget(map));
+
+        return Task.FromResult(map);
+    }
+
+    private static void ToggleSelected(IFeature? feature)
+    {
+        if (feature is null) return;
+        if (feature[&quot;selected&quot;] is null) feature[&quot;selected&quot;] = &quot;true&quot;;
+        else feature[&quot;selected&quot;] = null;
+    }
+
+    public static ILayer CreatePointLayer()
+    {
+        return new Layer(&quot;Points&quot;)
+        {
+            DataSource = new MemoryProvider(CreatePoints().Select(p =&gt; new PointFeature(p))),
+            Style = CreateStyle(),
+            IsMapInfoLayer = true
+        };
+    }
+
+    private static IStyle CreateStyle()
+    {
+        return new ThemeStyle(f =&gt;
+        {
+            if (f[&quot;selected&quot;]?.ToString() == &quot;true&quot;)
+
+                return new StyleCollection
+                {
+                    Styles = {
+                    // With the StyleCollection you can use the same symbol as when not selected but 
+                    // put something in the background to indicate it is selected.
+                    CreateSelectionSymbol(),
+                    CreateSymbol()
+                    }
+                };
+
+            return CreateSymbol();
+        });
+    }
+
+    private static SymbolStyle CreateSelectionSymbol()
+    {
+        return new SymbolStyle { Fill = new Brush(Color.Orange), SymbolScale = 1.2 };
+    }
+
+    private static SymbolStyle CreateSymbol()
+    {
+        return new SymbolStyle { Fill = new Brush(new Color(150, 150, 30)) };
+    }
+
+    private static MPoint[] CreatePoints()
+    {
+        return new[] {
+        new MPoint(0, 0),
+        new MPoint(9000000, 0),
+        new MPoint(9000000, 9000000),
+        new MPoint(0, 9000000),
+        new MPoint(-9000000, 0),
+        new MPoint(-9000000, -9000000),
+        new MPoint(0, -9000000),
+    };
+    }
+}
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/develop/4.1/docfx/codesamples/SelectionStyleSample.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
