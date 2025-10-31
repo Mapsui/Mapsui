@@ -239,7 +239,7 @@
   </Folder>
   <Folder Name="/Scripts/">
     <File Path="Scripts/BuildDocumentationWebSite.ps1" />
-    <File Path="Scripts/BuildSamplesDocumentation.ps1" />
+    <File Path="Scripts/BuildSampleCodePages.ps1" />
     <File Path="Scripts/BuildSamplesWebsite.ps1" />
     <File Path="Scripts/CopyGeneratedImagesOverOriginalImages.ps1" />
     <File Path="Scripts/DeleteBinAndObjFolders.ps1" />
