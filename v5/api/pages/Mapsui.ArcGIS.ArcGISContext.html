@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ArcGISContext </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ArcGISContext ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.ArcGIS.ArcGISContext">
+
+
+
+  <h1 id="Mapsui_ArcGIS_ArcGISContext" data-uid="Mapsui.ArcGIS.ArcGISContext" class="text-break">Class ArcGISContext</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext">JsonSerializerContext</a></div>
+    <div class="level2"><span class="xref">ArcGISContext</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.ijsontypeinforesolver">IJsonTypeInfoResolver</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext.options">JsonSerializerContext.Options</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.ArcGIS.html">ArcGIS</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.ArcGIS.dll</h6>
+  <h5 id="Mapsui_ArcGIS_ArcGISContext_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonSourceGenerationOptions(PropertyNameCaseInsensitive = true, UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip, NumberHandling = JsonNumberHandling.AllowReadingFromString|JsonNumberHandling.AllowNamedFloatingPointLiterals, ReadCommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true)]
+[JsonSerializable(typeof(ArcGISFeatureInfo))]
+[JsonSerializable(typeof(ArcGISLegendResponse))]
+[JsonSerializable(typeof(ArcGISDynamicCapabilities))]
+[JsonSerializable(typeof(ArcGISImageCapabilities))]
+public class ArcGISContext : JsonSerializerContext, IJsonTypeInfoResolver</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext__ctor_" data-uid="Mapsui.ArcGIS.ArcGISContext.#ctor*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext__ctor" data-uid="Mapsui.ArcGIS.ArcGISContext.#ctor">ArcGISContext()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ArcGISContext()</code></pre>
+  </div>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext__ctor_" data-uid="Mapsui.ArcGIS.ArcGISContext.#ctor*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext__ctor_System_Text_Json_JsonSerializerOptions_" data-uid="Mapsui.ArcGIS.ArcGISContext.#ctor(System.Text.Json.JsonSerializerOptions)">ArcGISContext(JsonSerializerOptions)</h4>
+  <div class="markdown level1 summary"><p>Creates an instance of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext">JsonSerializerContext</a> and binds it with the indicated <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ArcGISContext(JsonSerializerOptions options)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></td>
+        <td><span class="parametername">options</span></td>
+        <td><p>The run time provided options for the context instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISDynamicCapabilities_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISDynamicCapabilities" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities">ArcGISDynamicCapabilities</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISDynamicCapabilities&gt; ArcGISDynamicCapabilities { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities.html">ArcGISDynamicCapabilities</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISFeatureInfo_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISFeatureInfo" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo">ArcGISFeatureInfo</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISFeatureInfo&gt; ArcGISFeatureInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo.html">ArcGISFeatureInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISImageCapabilities_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISImageCapabilities" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities">ArcGISImageCapabilities</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISImageCapabilities&gt; ArcGISImageCapabilities { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html">ArcGISImageCapabilities</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISLayer_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLayer*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISLayer" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLayer">ArcGISLayer</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISLayer&gt; ArcGISLayer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISLayer.html">ArcGISLayer</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISLayerArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISLayerArray" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray">ArcGISLayerArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISLayer[]&gt; ArcGISLayerArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISLayer.html">ArcGISLayer</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponse_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponse" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse">ArcGISLegendResponse</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISLegendResponse&gt; ArcGISLegendResponse { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse.html">ArcGISLegendResponse</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLayer_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLayer" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer">ArcGISLegendResponseLayer</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISLegendResponseLayer&gt; ArcGISLegendResponseLayer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer.html">ArcGISLegendResponseLayer</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLayerArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLayerArray" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray">ArcGISLegendResponseLayerArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISLegendResponseLayer[]&gt; ArcGISLegendResponseLayerArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer.html">ArcGISLegendResponseLayer</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLegend_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLegend" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend">ArcGISLegendResponseLegend</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISLegendResponseLegend&gt; ArcGISLegendResponseLegend { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend.html">ArcGISLegendResponseLegend</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLegendArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLegendArray" data-uid="Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray">ArcGISLegendResponseLegendArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;ArcGISLegendResponseLegend[]&gt; ArcGISLegendResponseLegendArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend.html">ArcGISLegendResponseLegend</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Boolean_" data-uid="Mapsui.ArcGIS.ArcGISContext.Boolean*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Boolean" data-uid="Mapsui.ArcGIS.ArcGISContext.Boolean">Boolean</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;bool&gt; Boolean { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_DateTime_" data-uid="Mapsui.ArcGIS.ArcGISContext.DateTime*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_DateTime" data-uid="Mapsui.ArcGIS.ArcGISContext.DateTime">DateTime</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;DateTime&gt; DateTime { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Default_" data-uid="Mapsui.ArcGIS.ArcGISContext.Default*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Default" data-uid="Mapsui.ArcGIS.ArcGISContext.Default">Default</h4>
+  <div class="markdown level1 summary"><p>The default <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext">JsonSerializerContext</a> associated with a default <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ArcGISContext Default { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ArcGIS.ArcGISContext.html">ArcGISContext</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_DictionaryStringString_" data-uid="Mapsui.ArcGIS.ArcGISContext.DictionaryStringString*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_DictionaryStringString" data-uid="Mapsui.ArcGIS.ArcGISContext.DictionaryStringString">DictionaryStringString</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Dictionary&lt;string, string&gt;&gt; DictionaryStringString { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Domain_" data-uid="Mapsui.ArcGIS.ArcGISContext.Domain*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Domain" data-uid="Mapsui.ArcGIS.ArcGISContext.Domain">Domain</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Domain&gt; Domain { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.Domain.html">Domain</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Double_" data-uid="Mapsui.ArcGIS.ArcGISContext.Double*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Double" data-uid="Mapsui.ArcGIS.ArcGISContext.Double">Double</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;double&gt; Double { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_DoubleArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.DoubleArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_DoubleArray" data-uid="Mapsui.ArcGIS.ArcGISContext.DoubleArray">DoubleArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;double[]&gt; DoubleArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_EditFieldsInfo_" data-uid="Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_EditFieldsInfo" data-uid="Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo">EditFieldsInfo</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;EditFieldsInfo&gt; EditFieldsInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo.html">EditFieldsInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Extent_" data-uid="Mapsui.ArcGIS.ArcGISContext.Extent*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Extent" data-uid="Mapsui.ArcGIS.ArcGISContext.Extent">Extent</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Extent&gt; Extent { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.Extent.html">Extent</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Field_" data-uid="Mapsui.ArcGIS.ArcGISContext.Field*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Field" data-uid="Mapsui.ArcGIS.ArcGISContext.Field">Field</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Field&gt; Field { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.Field.html">Field</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_FieldArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.FieldArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_FieldArray" data-uid="Mapsui.ArcGIS.ArcGISContext.FieldArray">FieldArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Field[]&gt; FieldArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.Field.html">Field</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_GeneratedSerializerOptions_" data-uid="Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_GeneratedSerializerOptions" data-uid="Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions">GeneratedSerializerOptions</h4>
+  <div class="markdown level1 summary"><p>The source-generated options associated with this context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override JsonSerializerOptions? GeneratedSerializerOptions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext.generatedserializeroptions">JsonSerializerContext.GeneratedSerializerOptions</a></div>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_IDictionaryStringString_" data-uid="Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_IDictionaryStringString" data-uid="Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString">IDictionaryStringString</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;IDictionary&lt;string, string&gt;&gt; IDictionaryStringString { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Int32_" data-uid="Mapsui.ArcGIS.ArcGISContext.Int32*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Int32" data-uid="Mapsui.ArcGIS.ArcGISContext.Int32">Int32</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;int&gt; Int32 { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Int32Array_" data-uid="Mapsui.ArcGIS.ArcGISContext.Int32Array*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Int32Array" data-uid="Mapsui.ArcGIS.ArcGISContext.Int32Array">Int32Array</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;int[]&gt; Int32Array { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Int64_" data-uid="Mapsui.ArcGIS.ArcGISContext.Int64*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Int64" data-uid="Mapsui.ArcGIS.ArcGISContext.Int64">Int64</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;long&gt; Int64 { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Int64Array_" data-uid="Mapsui.ArcGIS.ArcGISContext.Int64Array*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Int64Array" data-uid="Mapsui.ArcGIS.ArcGISContext.Int64Array">Int64Array</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;long[]&gt; Int64Array { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_InterpolationType_" data-uid="Mapsui.ArcGIS.ArcGISContext.InterpolationType*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_InterpolationType" data-uid="Mapsui.ArcGIS.ArcGISContext.InterpolationType">InterpolationType</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;InterpolationType&gt; InterpolationType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.InterpolationType.html">InterpolationType</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Lod_" data-uid="Mapsui.ArcGIS.ArcGISContext.Lod*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Lod" data-uid="Mapsui.ArcGIS.ArcGISContext.Lod">Lod</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;TileInfo.Lod&gt; Lod { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.TileInfo.html">TileInfo</a>.<a class="xref" href="Mapsui.ArcGIS.TileInfo.Lod.html">Lod</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_LodArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.LodArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_LodArray" data-uid="Mapsui.ArcGIS.ArcGISContext.LodArray">LodArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;TileInfo.Lod[]&gt; LodArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.TileInfo.html">TileInfo</a>.<a class="xref" href="Mapsui.ArcGIS.TileInfo.Lod.html">Lod</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_NullableDateTime_" data-uid="Mapsui.ArcGIS.ArcGISContext.NullableDateTime*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_NullableDateTime" data-uid="Mapsui.ArcGIS.ArcGISContext.NullableDateTime">NullableDateTime</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;DateTime?&gt; NullableDateTime { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>?&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_NullableDouble_" data-uid="Mapsui.ArcGIS.ArcGISContext.NullableDouble*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_NullableDouble" data-uid="Mapsui.ArcGIS.ArcGISContext.NullableDouble">NullableDouble</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;double?&gt; NullableDouble { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Origin_" data-uid="Mapsui.ArcGIS.ArcGISContext.Origin*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Origin" data-uid="Mapsui.ArcGIS.ArcGISContext.Origin">Origin</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;TileInfo.Origin&gt; Origin { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.TileInfo.html">TileInfo</a>.<a class="xref" href="Mapsui.ArcGIS.TileInfo.Origin.html">Origin</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_OwnershipBasedAccessControlForRasters_" data-uid="Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_OwnershipBasedAccessControlForRasters" data-uid="Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters">OwnershipBasedAccessControlForRasters</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;OwnershipBasedAccessControlForRasters&gt; OwnershipBasedAccessControlForRasters { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters.html">OwnershipBasedAccessControlForRasters</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_RasterFunctionInfo_" data-uid="Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_RasterFunctionInfo" data-uid="Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo">RasterFunctionInfo</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;RasterFunctionInfo&gt; RasterFunctionInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html">RasterFunctionInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_RasterFunctionInfoArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_RasterFunctionInfoArray" data-uid="Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray">RasterFunctionInfoArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;RasterFunctionInfo[]&gt; RasterFunctionInfoArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html">RasterFunctionInfo</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_RasterTypeInfo_" data-uid="Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_RasterTypeInfo" data-uid="Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo">RasterTypeInfo</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;RasterTypeInfo&gt; RasterTypeInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html">RasterTypeInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_RasterTypeInfoArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_RasterTypeInfoArray" data-uid="Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray">RasterTypeInfoArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;RasterTypeInfo[]&gt; RasterTypeInfoArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html">RasterTypeInfo</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Result_" data-uid="Mapsui.ArcGIS.ArcGISContext.Result*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Result" data-uid="Mapsui.ArcGIS.ArcGISContext.Result">Result</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Result&gt; Result { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.Result.html">Result</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_ResultArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.ResultArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_ResultArray" data-uid="Mapsui.ArcGIS.ArcGISContext.ResultArray">ResultArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Result[]&gt; ResultArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.DynamicProvider.Result.html">Result</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_SpatialReference_" data-uid="Mapsui.ArcGIS.ArcGISContext.SpatialReference*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_SpatialReference" data-uid="Mapsui.ArcGIS.ArcGISContext.SpatialReference">SpatialReference</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;SpatialReference&gt; SpatialReference { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.SpatialReference.html">SpatialReference</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_String_" data-uid="Mapsui.ArcGIS.ArcGISContext.String*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_String" data-uid="Mapsui.ArcGIS.ArcGISContext.String">String</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;string&gt; String { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_Table_" data-uid="Mapsui.ArcGIS.ArcGISContext.Table*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_Table" data-uid="Mapsui.ArcGIS.ArcGISContext.Table">Table</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Table&gt; Table { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.Table.html">Table</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_TableArray_" data-uid="Mapsui.ArcGIS.ArcGISContext.TableArray*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_TableArray" data-uid="Mapsui.ArcGIS.ArcGISContext.TableArray">TableArray</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;Table[]&gt; TableArray { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.Table.html">Table</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_TileInfo_" data-uid="Mapsui.ArcGIS.ArcGISContext.TileInfo*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_TileInfo" data-uid="Mapsui.ArcGIS.ArcGISContext.TileInfo">TileInfo</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;TileInfo&gt; TileInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.TileInfo.html">TileInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_TimeInfo_" data-uid="Mapsui.ArcGIS.ArcGISContext.TimeInfo*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_TimeInfo" data-uid="Mapsui.ArcGIS.ArcGISContext.TimeInfo">TimeInfo</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;TimeInfo&gt; TimeInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.TimeInfo.html">TimeInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_TimeReference_" data-uid="Mapsui.ArcGIS.ArcGISContext.TimeReference*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_TimeReference" data-uid="Mapsui.ArcGIS.ArcGISContext.TimeReference">TimeReference</h4>
+  <div class="markdown level1 summary"><p>Defines the source generated JSON serialization contract metadata for a given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonTypeInfo&lt;TimeReference&gt; TimeReference { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1">JsonTypeInfo</a>&lt;<a class="xref" href="Mapsui.ArcGIS.ImageServiceProvider.TimeReference.html">TimeReference</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+
+
+  <a id="Mapsui_ArcGIS_ArcGISContext_GetTypeInfo_" data-uid="Mapsui.ArcGIS.ArcGISContext.GetTypeInfo*"></a>
+  <h4 id="Mapsui_ArcGIS_ArcGISContext_GetTypeInfo_System_Type_" data-uid="Mapsui.ArcGIS.ArcGISContext.GetTypeInfo(System.Type)">GetTypeInfo(Type)</h4>
+  <div class="markdown level1 summary"><p>Gets metadata for the specified type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override JsonTypeInfo? GetTypeInfo(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type to fetch metadata for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo">JsonTypeInfo</a></td>
+        <td><p>The metadata for the specified type, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if the context has no metadata for the type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext.gettypeinfo">JsonSerializerContext.GetTypeInfo(Type)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.ijsontypeinforesolver">IJsonTypeInfoResolver</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
