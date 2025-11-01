@@ -1,6 +1,6 @@
 name: Build Website
 env:
-  PUBLISH_DIR: website/samples/
+  PUBLISH_DIR: website/v4/samples/
 on:
   push:
     branches:  
