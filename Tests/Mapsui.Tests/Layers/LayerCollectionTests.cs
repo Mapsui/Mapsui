@@ -8,6 +8,7 @@ using NUnit.Framework;
 
 #pragma warning disable IDISP001 // Dispose Disposable
 #pragma warning disable IDISP004 // Don't ignore Disposable
+#pragma warning disable VSTHRD003 // Avoid awaiting foreign Tasks
 
 namespace Mapsui.Tests.Layers;
 
@@ -53,9 +54,9 @@ public class LayerCollectionTests
         var consumer = StartConsumerAsync(layerCollection, cts.Token, exceptionTcs);
         var producer = StartProducerAsync(layerCollection, cts.Token);
 
-        var ex = await WaitForExceptionOrTimeoutAsync(exceptionTcs.Task, TimeSpan.FromSeconds(3));
+        var ex = await WaitForExceptionOrTimeoutAsync(exceptionTcs.Task, TimeSpan.FromSeconds(3)).ConfigureAwait(false);
         await cts.CancelAsync();
-        await Task.WhenAll(consumer, producer);
+        await Task.WhenAll(consumer, producer).ConfigureAwait(false);
 
         // Assert
         if (ex is not null)
@@ -293,7 +294,7 @@ public class LayerCollectionTests
     {
         // Arrange
         var layerCollection = BuildLayerCollection();
-        using var layer = new MemoryLayer() { Name = $"LayerNotInList" };
+        using var layer = new MemoryLayer() { Name = "LayerNotInList" };
 
         // Act
         var result = layerCollection.Remove(layer);
@@ -385,7 +386,7 @@ public class LayerCollectionTests
 
     private static async Task<Exception?> WaitForExceptionOrTimeoutAsync(Task<Exception> exceptionTask, TimeSpan timeout)
     {
-        var completed = await Task.WhenAny(exceptionTask, Task.Delay(timeout));
+        var completed = await Task.WhenAny(exceptionTask, Task.Delay(timeout)).ConfigureAwait(false);
         if (completed == exceptionTask)
             return await exceptionTask;
         return null;
