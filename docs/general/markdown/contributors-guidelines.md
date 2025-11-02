@@ -17,9 +17,11 @@ Submit an issue before a pull request so we can discuss possible solutions to th
 
 To be able to review a PR, it helps if it is a small change that covers only one topic. For the reviewer, it is important to understand the purpose. Take the reviewer along in your thought process. There was a problem; you considered solutions; and there was a reason why you arrived at this solution. The diff shows what has changed, so it is not necessary to explain this (but it is useful to summarize it). What should be clear from the PR description, commit messages, and code comments is the "why."
 
-## When you need bigger changes you can use a chain of PRs where one depends on the other
+## Use a chain of PRs for bigger changes
 
-If you create a PR and want to make additional changes based on earlier changes, you should create a new PR that depends on the previous PR. At the top of the first comment add a single line that says it depends on another PR like this `Depends on #2722`. Once the previous PR has been merged, you can update the next one with `git pull origin main` on the command line, or the 'Update Branch' button on Github. Only use dependencies when you need them. If you can make changes with a couple of independent PRs this is be preferred.
+When you need bigger changes you can use a chain of PRs where one depends on the other, this is preferred over one big PR. So first change the core parts and turn that into a separate PR that is easy to review. In a second PR that depends on that you should add a single line to the top of the first comment that says something like this:`Depends on #2722`. Once the previous PR has been merged, you can update the next one with `git pull origin main` on the command line, or use the 'Update Branch' button on Github. 
+
+Only use dependencies when you need them. If you can make changes with a couple of independent PRs this is be preferred.
 
 ## Formatting
 
