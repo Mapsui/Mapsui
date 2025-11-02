@@ -1,7 +1,7 @@
 # Mapsui Contributor Guidelines
 
 !!! note
-This documents contains a list of contibutor guidelines. The items were added on random moments when we felt it could be useful to add them. This is not a complete list or an overview.
+    This documents contains a list of contibutor guidelines. The items were added on random moments when we felt it could be useful to add them. This is not a complete list or an overview.
 
 ## Sign the CLA 
 
