@@ -46,7 +46,7 @@ Code depends on other code. In a hierarchy, it is better to have high-quality co
 - Code that could throw exceptions, forcing the caller to catch them - or perhaps the caller should not need to catch them (it's better if you do not have to decide).
 - Fields that are nullable. Check for null early at the surface before passing it along to the core.
 
-A practical example in our own code is the dependency of: `DataSource <- Fetcher <- Layer <- Map <- MapControl`. The `DataSource` is disposable, and because of this, all other classes become disposable. We want to improve this by moving the disposable parts to a centralized data fetcher.
+A practical example of a problematic design in our own code is the dependency chain of: `DataSource <- Fetcher <- Layer <- Map <- MapControl`. The `DataSource` is disposable, and because of this, all other classes become disposable. We want to improve this by moving the disposable parts to a centralized data fetcher.
 
 ## Prefer pure functions and immutable data
 
@@ -59,10 +59,6 @@ This is related to the paragraph above. In general, it is considered a good thin
 - They should be in a namespace that follows the folder name (so, not in the namespace of the class it extends).
 - Extensions of a collection (`IEnumerable`, `List`, `Array`, etc.) of a type should also be in the class that extends the individual type.
 - If an interface is extended, the `I` should not be part of the class name. So, a class with extensions of `ILayer` should be called `LayerExtensions`.
-
-## Direct and indirect NuGet dependencies should point to the same version
-
-For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia, which has a dependency on SkiaSharp too. We want both of those to point to the same version. If not, linking or runtime errors could occur. In some cases, this might not be possible - for instance, when we have to downgrade because of a bug in some package.
 
 ## PR titles should be written as release notes
 
