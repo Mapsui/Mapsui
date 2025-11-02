@@ -67,7 +67,7 @@ The documentation can be found at [mapsui.com/v5/](https://mapsui.com/v5/).
 - Close an issue if your question is answered.
 
 ## Contributing
-See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.html)
+See the [guidelines](http://mapsui.com/v5/documentation/contributors-guidelines.html)
 
 ## Thanks go to
 - The developers of SharpMap from which this project was born.
