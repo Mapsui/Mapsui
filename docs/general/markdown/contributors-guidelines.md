@@ -1,8 +1,11 @@
 # Mapsui Contributor Guidelines
 
-Note: Below are some contributor guidelines. Items were added when we felt they were useful. It is not intended to be a complete list.
+!!! note
+This documents contains a list of contibutor guidelines. The items were added on random moments when we felt it could be useful to add them. This is not a complete list or an overview.
 
-## If you want to contribute, you need to sign the Contributor License Agreement (CLA)
+## Sign the CLA 
+
+If you want to contribute, you need to sign the Contributor License Agreement (CLA)
 
 [![CLA assistant](https://cla-assistant.io/readme/badge/Mapsui/Mapsui)](https://cla-assistant.io/Mapsui/Mapsui)
 
@@ -12,7 +15,7 @@ Submit an issue before a pull request so we can discuss possible solutions to th
 
 ## Create small PRs focused on one topic
 
-To be able to review a PR, it helps if it is a small change that covers only one topic. For the reviewer, it is important to understand the purpose. Take the reviewer along in your thought process. There was a problem; you considered solutions; and there was a reason why you arrived at this solution. The diff shows what has changed, so it is not necessary to explain this (but it is useful to summarize it). What should be clear from the PR description, commits, and code comments is the "why."
+To be able to review a PR, it helps if it is a small change that covers only one topic. For the reviewer, it is important to understand the purpose. Take the reviewer along in your thought process. There was a problem; you considered solutions; and there was a reason why you arrived at this solution. The diff shows what has changed, so it is not necessary to explain this (but it is useful to summarize it). What should be clear from the PR description, commit messages, and code comments is the "why."
 
 ### For bigger changes, work with PR dependencies
 
