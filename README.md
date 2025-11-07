@@ -15,15 +15,15 @@ The documentation can be found at [mapsui.com/v5/](https://mapsui.com/v5/).
 | Package | Version | Downloads | Quickstart Guide |
 | --- |:---:|:---:|:---:|
 | Mapsui.Maui | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Maui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Maui.svg)](https://www.nuget.org/packages/Mapsui.Maui) | [MAUI](https://mapsui.com/v5/#__tabbed_1_1) |
-| Mapsui.Avalonia | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg)](https://www.nuget.org/packages/Mapsui.Avalonia) | [Avalonia](https://mapsui.com/v5/#__tabbed_1_2) |
-| Mapsui.Uno.WinUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg)](https://www.nuget.org/packages/Mapsui.Uno.WinUI) | [Uno.WinUI](https://mapsui.com/v5/#__tabbed_1_3) |
+| Mapsui.Avalonia | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg)](https://www.nuget.org/packages/Mapsui.Avalonia) | [Avalonia UI](https://mapsui.com/v5/#__tabbed_1_2) |
+| Mapsui.Uno.WinUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg)](https://www.nuget.org/packages/Mapsui.Uno.WinUI) | [Uno Platform](https://mapsui.com/v5/#__tabbed_1_3) |
 | Mapsui.Blazor | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Blazor/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Blazor.svg)](https://www.nuget.org/packages/Mapsui.Blazor) | [Blazor](https://mapsui.com/v5/#__tabbed_1_4) |
 | Mapsui.Wpf | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg)](https://www.nuget.org/packages/Mapsui.Wpf) | [WPF](https://mapsui.com/v5/#__tabbed_1_5) |
 | Mapsui.WinUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WinUI/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.WinUI.svg)](https://www.nuget.org/packages/Mapsui.WinUI) | [WinUI](https://mapsui.com/v5/#__tabbed_1_6) |
-| Mapsui.WindowsForms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WindowsForms/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.WindowsForms.svg)](https://www.nuget.org/packages/Mapsui.WindowsForms) | [WindowsForms](https://mapsui.com/v5/#__tabbed_1_7) |
-| Mapsui.Eto | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) | [Eto](https://mapsui.com/v5/#__tabbed_1_8) |
-| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) | [Android](https://mapsui.com/v5/#__tabbed_1_9) |
-| Mapsui.iOS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) | [iOS](https://mapsui.com/v5/#__tabbed_1_10) |
+| Mapsui.WindowsForms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WindowsForms/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.WindowsForms.svg)](https://www.nuget.org/packages/Mapsui.WindowsForms) | [Windows Forms](https://mapsui.com/v5/#__tabbed_1_7) |
+| Mapsui.Eto | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) | [Eto Forms](https://mapsui.com/v5/#__tabbed_1_8) |
+| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) | [.NET for Android](https://mapsui.com/v5/#__tabbed_1_9) |
+| Mapsui.iOS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) | [.NET for iOS](https://mapsui.com/v5/#__tabbed_1_10) |
 
 
 ## Core NuGets
@@ -90,16 +90,16 @@ Lots of thanks to our sponsors
 <a href="https://github.com/TAlecksen"><img src="https://avatars.githubusercontent.com/u/26470677?v=4" width="200px;" alt="Sponsor1" /></a>
 <a href="https://github.com/unoplatform"><img src="https://avatars.githubusercontent.com/u/52228309?v=4" width="200px;" alt="Sponsor2" /></a>
 
-### ⭐ Past Sponsors
+### Past Sponsors
 <a href="https://github.com/P33tr"><img src="https://avatars.githubusercontent.com/u/44436267?v=4" width="40px;" alt="Sponsor4" /></a>
 <a href="https://github.com/Sebastian1989101"><img src="https://avatars.githubusercontent.com/u/25636075?v=4" width="40px;" alt="Sponsor5" /></a>
 <a href="https://github.com/blwhttngtn"><img src="https://avatars.githubusercontent.com/u/12670350?v=4" width="40px;" alt="Sponsor3" /></a>
 <a href="https://github.com/winkmichael"><img src="https://avatars.githubusercontent.com/u/5185889?v=4" width="40px;" alt="Sponsor5" /></a>
 
-[Sponsor Mapsui on GitHub](https://github.com/sponsors/pauldendulk)
+### You can sponsor
+
+Sponsor us through [GitHub Sponsors](https://github.com/sponsors/pauldendulk)
 
 ## License
 
 [MIT](LICENSE)
-
-[<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com)
