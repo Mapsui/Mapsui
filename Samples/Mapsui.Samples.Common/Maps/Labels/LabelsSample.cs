@@ -6,7 +6,7 @@ using NetTopologySuite.IO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Styles;
+namespace Mapsui.Samples.Common.Maps.Labels;
 
 public class LabelsSample : ISample
 {
