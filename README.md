@@ -101,5 +101,3 @@ Lots of thanks to our sponsors
 ## License
 
 [MIT](LICENSE)
-
-[<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com)
