@@ -4,7 +4,14 @@ on:
   push:
     branches:  
       - main
-      - feature/docs
+    paths:
+      - 'docs/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+  workflow_dispatch: {}
       
 permissions:
   contents: write
