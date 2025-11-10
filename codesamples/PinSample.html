@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<pre><code class="lang-csharp" name="Main" title="PinSample">using System;
+using System.IO;
+using System.Reflection;
+using Mapsui.Extensions;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Samples.Common.PersistentCaches;
+using Mapsui.Styles;
+using Mapsui.UI;
+
+#if __MAUI__
+using Mapsui.UI.Maui;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui;
+using Color = Microsoft.Maui.Graphics.Color;
+#else
+using Mapsui.UI.Forms;
+using Xamarin.Forms;
+using Color = Xamarin.Forms.Color;
+using Colors = Xamarin.Forms.Color;
+#endif
+
+#if __MAUI__
+namespace Mapsui.Samples.Maui;
+#else
+namespace Mapsui.Samples.Forms;
+#endif
+
+public class PinSample : IMapViewSample
+{
+    int _markerNum = 1;
+    readonly Random _random = new Random(4);
+
+    public string Name =&gt; &quot;Add Pin Sample&quot;;
+
+    public string Category =&gt; &quot;MapView&quot;;
+
+    public bool UpdateLocation =&gt; true;
+
+    public bool OnClick(object? sender, EventArgs args)
+    {
+        var mapView = sender as MapView;
+        var mapClickedArgs = (MapClickedEventArgs)args;
+
+        if (mapView == null)
+            return false;
+
+        var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
+        foreach (var str in assembly.GetManifestResourceNames())
+            System.Diagnostics.Debug.WriteLine(str);
+
+        switch (mapClickedArgs.NumOfTaps)
+        {
+            case 1:
+                var pin = new Pin(mapView)
+                {
+                    Label = $&quot;PinType.Pin {_markerNum++}&quot;,
+                    Position = mapClickedArgs.Point,
+                    Address = mapClickedArgs.Point.ToString(),
+                    Type = PinType.Pin,
+                    Color = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f),
+                    Transparency = 0.5f,
+                    Scale = _random.Next(50, 130) / 100f,
+                    RotateWithMap = true,
+                };
+                pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
+                pin.Callout.RectRadius = _random.Next(0, 10);
+                pin.Callout.ArrowHeight = _random.Next(5, 20);
+                pin.Callout.ArrowWidth = _random.Next(0, 20);
+                pin.Callout.ArrowAlignment = (ArrowAlignment)_random.Next(0, 4);
+                pin.Callout.ArrowPosition = _random.Next(0, 100) / 100.0;
+                pin.Callout.StrokeWidth = _random.Next(0, 10);
+                pin.Callout.Padding = new Thickness(_random.Next(0, 20), _random.Next(0, 20));
+                pin.Callout.BackgroundColor = Colors.White;
+                pin.Callout.RotateWithMap = true;
+                pin.Callout.IsClosableByClick = true;
+                pin.Callout.Color = pin.Color;
+                if (_random.Next(0, 3) &lt; 2)
+                {
+                    pin.Callout.Type = CalloutType.Detail;
+                    pin.Callout.TitleFontSize = _random.Next(15, 30);
+                    pin.Callout.TitleTextAlignment = TextAlignment.Center;
+                    pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
+                    pin.Callout.TitleFontColor = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f);
+                    pin.Callout.SubtitleFontColor = pin.Color;
+                    pin.Callout.SubtitleTextAlignment = TextAlignment.Center;
+                    pin.Callout.Spacing = _random.Next(0, 10);
+                    pin.Callout.MaxWidth = _random.Next(100, 200);
+                }
+                else
+                {
+                    pin.Callout.Type = CalloutType.Detail;
+                    pin.Callout.Content = 1;
+                }
+                pin.Callout.CalloutClicked += (s, e) =&gt;
+                {
+                    if (e.NumOfTaps == 2)
+                    {
+                        // Double click on callout moves pin
+                        var p = e.Callout?.Pin;
+                        if (p != null)
+                        {
+                            p.Position = new Position(p.Position.Latitude + 0.01, p.Position.Longitude);
+                            e.Handled = true;
+                        }
+
+                        return;
+                    }
+                    if (e.Callout != null &amp;&amp; e.Callout.Title != &quot;You clicked me!&quot;)
+                    {
+                        e.Callout.Type = CalloutType.Single;
+                        e.Callout.Title = &quot;You clicked me!&quot;;
+                        e.Handled = true;
+                    }
+                };
+                mapView.Pins.Add(pin);
+                pin.ShowCallout();
+                break;
+            case 2:
+                var resourceName = &quot;Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg&quot;;
+                var stream = assembly.GetManifestResourceStream(resourceName);
+                if (stream == null) throw new Exception($&quot;Could not find EmbeddedResource {resourceName}&quot;);
+                using (var reader = new StreamReader(stream))
+                {
+                    string svgString = reader.ReadToEnd();
+                    mapView.Pins.Add(new Pin(mapView)
+                    {
+                        Label = $&quot;PinType.Svg {_markerNum++}&quot;,
+                        Position = mapClickedArgs.Point,
+                        Type = PinType.Svg,
+                        Scale = 0.1f,
+                        RotateWithMap = true,
+                        Svg = svgString
+                    });
+                }
+
+                break;
+            case 3:
+                using (var manifestResourceStream = assembly.GetManifestResourceStream(&quot;Mapsui.Samples.Common.Images.loc.png&quot;))
+                {
+                    var icon = manifestResourceStream!.ToBytes();
+                    mapView.Pins.Add(new Pin(mapView)
+                    {
+                        Label = $&quot;PinType.Icon {_markerNum++}&quot;,
+                        Position = mapClickedArgs.Point,
+                        Type = PinType.Icon,
+                        Scale = 0.5f,
+                        Icon = icon
+                    });
+                }
+                break;
+        }
+
+        return true;
+    }
+
+    public void Setup(IMapControl mapControl)
+    {
+        //OSM never displays....
+        //mapControl.Map = OsmSample.CreateMap();
+
+        //I like bing Hybrid
+        mapControl.Map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
+
+        ((MapView)mapControl).UseDoubleTap = true;
+        //((MapView)mapControl).UniqueCallout = true;
+    }
+}
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/develop/4.1/docfx/codesamples/PinSample.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

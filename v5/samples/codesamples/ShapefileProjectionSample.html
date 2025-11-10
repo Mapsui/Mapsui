@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using System.IO;
+using System.Threading.Tasks;
+using Mapsui.Extensions.Projections;
+using Mapsui.Layers;
+using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Tiling.Layers;
+
+namespace Mapsui.Samples.Common.Maps.Projection;
+
+public class ShapefileProjectionSample : ISample
+{
+    static ShapefileProjectionSample()
+    {
+        ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
+        ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
+    }
+
+    public string Name => "ShapefileWithProjection";
+    public string Category => "Projection";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map()
+        {
+            CRS = "EPSG:3857", // The Map CRS needs to be set
+        };
+
+        var dotSpatialProjection = new DotSpatialProjection();
+        var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+        var countrySource = new ShapeFile(countriesPath, true, true, dotSpatialProjection);
+        var countryProjected = new ProjectingProvider(countrySource, dotSpatialProjection)
+        {
+            CRS = "EPSG:3857"
+        };
+
+        var citiesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "cities.shp");
+        var citySource = new ShapeFile(citiesPath, true, true, dotSpatialProjection);
+        var cityProjected = new ProjectingProvider(citySource, dotSpatialProjection)
+        {
+            CRS = "EPSG:3857"
+        };
+
+        map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(countryProjected)));
+        map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(cityProjected)));
+        map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(countryProjected)));
+        map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(cityProjected)));
+#pragma warning restore IDISP001 // Dispose created
+#pragma warning restore IDISP004 // Dispose created
+        return map;
+    }
+
+    private static Layer CreateCountryLayer(IProvider countrySource) => new()
+    {
+        Name = "Countries",
+        DataSource = countrySource,
+        Style = CreateCountryTheme()
+    };
+
+    private static Layer CreateCityLayer(IProvider citySource) => new()
+    {
+        Name = "Cities",
+        DataSource = citySource,
+        Style = CreateCityTheme()
+    };
+
+    private static Layer CreateCountryLabelLayer(IProvider countryProvider) => new("Country labels")
+    {
+        DataSource = countryProvider,
+        Enabled = true,
+        MaxVisible = double.MaxValue,
+        MinVisible = double.MinValue,
+        Style = CreateCountryLabelTheme()
+    };
+
+    private static Layer CreateCityLabelLayer(IProvider citiesProvider) => new("City labels")
+    {
+        DataSource = citiesProvider,
+        Enabled = true,
+        Style = CreateCityLabelStyle()
+    };
+
+    private static GradientTheme CreateCityTheme()
+    {
+        // Scaling city icons based on city population.
+        // Cities below 1.000.000 gets the smallest symbol.
+        // Cities with more than 5.000.000 the largest symbol.
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.icon.png";
+        var cityMin = new ImageStyle { Image = imageSource, SymbolScale = 0.5f };
+        var cityMax = new ImageStyle { Image = imageSource, SymbolScale = 1f };
+        return new GradientTheme("POPULATION", 1000000, 5000000, cityMin, cityMax);
+    }
+
+    private static GradientTheme CreateCountryTheme()
+    {
+        // Set a gradient theme on the countries layer, based on Population density
+        // First create two styles that specify min and max styles
+        // In this case we will just use the default values and override the fill-colors
+        // using a color blender. If different line-widths, line- and fill-colors where used
+        // in the min and max styles, these would automatically get linearly interpolated.
+        var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+        var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+
+        // Create theme using a density from 0 (min) to 400 (max)
+        return new GradientTheme("POPDENS", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+    }
+
+    private static LabelStyle CreateCityLabelStyle() => new()
+    {
+        ForeColor = Color.Black,
+        BackColor = new Brush { Color = Color.Orange },
+        Font = new Font { FontFamily = "GenericSerif", Size = 11 },
+        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+        Offset = new Offset { X = 0, Y = 0 },
+        Halo = new Pen { Color = Color.Yellow, Width = 2 },
+        CollisionDetection = true,
+        LabelColumn = "NAME"
+    };
+
+    private static GradientTheme CreateCountryLabelTheme()
+    {
+        // Lets scale the labels so that big countries have larger texts as well
+        var backColor = new Brush { Color = new Color(255, 255, 255, 128) };
+
+        var lblMin = new LabelStyle
+        {
+            ForeColor = Color.Black,
+            BackColor = backColor,
+            Font = new Font { FontFamily = "GenericSerif", Size = 6 },
+            LabelColumn = "NAME"
+        };
+
+        var lblMax = new LabelStyle
+        {
+            ForeColor = Color.Blue,
+            BackColor = backColor,
+            Font = new Font { FontFamily = "GenericSerif", Size = 9 },
+            LabelColumn = "NAME"
+        };
+
+        return new GradientTheme("POPDENS", 0, 400, lblMin, lblMax);
+    }
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>

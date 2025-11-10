@@ -1,0 +1,61 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Copyright>Copyright © Mapsui Developers 2018-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Mapsui/Mapsui</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Mapsui/Mapsui</RepositoryUrl>
+    <Authors>Mapsui Developers</Authors>
+    <Company>Mapsui Developers</Company>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <PackageReleaseNotes>Release notes are at https://github.com/Mapsui/Mapsui/releases</PackageReleaseNotes>
+    <PackageTags>map maps mapping geo gis osm</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
+    <!--Disable Run Api Compat Task causes Build failure on github actions with visual studio 2022 17.5 and .net Compilers Toolset 4.6-->
+    <RunApiCompat>false</RunApiCompat>
+	  <Nullable>enable</Nullable>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+    <MauiVersion>9.0.50</MauiVersion>
+    <Maui8Version>8.0.100</Maui8Version>
+  </PropertyGroup>
+
+	<!--Package Icon Include -->
+	<ItemGroup>
+		<None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
+		<None Include="..\LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+  <!-- Common Project Properties -->
+  <PropertyGroup>
+	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	  <LangVersion>13.0</LangVersion>
+      <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
+      <!-- Enable Windows Targeting on non Windows platforms -->
+      <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--Disposable Analyzer-->
+    <PackageReference Include="IDisposableAnalyzers">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <!--Threading Analyzer mainly Async Code-->
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <!-- Roslyn Compiler -->
+    <!-- <PackageReference Include="Microsoft.Net.Compilers.Toolset">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference> -->
+  </ItemGroup>
+
+</Project>

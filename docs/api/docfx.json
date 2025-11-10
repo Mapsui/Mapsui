@@ -1,0 +1,43 @@
+{
+	"metadata": [
+		{
+			"src": [
+				{
+					"src": "../../",
+					"files": [
+						"Mapsui/Mapsui.csproj",
+						"Mapsui.ArcGis/Mapsui.ArcGis.csproj",
+						"Mapsui.Extensions/Mapsui.Extensions.csproj",
+						"Mapsui.Nts/Mapsui.Nts.csproj",
+						"Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj",
+						"Mapsui.Tiling/Mapsui.Tiling.csproj",
+						"Mapsui.UI.*/*.csproj"
+					]
+				}
+			],
+			"dest": "pages",
+			"disableGitFeatures": false
+		}
+	],
+  "build": {
+    "cleanupCacheHistory": false,
+    "content": [
+      {
+        "files": [
+          "pages/**.yml",
+          "../codesamples/**.md"
+        ]
+      }
+    ],
+    "dest": "_site",
+    "disableGitFeatures": false,
+    "fileMetadataFiles": [],
+    "globalMetadataFiles": [ "metadata.json" ],
+    "keepFileLink": false,
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "postProcessors": [ "ExtractSearchIndex" ],
+    "template": [ "default" ],
+    "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
+  }
+}

@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<pre><code class="lang-csharp" name="Main" title="InfoLayersSample">using Mapsui.Layers;
+using Mapsui.Nts;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using NetTopologySuite.Geometries;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Mapsui.UI;
+using Mapsui.Widgets;
+using Mapsui.Extensions;
+using Mapsui.Widgets.Zoom;
+
+#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
+namespace Mapsui.Samples.Common.Maps.Demo;
+
+public class InfoLayersSample : ISample, ISampleTest
+{
+    private const string InfoLayerName = &quot;Info Layer&quot;;
+    private const string PolygonLayerName = &quot;Polygon Layer&quot;;
+    private const string LineLayerName = &quot;Line Layer&quot;;
+
+    public string Name =&gt; &quot;2 Map Info&quot;;
+    public string Category =&gt; &quot;Demo&quot;;
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateInfoLayer(map.Extent));
+        map.Layers.Add(CreatePolygonLayer());
+        map.Layers.Add(new WritableLayer());
+        map.Layers.Add(CreateLineLayer());
+
+        map.Widgets.Add(new MapInfoWidget(map));
+
+
+        return map;
+    }
+
+    public Task&lt;Map&gt; CreateMapAsync()
+    {
+        return Task.FromResult(CreateMap());
+    }
+
+    private static ILayer CreatePolygonLayer()
+    {
+        var features = new List&lt;IFeature&gt; { CreatePolygonFeature(), CreateMultiPolygonFeature() };
+
+        var layer = new MemoryLayer
+        {
+            Name = PolygonLayerName,
+            Features = features,
+            Style = null,
+            IsMapInfoLayer = true
+        };
+
+        return layer;
+    }
+
+    private static ILayer CreateLineLayer()
+    {
+        return new MemoryLayer
+        {
+            Name = LineLayerName,
+            Features = new[] { CreateLineFeature() },
+            Style = null,
+            IsMapInfoLayer = true
+        };
+    }
+
+    private static GeometryFeature CreateMultiPolygonFeature()
+    {
+        var feature = new GeometryFeature
+        {
+            Geometry = CreateMultiPolygon(),
+            [&quot;Name&quot;] = &quot;Multipolygon 1&quot;
+        };
+        feature.Styles.Add(new VectorStyle { Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black) });
+        return feature;
+    }
+
+    private static GeometryFeature CreatePolygonFeature()
+    {
+        var feature = new GeometryFeature
+        {
+            Geometry = CreatePolygon(),
+            [&quot;Name&quot;] = &quot;Polygon 1&quot;
+        };
+        feature.Styles.Add(new VectorStyle());
+        return feature;
+    }
+
+    private static GeometryFeature CreateLineFeature()
+    {
+        return new GeometryFeature
+        {
+            Geometry = CreateLine(),
+            [&quot;Name&quot;] = &quot;Line 1&quot;,
+            Styles = new List&lt;IStyle&gt; { new VectorStyle { Line = new Pen(Color.Violet, 6) } }
+        };
+    }
+
+    private static MultiPolygon CreateMultiPolygon()
+    {
+        return new MultiPolygon(new[] {
+            new Polygon(new LinearRing(new[] {
+                new Coordinate(4000000, 3000000),
+                new Coordinate(4000000, 2000000),
+                new Coordinate(3000000, 2000000),
+                new Coordinate(3000000, 3000000),
+                new Coordinate(4000000, 3000000)
+            })),
+
+            new(new LinearRing(new[] {
+                new Coordinate(4000000, 5000000),
+                new Coordinate(4000000, 4000000),
+                new Coordinate(3000000, 4000000),
+                new Coordinate(3000000, 5000000),
+                new Coordinate(4000000, 5000000)
+            }))
+        });
+    }
+
+    private static Polygon CreatePolygon()
+    {
+        return new Polygon(new LinearRing(new[]
+        {
+            new Coordinate(1000000, 1000000),
+            new Coordinate(1000000, -1000000),
+            new Coordinate(-1000000, -1000000),
+            new Coordinate(-1000000, 1000000),
+            new Coordinate(1000000, 1000000)
+        }));
+    }
+
+    private static LineString CreateLine()
+    {
+        var offsetX = -2000000;
+        var offsetY = -2000000;
+        var stepSize = -2000000;
+
+        return new LineString(new[]
+        {
+            new Coordinate(offsetX + stepSize,      offsetY + stepSize),
+            new Coordinate(offsetX + stepSize * 2,  offsetY + stepSize),
+            new Coordinate(offsetX + stepSize * 2,  offsetY + stepSize * 2),
+            new Coordinate(offsetX + stepSize * 3,  offsetY + stepSize * 2),
+            new Coordinate(offsetX + stepSize * 3,  offsetY + stepSize * 3)
+        });
+    }
+
+    private static ILayer CreateInfoLayer(MRect? envelope)
+    {
+        var random = new Random(7);
+
+        return new Layer(InfoLayerName)
+        {
+            DataSource = RandomPointsBuilder.CreateProviderWithRandomPoints(envelope, 25, random),
+            Style = CreateSymbolStyle(),
+            IsMapInfoLayer = true
+        };
+    }
+
+    private static SymbolStyle CreateSymbolStyle()
+    {
+        return new SymbolStyle
+        {
+            SymbolScale = 0.8,
+            Fill = new Brush(new Color(213, 234, 194)),
+            Outline = { Color = Color.Gray, Width = 1 }
+        };
+    }
+
+    public async Task InitializeTestAsync(IMapControl mapControl)
+    {
+        await Task.Delay(1000).ConfigureAwait(true);
+    }
+}
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/develop/4.1/docfx/codesamples/InfoLayersSample.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

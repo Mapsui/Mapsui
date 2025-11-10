@@ -1,0 +1,29 @@
+{
+  "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
+  "tasks": [
+    {
+      "name": "dotnet-format-whitespace",
+      "group": "pre-commit",
+      "command": "dotnet",
+      "args": [
+        "format",
+        "whitespace",
+        "Mapsui.sln",
+        "--include",
+        "${staged}"
+      ]
+    },
+    {
+      "name": "re-add-the-staged-files-after-formatting-so-that-the-fix-becomes-part-of-the-commit",
+      "group": "pre-commit",
+      "output": "always",
+      "command": "bash",
+      "args": [ "-c", "git", "add", "${staged}" ],
+      "windows": {
+        "command": "cmd",
+        "args": [ "/c", "git", "add", "${staged}" ]
+      },
+      "include": [ "**/*.cs" ]
+    }
+  ]
+}

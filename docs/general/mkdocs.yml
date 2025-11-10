@@ -1,0 +1,66 @@
+site_name: Mapsui Documentation
+docs_dir: markdown
+site_dir: _site
+theme:
+  name: 'material'
+  features:
+    - content.action.edit
+    - content.tabs.link
+    - navigation.expand
+    - navigation.sections
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.select
+nav:
+  - 'index.md'
+  - 'projects-that-use-mapsui.md'
+  - 'samples.md'
+  - 'logging.md'
+  - 'roadmap.md'
+  - 'faq.md'
+  - 'nuget-of-latest-build.md'
+  - 'mapsui-components.md'
+  - 'async-fetching.md'
+  - 'resolution.md'
+  - 'projections.md'
+  - 'custom-style-renders.md'
+  - 'performance-widget.md'
+  - 'imagesource.md'
+  - 'mapinfo.md'
+  
+  - Upgrade guides:
+    - 'v4.0-upgrade-guide.md'
+    - 'v5.0-upgrade-guide.md'
+
+  - Contributing to Mapsui:
+    - 'contributors-guidelines.md'
+    - 'rendering-tests.md'
+    - 'documentation.md'
+    - 'touch-and-mouse-handling.md'
+
+repo_url: https://github.com/Mapsui/Mapsui/
+edit_uri: blob/master/docs/general/markdown
+plugins:
+  - glightbox
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'  
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+ 
