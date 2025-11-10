@@ -69,8 +69,6 @@ public class AlternativeFontLabelSample : ISample
             _ => null
         },
         Offset = new Offset(20, -56),
-        // Use embedded font from Samples project. The resource path is relative to the project and the code
-        // will load it when FontFamily starts with the "embedded://" scheme.
         Font = new Font { FontFamily = "embedded://Mapsui.Samples.Common.Fonts.Blink-ynYZ.otf", Size = 32 },
         BorderThickness = 1,
         BorderColor = Color.DimGray,
