@@ -1,34 +1,23 @@
-﻿using Mapsui.Extensions;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts.Providers;
-using Mapsui.Rendering.Skia;
-using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
-using Mapsui.Tiling.Layers;
-using Mapsui.UI;
-using Mapsui.Widgets;
-using Mapsui.Widgets.InfoWidgets;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class HugeShapeFileWithSimplifierAndClippingSample : IMapControlSample
+public class HugeShapeFileWithSimplifierAndClippingSample : ISample
 {
-    private static TileLayer TileLayer = OpenStreetMap.CreateTileLayer();
-    private static ILayer ShapeLayer1 = CreateShapeLayer("EZG_KB_LM.shp", "cache1");
-    private static ILayer ShapeLayer2 = CreateShapeLayer("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp", "cache2");
-
-    private readonly Mapsui.Utilities.Performance _performance = new(10);
-    private IMapControl? _mapControl;
-
-    public HugeShapeFileWithSimplifierAndClippingSample()
+    static HugeShapeFileWithSimplifierAndClippingSample()
     {
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("EZG_KB_LM.shp");
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp");
     }
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public string Name => "Huge Shape File With Simplifier and Clipping";
     public string Category => "Performance";
@@ -37,26 +26,20 @@ public class HugeShapeFileWithSimplifierAndClippingSample : IMapControlSample
     {
         var map = new Map();
 
-        map.Layers.Add(TileLayer);
-        map.Layers.Add(ShapeLayer1);
-        map.Layers.Add(ShapeLayer2);
+        var tileLayer = OpenStreetMap.CreateTileLayer();
+        var shapeLayer1 = CreateShapeLayer("EZG_KB_LM.shp", "cache1");
+        var shapeLayer2 = CreateShapeLayer("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp", "cache2");
+
+        map.Layers.Add(tileLayer);
+        map.Layers.Add(shapeLayer1);
+        map.Layers.Add(shapeLayer2);
 
         return map;
     }
 
-    public void Setup(IMapControl mapControl)
-    {
-        _mapControl = mapControl;
-        mapControl.Map = CreateMap();
-        var widget = CreatePerformanceWidget();
-        mapControl.Map.Widgets.Add(widget);
-        mapControl.Performance = _performance;
-        MapRenderer.RegisterWidgetRenderer(typeof(PerformanceWidget), new PerformanceWidgetRenderer());
-    }
-
     private static ILayer CreateShapeLayer(string shapeName, string cacheName)
     {
-        using var shapeFile = new Mapsui.Nts.Providers.Shapefile.ShapeFile(
+        using var shapeFile = new Nts.Providers.Shapefile.ShapeFile(
            Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, shapeName), false)
         { CRS = "EPSG:3857" };
 
@@ -105,20 +88,4 @@ public class HugeShapeFileWithSimplifierAndClippingSample : IMapControlSample
             return style;
         });
     }
-
-    private PerformanceWidget CreatePerformanceWidget() => new(_performance)
-    {
-        HorizontalAlignment = HorizontalAlignment.Left,
-        VerticalAlignment = VerticalAlignment.Top,
-        Margin = new MRect(10),
-        TextSize = 12,
-        TextColor = Color.Black,
-        BackColor = Color.White,
-        Tapped = (s, e) =>
-        {
-            _mapControl?.Performance?.Clear();
-            _mapControl?.RefreshGraphics();
-            return true;
-        }
-    };
 }
