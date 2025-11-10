@@ -4,7 +4,14 @@ on:
   push:
     branches:  
       - main
-      - feature/docs
+    paths:
+      - 'docs/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+  workflow_dispatch: {}
       
 permissions:
   contents: write
@@ -76,5 +83,6 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./website
-        destination_dir: v5
+        destination_dir: .
         keep_files: true
+

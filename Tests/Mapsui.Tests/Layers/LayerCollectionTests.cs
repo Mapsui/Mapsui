@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using NUnit.Framework;
 
 #pragma warning disable IDISP001 // Dispose Disposable
 #pragma warning disable IDISP004 // Don't ignore Disposable
+#pragma warning disable VSTHRD003 // Avoid awaiting foreign Tasks
 
 namespace Mapsui.Tests.Layers;
 
@@ -35,6 +38,29 @@ public class LayerCollectionTests
         Assert.That(list[1].Name, Is.EqualTo("Layer3"));
         Assert.That(list[2], Is.Not.Null);
         Assert.That(list[2].Name, Is.EqualTo("Layer2"));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
+    }
+
+    [Test]
+    public async Task EnumeratingWhileModifying_ShouldNotThrow_IndexOutOfRangeExceptionAsync()
+    {
+        // Arrange
+        var layerCollection = new LayerCollection();
+        var (cts, exceptionTcs) = CreateSignals();
+
+        // Act
+        var consumer = StartConsumerAsync(layerCollection, cts.Token, exceptionTcs);
+        var producer = StartProducerAsync(layerCollection, cts.Token);
+
+        var ex = await WaitForExceptionOrTimeoutAsync(exceptionTcs.Task, TimeSpan.FromSeconds(3)).ConfigureAwait(false);
+        await cts.CancelAsync();
+        await Task.WhenAll(consumer, producer).ConfigureAwait(false);
+
+        // Assert
+        if (ex is not null)
+            Assert.Fail($"Unexpected exception during concurrent enumeration: {ex}");
 
         // Absolve
         layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
@@ -268,7 +294,7 @@ public class LayerCollectionTests
     {
         // Arrange
         var layerCollection = BuildLayerCollection();
-        using var layer = new MemoryLayer() { Name = $"LayerNotInList" };
+        using var layer = new MemoryLayer() { Name = "LayerNotInList" };
 
         // Act
         var result = layerCollection.Remove(layer);
@@ -294,5 +320,75 @@ public class LayerCollectionTests
         }
 
         return layerCollection;
+    }
+
+    private static (CancellationTokenSource cts, TaskCompletionSource<Exception> exceptionTcs) CreateSignals()
+    {
+        var cts = new CancellationTokenSource();
+        var exceptionTcs = new TaskCompletionSource<Exception>(TaskCreationOptions.RunContinuationsAsynchronously);
+        return (cts, exceptionTcs);
+    }
+
+    private static Task StartConsumerAsync(LayerCollection layerCollection, CancellationToken token, TaskCompletionSource<Exception> exceptionTcs)
+    {
+        return Task.Run(() =>
+        {
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    foreach (var l in layerCollection)
+                    {
+                        _ = l?.Name; // touch item
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                exceptionTcs.TrySetResult(ex);
+            }
+        }, token);
+    }
+
+    private static Task StartProducerAsync(LayerCollection layerCollection, CancellationToken token)
+    {
+        return Task.Run(() =>
+        {
+            var rnd = new Random();
+            for (int i = 0; i < 5000 && !token.IsCancellationRequested; i++)
+            {
+                var group = rnd.Next(-1, 2); // -1, 0, 1
+
+                layerCollection.Add(new MemoryLayer() { Name = $"L{i}" }, group);
+
+                if ((i % 3) == 0)
+                {
+                    var layersInGroup = layerCollection.GetLayers(group).ToArray();
+                    var idx = layersInGroup.Length == 0 ? 0 : rnd.Next(0, layersInGroup.Length);
+                    layerCollection.Insert(idx, new MemoryLayer() { Name = $"I{i}" }, group);
+                }
+
+                if ((i % 5) == 0)
+                {
+                    var g = rnd.Next(-1, 2);
+                    var layers = layerCollection.GetLayers(g).ToArray();
+                    if (layers.Length > 0)
+                        _ = layerCollection.Remove(layers[rnd.Next(layers.Length)]);
+                }
+
+                if ((i % 25) == 0)
+                {
+                    layerCollection.ClearAllGroups();
+                }
+            }
+        }, token);
+    }
+
+    private static async Task<Exception?> WaitForExceptionOrTimeoutAsync(Task<Exception> exceptionTask, TimeSpan timeout)
+    {
+        var completed = await Task.WhenAny(exceptionTask, Task.Delay(timeout)).ConfigureAwait(false);
+        if (completed == exceptionTask)
+            return await exceptionTask;
+        return null;
     }
 }
