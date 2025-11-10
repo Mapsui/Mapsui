@@ -74,8 +74,6 @@ public class AlternativeFontLabelSample : ISample
         BorderColor = Color.DimGray,
     };
 
-
-
     private static MemoryLayer CreatePinLayer(IEnumerable<IFeature> features, LabelStyle labelStyle) => new()
     {
         Name = "Pins",
