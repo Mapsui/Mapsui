@@ -5,7 +5,6 @@
 // WFS provider by Peter Robineau (www.geoimpact.ch)
 
 using System.Collections.Generic;
-// ReSharper disable InconsistentNaming // Not going to fix these unless there is work done on WFS
 
 namespace Mapsui.Providers.Wfs.Utilities;
 

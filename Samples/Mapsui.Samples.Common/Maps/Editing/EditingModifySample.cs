@@ -1,15 +1,12 @@
 ﻿using Mapsui.Nts.Editing;
-using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Editing;
 
-public class EditingModifySample : IMapControlSample
+public class EditingModifySample : ISample
 {
-    public string Name => "Editing Modify";
+    public string Name => "Modify";
     public string Category => "Editing";
-    public void Setup(IMapControl mapControl)
-    {
-        var editManager = EditingSample.InitEditMode(mapControl, EditMode.Modify);
-        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
-    }
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(EditingSample.CreateMap(EditMode.Modify));
 }

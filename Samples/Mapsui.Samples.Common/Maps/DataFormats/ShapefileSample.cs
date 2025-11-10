@@ -17,8 +17,8 @@ public class ShapefileSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "Shapefile with labels";
-    public string Category => "Data Formats";
+    public string Name => "ShapefileWithLabels";
+    public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

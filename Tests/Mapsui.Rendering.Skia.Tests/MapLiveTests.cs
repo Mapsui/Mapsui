@@ -6,8 +6,8 @@ using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Tests.Helpers;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.DataFormats;
+using Mapsui.Samples.Common.Maps.FeatureAnimations;
 using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Widgets;
@@ -27,8 +27,7 @@ public class MapLiveTests
 {
     static MapLiveTests()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Samples.Common.Samples.Register();
     }
 
     private static ISampleBase[]? _excludedSamples;
@@ -57,6 +56,7 @@ public class MapLiveTests
         var original = Logger.LogDelegate;
         try
         {
+            SQLitePCL.Batteries.Init();
             Logger.LogDelegate = ConsoleLog;
             // At the moment of writing this comment we do not have logging in the map. To compare
             // images we disable it for now. Perhaps we want logging to be part of the test image in some cases.

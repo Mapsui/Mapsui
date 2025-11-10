@@ -4,6 +4,8 @@
     "projects": [
       "Benchmarks\\Mapsui.Rendering.Benchmarks\\Mapsui.Rendering.Benchmarks.csproj",
       "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
+      "Mapsui.Experimental.VectorTiles\\Mapsui.Experimental.VectorTiles.csproj",
+      "Mapsui.Experimental\\Mapsui.Experimental.csproj",
       "Mapsui.Extensions\\Mapsui.Extensions.csproj",
       "Mapsui.Nts\\Mapsui.Nts.csproj",
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
@@ -20,7 +22,6 @@
       "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
-      "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
       "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj"
     ]
   }

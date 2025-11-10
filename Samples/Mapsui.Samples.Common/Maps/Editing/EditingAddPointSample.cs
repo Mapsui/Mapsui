@@ -1,17 +1,12 @@
 ﻿using Mapsui.Nts.Editing;
-using Mapsui.UI;
-
-#pragma warning disable IDISP001 // Dispose created
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Editing;
 
-public class EditingAddPointSample : IMapControlSample
+public class EditingAddPointSample : ISample
 {
-    public string Name => "Editing Add Point";
+    public string Name => "AddPoint";
     public string Category => "Editing";
-    public void Setup(IMapControl mapControl)
-    {
-        var editManager = EditingSample.InitEditMode(mapControl, EditMode.AddPoint);
-        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
-    }
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(EditingSample.CreateMap(EditMode.AddPoint));
 }

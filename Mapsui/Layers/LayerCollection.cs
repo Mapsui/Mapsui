@@ -32,12 +32,24 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <returns>An enumerator for the layers in the collection.</returns>
     public IEnumerator<ILayer> GetEnumerator()
     {
-        return _entries.OrderBy(e => e.Index).OrderBy(e => e.Group).Select(e => e.Layer).ToList().GetEnumerator();
+        var snapshot = _entries.ToArray();
+        return snapshot
+            .OrderBy(e => e.Group)
+            .ThenBy(e => e.Index)
+            .Select(e => e.Layer)
+            .ToList()
+            .GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return _entries.OrderBy(e => e.Index).OrderBy(e => e.Group).Select(e => e.Layer).ToList().GetEnumerator();
+        var snapshot = _entries.ToArray();
+        return snapshot
+            .OrderBy(e => e.Group)
+            .ThenBy(e => e.Index)
+            .Select(e => e.Layer)
+            .ToList()
+            .GetEnumerator();
     }
 
     /// <summary>
@@ -47,7 +59,8 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <returns>All the layers in the specified group.</returns>
     public IEnumerable<ILayer> GetLayers(int group = 0)
     {
-        return _entries.Where(e => e.Group == group).OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
+        var snapshot = _entries.ToArray();
+        return snapshot.Where(e => e.Group == group).OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
     }
 
     /// <summary>
@@ -56,7 +69,12 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <returns>All the layers of all groups.</returns>
     public IEnumerable<ILayer> GetLayersOfAllGroups()
     {
-        return _entries.OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
+        var snapshot = _entries.ToArray();
+        return snapshot
+            .OrderBy(e => e.Group)
+            .ThenBy(e => e.Index)
+            .Select(e => e.Layer)
+            .ToArray();
     }
 
     /// <summary>
@@ -65,8 +83,9 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <param name="group">The group identifier (default is 0).</param>
     public void Clear(int group = 0)
     {
-        var layersToRemove = _entries.Where(e => e.Group == group).Select(e => e.Layer).ToArray();
-        RemoveInternal(layersToRemove);
+        var snapshot = _entries.ToArray();
+        var layersToRemove = snapshot.Where(e => e.Group == group).Select(e => e.Layer).ToArray();
+        _ = RemoveInternal(layersToRemove);
         OnChanged([], layersToRemove, []);
     }
 
@@ -75,21 +94,23 @@ public class LayerCollection : IEnumerable<ILayer>
     /// </summary>
     public void ClearAllGroups()
     {
+        var snapshot = _entries.ToArray();
         var entries = new ConcurrentQueue<LayerEntry>();
 
-        foreach (var entry in _entries.ToArray())
+        foreach (var entry in snapshot)
         {
-            if (entry is IAsyncDataFetcher asyncLayer)
+            var layer = entry.Layer;
+            if (layer is IAsyncDataFetcher asyncLayer)
             {
                 asyncLayer.AbortFetch();
                 asyncLayer.ClearCache();
             }
-            if (entry is IFetchableSource fetchableSource)
+            if (layer is IFetchableSource fetchableSource)
             {
                 fetchableSource.ClearCache();
             }
         }
-        var layersToRemove = _entries.Select(e => e.Layer).ToArray();
+        var layersToRemove = snapshot.Select(e => e.Layer).ToArray();
         _entries = entries;
         OnChanged([], layersToRemove, []);
     }
@@ -177,25 +198,34 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <param name="layer">The layer to move.</param>
     public void MoveToTop(ILayer layer)
     {
-        MoveInternal(_entries.Count - 1, layer);
+        var snapshot = _entries.ToArray();
+        var group = snapshot.First(e => e.Layer == layer).Group;
+        var maxIndex = GetEntriesOfGroup(group).Length - 1;
+        MoveInternal(maxIndex, layer);
         OnChanged([], [], [layer]);
     }
 
     public void MoveDown(ILayer layer)
     {
-        var index = GetLayerIndex(layer);
+        var snapshot = _entries.ToArray();
+        var entry = snapshot.First(e => e.Layer == layer);
+        var index = entry.Index;
         if (index <= 0)
             return;
-        MoveInternal(--index, layer);
+        MoveInternal(index - 1, layer);
         OnChanged([], [], [layer]);
     }
 
     public void MoveUp(ILayer layer)
     {
-        var index = GetLayerIndex(layer);
-        if (index >= _entries.Count - 1)
+        var snapshot = _entries.ToArray();
+        var entry = snapshot.First(e => e.Layer == layer);
+        var group = entry.Group;
+        var index = entry.Index;
+        var maxIndex = GetEntriesOfGroup(group).Length - 1;
+        if (index >= maxIndex)
             return;
-        MoveInternal(++index, layer);
+        MoveInternal(index + 1, layer);
         OnChanged([], [], [layer]);
     }
 
@@ -254,10 +284,11 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <returns>True if all matching layers were removed successfully; otherwise, false.</returns>
     public bool Remove(Func<ILayer, bool> predicate)
     {
-        var copyLayers = _entries.Select(e => e.Layer).ToArray().Where(predicate).ToArray();
-        var success = RemoveInternal(copyLayers);
+        var snapshot = _entries.ToArray();
+        var layersToRemove = snapshot.Select(e => e.Layer).Where(predicate).ToArray();
+        var success = RemoveInternal(layersToRemove);
 
-        OnChanged([], copyLayers, []);
+        OnChanged([], layersToRemove, []);
         return success;
     }
 
@@ -268,13 +299,13 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <param name="layersToAdd">The layers to add to the collection.</param>
     public void Modify(IEnumerable<ILayer> layersToRemove, IEnumerable<ILayer> layersToAdd)
     {
-        var copyLayersToRemove = layersToRemove.ToArray();
-        var copyLayersToAdd = layersToAdd.ToArray();
+        var layersToRemoveSnapshot = layersToRemove.ToArray();
+        var layersToAddSnapshot = layersToAdd.ToArray();
 
-        RemoveInternal(copyLayersToRemove);
-        AddInternal(copyLayersToAdd);
+        _ = RemoveInternal(layersToRemoveSnapshot);
+        AddInternal(layersToAddSnapshot);
 
-        OnChanged(copyLayersToAdd, copyLayersToRemove, []);
+        OnChanged(layersToAddSnapshot, layersToRemoveSnapshot, []);
     }
 
     /// <summary>
@@ -284,13 +315,14 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <param name="layersToAdd">The layers to add to the collection.</param>
     public void Modify(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
     {
-        var copyLayersToRemove = _entries.Select(e => e.Layer).ToArray().Where(removePredicate).ToArray();
-        var copyLayersToAdd = layersToAdd.ToArray();
+        var snapshot = _entries.ToArray();
+        var layersToRemove = snapshot.Select(e => e.Layer).Where(removePredicate).ToArray();
+        var layersToAddSnapshot = layersToAdd.ToArray();
 
-        RemoveInternal(copyLayersToRemove);
-        AddInternal(copyLayersToAdd);
+        _ = RemoveInternal(layersToRemove);
+        AddInternal(layersToAddSnapshot);
 
-        OnChanged(copyLayersToAdd, copyLayersToRemove, []);
+        OnChanged(layersToAddSnapshot, layersToRemove, []);
     }
 
     /// <summary>
@@ -300,17 +332,28 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <returns>The layers with the specified name.</returns>
     public IEnumerable<ILayer> FindLayer(string layerName)
     {
-        return _entries.Where(e => e.Layer.Name == layerName).Select(e => e.Layer).ToArray();
+        var snapshot = _entries.ToArray();
+        return snapshot.Where(e => e.Layer.Name == layerName).Select(e => e.Layer).ToArray();
     }
 
     private void MoveInternal(int index, ILayer layer)
     {
-        var entryToMove = _entries.First(e => e.Layer == layer);
+        var snapshot = _entries.ToArray();
+        var entryToMove = snapshot.First(e => e.Layer == layer);
+        var group = entryToMove.Group;
+
+        var groupEntries = GetEntriesOfGroup(group);
+        if (groupEntries.Length == 0)
+            return;
+
+        // Clamp target index to the valid range within the group
+        var maxIndex = groupEntries.Length - 1;
+        index = Math.Clamp(index, 0, maxIndex);
 
         entryToMove.Index = index;
 
         var counter = 0;
-        foreach (var entry in GetEntriesOfGroup(entryToMove.Group))
+        foreach (var entry in GetEntriesOfGroup(group))
         {
             if (entryToMove == entry) // Skip the entry we are moving
                 continue;
@@ -326,12 +369,13 @@ public class LayerCollection : IEnumerable<ILayer>
 
     private LayerEntry[] GetEntriesOfGroup(int group)
     {
-        return _entries.Where(e => e.Group == group).OrderBy(e => e.Index).ToArray();
+        var snapshot = _entries.ToArray();
+        return snapshot.Where(e => e.Group == group).OrderBy(e => e.Index).ToArray();
     }
 
     private void InsertInternal(int index, IEnumerable<ILayer> layers, int group)
     {
-        if (layers == null || layers.Count() == 0)
+        if (layers == null || !layers.Any())
             throw new ArgumentException("Layers cannot be null or empty");
 
         foreach (var layer in layers)
@@ -343,13 +387,13 @@ public class LayerCollection : IEnumerable<ILayer>
 
     private void InsertInternal(ILayer layer, int index, int group)
     {
+        var groupEntries = GetEntriesOfGroup(group);
+        index = Math.Clamp(index, 0, groupEntries.Length);
+
         var entryToInsert = new LayerEntry(layer, index, group);
         var counter = 0;
-        foreach (var entry in GetEntriesOfGroup(entryToInsert.Group))
+        foreach (var entry in groupEntries)
         {
-            if (entry.Group != entryToInsert.Group) // Skip entries in other groups
-                continue;
-
             if (counter < index)
                 entry.Index = counter;
             else
@@ -362,7 +406,7 @@ public class LayerCollection : IEnumerable<ILayer>
 
     private void AddInternal(IEnumerable<ILayer> layers, int group = 0)
     {
-        if (layers == null || layers.Count() == 0)
+        if (layers == null || !layers.Any())
             throw new ArgumentException("Layers cannot be null or empty");
 
         foreach (var layer in layers)
@@ -374,21 +418,21 @@ public class LayerCollection : IEnumerable<ILayer>
 
     private bool RemoveInternal(ILayer[] layers)
     {
-        var copyOfEntries = _entries.ToList();
+        var workingEntries = _entries.ToList();
         var success = true;
 
         foreach (var layer in layers)
         {
-            var entryToRemove = copyOfEntries.FirstOrDefault(e => e.Layer == layer);
+            var entryToRemove = workingEntries.FirstOrDefault(e => e.Layer == layer);
             if (entryToRemove == null)
             {
                 success = false;
                 continue;
             }
-            if (!copyOfEntries.Remove(entryToRemove))
+            if (!workingEntries.Remove(entryToRemove))
                 success = false;
 
-            UpdateIndexes(copyOfEntries, entryToRemove.Group);
+            UpdateIndexes(workingEntries, entryToRemove.Group);
 
             if (layer is IAsyncDataFetcher asyncLayer)
             {
@@ -401,7 +445,7 @@ public class LayerCollection : IEnumerable<ILayer>
             }
         }
 
-        _entries = new ConcurrentQueue<LayerEntry>(copyOfEntries);
+        _entries = new ConcurrentQueue<LayerEntry>(workingEntries);
 
         return success;
     }
@@ -409,11 +453,8 @@ public class LayerCollection : IEnumerable<ILayer>
     private static void UpdateIndexes(List<LayerEntry> entries, int group)
     {
         var counter = 0;
-        foreach (var entry in entries.OrderBy(e => e.Index))
+        foreach (var entry in entries.Where(e => e.Group == group).OrderBy(e => e.Index))
         {
-            if (entry.Group != group) // Skip entries in other groups
-                continue;
-
             entry.Index = counter;
             counter++;
         }
@@ -423,9 +464,6 @@ public class LayerCollection : IEnumerable<ILayer>
     {
         Changed?.Invoke(this, new LayerCollectionChangedEventArgs(added, removed, moved));
     }
-
-    private int GetLayerIndex(ILayer layer) =>
-        _entries.First(e => e.Layer == layer).Index;
 
     private class LayerEntry(ILayer layer, int index, int group = 0)
     {

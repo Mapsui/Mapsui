@@ -11,7 +11,7 @@ public class StackedLabelsSample : ISample
 {
     private const string LabelColumn = "Label";
 
-    public string Name => "Stacked labels";
+    public string Name => "StackedLabels";
     public string Category => "Special";
 
     public Task<Map> CreateMapAsync()

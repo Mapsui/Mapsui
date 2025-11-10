@@ -19,7 +19,7 @@ public class ShapefileProjectionSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
     }
 
-    public string Name => "Shapefile with Projection";
+    public string Name => "ShapefileWithProjection";
     public string Category => "Projection";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
@@ -31,8 +31,6 @@ public class ShapefileProjectionSample : ISample
             CRS = "EPSG:3857", // The Map CRS needs to be set
         };
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable 
         var dotSpatialProjection = new DotSpatialProjection();
         var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
         var countrySource = new ShapeFile(countriesPath, true, true, dotSpatialProjection);

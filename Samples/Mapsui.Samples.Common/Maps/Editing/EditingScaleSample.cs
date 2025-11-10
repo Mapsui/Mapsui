@@ -1,17 +1,12 @@
 ﻿using Mapsui.Nts.Editing;
-using Mapsui.UI;
-
-#pragma warning disable IDISP001 // Dispose created
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Editing;
 
-public class EditingRotateSample : IMapControlSample
+public class EditingScaleSample : ISample
 {
-    public string Name => "Editing Rotate";
+    public string Name => "Scale";
     public string Category => "Editing";
-    public void Setup(IMapControl mapControl)
-    {
-        var editManager = EditingSample.InitEditMode(mapControl, EditMode.Rotate);
-        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
-    }
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(EditingSample.CreateMap(EditMode.Scale));
 }

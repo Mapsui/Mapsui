@@ -59,15 +59,88 @@ a, .btn-link {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
-    }
-    
+.blazor-error-boundary::after {
+    content: "An error has occurred."
+}
+
 .canvas-container {
+    margin: 0;
+    padding: 0;
     line-height: 1;
 }
 
 .canvas-container canvas {
     width: 100%;
-    height: 80vh;
+    height: calc(100vh - 220px);
+    display: block;
+}
+
+/* Responsive design for code blocks */
+@media (max-width: 768px) {
+    pre[class*="language-"] {
+        font-size: 12px;
+        padding: 0.75em;
+        margin: 0.5em 0;
+    }
+    
+    code[class*="language-"] {
+        font-size: 12px;
+    }
+}
+
+/* Ensure proper styling for syntax highlighting themes */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #6a9955;
+    font-style: italic;
+}
+
+.token.punctuation {
+    color: #393a34;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #b5cea8;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #ce9178;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #d4d4d4;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #569cd6;
+}
+
+.token.function,
+.token.class-name {
+    color: #4ec9b0;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #d16969;
 }

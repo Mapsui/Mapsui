@@ -3,7 +3,7 @@ using AndroidX.AppCompat.App;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Samples.Common.Maps.Basic;
 using Mapsui.UI.Android;
 
 namespace Mapsui.Samples.Droid;
@@ -13,8 +13,7 @@ public class MainActivity : AppCompatActivity
 {
     static MainActivity()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Common.Samples.Register();
     }
 
     private MapControl? _mapControl;
@@ -33,7 +32,7 @@ public class MainActivity : AppCompatActivity
 
         var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
         _mapControl.Map.Layers.ClearAllGroups();
-        var sample = new OsmSample();
+        var sample = new OpenStreetMapSample();
 
         Catch.Exceptions(async () =>
         {

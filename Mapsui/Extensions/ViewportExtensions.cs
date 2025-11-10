@@ -24,9 +24,10 @@ public static class ViewportExtensions
     {
         if (!viewport.IsRotated()) // Checking on IsRotated for performance reasons
         {
-            var min = viewport.WorldToScreen(rect.Min);
-            var max = viewport.WorldToScreen(rect.Max);
-            return new MRect(min.X, min.Y, max.X, max.Y);
+            var (minScreenX, minScreenY) = viewport.WorldToScreenXY(rect.Min.X, rect.Min.Y);
+            var (maxScreenX, maxScreenY) = viewport.WorldToScreenXY(rect.Max.X, rect.Max.Y);
+            // WorldToScreen inverts the Y so minY and maxY are swapped.
+            return new MRect(minScreenX, maxScreenY, maxScreenX, minScreenY);
         }
 
         // In case of the rotated viewport all four coordinates

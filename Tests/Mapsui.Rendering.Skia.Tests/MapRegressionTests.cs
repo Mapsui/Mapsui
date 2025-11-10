@@ -4,14 +4,15 @@
 
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Tests.Helpers;
+using Mapsui.Rendering.Skia.Tests.Utilities;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.DataFormats;
-using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.Samples.Common.Maps.FeatureAnimations;
 using Mapsui.Samples.Common.Maps.Geometries;
-using Mapsui.Samples.Common.Maps.Info;
+using Mapsui.Samples.Common.Maps.MapInfo;
 using Mapsui.Samples.Common.Maps.Performance;
 using Mapsui.Samples.Common.Maps.Special;
+using Mapsui.Samples.Common.Maps.Styles;
 using Mapsui.Samples.Common.Maps.WFS;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Samples.Common.Maps.WMS;
@@ -20,7 +21,6 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using NUnit.Framework;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,8 +32,7 @@ public class MapRegressionTests
 {
     static MapRegressionTests()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Samples.Common.Samples.Register();
     }
 
     private static ISampleBase[]? _excludedSamples;
@@ -57,7 +56,7 @@ public class MapRegressionTests
             new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
             new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
             new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
-            new CustomSvgStyleSample(), // Is currently not functioning and should be fixed with a redesign.
+            new CustomSvgColorSample(), // Is currently not functioning and should be fixed with a redesign.
             new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
             new WmsBasilicataSample(), // Times out,
             new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
@@ -73,10 +72,11 @@ public class MapRegressionTests
         var original = Logger.LogDelegate;
         try
         {
+            SQLitePCL.Batteries.Init();
             Logger.LogDelegate = SampleHelper.ConsoleLog;
             // At the moment of writing this comment we do not have logging in the map. To compare
             // images we disable it for now. Perhaps we want logging to be part of the test image in some cases.
-            LoggingWidget.ShowLoggingInMap = ActiveMode.No;
+            LoggingWidget.ShowLoggingInMap = ActiveMode.No; // We do not want logging in the mag
             SampleHelper.ConsoleLog(LogLevel.Debug, $"Start MapRegressionTest {sample.GetType().Name}", null);
             await TestSampleAsync(sample, true).ConfigureAwait(false);
         }
@@ -129,7 +129,7 @@ public class MapRegressionTests
                     }
                     else
                     {
-                        Assert.That(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995), Is.True,
+                        Assert.That(BitmapComparer.Compare(originalStream, bitmap, 1, 0.995), Is.True,
                             $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
                     }
                 }
@@ -142,12 +142,8 @@ public class MapRegressionTests
         }
         finally
         {
-            if (sample is IDisposable disposable)
-            {
-#pragma warning disable IDISP007 // Don't dispose injected
-                disposable.Dispose();
-#pragma warning restore IDISP007 // Don't dispose injected
-            }
+            // At this point we would like to dispose the samples but the instance is created
+            // once and reused for all retries. Instead we should create an instance per test run.
         }
     }
 

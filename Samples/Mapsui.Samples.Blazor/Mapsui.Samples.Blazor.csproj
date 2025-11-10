@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-	<!-- In debug, make builds faster by reducing optimizations -->
-	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-		<WasmNativeStrip>false</WasmNativeStrip>
-		<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
-	</PropertyGroup>
+  <!-- In debug, make builds faster by reducing optimizations -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <WasmNativeStrip>false</WasmNativeStrip>
+    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
+  </PropertyGroup>
 
-  <!--Release enable all Performance-->
+  <!-- Release -->
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <WasmNativeStrip>false</WasmNativeStrip>
     <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
-    <!--<RunAOTCompilation>true</RunAOTCompilation>-->
-    <!--<WasmStripILAfterAOT>true</WasmStripILAfterAOT>-->
+    <!--<RunAOTCompilation>true</RunAOTCompilation>
+    <WasmStripILAfterAOT>true</WasmStripILAfterAOT>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,16 +25,18 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="9.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" VersionOverride="9.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" VersionOverride="9.0" PrivateAssets="all" />
-		<!--still needed for direct project reference the nuget package of blazor doesn't need this anymore-->
-		<NativeFileReference Include="libHarfBuzzSharp.a" />
-	  <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
+ 
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
-	</ItemGroup>
+
+    <!-- Had to reference sqlite-net-pcl and SQLitePCLRaw.bundle_green because I get an I/O error with the SourceGear ones. -->
+    <PackageReference Include="sqlite-net-pcl" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.UI.Blazor\Mapsui.UI.Blazor.csproj" />
-    <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
 
 </Project>

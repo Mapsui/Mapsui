@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class GeoTiffSample : ISample
@@ -18,8 +16,8 @@ public class GeoTiffSample : ISample
         GeoTiffDeployer.CopyEmbeddedResourceToFile("example.shp");
     }
 
-    public string Name => "Geo Tiff";
-    public string Category => "Data Formats";
+    public string Name => "GeoTiff";
+    public string Category => "DataFormats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

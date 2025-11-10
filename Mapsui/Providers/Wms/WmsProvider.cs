@@ -618,7 +618,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         var minPoint = viewport.ScreenToWorld(screenPosition.X - halfSymbolSize, screenPosition.Y - halfSymbolSize);
         var maxPoint = viewport.ScreenToWorld(screenPosition.X + halfSymbolSize, screenPosition.Y + halfSymbolSize);
 
-        var extent = new MRect(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y);
+        var extent = new MRect(minPoint.X, maxPoint.Y, maxPoint.X, minPoint.Y); // Note that the Y axis is inverted by ScreenToWorld
         var featureInfo = await getFeatureInfo.RequestAsync(resource.OnlineResource!, wmsVersion!, infoFormat, srs!, layer!, extent.MinX, extent.MinY, extent.MaxX, extent.MaxY, (int)screenPosition.X, (int)screenPosition.Y, (int)viewport.Width, (int)viewport.Height).ConfigureAwait(false);
         if (featureInfo != null)
         {

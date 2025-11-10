@@ -1,0 +1,149 @@
+.navigation-bar {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.98) 100%);
+    border-bottom: 2px solid #e9ecef;
+    padding: 10px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    /* Establish a predictable height variable (approx). Adjust if needed */
+    --nav-height: 68px; /* will be used below for container height calculation */
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    margin: 0; /* left align inside navigation bar */
+    max-width: none;
+    justify-content: flex-start;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.control-group label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.form-select {
+    min-width: 180px;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-select:focus {
+    border-color: rgb(5, 39, 103);
+    box-shadow: 0 0 0 3px rgba(5, 39, 103, 0.1);
+    outline: none;
+}
+
+.form-select:hover {
+    border-color: #adb5bd;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .nav-controls {
+        flex-wrap: wrap; /* allow wrapping but keep left alignment */
+        gap: 0.75rem 1.25rem; /* row gap then column gap */
+        align-items: flex-start;
+    }
+    .control-group {
+        flex-direction: row; /* keep label and select on one line */
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .form-select {
+        min-width: 150px;
+        width: auto; /* shrink-to-fit */
+    }
+}
+
+@media (max-width: 480px) {
+    .navigation-bar {
+        padding: 1rem;
+    }
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 10px; /* left aligned container */
+    width: auto;  /* allow it to span naturally */
+    justify-content: flex-start;
+}
+
+.tab-btn {
+    flex: 0 0 auto; /* equal intrinsic width */
+    width: 180px; /* match Page1 */
+    padding: 12px 0;
+    text-align: center;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.2;
+    transition: background-color 0.3s;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    background-color: white;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    /* Subtract navigation bar height so we don't overflow viewport */
+    height: calc(100vh - var(--nav-height, 68px));
+}
+
+/* Remove thick UA outlines while keeping keyboard accessibility */
+.tab-btn:focus { outline: none; }
+.tab-btn:focus-visible { outline: 2px solid #1d6fb8; outline-offset: 2px; }
+
+.tab-btn:hover {
+    background-color: #d0d0d0;
+}
+
+.tab-btn.active {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Layout for tab content so map or source code fills remaining space */
+.tab-content {
+    flex: 1 1 auto;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.canvas-container {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+iframe.source-code-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}

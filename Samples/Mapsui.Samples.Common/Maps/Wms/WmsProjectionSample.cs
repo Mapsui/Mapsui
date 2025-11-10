@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps.WMS;
 
 public class WmsProjectionSample : ISample
 {
-    public string Name => "WMS Projection";
+    public string Name => "WmsProjection";
     public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()

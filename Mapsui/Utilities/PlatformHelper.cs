@@ -4,7 +4,6 @@
 
 using System;
 
-// ReSharper disable All - This is a workaround for a limitation of the nuget package
 namespace ConcurrentCollections;
 
 internal static class PlatformHelper

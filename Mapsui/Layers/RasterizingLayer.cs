@@ -12,7 +12,7 @@ namespace Mapsui.Layers;
 public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
 {
     private readonly ConcurrentStack<RasterFeature> _cache;
-    private readonly ILayer _layer;
+    private readonly ILayer _sourceLayer;
     private readonly float _pixelDensity;
     private readonly object _syncLock = new();
     private bool _busy;
@@ -28,67 +28,77 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
     /// <summary>
     ///     Creates a RasterizingLayer which rasterizes a layer for performance
     /// </summary>
-    /// <param name="layer">The Layer to be rasterized</param>
+    /// <param name="sourceLayer">The Layer to be rasterized</param>
     /// <param name="delayBeforeRasterize">Delay after viewport change to start re-rasterizing</param>
     /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
     /// <param name="pixelDensity"></param>
     /// <param name="renderFormat">render Format png is default and skp is skia picture</param>
     public RasterizingLayer(
-        ILayer layer,
+        ILayer sourceLayer,
         int delayBeforeRasterize = 1000,
         IMapRenderer? rasterizer = null,
         float pixelDensity = 1,
         RenderFormat renderFormat = RenderFormat.Png)
     {
         _renderFormat = renderFormat;
-        _layer = layer;
-        Name = layer.Name;
+        _sourceLayer = sourceLayer;
+        Name = sourceLayer.Name;
         if (rasterizer != null)
             _rasterizer = rasterizer;
         _cache = new ConcurrentStack<RasterFeature>();
         _pixelDensity = pixelDensity;
-        _layer.DataChanged += LayerOnDataChanged;
+        _sourceLayer.DataChanged += SourceLayerOnDataChanged;
         Style = new RasterStyle(); // default raster style
     }
 
-    public override MRect? Extent => _layer.Extent;
+    public override MRect? Extent => _sourceLayer.Extent;
 
-    public ILayer SourceLayer => _layer;
+    public ILayer SourceLayer => _sourceLayer;
 
-    private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
+    private void SourceLayerOnDataChanged(object sender, DataChangedEventArgs e)
     {
-        if (!Enabled) return;
-        if (_fetchInfo == null) return;
-        if (MinVisible > _fetchInfo.Resolution) return;
-        if (MaxVisible < _fetchInfo.Resolution) return;
-        if (_busy) return;
+        if (!Enabled)
+            return;
+        if (_fetchInfo == null)
+            return;
+        if (MinVisible > _fetchInfo.Resolution)
+            return;
+        if (MaxVisible < _fetchInfo.Resolution)
+            return;
+        if (_busy)
+            return;
 
-        OnFetchRequested();
+        OnDataChanged(e);
     }
 
     private async Task RasterizeAsync()
     {
-        if (!Enabled) return;
-        if (_busy) return;
+        if (!Enabled)
+            return;
+        if (_busy)
+            return;
+
         _busy = true;
 
         lock (_syncLock)
         {
             try
             {
-                if (_fetchInfo == null) return;
-                if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
-                if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
+                if (_fetchInfo == null)
+                    return;
+                if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0)
+                    return;
+                if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0)
+                    return;
 
                 _currentSection = _fetchInfo.Section;
 
                 using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewport(_currentSection),
-                    [_layer], _renderService, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+                    [_sourceLayer], _renderService, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
 
                 _cache.Clear();
-                var features = new RasterFeature[1];
-                features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
-                _cache.PushRange(features);
+                var rasterFeature = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
+                _cache.PushRange([rasterFeature]);
                 OnDataChanged(new DataChangedEventArgs(Name));
             }
             finally
@@ -113,10 +123,9 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
         return features.Where(f => f.Raster != null && f.Raster.Extent.Intersects(biggerBox)).ToList();
     }
 
-
     public void ClearCache()
     {
-        if (_layer is IFetchableSource fetchableSource)
+        if (_sourceLayer is IFetchableSource fetchableSource)
             fetchableSource.ClearCache();
     }
 
@@ -137,8 +146,9 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
         {
             _fetchInfo = fetchInfo;
 
-            if (_layer is IFetchableSource fetchableSource)
-                return [new FetchJob(_layer.Id, async () =>
+            if (_sourceLayer is IFetchableSource fetchableSource)
+                return [
+                    new FetchJob(_sourceLayer.Id, async () =>
                     {
                         var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
                         foreach (var fetchJob in fetchJobs)
@@ -146,10 +156,10 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
                             await fetchJob.FetchFunc();
                         }
                         await RasterizeAsync();
-                    })];
+                    })
+                ];
             else
-                return [new FetchJob(_layer.Id, RasterizeAsync)];
-
+                return [new FetchJob(_sourceLayer.Id, RasterizeAsync)];
         }
         return [];
     }
@@ -157,7 +167,7 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
     public void ViewportChanged(FetchInfo fetchInfo)
     {
         _latestFetchInfo.Overwrite(fetchInfo);
-        if (_layer is IFetchableSource fetchableSource)
+        if (_sourceLayer is IFetchableSource fetchableSource)
             fetchableSource.ViewportChanged(fetchInfo);
     }
 

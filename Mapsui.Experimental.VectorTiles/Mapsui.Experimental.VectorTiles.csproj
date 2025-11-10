@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <Description>Mapsui experimental component for vector tiles</Description>
+    <PackageTags>$(PackageTags) vector tiles vextile tiling mbtiles mvt</PackageTags>
+    <IsPackable>true</IsPackable>
+    <Nullable>enable</Nullable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BruTile" />
+    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="BruTile.MbTiles" />
+    <PackageReference Include="VexTile.TileSource.Mvt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

@@ -11,16 +11,14 @@ using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-[SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
 public class CustomPointStyleAdvancedSample : ISample
 {
-    public string Name => $"{nameof(CustomPointStyle)} Advanced";
+    public string Name => $"Advanced";
     public string Category => $"{nameof(CustomPointStyle)}";
 
     private static readonly Color _color1 = Color.FromString("#6A5ACD");

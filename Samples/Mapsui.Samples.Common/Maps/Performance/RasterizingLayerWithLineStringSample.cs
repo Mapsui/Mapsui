@@ -8,14 +8,11 @@ using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 
-// ReSharper disable UnusedAutoPropertyAccessor.Local
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Performance;
 
 public class RasterizingLayerWithLineStringSample : IMapControlSample
 {
-    public string Name => "RasterizingLayer with LineString";
+    public string Name => "RasterizingLayerWithLineString";
     public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)

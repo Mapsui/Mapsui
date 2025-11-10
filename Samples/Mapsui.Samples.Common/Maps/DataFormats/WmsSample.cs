@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 public class WmsSample : ISample
 {
     public string Name => "WMS";
-    public string Category => "Data Formats";
+    public string Category => "DataFormats";
 
     public async Task<Map> CreateMapAsync()
     {

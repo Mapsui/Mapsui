@@ -9,8 +9,6 @@ using NetTopologySuite.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Geometries;
 
 public class LineStringSample : ISample

@@ -1,17 +1,12 @@
 ﻿using Mapsui.Nts.Editing;
-using Mapsui.UI;
-
-#pragma warning disable IDISP001 // Dispose created
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Editing;
 
-public class EditingAddLineSample : IMapControlSample
+public class EditingAddLineSample : ISample
 {
-    public string Name => "Editing Add Line";
+    public string Name => "AddLine";
     public string Category => "Editing";
-    public void Setup(IMapControl mapControl)
-    {
-        var editManager = EditingSample.InitEditMode(mapControl, EditMode.AddLine);
-        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
-    }
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(EditingSample.CreateMap(EditMode.AddLine));
 }

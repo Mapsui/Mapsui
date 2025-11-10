@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps.Geometries;
 
 public class ComplexPolygonSample : ISample
 {
-    public string Name => "Complex Polygons";
+    public string Name => "ComplexPolygons";
 
     public string Category => "Geometries";
 

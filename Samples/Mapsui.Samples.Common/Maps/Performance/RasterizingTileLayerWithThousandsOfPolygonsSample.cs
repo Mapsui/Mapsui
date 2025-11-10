@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
@@ -10,26 +11,20 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using NetTopologySuite.Geometries;
 
-#pragma warning disable IDISP001 // Dispose created
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapControlSample, IDisposable
+public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : ISample, IDisposable
 {
     private Map? _map;
-    public string Name => "RasterizingTileLayer with Thousands of Polygons";
+
+    public string Name => "RasterizingTileLayerWithThousandsOfPolygons";
     public string Category => "Performance";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public Map CreateMap()
     {

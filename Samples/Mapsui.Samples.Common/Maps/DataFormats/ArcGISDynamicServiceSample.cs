@@ -13,8 +13,8 @@ public class ArcGISDynamicServiceSample : ISample
     private const string SampleWorldCities = @"https://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapServer";
     private ArcGISDynamicCapabilities? _capabilities;
 
-    public string Name => "ArcGIS dynamic";
-    public string Category => "Data Formats";
+    public string Name => "ArcGisDynamic";
+    public string Category => "DataFormats";
 
     public static IUrlPersistentCache? DefaultCache { get; set; }
 

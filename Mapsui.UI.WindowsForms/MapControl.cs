@@ -9,7 +9,7 @@ namespace Mapsui.UI.WindowsForms;
 
 public partial class MapControl : UserControl, IMapControl, IDisposable
 {
-    public static bool UseGPU = false;
+    public static bool UseGPU { get; set; } = false;
 
     private readonly SKGLControl? _glView;
     private readonly SKControl? _canvasView;

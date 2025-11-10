@@ -4,7 +4,6 @@ using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,13 +13,12 @@ namespace Mapsui.Samples.Common.Maps.Special;
 
 public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
 {
-    public string Name => "Mutating triangle";
-    public string Category => "Special";
-
     private static readonly Random _random = new(0);
     private static CancellationTokenSource? _cancelationTokenSource;
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
+    public string Name => "MutatingTriangle";
+    public string Category => "Special";
+
     public Task<Map> CreateMapAsync()
     {
         _cancelationTokenSource?.Dispose();
@@ -103,7 +101,6 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
         await localCancelationTokenSource.CancelAsync();
     }
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
     public void Dispose()
     {
         _cancelationTokenSource?.Cancel();

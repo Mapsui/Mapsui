@@ -120,7 +120,7 @@ public class LoggingWidget : TextBoxWidget
     /// <summary>
     /// Color for warnings
     /// </summary>
-    public Color WarningTextColor { get; set; } = Color.Orange;
+    public Color WarningTextColor { get; set; } = Color.DarkOrange;
 
     /// <summary>
     /// Color for information text

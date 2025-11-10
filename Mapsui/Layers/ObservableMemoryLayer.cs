@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -7,34 +6,47 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Layers;
 
+/// <summary>
+/// Represents a memory-based layer that exposes its data as an observable collection and synchronizes feature changes
+/// with the underlying feature set.
+/// </summary>
+/// <remarks>This class enables two-way synchronization between an ObservableCollection of items and the set of
+/// features exposed by the layer. Changes to the collection are automatically reflected in the feature set, and vice
+/// versa. This is useful for scenarios where UI or other components need to observe and react to changes in the layer's
+/// data in real time.</remarks>
+/// <typeparam name="T">The type of items contained in the observable collection. Must be a reference type.</typeparam>
 public class ObservableMemoryLayer<T> : MemoryLayer
     where T : class
 {
     private ObservableCollection<T>? _observableCollection;
-    private readonly ConcurrentHashSet<IFeature> _shadowCollection = new ConcurrentHashSet<IFeature>();
-    private readonly Func<T, IFeature?> _getFeature;
+    private readonly ConcurrentHashSet<ShadowItem<T>> _shadowCollection = new();
+    private readonly Func<T, IFeature?> _itemToFeature;
 
-    public ObservableMemoryLayer(Func<T, IFeature?> getFeature, string? name = null) : base(
-        name ?? nameof(ObservableMemoryLayer<T>))
+    /// <summary>
+    /// Initializes a new instance of the ObservableMemoryLayer class with the specified feature selector and optional
+    /// name.
+    /// </summary>
+    /// <param name="itemToFeature">A function gets the IFeature instance related to the item of type T. This function is used to map items in the
+    /// layer to their corresponding features. Cannot be null.</param>
+    /// <param name="name">The optional name to assign to the layer. If null, a default name based on the type is used.</param>
+    public ObservableMemoryLayer(Func<T, IFeature?> itemToFeature, string? name = null) : base(name ?? nameof(ObservableMemoryLayer<T>))
     {
-        _getFeature = getFeature;
-        base.Features = _shadowCollection;
+        _itemToFeature = itemToFeature;
+        Features = _shadowCollection.Select(i => i.Feature);
     }
 
     /// <summary>
-    /// Hide set from Base Features Collection because, if this is set than observable memory layer does not work
+    /// Gets or sets the underlying collection of items to observe for changes.
     /// </summary>
-    public new IEnumerable<IFeature> Features => _shadowCollection;
-
+    /// <remarks>Assigning a new collection will update the internal state to reflect the contents of the
+    /// provided collection and subscribe to its change notifications. If the collection is replaced, any previous event
+    /// subscriptions are removed. Setting this property to null will clear the internal state and unsubscribe from
+    /// change notifications.</remarks>
     public ObservableCollection<T>? ObservableCollection
     {
         get => _observableCollection;
         set
         {
-            // safety check
-            if (base.Features != _shadowCollection)
-                base.Features = _shadowCollection;
-
             if (_observableCollection != null)
             {
                 _observableCollection.CollectionChanged -= DataSource_CollectionChanged;
@@ -47,11 +59,15 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 _shadowCollection.Clear();
                 foreach (var it in _observableCollection.ToArray()) // collection has been changed.
                 {
-                    var feature = _getFeature(it);
+                    var feature = _itemToFeature(it);
                     if (feature != null)
-                        _shadowCollection.Add(feature);
+                    {
+                        _ = _shadowCollection.Add(new ShadowItem<T>(it, feature));
+                    }
                 }
             }
+            FeaturesWereModified();
+            DataHasChanged();
         }
     }
 
@@ -66,9 +82,9 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 {
                     foreach (var it in e.OldItems)
                     {
-                        var feature = _getFeature((T)it);
-                        if (feature != null)
-                            _shadowCollection.TryRemove(feature);
+                        var shadowItem = _shadowCollection.FirstOrDefault(i => i.Item == it);
+                        if (shadowItem != null)
+                            _ = _shadowCollection.TryRemove(shadowItem);
                     }
                 }
 
@@ -76,12 +92,16 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 {
                     foreach (var it in e.NewItems)
                     {
-                        var feature = _getFeature((T)it);
+                        var feature = _itemToFeature((T)it);
                         if (feature != null)
-                            _shadowCollection.Add(feature);
+                        {
+                            var shadowItem = new ShadowItem<T>((T)it, feature);
+                            _shadowCollection.Add(shadowItem);
+                        }
                     }
                 }
 
+                FeaturesWereModified();
                 DataHasChanged();
                 break;
             case NotifyCollectionChangedAction.Reset:
@@ -89,17 +109,26 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 if (_observableCollection != null)
                     foreach (var it in _observableCollection)
                     {
-                        var feature = _getFeature(it);
+                        var feature = _itemToFeature(it);
                         if (feature != null)
-                            _shadowCollection.Add(feature);
+                        {
+                            var shadowItem = new ShadowItem<T>(it, feature);
+                            _ = _shadowCollection.Add(shadowItem);
+                        }
                     }
 
+                FeaturesWereModified();
                 DataHasChanged();
                 break;
             case NotifyCollectionChangedAction.Move:
                 // do nothing
                 break;
         }
-        FeaturesWereModified();
+    }
+
+    private class ShadowItem<U>(U item, IFeature feature)
+    {
+        public U Item { get; } = item;
+        public IFeature Feature { get; } = feature;
     }
 }

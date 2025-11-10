@@ -1,0 +1,52 @@
+﻿using Mapsui.Animations;
+using Mapsui.Extensions;
+using Mapsui.Tiling;
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidgets;
+using System.Threading.Tasks;
+using Mapsui.Styles;
+
+namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
+
+public class ViewportRotateAnimationSample : ISample
+{
+    public string Name => "Rotate";
+    public string Category => "ViewportAnimations";
+
+    public static int mode = 1;
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map { CRS = "EPSG:3857" };
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
+        var rotateButton = CreateButton("Click to rotate clockwise", VerticalAlignment.Top);
+        rotateButton.Tapped += (s, e) =>
+        {
+            map.Navigator.RotateTo(map.Navigator.Viewport.Rotation + 45, 500, Easing.CubicIn);
+        };
+        map.Widgets.Add(rotateButton);
+
+        var rotateBackButton = CreateButton("Click to rotate counterclockwise", VerticalAlignment.Bottom);
+        rotateBackButton.Tapped += (s, e) =>
+        {
+            map.Navigator.RotateTo(map.Navigator.Viewport.Rotation - 45, 500, Easing.CubicIn);
+        };
+        map.Widgets.Add(rotateBackButton);
+
+        return map;
+    }
+
+    private static ButtonWidget CreateButton(string text, VerticalAlignment verticalAlignment) => new()
+    {
+        Text = text,
+        Margin = new MRect(20),
+        Padding = new MRect(10),
+        HorizontalAlignment = HorizontalAlignment.Left,
+        VerticalAlignment = verticalAlignment,
+        BackColor = new Color(0, 123, 255),
+        TextColor = Color.White
+    };
+}

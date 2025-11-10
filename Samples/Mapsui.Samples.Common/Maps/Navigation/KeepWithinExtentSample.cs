@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation;
 
 public class KeepWithinExtentSample : ISample
 {
-    public string Name => "Keep Within Extent";
+    public string Name => "KeepWithinExtent";
     public string Category => "Navigation";
 
     public Task<Map> CreateMapAsync()
