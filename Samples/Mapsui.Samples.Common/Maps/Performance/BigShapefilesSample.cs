@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class HugeShapeFileWithSimplifierAndClippingSample : ISample
+public class BigShapefilesSample : ISample
 {
-    static HugeShapeFileWithSimplifierAndClippingSample()
+    static BigShapefilesSample()
     {
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("EZG_KB_LM.shp");
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp");
     }
 
-    public string Name => "Huge Shape File With Simplifier and Clipping";
-    public string Category => "1";
+    public string Name => "BigShapesfiles";
+    public string Category => "Performance";
 
     public async Task<Map> CreateMapAsync()
     {
         var map = new Map();
 
         var tileLayer = OpenStreetMap.CreateTileLayer();
-        var shapeLayer1 = await CreateShapeLayerAsync("EZG_KB_LM.shp", "cache1");
-        var shapeLayer2 = await CreateShapeLayerAsync("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp", "cache2");
+        var shapeLayer1 = await CreateShapeLayerAsync("EZG_KB_LM.shp");
+        var shapeLayer2 = await CreateShapeLayerAsync("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp");
 
         map.Layers.Add(tileLayer);
         map.Layers.Add(shapeLayer1);
@@ -34,11 +34,13 @@ public class HugeShapeFileWithSimplifierAndClippingSample : ISample
         return map;
     }
 
-    private static async Task<ILayer[]> CreateShapeLayerAsync(string shapeName, string cacheName)
+    private static async Task<ILayer[]> CreateShapeLayerAsync(string shapeName)
     {
-        using var shapeFile = new Nts.Providers.Shapefile.ShapeFile(
-           Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, shapeName), false)
-        { CRS = "EPSG:3857" };
+        var fileLocation = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, shapeName);
+        using var shapeFile = new Nts.Providers.Shapefile.ShapeFile(fileLocation, false)
+        {
+            CRS = "EPSG:3857"
+        };
 
         using var blackLayer = new MemoryLayer
         {
@@ -54,8 +56,7 @@ public class HugeShapeFileWithSimplifierAndClippingSample : ISample
             Style = CreateYellowStyle(),
         };
 
-        return [
-            new RasterizingTileLayer(blackLayer), new RasterizingLayer(yellowLayer)];
+        return [new RasterizingTileLayer(blackLayer), new RasterizingLayer(yellowLayer)];
     }
 
     private static VectorStyle CreateBlackStyle() => new()
