@@ -1,9 +1,9 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Nts.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
+using Mapsui.Tiling.Layers;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -17,18 +17,16 @@ public class HugeShapeFileWithSimplifierAndClippingSample : ISample
         ShapeFilesDeployer.CopyEmbeddedResourceToFile("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp");
     }
 
-    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
-
     public string Name => "Huge Shape File With Simplifier and Clipping";
-    public string Category => "Performance";
+    public string Category => "1";
 
-    public static Map CreateMap()
+    public async Task<Map> CreateMapAsync()
     {
         var map = new Map();
 
         var tileLayer = OpenStreetMap.CreateTileLayer();
-        var shapeLayer1 = CreateShapeLayer("EZG_KB_LM.shp", "cache1");
-        var shapeLayer2 = CreateShapeLayer("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp", "cache2");
+        var shapeLayer1 = await CreateShapeLayerAsync("EZG_KB_LM.shp", "cache1");
+        var shapeLayer2 = await CreateShapeLayerAsync("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp", "cache2");
 
         map.Layers.Add(tileLayer);
         map.Layers.Add(shapeLayer1);
@@ -37,32 +35,20 @@ public class HugeShapeFileWithSimplifierAndClippingSample : ISample
         return map;
     }
 
-    private static ILayer CreateShapeLayer(string shapeName, string cacheName)
+    private static async Task<ILayer[]> CreateShapeLayerAsync(string shapeName, string cacheName)
     {
         using var shapeFile = new Nts.Providers.Shapefile.ShapeFile(
            Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, shapeName), false)
         { CRS = "EPSG:3857" };
 
-        //option 1: with clipping
-        //var provider = new GeometrySimplifyAndClippingProvider(shapeFile);
-
-        //option 2: without clipping
-        var provider = new GeometrySimplifyProvider(shapeFile);
-
-        //var sqlitePersistentCache = new SqlitePersistentCache(cacheName);
-        //sqlitePersistentCache.Clear();
-
-        using var layer = new Layer
+        using var layer = new MemoryLayer
         {
             Name = shapeName,
-            DataSource = provider,
+            Features = await shapeFile.GetFeaturesAsync(new FetchInfo(new MSection(shapeFile.GetExtent()!, 156543), "EPSG:3857", ChangeType.Discrete)),
             Style = CreateVectorThemeStyle(),
         };
 
-        //return layer;
-        return new RasterizingLayer(layer);
-        //return new RasterizingTileLayer(layer) { Enabled = false }; //really slow
-        //return new RasterizingTileLayer(layer, persistentCache: sqlitePersistentCache) { Enabled = false }; //really slow
+        return [new RasterizingLayer(layer), new RasterizingTileLayer(layer)];
     }
 
     private static IThemeStyle CreateVectorThemeStyle()
@@ -75,7 +61,6 @@ public class HugeShapeFileWithSimplifierAndClippingSample : ISample
                 Color = Color.Black,
                 Width = 2
             },
-            //Opacity = vectorTheme.Opacity,
             Outline = new Pen
             {
                 Color = Color.Black,
