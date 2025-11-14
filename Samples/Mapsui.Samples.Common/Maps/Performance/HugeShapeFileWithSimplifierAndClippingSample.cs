@@ -1,7 +1,6 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.Tiling.Layers;
 using System.IO;
@@ -41,36 +40,41 @@ public class HugeShapeFileWithSimplifierAndClippingSample : ISample
            Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, shapeName), false)
         { CRS = "EPSG:3857" };
 
-        using var layer = new MemoryLayer
+        using var blackLayer = new MemoryLayer
         {
             Name = shapeName,
             Features = await shapeFile.GetFeaturesAsync(new FetchInfo(new MSection(shapeFile.GetExtent()!, 156543), "EPSG:3857", ChangeType.Discrete)),
-            Style = CreateVectorThemeStyle(),
+            Style = CreateBlackStyle(),
         };
 
-        return [new RasterizingLayer(layer), new RasterizingTileLayer(layer)];
+        using var yellowLayer = new MemoryLayer
+        {
+            Name = shapeName,
+            Features = await shapeFile.GetFeaturesAsync(new FetchInfo(new MSection(shapeFile.GetExtent()!, 156543), "EPSG:3857", ChangeType.Discrete)),
+            Style = CreateYellowStyle(),
+        };
+
+        return [
+            new RasterizingTileLayer(blackLayer), new RasterizingLayer(yellowLayer)];
     }
 
-    private static IThemeStyle CreateVectorThemeStyle()
+    private static VectorStyle CreateBlackStyle() => new()
     {
-        var style = new VectorStyle()
+        Fill = null,
+        Outline = new Pen
         {
-            Fill = new Brush(Color.Transparent),
-            Line = new Pen
-            {
-                Color = Color.Black,
-                Width = 2
-            },
-            Outline = new Pen
-            {
-                Color = Color.Black,
-                Width = 2
-            }
-        };
+            Color = Color.Black,
+            Width = 3
+        }
+    };
 
-        return new ThemeStyle(f =>
+    private static VectorStyle CreateYellowStyle() => new()
+    {
+        Fill = null,
+        Outline = new Pen
         {
-            return style;
-        });
-    }
+            Color = Color.DarkOrange,
+            Width = 1
+        }
+    };
 }
