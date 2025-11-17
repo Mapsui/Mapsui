@@ -62,7 +62,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.305
+           9.0.307
            8.0.407
     # Open JDK
     - name: Install Open JDK 11
@@ -80,7 +80,7 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check --version 1.32.17
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip androidemulator --dotnet 9.0.305
+      run: uno-check -v --ci --non-interactive --fix --skip androidemulator --dotnet 9.0.307
     - name: Restore dependencies
       run: dotnet restore Mapsui.Linux.slnf
     - name: Build Mapsui.Linux.slnf
@@ -122,16 +122,16 @@ jobs:
       uses: NuGet/setup-nuget@v2   
       with:
         nuget-version: latest
-    - name: Set up Xcode 16
+    - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '16.4'          
+        xcode-version: '26.1'          
     # .Net 9 update     
     - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.305
+           9.0.307
            8.0.407
     - name: Set MSBuildEnableWorkloadResolver
       run: echo "MSBuildEnableWorkloadResolver=true" >> $GITHUB_ENV
@@ -140,11 +140,11 @@ jobs:
     - name: install Uno.Check 
       run: dotnet tool install --global Uno.Check --version 1.31.7
     - name: install Android SDK 34
-      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.305
+      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.307
     - name: Install newest Uno Check
       run: dotnet tool update -g uno.check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --dotnet 9.0.305
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --dotnet 9.0.307
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Build        
@@ -205,7 +205,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.305
+           9.0.307
            8.0.407
     # Java Sdk install 11
     - name: Install Open JDK 11
@@ -222,7 +222,7 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check --version 1.30.1
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.305
+      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.307
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.slnx  
     - name: Run dotnet format
