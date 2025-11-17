@@ -78,7 +78,7 @@ jobs:
     - name: Install workloads android wasm-tools wasm-tools-net8 maui-android
       run: dotnet workload install android wasm-tools wasm-tools-net8 maui-android
     - name: Install Uno Check
-      run: dotnet tool install -g Uno.Check --version 1.33.1
+      run: dotnet tool install -g Uno.Check --version 1.32.17
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip androidemulator --dotnet 9.0.307
     - name: Restore dependencies
