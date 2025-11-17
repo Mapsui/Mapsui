@@ -141,8 +141,6 @@ jobs:
       run: dotnet tool install --global Uno.Check --version 1.31.7
     - name: install Android SDK 34
       run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.307
-    - name: Install newest Uno Check
-      run: dotnet tool update -g uno.check
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --dotnet 9.0.307
     - name: Restore dependencies Mapsui.Mac
