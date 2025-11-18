@@ -217,10 +217,10 @@ jobs:
         nuget-version: latest
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
-    - name: Install Uno Check
-      run: dotnet tool install -g Uno.Check --version 1.33.1
-    - name: Uno Check
-      run: uno-check -v --ci --non-interactive --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.307
+    # - name: Install Uno Check
+    #   run: dotnet tool install -g Uno.Check --version 1.33.1
+    # - name: Uno Check
+    #   run: uno-check -v --ci --non-interactive --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.307
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.slnx  
     - name: Run dotnet format
