@@ -203,6 +203,9 @@
       <Platform Solution="Release|x86" Project="x86" />
       <Build Solution="Release|AnyCPU" Project="false" />
     </Project>
+    <Project Path="Samples/Mapsui.Samples.Wpf.Quickstart/Mapsui.Samples.Wpf.Quickstart.csproj">
+      <Build Solution="Release|AnyCPU" Project="false" />
+    </Project>
   </Folder>
   <Folder Name="/Samples/Avalonia/">
     <File Path="Samples/Avalonia/Directory.Build.props" />
