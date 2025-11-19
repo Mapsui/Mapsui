@@ -10,6 +10,60 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GeoData\GeoJson\countries.geojson" />
+    <None Remove="GeoData\MbTiles\zurich.mbtiles" />
+    <None Remove="GeoData\TrueMarble\0\0\0.png" />
+    <None Remove="GeoData\TrueMarble\1\0\0.png" />
+    <None Remove="GeoData\TrueMarble\1\0\1.png" />
+    <None Remove="GeoData\TrueMarble\1\1\0.png" />
+    <None Remove="GeoData\TrueMarble\1\1\1.png" />
+    <None Remove="GeoData\World\
+                  .dbf" />
+    <None Remove="GeoData\World\cities.prj" />
+    <None Remove="GeoData\World\cities.shp" />
+    <None Remove="GeoData\World\cities.shp.sidx" />
+    <None Remove="GeoData\World\cities.shx" />
+    <None Remove="GeoData\World\countries.dbf" />
+    <None Remove="GeoData\World\countries.prj" />
+    <None Remove="GeoData\World\countries.shp" />
+    <None Remove="GeoData\World\countries.shp.sidx" />
+    <None Remove="GeoData\World\countries.shx" />
+    <None Remove="GeoData\World\EZG_KB_LM.dbf" />
+    <None Remove="GeoData\World\EZG_KB_LM.prj" />
+    <None Remove="GeoData\World\EZG_KB_LM.shp" />
+    <None Remove="GeoData\World\EZG_KB_LM.shp.sidx" />
+    <None Remove="GeoData\World\EZG_KB_LM.shp.sqlite" />
+    <None Remove="GeoData\World\EZG_KB_LM.shx" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.dbf" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.prj" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp.sidx" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp.sqlite" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shx" />
+    <None Remove="GeoData\World\rivers.dbf" />
+    <None Remove="GeoData\World\rivers.prj" />
+    <None Remove="GeoData\World\rivers.shp" />
+    <None Remove="GeoData\World\rivers.shp.sidx" />
+    <None Remove="GeoData\World\rivers.shx" />
+    <None Remove="Images\arrow.png" />
+    <None Remove="Images\arrow.svg" />
+    <None Remove="Images\checkered.png" />
+    <None Remove="Images\circle.png" />
+    <None Remove="Images\example.tfw" />
+    <None Remove="Images\example.tif" />
+    <None Remove="Images\Ghostscript_Tiger.png" />
+    <None Remove="Images\Ghostscript_Tiger.svg" />
+    <None Remove="Images\home.png" />
+    <None Remove="Images\icon.png" />
+    <None Remove="Images\ic_place_black_24dp.png" />
+    <None Remove="Images\loc.png" />
+    <None Remove="Images\location.png" />
+    <None Remove="Images\netherlands.jpg" />
+    <None Remove="Images\osm-liberty.png" />
+    <None Remove="Images\Pin.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="GeoData\GeoJson\cities.geojson" />
     <EmbeddedResource Include="GeoData\GeoJson\countries.geojson" />
     <EmbeddedResource Include="GeoData\GeoTiff\example.tfw">
@@ -75,6 +129,42 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\World\countries.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.shp.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\World\rivers.dbf">

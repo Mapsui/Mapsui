@@ -11,6 +11,7 @@ using Mapsui.Samples.Common.Extensions;
 using Mapsui.UI;
 
 namespace Mapsui.Rendering.Skia.Tests.Helpers;
+
 internal static class SampleHelper
 {
     public static async Task<RegressionMapControl> InitMapAsync(ISampleBase sample)
