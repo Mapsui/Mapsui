@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Layers;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Mapsui.UI;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Mapsui.Tiling.Layers;
+
+namespace Mapsui.Samples.Common.Maps.Performance;
+
+public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
+{
+    public string Name => "RasterizingTileLayerWithDynamicPoints";
+    public string Category => "Performance";
+
+    public void Setup(IMapControl mapControl)
+    {
+        // PixelDensity is not always known at startup. The RasterizingTileLayer should be initialized later.
+        var pixelDensity = mapControl.GetPixelDensity() ?? 1;
+        mapControl.Map = CreateMap(pixelDensity);
+    }
+
+    public static Map CreateMap(float pixelDensity)
+    {
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
+        var extent = map.Layers.Get(1).Extent!.Grow(map.Layers.Get(1).Extent!.Width * 0.1);
+        map.Navigator.ZoomToBox(extent);
+        return map;
+    }
+
+    private static ObservableMemoryLayer<MPoint> CreateRandomPointLayer()
+    {
+        var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
+        var observableCollection = new ObservableCollection<MPoint>();
+
+        var layer = new ObservableMemoryLayer<MPoint>(f => new PointFeature(f))
+        {
+            Name = "Points",
+            Style = new SymbolStyle
+            {
+                SymbolType = SymbolType.Triangle,
+                Fill = new Brush(Color.Red)
+            },
+            ObservableCollection = observableCollection,
+        };
+
+        _ = Task.Run(async () =>
+        {
+            for (var i = 0; i < 100; i++)
+            {
+                observableCollection.Add(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000)));
+                layer.DataHasChanged();
+                await Task.Delay(100);
+            }
+        });
+
+        return layer;
+    }
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
