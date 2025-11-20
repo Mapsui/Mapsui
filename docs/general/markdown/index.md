@@ -23,10 +23,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create a new .NET 7.0 MAUI application in Visual Studio.
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Maui nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Maui
+        dotnet add package Mapsui.Maui
         ```
 
         **Step 3:** IMPORTANT: In MauiProgram.cs add **.UseSkiaSharp()** to the builder like this:
@@ -104,13 +104,13 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create new 'Uno Platform App' in Visual Studio
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Uno.WinUI nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Uno.WinUI
+        dotnet add package Mapsui.Uno.WinUI
         ```
 
-        Repeat this for all the targets you are using (Change the default Project in the Package Manager Console)
+        Repeat this for all the targets you are using
 
         **Step 3:** Open MainPage.xaml and add namespace:
 
@@ -172,10 +172,10 @@ Try the quick-start for your favorite framework below.
     
         **Step 1:** Create a new Blazor WebAssembly Application in your IDE and select .NET 7.0 (Standard Term Support) as Framework.
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Blazor nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Blazor
+        dotnet add package Mapsui.Blazor
         ```
 
         **Step 3:** In Index.razor add this to the to Page.
@@ -236,9 +236,9 @@ Try the quick-start for your favorite framework below.
         
         **Step 1**: Start a new WPF application in Visual Studio.
 
-        **Step 2**: In the package manager console type:
+        **Step 2**: Add the Mapsui.Wpf nuget package:
         ```console
-        PM> Install-Package Mapsui.Wpf
+        dotnet add package Mapsui.Wpf
         ```
 
         **Step 3**: In MainWindow.xaml.cs add in the constructor **after** InitializeComponent():
@@ -255,10 +255,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create new 'Blank App. Packaged (WinUI 3 in Desktop)' in Visual Studio
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.WinUI nuget package:
         
         ```console
-        PM> Install-Package Mapsui.WinUI
+        dotnet add package Mapsui.WinUI
         ```
 
         **Step 3:** Open MainPage.xaml and add namespace:
@@ -297,10 +297,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Start a new Windows Forms App in Visual Studio.
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.WindowsForms nuget package:
 
         ```console
-        PM> Install-Package Mapsui.WindowsForms
+        dotnet add package Mapsui.WindowsForms
         ```
 
         **Step 3:** In Form1.cs add this to the class constructor:
@@ -317,10 +317,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Start a new [Eto.Forms](https://github.com/picoe/Eto/wiki/Quick-Start) application in Visual Studio.
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Eto nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Eto
+        dotnet add package Mapsui.Eto
         ```
 
         **Step 3:** In MainForm.cs add this to the class constructor:
@@ -337,10 +337,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create 'Blank App (Android)' in Visual Studio
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Android nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Android
+        dotnet add package Mapsui.Android
         ```
 
         **Step 3:** In Resources/layout/Main.axml add Mapsui.UI.Android.MapControl:
@@ -389,10 +389,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create new 'Single View App' in Visual Studio
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.iOS nuget package:
 
         ```console
-        PM> Install-Package Mapsui.iOS
+        dotnet add package Mapsui.iOS
         ```
 
         **Step 3:** Open ViewController.cs and add namespaces:
