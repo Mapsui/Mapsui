@@ -234,22 +234,71 @@ Try the quick-start for your favorite framework below.
 
     === "WPF"
         
-        **Step 1**: Start a new WPF application in Visual Studio.
+        **Prerequisites:**
+        - Windows operating system
+        - .NET SDK 8.0 or later (the project targets net8.0-windows)
 
-        **Step 2**: Add the Mapsui.Wpf nuget package:
+        **Step 1:** Create a new WPF project:
+
         ```console
+        dotnet new wpf -n MapsuiWpfQuickstart -f net8.0-windows
+        cd MapsuiWpfQuickstart
+        ```
+
+        **Step 2:** Add the required Mapsui packages:
+
+        ```console
+        dotnet add package Mapsui
         dotnet add package Mapsui.Wpf
         ```
 
-        **Step 3**: In MainWindow.xaml.cs add in the constructor **after** InitializeComponent():
+        **Step 3:** Replace the contents of `MainWindow.xaml` with:
 
-        ```csharp
-        var mapControl = new Mapsui.UI.Wpf.MapControl();
-        mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        Content = mapControl;
+        ```xml
+        <Window x:Class="MapsuiWpfQuickstart.MainWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mapsui="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
+                Title="Mapsui WPF Quickstart" Height="450" Width="800">
+            <Grid>
+                <mapsui:MapControl x:Name="mapControl" />
+            </Grid>
+        </Window>
         ```
 
-        **Step 4**: Run it and you should see a map of the world.
+        **Step 4:** Replace the contents of `MainWindow.xaml.cs` with:
+
+        ```csharp
+        using System.Windows;
+        using Mapsui.Tiling;
+
+        namespace MapsuiWpfQuickstart
+        {
+            public partial class MainWindow : Window
+            {
+                public MainWindow()
+                {
+                    InitializeComponent();
+                    
+                    var map = new Mapsui.Map();
+                    map.Layers.Add(OpenStreetMap.CreateTileLayer());
+                    mapControl.Map = map;
+                }
+            }
+        }
+        ```
+
+        **Step 5:** Run the application:
+
+        ```console
+        dotnet run
+        ```
+
+        You should see a map of the world with OpenStreetMap tiles.
+
+        **Note:** You can also create and run this project using Visual Studio or any other IDE by creating a WPF Application and following steps 2-4.
+
+        **Full example:** A complete WPF sample is available in the repository at `Samples/Mapsui.Samples.Wpf`.
 
     === "WinUI"
 
