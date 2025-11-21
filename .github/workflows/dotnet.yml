@@ -122,10 +122,10 @@ jobs:
       uses: NuGet/setup-nuget@v2   
       with:
         nuget-version: latest
-    - name: Set up Xcode 16
+    - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '26.0'          
+        xcode-version: '16.4'          
     # .Net 9 update     
     - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
