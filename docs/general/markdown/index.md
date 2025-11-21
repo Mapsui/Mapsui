@@ -235,13 +235,14 @@ Try the quick-start for your favorite framework below.
     === "WPF"
         
         **Prerequisites:**
+		
         - Windows operating system
-        - .NET SDK 8.0 or later (the project targets net8.0-windows)
+        - .NET SDK 9.0 or later (the project targets net9.0-windows)
 
         **Step 1:** Create a new WPF project:
 
         ```console
-        dotnet new wpf -n MapsuiWpfQuickstart -f net8.0-windows
+        dotnet new wpf -n MapsuiWpfQuickstart -f net9.0-windows
         cd MapsuiWpfQuickstart
         ```
 
@@ -295,10 +296,6 @@ Try the quick-start for your favorite framework below.
         ```
 
         You should see a map of the world with OpenStreetMap tiles.
-
-        **Note:** You can also create and run this project using Visual Studio or any other IDE by creating a WPF Application and following steps 2-4.
-
-        **Full example:** A complete WPF sample is available in the repository at `Samples/Mapsui.Samples.Wpf`.
 
     === "WinUI"
 
