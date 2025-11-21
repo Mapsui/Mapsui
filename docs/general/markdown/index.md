@@ -80,21 +80,48 @@ Try the quick-start for your favorite framework below.
         **Step 2:** Add the Mapsui.Avalonia nuget package:
 
         ```console
-        dotnet add MyApp package Mapsui.Avalonia
+        cd MyApp
+        dotnet add package Mapsui.Avalonia
         ```
 
-        **Step 3:** In MainWindow.axaml.cs add this to the constructor **after** InitializeComponent():
+        **Step 3:** Update MainWindow.axaml to add the Mapsui namespace and MapControl:
 
-        ```csharp
-        var mapControl = new Mapsui.UI.Avalonia.MapControl();
-        mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        Content = mapControl;
+        ```diff
+        <Window xmlns="https://github.com/avaloniaui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        +       xmlns:mapsui="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+                mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                x:Class="MyApp.MainWindow"
+                Title="MyApp">
+        -    <TextBlock Text="Welcome to Avalonia!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        +    <mapsui:MapControl x:Name="MyMapControl" />
+        </Window>
         ```
 
-        **Step 4:** Run it and you should see a map of the world.
+        **Step 4:** Update MainWindow.axaml.cs to initialize the map:
+
+        ```diff
+        using Avalonia.Controls;
+        +using Mapsui.Tiling;
+
+        namespace MyApp;
+
+        public partial class MainWindow : Window
+        {
+            public MainWindow()
+            {
+                InitializeComponent();
+        +
+        +        MyMapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
+            }
+        }
+        ```
+
+        **Step 5:** Run it and you should see a map of the world.
 
         ```console
-        cd MyApp
         dotnet run
         ```
 
@@ -170,7 +197,7 @@ Try the quick-start for your favorite framework below.
 
     === "Blazor"
     
-        **Step 1:** Create a new Blazor WebAssembly Application in your IDE and select .NET 7.0 (Standard Term Support) as Framework.
+        **Step 1:** Create a new Blazor WebAssembly Application in your IDE and select .NET 8.0 or later as Framework.
 
         **Step 2:** Add the Mapsui.Blazor nuget package:
 
@@ -178,7 +205,7 @@ Try the quick-start for your favorite framework below.
         dotnet add package Mapsui.Blazor
         ```
 
-        **Step 3:** In Index.razor add this to the to Page.
+        **Step 3:** In Home.razor (or Index.razor in older templates) add this to the Page.
 
         ```csharp
         @using Mapsui.UI.Blazor
@@ -218,7 +245,7 @@ Try the quick-start for your favorite framework below.
         }
         ```
 
-        **Step 6:** Run it and you should see a map of the world.
+        **Step 4:** Run it and you should see a map of the world.
 
         **Troubleshooting:**
 
@@ -237,12 +264,12 @@ Try the quick-start for your favorite framework below.
         **Prerequisites:**
 		
         - Windows operating system
-        - .NET SDK 9.0 or later (the project targets net9.0-windows)
+        - .NET SDK 9.0 or later (the sample targets net9.0)
 
         **Step 1:** Create a new WPF project:
 
         ```console
-        dotnet new wpf -n MapsuiWpfQuickstart -f net9.0-windows
+        dotnet new wpf -n MapsuiWpfQuickstart -f net9.0
         cd MapsuiWpfQuickstart
         ```
 
@@ -363,13 +390,21 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Start a new [Eto.Forms](https://github.com/picoe/Eto/wiki/Quick-Start) application in Visual Studio.
 
-        **Step 2:** Add the Mapsui.Eto nuget package:
+        **Step 2:** Update the target framework in the main project's .csproj file from `netstandard2.0` to `net9.0` (Mapsui.Eto requires .NET 9.0 or later):
+
+        ```xml
+        <PropertyGroup>
+            <TargetFramework>net9.0</TargetFramework>
+        </PropertyGroup>
+        ```
+
+        **Step 3:** Add the Mapsui.Eto nuget package:
 
         ```console
         dotnet add package Mapsui.Eto
         ```
 
-        **Step 3:** In MainForm.cs add this to the class constructor:
+        **Step 4:** In MainForm.cs add this to the class constructor:
 
         ```csharp
         var mapControl = new Mapsui.UI.Eto.MapControl();
@@ -377,7 +412,7 @@ Try the quick-start for your favorite framework below.
         Content = mapControl;
         ```
 
-        **Step 4:** Run it and you should see a map of the world.
+        **Step 5:** Run it and you should see a map of the world.
 
     === ".NET for Android"
 
