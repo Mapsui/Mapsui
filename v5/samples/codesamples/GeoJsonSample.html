@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Layers;
+using Mapsui.Nts.Providers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Tiling.Layers;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.DataFormats;
+
+public class GeoJsonSample : ISample
+{
+    private static readonly MRect _extent = new(-2066786, 3982655, 3558942, 7705420);
+
+    static GeoJsonSample()
+    {
+        GeoJsonDeployer.CopyEmbeddedResourceToFile("cities.geojson");
+        GeoJsonDeployer.CopyEmbeddedResourceToFile("countries.geojson");
+    }
+
+    public string Name => "GeoJson";
+    public string Category => "DataFormats";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        map.Navigator.ZoomToBox(_extent);
+        map.BackColor = new Color(55, 84, 162);
+        map.Layers.Add(CountriesLayerBuilder.CreateCountriesLayer());
+        map.Layers.Add(CitiesLayerBuilder.CreateCitiesLayer());
+        return map;
+    }
+}
+
+internal static class CountriesLayerBuilder
+{
+    private static readonly string[] _euroZoneCountries = [
+        "Austria",
+        "Belgium",
+        "Croatia",
+        "Cyprus",
+        "Estonia",
+        "Finland",
+        "France",
+        "Germany",
+        "Greece",
+        "Ireland",
+        "Italy",
+        "Latvia",
+        "Lithuania",
+        "Luxembourg",
+        "Malta",
+        "the Netherlands",
+        "Portugal",
+        "Slovakia",
+        "Slovenia",
+        "Spain"
+    ];
+    private static readonly VectorStyle _euroStyle = new()
+    {
+        Fill = new Brush(new Color(245, 245, 242)),
+        Outline = new Pen(new Color(55, 84, 162), 2),
+    };
+    private static readonly VectorStyle _nonEuroStyle = new()
+    {
+        Fill = new Brush(new Color(86, 109, 176)),
+        Outline = new Pen(new Color(55, 84, 162), 2),
+    };
+
+    public static RasterizingTileLayer CreateCountriesLayer() => new(CreateCountriesGeoJsonLayer());
+
+    private static Layer CreateCountriesGeoJsonLayer()
+        => new("Countries")
+        {
+            DataSource = CreateCountriesProvider(),
+            Style = new StyleCollection
+            {
+                Styles =
+                {
+                    CreateCountriesStyle(),
+                    new CalloutStyle()
+                }
+            }
+        };
+
+    private static ProjectingProvider CreateCountriesProvider()
+    {
+        var path = Path.Combine(GeoJsonDeployer.GeoJsonLocation, "countries.geojson");
+        var provider = new GeoJsonProvider(path) { CRS = "EPSG:4326" }; // The ProjectingProvider needs to know the source CRS (EPSG:4326)
+        return new ProjectingProvider(provider) { CRS = "EPSG:3857" }; // The ProjectingProvider needs to know the target CRS (EPSG:3857)
+    }
+
+    private static IStyle CreateCountriesStyle()
+        => new ThemeStyle((f) =>
+        {
+            // With a ThemeStyle it is possible to create a specific style for each feature
+            var name = f["name"] as string ?? throw new Exception("Feature should have name field");
+            return IsInEuroZone(name) ? _euroStyle : _nonEuroStyle;
+        });
+
+    private static bool IsInEuroZone(string name) => _euroZoneCountries.Contains(name);
+
+}
+
+internal static class CitiesLayerBuilder
+{
+    public static Layer CreateCitiesLayer() => CreateCitiesLabelLayer();
+
+    private static Layer CreateCitiesLabelLayer()
+        => new("Cities labels")
+        {
+            DataSource = CreateCitiesProvider(),
+            Style = CreateCitiesLabelStyle()
+        };
+
+    private static ProjectingProvider CreateCitiesProvider()
+    {
+        var path = Path.Combine(GeoJsonDeployer.GeoJsonLocation, "cities.geojson");
+        var provider = new GeoJsonProvider(path) { CRS = "EPSG:4326" }; // The ProjectingProvider needs to know the source CRS (EPSG:4326)
+        return new ProjectingProvider(provider) { CRS = "EPSG:3857" }; // The ProjectingProvider needs to know the target CRS (EPSG:3857)
+    }
+
+    private static LabelStyle CreateCitiesLabelStyle()
+        => new()
+        {
+            ForeColor = Color.Black,
+            BackColor = new Brush(new Color(245, 245, 242)),
+            LabelColumn = "city",
+        };
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
