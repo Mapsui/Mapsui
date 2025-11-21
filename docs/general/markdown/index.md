@@ -3,16 +3,16 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks.
 
 | UI Framework | NuGet  |
 | ---------------|-------------:|
-| MAUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat&logo=nuget&label=Mapsui.Maui)](https://www.nuget.org/packages/Mapsui.Maui/) |
-| Avalonia | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat&logo=nuget&label=Mapsui.Avalonia)](https://www.nuget.org/packages/Mapsui.Avalonia/) |
-| Uno Platform | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat&logo=nuget&label=Mapsui.Uno.WinUI)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |
-| Blazor | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat&logo=nuget&label=Mapsui.Blazor)](https://www.nuget.org/packages/Mapsui.Blazor/) |
-| WPF | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat&logo=nuget&label=Mapsui.Wpf)](https://www.nuget.org/packages/Mapsui.Wpf/) |
-| WinUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat&logo=nuget&label=Mapsui.WinUI)](https://www.nuget.org/packages/Mapsui.WinUI/) |
-| Windows Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat&logo=nuget&label=Mapsui.WindowsForms)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |
-| Eto Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat&logo=nuget&label=Mapsui.Eto)](https://www.nuget.org/packages/Mapsui.Eto/) |
-| .NET for Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat&logo=nuget&label=Mapsui.Android)](https://www.nuget.org/packages/Mapsui.Android/) |
-| .NET for iOS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat&logo=nuget&label=Mapsui.iOS)](https://www.nuget.org/packages/Mapsui.iOS/)
+| MAUI | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Maui.svg?style=flat&logo=nuget&label=Mapsui.Maui)](https://www.nuget.org/packages/Mapsui.Maui/) |
+| Avalonia | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg?style=flat&logo=nuget&label=Mapsui.Avalonia)](https://www.nuget.org/packages/Mapsui.Avalonia/) |
+| Uno Platform | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg?style=flat&logo=nuget&label=Mapsui.Uno.WinUI)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |
+| Blazor | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Blazor.svg?style=flat&logo=nuget&label=Mapsui.Blazor)](https://www.nuget.org/packages/Mapsui.Blazor/) |
+| WPF | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg?style=flat&logo=nuget&label=Mapsui.Wpf)](https://www.nuget.org/packages/Mapsui.Wpf/) |
+| WinUI | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.WinUI.svg?style=flat&logo=nuget&label=Mapsui.WinUI)](https://www.nuget.org/packages/Mapsui.WinUI/) |
+| Windows Forms | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.WindowsForms.svg?style=flat&logo=nuget&label=Mapsui.WindowsForms)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |
+| Eto Forms | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Eto.svg?style=flat&logo=nuget&label=Mapsui.Eto)](https://www.nuget.org/packages/Mapsui.Eto/) |
+| .NET for Android | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Android.svg?style=flat&logo=nuget&label=Mapsui.Android)](https://www.nuget.org/packages/Mapsui.Android/) |
+| .NET for iOS | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.iOS.svg?style=flat&logo=nuget&label=Mapsui.iOS)](https://www.nuget.org/packages/Mapsui.iOS/)
 
 
 Try the quick-start for your favorite framework below.
@@ -23,10 +23,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create a new .NET 7.0 MAUI application in Visual Studio.
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Maui nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Maui
+        dotnet add package Mapsui.Maui
         ```
 
         **Step 3:** IMPORTANT: In MauiProgram.cs add **.UseSkiaSharp()** to the builder like this:
@@ -80,21 +80,48 @@ Try the quick-start for your favorite framework below.
         **Step 2:** Add the Mapsui.Avalonia nuget package:
 
         ```console
-        dotnet add MyApp package Mapsui.Avalonia
+        cd MyApp
+        dotnet add package Mapsui.Avalonia
         ```
 
-        **Step 3:** In MainWindow.axaml.cs add this to the constructor **after** InitializeComponent():
+        **Step 3:** Update MainWindow.axaml to add the Mapsui namespace and MapControl:
 
-        ```csharp
-        var mapControl = new Mapsui.UI.Avalonia.MapControl();
-        mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        Content = mapControl;
+        ```diff
+        <Window xmlns="https://github.com/avaloniaui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        +       xmlns:mapsui="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+                mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                x:Class="MyApp.MainWindow"
+                Title="MyApp">
+        -    <TextBlock Text="Welcome to Avalonia!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        +    <mapsui:MapControl x:Name="MyMapControl" />
+        </Window>
         ```
 
-        **Step 4:** Run it and you should see a map of the world.
+        **Step 4:** Update MainWindow.axaml.cs to initialize the map:
+
+        ```diff
+        using Avalonia.Controls;
+        +using Mapsui.Tiling;
+
+        namespace MyApp;
+
+        public partial class MainWindow : Window
+        {
+            public MainWindow()
+            {
+                InitializeComponent();
+        +
+        +        MyMapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
+            }
+        }
+        ```
+
+        **Step 5:** Run it and you should see a map of the world.
 
         ```console
-        cd MyApp
         dotnet run
         ```
 
@@ -104,13 +131,13 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create new 'Uno Platform App' in Visual Studio
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Uno.WinUI nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Uno.WinUI
+        dotnet add package Mapsui.Uno.WinUI
         ```
 
-        Repeat this for all the targets you are using (Change the default Project in the Package Manager Console)
+        Repeat this for all the targets you are using
 
         **Step 3:** Open MainPage.xaml and add namespace:
 
@@ -170,15 +197,15 @@ Try the quick-start for your favorite framework below.
 
     === "Blazor"
     
-        **Step 1:** Create a new Blazor WebAssembly Application in your IDE and select .NET 7.0 (Standard Term Support) as Framework.
+        **Step 1:** Create a new Blazor WebAssembly Application in your IDE and select .NET 8.0 or later as Framework.
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Blazor nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Blazor
+        dotnet add package Mapsui.Blazor
         ```
 
-        **Step 3:** In Index.razor add this to the to Page.
+        **Step 3:** In Home.razor (or Index.razor in older templates) add this to the Page.
 
         ```csharp
         @using Mapsui.UI.Blazor
@@ -218,7 +245,7 @@ Try the quick-start for your favorite framework below.
         }
         ```
 
-        **Step 6:** Run it and you should see a map of the world.
+        **Step 4:** Run it and you should see a map of the world.
 
         **Troubleshooting:**
 
@@ -234,31 +261,77 @@ Try the quick-start for your favorite framework below.
 
     === "WPF"
         
-        **Step 1**: Start a new WPF application in Visual Studio.
+        **Prerequisites:**
+		
+        - Windows operating system
+        - .NET SDK 9.0 or later (the sample targets net9.0)
 
-        **Step 2**: In the package manager console type:
+        **Step 1:** Create a new WPF project:
+
         ```console
-        PM> Install-Package Mapsui.Wpf
+        dotnet new wpf -n MapsuiWpfQuickstart -f net9.0
+        cd MapsuiWpfQuickstart
         ```
 
-        **Step 3**: In MainWindow.xaml.cs add in the constructor **after** InitializeComponent():
+        **Step 2:** Add the required Mapsui packages:
+
+        ```console
+        dotnet add package Mapsui
+        dotnet add package Mapsui.Wpf
+        ```
+
+        **Step 3:** Replace the contents of `MainWindow.xaml` with:
+
+        ```xml
+        <Window x:Class="MapsuiWpfQuickstart.MainWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mapsui="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
+                Title="Mapsui WPF Quickstart" Height="450" Width="800">
+            <Grid>
+                <mapsui:MapControl x:Name="mapControl" />
+            </Grid>
+        </Window>
+        ```
+
+        **Step 4:** Replace the contents of `MainWindow.xaml.cs` with:
 
         ```csharp
-        var mapControl = new Mapsui.UI.Wpf.MapControl();
-        mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        Content = mapControl;
+        using System.Windows;
+        using Mapsui.Tiling;
+
+        namespace MapsuiWpfQuickstart
+        {
+            public partial class MainWindow : Window
+            {
+                public MainWindow()
+                {
+                    InitializeComponent();
+                    
+                    var map = new Mapsui.Map();
+                    map.Layers.Add(OpenStreetMap.CreateTileLayer());
+                    mapControl.Map = map;
+                }
+            }
+        }
         ```
 
-        **Step 4**: Run it and you should see a map of the world.
+        **Step 5:** Run the application:
+
+        ```console
+        dotnet run
+        ```
+
+        You should see a map of the world with OpenStreetMap tiles.
 
     === "WinUI"
 
         **Step 1:** Create new 'Blank App. Packaged (WinUI 3 in Desktop)' in Visual Studio
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.WinUI nuget package:
         
         ```console
-        PM> Install-Package Mapsui.WinUI
+        dotnet add package Mapsui.WinUI
         ```
 
         **Step 3:** Open MainPage.xaml and add namespace:
@@ -297,10 +370,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Start a new Windows Forms App in Visual Studio.
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.WindowsForms nuget package:
 
         ```console
-        PM> Install-Package Mapsui.WindowsForms
+        dotnet add package Mapsui.WindowsForms
         ```
 
         **Step 3:** In Form1.cs add this to the class constructor:
@@ -317,13 +390,21 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Start a new [Eto.Forms](https://github.com/picoe/Eto/wiki/Quick-Start) application in Visual Studio.
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Update the target framework in the main project's .csproj file from `netstandard2.0` to `net9.0` (Mapsui.Eto requires .NET 9.0 or later):
 
-        ```console
-        PM> Install-Package Mapsui.Eto
+        ```xml
+        <PropertyGroup>
+            <TargetFramework>net9.0</TargetFramework>
+        </PropertyGroup>
         ```
 
-        **Step 3:** In MainForm.cs add this to the class constructor:
+        **Step 3:** Add the Mapsui.Eto nuget package:
+
+        ```console
+        dotnet add package Mapsui.Eto
+        ```
+
+        **Step 4:** In MainForm.cs add this to the class constructor:
 
         ```csharp
         var mapControl = new Mapsui.UI.Eto.MapControl();
@@ -331,16 +412,16 @@ Try the quick-start for your favorite framework below.
         Content = mapControl;
         ```
 
-        **Step 4:** Run it and you should see a map of the world.
+        **Step 5:** Run it and you should see a map of the world.
 
     === ".NET for Android"
 
         **Step 1:** Create 'Blank App (Android)' in Visual Studio
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.Android nuget package:
 
         ```console
-        PM> Install-Package Mapsui.Android
+        dotnet add package Mapsui.Android
         ```
 
         **Step 3:** In Resources/layout/Main.axml add Mapsui.UI.Android.MapControl:
@@ -389,10 +470,10 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create new 'Single View App' in Visual Studio
 
-        **Step 2:** In the package manager console type:
+        **Step 2:** Add the Mapsui.iOS nuget package:
 
         ```console
-        PM> Install-Package Mapsui.iOS
+        dotnet add package Mapsui.iOS
         ```
 
         **Step 3:** Open ViewController.cs and add namespaces:

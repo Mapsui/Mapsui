@@ -8,7 +8,6 @@ using BenchmarkDotNet.Engines;
 using Mapsui.Extensions;
 using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
-using Mapsui.Rendering.Skia.Tests;
 using Mapsui.Styles.Thematics;
 using Mapsui.Nts.Providers;
 
@@ -74,8 +73,10 @@ public class RenderToBitmapPerformance
     {
         var map = new Map();
 
-        var countrySource = new ShapeFile(GetAppDir() + $"{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}countries.shp", true);
-        countrySource.CRS = "EPSG:4326";
+        var countrySource = new ShapeFile(GetAppDir() + $"{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}countries.shp", true)
+        {
+            CRS = "EPSG:4326"
+        };
         var projectedCountrySource = new ProjectingProvider(countrySource)
         {
             CRS = "EPSG:3857",
@@ -111,7 +112,7 @@ public class RenderToBitmapPerformance
         return path;
     }
 
-    private static ILayer CreateCountryLayer(IProvider countrySource)
+    private static Layer CreateCountryLayer(IProvider countrySource)
     {
         return new Layer
         {
@@ -121,7 +122,7 @@ public class RenderToBitmapPerformance
         };
     }
 
-    private static IThemeStyle CreateCountryTheme()
+    private static GradientTheme CreateCountryTheme()
     {
         // Set a gradient theme on the countries layer, based on Population density
         // First create two styles that specify min and max styles

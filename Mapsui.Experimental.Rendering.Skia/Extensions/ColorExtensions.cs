@@ -1,0 +1,18 @@
+﻿using Mapsui.Styles;
+using SkiaSharp;
+
+namespace Mapsui.Experimental.Rendering.Skia.Extensions;
+
+public static class ColorExtensions
+{
+    public static SKColor ToSkia(this Color? color, float layerOpacity = 1)
+    {
+        if (color == null) return new SKColor(128, 128, 128, 0);
+        return new SKColor((byte)color.Value.R, (byte)color.Value.G, (byte)color.Value.B, (byte)(color.Value.A * layerOpacity));
+    }
+
+    public static SKColor ToSkia(this Color color, float layerOpacity = 1)
+    {
+        return new SKColor((byte)color.R, (byte)color.G, (byte)color.B, (byte)(color.A * layerOpacity));
+    }
+}
