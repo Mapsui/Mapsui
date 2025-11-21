@@ -25,7 +25,6 @@
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Skia" />
-    <PackageReference Include="Avalonia.ReactiveUI" />
   </ItemGroup>
 
   <ItemGroup>
