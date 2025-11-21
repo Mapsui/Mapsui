@@ -84,15 +84,42 @@ Try the quick-start for your favorite framework below.
         dotnet add package Mapsui.Avalonia
         ```
 
-        **Step 3:** In MainWindow.axaml.cs add this to the constructor **after** InitializeComponent():
+        **Step 3:** Update MainWindow.axaml to add the Mapsui namespace and MapControl:
 
-        ```csharp
-        var mapControl = new Mapsui.UI.Avalonia.MapControl();
-        mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        Content = mapControl;
+        ```diff
+        <Window xmlns="https://github.com/avaloniaui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        +       xmlns:mapsui="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+                mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                x:Class="MyApp.MainWindow"
+                Title="MyApp">
+        -    <TextBlock Text="Welcome to Avalonia!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        +    <mapsui:MapControl x:Name="MyMapControl" />
+        </Window>
         ```
 
-        **Step 4:** Run it and you should see a map of the world.
+        **Step 4:** Update MainWindow.axaml.cs to initialize the map:
+
+        ```diff
+        using Avalonia.Controls;
+        +using Mapsui.Tiling;
+
+        namespace MyApp;
+
+        public partial class MainWindow : Window
+        {
+            public MainWindow()
+            {
+                InitializeComponent();
+        +
+        +        MyMapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
+            }
+        }
+        ```
+
+        **Step 5:** Run it and you should see a map of the world.
 
         ```console
         dotnet run
