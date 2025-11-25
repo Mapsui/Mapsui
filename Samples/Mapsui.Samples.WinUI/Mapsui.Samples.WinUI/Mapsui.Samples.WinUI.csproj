@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Mapsui.Experimental.Rendering.Skia\Mapsui.Experimental.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.UI.WinUI\Mapsui.UI.WinUI.csproj" />
     <ProjectReference Include="..\..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
