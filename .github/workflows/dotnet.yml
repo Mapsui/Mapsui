@@ -126,7 +126,7 @@ jobs:
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '26.0'          
+        xcode-version: '16.4'          
     # .Net 9 update     
     - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
@@ -140,9 +140,9 @@ jobs:
     - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
     - name: install Uno.Check 
-      run: dotnet tool install --global Uno.Check --version 1.33.1
-    - name: install Android SDK 34
-      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.307
+      run: dotnet tool install --global Uno.Check --version 1.32.17
+    - name: install Android SDK
+      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.305
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --dotnet 9.0.307
     - name: Restore dependencies Mapsui.Mac
@@ -221,7 +221,7 @@ jobs:
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
     - name: Install Uno Check
-      run: dotnet tool install -g Uno.Check --version 1.33.1
+      run: dotnet tool install -g Uno.Check --version 1.32.17
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.307
     - name: Restore dependencies (dotnet)
