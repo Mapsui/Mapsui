@@ -19,6 +19,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Mapsui.Rendering;
+using Mapsui.Experimental.VectorTiles.Tiling;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -46,6 +47,7 @@ public sealed class MapRenderer : IMapRenderer
         _styleRenderers[typeof(ImageStyle)] = new ImageStyleRenderer();
         _styleRenderers[typeof(CustomPointStyle)] = new CustomPointStyleRenderer();
         _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
+        _styleRenderers[typeof(VectorTileStyle)] = new VectorTileStyleRenderer();
 
         _widgetRenderers[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
         _widgetRenderers[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
