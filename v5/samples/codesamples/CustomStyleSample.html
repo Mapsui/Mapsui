@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Rendering;
+using Mapsui.Rendering.Skia;
+using Mapsui.Rendering.Skia.SkiaStyles;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Mapsui.Widgets.InfoWidgets;
+using SkiaSharp;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Styles;
+
+public class CustomStyleSample : ISample
+{
+    private const string _mapInfoLayerName = "Custom Style Layer";
+
+    public string Name => "CustomStyle";
+    public string Category => "Styles";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        // This is the crucial part where we tell the renderer that a CustomStyle should be
+        // rendered with the SkiaCustomStyleRenderer
+        MapRenderer.RegisterStyleRenderer(typeof(CustomStyle), new SkiaCustomStyleRenderer());
+
+        var map = new Map();
+
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateStylesLayer(map.Extent));
+
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _mapInfoLayerName));
+
+        return map;
+    }
+
+    private static MemoryLayer CreateStylesLayer(MRect? envelope) => new()
+    {
+        Name = _mapInfoLayerName,
+        Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
+        Style = null,
+    };
+
+    private static List<IFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
+    {
+        var features = new List<IFeature>();
+        var style = new CustomStyle();
+        var counter = 1;
+        foreach (var point in randomPoints)
+        {
+            var feature = new PointFeature(point);
+            feature["Label"] = $"I'm no. {counter++} and, autsch, you hit me!";
+            feature.Styles.Add(style); // Here the custom style is set!
+            feature.Styles.Add(SmallDot());
+            features.Add(feature);
+        }
+        return features;
+    }
+
+    private static SymbolStyle SmallDot() => new() { SymbolScale = 0.2, Fill = new Brush(new Color(40, 40, 40)) };
+
+    public class CustomStyle : BaseStyle
+    {
+        public CustomStyle() => Opacity = 0.7f;
+    }
+
+    public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
+    {
+        private static Random _random = new(1);
+
+        public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
+        {
+            if (feature is not PointFeature pointFeature) return false;
+            var worldPoint = pointFeature.Point;
+
+            var screenPoint = viewport.WorldToScreen(worldPoint);
+            var color = new SKColor((byte)_random.Next(0, 256), (byte)_random.Next(0, 256), (byte)_random.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
+            using var colored = new SKPaint { Color = color, IsAntialias = true };
+            using var black = new SKPaint { Color = SKColors.Black, IsAntialias = true };
+
+            canvas.Translate((float)screenPoint.X, (float)screenPoint.Y);
+            canvas.DrawCircle(0, 0, 15, colored);
+            canvas.DrawCircle(-8, -12, 8, colored);
+            canvas.DrawCircle(8, -12, 8, colored);
+            canvas.DrawCircle(8, -8, 2, black);
+            canvas.DrawCircle(-8, -8, 2, black);
+
+            using var path = new SKPath();
+            path.ArcTo(new SKRect(-8, 2, 8, 10), 25, 135, true);
+            using var skPaint = new SKPaint { Style = SKPaintStyle.Stroke, Color = SKColors.Black, IsAntialias = true };
+            canvas.DrawPath(path, skPaint);
+
+            return true;
+        }
+    }
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
