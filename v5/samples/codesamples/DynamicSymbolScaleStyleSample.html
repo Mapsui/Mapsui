@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Layers;
+using Mapsui.Nts.Extensions;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using NetTopologySuite.Geometries;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Styles;
+
+public class DynamicSymbolScaleStyleSample : ISample
+{
+    private const double _level1 = 32000.0;
+    private const double _level2 = 16000.0;
+    private const double _level3 = 8000.0;
+
+    public string Name => "DynamicSymbolScaleStyle";
+    public string Category => "Styles";
+
+    public Task<Map> CreateMapAsync()
+    {
+        var map = new Map();
+        map.Layers.Add(CreatePolygonLayer());
+        map.Layers.Add(CreateLayerWithDynamicScaleStyle(map));
+        map.Navigator.OverrideResolutions = new[] { _level1, _level2, _level3 };
+        map.Navigator.OverrideZoomBounds = new MMinMax(_level1, _level3);
+        map.Navigator.ZoomToLevel(0);
+        return Task.FromResult(map);
+    }
+
+    private static MemoryLayer CreateLayerWithDynamicScaleStyle(Map map) => new()
+    {
+        Name = "Dynamic Symbol Scale",
+        Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent!.Grow(map.Extent.Width * 0.94 - map.Extent.Width), 50, seed: 245),
+        Style = CreateDynamicSymbolScaleStyle()
+    };
+
+    private static ThemeStyle CreateDynamicSymbolScaleStyle()
+    {
+        var fill = new Brush(new Color(242, 229, 29, 255));
+        var pen = new Pen(Color.DimGray, 1.6);
+
+        var smallStyle = new SymbolStyle { SymbolScale = 0.75, Fill = fill, Outline = pen };
+        var mediumStyle = new SymbolStyle { SymbolScale = 1, Fill = fill, Outline = pen };
+        var bigStyle = new SymbolStyle { SymbolScale = 1.5, Fill = fill, Outline = pen };
+
+        return new ThemeStyle((f, v) =>
+        {
+            return v.Resolution switch
+            {
+                > _level2 => smallStyle,
+                > _level3 => mediumStyle,
+                _ => bigStyle
+            };
+        });
+    }
+
+    public static ILayer CreatePolygonLayer()
+    {
+        return new Layer("Polygons")
+        {
+            DataSource = new MemoryProvider(CreateSquarePolygon(10000000).ToFeature()),
+            Style = new VectorStyle
+            {
+                Fill = new Brush(Color.LightGray),
+                Outline = new Pen
+                {
+                    Color = Color.DimGray,
+                    Width = 3
+                }
+            }
+        };
+    }
+
+    private static Polygon CreateSquarePolygon(int width)
+    {
+        var halfWidth = width / 2;
+        return new Polygon(new LinearRing(new[]
+        {
+            new Coordinate(-halfWidth, -halfWidth),
+            new Coordinate(-halfWidth, halfWidth),
+            new Coordinate(halfWidth, halfWidth),
+            new Coordinate(halfWidth, -halfWidth),
+            new Coordinate(-halfWidth, -halfWidth) // Closing the ring
+        }));
+    }
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
