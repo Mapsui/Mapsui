@@ -25,6 +25,7 @@
       "Samples\\Mapsui.Samples.Maui.MapView\\Mapsui.Samples.Maui.MapView.csproj",
       "Samples\\Mapsui.Samples.Maui\\Mapsui.Samples.Maui.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.csproj",
+      "Samples\\QuickStart.Avalonia\\QuickStart.Avalonia.csproj",
       "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",

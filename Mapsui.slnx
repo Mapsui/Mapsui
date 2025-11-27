@@ -229,6 +229,12 @@
       <BuildType Solution="AppStore|*" Project="Debug" />
     </Project>
   </Folder>
+  <Folder Name="/Samples/QuickStart.Avalonia/">
+    <Project Path="Samples/QuickStart.Avalonia/QuickStart.Avalonia.csproj">
+      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+      <BuildType Solution="AppStore|*" Project="Debug" />
+    </Project>
+  </Folder>
   <Folder Name="/Samples/Mapsui.Samples.Uno.WinUI/">
     <File Path="Samples/Mapsui.Samples.Uno.WinUI/Directory.Build.props" />
     <Project Path="Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.csproj">
