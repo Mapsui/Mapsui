@@ -5,11 +5,13 @@ on:
     branches: [ main ]
     paths:
       - 'Samples/QuickStart.Avalonia/**'
+      - 'Samples/QuickStart.Avalonia.Tests/**'
       - '.github/workflows/quickstart-avalonia.yml'
   pull_request:
     branches: [ '**' ]
     paths:
       - 'Samples/QuickStart.Avalonia/**'
+      - 'Samples/QuickStart.Avalonia.Tests/**'
       - '.github/workflows/quickstart-avalonia.yml'
   workflow_dispatch:
 
@@ -40,11 +42,20 @@ jobs:
           9.0.305
           8.0.407
 
-    - name: Restore dependencies
+    - name: Restore QuickStart.Avalonia
       run: dotnet restore Samples/QuickStart.Avalonia/QuickStart.Avalonia.csproj
 
     - name: Build QuickStart.Avalonia
       run: dotnet build Samples/QuickStart.Avalonia/QuickStart.Avalonia.csproj --no-restore --configuration Release
+
+    - name: Restore QuickStart.Avalonia.Tests
+      run: dotnet restore Samples/QuickStart.Avalonia.Tests/QuickStart.Avalonia.Tests.csproj
+
+    - name: Build QuickStart.Avalonia.Tests
+      run: dotnet build Samples/QuickStart.Avalonia.Tests/QuickStart.Avalonia.Tests.csproj --no-restore --configuration Debug
+
+    - name: Run QuickStart.Avalonia.Tests
+      run: dotnet test Samples/QuickStart.Avalonia.Tests/bin/Debug/net9.0/QuickStart.Avalonia.Tests.dll --blame-hang-timeout:60s
 
     - name: Verify build output
       run: |
