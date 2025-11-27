@@ -1,6 +1,6 @@
 # Mapsui QuickStart - Avalonia
 
-A minimal Avalonia application demonstrating Mapsui integration based on the [Mapsui v5 QuickStart documentation](https://mapsui.com/v5/).
+A minimal Avalonia application demonstrating basic Mapsui integration. This sample follows the approach outlined in the [Mapsui v5 documentation](https://mapsui.com/v5/) to display an interactive map in an Avalonia window.
 
 ## Prerequisites
 

@@ -35,7 +35,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-nuget-quickstart-
 
-    - name: Setup .NET 9 SDK
+    # Both .NET 8 and 9 are required because Mapsui libraries target net8.0;net9.0
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
@@ -51,11 +52,8 @@ jobs:
     - name: Restore QuickStart.Avalonia.Tests
       run: dotnet restore Samples/QuickStart.Avalonia.Tests/QuickStart.Avalonia.Tests.csproj
 
-    - name: Build QuickStart.Avalonia.Tests
-      run: dotnet build Samples/QuickStart.Avalonia.Tests/QuickStart.Avalonia.Tests.csproj --no-restore --configuration Debug
-
-    - name: Run QuickStart.Avalonia.Tests
-      run: dotnet test Samples/QuickStart.Avalonia.Tests/bin/Debug/net9.0/QuickStart.Avalonia.Tests.dll --blame-hang-timeout:60s
+    - name: Build and Run QuickStart.Avalonia.Tests
+      run: dotnet test Samples/QuickStart.Avalonia.Tests/QuickStart.Avalonia.Tests.csproj --configuration Debug --blame-hang-timeout:60s
 
     - name: Verify build output
       run: |
