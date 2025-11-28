@@ -14,6 +14,8 @@ public sealed class MainPage : ContentPage, IDisposable
 
     public MainPage(MainViewModel mainViewModel)
     {
+        // Uncomment the line below to use the Experimental Skia renderer
+        mapControl.SetMapRenderer(new Experimental.Rendering.Skia.MapRenderer());
         mapControl.Map.Navigator.RotationLock = false;
 
         categoryPicker = CreatePicker(mainViewModel);
@@ -24,6 +26,8 @@ public sealed class MainPage : ContentPage, IDisposable
 
         // Workaround. Samples need the MapControl in the current setup.
         mainViewModel.MapControl = mapControl;
+
+
 
         Content = new Grid
         {
