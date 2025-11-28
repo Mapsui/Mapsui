@@ -34,7 +34,7 @@ public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaSty
                 {
                     var screenExtent = viewport.WorldToScreen(feature.Extent);
 
-                    if (ntsFeature.Geometry is not Point)
+                    if (ntsFeature.Geometry is Polygon || ntsFeature.Geometry is MultiPolygon)
                     {
                         using var clipPath = screenExtent.ToSkiaPath();
                         canvas.ClipPath(clipPath);
