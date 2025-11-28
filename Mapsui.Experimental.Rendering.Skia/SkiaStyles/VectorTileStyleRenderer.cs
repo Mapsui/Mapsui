@@ -4,6 +4,7 @@ using Mapsui.Experimental.VectorTiles.Extensions;
 using Mapsui.Experimental.VectorTiles.Tiling;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
@@ -16,13 +17,19 @@ public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaSty
 
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, Mapsui.Rendering.RenderService renderService, long iteration)
     {
-        if (feature is not VectorTileFeature vectorStyleFeature)
-            return false; // Todo: Log warning
+        if (feature is not VectorTileFeature vectorTileFeature)
+        {
+            Logger.Log(LogLevel.Warning, $"VectorTileStyleRenderer expected feature of type {nameof(VectorTileFeature)} but received {feature?.GetType().FullName ?? "null"} (Layer: {layer.Name}, Iteration: {iteration}).");
+            return false;
+        }
         if (style is not VectorTileStyle vectorTileStyle)
-            return false; // Todo: Log warning
+        {
+            Logger.Log(LogLevel.Warning, $"VectorTileStyleRenderer expected style of type {nameof(VectorTileStyle)} but received {style?.GetType().FullName ?? "null"} (Layer: {layer.Name}, Iteration: {iteration}).");
+            return false;
+        }
 
 
-        foreach (var vectorTileLayer in vectorStyleFeature.VectorTile.Layers)
+        foreach (var vectorTileLayer in vectorTileFeature.VectorTile.Layers)
         {
             if (feature.Extent is null)
                 continue;
@@ -55,13 +62,13 @@ public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaSty
                             }
                             else
                             {
-                                // Todo: Log warning about missing ISkiaStyleRenderer
+                                Logger.Log(LogLevel.Warning, $"Registered style renderer for style type {featureStyle.GetType().FullName} does not implement {nameof(ISkiaStyleRenderer)} (Layer: {layer.Name}, Iteration: {iteration}).");
                                 continue;
                             }
                         }
                         else
                         {
-                            // Todo: Log warning about missing style renderer
+                            Logger.Log(LogLevel.Warning, $"No style renderer registered for style type {featureStyle.GetType().FullName} (Layer: {layer.Name}, Iteration: {iteration}).");
                             continue;
                         }
                     }
