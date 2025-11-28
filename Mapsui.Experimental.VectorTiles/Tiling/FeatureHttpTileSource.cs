@@ -33,7 +33,7 @@ public sealed class FeatureHttpTileSource(IHttpTileSource httpTileSource) : IFea
         var tileData = await _httpTileSource.GetTileAsync(httpClient, tileInfo, cancellationToken).ConfigureAwait(false);
 
         if (tileData is null)
-            return new VectorTileFeature(new VectorTile(), tileInfo); // Shoudl we return null instead?
+            return new VectorTileFeature(new VectorTile(), tileInfo); // Should we return null instead?
 
         var vectorTile = MvtDecoder.DecodeTile(tileData, tileInfo.Index.Col, tileInfo.Index.Row, tileInfo.Index.Level);
         var vectorTileFeature = new VectorTileFeature(vectorTile, tileInfo);
