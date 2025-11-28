@@ -8,4 +8,11 @@ public static class MRectExtensions
     {
         return new SKRect((float)rect.MinX, (float)rect.MinY, (float)rect.MaxX, (float)rect.MaxY);
     }
+
+    public static SKPath ToSkiaPath(this MRect rect)
+    {
+        var path = new SKPath();
+        path.AddRect(rect.ToSkia());
+        return path;
+    }
 }
