@@ -44,11 +44,26 @@ public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaSty
                     var featureStyles = vectorTileStyle.Style.GetStylesToApply(mapsuiFeature, viewport);
                     foreach (var featureStyle in featureStyles)
                     {
-                        _mapRenderer.TryGetStyleRenderer(featureStyle.GetType(), out var styleRenderer);
-                        var skiaStyleRenderer = (ISkiaStyleRenderer?)styleRenderer!;
-                        if (mapsuiFeature is Point)
-                            return false;
-                        skiaStyleRenderer.Draw(canvas, viewport, layer, mapsuiFeature, featureStyle, renderService, iteration);
+                        if (_mapRenderer.TryGetStyleRenderer(featureStyle.GetType(), out var styleRenderer))
+                        {
+                            var skiaStyleRenderer = styleRenderer as ISkiaStyleRenderer;
+                            if (skiaStyleRenderer != null)
+                            {
+                                if (mapsuiFeature is Point)
+                                    return false;
+                                skiaStyleRenderer.Draw(canvas, viewport, layer, mapsuiFeature, featureStyle, renderService, iteration);
+                            }
+                            else
+                            {
+                                // Todo: Log warning about missing ISkiaStyleRenderer
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            // Todo: Log warning about missing style renderer
+                            continue;
+                        }
                     }
                 }
                 finally

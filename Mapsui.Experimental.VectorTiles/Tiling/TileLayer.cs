@@ -46,7 +46,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         IRenderFetchStrategy? renderFetchStrategy = null,
         HttpClient? httpClient = null)
     {
-        _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
+        _tileSource = tileSource ?? throw new ArgumentException($"{nameof(tileSource)} cannot be null");
         _tileCache = new TileCache();
         _extent = _tileSource.Schema.Extent.ToMRect();
         _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();

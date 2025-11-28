@@ -7,15 +7,32 @@ using System;
 
 namespace Mapsui.Experimental.VectorTiles.Tiling;
 
-public class VectorTileFeature(VectorTile vectorTile, TileInfo tileInfo) : BaseFeature
+public class VectorTileFeature : BaseFeature
 {
-    public VectorTile VectorTile { get; } = vectorTile.Copy();
+    public VectorTile VectorTile { get; }
+    public TileInfo TileInfo { get; }
 
-    public override MRect? Extent { get; } = tileInfo.Extent.ToMRect();
+    public VectorTileFeature(VectorTile vectorTile, TileInfo tileInfo)
+    {
+        VectorTile = vectorTile.Copy();
+        TileInfo = tileInfo;
+        Extent = tileInfo.Extent.ToMRect();
+    }
+
+    // Copy constructor
+    public VectorTileFeature(VectorTileFeature source) : base(source)
+    {
+        VectorTile = source.VectorTile.Copy();
+        TileInfo = source.TileInfo;
+        Extent = source.Extent;
+        // If BaseFeature has fields/properties to copy manually, do so here.
+    }
+
+    public override MRect? Extent { get; }
 
     public override object Clone()
     {
-        return new VectorTileFeature(vectorTile, tileInfo);
+        return new VectorTileFeature(this);
     }
 
     public override void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
