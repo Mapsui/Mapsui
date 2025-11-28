@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net9.0-ios;net9.0-maccatalyst;net9.0-android;net9.0-windows10.0.19041</TargetFrameworks>
+    <TargetFrameworks>net8.0;net8.0-android;net8.0-windows10.0.19041;net9.0;net9.0-ios;net9.0-maccatalyst;net9.0-android;net9.0-windows10.0.19041</TargetFrameworks>
     <UnoSingleProject>true</UnoSingleProject>
     <OutputType>Library</OutputType>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
