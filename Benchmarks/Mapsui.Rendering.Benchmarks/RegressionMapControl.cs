@@ -1,0 +1,95 @@
+﻿// Copyright (c) The Mapsui authors.
+// The Mapsui authors licensed this file under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
+#pragma warning disable CS0067 // The event is never used
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
+#pragma warning disable IDE0005 // Using directive is unnecessary, there are differences between contexts
+
+using Mapsui.Layers;
+using Mapsui.Manipulations;
+using Mapsui.Rendering.Skia;
+using Mapsui.UI;
+using Mapsui.Utilities;
+using System;
+using System.Collections.Generic;
+
+namespace Mapsui.Rendering.Benchmarks;
+
+public sealed class RegressionMapControl(MapRenderer? mapRenderer = null) : IMapControl
+{
+    private Map _map = new();
+
+    public double UnSnapRotationDegrees { get; set; }
+    public double ReSnapRotationDegrees { get; set; }
+    public IMapRenderer Renderer { get; } = mapRenderer ?? new MapRenderer();
+    public float? GetPixelDensity() => 1f;
+    public double ScreenWidth { get; private set; }
+    public double ScreenHeight { get; private set; }
+
+    public Map Map
+    {
+        get => _map;
+        set
+        {
+            _map = value ?? throw new ArgumentNullException();
+            _map.Navigator.SetSize(ScreenWidth, ScreenHeight);
+        }
+    }
+
+    public event EventHandler<MapInfoEventArgs>? Info;
+    public event EventHandler? ViewportInitialized;
+
+    public void RefreshGraphics()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void InvalidateCanvas() { }
+
+    public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Refresh(ChangeType changeType = ChangeType.Discrete)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Unsubscribe()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OpenInBrowser(string url)
+    {
+        throw new NotImplementedException();
+    }
+
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
+    {
+        throw new NotImplementedException();
+    }
+
+    public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetSize(int screenWidth, int screenHeight)
+    {
+        ScreenWidth = screenWidth;
+        ScreenHeight = screenHeight;
+    }
+
+    public void Dispose()
+    {
+        // Nothing to dispose
+    }
+
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
+    {
+        throw new NotImplementedException();
+    }
+}
