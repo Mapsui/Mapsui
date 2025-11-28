@@ -1,48 +1,55 @@
-using Mapsui.Layers;
-using Mapsui.Experimental.Rendering.Skia.SkiaStyles;
-using Mapsui.Styles;
-using SkiaSharp;
-using Mapsui.Experimental.VectorTiles.Tiling;
 using Mapsui.Experimental.Rendering.Skia.Extensions;
-using Mapsui.Extensions;
+using Mapsui.Experimental.Rendering.Skia.SkiaStyles;
 using Mapsui.Experimental.VectorTiles.Extensions;
+using Mapsui.Experimental.VectorTiles.Tiling;
+using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Styles;
 using NetTopologySuite.Geometries;
+using SkiaSharp;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
-public class VectorTileStyleRenderer : ISkiaStyleRenderer
+public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaStyleRenderer
 {
+    private readonly MapRenderer _mapRenderer = mapRenderer ?? new MapRenderer();
+
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, Mapsui.Rendering.RenderService renderService, long iteration)
     {
         if (feature is not VectorTileFeature vectorStyleFeature)
             return false; // Todo: Log warning
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
         if (style is not VectorTileStyle vectorTileStyle)
             return false; // Todo: Log warning
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
 
-        var vectorStyleRenderer = new VectorStyleRenderer();
+
         foreach (var vectorTileLayer in vectorStyleFeature.VectorTile.Layers)
         {
             if (feature.Extent is null)
                 continue;
 
-            var vectorStyle = CreateVectorTileStyle();
-
-            foreach (var childFeature in vectorTileLayer.Features)
+            foreach (var ntsFeature in vectorTileLayer.Features)
             {
                 var saveCount = canvas.Save();
                 try
                 {
                     var screenExtent = viewport.WorldToScreen(feature.Extent);
 
-                    if (childFeature.Geometry is not Point)
+                    if (ntsFeature.Geometry is not Point)
                     {
                         using var clipPath = screenExtent.ToSkiaPath();
                         canvas.ClipPath(clipPath);
                     }
-                    var mapsuiChild = childFeature.ToMapsui();
-                    vectorStyleRenderer.Draw(canvas, viewport, layer, mapsuiChild, vectorStyle, renderService, iteration);
+                    var mapsuiFeature = ntsFeature.ToMapsui();
+
+                    var featureStyles = vectorTileStyle.Style.GetStylesToApply(mapsuiFeature, viewport);
+                    foreach (var featureStyle in featureStyles)
+                    {
+                        _mapRenderer.TryGetStyleRenderer(featureStyle.GetType(), out var styleRenderer);
+                        var skiaStyleRenderer = (ISkiaStyleRenderer?)styleRenderer!;
+                        if (mapsuiFeature is Point)
+                            return false;
+                        skiaStyleRenderer.Draw(canvas, viewport, layer, mapsuiFeature, featureStyle, renderService, iteration);
+                    }
                 }
                 finally
                 {
@@ -51,14 +58,5 @@ public class VectorTileStyleRenderer : ISkiaStyleRenderer
             }
         }
         return true;
-    }
-
-    private static IStyle CreateVectorTileStyle()
-    {
-        return new VectorStyle
-        {
-            Fill = null,
-            Outline = new Pen { Color = Color.Blue, Width = 1 },
-        };
     }
 }

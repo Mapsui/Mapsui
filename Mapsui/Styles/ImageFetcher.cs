@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
+
 public static class ImageFetcher
 {
     public const string EmbeddedScheme = "embedded";

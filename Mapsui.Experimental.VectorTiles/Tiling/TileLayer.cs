@@ -54,7 +54,6 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         _tileFetchPlanner.DataChanged += TileFetchPlanner_OnDataChanged;
         _tileFetchPlanner.PropertyChanged += TileFetchPlanner_OnPropertyChanged;
 
-        Style = new VectorTileStyle();
         Attribution.Text = _tileSource.Attribution.Text;
         Attribution.Url = _tileSource.Attribution.Url;
 

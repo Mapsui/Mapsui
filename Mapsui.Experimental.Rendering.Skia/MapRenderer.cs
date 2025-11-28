@@ -172,9 +172,9 @@ public sealed class MapRenderer : IMapRenderer
         return false;
     }
 
-    public bool TryGetStyleRenderer(Type widgetType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
+    public bool TryGetStyleRenderer(Type styleType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
     {
-        if (_styleRenderers.TryGetValue(widgetType, out var outStyleRenderer))
+        if (_styleRenderers.TryGetValue(styleType, out var outStyleRenderer))
         {
             styleRenderer = outStyleRenderer;
             return true;
