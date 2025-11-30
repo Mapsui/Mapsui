@@ -4,7 +4,15 @@ In Mapsui v5 the Image class was added which simplifies the process of working w
 
 ### Supported Path Schemes for the Source
 
-Mapsui supports five types of schemes for specifying image paths: 'http(s)', 'file', 'embedded' (for pointing to embedded resources), 'svg-content' (for strings that contain the SVG xml itself) and 'base64-content' (for strings containing base64 encoded images). Here are some examples:
+Mapsui supports five types of schemes for specifying image paths: 
+
+- **http(s)://**, for pointing images on a remote server.
+- **file://**, for pointing to images on the local file system.
+- **embedded://**, for pointing to images in the dotnet embedded resources.
+- **svg-content://**, for strings that contain the SVG xml itself.
+- **base64-content://**, for strings containing base64 encoded images.
+
+Here are some examples:
 
 ```csharp
 myStyle.Image.Source = "https://mapsui.com/images/logo.svg";

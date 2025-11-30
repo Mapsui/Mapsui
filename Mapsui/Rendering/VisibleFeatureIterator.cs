@@ -42,6 +42,12 @@ public static class VisibleFeatureIterator
         {
             foreach (var feature in features)
             {
+                // Todo before the v6 release: Replace the code below with the snipped in comments.
+                // The new GetStylesToApply overload takes into account nested ThemeStyles and StyleCollections.
+                // foreach (var styleForFeature in layerStyle.GetStylesToApply(feature, viewport))
+                // {
+                //     callback(viewport, layer, styleForFeature, feature, (float)layer.Opacity, iteration);
+                // }
                 if (layerStyle is IThemeStyle themeStyle)
                 {
                     var stylesFromThemeStyle = themeStyle.GetStyle(feature, viewport).GetStylesToApply(viewport.Resolution);

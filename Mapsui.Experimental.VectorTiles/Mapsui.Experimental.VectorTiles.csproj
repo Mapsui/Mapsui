@@ -14,10 +14,19 @@
     <PackageReference Include="System.Text.Json" />
     <PackageReference Include="BruTile.MbTiles" />
     <PackageReference Include="VexTile.TileSource.Mvt" />
+    <PackageReference Include="NetTopologySuite.IO.VectorTiles" />
+    <PackageReference Include="NetTopologySuite.IO.VectorTiles.Mapbox" />
+    <PackageReference Include="NetTopologySuite" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
+    <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
 </Project>

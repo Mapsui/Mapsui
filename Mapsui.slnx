@@ -302,6 +302,10 @@
     <BuildType Solution="Ad-Hoc|*" Project="Debug" />
     <BuildType Solution="AppStore|*" Project="Debug" />
   </Project>
+  <Project Path="Mapsui.Experimental.Rendering.Skia/Mapsui.Experimental.Rendering.Skia.csproj">
+    <BuildType Solution="Ad-Hoc|*" Project="Release" />
+    <BuildType Solution="AppStore|*" Project="Release" />
+  </Project>
   <Project Path="Mapsui.Experimental.VectorTiles/Mapsui.Experimental.VectorTiles.csproj" Id="cbf48a30-76b7-44e7-a869-d9a5d7699230">
     <BuildType Solution="Ad-Hoc|*" Project="Release" />
     <BuildType Solution="AppStore|*" Project="Release" />

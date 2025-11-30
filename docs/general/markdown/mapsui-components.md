@@ -6,7 +6,7 @@ This part will talk about a few of Mapsui's core components. These are:
 - **Map**: UI indepenent part which holds most of the state of the map. 
 - **Navigator**: Controls all mutations of the Viewport.
 - **Viewport**: The state that defines which part is visible in the MapControl.
-- **Renderer**: Draws the map in the MapControl.
+- **MapRenderer**: Draws the map in the MapControl.
 
 ### MapControl
 
@@ -30,7 +30,7 @@ Is responsible for all Viewport manipulations, this includes:
 
 ### Viewport
 
-Defines what part of the map is visible on the screen. It is a simple immutable struct that contains just state. Id is passed into the renderers and data fetchers.
+Defines what part of the map is visible on the screen. It is a simple immutable struct that contains just state. It is passed into the MapRenderer and data fetchers.
 
-### Renderer
+### MapRenderer
 A member of the MapControl. Draws the map on the MapControl when RefreshGraphics is called.
