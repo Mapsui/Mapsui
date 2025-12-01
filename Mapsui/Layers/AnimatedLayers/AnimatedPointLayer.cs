@@ -95,6 +95,8 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
             }
             foreach (var field in target.Fields)
                 animatedPointFeature[field] = target[field];
+
+            animatedPointFeature.Styles = target.Styles.ToList(); // Copy the styles from the target feature to the animated feature
         }
     }
 

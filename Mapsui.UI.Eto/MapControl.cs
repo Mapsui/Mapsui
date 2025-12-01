@@ -16,7 +16,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
     public MapControl()
     {
-        SizeChanged += MapControl_SizeChanged; ;
+        SizeChanged += MapControl_SizeChanged;
         SharedConstructor();
     }
 

@@ -1,11 +1,12 @@
-﻿using System.Linq;
+﻿using Mapsui.Extensions;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Extensions;
+using Mapsui.UI.Wpf;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using Mapsui.Extensions;
-using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Extensions;
 
 namespace Mapsui.Samples.Wpf;
 
@@ -23,6 +24,9 @@ public partial class Window1
         InitializeComponent();
 
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+        // Uncomment the line below to use the Experimental Skia renderer
+        // MapControl.SetMapRenderer(new Experimental.Rendering.Skia.MapRenderer());
         MapControl.Map.Navigator.RotationLock = false;
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;

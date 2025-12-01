@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <Description>Mapsui - Library for mapping</Description>
+    <PackageTags>$(PackageTags) rendering skia</PackageTags>
+		<IsPackable>true</IsPackable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- For experimental projects suppress: A stable release of a package should not have a prerelease dependency. -->
+    <NoWarn>NU5104</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="Svg.Skia" />
+    <PackageReference Include="Topten.RichTextKit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Experimental.VectorTiles\Mapsui.Experimental.VectorTiles.csproj" />
+    <ProjectReference Include="..\Mapsui.Experimental\Mapsui.Experimental.csproj" />
+    <ProjectReference Include="..\Mapsui.Extensions\Mapsui.Extensions.csproj" />
+    <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+  </ItemGroup>
+
+	<PropertyGroup>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+</Project>

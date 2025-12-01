@@ -62,6 +62,7 @@ public class MapRegressionTests
             new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
             new WfsGeometryFilterSample(), // Crashes on the build server.
             new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
+            new ArcGISImageServiceSample(), // Changes and we did not cache the reponse in the sqlite yet.
         ];
 
     [Test]
