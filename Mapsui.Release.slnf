@@ -1,9 +1,7 @@
 {
-  "formatVersion": 1,
-  "solutions": [
-    {
-      "path": "Mapsui.slnx",
-      "projects": [
+  "solution": {
+    "path": "Mapsui.slnx",
+    "projects": [
         "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
         "Mapsui.Experimental\\Mapsui.Experimental.csproj",
         "Mapsui.Experimental.Rendering.Skia\\Mapsui.Experimental.Rendering.Skia.csproj",
@@ -24,7 +22,6 @@
         "Mapsui.UI.WindowsForms\\Mapsui.UI.WindowsForms.csproj",
         "Mapsui.UI.WinUI\\Mapsui.UI.WinUI.csproj",
         "Mapsui.UI.Wpf\\Mapsui.UI.Wpf.csproj"
-      ]
-    }
-  ]
+    ]
+  }
 }
