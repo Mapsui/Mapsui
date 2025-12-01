@@ -173,17 +173,7 @@ public partial class MapControl : UIView, IMapControl
     {
         if (uiEvent is null)
             return [];
-        return uiEvent.AllTouches.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new ScreenPosition(p.X, p.Y)).ToArray();
-    }
-
-    /// <summary>
-    /// Gets screen position in device independent units (or DIP or DP).
-    /// </summary>
-    /// <param name="point"></param>
-    /// <returns></returns>
-    private static MPoint GetScreenPosition(CGPoint point)
-    {
-        return new MPoint(point.X, point.Y);
+        return uiEvent?.AllTouches?.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new ScreenPosition(p.X, p.Y)).ToArray() ?? [];
     }
 
     private static void RunOnUIThread(Action action)
