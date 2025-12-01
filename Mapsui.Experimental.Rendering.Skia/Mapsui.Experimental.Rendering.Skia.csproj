@@ -6,6 +6,8 @@
     <PackageTags>$(PackageTags) rendering skia</PackageTags>
 		<IsPackable>true</IsPackable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- For experimental projects suppress: A stable release of a package should not have a prerelease dependency. -->
+    <NoWarn>NU5104</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
