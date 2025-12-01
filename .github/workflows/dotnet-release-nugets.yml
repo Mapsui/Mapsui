@@ -11,9 +11,6 @@ on:
 jobs:
   build:
 
-    env:
-      SOLUTION: 'Mapsui.slnx'
-
     runs-on: windows-latest
 
     steps:
@@ -42,18 +39,49 @@ jobs:
         echo ("VERSION_OF_RELEASE=" + $(git describe --tags --abbrev=0)) >> $env:GITHUB_ENV
         echo $VERSION_OF_RELEASE
 
-    - name: install workloads
+    - name: Install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
 
-    - name: Build
-      run: dotnet build ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+    - name: Find and pack packable projects
+      shell: pwsh
+      run: |
+        $version = '${{ env.VERSION_OF_RELEASE }}'
+        Write-Host "Packing version $version"
 
-    - name: Test
-      run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
-      
-    - name: Pack
-      # The version argument overrides the version in the Directory.Build.props.
-      run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets
+        # Find projects marked as packable (case-insensitive match)
+        $packable = Get-ChildItem -Path . -Recurse -Filter *.csproj |
+          Where-Object { Select-String -Path $_.FullName -Pattern '<IsPackable>\s*true\s*</IsPackable>' -Quiet } |
+          ForEach-Object { $_.FullName }
+
+        if (-not $packable) {
+          Write-Error "No packable projects found"
+          exit 1
+        }
+
+        New-Item -ItemType Directory -Force -Path nugets | Out-Null
+
+        foreach ($proj in $packable) {
+          Write-Host "Restoring $proj"
+          dotnet restore $proj
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Restore failed for $proj"
+            exit 1
+          }
+
+          Write-Host "Building $proj"
+          dotnet build $proj -c Release /p:Version=$version --no-restore
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Build failed for $proj"
+            exit 1
+          }
+
+          Write-Host "Packing $proj"
+          dotnet pack $proj -c Release -o nugets /p:Version=$version --no-build
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Pack failed for $proj"
+            exit 1
+          }
+        }
 
     - name: Upload nugets
       uses: actions/upload-artifact@v4
