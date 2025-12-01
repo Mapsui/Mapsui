@@ -42,18 +42,34 @@ jobs:
         echo ("VERSION_OF_RELEASE=" + $(git describe --tags --abbrev=0)) >> $env:GITHUB_ENV
         echo $VERSION_OF_RELEASE
 
-    - name: install workloads
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
+    - name: Find and pack packable projects
+      shell: pwsh
+      run: |
+        $version = $env:VERSION_OF_RELEASE
+        if (-not $version) { Write-Error 'VERSION_OF_RELEASE is empty'; exit 1 }
+        Write-Host "Packing version $version"
 
-    - name: Build
-      run: dotnet build ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+        # Find projects marked as packable (IsPackable true)
+        $packable = Get-ChildItem -Path . -Recurse -Filter *.csproj |
+          Where-Object { Select-String -Path $_.FullName -Pattern '<IsPackable>true</IsPackable>' -Quiet } |
+          ForEach-Object { $_.FullName }
 
-    - name: Test
-      run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
-      
-    - name: Pack
-      # The version argument overrides the version in the Directory.Build.props.
-      run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets
+        if (-not $packable) {
+          Write-Error "No packable projects found"
+          exit 1
+        }
+
+        New-Item -ItemType Directory -Force -Path nugets | Out-Null
+
+        foreach ($proj in $packable) {
+          Write-Host "Building $proj"
+          dotnet build $proj -c Release /p:Version=$version
+          if ($LASTEXITCODE -ne 0) { Write-Error "Build failed for $proj"; exit 1 }
+
+          Write-Host "Packing $proj"
+          dotnet pack $proj -c Release -o nugets /p:Version=$version --no-build
+          if ($LASTEXITCODE -ne 0) { Write-Error "Pack failed for $proj"; exit 1 }
+        }
 
     - name: Upload nugets
       uses: actions/upload-artifact@v4
