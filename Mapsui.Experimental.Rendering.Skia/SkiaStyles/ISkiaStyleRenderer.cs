@@ -15,6 +15,7 @@ public interface ISkiaStyleRenderer : IStyleRenderer
     /// <param name="feature">Feature to draw.</param>
     /// <param name="style">Style to draw.</param>
     /// <param name="renderService">RenderService to provide caches and such.</param>
+    /// <param name="iteration">The current render iteration. This can be used in the caching strategy.</param>
     /// <returns></returns>
     bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, Mapsui.Rendering.RenderService renderService, long iteration);
 }
