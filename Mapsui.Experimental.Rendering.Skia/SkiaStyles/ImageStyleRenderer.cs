@@ -20,12 +20,12 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         feature.CoordinateVisitor((x, y, setter) =>
         {
             var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
-            PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, symbolStyle, renderService, opacity, DrawImageStyle);
+            PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, symbolStyle, feature, renderService, opacity, DrawImageStyle);
         });
         return true;
     }
 
-    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, Mapsui.Rendering.RenderService renderService, float opacity)
+    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, IFeature feature, Mapsui.Rendering.RenderService renderService, float opacity)
     {
         if (pointStyle is ImageStyle imageStyle)
         {
