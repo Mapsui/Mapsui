@@ -16,7 +16,7 @@ public class CustomPointStyleRenderer : ISkiaStyleRenderer
             {
                 var opacity = (float)(layer.Opacity * customPointStyle.Opacity);
                 if (MapRenderer.TryGetPointStyleRenderer(customPointStyle.RendererName, out var pointStyleRenderer))
-                    PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, customPointStyle, renderService, opacity, pointStyleRenderer);
+                    PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, customPointStyle, feature, renderService, opacity, pointStyleRenderer);
                 else
                     Logger.Log(LogLevel.Error, $"Could not find the point style renderer with name {customPointStyle.RendererName}");
             });

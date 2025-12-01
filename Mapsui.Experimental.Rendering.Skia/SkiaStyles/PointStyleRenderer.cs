@@ -6,9 +6,9 @@ namespace Mapsui.Experimental.Rendering.Skia.SkiaStyles;
 
 public abstract class PointStyleRenderer
 {
-    public delegate void RenderHandler(SKCanvas canvas, IPointStyle style, Mapsui.Rendering.RenderService renderService, float opacity);
+    public delegate void RenderHandler(SKCanvas canvas, IPointStyle style, IFeature feature, Mapsui.Rendering.RenderService renderService, float opacity);
 
-    public static void DrawPointStyle(SKCanvas canvas, Viewport viewport, double x, double y, IPointStyle imageStyle,
+    public static void DrawPointStyle(SKCanvas canvas, Viewport viewport, double x, double y, IPointStyle imageStyle, IFeature feature,
         Mapsui.Rendering.RenderService renderService, float opacity, RenderHandler renderHandler)
     {
         try
@@ -32,7 +32,7 @@ public abstract class PointStyleRenderer
             // Translate to offset
             canvas.Translate((float)imageStyle.Offset.X, (float)-imageStyle.Offset.Y);
 
-            renderHandler(canvas, imageStyle, renderService, opacity);
+            renderHandler(canvas, imageStyle, feature, renderService, opacity);
         }
         finally
         {

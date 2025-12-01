@@ -9,10 +9,10 @@ namespace Mapsui.Experimental.Rendering.Skia.SkiaStyles;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public static void DrawStatic(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, IPointStyle pointStyle, Mapsui.Rendering.RenderService renderService)
+    public static void DrawStatic(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, IPointStyle pointStyle, IFeature feature, Mapsui.Rendering.RenderService renderService)
     {
         var opacity = (float)(layer.Opacity * pointStyle.Opacity);
-        PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, pointStyle, renderService, opacity, DrawSymbolStyle);
+        PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, pointStyle, feature, renderService, opacity, DrawSymbolStyle);
     }
 
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, Mapsui.Rendering.RenderService renderService, long iteration)
@@ -21,12 +21,12 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         feature.CoordinateVisitor((x, y, setter) =>
         {
             var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
-            PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, symbolStyle, renderService, opacity, DrawSymbolStyle);
+            PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, symbolStyle, feature, renderService, opacity, DrawSymbolStyle);
         });
         return true;
     }
 
-    private static void DrawSymbolStyle(SKCanvas canvas, IPointStyle pointStyle, Mapsui.Rendering.RenderService renderService, float opacity)
+    private static void DrawSymbolStyle(SKCanvas canvas, IPointStyle pointStyle, IFeature feature, Mapsui.Rendering.RenderService renderService, float opacity)
     {
         if (pointStyle is SymbolStyle symbolStyle)
         {
