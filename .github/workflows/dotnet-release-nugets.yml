@@ -62,14 +62,13 @@ jobs:
         New-Item -ItemType Directory -Force -Path nugets | Out-Null
 
         foreach ($proj in $packable) {
-          Write-Host "Restoring $proj"
-          dotnet restore $proj
-
           Write-Host "Building $proj"
           dotnet build $proj -c Release /p:Version=$version
+          if ($LASTEXITCODE -ne 0) { Write-Error "Build failed for $proj"; exit 1 }
 
           Write-Host "Packing $proj"
           dotnet pack $proj -c Release -o nugets /p:Version=$version --no-build
+          if ($LASTEXITCODE -ne 0) { Write-Error "Pack failed for $proj"; exit 1 }
         }
 
     - name: Upload nugets
