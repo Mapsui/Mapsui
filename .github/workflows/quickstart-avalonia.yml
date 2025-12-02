@@ -1,0 +1,61 @@
+name: QuickStart Avalonia
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Samples/QuickStart.Avalonia/**'
+      - 'Samples/QuickStart.Avalonia.Tests/**'
+      - '.github/workflows/quickstart-avalonia.yml'
+  pull_request:
+    branches: [ '**' ]
+    paths:
+      - 'Samples/QuickStart.Avalonia/**'
+      - 'Samples/QuickStart.Avalonia.Tests/**'
+      - '.github/workflows/quickstart-avalonia.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        filter: tree:0
+
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.nuget/packages/*
+          !/.nuget/packages/Mapsui*
+        key: ${{ runner.os }}-nuget-quickstart-${{ hashFiles('Directory.Packages.props') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-quickstart-
+
+    # Both .NET 8 and 9 are required because Mapsui libraries target net8.0;net9.0
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          9.0.305
+          8.0.407
+
+    - name: Restore QuickStart.Avalonia
+      run: dotnet restore Samples/QuickStart.Avalonia/QuickStart.Avalonia.csproj
+
+    - name: Build QuickStart.Avalonia
+      run: dotnet build Samples/QuickStart.Avalonia/QuickStart.Avalonia.csproj --no-restore --configuration Release
+
+    - name: Restore QuickStart.Avalonia.Tests
+      run: dotnet restore Samples/QuickStart.Avalonia.Tests/QuickStart.Avalonia.Tests.csproj
+
+    - name: Build and Run QuickStart.Avalonia.Tests
+      run: dotnet test Samples/QuickStart.Avalonia.Tests/QuickStart.Avalonia.Tests.csproj --configuration Debug --blame-hang-timeout:60s
+
+    - name: Verify build output
+      run: |
+        ls -la Samples/QuickStart.Avalonia/bin/Release/net9.0/
+        test -f Samples/QuickStart.Avalonia/bin/Release/net9.0/QuickStart.Avalonia.dll
