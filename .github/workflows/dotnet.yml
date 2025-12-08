@@ -247,23 +247,6 @@ jobs:
       run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
     - name: Run Mapsui.UI.Maui.Tests
       run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net9.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll --blame-hang-timeout:60s
-    # Release Build
-    - name: Build nuget packages
-      run: dotnet pack Mapsui.slnx --configuration Release /p:Version=$(git describe --tags) -o Artifacts
-    - name: Cleanup
-      run: git clean -fx -d -e Artifacts
-    # Change Project References to nuget package references in samples    
-    - name: nuget ProjectReferences to PackageReferences
-      shell: pwsh
-      run: |
-       ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
-    - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.slnx  
-    # Samples Build 
-    - name: Mapsui Samples without MAUI
-      run: dotnet build --no-restore --configuration Debug Mapsui.WithoutMaui.slnf
-    - name: Mapsui Samples MAUI
-      run: dotnet build --no-restore --configuration Debug Mapsui.Maui.slnf
     # Publishing  
     - name: Upload packages
       uses: actions/upload-artifact@v4
