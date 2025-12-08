@@ -44,7 +44,6 @@
     <!--Disposable Analyzer-->
     <PackageReference Include="IDisposableAnalyzers">
         <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <!--Threading Analyzer mainly Async Code-->
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers">
