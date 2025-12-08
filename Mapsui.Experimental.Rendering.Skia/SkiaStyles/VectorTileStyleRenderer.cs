@@ -35,7 +35,7 @@ public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaSty
     /// <param name="renderService">The render service.</param>
     /// <param name="iteration">The current iteration.</param>
     /// <returns>True if the feature was drawn, false otherwise.</returns>
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, Mapsui.Rendering.RenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         if (feature is not VectorTileFeature vectorTileFeature)
         {
