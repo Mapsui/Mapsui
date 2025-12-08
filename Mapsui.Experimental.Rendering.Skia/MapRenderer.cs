@@ -24,6 +24,9 @@ using Mapsui.Experimental.Rendering.Skia.MapInfos;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
+/// <summary>
+/// MapRenderer for SkiaSharp.
+/// </summary>
 public sealed class MapRenderer : IMapRenderer
 {
     private long _currentIteration;
@@ -61,6 +64,15 @@ public sealed class MapRenderer : IMapRenderer
         _widgetRenderers[typeof(PerformanceWidget)] = new PerformanceWidgetRenderer();
     }
 
+    /// <summary>
+    /// Renders the map to the target.
+    /// </summary>
+    /// <param name="target">The target to render to.</param>
+    /// <param name="viewport">The viewport to render.</param>
+    /// <param name="layers">The layers to render.</param>
+    /// <param name="widgets">The widgets to render.</param>
+    /// <param name="renderService">The render service.</param>
+    /// <param name="background">The background color.</param>
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
         IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
     {
@@ -81,12 +93,32 @@ public sealed class MapRenderer : IMapRenderer
         Render(canvas, viewport, widgets, renderService, 1);
     }
 
+    /// <summary>
+    /// Renders the map to a bitmap stream.
+    /// </summary>
+    /// <param name="map">The map to render.</param>
+    /// <param name="pixelDensity">The pixel density.</param>
+    /// <param name="renderFormat">The render format.</param>
+    /// <param name="quality">The quality of the image.</param>
+    /// <returns>A memory stream containing the rendered image.</returns>
     public MemoryStream RenderToBitmapStream(Map map, float pixelDensity = 1,
         RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
         return RenderToBitmapStream(map.Navigator.Viewport, map.Layers, map.RenderService, map.BackColor, pixelDensity, map.Widgets, renderFormat, quality);
     }
 
+    /// <summary>
+    /// Renders the map to a bitmap stream.
+    /// </summary>
+    /// <param name="viewport">The viewport to render.</param>
+    /// <param name="layers">The layers to render.</param>
+    /// <param name="renderService">The render service.</param>
+    /// <param name="background">The background color.</param>
+    /// <param name="pixelDensity">The pixel density.</param>
+    /// <param name="widgets">The widgets to render.</param>
+    /// <param name="renderFormat">The render format.</param>
+    /// <param name="quality">The quality of the image.</param>
+    /// <returns>A memory stream containing the rendered image.</returns>
     public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService,
         Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
@@ -162,6 +194,12 @@ public sealed class MapRenderer : IMapRenderer
         }
     }
 
+    /// <summary>
+    /// Tries to get a widget renderer.
+    /// </summary>
+    /// <param name="widgetType">The type of the widget.</param>
+    /// <param name="widgetRenderer">The widget renderer.</param>
+    /// <returns>True if the renderer was found, false otherwise.</returns>
     public bool TryGetWidgetRenderer(Type widgetType, [NotNullWhen(true)] out IWidgetRenderer? widgetRenderer)
     {
         if (_widgetRenderers.TryGetValue(widgetType, out var outWidgetRenderer))
@@ -173,6 +211,12 @@ public sealed class MapRenderer : IMapRenderer
         return false;
     }
 
+    /// <summary>
+    /// Tries to get a style renderer.
+    /// </summary>
+    /// <param name="styleType">The type of the style.</param>
+    /// <param name="styleRenderer">The style renderer.</param>
+    /// <returns>True if the renderer was found, false otherwise.</returns>
     public bool TryGetStyleRenderer(Type styleType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
     {
         if (_styleRenderers.TryGetValue(styleType, out var outStyleRenderer))
@@ -184,6 +228,12 @@ public sealed class MapRenderer : IMapRenderer
         return false;
     }
 
+    /// <summary>
+    /// Tries to get a point style renderer.
+    /// </summary>
+    /// <param name="rendererName">The name of the renderer.</param>
+    /// <param name="renderHandler">The render handler.</param>
+    /// <returns>True if the renderer was found, false otherwise.</returns>
     public static bool TryGetPointStyleRenderer(string rendererName, [NotNullWhen(true)] out PointStyleRenderer.RenderHandler? renderHandler)
     {
         if (_pointStyleRenderers.TryGetValue(rendererName, out var outRenderHandler))
@@ -195,21 +245,41 @@ public sealed class MapRenderer : IMapRenderer
         return false;
     }
 
+    /// <summary>
+    /// Registers a style renderer.
+    /// </summary>
+    /// <param name="type">The type of the style.</param>
+    /// <param name="renderer">The renderer.</param>
     public static void RegisterStyleRenderer(Type type, ISkiaStyleRenderer renderer)
     {
         _styleRenderers[type] = renderer;
     }
 
+    /// <summary>
+    /// Registers a widget renderer.
+    /// </summary>
+    /// <param name="type">The type of the widget.</param>
+    /// <param name="renderer">The renderer.</param>
     public static void RegisterWidgetRenderer(Type type, ISkiaWidgetRenderer renderer)
     {
         _widgetRenderers[type] = renderer;
     }
 
+    /// <summary>
+    /// Registers a point style renderer.
+    /// </summary>
+    /// <param name="rendererName">The name of the renderer.</param>
+    /// <param name="rendererHandler">The renderer handler.</param>
     public static void RegisterPointStyleRenderer(string rendererName, PointStyleRenderer.RenderHandler rendererHandler)
     {
         _pointStyleRenderers[rendererName] = rendererHandler;
     }
 
+    /// <summary>
+    /// Registers a layer renderer.
+    /// </summary>
+    /// <param name="rendererName">The name of the renderer.</param>
+    /// <param name="rendererHandler">The renderer handler.</param>
     public static void RegisterLayerRenderer(string rendererName, CustomLayerRenderer.RenderHandler rendererHandler)
     {
         _layerRenderers[rendererName] = rendererHandler;
@@ -268,6 +338,15 @@ public sealed class MapRenderer : IMapRenderer
         WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, renderService, layerOpacity);
     }
 
+    /// <summary>
+    /// Gets the map info.
+    /// </summary>
+    /// <param name="screenPosition">The screen position.</param>
+    /// <param name="viewport">The viewport.</param>
+    /// <param name="layers">The layers.</param>
+    /// <param name="renderService">The render service.</param>
+    /// <param name="margin">The margin.</param>
+    /// <returns>The map info.</returns>
     public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService, int margin = 0)
     {
         var mapInfoLayers = layers

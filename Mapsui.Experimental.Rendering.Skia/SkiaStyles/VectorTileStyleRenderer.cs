@@ -16,10 +16,25 @@ using System.Collections.Generic;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
+/// <summary>
+/// Renderer for VectorTileStyle.
+/// </summary>
+/// <param name="mapRenderer">The map renderer to use for rendering the vector tile features.</param>
 public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaStyleRenderer, IMapInfoRenderer
 {
     private readonly MapRenderer _mapRenderer = mapRenderer ?? new MapRenderer();
 
+    /// <summary>
+    /// Draws the vector tile feature.
+    /// </summary>
+    /// <param name="canvas">The Skia canvas to draw on.</param>
+    /// <param name="viewport">The current viewport.</param>
+    /// <param name="layer">The layer the feature belongs to.</param>
+    /// <param name="feature">The feature to draw.</param>
+    /// <param name="style">The style to apply.</param>
+    /// <param name="renderService">The render service.</param>
+    /// <param name="iteration">The current iteration.</param>
+    /// <returns>True if the feature was drawn, false otherwise.</returns>
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, Mapsui.Rendering.RenderService renderService, long iteration)
     {
         if (feature is not VectorTileFeature vectorTileFeature)
@@ -86,6 +101,18 @@ public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaSty
         return true;
     }
 
+    /// <summary>
+    /// Gets the map info for the vector tile feature.
+    /// </summary>
+    /// <param name="canvas">The Skia canvas.</param>
+    /// <param name="screenPosition">The screen position to check.</param>
+    /// <param name="viewport">The current viewport.</param>
+    /// <param name="feature">The feature to check.</param>
+    /// <param name="style">The style to apply.</param>
+    /// <param name="layer">The layer the feature belongs to.</param>
+    /// <param name="renderService">The render service.</param>
+    /// <param name="margin">The margin to use for hit testing.</param>
+    /// <returns>A collection of map info records.</returns>
     public IEnumerable<MapInfoRecord> GetMapInfo(
         SKCanvas canvas, ScreenPosition screenPosition, Viewport viewport, IFeature feature, IStyle style, ILayer layer, RenderService renderService, int margin = 0)
     {
