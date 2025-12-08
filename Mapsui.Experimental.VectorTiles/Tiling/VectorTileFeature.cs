@@ -19,13 +19,11 @@ public class VectorTileFeature : BaseFeature
         Extent = tileInfo.Extent.ToMRect();
     }
 
-    // Copy constructor
     public VectorTileFeature(VectorTileFeature source) : base(source)
     {
         VectorTile = source.VectorTile.Copy();
         TileInfo = source.TileInfo;
         Extent = source.Extent;
-        // If BaseFeature has fields/properties to copy manually, do so here.
     }
 
     public override MRect? Extent { get; }

@@ -20,14 +20,15 @@ using System.IO;
 using System.Linq;
 using Mapsui.Rendering;
 using Mapsui.Experimental.VectorTiles.Tiling;
+using Mapsui.Experimental.Rendering.Skia.MapInfos;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
 public sealed class MapRenderer : IMapRenderer
 {
     private long _currentIteration;
-    private static readonly Dictionary<Type, IWidgetRenderer> _widgetRenderers = [];
-    private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
+    private static readonly Dictionary<Type, ISkiaWidgetRenderer> _widgetRenderers = [];
+    private static readonly Dictionary<Type, ISkiaStyleRenderer> _styleRenderers = [];
     private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
     private static readonly Dictionary<string, CustomLayerRenderer.RenderHandler> _layerRenderers = [];
 
@@ -86,7 +87,7 @@ public sealed class MapRenderer : IMapRenderer
         return RenderToBitmapStream(map.Navigator.Viewport, map.Layers, map.RenderService, map.BackColor, pixelDensity, map.Widgets, renderFormat, quality);
     }
 
-    public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, Mapsui.Rendering.RenderService renderService,
+    public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService,
         Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
         try
@@ -194,12 +195,12 @@ public sealed class MapRenderer : IMapRenderer
         return false;
     }
 
-    public static void RegisterStyleRenderer(Type type, IStyleRenderer renderer)
+    public static void RegisterStyleRenderer(Type type, ISkiaStyleRenderer renderer)
     {
         _styleRenderers[type] = renderer;
     }
 
-    public static void RegisterWidgetRenderer(Type type, IWidgetRenderer renderer)
+    public static void RegisterWidgetRenderer(Type type, ISkiaWidgetRenderer renderer)
     {
         _widgetRenderers[type] = renderer;
     }
@@ -215,7 +216,7 @@ public sealed class MapRenderer : IMapRenderer
     }
 
     private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
-        IEnumerable<IWidget>? widgets, Mapsui.Rendering.RenderService renderService, SKCanvas skCanvas)
+        IEnumerable<IWidget>? widgets, RenderService renderService, SKCanvas skCanvas)
     {
         if (skCanvas == null) throw new ArgumentNullException(nameof(viewport));
 
@@ -227,12 +228,12 @@ public sealed class MapRenderer : IMapRenderer
             Render(skCanvas, viewport, widgets, renderService, 1);
     }
 
-    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers, Mapsui.Rendering.RenderService renderService)
+    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService)
     {
         try
         {
             VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration,
-                (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, o, i),
+                (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, i),
                 (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService));
 
             _currentIteration++;
@@ -243,7 +244,7 @@ public sealed class MapRenderer : IMapRenderer
         }
     }
 
-    private static void CustomLayerRendererCallback(SKCanvas canvas, Viewport viewport, ILayer layer, Mapsui.Rendering.RenderService renderService)
+    private static void CustomLayerRendererCallback(SKCanvas canvas, Viewport viewport, ILayer layer, RenderService renderService)
     {
         if (_layerRenderers.TryGetValue(layer.CustomLayerRendererName!, out var layerRenderer))
             CustomLayerRenderer.RenderLayer(canvas, viewport, layer, renderService, layerRenderer);
@@ -252,27 +253,22 @@ public sealed class MapRenderer : IMapRenderer
     }
 
     private static void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature,
-        Mapsui.Rendering.RenderService renderService, float layerOpacity, long iteration)
+        RenderService renderService, long iteration)
     {
-        // Check, if we have a special renderer for this style
-        if (_styleRenderers.TryGetValue(style.GetType(), out var renderer))
-        {
-            // Save canvas
-            canvas.Save();
-            // We have a special renderer, so try, if it could draw this
-            var styleRenderer = (ISkiaStyleRenderer)renderer;
-            styleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
-            // Restore old canvas
-            canvas.Restore();
-        }
+        if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
+            throw new Exception($"Style renderer not found for {style.GetType().Name}");
+
+        var saveCount = canvas.Save(); // Save canvas
+        styleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
+        canvas.RestoreToCount(saveCount); // Restore old canvas
     }
 
-    private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, Mapsui.Rendering.RenderService renderService, float layerOpacity)
+    private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity)
     {
         WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, renderService, layerOpacity);
     }
 
-    public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, Mapsui.Rendering.RenderService renderService, int margin = 0)
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService, int margin = 0)
     {
         var mapInfoLayers = layers
             .Select(l => l is ISourceLayer sl and not ILayerFeatureInfo ? sl.SourceLayer : l)
@@ -281,7 +277,8 @@ public sealed class MapRenderer : IMapRenderer
         var list = new ConcurrentQueue<List<MapInfoRecord>>();
         var mapInfo = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution);
 
-        if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(mapInfo.ScreenPosition)) ?? false) return mapInfo;
+        if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(mapInfo.ScreenPosition)) ?? false)
+            return mapInfo;
 
         try
         {
@@ -296,51 +293,70 @@ public sealed class MapRenderer : IMapRenderer
             if (intX >= width || intY >= height)
                 return mapInfo;
 
-            using (var surface = SKSurface.Create(imageInfo))
+            using var clearPixelPaint = new SKPaint { Color = SKColors.Transparent, BlendMode = SKBlendMode.Src };
+
+            using var surface = SKSurface.Create(imageInfo);
+
+            if (surface == null)
             {
-                if (surface == null)
-                {
-                    Logger.Log(LogLevel.Error, "SKSurface is null while getting MapInfo.  This is not expected.");
-                    return mapInfo;
-                }
+                Logger.Log(LogLevel.Error, "SKSurface is null while getting MapInfo.  This is not expected.");
+                return mapInfo;
+            }
 
-                surface.Canvas.ClipRect(new SKRect((float)(screenPosition.X - 1), (float)(screenPosition.Y - 1), (float)(screenPosition.X + 1), (float)(screenPosition.Y + 1)));
-                surface.Canvas.Clear(SKColors.Transparent);
+            surface.Canvas.ClipRect(new SKRect((float)(screenPosition.X - 1), (float)(screenPosition.Y - 1), (float)(screenPosition.X + 1), (float)(screenPosition.Y + 1)));
+            surface.Canvas.Clear(SKColors.Transparent);
 
-                using var pixMap = surface.PeekPixels();
-                var color = pixMap.GetPixelColor(intX, intY);
+            using var pixMap = surface.PeekPixels();
+            var originalColor = pixMap.GetPixelColor(intX, intY);
 
-                for (var index = 0; index < mapInfoLayers.Count; index++)
-                {
-                    var mapList = new List<MapInfoRecord>();
-                    list.Enqueue(mapList);
-                    var infoLayer = mapInfoLayers[index];
+            for (var index = 0; index < mapInfoLayers.Count; index++)
+            {
+                var mapList = new List<MapInfoRecord>();
+                list.Enqueue(mapList);
+                var infoLayer = mapInfoLayers[index];
 
-                    // get information from ILayer
-                    VisibleFeatureIterator.IterateLayers(viewport, [infoLayer], 0,
-                        (v, layer, style, feature, opacity, iteration) =>
+                // get information from ILayer
+                VisibleFeatureIterator.IterateLayers(viewport, [infoLayer], 0,
+                    (v, layer, style, feature, opacity, iteration) =>
+                    {
+                        try
                         {
-                            try
+                            surface.Canvas.Save();
+                            // 1) Clear the pixel where we clicked
+                            surface.Canvas.DrawPoint(intX, intY, clearPixelPaint);
+
+                            // 2) Render the feature to the clean canvas
+                            if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
+                                throw new Exception($"Style renderer not found for {style.GetType().Name}");
+
+                            var saveCount = surface.Canvas.Save(); // Save canvas
+                            styleRenderer.Draw(surface.Canvas, viewport, layer, feature, style, renderService, iteration);
+                            surface.Canvas.RestoreToCount(saveCount); // Restore old canvas
+
+                            // 3) Check if the pixel has changed.
+                            if (originalColor != pixMap.GetPixelColor(intX, intY))
                             {
-                                surface.Canvas.Save();
-                                // 1) Clear the entire bitmap
-                                surface.Canvas.Clear(SKColors.Transparent);
-                                // 2) Render the feature to the clean canvas
-                                RenderFeature(surface.Canvas, v, layer, style, feature, renderService, opacity, 0);
-                                // 3) Check if the pixel has changed.
-                                if (color != pixMap.GetPixelColor(intX, intY))
-                                    // 4) Add feature and style to result
+                                // 4) Add feature and style to result or dig deeper if it's a IMapInfoRenderer
+                                if (styleRenderer is IMapInfoRenderer mapInfoRenderer)
+                                {
+                                    var subMapInfo = mapInfoRenderer.GetMapInfo(surface.Canvas, screenPosition, viewport, feature, style, layer, renderService);
+                                    foreach (var record in subMapInfo)
+                                    {
+                                        mapList.Add(record);
+                                    }
+                                }
+                                else
                                     mapList.Add(new MapInfoRecord(feature, style, layer));
-                                surface.Canvas.Restore();
                             }
-                            catch (Exception exception)
-                            {
-                                Logger.Log(LogLevel.Error,
-                                    "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.",
-                                    exception);
-                            }
-                        });
-                }
+                            surface.Canvas.Restore();
+                        }
+                        catch (Exception exception)
+                        {
+                            Logger.Log(LogLevel.Error,
+                                "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.",
+                                exception);
+                        }
+                    });
             }
 
             // The VisibleFeatureIterator is intended for drawing and puts the bottom features first. In the MapInfo request
