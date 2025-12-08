@@ -1,4 +1,4 @@
-name: NuGet Package Validation
+name: Validate NuGets
 
 on:
   push:
