@@ -64,6 +64,8 @@ public sealed class Wfs2Provider : IProvider, IDisposable
 
     /// <summary>
     /// Gets or sets the maximum number of features to return per request (WFS 2.0.2 paging)
+    /// Note: This property is exposed for future use. Full integration with the request flow
+    /// requires additional changes to the WFSProvider request building logic.
     /// </summary>
     public int? Count
     {
@@ -73,6 +75,8 @@ public sealed class Wfs2Provider : IProvider, IDisposable
 
     /// <summary>
     /// Gets or sets the starting index for paging (WFS 2.0.2 paging)
+    /// Note: This property is exposed for future use. Full integration with the request flow
+    /// requires additional changes to the WFSProvider request building logic.
     /// </summary>
     public int? StartIndex
     {
@@ -82,6 +86,8 @@ public sealed class Wfs2Provider : IProvider, IDisposable
 
     /// <summary>
     /// Gets or sets the result type: "results" for features or "hits" for count only
+    /// Note: This property is exposed for future use. Full integration with the request flow
+    /// requires additional changes to the WFSProvider request building logic.
     /// </summary>
     public string? ResultType
     {
@@ -140,6 +146,17 @@ public sealed class Wfs2Provider : IProvider, IDisposable
     }
 
     /// <summary>
+    /// Helper method to override the text resources in a WFSProvider instance using reflection.
+    /// This is necessary because WFSProvider doesn't expose a way to inject custom text resources.
+    /// </summary>
+    private static void OverrideTextResources(WFSProvider provider, WFS_2_0_2_TextResources textResources)
+    {
+        var textResourcesField = typeof(WFSProvider).GetField("_textResources",
+            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        textResourcesField?.SetValue(provider, textResources);
+    }
+
+    /// <summary>
     /// Creates a new WFS 2.0.2 provider instance and initializes it
     /// </summary>
     /// <param name="baseUri">Base URI of the WFS service (e.g., "https://example.com/geoserver/ows")</param>
@@ -171,9 +188,7 @@ public sealed class Wfs2Provider : IProvider, IDisposable
             persistentCache);
 
         // Override the text resources with our 2.0.2 version
-        var textResourcesField = typeof(WFSProvider).GetField("_textResources",
-            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        textResourcesField?.SetValue(innerProvider, textResources);
+        OverrideTextResources(innerProvider, textResources);
 
         if (!string.IsNullOrEmpty(proxyUrl))
         {
@@ -226,9 +241,7 @@ public sealed class Wfs2Provider : IProvider, IDisposable
             persistentCache);
 
         // Override the text resources with our 2.0.2 version
-        var textResourcesField = typeof(WFSProvider).GetField("_textResources",
-            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        textResourcesField?.SetValue(innerProvider, textResources);
+        OverrideTextResources(innerProvider, textResources);
 
         return new Wfs2Provider(innerProvider, textResources);
     }
