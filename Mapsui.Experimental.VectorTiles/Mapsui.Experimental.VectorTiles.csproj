@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Experimental\Mapsui.Experimental.csproj" />
     <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
     <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />

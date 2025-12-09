@@ -2,12 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using BruTile;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
@@ -16,6 +10,12 @@ using Mapsui.Tiling.Extensions;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Rendering;
 using Mapsui.Tiling.Utilities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Mapsui.Experimental.VectorTiles.Tiling;
 
@@ -137,7 +137,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         }
         else
         {
-            throw new NotImplementedException($"ToFeatureAsync is not implemented for this TileSource type '{_tileSource.GetType()}'. Inherit either from either '{nameof(IHttpTileSource)}' or '{nameof(ILocalTileSource)}'");
+            throw new NotImplementedException($"ToFeatureAsync is not implemented for this TileSource type '{_tileSource.GetType()}'. Inherit either from either '{nameof(IHttpTileSource)}', '{nameof(ILocalTileSource)}' or '{nameof(IFeatureHttpTileSource)}'");
         }
     }
 

@@ -14,7 +14,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
     private static readonly SKSamplingOptions _skSamplingOptions = new(SKFilterMode.Linear, SKMipmapMode.None);
 
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, Mapsui.Rendering.RenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         var symbolStyle = (ImageStyle)style;
         feature.CoordinateVisitor((x, y, setter) =>
@@ -25,7 +25,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, IFeature feature, Mapsui.Rendering.RenderService renderService, float opacity)
+    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, IFeature feature, RenderService renderService, float opacity)
     {
         if (pointStyle is ImageStyle imageStyle)
         {
@@ -162,7 +162,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => false;
 
-    double IFeatureSize.FeatureSize(IStyle style, Mapsui.Rendering.RenderService renderService, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, RenderService renderService, IFeature? feature)
     {
         if (style is ImageStyle symbolStyle)
         {
@@ -172,7 +172,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return 0;
     }
 
-    public static double FeatureSize(ImageStyle imageStyle, Mapsui.Rendering.RenderService renderService)
+    public static double FeatureSize(ImageStyle imageStyle, RenderService renderService)
     {
         Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
 

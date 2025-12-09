@@ -8,7 +8,7 @@ namespace Mapsui.Experimental.Rendering.Skia.SkiaWidgets;
 public static class WidgetRenderer
 {
     public static void Render(object target, Viewport viewport, IEnumerable<IWidget> widgets,
-        IDictionary<Type, IWidgetRenderer> renders, Mapsui.Rendering.RenderService renderService, float layerOpacity)
+        IDictionary<Type, ISkiaWidgetRenderer> renders, Mapsui.Rendering.RenderService renderService, float layerOpacity)
     {
         var canvas = (SKCanvas)target;
 
@@ -40,7 +40,7 @@ public static class WidgetRenderer
                 renderer = renders[widget.GetType()];
             }
 
-            ((ISkiaWidgetRenderer)renderer).Draw(canvas, viewport, widget, renderService, layerOpacity);
+            renderer.Draw(canvas, viewport, widget, renderService, layerOpacity);
         }
     }
 }
