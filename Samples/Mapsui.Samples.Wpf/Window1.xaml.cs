@@ -26,7 +26,7 @@ public partial class Window1
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         // Uncomment the line below to use the Experimental Skia renderer
-        MapControl.SetMapRenderer(new Experimental.Rendering.Skia.MapRenderer());
+        // MapControl.SetMapRenderer(new Experimental.Rendering.Skia.MapRenderer());
         MapControl.Map.Navigator.RotationLock = false;
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
