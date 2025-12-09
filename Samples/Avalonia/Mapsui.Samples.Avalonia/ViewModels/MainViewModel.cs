@@ -6,5 +6,5 @@ public class MainViewModel : ViewModelBase
 {
     public string Greeting => "Welcome to Avalonia!";
 
-    public Map BoundMap { get; set; } = new Map();
+    public Map? BoundMap { get; set; }
 }

@@ -1,0 +1,70 @@
+name: Validate NuGets
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validateNugets:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0          
+        filter: tree:0
+    # Cache Nugets
+    - uses: actions/cache@v4
+      with:
+        path: |
+           ~/.nuget/packages/*
+           !/.nuget/packages/Mapsui*
+        key: ${{ runner.os }}-nuget22-${{ hashFiles('Directory.Packages.props') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget22-
+    # .Net 9 update     
+    - name: Setup .NET 9 SDK 
+      uses: actions/setup-dotnet@v4
+      with:
+         dotnet-version: |
+           9.0.305
+           8.0.407
+    # Java Sdk install 11
+    - name: Install Open JDK 11
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft'
+        java-version: '11'
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v2
+      with:
+        nuget-version: latest
+    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
+    - name: Install Uno Check
+      run: dotnet tool install -g Uno.Check --version 1.32.17
+    - name: Uno Check
+      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.305
+    - name: Restore dependencies (dotnet)
+      run: dotnet restore Mapsui.slnx  
+    # Release Build
+    - name: Build nuget packages
+      run: dotnet pack Mapsui.slnx --configuration Release /p:Version=$(git describe --tags) -o Artifacts
+    - name: Cleanup
+      run: git clean -fx -d -e Artifacts
+    # Change Project References to nuget package references in samples    
+    - name: nuget ProjectReferences to PackageReferences
+      shell: pwsh
+      run: |
+       ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
+    - name: Restore dependencies (dotnet)
+      run: dotnet restore Mapsui.slnx  
+    # Samples Build 
+    - name: Mapsui Samples without MAUI
+      run: dotnet build --no-restore --configuration Debug Mapsui.WithoutMaui.slnf
+    - name: Mapsui Samples MAUI
+      run: dotnet build --no-restore --configuration Debug Mapsui.Maui.slnf
+    # Publishing  
+    - name: Upload packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: nupkg.validation
+        path: Artifacts/*.nupkg

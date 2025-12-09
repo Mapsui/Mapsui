@@ -57,6 +57,7 @@
   <Folder Name="/GitHubActions/">
     <File Path=".github/workflows/dotnet-docs.yml" />
     <File Path=".github/workflows/dotnet-release-nugets.yml" />
+    <File Path=".github/workflows/dotnet-validate-nugets.yml" />
     <File Path=".github/workflows/dotnet.yml" />
   </Folder>
   <Folder Name="/GitHubTemplates/">
