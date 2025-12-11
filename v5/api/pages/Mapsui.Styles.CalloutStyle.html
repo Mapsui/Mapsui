@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class CalloutStyle </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class CalloutStyle ">
+    
+    <meta name="description" content="A CalloutStyle shows a callout or InfoWindow in Google Maps">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Styles.CalloutStyle">
+
+
+
+  <h1 id="Mapsui_Styles_CalloutStyle" data-uid="Mapsui.Styles.CalloutStyle" class="text-break">Class CalloutStyle</h1>
+  <div class="markdown level0 summary"><p>A CalloutStyle shows a callout or InfoWindow in Google Maps</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Mapsui.Styles.BaseStyle.html">BaseStyle</a></div>
+    <div class="level2"><a class="xref" href="Mapsui.Styles.BasePointStyle.html">BasePointStyle</a></div>
+    <div class="level3"><a class="xref" href="Mapsui.Styles.ImageStyle.html">ImageStyle</a></div>
+    <div class="level4"><span class="xref">CalloutStyle</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Styles.IPointStyle.html">IPointStyle</a></div>
+    <div><a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a></div>
+    <div><a class="xref" href="Mapsui.Styles.IHasImage.html">IHasImage</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Mapsui.Styles.ImageStyle.html#Mapsui_Styles_ImageStyle_Image">ImageStyle.Image</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolRotation">BasePointStyle.SymbolRotation</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_RotateWithMap">BasePointStyle.RotateWithMap</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolScale">BasePointStyle.SymbolScale</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolOffset">BasePointStyle.SymbolOffset</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_Offset">BasePointStyle.Offset</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_RelativeOffset">BasePointStyle.RelativeOffset</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolOffsetRotatesWithMap">BasePointStyle.SymbolOffsetRotatesWithMap</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BaseStyle.html#Mapsui_Styles_BaseStyle_MinVisible">BaseStyle.MinVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BaseStyle.html#Mapsui_Styles_BaseStyle_MaxVisible">BaseStyle.MaxVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BaseStyle.html#Mapsui_Styles_BaseStyle_Enabled">BaseStyle.Enabled</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Styles.BaseStyle.html#Mapsui_Styles_BaseStyle_Opacity">BaseStyle.Opacity</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Styles.html">Styles</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.dll</h6>
+  <h5 id="Mapsui_Styles_CalloutStyle_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class CalloutStyle : ImageStyle, IPointStyle, IStyle, IHasImage</code></pre>
+  </div>
+  <h5 id="Mapsui_Styles_CalloutStyle_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>There are three different types of Callouts</p>
+<ol>
+<li>Type = CalloutType.Single
+The text in Title will be shown</li>
+<li>Type = CalloutType.Detail
+The text in Title and SubTitle will be shown</li>
+<li>Type = CalloutType.Custom
+The bitmap with ID in Content will be shown</li>
+</ol>
+</div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_BalloonDefinition.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.BalloonDefinition%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L256">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_BalloonDefinition_" data-uid="Mapsui.Styles.CalloutStyle.BalloonDefinition*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_BalloonDefinition" data-uid="Mapsui.Styles.CalloutStyle.BalloonDefinition">BalloonDefinition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CalloutBalloonDefinition BalloonDefinition { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.CalloutBalloonDefinition.html">CalloutBalloonDefinition</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_ImageIdOfCallout.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.ImageIdOfCallout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L76">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_ImageIdOfCallout_" data-uid="Mapsui.Styles.CalloutStyle.ImageIdOfCallout*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_ImageIdOfCallout" data-uid="Mapsui.Styles.CalloutStyle.ImageIdOfCallout">ImageIdOfCallout</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ImageIdOfCallout { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_ImageIdOfCalloutContent.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.ImageIdOfCalloutContent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L77">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_ImageIdOfCalloutContent_" data-uid="Mapsui.Styles.CalloutStyle.ImageIdOfCalloutContent*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_ImageIdOfCalloutContent" data-uid="Mapsui.Styles.CalloutStyle.ImageIdOfCalloutContent">ImageIdOfCalloutContent</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ImageIdOfCalloutContent { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_MaxWidth.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.MaxWidth%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L223">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_MaxWidth_" data-uid="Mapsui.Styles.CalloutStyle.MaxWidth*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_MaxWidth" data-uid="Mapsui.Styles.CalloutStyle.MaxWidth">MaxWidth</h4>
+  <div class="markdown level1 summary"><p>MaxWidth for Title and Subtitle of Callout</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double MaxWidth { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_Rotation.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.Rotation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L101">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_Rotation_" data-uid="Mapsui.Styles.CalloutStyle.Rotation*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_Rotation" data-uid="Mapsui.Styles.CalloutStyle.Rotation">Rotation</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the rotation of the Callout in degrees (clockwise is positive)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Rotation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_Spacing.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.Spacing%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L207">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_Spacing_" data-uid="Mapsui.Styles.CalloutStyle.Spacing*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_Spacing" data-uid="Mapsui.Styles.CalloutStyle.Spacing">Spacing</h4>
+  <div class="markdown level1 summary"><p>Space between Title and Subtitle of Callout</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Spacing { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_Subtitle.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.Subtitle%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L162">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_Subtitle_" data-uid="Mapsui.Styles.CalloutStyle.Subtitle*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_Subtitle" data-uid="Mapsui.Styles.CalloutStyle.Subtitle">Subtitle</h4>
+  <div class="markdown level1 summary"><p>Content of Callout subtitle label</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Subtitle { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_SubtitleFont.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.SubtitleFont%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L246">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_SubtitleFont_" data-uid="Mapsui.Styles.CalloutStyle.SubtitleFont*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_SubtitleFont" data-uid="Mapsui.Styles.CalloutStyle.SubtitleFont">SubtitleFont</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Font SubtitleFont { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Font.html">Font</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_SubtitleFontColor.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.SubtitleFontColor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L178">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_SubtitleFontColor_" data-uid="Mapsui.Styles.CalloutStyle.SubtitleFontColor*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_SubtitleFontColor" data-uid="Mapsui.Styles.CalloutStyle.SubtitleFontColor">SubtitleFontColor</h4>
+  <div class="markdown level1 summary"><p>Font color to render subtitle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color? SubtitleFontColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Color.html">Color</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_SubtitleTextAlignment.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.SubtitleTextAlignment%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L191">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_SubtitleTextAlignment_" data-uid="Mapsui.Styles.CalloutStyle.SubtitleTextAlignment*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_SubtitleTextAlignment" data-uid="Mapsui.Styles.CalloutStyle.SubtitleTextAlignment">SubtitleTextAlignment</h4>
+  <div class="markdown level1 summary"><p>Text alignment of subtitle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Alignment SubtitleTextAlignment { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.Alignment.html">Alignment</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_Title.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.Title%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L117">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_Title_" data-uid="Mapsui.Styles.CalloutStyle.Title*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_Title" data-uid="Mapsui.Styles.CalloutStyle.Title">Title</h4>
+  <div class="markdown level1 summary"><p>Content of Callout title label</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Title { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_TitleFont.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.TitleFont%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L236">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_TitleFont_" data-uid="Mapsui.Styles.CalloutStyle.TitleFont*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_TitleFont" data-uid="Mapsui.Styles.CalloutStyle.TitleFont">TitleFont</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Font TitleFont { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Font.html">Font</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_TitleFontColor.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.TitleFontColor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L133">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_TitleFontColor_" data-uid="Mapsui.Styles.CalloutStyle.TitleFontColor*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_TitleFontColor" data-uid="Mapsui.Styles.CalloutStyle.TitleFontColor">TitleFontColor</h4>
+  <div class="markdown level1 summary"><p>Font color to render title</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color? TitleFontColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Color.html">Color</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_TitleTextAlignment.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.TitleTextAlignment%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L146">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_TitleTextAlignment_" data-uid="Mapsui.Styles.CalloutStyle.TitleTextAlignment*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_TitleTextAlignment" data-uid="Mapsui.Styles.CalloutStyle.TitleTextAlignment">TitleTextAlignment</h4>
+  <div class="markdown level1 summary"><p>Text alignment of title</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Alignment TitleTextAlignment { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.Alignment.html">Alignment</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_Type.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.Type%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L85">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_Type_" data-uid="Mapsui.Styles.CalloutStyle.Type*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_Type" data-uid="Mapsui.Styles.CalloutStyle.Type">Type</h4>
+  <div class="markdown level1 summary"><p>Type of Callout</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CalloutType Type { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.CalloutType.html">CalloutType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Styles_CalloutStyle_Type_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Could be Single, Detail or Image.</p>
+</div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle_Invalidate.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle.Invalidate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L266">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_CalloutStyle_Invalidate_" data-uid="Mapsui.Styles.CalloutStyle.Invalidate*"></a>
+  <h4 id="Mapsui_Styles_CalloutStyle_Invalidate" data-uid="Mapsui.Styles.CalloutStyle.Invalidate">Invalidate()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Invalidate()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Styles.IPointStyle.html">IPointStyle</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Styles.IHasImage.html">IHasImage</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_Mapsui_IFeature_Mapsui_Viewport_">StyleExtensions.GetStylesToApply(IStyle?, IFeature, Viewport)</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_">StyleExtensions.GetStylesToApply(IStyle?, double)</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_">StyleExtensions.ShouldBeApplied(IStyle?, double)</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_CalloutStyle.md&amp;value=---%0Auid%3A%20Mapsui.Styles.CalloutStyle%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/CalloutStyle.cs/#L60" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

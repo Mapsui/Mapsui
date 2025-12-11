@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Animations;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Mapsui.UI;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.FeatureAnimations;
+
+public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
+{
+    private Layer? _animationLayer;
+    private static bool _repeat = true;
+    public string Name => "AnimatedSymbols";
+    public string Category => "FeatureAnimations";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public Map CreateMap()
+    {
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateLayer());
+        _animationLayer = (Layer)map.Layers.Last();
+        return map;
+    }
+
+    public static ILayer CreateLayer()
+    {
+        var style = new SymbolStyle() { Fill = new Brush(Color.Red), SymbolScale = 1 };
+
+        var layer = new Layer("Points")
+        {
+            DataSource = new MemoryProvider(CreatePoints(style)),
+        };
+
+        var animations = CreateAnimationsForSymbolStyle(style);
+        layer.Animations.Add(() => Animation.UpdateAnimations(style, animations).IsRunning);
+
+        return layer;
+
+    }
+
+    private static List<PointFeature> CreatePoints(IStyle style)
+    {
+        var result = new List<PointFeature>
+        {
+            CreatePoint(1000000, 1000000, style),
+            CreatePoint(9000000, 1000000, style),
+            CreatePoint(9000000, 9000000, style),
+            CreatePoint(1000000, 9000000, style)
+        };
+
+        return result;
+    }
+
+    private static List<AnimationEntry<SymbolStyle>> CreateAnimationsForSymbolStyle(SymbolStyle style)
+    {
+        var animations = new List<AnimationEntry<SymbolStyle>>();
+
+        var entry1 = new AnimationEntry<SymbolStyle>(
+            start: style.SymbolScale,
+            end: style.SymbolScale * 2,
+            animationStart: 0,
+            animationEnd: .5,
+            easing: Easing.SinInOut,
+            repeat: _repeat,
+            tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult<SymbolStyle>(style, true); },
+            final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; return new AnimationResult<SymbolStyle>(style, true); }
+        );
+        animations.Add(entry1);
+
+        var entry2 = new AnimationEntry<SymbolStyle>(
+            start: style.SymbolScale * 2,
+            end: style.SymbolScale,
+            animationStart: .5,
+            animationEnd: 1,
+            easing: Easing.SinInOut,
+            repeat: _repeat,
+            tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult<SymbolStyle>(style, true); },
+            final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; return new AnimationResult<SymbolStyle>(style, true); }
+        );
+        animations.Add(entry2);
+
+        var entry3 = new AnimationEntry<SymbolStyle>(
+            start: Color.Black,
+            end: Color.Red,
+            animationStart: 0,
+            animationEnd: 1,
+            easing: Easing.SinInOut,
+            tick: (symbolStyle, e, v) =>
+            {
+                var start = (Color)e.Start;
+                var end = (Color)e.End;
+                if (symbolStyle.Fill != null)
+                {
+                    symbolStyle.Fill.Color = new Color(
+                        (int)(start.R * (1.0 - v) + end.R * v),
+                        (int)(start.G * (1.0 - v) + end.G * v),
+                        (int)(start.B * (1.0 - v) + end.B * v));
+                }
+                return new AnimationResult<SymbolStyle>(symbolStyle, true);
+            },
+            final: (symbolStyle, e) =>
+            {
+                if (symbolStyle.Fill != null)
+                {
+                    symbolStyle.Fill.Color = (Color)e.End;
+                }
+                return new AnimationResult<SymbolStyle>(symbolStyle, true);
+            }
+
+        );
+        animations.Add(entry3);
+
+        Animation.Start(animations, 1000); // This should not be necessary
+
+        return animations;
+    }
+
+    private static PointFeature CreatePoint(double x, double y, IStyle style)
+    {
+        var result = new PointFeature(new MPoint(x, y));
+        result.Styles.Add(style);
+        return result;
+    }
+
+    public async Task InitializeTestAsync(IMapControl mapControl)
+    {
+        if (_animationLayer == null)
+            return;
+
+        while (_animationLayer.UpdateAnimations())
+        {
+            await Task.Delay(10).ConfigureAwait(false);
+        }
+    }
+
+    public void PrepareTest()
+    {
+        _repeat = false;
+    }
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
