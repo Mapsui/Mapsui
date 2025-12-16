@@ -166,7 +166,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
     }
 
-    private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    protected void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         _pointerDownPosition = e.GetPosition(this).ToMapsui();
 
@@ -184,7 +184,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         return Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
     }
 
-    private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    protected void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         var mousePosition = e.GetPosition(this).ToMapsui();
         if (HandleWidgetPointerUp(mousePosition, _pointerDownPosition, true, e.ClickCount, ShiftPressed))
