@@ -12,10 +12,15 @@ We will keep all development in the main branch. Stable projects will remain mos
 
 - `Mapsui.Experimental` – Code that belongs in the Mapsui core project but is in an experimental stage.
 - `Mapsui.Experimental.VectorTiles` – Implementation of vector tile rendering which is currently in an experimental stage.
-
-We will also add:
-
 - `Mapsui.Experimental.Rendering.Skia` – In this package we will do a substantial rewrite of the rendering.
+
+## Use Mapsui.Experimental.Rendering.Skia
+
+To use the experimental renderer you need to set it on the MapControl used in your project.
+```cs
+MapControl.SetMapRenderer(new Mapsui.Experimental.Rendering.Skia.MapRenderer());
+```
+From the MapRenderer all other rendering implementations are called, so this is usually the only thing you need to change to use all experimental renderers. If you use custom renderer then you need to make sure to register them on the experimental MapRenderer instead of the default MapRenderer (look for method calls to RegisterStyleRenderer and RegisterWidgetRenderer).
 
 ## Branching before the next release
 
