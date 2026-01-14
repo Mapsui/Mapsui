@@ -1,6 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Animations;
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Objects;
 using Mapsui.Utilities;
@@ -808,8 +809,90 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             WithTappedEvent = tapped
         };
 
+    private void DetachHandlers()
+    {
+        SizeChanged -= HandlerSizeChanged;
+
+        if (Map != null)
+        {
+            Map.Navigator.ViewportChanged -= HandlerViewportChanged;
+            Map.Layers.Changed -= HandleLayersChanged;
+        }
+
+        _pins.CollectionChanged -= HandlerPinsOnCollectionChanged;
+        _drawables.CollectionChanged -= HandlerDrawablesOnCollectionChanged;
+
+        foreach (var pin in _pins.ToList())
+        {
+            pin.PropertyChanged -= HandlerPinPropertyChanged;
+        }
+
+        foreach (var drawable in _drawables.OfType<INotifyPropertyChanged>().ToList())
+        {
+            drawable.PropertyChanged -= HandlerDrawablePropertyChanged;
+        }
+    }
+
+    private void CleanupMapViewResources()
+    {
+        SelectedPin = null;
+        MyLocationLayer.Enabled = false;
+        MyLocationLayer.IsMoving = false;
+        MyLocationLayer.ShowCallout = false;
+
+        HideCallouts();
+        _pins.Clear();
+        _drawables.Clear();
+        _callouts.Clear();
+
+        RemoveButtons();
+        RemoveLayers();
+
+        if (Map != null)
+        {
+            Map.Widgets.Clear();
+            Map.Layers.Clear();
+        }
+
+        _mapZoomInButton = null;
+        _mapZoomOutButton = null;
+        _mapMyLocationButton = null;
+        _mapNorthingButton = null;
+    }
+
+    private void TryStopMyLocationAnimations()
+    {
+        var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+        var layerType = MyLocationLayer.GetType();
+        var animationsField = layerType.GetField("_animations", flags);
+        var animationMyLocationField = layerType.GetField("_animationMyLocation", flags);
+        var animationMyDirectionField = layerType.GetField("_animationMyDirection", flags);
+        var animationMyViewDirectionField = layerType.GetField("_animationMyViewDirection", flags);
+
+        if (animationMyLocationField?.GetValue(MyLocationLayer) is AnimationEntry<MapView> myLocationEntry)
+            Mapsui.Animations.Animation.Stop(this, myLocationEntry, callFinal: false);
+        if (animationMyDirectionField?.GetValue(MyLocationLayer) is AnimationEntry<MapView> myDirectionEntry)
+            Mapsui.Animations.Animation.Stop(this, myDirectionEntry, callFinal: false);
+        if (animationMyViewDirectionField?.GetValue(MyLocationLayer) is AnimationEntry<MapView> myViewDirectionEntry)
+            Mapsui.Animations.Animation.Stop(this, myViewDirectionEntry, callFinal: false);
+
+        if (animationsField?.GetValue(MyLocationLayer) is ConcurrentHashSet<AnimationEntry<MapView>> animations)
+            animations.Clear();
+
+        animationMyLocationField?.SetValue(MyLocationLayer, null);
+        animationMyDirectionField?.SetValue(MyLocationLayer, null);
+        animationMyViewDirectionField?.SetValue(MyLocationLayer, null);
+    }
+
     protected override void Dispose(bool disposing)
     {
+        if (disposing)
+        {
+            DetachHandlers();
+            TryStopMyLocationAnimations();
+            CleanupMapViewResources();
+        }
+
         base.Dispose(disposing);
         if (disposing)
         {

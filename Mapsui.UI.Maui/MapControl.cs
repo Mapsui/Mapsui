@@ -35,7 +35,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// period of dangling ghost touches. You might want to tweak this value to your needs.
     /// </summary>
     public TimeSpan IsStaleTimeSpan { get; set; } = TimeSpan.FromMilliseconds(500); // Even with a value of 100 I never see removal of a valid event, so I assume 500 is save. And perhaps it could be set even lower because if a valid event is removed sometimes I don't notice any change in the UI.
-
     public MapControl()
     {
         View view;
@@ -71,8 +70,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         view.SizeChanged += View_SizeChanged;
         Content = view;
         SharedConstructor();
+        Mapsui.Utilities.PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowserStatic);
     }
-
     public void InvalidateCanvas()
     {
         if (_glView is SKGLView glView)
@@ -266,7 +265,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         _renderController?.Render(canvas);
     }
-
+    private static void OpenInBrowserStatic(string url)
+    {
+        Catch.TaskRun(() => _ = Launcher.OpenAsync(new Uri(url)));
+    }
     private ScreenPosition GetScreenPosition(SKPoint point, float pixelDensity) =>
         new(point.X / pixelDensity, point.Y / pixelDensity);
 
@@ -295,32 +297,54 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Dispatcher.Dispatch(() => Catch.Exceptions(action));
     }
 
+    private void DetachSkiaViewHandlers()
+    {
+        if (_glView != null)
+        {
+            _glView.Touch -= OnTouch;
+            _glView.PaintSurface -= OnGLPaintSurface;
+            _glView.SizeChanged -= View_SizeChanged;
+            _glView.Handler?.DisconnectHandler();
+        }
+
+        if (_canvasView != null)
+        {
+            _canvasView.Touch -= OnTouch;
+            _canvasView.PaintSurface -= OnPaintSurface;
+            _canvasView.SizeChanged -= View_SizeChanged;
+            _canvasView.Handler?.DisconnectHandler();
+        }
+
+        if (Content != null)
+        {
+            Content.SizeChanged -= View_SizeChanged;
+        }
+    }
+
     public void Dispose()
     {
         Dispose(true);
         GC.SuppressFinalize(this);
     }
-
     protected virtual void Dispose(bool disposing)
     {
-        var weakReference = _listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
-        if (weakReference != null)
-        {
-            _listeners?.Remove(weakReference);
-        }
-
         if (disposing)
         {
+            var weakReference = _listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
+            if (weakReference != null)
+            {
+                _listeners?.Remove(weakReference);
+            }
+
+            DetachSkiaViewHandlers();
             Map?.Dispose();
-        }
 
 #if ANDROID
-        DisposeAndroid();
+            DisposeAndroid();
 #endif
-
-        SharedDispose(disposing);
+            SharedDispose(disposing);
+        }
     }
-
     ~MapControl()
     {
         Dispose(false);

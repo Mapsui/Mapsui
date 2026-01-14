@@ -450,6 +450,7 @@ public class Map : INotifyPropertyChanged, IDisposable
                 LayerRemoved(layer); // Remove Event so that no memory leaks occur
             Layers.ClearAllGroups();
             RenderService.Dispose();
+            _dataFetcher.Dispose();
 
             Navigator.ViewportChanged -= Navigator_ViewportChanged;
             Navigator.FetchRequested -= Navigator_FetchRequested;
