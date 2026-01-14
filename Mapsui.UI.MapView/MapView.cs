@@ -1,7 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Animations;
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Objects;
 using Mapsui.Utilities;
@@ -862,26 +861,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void TryStopMyLocationAnimations()
     {
-        var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
-        var layerType = MyLocationLayer.GetType();
-        var animationsField = layerType.GetField("_animations", flags);
-        var animationMyLocationField = layerType.GetField("_animationMyLocation", flags);
-        var animationMyDirectionField = layerType.GetField("_animationMyDirection", flags);
-        var animationMyViewDirectionField = layerType.GetField("_animationMyViewDirection", flags);
-
-        if (animationMyLocationField?.GetValue(MyLocationLayer) is AnimationEntry<MapView> myLocationEntry)
-            Mapsui.Animations.Animation.Stop(this, myLocationEntry, callFinal: false);
-        if (animationMyDirectionField?.GetValue(MyLocationLayer) is AnimationEntry<MapView> myDirectionEntry)
-            Mapsui.Animations.Animation.Stop(this, myDirectionEntry, callFinal: false);
-        if (animationMyViewDirectionField?.GetValue(MyLocationLayer) is AnimationEntry<MapView> myViewDirectionEntry)
-            Mapsui.Animations.Animation.Stop(this, myViewDirectionEntry, callFinal: false);
-
-        if (animationsField?.GetValue(MyLocationLayer) is ConcurrentHashSet<AnimationEntry<MapView>> animations)
-            animations.Clear();
-
-        animationMyLocationField?.SetValue(MyLocationLayer, null);
-        animationMyDirectionField?.SetValue(MyLocationLayer, null);
-        animationMyViewDirectionField?.SetValue(MyLocationLayer, null);
+        MyLocationLayer.StopAnimations();
     }
 
     protected override void Dispose(bool disposing)
