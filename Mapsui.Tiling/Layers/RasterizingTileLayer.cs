@@ -33,6 +33,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchableSource, I
     /// <param name="persistentCache">Persistent Cache</param>
     /// <param name="projection">Projection</param>
     /// <param name="renderFormat">Format to Render To</param>
+    /// <param name="tileSchema">Optional tile schema to use. If null, defaults to GlobalSphericalMercator</param>
     public RasterizingTileLayer(
         ILayer layer,
         float pixelDensity = 1,
