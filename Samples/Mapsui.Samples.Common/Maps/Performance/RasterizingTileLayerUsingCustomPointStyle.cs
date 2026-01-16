@@ -14,12 +14,12 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 
 /// <summary>
 /// This sample demonstrates how to use a RasterizingTileLayer with a CustomPointStyle renderer for improved 
-/// performance when rendering a large number of points. The sample renders one million random points.
+/// performance when rendering one million points.
 /// </summary>
 public sealed class RasterizingTileLayerUsingCustomPointStyle : ISample
 {
     public string Name => "RasterizingTileLayerUsingCustomPointStyle";
-    public string Category => "Performance";
+    public string Category => "1";
 
     static readonly SKPaint _paint = new() { Color = new SKColor(79, 10, 107, 192), IsAntialias = true };
 
