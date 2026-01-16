@@ -343,6 +343,17 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             DisposeAndroid();
 #endif
             SharedDispose(disposing);
+
+            Handler?.DisconnectHandler();
+            var content = Content;
+            if (content != null)
+            {
+                if (content is VisualElement contentElement)
+                {
+                    contentElement.Handler?.DisconnectHandler();
+                }
+                Content = null;
+            }
         }
     }
     ~MapControl()

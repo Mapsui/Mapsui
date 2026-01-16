@@ -405,16 +405,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Unsubscribe();
             _map?.Dispose();
             _map = null;
-            Handler?.DisconnectHandler();
-            var content = Content;
-            if (content != null)
-            {
-                if (content is VisualElement contentElement)
-                {
-                    contentElement.Handler?.DisconnectHandler();
-                }
-                Content = null;
-            }
         }
     }
 
