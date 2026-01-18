@@ -2,6 +2,7 @@
 using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
 using Mapsui.Tiling.Rendering;
 using SkiaSharp;
@@ -16,7 +17,7 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 /// This sample demonstrates how to use a RasterizingTileLayer with a CustomPointStyle renderer for improved 
 /// performance when rendering one million points.
 /// </summary>
-public sealed class RasterizingTileLayerUsingCustomPointStyle : ISample
+public sealed class RasterizingTileLayerWithCustomPointStyleSample : ISample
 {
     public string Name => "RasterizingTileLayerUsingCustomPointStyle";
     public string Category => "1";
@@ -30,19 +31,23 @@ public sealed class RasterizingTileLayerUsingCustomPointStyle : ISample
         map.Layers.Add(CreateRasterizingTileLayer());
         var extent = map.Layers.Get(1).Extent!.Grow(map.Layers.Get(1).Extent!.Width * 0.1);
         map.Navigator.ZoomToBox(extent);
-        Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
+
+        Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
+        // You can add the Mapsui.Experimental.Rendering.Skia package and use the Experimental RegisterPointStyleRenderer to get accss to the IFeature parameter.
+        // Uncomment: Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
 
         return Task.FromResult(map);
     }
 
     private static RasterizingTileLayer CreateRasterizingTileLayer() => new(
         CreateRandomPointLayer(),
-        renderFetchStrategy: new RenderFetchStrategy())
+        renderFetchStrategy: new ImprovedRenderFetchStrategy(),
+        dataFetchStrategy: new DataFetchStrategy())
     {
         Style = new RasterStyle { Outline = new Pen(Color.Gray, 1) },
     };
 
-    private static void MyBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, IFeature feature, RenderService renderService, float opacity)
+    private static void MyBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, RenderService renderService, float opacity)
     {
         canvas.DrawRect(-5f, -5f, 10f, 10f, _paint);
     }
