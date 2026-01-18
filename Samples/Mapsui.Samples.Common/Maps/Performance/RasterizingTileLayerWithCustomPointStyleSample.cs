@@ -39,10 +39,7 @@ public sealed class RasterizingTileLayerWithCustomPointStyleSample : ISample
         return Task.FromResult(map);
     }
 
-    private static RasterizingTileLayer CreateRasterizingTileLayer() => new(
-        CreateRandomPointLayer(),
-        renderFetchStrategy: new ImprovedRenderFetchStrategy(),
-        dataFetchStrategy: new DataFetchStrategy())
+    private static RasterizingTileLayer CreateRasterizingTileLayer() => new(CreateRandomPointLayer())
     {
         Style = new RasterStyle { Outline = new Pen(Color.Gray, 1) },
     };
