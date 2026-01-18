@@ -2,16 +2,13 @@
 using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
-using Mapsui.Tiling.Rendering;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
-
 
 /// <summary>
 /// This sample demonstrates how to use a RasterizingTileLayer with a CustomPointStyle renderer for improved 
