@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 public sealed class RasterizingTileLayerWithCustomPointStyleSample : ISample
 {
     public string Name => "RasterizingTileLayerUsingCustomPointStyle";
-    public string Category => "1";
+    public string Category => "Performance";
 
     static readonly SKPaint _paint = new() { Color = new SKColor(79, 10, 107, 192), IsAntialias = true };
 
