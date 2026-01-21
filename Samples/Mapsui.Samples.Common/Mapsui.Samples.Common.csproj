@@ -17,8 +17,7 @@
     <None Remove="GeoData\TrueMarble\1\0\1.png" />
     <None Remove="GeoData\TrueMarble\1\1\0.png" />
     <None Remove="GeoData\TrueMarble\1\1\1.png" />
-    <None Remove="GeoData\World\
-                  .dbf" />
+    <None Remove="GeoData\World\cities.dbf" />
     <None Remove="GeoData\World\cities.prj" />
     <None Remove="GeoData\World\cities.shp" />
     <None Remove="GeoData\World\cities.shp.sidx" />
@@ -220,6 +219,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.ArcGIS\Mapsui.ArcGIS.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Experimental.Rendering.Skia\Mapsui.Experimental.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui.Experimental.VectorTiles\Mapsui.Experimental.VectorTiles.csproj" />
     <ProjectReference Include="..\..\Mapsui.Experimental\Mapsui.Experimental.csproj" />
     <ProjectReference Include="..\..\Mapsui.Extensions\Mapsui.Extensions.csproj" />

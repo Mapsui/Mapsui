@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
@@ -32,6 +33,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchableSource, I
     /// <param name="persistentCache">Persistent Cache</param>
     /// <param name="projection">Projection</param>
     /// <param name="renderFormat">Format to Render To</param>
+    /// <param name="tileSchema">Optional tile schema to use. If null, defaults to GlobalSphericalMercator</param>
     public RasterizingTileLayer(
         ILayer layer,
         float pixelDensity = 1,
@@ -43,14 +45,16 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchableSource, I
         int maxExtraTiles = -1,
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
-        RenderFormat renderFormat = RenderFormat.Png) : base(
-        new RasterizingTileSource(layer, pixelDensity, persistentCache, projection, renderFormat),
-        minTiles,
-        maxTiles,
-        dataFetchStrategy,
-        renderFetchStrategy ?? new TilingRenderFetchStrategy(),
-        minExtraTiles,
-        maxExtraTiles)
+        RenderFormat renderFormat = RenderFormat.Png,
+        ITileSchema? tileSchema = null)
+        : base(
+            new RasterizingTileSource(layer, pixelDensity, persistentCache, projection, renderFormat, tileSchema),
+            minTiles,
+            maxTiles,
+            dataFetchStrategy,
+            renderFetchStrategy ?? new TilingRenderFetchStrategy(),
+            minExtraTiles,
+            maxExtraTiles)
     {
         SourceLayer = layer;
         Name = layer.Name;

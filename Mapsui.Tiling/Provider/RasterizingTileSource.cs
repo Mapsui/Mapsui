@@ -35,14 +35,16 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         float pixelDensity = 1,
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
-        RenderFormat renderFormat = RenderFormat.Png)
+        RenderFormat renderFormat = RenderFormat.Png,
+        ITileSchema? tileSchema = null)
     {
-        _renderFormat = renderFormat;
         _layer = layer;
-        _renderService.VectorCache.Enabled = false;
-
         _pixelDensity = pixelDensity;
         PersistentCache = persistentCache ?? new NullCache();
+        _renderFormat = renderFormat;
+        _tileSchema = tileSchema;
+
+        _renderService.VectorCache.Enabled = false;
 
         if (_layer is ILayerDataSource<IProvider> { DataSource: { } } dataSourceLayer)
         {
