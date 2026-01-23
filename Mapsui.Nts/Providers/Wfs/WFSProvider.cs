@@ -81,6 +81,7 @@ public class WFSProvider : IProvider, IDisposable
     private string? _sridOverride;
     private string? _proxyUrl;
     private ICredentials? _credentials;
+    private Dictionary<string, string>? _httpHeaders;
     private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
     private readonly SemaphoreSlim _init = new(1, 1);
     private bool _initialized;
@@ -223,6 +224,19 @@ public class WFSProvider : IProvider, IDisposable
         set
         {
             _credentials = value;
+            _initialized = false;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the additional HTTP headers for the requests.
+    /// </summary>
+    public Dictionary<string, string>? HttpHeaders
+    {
+        get => _httpHeaders;
+        set
+        {
+            _httpHeaders = value;
             _initialized = false;
         }
     }
@@ -665,6 +679,14 @@ public class WFSProvider : IProvider, IDisposable
         if (_credentials != null)
         {
             httpClientUtil.Credentials = _credentials;
+        }
+
+        if (_httpHeaders != null)
+        {
+            foreach (var httpHeader in _httpHeaders)
+            {
+                httpClientUtil.AddHeader(httpHeader.Key, httpHeader.Value, true);
+            }
         }
 
         if (_proxyUrl != null)
