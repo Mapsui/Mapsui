@@ -60,9 +60,10 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
     /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="userAgent">user Agent</param>
-    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    /// <param name="httpHeaders">Additional HTTP headers to be sent with each request.</param>
+    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null, Dictionary<string, string>? httpHeaders = null)
     {
-        var client = await Client.CreateAsync(url, wmsVersion, getBytesAsync, persistentCache: persistentCache ?? DefaultCache, userAgent);
+        var client = await Client.CreateAsync(url, wmsVersion, getBytesAsync, persistentCache: persistentCache ?? DefaultCache, userAgent, httpHeaders);
         var provider = new WmsProvider(client, persistentCache: persistentCache ?? DefaultCache)
         {
             UserAgent = userAgent
@@ -578,6 +579,15 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
         using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
+
+        if (_wmsClient?.HttpHeaders != null)
+        {
+            foreach (var httpHeader in _wmsClient.HttpHeaders)
+            {
+                client.DefaultRequestHeaders.Add(httpHeader.Key, httpHeader.Value);
+            }
+        }
+
         using var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);
         using var response = await client.SendAsync(req).ConfigureAwait(false);
 

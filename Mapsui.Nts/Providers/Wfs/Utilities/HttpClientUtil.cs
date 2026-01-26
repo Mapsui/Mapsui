@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security;
@@ -23,7 +24,8 @@ namespace Mapsui.Providers.Wfs.Utilities;
 /// </summary>
 public class HttpClientUtil(IUrlPersistentCache? persistentCache = null)
 {
-    private readonly Dictionary<string, string?> _requestHeaders = [];
+    private readonly Dictionary<string, string?> _nonPersistentRequestHeaders = [];
+    private readonly Dictionary<string, string?> _persistentRequestHeaders = [];
     private byte[]? _postData;
     private string? _proxyUrl;
     private string? _url;
@@ -69,9 +71,17 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null)
     /// </summary>
     /// <param name="name">The name of the header</param>
     /// <param name="value">The value of the header</param>
-    public void AddHeader(string name, string value)
+    /// <param name="persistent">If true, HTTP header will not be reset.</param>
+    public void AddHeader(string name, string value, bool persistent = false)
     {
-        _requestHeaders.Add(name, value);
+        if (persistent)
+        {
+            _persistentRequestHeaders.Add(name, value);
+        }
+        else
+        {
+            _nonPersistentRequestHeaders.Add(name, value);
+        }
     }
 
     /// <summary>
@@ -115,7 +125,7 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null)
             using var httpClient = new HttpClient(httpClientHandler);
             httpClient.Timeout = new TimeSpan(0, 0, 1, 30);
 
-            foreach (var header in _requestHeaders)
+            foreach (var header in _nonPersistentRequestHeaders.Concat(_persistentRequestHeaders))
             {
                 httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
             }
@@ -177,6 +187,6 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null)
     {
         _url = null;
         _postData = null;
-        _requestHeaders.Clear();
+        _nonPersistentRequestHeaders.Clear();
     }
 }

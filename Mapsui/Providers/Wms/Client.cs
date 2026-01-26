@@ -160,6 +160,7 @@ public class Client
     private string _wmsVersion = "1.0.0"; // set default value
     private WmsServerLayer _layer;
     private readonly string? _userAgent;
+    private Dictionary<string, string>? _httpHeaders;
 
     /// <summary>
     /// Gets the service description
@@ -180,6 +181,11 @@ public class Client
     /// Gets a list of available feature info mime type formats
     /// </summary>
     public Collection<string>? GetFeatureInfoOutputFormats => _getFeatureInfoOutputFormats;
+
+    /// <summary>
+    /// Gets additional HTTP headers to be sent with each request.
+    /// </summary>
+    public Dictionary<string, string>? HttpHeaders => _httpHeaders;
 
     /// <summary>
     /// Gets a list of available exception mime type formats
@@ -209,9 +215,10 @@ public class Client
     /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="persistentCache">persistent Cache</param>
     /// <param name="userAgent">user Agent</param>
-    public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    /// <param name="httpHeaders">Additional HTTP headers to be sent with each request</param>
+    public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null, Dictionary<string, string>? httpHeaders = null)
     {
-        var client = new Client(getBytesAsync, persistentCache, userAgent);
+        var client = new Client(getBytesAsync, persistentCache, userAgent, httpHeaders);
 
         var strReq = new StringBuilder(url);
         if (!url.Contains('?'))
@@ -234,8 +241,10 @@ public class Client
     /// </summary>
     /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="persistentCache">persistent Cache</param>
-    private Client(Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    /// <param name="httpHeaders">Additional HTTP headers to be sent with each request</param>
+    private Client(Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null, Dictionary<string, string>? httpHeaders = null)
     {
+        _httpHeaders = httpHeaders;
         _userAgent = userAgent;
         _persistentCache = persistentCache;
         _getBytesAsync = InitializeGetBytesAsyncMethod(getBytesAsync);
@@ -262,6 +271,15 @@ public class Client
             var handler = new HttpClientHandler();
             using var client = new HttpClient(handler);
             client.DefaultRequestHeaders.UserAgent.ParseAdd(_userAgent ?? "If you use BruTile please specify a user-agent specific to your app");
+
+            if (_httpHeaders != null)
+            {
+                foreach (var httpHeader in _httpHeaders)
+                {
+                    client.DefaultRequestHeaders.Add(httpHeader.Key, httpHeader.Value);
+                }
+            }
+
             using var response = await client.GetAsync(url).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
