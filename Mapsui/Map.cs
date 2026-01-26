@@ -343,6 +343,9 @@ public class Map : INotifyPropertyChanged, IDisposable
 
         layer.DataChanged -= LayerDataChanged;
         layer.PropertyChanged -= LayerPropertyChanged;
+
+        // Clean up any caches associated with this layer
+        RenderService.CleanupLayerCaches(layer.Id);
     }
 
     private void LayersChanged()

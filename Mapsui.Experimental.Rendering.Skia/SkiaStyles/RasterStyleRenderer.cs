@@ -28,10 +28,14 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             if (style is not RasterStyle)
                 throw new ArgumentException("Excepted a RasterStyle in the RasterStyleRenderer");
 
-            var tileCache = renderService.TileCache;
-            tileCache.UpdateCache(currentIteration);
+            // Use per-layer cache to avoid competition for cache space between layers
+            // The cache is managed by RenderService and disposed when the layer is removed
+#pragma warning disable IDISP001 // Dispose created
+            var featureIdTileCache = renderService.GetLayerFeatureIdTileCache(layer.Id);
+#pragma warning restore IDISP001
+            featureIdTileCache.UpdateCache(currentIteration);
 
-            var tile = tileCache.GetOrAdd(raster, ToTileCacheEntry, currentIteration);
+            var tile = featureIdTileCache.GetOrAdd(feature.Id, _ => ToTileCacheEntry(raster), currentIteration);
             if (tile is null)
                 return false;
 
