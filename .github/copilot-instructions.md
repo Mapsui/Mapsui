@@ -5,24 +5,30 @@ These instructions guide GitHub Copilot (and Copilot Chat) when helping in this 
 ## Project overview
 - This repository contains the Mapsui project, a .NET/C# mapping and map-rendering toolkit used across multiple app platforms.
 - Typical technologies you will see: C#, .NET, build/test via dotnet CLI, sample apps, and cross-platform UI integrations.
+- Code in `Mapsui.Experimental.*` namespaces may have breaking API changes in any release.
 
 ## Tech and build
 - Primary language: C# (.NET).
 - Build locally: `dotnet restore && dotnet build` from the repository root.
 - Run tests: `dotnet test` from the repository root (or relevant test project directories).
 - Respect solution/project configurations and any Directory.Build.props/targets.
+- **Always build affected projects after making code changes** to verify compilation and catch errors early using `dotnet build <project-path>.csproj`.
 
 ## Style and quality
 - Follow the repo's .editorconfig and analyzers where present.
 - Prefer readable, consistent naming; small, focused methods; early returns where it improves clarity.
 - Keep public APIs stable; avoid breaking changes without prior discussion.
 - Add/adjust XML doc comments when modifying public-facing types/members.
+- Ensure all necessary using directives are included; verify compilation after adding extension methods.
+- Follow existing error handling patterns; consider whether to throw exceptions vs return null based on codebase conventions.
 
 ## Contributions Copilot should optimize for
 - Clear, small changes with strong rationale.
 - Tests when fixing bugs or adding non-trivial behavior.
 - Helpful comments where logic is non-obvious.
 - Performance awareness in hot paths; avoid allocations and unnecessary LINQ in tight loops.
+- Ask clarifying questions before implementing significant design changes.
+- Follow existing patterns in the codebase (e.g., type-checking patterns in layers).
 
 ## What to avoid
 - Introducing dependencies without discussion.
@@ -52,3 +58,4 @@ These instructions guide GitHub Copilot (and Copilot Chat) when helping in this 
 - Provide concrete file paths, types, and examples.
 - Ask for tests and edge cases.
 - Request refactors in small, verifiable steps.
+- Request implementation in stages (interface first, then implementations, then integration).
