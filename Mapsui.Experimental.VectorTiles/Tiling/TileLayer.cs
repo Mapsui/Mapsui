@@ -123,6 +123,10 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         {
             return await featureTileSource.GetFeatureAsync(GetHttpClient(), tileInfo).ConfigureAwait(false);
         }
+        if (_tileSource is ILocalFeatureTileSource localFeatureTileSource)
+        {
+            return await localFeatureTileSource.GetFeatureAsync(tileInfo).ConfigureAwait(false);
+        }
         if (_tileSource is IHttpTileSource httpTileSource)
         {
             var tileData = await httpTileSource.GetTileAsync(GetHttpClient(), tileInfo).ConfigureAwait(false);
@@ -137,7 +141,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         }
         else
         {
-            throw new NotImplementedException($"ToFeatureAsync is not implemented for this TileSource type '{_tileSource.GetType()}'. Inherit either from either '{nameof(IHttpTileSource)}', '{nameof(ILocalTileSource)}' or '{nameof(IFeatureHttpTileSource)}'");
+            throw new NotImplementedException($"ToFeatureAsync is not implemented for this TileSource type '{_tileSource.GetType()}'. Inherit either from either '{nameof(IHttpTileSource)}', '{nameof(ILocalTileSource)}', '{nameof(IFeatureHttpTileSource)}' or '{nameof(ILocalFeatureTileSource)}'");
         }
     }
 
