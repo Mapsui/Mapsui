@@ -24,7 +24,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
     private readonly RenderService _renderService = new();
     private readonly float _pixelDensity;
     private readonly ILayer _layer;
-    private ITileSchema? _tileSchema;
+    private ITileSchema _tileSchema;
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
@@ -43,7 +43,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         _pixelDensity = pixelDensity;
         PersistentCache = persistentCache ?? new NullCache();
         _renderFormat = renderFormat;
-        _tileSchema = tileSchema;
+        _tileSchema = tileSchema ?? new GlobalSphericalMercator();
 
         _renderService.VectorCache.Enabled = false;
 
@@ -211,7 +211,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
     }
 
-    public ITileSchema Schema => _tileSchema ??= new GlobalSphericalMercator();
+    public ITileSchema Schema => _tileSchema;
     public string Name => _layer.Name;
     public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text ?? string.Empty, _layer.Attribution.Url ?? string.Empty);
 
