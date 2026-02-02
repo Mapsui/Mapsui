@@ -3,6 +3,7 @@ using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -63,6 +64,9 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
 
     public async Task<byte[]?> GetTileAsync(TileInfo tileInfo)
     {
+        if (_layer.Extent?.ToExtent().Intersects(tileInfo.Extent) != true)
+            return null;
+
         var index = tileInfo.Index;
         var result = PersistentCache.Find(index);
         if (result == null)
@@ -82,7 +86,10 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
     private async Task<(MSection section, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo, IMapRenderer renderer, RenderService renderService)
     {
         var indexLevel = tileInfo.Index.Level;
-        Schema.Resolutions.TryGetValue(indexLevel, out var tileResolution);
+        if (!Schema.Resolutions.TryGetValue(indexLevel, out var tileResolution))
+        {
+            Logger.Log(LogLevel.Error, $"Requested level was not available in the {nameof(TileSchema)} of the {nameof(RasterizingTileSource)}");
+        }
 
         var resolution = tileResolution.UnitsPerPixel;
         var section = new MSection(tileInfo.Extent.ToMRect(), resolution);
