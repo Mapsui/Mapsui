@@ -28,7 +28,6 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     private readonly IRenderFetchStrategy _renderFetchStrategy;
     private readonly TileCache _tileCache;
     private readonly TileFetchPlanner _tileFetchPlanner;
-    private readonly MRect? _extent;
     private readonly HttpClient? _httpClient = null;
     private readonly HttpClient? _injectedHttpClient = null;
 
@@ -48,7 +47,6 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     {
         _tileSource = tileSource ?? throw new ArgumentException($"{nameof(tileSource)} cannot be null");
         _tileCache = new TileCache();
-        _extent = _tileSource.Schema.Extent.ToMRect();
         _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
         _tileFetchPlanner = new TileFetchPlanner(_tileCache, _tileSource.Schema, ToFeatureAsync, dataFetchStrategy ?? new DataFetchStrategy(3), this);
         _tileFetchPlanner.DataChanged += TileFetchPlanner_OnDataChanged;
@@ -74,7 +72,9 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     public override IReadOnlyList<double> Resolutions => _tileSource.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
     /// <inheritdoc />
-    public override MRect? Extent => _tileSource is IFeatureTileSource featureTileSource ? featureTileSource.Extent : _extent;
+    public override MRect? Extent => _tileSource is IFeatureTileSource featureTileSource
+        ? featureTileSource.Extent
+        : _tileSource.Schema.Extent.ToMRect();
 
     /// <inheritdoc />
     public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
