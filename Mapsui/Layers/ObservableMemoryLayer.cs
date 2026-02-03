@@ -53,10 +53,10 @@ public class ObservableMemoryLayer<T> : MemoryLayer
             }
 
             _observableCollection = value;
+            _shadowCollection.Clear();
             if (_observableCollection != null)
             {
                 _observableCollection.CollectionChanged += DataSource_CollectionChanged;
-                _shadowCollection.Clear();
                 if (_observableCollection is IEnumerable<T> enumerable)
                 {
                     foreach (var it in enumerable.ToArray()) // collection has been changed.
