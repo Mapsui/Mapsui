@@ -235,9 +235,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
             f.Extent.MinX <= worldPosition.X && f.Extent.MaxX >= worldPosition.X && f.Extent.MinY <= worldPosition.Y && f.Extent.MaxY >= worldPosition.Y);
 
         if (tileInfo == null)
-        {
             return result;
-        }
 
         var layer = await CreateRenderLayerAsync(tileInfo, _defaultRenderer, _renderService);
         var renderLayer = layer.RenderLayer;
