@@ -1,5 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using Mapsui.Utilities;
@@ -18,7 +18,7 @@ namespace Mapsui.Layers;
 public class ObservableMemoryLayer<T> : MemoryLayer
     where T : class
 {
-    private ObservableCollection<T>? _observableCollection;
+    private INotifyCollectionChanged? _observableCollection;
     private readonly ConcurrentHashSet<ShadowItem<T>> _shadowCollection = new();
     private readonly Func<T, IFeature?> _itemToFeature;
 
@@ -42,7 +42,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
     /// provided collection and subscribe to its change notifications. If the collection is replaced, any previous event
     /// subscriptions are removed. Setting this property to null will clear the internal state and unsubscribe from
     /// change notifications.</remarks>
-    public ObservableCollection<T>? ObservableCollection
+    public INotifyCollectionChanged? ObservableCollection
     {
         get => _observableCollection;
         set
@@ -57,12 +57,15 @@ public class ObservableMemoryLayer<T> : MemoryLayer
             {
                 _observableCollection.CollectionChanged += DataSource_CollectionChanged;
                 _shadowCollection.Clear();
-                foreach (var it in _observableCollection.ToArray()) // collection has been changed.
+                if (_observableCollection is IEnumerable<T> enumerable)
                 {
-                    var feature = _itemToFeature(it);
-                    if (feature != null)
+                    foreach (var it in enumerable.ToArray()) // collection has been changed.
                     {
-                        _ = _shadowCollection.Add(new ShadowItem<T>(it, feature));
+                        var feature = _itemToFeature(it);
+                        if (feature != null)
+                        {
+                            _ = _shadowCollection.Add(new ShadowItem<T>(it, feature));
+                        }
                     }
                 }
             }
@@ -106,8 +109,8 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 break;
             case NotifyCollectionChangedAction.Reset:
                 _shadowCollection.Clear();
-                if (_observableCollection != null)
-                    foreach (var it in _observableCollection)
+                if (_observableCollection is IEnumerable<T> enumerable)
+                    foreach (var it in enumerable)
                     {
                         var feature = _itemToFeature(it);
                         if (feature != null)
