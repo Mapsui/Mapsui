@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using MapsuiManipulation = Mapsui.Manipulations.Manipulation;
 
 namespace Mapsui.UI.Wpf;
@@ -60,8 +59,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         SkiaCanvas.Visibility = Visibility.Visible;
 
         SharedConstructor();
-
-        RefreshGraphics();
     }
 
     public void InvalidateCanvas()
@@ -69,20 +66,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (Dispatcher.CheckAccess()) SkiaCanvas.InvalidateVisual();
         else RunOnUIThread(SkiaCanvas.InvalidateVisual);
     }
-
-    private static Rectangle CreateSelectRectangle() => new()
-    {
-        Fill = new SolidColorBrush(Colors.Red),
-        Stroke = new SolidColorBrush(Colors.Black),
-        StrokeThickness = 3,
-        RadiusX = 0.5,
-        RadiusY = 0.5,
-        StrokeDashArray = [3.0],
-        Opacity = 0.3,
-        VerticalAlignment = VerticalAlignment.Top,
-        HorizontalAlignment = HorizontalAlignment.Left,
-        Visibility = Visibility.Collapsed
-    };
 
     private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
 
