@@ -40,6 +40,11 @@ public class GetFeatureInfo
     public ICredentials? Credentials { get; set; }
 
     /// <summary>
+    /// Gets or sets additional HTTP headers to be sent with each request.
+    /// </summary>
+    public Dictionary<string, string>? HttpHeaders { get; set; }
+
+    /// <summary>
     /// Request FeatureInfo for a WMS Server
     /// </summary>
     /// <param name="baseUrl">Base URL of the WMS server</param>
@@ -88,6 +93,15 @@ public class GetFeatureInfo
 
         using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
+
+        if (HttpHeaders != null)
+        {
+            foreach (var httpHeader in HttpHeaders)
+            {
+                client.DefaultRequestHeaders.Add(httpHeader.Key, httpHeader.Value);
+            }
+        }
+
         using var req = new HttpRequestMessage(HttpMethod.Get, url);
         using var response = await client.SendAsync(req).ConfigureAwait(false);
 
