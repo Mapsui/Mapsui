@@ -52,10 +52,13 @@ public class ProjectingProvider : IProvider
 
     public MRect? GetExtent()
     {
-        if (_provider.GetExtent() == null) return null;
-        var extent = _provider.GetExtent()!;
+        var extent = _provider.GetExtent();
 
-        if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS)) return extent;
+        if (extent is null)
+            return null;
+
+        if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS))
+            return extent;
 
         if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))
             throw new NotSupportedException($"CRS is not provided. From CRS: {_provider.CRS}. To CRS {CRS}");
