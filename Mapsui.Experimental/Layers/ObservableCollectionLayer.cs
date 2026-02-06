@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Mapsui.Extensions;
@@ -14,7 +13,7 @@ namespace Mapsui.Experimental.Layers;
 /// Represents a memory-based layer that exposes its data as an observable collection and synchronizes feature changes
 /// with the underlying feature set.
 /// </summary>
-/// <remarks>This class enables two-way synchronization between an ObservableCollection of items and the set of
+/// <remarks>This class enables two-way synchronization between a collection implementing both INotifyCollectionChanged and IEnumerable&lt;T&gt; (such as ObservableCollection&lt;T&gt;) and the set of
 /// features exposed by the layer. Changes to the collection are automatically reflected in the feature set, and vice
 /// versa. This is useful for scenarios where UI or other components need to observe and react to changes in the layer's
 /// data in real time.</remarks>
@@ -22,7 +21,8 @@ namespace Mapsui.Experimental.Layers;
 public class ObservableCollectionLayer<T> : BaseLayer
     where T : class
 {
-    private ObservableCollection<T>? _observableCollection;
+    private IEnumerable<T>? _collection;
+    private INotifyCollectionChanged? _notifier;
     private readonly ConcurrentHashSet<ShadowItem<T>> _shadowCollection = new();
     private readonly Func<T, IFeature?> _itemToFeature;
     private MRect? _extent;
@@ -45,23 +45,29 @@ public class ObservableCollectionLayer<T> : BaseLayer
     /// <remarks>Assigning a new collection will update the internal state to reflect the contents of the
     /// provided collection and subscribe to its change notifications. If the collection is replaced, any previous event
     /// subscriptions are removed. Setting this property to null will clear the internal state and unsubscribe from
-    /// change notifications.</remarks>
-    public ObservableCollection<T>? ObservableCollection
+    /// change notifications. The collection must implement both INotifyCollectionChanged and IEnumerable&lt;T&gt; (such as ObservableCollection&lt;T&gt; or any custom implementation).</remarks>
+    public IEnumerable<T>? ObservableCollection
     {
-        get => _observableCollection;
+        get => _collection;
         set
         {
-            if (_observableCollection != null)
+            if (_notifier != null)
             {
-                _observableCollection.CollectionChanged -= DataSource_CollectionChanged;
+                _notifier.CollectionChanged -= DataSource_CollectionChanged;
             }
 
-            _observableCollection = value;
-            if (_observableCollection != null)
+            _collection = value;
+            _notifier = value as INotifyCollectionChanged;
+
+            if (_notifier != null)
             {
-                _observableCollection.CollectionChanged += DataSource_CollectionChanged;
-                _shadowCollection.Clear();
-                foreach (var it in _observableCollection.ToArray())
+                _notifier.CollectionChanged += DataSource_CollectionChanged;
+            }
+
+            _shadowCollection.Clear();
+            if (_collection != null)
+            {
+                foreach (var it in _collection.ToArray())
                 {
                     var feature = _itemToFeature(it);
                     if (feature != null)
@@ -70,6 +76,7 @@ public class ObservableCollectionLayer<T> : BaseLayer
                     }
                 }
             }
+
             FeaturesWereModified();
             DataHasChanged();
         }
@@ -110,8 +117,8 @@ public class ObservableCollectionLayer<T> : BaseLayer
                 break;
             case NotifyCollectionChangedAction.Reset:
                 _shadowCollection.Clear();
-                if (_observableCollection != null)
-                    foreach (var it in _observableCollection)
+                if (_collection != null)
+                    foreach (var it in _collection)
                     {
                         var feature = _itemToFeature(it);
                         if (feature != null)
