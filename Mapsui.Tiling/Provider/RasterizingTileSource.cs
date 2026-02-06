@@ -3,6 +3,7 @@ using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -23,7 +24,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
     private readonly RenderService _renderService = new();
     private readonly float _pixelDensity;
     private readonly ILayer _layer;
-    private ITileSchema? _tileSchema;
+    private ITileSchema _tileSchema;
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
@@ -42,7 +43,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         _pixelDensity = pixelDensity;
         PersistentCache = persistentCache ?? new NullCache();
         _renderFormat = renderFormat;
-        _tileSchema = tileSchema;
+        _tileSchema = tileSchema ?? new GlobalSphericalMercator();
 
         _renderService.VectorCache.Enabled = false;
 
@@ -63,6 +64,9 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
 
     public async Task<byte[]?> GetTileAsync(TileInfo tileInfo)
     {
+        if (_layer.Extent?.ToExtent().Intersects(tileInfo.Extent) != true)
+            return null;
+
         var index = tileInfo.Index;
         var result = PersistentCache.Find(index);
         if (result == null)
@@ -82,7 +86,10 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
     private async Task<(MSection section, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo, IMapRenderer renderer, RenderService renderService)
     {
         var indexLevel = tileInfo.Index.Level;
-        Schema.Resolutions.TryGetValue(indexLevel, out var tileResolution);
+        if (!Schema.Resolutions.TryGetValue(indexLevel, out var tileResolution))
+        {
+            Logger.Log(LogLevel.Error, $"Requested level was not available in the {nameof(TileSchema)} of the {nameof(RasterizingTileSource)}");
+        }
 
         var resolution = tileResolution.UnitsPerPixel;
         var section = new MSection(tileInfo.Extent.ToMRect(), resolution);
@@ -204,7 +211,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
     }
 
-    public ITileSchema Schema => _tileSchema ??= new GlobalSphericalMercator();
+    public ITileSchema Schema => _tileSchema;
     public string Name => _layer.Name;
     public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text ?? string.Empty, _layer.Attribution.Url ?? string.Empty);
 
@@ -228,9 +235,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
             f.Extent.MinX <= worldPosition.X && f.Extent.MaxX >= worldPosition.X && f.Extent.MinY <= worldPosition.Y && f.Extent.MaxY >= worldPosition.Y);
 
         if (tileInfo == null)
-        {
             return result;
-        }
 
         var layer = await CreateRenderLayerAsync(tileInfo, _defaultRenderer, _renderService);
         var renderLayer = layer.RenderLayer;
