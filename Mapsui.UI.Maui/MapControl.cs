@@ -194,8 +194,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
                     _manipulationTracker.Manipulate(_positions.Values.Select(p => p.ScreenPosition).ToArray(), Map.Navigator.Manipulate);
                 }
-
-                RefreshGraphics();
             }
             else if (e.ActionType == SKTouchAction.Released)
             {

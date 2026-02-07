@@ -121,8 +121,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (OnPointerMoved([position], true)) // Only for hover events
             return;
-
-        RefreshGraphics(); // Todo: Figure out if we really need to refresh the graphics here. It might be better to only do this when the map is actually changed. In that case it should perhaps be done  in the users handler to OnMapPointerMoved
     }
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
@@ -204,8 +202,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (OnPointerMoved([manipulation.Center], false))
             return;
 
-        Map.Navigator.Manipulate(ToManipulation(e));
-        RefreshGraphics();
+        Map.Navigator.Manipulate(manipulation);
     }
 
     private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
