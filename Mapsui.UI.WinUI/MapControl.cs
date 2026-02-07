@@ -202,7 +202,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (OnPointerMoved([manipulation.Center], false))
             return;
 
-        Map.Navigator.Manipulate(ToManipulation(e));
+        Map.Navigator.Manipulate(manipulation);
     }
 
     private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
