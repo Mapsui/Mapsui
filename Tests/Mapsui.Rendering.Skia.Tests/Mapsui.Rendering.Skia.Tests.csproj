@@ -373,14 +373,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Images\OriginalTest\">
-    </Folder>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Resources\Images\OriginalTest\*.*">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Images\OriginalRegression\*.*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

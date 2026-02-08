@@ -24,8 +24,8 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
     private readonly RenderService _renderService = new();
     private readonly float _pixelDensity;
     private readonly ILayer _layer;
-    private ITileSchema _tileSchema;
-    private Attribution? _attribution;
+    private readonly ITileSchema _tileSchema;
+    private readonly Attribution _attribution;
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
     private readonly ConcurrentDictionary<TileIndex, double> _searchSizeCache = new();
@@ -44,6 +44,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         PersistentCache = persistentCache ?? new NullCache();
         _renderFormat = renderFormat;
         _tileSchema = tileSchema ?? new GlobalSphericalMercator();
+        _attribution = new Attribution(_layer.Attribution.Text ?? string.Empty, _layer.Attribution.Url ?? string.Empty);
 
         _renderService.VectorCache.Enabled = false;
 
@@ -213,7 +214,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
 
     public ITileSchema Schema => _tileSchema;
     public string Name => _layer.Name;
-    public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text ?? string.Empty, _layer.Attribution.Url ?? string.Empty);
+    public Attribution Attribution => _attribution;
 
     public static Viewport ToViewport(MSection section)
     {
