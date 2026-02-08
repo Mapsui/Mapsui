@@ -8,7 +8,7 @@ namespace Mapsui.Experimental.VectorTiles.Tiling;
 /// <summary>
 /// Tile source that retrieves features directly via HTTP requests instead of raster tiles
 /// </summary>
-public interface IFeatureHttpTileSource : ITileSource
+public interface IHttpFeatureTileSource : ITileSource, IFeatureTileSource
 {
     /// <summary>
     /// Gets a feature for the specified tile using the provided HttpClient

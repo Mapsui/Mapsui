@@ -1,6 +1,7 @@
 using BruTile;
 using BruTile.Predefined;
 using Mapsui.Experimental.VectorTiles.Tiling;
+using Mapsui.Tiling.Extensions;
 using System.Threading;
 using System.Threading.Tasks;
 using VexTile.Common.Sources;
@@ -37,6 +38,9 @@ public sealed class VexTileSource : ILocalFeatureTileSource
 
     /// <inheritdoc />
     public Attribution Attribution => new("Attributions");
+
+    /// <inheritdoc />
+    public MRect? Extent => Schema.Extent.ToMRect();
 
     /// <inheritdoc />
     public async Task<IFeature?> GetFeatureAsync(TileInfo tileInfo, CancellationToken cancellationToken = default)

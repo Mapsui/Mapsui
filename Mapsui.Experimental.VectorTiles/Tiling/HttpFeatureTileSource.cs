@@ -1,5 +1,6 @@
 using BruTile;
 using Mapsui.Projections;
+using Mapsui.Tiling.Extensions;
 using NetTopologySuite.IO.VectorTiles;
 using System.Net.Http;
 using System.Threading;
@@ -14,7 +15,7 @@ namespace Mapsui.Experimental.VectorTiles.Tiling;
 /// Creates a new FeatureHttpTileSource that wraps an existing HttpTileSource
 /// </remarks>
 /// <param name="httpTileSource">The underlying HTTP tile source to wrap</param>
-public sealed class FeatureHttpTileSource(IHttpTileSource httpTileSource) : IFeatureHttpTileSource
+public sealed class FeatureHttpTileSource(IHttpTileSource httpTileSource) : IHttpFeatureTileSource
 {
     private readonly IHttpTileSource _httpTileSource = httpTileSource;
 
@@ -26,6 +27,9 @@ public sealed class FeatureHttpTileSource(IHttpTileSource httpTileSource) : IFea
 
     /// <inheritdoc />
     public Attribution Attribution => _httpTileSource.Attribution;
+
+    /// <inheritdoc />
+    public MRect? Extent => Schema.Extent.ToMRect();
 
     /// <inheritdoc />
     public async Task<IFeature> GetFeatureAsync(HttpClient httpClient, TileInfo tileInfo, CancellationToken? cancellationToken = null)

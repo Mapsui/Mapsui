@@ -7,7 +7,7 @@ namespace Mapsui.Experimental.VectorTiles.Tiling;
 /// <summary>
 /// Tile source that retrieves features directly from local sources instead of raster tiles
 /// </summary>
-public interface ILocalFeatureTileSource : ITileSource
+public interface ILocalFeatureTileSource : ITileSource, IFeatureTileSource
 {
     /// <summary>
     /// Gets a feature for the specified tile
