@@ -7,7 +7,8 @@ namespace Mapsui.Experimental.Rendering.Skia.Drawables;
 /// <summary>
 /// A pre-created drawable for polygon and linestring features rendered with VectorStyle.
 /// The SKPath is stored in world coordinates and transformed to screen coordinates at draw time
-/// using a world-to-screen matrix (clone + transform). All paints remain in pixel/screen units.
+/// via a canvas matrix. Paint objects are created locally at draw time from the stored style
+/// parameters, avoiding native-object lifecycle issues between background and UI threads.
 /// </summary>
 public sealed class VectorStyleDrawable : IDrawable
 {
@@ -15,17 +16,29 @@ public sealed class VectorStyleDrawable : IDrawable
         double worldX,
         double worldY,
         SKPath worldPath,
-        SKPaint? fillPaint,
-        SKPaint? outlinePaint,
-        SKPaint? linePaint,
+        Brush? brush,
+        float fillOpacity,
+        double viewportRotation,
+        SKImage? bitmapFillImage,
+        Pen? outlinePen,
+        float? outlineWidthOverride,
+        float outlineOpacity,
+        Pen? linePen,
+        float lineOpacity,
         FillStyle fillStyle)
     {
         WorldX = worldX;
         WorldY = worldY;
         WorldPath = worldPath;
-        FillPaint = fillPaint;
-        OutlinePaint = outlinePaint;
-        LinePaint = linePaint;
+        Brush = brush;
+        FillOpacity = fillOpacity;
+        ViewportRotation = viewportRotation;
+        BitmapFillImage = bitmapFillImage;
+        OutlinePen = outlinePen;
+        OutlineWidthOverride = outlineWidthOverride;
+        OutlineOpacity = outlineOpacity;
+        LinePen = linePen;
+        LineOpacity = lineOpacity;
         FillStyle = fillStyle;
     }
 
@@ -35,28 +48,45 @@ public sealed class VectorStyleDrawable : IDrawable
     /// <summary>World Y coordinate (geometry centroid, for IDrawable interface).</summary>
     public double WorldY { get; }
 
-    /// <summary>Pre-created path in world coordinates. Transformed to screen coords at draw time.</summary>
+    /// <summary>Pre-created path in world coordinates. Transformed to screen coords at draw time via canvas matrix.</summary>
     public SKPath WorldPath { get; }
 
-    /// <summary>Pre-created fill paint for polygons, or null if no fill.</summary>
-    public SKPaint? FillPaint { get; }
+    /// <summary>The Mapsui Brush for polygon fills, or null if no fill.</summary>
+    public Brush? Brush { get; }
 
-    /// <summary>Pre-created outline paint (polygon outline or linestring outline), or null.</summary>
-    public SKPaint? OutlinePaint { get; }
+    /// <summary>Combined opacity (layer * style) for the fill paint.</summary>
+    public float FillOpacity { get; }
 
-    /// <summary>Pre-created line paint for linestrings, or null.</summary>
-    public SKPaint? LinePaint { get; }
+    /// <summary>Viewport rotation at creation time (used for BitmapRotated fill).</summary>
+    public double ViewportRotation { get; }
+
+    /// <summary>Pre-extracted SKImage for Bitmap/BitmapRotated fills (cache-owned, not disposed by this drawable).</summary>
+    public SKImage? BitmapFillImage { get; }
+
+    /// <summary>The Mapsui Pen for polygon outlines or linestring outer strokes, or null.</summary>
+    public Pen? OutlinePen { get; }
+
+    /// <summary>Explicit width override for linestring outlines (line width + 2 * outline width).</summary>
+    public float? OutlineWidthOverride { get; }
+
+    /// <summary>Combined opacity for the outline paint.</summary>
+    public float OutlineOpacity { get; }
+
+    /// <summary>The Mapsui Pen for linestrings, or null.</summary>
+    public Pen? LinePen { get; }
+
+    /// <summary>Combined opacity for the line paint.</summary>
+    public float LineOpacity { get; }
 
     /// <summary>The fill style, used to determine solid vs pattern fill drawing.</summary>
     public FillStyle FillStyle { get; }
 
-#pragma warning disable IDISP007 // Don't dispose injected - these objects are created by and owned by this drawable
     public void Dispose()
     {
+        // Only WorldPath is a native object owned by this drawable.
+        // BitmapFillImage is cache-owned and must not be disposed here.
+#pragma warning disable IDISP007 // Don't dispose injected - WorldPath is created by and owned by this drawable
         WorldPath.Dispose();
-        FillPaint?.Dispose();
-        OutlinePaint?.Dispose();
-        LinePaint?.Dispose();
-    }
 #pragma warning restore IDISP007
+    }
 }

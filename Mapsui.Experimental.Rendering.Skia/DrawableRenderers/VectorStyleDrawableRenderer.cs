@@ -23,11 +23,6 @@ namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 /// </summary>
 public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
 {
-    /// <summary>
-    /// Fill paint scale for non-solid fill patterns (Cross, Dotted, etc.).
-    /// Must match PolygonRenderer._scale.
-    /// </summary>
-    private const float Scale = 10.0f;
 
     public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
@@ -122,22 +117,27 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
         var centroidX = (envelope.MinX + envelope.MaxX) / 2.0;
         var centroidY = (envelope.MinY + envelope.MaxY) / 2.0;
 
-        // Create fill paint if visible
-        SKPaint? fillPaint = null;
         var fillStyle = vectorStyle.Fill?.FillStyle ?? FillStyle.Solid;
-        if (vectorStyle.Fill.IsVisible())
+
+        // Pre-extract SKImage for bitmap fills (cache-owned, safe to store)
+        SKImage? bitmapFillImage = null;
+        if (fillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated && vectorStyle.Fill?.Image is not null)
         {
-            fillPaint = PolygonRenderer.CreateSkPaint((vectorStyle.Fill, opacity, viewport.Rotation), renderService);
+            bitmapFillImage = PolygonRenderer.GetSKImage(renderService, vectorStyle.Fill.Image);
         }
 
-        // Create outline paint if visible
-        SKPaint? outlinePaint = null;
-        if (vectorStyle.Outline.IsVisible())
-        {
-            outlinePaint = PolygonRenderer.CreateSkPaint((vectorStyle.Outline, opacity));
-        }
-
-        return new VectorStyleDrawable(centroidX, centroidY, worldPath, fillPaint, outlinePaint, linePaint: null, fillStyle);
+        return new VectorStyleDrawable(
+            centroidX, centroidY, worldPath,
+            brush: vectorStyle.Fill.IsVisible() ? vectorStyle.Fill : null,
+            fillOpacity: opacity,
+            viewportRotation: viewport.Rotation,
+            bitmapFillImage: bitmapFillImage,
+            outlinePen: vectorStyle.Outline.IsVisible() ? vectorStyle.Outline : null,
+            outlineWidthOverride: null,
+            outlineOpacity: opacity,
+            linePen: null,
+            lineOpacity: 0,
+            fillStyle: fillStyle);
     }
 
     private static VectorStyleDrawable CreateLineStringDrawable(LineString lineString,
@@ -151,22 +151,27 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
         var centroidX = (envelope.MinX + envelope.MaxX) / 2.0;
         var centroidY = (envelope.MinY + envelope.MaxY) / 2.0;
 
-        // Create outline paint if visible (drawn first, as border around line)
-        SKPaint? outlinePaint = null;
+        // Compute outline width override if both line and outline are visible
+        float? outlineWidthOverride = null;
+        Pen? outlinePen = null;
         if (vectorStyle.Line.IsVisible() && vectorStyle.Outline?.Width > 0)
         {
-            var width = vectorStyle.Outline.Width + vectorStyle.Outline.Width + vectorStyle.Line?.Width ?? 1;
-            outlinePaint = LineStringRenderer.CreateSkPaint((vectorStyle.Outline, (float?)width, opacity));
+            outlineWidthOverride = (float)(vectorStyle.Outline.Width + vectorStyle.Outline.Width + (vectorStyle.Line?.Width ?? 1));
+            outlinePen = vectorStyle.Outline;
         }
 
-        // Create line paint if visible
-        SKPaint? linePaint = null;
-        if (vectorStyle.Line.IsVisible())
-        {
-            linePaint = LineStringRenderer.CreateSkPaint((vectorStyle.Line, (float?)null, opacity));
-        }
-
-        return new VectorStyleDrawable(centroidX, centroidY, worldPath, fillPaint: null, outlinePaint, linePaint, FillStyle.Solid);
+        return new VectorStyleDrawable(
+            centroidX, centroidY, worldPath,
+            brush: null,
+            fillOpacity: 0,
+            viewportRotation: 0,
+            bitmapFillImage: null,
+            outlinePen: outlinePen,
+            outlineWidthOverride: outlineWidthOverride,
+            outlineOpacity: opacity,
+            linePen: vectorStyle.Line.IsVisible() ? vectorStyle.Line : null,
+            lineOpacity: opacity,
+            fillStyle: FillStyle.Solid);
     }
 
     private static void DrawVectorDrawable(SKCanvas canvas, Viewport viewport, VectorStyleDrawable drawable)
@@ -174,28 +179,43 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
         // Build the world-to-screen transformation matrix
         var matrix = CreateWorldToScreenMatrix(viewport);
 
-        // Clone the world path and transform it to screen coordinates.
-        // This is a native SkiaSharp operation — much faster than per-vertex managed math.
-        // All paints remain in pixel/screen units, so no stroke/pattern adjustments needed.
-        using var screenPath = new SKPath(drawable.WorldPath);
-        screenPath.Transform(matrix);
+        // Concat the matrix onto the canvas so the GPU applies the world-to-screen
+        // transform directly. Using Concat (not SetMatrix) preserves any existing
+        // canvas transformation (pixel density, layout offset, etc.).
+        //
+        // The canvas matrix scales geometry by 1/resolution. Stroke widths would be
+        // scaled down by the matrix, so we compensate by multiplying with resolution.
+        // All SKPaint objects are created locally (no cached native objects) to avoid
+        // lifecycle issues between background and UI threads.
+        var res = (float)viewport.Resolution;
 
-        // Draw fill (polygon only) — must come first, outline goes on top
-        if (drawable.FillPaint is not null)
+        using (new SKAutoCanvasRestore(canvas))
         {
-            DrawFillPath(canvas, screenPath, drawable.FillPaint, drawable.FillStyle);
-        }
+            canvas.Concat(matrix);
 
-        // Draw outline (polygon outline or linestring outline — for linestring, drawn under line)
-        if (drawable.OutlinePaint is not null)
-        {
-            canvas.DrawPath(screenPath, drawable.OutlinePaint);
-        }
+            // Draw fill (polygon only) — must come first, outline goes on top
+            if (drawable.Brush is not null)
+            {
+                using var fillPaint = CreateFillPaint(drawable.Brush, drawable.FillOpacity,
+                    drawable.ViewportRotation, drawable.BitmapFillImage);
+                DrawFillPath(canvas, drawable.WorldPath, fillPaint, drawable.FillStyle);
+            }
 
-        // Draw line (linestring only — drawn on top of outline)
-        if (drawable.LinePaint is not null)
-        {
-            canvas.DrawPath(screenPath, drawable.LinePaint);
+            // Draw outline (polygon outline or linestring outline — for linestring, drawn under line)
+            if (drawable.OutlinePen is not null)
+            {
+                using var outlinePaint = CreateStrokePaint(drawable.OutlinePen, drawable.OutlineWidthOverride, drawable.OutlineOpacity);
+                outlinePaint.StrokeWidth *= res;
+                canvas.DrawPath(drawable.WorldPath, outlinePaint);
+            }
+
+            // Draw line (linestring only — drawn on top of outline)
+            if (drawable.LinePen is not null)
+            {
+                using var linePaint = CreateStrokePaint(drawable.LinePen, null, drawable.LineOpacity);
+                linePaint.StrokeWidth *= res;
+                canvas.DrawPath(drawable.WorldPath, linePaint);
+            }
         }
     }
 
@@ -211,16 +231,127 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
         }
         else
         {
-            // For non-solid fills, clip to the path and draw a larger rect so the pattern fills completely
+            // For non-solid fills, clip to the path and draw a larger rect so the pattern fills completely.
             using (new SKAutoCanvasRestore(canvas))
             {
                 canvas.ClipPath(path);
                 var bounds = path.Bounds;
-                var inflate = ((int)bounds.Width * 0.3f / Scale) * Scale;
+                // Inflate in world units (the canvas matrix will scale to screen)
+                var inflate = bounds.Width * 0.3f;
                 bounds.Inflate(inflate, inflate);
                 canvas.DrawRect(bounds, fillPaint);
             }
         }
+    }
+
+    /// <summary>
+    /// Creates an SKPaint for stroke rendering from a Mapsui Pen.
+    /// This is created locally at draw time to avoid native-object lifecycle issues.
+    /// </summary>
+    private static SKPaint CreateStrokePaint(Pen pen, float? widthOverride, float opacity)
+    {
+        var lineWidth = widthOverride ?? (float)pen.Width;
+        var paint = new SKPaint { IsAntialias = true };
+        paint.IsStroke = true;
+        paint.StrokeWidth = lineWidth;
+        paint.Color = pen.Color.ToSkia(opacity);
+        paint.StrokeCap = pen.PenStrokeCap.ToSkia();
+        paint.StrokeJoin = pen.StrokeJoin.ToSkia();
+        paint.StrokeMiter = pen.StrokeMiterLimit;
+        paint.PathEffect = pen.PenStyle != PenStyle.Solid
+            ? pen.PenStyle.ToSkia(lineWidth, pen.DashArray, pen.DashOffset)
+            : null;
+        return paint;
+    }
+
+    /// <summary>
+    /// Creates an SKPaint for fill rendering from a Mapsui Brush.
+    /// Handles solid fills, pattern fills (Cross, Dotted, etc.), and bitmap fills.
+    /// Created locally at draw time to avoid native-object lifecycle issues.
+    /// </summary>
+    private static SKPaint CreateFillPaint(Brush brush, float opacity, double viewportRotation, SKImage? bitmapImage)
+    {
+        var fillColor = brush.Color ?? new Color(128, 128, 128); // default gray
+        var paint = new SKPaint { IsAntialias = true };
+
+        if (brush.FillStyle == FillStyle.Solid)
+        {
+            paint.StrokeWidth = 0;
+            paint.Style = SKPaintStyle.Fill;
+            paint.Color = fillColor.ToSkia(opacity);
+        }
+        else if (brush.FillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated)
+        {
+            paint.Style = SKPaintStyle.Fill;
+            if (bitmapImage != null)
+            {
+                if (brush.FillStyle == FillStyle.BitmapRotated)
+                {
+                    paint.Shader = bitmapImage.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat,
+                        SKMatrix.CreateRotation((float)(viewportRotation * Math.PI / 180.0f),
+                            bitmapImage.Width >> 1, bitmapImage.Height >> 1));
+                }
+                else
+                {
+                    paint.Shader = bitmapImage.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
+                }
+            }
+        }
+        else
+        {
+            // Pattern fills (Cross, Dotted, etc.)
+            const float scale = 10.0f;
+            paint.StrokeWidth = 1;
+            paint.Style = SKPaintStyle.Stroke;
+            paint.Color = fillColor.ToSkia(opacity);
+            using var fillPath = new SKPath();
+            var matrix = SKMatrix.CreateScale(scale, scale);
+
+            switch (brush.FillStyle)
+            {
+                case FillStyle.Cross:
+                    fillPath.MoveTo(scale * 0.8f, scale * 0.8f);
+                    fillPath.LineTo(0, 0);
+                    fillPath.MoveTo(0, scale * 0.8f);
+                    fillPath.LineTo(scale * 0.8f, 0);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.DiagonalCross:
+                    fillPath.MoveTo(scale, scale);
+                    fillPath.LineTo(0, 0);
+                    fillPath.MoveTo(0, scale);
+                    fillPath.LineTo(scale, 0);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.BackwardDiagonal:
+                    fillPath.MoveTo(0, scale);
+                    fillPath.LineTo(scale, 0);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.ForwardDiagonal:
+                    fillPath.MoveTo(scale, scale);
+                    fillPath.LineTo(0, 0);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.Dotted:
+                    paint.Style = SKPaintStyle.StrokeAndFill;
+                    fillPath.AddCircle(scale * 0.5f, scale * 0.5f, scale * 0.35f);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.Horizontal:
+                    fillPath.MoveTo(0, scale * 0.5f);
+                    fillPath.LineTo(scale, scale * 0.5f);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.Vertical:
+                    fillPath.MoveTo(scale * 0.5f, 0);
+                    fillPath.LineTo(scale * 0.5f, scale);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+            }
+        }
+
+        return paint;
     }
 
     /// <summary>

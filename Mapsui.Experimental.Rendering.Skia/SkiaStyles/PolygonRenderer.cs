@@ -196,7 +196,7 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetSKImage(Mapsui.Rendering.RenderService renderService, Image image)
+    internal static SKImage? GetSKImage(Mapsui.Rendering.RenderService renderService, Image image)
     {
         if (image is null)
             return null;
