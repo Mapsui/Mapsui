@@ -1,12 +1,13 @@
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mapsui.Rendering;
+namespace Mapsui.Experimental.Rendering.Skia;
 
 /// <summary>
 /// Static service that manages drawable creation and caching.
@@ -35,7 +36,9 @@ public static class DrawableRenderer
 
         try
         {
+#pragma warning disable IDISP001 // Dispose created - cache managed by RenderService
             var cache = renderService.GetLayerDrawableCache(layer.Id);
+#pragma warning restore IDISP001
             cache.Clear(); // Clear old drawables for this layer
 
             var extent = viewport.ToExtent();
@@ -106,6 +109,8 @@ public static class DrawableRenderer
     /// <returns>The cached drawables, or null if not found.</returns>
     public static IReadOnlyList<IDrawable>? TryGetDrawables(RenderService renderService, int layerId, long featureId)
     {
+#pragma warning disable IDISP001, IDISP004 // Cache managed by RenderService
         return renderService.GetLayerDrawableCache(layerId).Get(featureId);
+#pragma warning restore IDISP001, IDISP004
     }
 }
