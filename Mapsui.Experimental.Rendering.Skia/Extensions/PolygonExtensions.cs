@@ -1,20 +1,19 @@
-﻿using Mapsui.Experimental.Rendering.Skia.Functions;
+﻿using Mapsui.Extensions;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System.Collections.Generic;
 
 namespace Mapsui.Experimental.Rendering.Skia.Extensions;
 
 internal static class PolygonExtensions
 {
     /// <summary>
-    /// Converts a Polygon into a SKPath, that is clipped to clipRect, where exterior is bigger than interior
+    /// Converts a Polygon into a SKPath using world-to-screen coordinate conversion.
     /// </summary>
     /// <param name="polygon">Polygon to convert</param>
     /// <param name="viewport">The Viewport that is used for the conversions.</param>
-    /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
-    /// <param name="strokeWidth">StrokeWidth for inflating clipRect</param>
     /// <returns></returns>
-    public static SKPath ToSkiaPath(this Polygon polygon, Viewport viewport, SKRect clipRect, float strokeWidth)
+    public static SKPath ToSkiaPath(this Polygon polygon, Viewport viewport)
     {
         var path = new SKPath();
 
@@ -24,9 +23,7 @@ internal static class PolygonExtensions
         // Bring outer ring in CCW direction
         var outerRing = (polygon.ExteriorRing.IsRing && ((LinearRing)polygon.ExteriorRing).IsCCW) ? polygon.ExteriorRing : (LineString)((Geometry)polygon.ExteriorRing).Reverse();
 
-        // Reduce exterior ring to parts, that are visible in clipping rectangle
-        // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
-        var exterior = ClippingFunctions.ReducePointsToClipRect(outerRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
+        var exterior = WorldToScreen(viewport, outerRing?.Coordinates);
 
         if (exterior.Count == 0)
             return path;
@@ -53,8 +50,7 @@ internal static class PolygonExtensions
             // Bring inner ring in CW direction
             var innerRing = (interiorRing.IsRing && ((LinearRing)interiorRing).IsCCW) ? (LineString)((Geometry)interiorRing).Reverse() : interiorRing;
 
-            // Reduce interior ring to parts, that are visible in clipping rectangle
-            var interior = ClippingFunctions.ReducePointsToClipRect(innerRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
+            var interior = WorldToScreen(viewport, innerRing?.Coordinates);
 
             if (interior.Count == 0)
                 continue;
@@ -70,5 +66,20 @@ internal static class PolygonExtensions
         path.Close();
 
         return path;
+    }
+
+    private static List<SKPoint> WorldToScreen(Viewport viewport, IEnumerable<Coordinate>? coordinates)
+    {
+        var result = new List<SKPoint>();
+        if (coordinates == null)
+            return result;
+
+        foreach (var coordinate in coordinates)
+        {
+            var (screenX, screenY) = viewport.WorldToScreenXY(coordinate.X, coordinate.Y);
+            result.Add(new SKPoint((float)screenX, (float)screenY));
+        }
+
+        return result;
     }
 }
