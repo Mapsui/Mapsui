@@ -37,7 +37,7 @@ public class SymbolStyleDrawableRenderer : IDrawableStyleRenderer
         return drawables;
     }
 
-    private static SymbolStyleDrawable CreateSymbolDrawable(double worldX, double worldY,
+    internal static SymbolStyleDrawable CreateSymbolDrawable(double worldX, double worldY,
         SymbolStyle symbolStyle, float opacity)
     {
         // Create the path (heavy work - done on background thread)
@@ -89,7 +89,7 @@ public class SymbolStyleDrawableRenderer : IDrawableStyleRenderer
         DrawSymbolDrawable(skCanvas, viewport, symbolDrawable);
     }
 
-    private static void DrawSymbolDrawable(SKCanvas canvas, Viewport viewport, SymbolStyleDrawable drawable)
+    internal static void DrawSymbolDrawable(SKCanvas canvas, Viewport viewport, SymbolStyleDrawable drawable)
     {
         canvas.Save();
         try

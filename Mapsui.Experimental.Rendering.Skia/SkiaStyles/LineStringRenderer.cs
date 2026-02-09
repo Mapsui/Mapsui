@@ -31,7 +31,7 @@ public static class LineStringRenderer
         }
     }
 
-    private static SKPaint CreateSkPaint((Pen? pen, float? width, float opacity) valueTuple)
+    internal static SKPaint CreateSkPaint((Pen? pen, float? width, float opacity) valueTuple)
     {
         var pen = valueTuple.pen;
         var opacity = valueTuple.opacity;

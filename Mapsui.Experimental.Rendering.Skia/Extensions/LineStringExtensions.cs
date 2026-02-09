@@ -31,4 +31,25 @@ internal static class LineStringExtensions
 
         return path;
     }
+
+    /// <summary>
+    /// Converts a LineString into a SKPath using raw world coordinates (no viewport transformation).
+    /// The path is intended to be transformed to screen coordinates at draw time using a matrix.
+    /// </summary>
+    /// <param name="lineString">LineString in Mapsui world coordinates.</param>
+    /// <returns>SKPath in world coordinates</returns>
+    public static SKPath ToWorldPath(this LineString lineString)
+    {
+        var coordinates = lineString.Coordinates;
+        var path = new SKPath();
+
+        if (coordinates.Length == 0)
+            return path;
+
+        path.MoveTo((float)coordinates[0].X, (float)coordinates[0].Y);
+        for (var i = 1; i < coordinates.Length; i++)
+            path.LineTo((float)coordinates[i].X, (float)coordinates[i].Y);
+
+        return path;
+    }
 }

@@ -45,7 +45,7 @@ public sealed class MapRenderer : IMapRenderer
     private static void InitRenderer()
     {
         _styleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
-        _styleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
+        _styleRenderers[typeof(VectorStyle)] = new DrawableRenderers.VectorStyleDrawableRenderer();
         _styleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
         _styleRenderers[typeof(SymbolStyle)] = new DrawableRenderers.SymbolStyleDrawableRenderer();
         _styleRenderers[typeof(ImageStyle)] = new ImageStyleRenderer();

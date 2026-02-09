@@ -82,4 +82,56 @@ internal static class PolygonExtensions
 
         return result;
     }
+
+    /// <summary>
+    /// Converts a Polygon into a SKPath using raw world coordinates (no viewport transformation).
+    /// The path is intended to be transformed to screen coordinates at draw time using a matrix.
+    /// </summary>
+    /// <param name="polygon">Polygon to convert</param>
+    /// <returns>SKPath in world coordinates</returns>
+    public static SKPath ToWorldPath(this Polygon polygon)
+    {
+        var path = new SKPath();
+
+        if (polygon.ExteriorRing is null)
+            return path;
+
+        // Bring outer ring in CCW direction
+        var outerRing = (polygon.ExteriorRing.IsRing && ((LinearRing)polygon.ExteriorRing).IsCCW) ? polygon.ExteriorRing : (LineString)((Geometry)polygon.ExteriorRing).Reverse();
+
+        var coords = outerRing?.Coordinates;
+        if (coords == null || coords.Length == 0)
+            return path;
+
+        path.MoveTo((float)coords[0].X, (float)coords[0].Y);
+        for (var i = 1; i < coords.Length; i++)
+            path.LineTo((float)coords[i].X, (float)coords[i].Y);
+        path.Close();
+
+        foreach (var interiorRing in polygon.InteriorRings)
+        {
+            // note: For Skia inner rings need to be clockwise and outer rings
+            // need to be counter clockwise (if this is the other way around it also
+            // seems to work). The world-to-screen matrix includes a Y-flip which
+            // reverses both windings equally, so they remain opposite.
+
+            if (interiorRing is null)
+                continue;
+
+            // Bring inner ring in CW direction
+            var innerRing = (interiorRing.IsRing && ((LinearRing)interiorRing).IsCCW) ? (LineString)((Geometry)interiorRing).Reverse() : interiorRing;
+
+            var innerCoords = innerRing?.Coordinates;
+            if (innerCoords == null || innerCoords.Length == 0)
+                continue;
+
+            path.MoveTo((float)innerCoords[0].X, (float)innerCoords[0].Y);
+            for (var i = 1; i < innerCoords.Length; i++)
+                path.LineTo((float)innerCoords[i].X, (float)innerCoords[i].Y);
+        }
+
+        path.Close();
+
+        return path;
+    }
 }
