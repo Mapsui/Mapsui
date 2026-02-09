@@ -31,7 +31,7 @@ public sealed class MapRenderer : IMapRenderer
 {
     private long _currentIteration;
     private static readonly Dictionary<Type, ISkiaWidgetRenderer> _widgetRenderers = [];
-    private static readonly Dictionary<Type, ISkiaStyleRenderer> _styleRenderers = [];
+    private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
     private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
     private static readonly Dictionary<string, CustomLayerRenderer.RenderHandler> _layerRenderers = [];
 
@@ -47,7 +47,7 @@ public sealed class MapRenderer : IMapRenderer
         _styleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
         _styleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
         _styleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
-        _styleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
+        _styleRenderers[typeof(SymbolStyle)] = new DrawableRenderers.SymbolStyleDrawableRenderer();
         _styleRenderers[typeof(ImageStyle)] = new ImageStyleRenderer();
         _styleRenderers[typeof(CustomPointStyle)] = new CustomPointStyleRenderer();
         _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
@@ -82,6 +82,12 @@ public sealed class MapRenderer : IMapRenderer
         var allWidgets = widgets.Concat(attributions);
 
         RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, renderService, background);
+    }
+
+    /// <inheritdoc />
+    public void UpdateDrawables(Viewport viewport, ILayer layer, RenderService renderService)
+    {
+        DrawableRenderer.UpdateDrawables(viewport, layer, _styleRenderers, renderService);
     }
 
     private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
@@ -220,13 +226,7 @@ public sealed class MapRenderer : IMapRenderer
     /// <returns>True if the renderer was found, false otherwise.</returns>
     public bool TryGetStyleRenderer(Type styleType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
     {
-        if (_styleRenderers.TryGetValue(styleType, out var outStyleRenderer))
-        {
-            styleRenderer = outStyleRenderer;
-            return true;
-        }
-        styleRenderer = null;
-        return false;
+        return _styleRenderers.TryGetValue(styleType, out styleRenderer);
     }
 
     /// <summary>
@@ -251,7 +251,7 @@ public sealed class MapRenderer : IMapRenderer
     /// </summary>
     /// <param name="type">The type of the style.</param>
     /// <param name="renderer">The renderer.</param>
-    public static void RegisterStyleRenderer(Type type, ISkiaStyleRenderer renderer)
+    public static void RegisterStyleRenderer(Type type, IStyleRenderer renderer)
     {
         _styleRenderers[type] = renderer;
     }
@@ -303,6 +303,17 @@ public sealed class MapRenderer : IMapRenderer
     {
         try
         {
+            // Ensure drawables are created for layers that already have features but
+            // missed the DataChanged event (e.g. MemoryLayer features set before the
+            // layer was added to the map).
+            foreach (var layer in layers)
+            {
+                if (layer.Enabled && !renderService.HasLayerDrawableCache(layer.Id))
+                {
+                    DrawableRenderer.UpdateDrawables(viewport, layer, _styleRenderers, renderService);
+                }
+            }
+
             VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration,
                 (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, i),
                 (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService));
@@ -329,9 +340,29 @@ public sealed class MapRenderer : IMapRenderer
         if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
             throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
-        var saveCount = canvas.Save(); // Save canvas
-        styleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
-        canvas.RestoreToCount(saveCount); // Restore old canvas
+        if (styleRenderer is IDrawableStyleRenderer drawableStyleRenderer)
+        {
+            // Two-step drawable path: draw from pre-created cached drawables
+            var drawables = DrawableRenderer.TryGetDrawables(renderService, layer.Id, feature.Id);
+            if (drawables is not null)
+            {
+                var saveCount = canvas.Save();
+                foreach (var drawable in drawables)
+                {
+                    drawableStyleRenderer.DrawDrawable(canvas, viewport, drawable, layer);
+                }
+                canvas.RestoreToCount(saveCount);
+            }
+            return;
+        }
+
+        if (styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
+        {
+            // Legacy rendering path
+            var saveCount = canvas.Save();
+            skiaStyleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
+            canvas.RestoreToCount(saveCount);
+        }
     }
 
     private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity)
@@ -409,9 +440,23 @@ public sealed class MapRenderer : IMapRenderer
                             if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
                                 throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
-                            var saveCount = surface.Canvas.Save(); // Save canvas
-                            styleRenderer.Draw(surface.Canvas, viewport, layer, feature, style, renderService, iteration);
-                            surface.Canvas.RestoreToCount(saveCount); // Restore old canvas
+                            var saveCount = surface.Canvas.Save();
+                            if (styleRenderer is IDrawableStyleRenderer drawableStyleRenderer)
+                            {
+                                var drawables = DrawableRenderer.TryGetDrawables(renderService, layer.Id, feature.Id);
+                                if (drawables is not null)
+                                {
+                                    foreach (var drawable in drawables)
+                                    {
+                                        drawableStyleRenderer.DrawDrawable(surface.Canvas, viewport, drawable, layer);
+                                    }
+                                }
+                            }
+                            else if (styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
+                            {
+                                skiaStyleRenderer.Draw(surface.Canvas, viewport, layer, feature, style, renderService, iteration);
+                            }
+                            surface.Canvas.RestoreToCount(saveCount);
 
                             // 3) Check if the pixel has changed.
                             if (originalColor != pixMap.GetPixelColor(intX, intY))

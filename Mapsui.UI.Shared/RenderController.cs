@@ -44,6 +44,15 @@ public sealed class RenderController : IDisposable
 
     public void SetMapRenderer(IMapRenderer mapRenderer) => _mapRenderer = mapRenderer;
 
+    /// <summary>
+    /// Delegates to the map renderer's UpdateDrawables to create pre-rendered objects.
+    /// Called when layer data changes.
+    /// </summary>
+    public void UpdateDrawables(Viewport viewport, ILayer layer, RenderService renderService)
+    {
+        _mapRenderer.UpdateDrawables(viewport, layer, renderService);
+    }
+
     public void RefreshGraphics()
     {
         _needsRefresh.Set();

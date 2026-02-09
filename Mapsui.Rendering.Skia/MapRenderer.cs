@@ -67,6 +67,12 @@ public sealed class MapRenderer : IMapRenderer
         RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, renderService, background);
     }
 
+    /// <inheritdoc />
+    public void UpdateDrawables(Viewport viewport, ILayer layer, RenderService renderService)
+    {
+        // No-op: the default renderer does not use the two-step drawable architecture.
+    }
+
     private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
         IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
     {
