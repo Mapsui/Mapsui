@@ -94,9 +94,6 @@ public sealed class SymbolStyleDrawable : IDrawable
     /// <summary>The relative Y offset (resolved to absolute at draw time based on symbol size).</summary>
     public float RelativeOffsetY { get; }
 
-    /// <summary>
-    /// Disposes the owned <see cref="Path"/>, <see cref="FillPaint"/>, and <see cref="OutlinePaint"/>.
-    /// </summary>
 #pragma warning disable IDISP007 // Don't dispose injected - these objects are created by and owned by this drawable
     public void Dispose()
     {
