@@ -85,14 +85,14 @@ public sealed class SymbolStyleDrawable : IDrawable
     /// <summary>The absolute Y offset (note: sign is already flipped).</summary>
     public float OffsetY { get; }
 
+    /// <summary>The combined opacity (layer * style).</summary>
+    public float Opacity { get; }
+
     /// <summary>The relative X offset (resolved to absolute at draw time based on symbol size).</summary>
     public float RelativeOffsetX { get; }
 
     /// <summary>The relative Y offset (resolved to absolute at draw time based on symbol size).</summary>
     public float RelativeOffsetY { get; }
-
-    /// <summary>The combined opacity (layer * style).</summary>
-    public float Opacity { get; }
 
     /// <summary>
     /// Disposes the owned <see cref="Path"/>, <see cref="FillPaint"/>, and <see cref="OutlinePaint"/>.
