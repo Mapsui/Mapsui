@@ -52,7 +52,7 @@ public sealed class MapRenderer : IMapRenderer
         _styleRenderers[typeof(CustomPointStyle)] = new CustomPointStyleRenderer();
         _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
         _styleRenderers[typeof(VectorTileStyle)] = new VectorTileStyleRenderer();
-        _styleRenderers[typeof(VexTileStyle)] = new DrawableRenderers.VexTileStyleDrawableRenderer();
+        _styleRenderers[typeof(VexTileStyle)] = new VexTileStyleRenderer();
 
         _widgetRenderers[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
         _widgetRenderers[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
