@@ -24,6 +24,13 @@ namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
 {
 
+    /// <inheritdoc />
+    /// <remarks>
+    /// Creates drawables for polygon, linestring, point, and geometry collection features.
+    /// Polygons and linestrings produce <see cref="VectorStyleDrawable"/> with world-coordinate
+    /// <see cref="SKPath"/>s and plain .NET style parameters. Points delegate to
+    /// <see cref="SymbolStyleDrawableRenderer.CreateSymbolDrawable"/>.
+    /// </remarks>
     public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
     {
@@ -56,6 +63,12 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
         return drawables;
     }
 
+    /// <inheritdoc />
+    /// <remarks>
+    /// Concatenates a world-to-screen affine matrix onto the canvas, creates <see cref="SKPaint"/>
+    /// locally from the stored style parameters, and draws the world-coordinate path.
+    /// Dispatches to <see cref="SymbolStyleDrawableRenderer.DrawSymbolDrawable"/> for point drawables.
+    /// </remarks>
     public void DrawDrawable(object canvas, Viewport viewport, IDrawable drawable, ILayer layer)
     {
         if (canvas is not SKCanvas skCanvas)
@@ -204,16 +217,14 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
             // Draw outline (polygon outline or linestring outline — for linestring, drawn under line)
             if (drawable.OutlinePen is not null)
             {
-                using var outlinePaint = CreateStrokePaint(drawable.OutlinePen, drawable.OutlineWidthOverride, drawable.OutlineOpacity);
-                outlinePaint.StrokeWidth *= res;
+                using var outlinePaint = CreateStrokePaint(drawable.OutlinePen, drawable.OutlineWidthOverride, drawable.OutlineOpacity, res);
                 canvas.DrawPath(drawable.WorldPath, outlinePaint);
             }
 
             // Draw line (linestring only — drawn on top of outline)
             if (drawable.LinePen is not null)
             {
-                using var linePaint = CreateStrokePaint(drawable.LinePen, null, drawable.LineOpacity);
-                linePaint.StrokeWidth *= res;
+                using var linePaint = CreateStrokePaint(drawable.LinePen, null, drawable.LineOpacity, res);
                 canvas.DrawPath(drawable.WorldPath, linePaint);
             }
         }
@@ -248,9 +259,9 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
     /// Creates an SKPaint for stroke rendering from a Mapsui Pen.
     /// This is created locally at draw time to avoid native-object lifecycle issues.
     /// </summary>
-    private static SKPaint CreateStrokePaint(Pen pen, float? widthOverride, float opacity)
+    private static SKPaint CreateStrokePaint(Pen pen, float? widthOverride, float opacity, float resolution)
     {
-        var lineWidth = widthOverride ?? (float)pen.Width;
+        var lineWidth = (widthOverride ?? (float)pen.Width) * resolution;
         var paint = new SKPaint { IsAntialias = true };
         paint.IsStroke = true;
         paint.StrokeWidth = lineWidth;

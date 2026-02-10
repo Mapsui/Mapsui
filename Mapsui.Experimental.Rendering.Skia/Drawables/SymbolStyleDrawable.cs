@@ -9,6 +9,22 @@ namespace Mapsui.Experimental.Rendering.Skia.Drawables;
 /// </summary>
 public sealed class SymbolStyleDrawable : IDrawable
 {
+    /// <summary>
+    /// Initializes a new <see cref="SymbolStyleDrawable"/>.
+    /// </summary>
+    /// <param name="worldX">The world X coordinate of the symbol.</param>
+    /// <param name="worldY">The world Y coordinate of the symbol.</param>
+    /// <param name="path">The pre-created path for the symbol shape.</param>
+    /// <param name="fillPaint">The fill paint, or null if fill is not visible.</param>
+    /// <param name="outlinePaint">The outline paint, or null if outline is not visible.</param>
+    /// <param name="symbolScale">The symbol scale factor.</param>
+    /// <param name="symbolRotation">The symbol rotation in degrees.</param>
+    /// <param name="rotateWithMap">Whether the symbol rotates with the map.</param>
+    /// <param name="offsetX">The absolute X offset.</param>
+    /// <param name="offsetY">The absolute Y offset (sign already flipped).</param>
+    /// <param name="relativeOffsetX">The relative X offset.</param>
+    /// <param name="relativeOffsetY">The relative Y offset.</param>
+    /// <param name="opacity">The combined opacity (layer × style).</param>
     public SymbolStyleDrawable(
         double worldX,
         double worldY,
@@ -39,7 +55,10 @@ public sealed class SymbolStyleDrawable : IDrawable
         Opacity = opacity;
     }
 
+    /// <inheritdoc />
     public double WorldX { get; }
+
+    /// <inheritdoc />
     public double WorldY { get; }
 
     /// <summary>Pre-created path for the symbol shape (circle, rectangle, triangle).</summary>
@@ -75,6 +94,9 @@ public sealed class SymbolStyleDrawable : IDrawable
     /// <summary>The combined opacity (layer * style).</summary>
     public float Opacity { get; }
 
+    /// <summary>
+    /// Disposes the owned <see cref="Path"/>, <see cref="FillPaint"/>, and <see cref="OutlinePaint"/>.
+    /// </summary>
 #pragma warning disable IDISP007 // Don't dispose injected - these objects are created by and owned by this drawable
     public void Dispose()
     {

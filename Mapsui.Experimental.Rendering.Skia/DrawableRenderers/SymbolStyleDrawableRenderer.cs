@@ -19,6 +19,11 @@ namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 /// </summary>
 public class SymbolStyleDrawableRenderer : IDrawableStyleRenderer
 {
+    /// <inheritdoc />
+    /// <remarks>
+    /// Creates one <see cref="SymbolStyleDrawable"/> per coordinate in the feature,
+    /// building the <see cref="SKPath"/> and <see cref="SKPaint"/> objects on the calling (background) thread.
+    /// </remarks>
     public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
     {
@@ -78,6 +83,11 @@ public class SymbolStyleDrawableRenderer : IDrawableStyleRenderer
         );
     }
 
+    /// <inheritdoc />
+    /// <remarks>
+    /// Applies world-to-screen transform, scale, rotation, and offsets, then draws the
+    /// pre-created path with pre-created paints. This is the fast UI-thread step.
+    /// </remarks>
     public void DrawDrawable(object canvas, Viewport viewport, IDrawable drawable, ILayer layer)
     {
         if (canvas is not SKCanvas skCanvas)

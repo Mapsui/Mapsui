@@ -12,6 +12,22 @@ namespace Mapsui.Experimental.Rendering.Skia.Drawables;
 /// </summary>
 public sealed class VectorStyleDrawable : IDrawable
 {
+    /// <summary>
+    /// Initializes a new <see cref="VectorStyleDrawable"/>.
+    /// </summary>
+    /// <param name="worldX">The world X coordinate (geometry centroid).</param>
+    /// <param name="worldY">The world Y coordinate (geometry centroid).</param>
+    /// <param name="worldPath">The pre-created path in world coordinates.</param>
+    /// <param name="brush">The Mapsui Brush for polygon fills, or null.</param>
+    /// <param name="fillOpacity">Combined opacity for the fill paint.</param>
+    /// <param name="viewportRotation">Viewport rotation at creation time (used for BitmapRotated fill).</param>
+    /// <param name="bitmapFillImage">Pre-extracted SKImage for bitmap fills (cache-owned), or null.</param>
+    /// <param name="outlinePen">The Mapsui Pen for polygon/linestring outlines, or null.</param>
+    /// <param name="outlineWidthOverride">Explicit width override for linestring outlines, or null.</param>
+    /// <param name="outlineOpacity">Combined opacity for the outline paint.</param>
+    /// <param name="linePen">The Mapsui Pen for linestrings, or null.</param>
+    /// <param name="lineOpacity">Combined opacity for the line paint.</param>
+    /// <param name="fillStyle">The fill style (solid vs pattern).</param>
     public VectorStyleDrawable(
         double worldX,
         double worldY,
@@ -27,6 +43,9 @@ public sealed class VectorStyleDrawable : IDrawable
         float lineOpacity,
         FillStyle fillStyle)
     {
+        // Note: This is a very long list of parameters. It may be possible to apply their values in step 1
+        // so we do not need them in step 2. I did not look into that yet.
+
         WorldX = worldX;
         WorldY = worldY;
         WorldPath = worldPath;
@@ -81,6 +100,9 @@ public sealed class VectorStyleDrawable : IDrawable
     /// <summary>The fill style, used to determine solid vs pattern fill drawing.</summary>
     public FillStyle FillStyle { get; }
 
+    /// <summary>
+    /// Disposes the owned <see cref="WorldPath"/>. The <see cref="BitmapFillImage"/> is cache-owned and not disposed here.
+    /// </summary>
     public void Dispose()
     {
         // Only WorldPath is a native object owned by this drawable.
