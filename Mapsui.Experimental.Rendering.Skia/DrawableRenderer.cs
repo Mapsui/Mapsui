@@ -62,7 +62,7 @@ public static class DrawableRenderer
         RenderService renderService, DrawableCache cache)
     {
         // Check layer styles
-        var layerStyles = layer.Style?.GetStylesToApply(viewport.Resolution);
+        var layerStyles = layer.Style?.GetStylesToApply(feature, viewport);
         if (layerStyles is not null)
         {
             foreach (var style in layerStyles)
