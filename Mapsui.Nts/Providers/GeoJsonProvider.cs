@@ -137,7 +137,7 @@ public class GeoJsonProvider(string geoJson) : IProvider, IProviderExtended
                                 if (_extent == null)
                                     _extent = mRect;
                                 else
-                                    _extent.Join(mRect);
+                                    _extent = _extent.Join(mRect);
                             }
                         }
                     }

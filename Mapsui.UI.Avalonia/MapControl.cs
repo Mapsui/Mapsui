@@ -121,7 +121,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
                 return;
             _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
         }
-        RefreshGraphics();
     }
 
     private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
