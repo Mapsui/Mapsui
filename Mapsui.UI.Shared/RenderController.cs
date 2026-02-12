@@ -66,6 +66,8 @@ public sealed class RenderController : IDisposable
             return;
 
         _isRunning = false;
+        _needsRefresh.Set();
+        _isDrawingDone.Set();
 
         _disposed = true;
     }

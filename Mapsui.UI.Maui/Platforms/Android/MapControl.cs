@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 using SkiaSharp.Views.Maui.Handlers;
@@ -16,9 +17,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private Page? _page;
     private Element? _element;
+    private CancellationTokenSource? _sizeNotifyCancellation;
 
     private void DisposeAndroid()
     {
+        _sizeNotifyCancellation?.Cancel();
+        _sizeNotifyCancellation?.Dispose();
+        _sizeNotifyCancellation = null;
+
         if (_element != null)
         {
             _element.ParentChanged -= Element_ParentChanged;
@@ -125,23 +131,28 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 return;
             }
 
+            _sizeNotifyCancellation?.Cancel();
+            _sizeNotifyCancellation?.Dispose();
+            _sizeNotifyCancellation = new CancellationTokenSource();
+            var token = _sizeNotifyCancellation.Token;
+
             sizeNotifyTask = Task.Run(async () =>
             {
-                while (true)
+                while (!token.IsCancellationRequested)
                 {
                     var glThread = glThreadField?.GetValue(glTextureView);
                     bool? exited = (bool?)glThreadExitedField?.GetValue(glThread);
                     if (exited.HasValue && exited.Value)
                     {
                         // The TextureView still has its old glThread. Wait for the new glThread to be created
-                        await Task.Delay(30);
+                        await Task.Delay(30, token);
                         continue;
                     }
                     // Now notify the glThread of the actual size of the View
                     glTextureView.OnSurfaceTextureSizeChanged(null, glTextureView.Width, glTextureView.Height);
                     return;
                 }
-            });
+            }, token);
         }
     }
 }

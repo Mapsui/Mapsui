@@ -400,6 +400,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (disposing)
         {
+            _renderController?.Dispose();
+            _renderController = null;
             Unsubscribe();
             _map?.Dispose();
             _map = null;
