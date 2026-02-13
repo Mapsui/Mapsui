@@ -14,7 +14,7 @@ namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 /// <summary>
 /// Two-step renderer for SymbolStyle. No cache interaction inside the renderer.
 /// <list type="bullet">
-///   <item><description><see cref="CreateDrawables"/>: Creates SKPath and SKPaint objects
+///   <item><description><see cref="CreateDrawable"/>: Creates SKPath and SKPaint objects
 ///         (expensive, runs on background thread).</description></item>
 ///   <item><description><see cref="DrawDrawable"/>: Applies viewport transform and draws
 ///         (fast, render thread).</description></item>
@@ -28,8 +28,10 @@ public class TwoStepSymbolStyleRenderer : ITwoStepStyleRenderer
     public IDrawableCache CreateCache() => new DrawableCache();
 
     /// <inheritdoc />
-    public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
+#pragma warning disable IDISP015 // Member should not return created and cached instance - ownership transfers to cache
+    public IDrawable? CreateDrawable(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
+#pragma warning restore IDISP015
     {
         if (style is not SymbolStyle symbolStyle)
             throw new ArgumentException($"Expected {nameof(SymbolStyle)} but got {style?.GetType().Name}");
@@ -43,16 +45,30 @@ public class TwoStepSymbolStyleRenderer : ITwoStepStyleRenderer
             drawables.Add(drawable);
         });
 
-        return drawables;
+        return drawables.Count switch
+        {
+            0 => null,
+            1 => drawables[0],
+            _ => new CompositeDrawable(drawables)
+        };
     }
 
     /// <inheritdoc />
     public void DrawDrawable(object canvas, Viewport viewport, IDrawable drawable, ILayer layer)
     {
-        if (canvas is not SKCanvas skCanvas || drawable is not SymbolStyleDrawable symbolDrawable)
+        if (canvas is not SKCanvas skCanvas)
             return;
 
-        DrawSymbolDrawable(skCanvas, viewport, symbolDrawable);
+        switch (drawable)
+        {
+            case SymbolStyleDrawable symbolDrawable:
+                DrawSymbolDrawable(skCanvas, viewport, symbolDrawable);
+                break;
+            case CompositeDrawable composite:
+                foreach (var child in composite.Children)
+                    DrawDrawable(canvas, viewport, child, layer);
+                break;
+        }
     }
 
     internal static SymbolStyleDrawable CreateSymbolDrawable(double worldX, double worldY,

@@ -18,7 +18,7 @@ public static class DrawableRenderer
 {
     /// <summary>
     /// Updates drawables for a layer on a background thread. For each feature that is not
-    /// yet cached, calls <see cref="ITwoStepStyleRenderer.CreateDrawables"/> and stores
+    /// yet cached, calls <see cref="ITwoStepStyleRenderer.CreateDrawable"/> and stores
     /// the result in the cache. Then calls <see cref="IDrawableCache.Cleanup"/> to evict
     /// stale entries based on the current render iteration.
     /// </summary>
@@ -48,13 +48,15 @@ public static class DrawableRenderer
             // Cleanup knows they are still in use.
             foreach (var feature in features)
             {
-                if (cache.Get(feature.Id, currentIteration) is not null && cache.Get(feature.Id, currentIteration).Count > 0)
+                if (cache.Get(feature.Id, currentIteration) is not null)
                     continue; // Already cached and stamped, skip.
 
-                var drawables = CreateDrawablesForFeature(viewport, layer, feature, styleRenderers, renderService);
-                if (drawables is not null && drawables.Count > 0)
+#pragma warning disable IDISP001 // Dispose created - ownership transfers to cache via Set
+                var drawable = CreateDrawableForFeature(viewport, layer, feature, styleRenderers, renderService);
+#pragma warning restore IDISP001
+                if (drawable is not null)
                 {
-                    cache.Set(feature.Id, drawables, currentIteration);
+                    cache.Set(feature.Id, drawable, currentIteration);
                 }
             }
 
@@ -69,11 +71,11 @@ public static class DrawableRenderer
     }
 
     /// <summary>
-    /// Tries to get cached drawables for a feature. Called from the render thread.
+    /// Tries to get a cached drawable for a feature. Called from the render thread.
     /// Stamps the cache entry with <paramref name="iteration"/> so that Cleanup
     /// knows the entry was recently used.
     /// </summary>
-    public static IReadOnlyList<IDrawable> TryGetDrawables(RenderService renderService, int layerId, long featureId, long iteration)
+    public static IDrawable? TryGetDrawable(RenderService renderService, int layerId, long featureId, long iteration)
     {
 #pragma warning disable IDISP001, IDISP004 // Cache managed by RenderService
         return renderService.GetLayerDrawableCache(layerId).Get(featureId, iteration);
@@ -113,11 +115,13 @@ public static class DrawableRenderer
     }
 
     /// <summary>
-    /// Calls <see cref="ITwoStepStyleRenderer.CreateDrawables"/> for each applicable style
-    /// on the feature. Returns the combined drawables, or null if none were created.
+    /// Calls <see cref="ITwoStepStyleRenderer.CreateDrawable"/> for each applicable style
+    /// on the feature. Returns the combined drawable, or null if none were created.
     /// </summary>
-    private static IReadOnlyList<IDrawable>? CreateDrawablesForFeature(Viewport viewport, ILayer layer,
+#pragma warning disable IDISP015 // Member should not return created and cached instance - ownership transfers to caller
+    private static IDrawable? CreateDrawableForFeature(Viewport viewport, ILayer layer,
         IFeature feature, IReadOnlyDictionary<Type, IStyleRenderer> styleRenderers, RenderService renderService)
+#pragma warning restore IDISP015
     {
         List<IDrawable>? result = null;
 
@@ -131,11 +135,13 @@ public static class DrawableRenderer
                     || renderer is not ITwoStepStyleRenderer twoStepRenderer)
                     continue;
 
-                var drawables = twoStepRenderer.CreateDrawables(viewport, layer, feature, style, renderService);
-                if (drawables.Count > 0)
+#pragma warning disable IDISP001 // Dispose created - ownership transfers to caller/cache
+                var drawable = twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
+#pragma warning restore IDISP001
+                if (drawable is not null)
                 {
                     result ??= [];
-                    result.AddRange(drawables);
+                    result.Add(drawable);
                 }
             }
         }
@@ -151,15 +157,18 @@ public static class DrawableRenderer
                     || renderer is not ITwoStepStyleRenderer twoStepRenderer)
                     continue;
 
-                var drawables = twoStepRenderer.CreateDrawables(viewport, layer, feature, style, renderService);
-                if (drawables.Count > 0)
+#pragma warning disable IDISP001 // Dispose created - ownership transfers to caller/cache
+                var drawable = twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
+#pragma warning restore IDISP001
+                if (drawable is not null)
                 {
                     result ??= [];
-                    result.AddRange(drawables);
+                    result.Add(drawable);
                 }
             }
         }
 
-        return result;
+        if (result is null) return null;
+        return result.Count == 1 ? result[0] : new CompositeDrawable(result);
     }
 }

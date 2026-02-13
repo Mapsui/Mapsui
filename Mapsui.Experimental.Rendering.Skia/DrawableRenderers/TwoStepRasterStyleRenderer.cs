@@ -7,7 +7,6 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
-using System.Collections.Generic;
 
 namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 
@@ -15,7 +14,7 @@ namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 /// Two-step renderer for RasterStyle. No cache interaction inside the renderer —
 /// caching is managed externally by the orchestrator.
 /// <list type="bullet">
-///   <item><description><see cref="CreateDrawables"/>: Decodes raster bytes to SKImage/SKPicture
+///   <item><description><see cref="CreateDrawable"/>: Decodes raster bytes to SKImage/SKPicture
 ///         (expensive, runs on background thread).</description></item>
 ///   <item><description><see cref="DrawDrawable"/>: Blits a cached raster image to the canvas
 ///         (fast, render thread).</description></item>
@@ -27,22 +26,22 @@ public class TwoStepRasterStyleRenderer : ITwoStepStyleRenderer
     public IDrawableCache CreateCache() => new TileDrawableCache();
 
     /// <inheritdoc />
-    public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
+    public IDrawable? CreateDrawable(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
     {
         if (feature is not RasterFeature rasterFeature)
-            return [];
+            return null;
 
         var raster = rasterFeature.Raster;
         if (raster is null)
-            return [];
+            return null;
 
         if (style is not RasterStyle rasterStyle)
-            return [];
+            return null;
 
         var extent = feature.Extent;
         if (extent is null)
-            return [];
+            return null;
 
         try
         {
@@ -50,12 +49,12 @@ public class TwoStepRasterStyleRenderer : ITwoStepStyleRenderer
             var data = DecodeRaster(raster);
 #pragma warning restore IDISP001
             var opacity = (float)(layer.Opacity * style.Opacity);
-            return [new RasterStyleDrawable(data, extent, opacity, rasterStyle.Outline)];
+            return new RasterStyleDrawable(data, extent, opacity, rasterStyle.Outline);
         }
         catch (Exception ex)
         {
             Logger.Log(LogLevel.Error, $"Error creating raster drawable: {ex.Message}", ex);
-            return [];
+            return null;
         }
     }
 

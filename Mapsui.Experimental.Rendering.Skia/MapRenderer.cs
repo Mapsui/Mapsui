@@ -304,12 +304,15 @@ public sealed class MapRenderer : IMapRenderer
     {
         try
         {
-            // Ensure drawables are created for layers that already have features but
-            // missed the DataChanged event (e.g. MemoryLayer features set before the
-            // layer was added to the map).
+            // Ensure drawables are up to date for all two-step layers. This covers:
+            // 1. Layers that already have features but missed the DataChanged event
+            //    (e.g. MemoryLayer features set before the layer was added to the map).
+            // 2. Features that entered the viewport due to panning/zooming but are
+            //    already in the layer's memory cache, so no DataChanged fires
+            //    (e.g. coarser tile levels when zooming out).
             foreach (var layer in layers)
             {
-                if (layer.Enabled && !renderService.HasLayerDrawableCache(layer.Id))
+                if (layer.Enabled)
                 {
                     DrawableRenderer.UpdateDrawables(viewport, layer, _styleRenderers, renderService);
                 }
@@ -345,14 +348,13 @@ public sealed class MapRenderer : IMapRenderer
         // Two-step path: draw from pre-created cached drawables (cache managed externally).
         if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
         {
-            var drawables = DrawableRenderer.TryGetDrawables(renderService, layer.Id, feature.Id, iteration);
-            if (drawables is not null)
+#pragma warning disable IDISP001 // Dispose created - drawable is cache-managed, not owned here
+            var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.Id, iteration);
+#pragma warning restore IDISP001
+            if (drawable is not null)
             {
                 var saveCount = canvas.Save();
-                foreach (var drawable in drawables)
-                {
-                    twoStepRenderer.DrawDrawable(canvas, viewport, drawable, layer);
-                }
+                twoStepRenderer.DrawDrawable(canvas, viewport, drawable, layer);
                 canvas.RestoreToCount(saveCount);
                 return;
             }
@@ -448,11 +450,12 @@ public sealed class MapRenderer : IMapRenderer
                             // Try two-step path first (cached drawables)
                             if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
                             {
-                                var drawables = DrawableRenderer.TryGetDrawables(renderService, layer.Id, feature.Id, iteration);
-                                if (drawables is not null)
+#pragma warning disable IDISP001 // Dispose created - drawable is cache-managed, not owned here
+                                var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.Id, iteration);
+#pragma warning restore IDISP001
+                                if (drawable is not null)
                                 {
-                                    foreach (var drawable in drawables)
-                                        twoStepRenderer.DrawDrawable(surface.Canvas, viewport, drawable, layer);
+                                    twoStepRenderer.DrawDrawable(surface.Canvas, viewport, drawable, layer);
                                     rendered = true;
                                 }
                             }

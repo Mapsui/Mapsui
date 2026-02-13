@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Mapsui.Rendering;
@@ -17,20 +16,20 @@ public sealed class TileDrawableCache : IDrawableCache
     private readonly ConcurrentDictionary<long, CacheEntry> _cache = new();
 
     /// <inheritdoc />
-    public IReadOnlyList<IDrawable> Get(long featureId, long iteration)
+    public IDrawable? Get(long featureId, long iteration)
     {
         if (_cache.TryGetValue(featureId, out var entry))
         {
             entry.Iteration = iteration;
-            return entry.Drawables;
+            return entry.Drawable;
         }
-        return [];
+        return null;
     }
 
     /// <inheritdoc />
-    public void Set(long featureId, IReadOnlyList<IDrawable> drawables, long iteration)
+    public void Set(long featureId, IDrawable drawable, long iteration)
     {
-        _cache.TryAdd(featureId, new CacheEntry(drawables, iteration));
+        _cache.TryAdd(featureId, new CacheEntry(drawable, iteration));
     }
 
     /// <inheritdoc />
@@ -54,7 +53,9 @@ public sealed class TileDrawableCache : IDrawableCache
     {
         foreach (var entry in _cache.Values)
         {
-            DisposeDrawables(entry.Drawables);
+#pragma warning disable IDISP007 // Don't dispose injected - cache owns these drawables
+            entry.Drawable.Dispose();
+#pragma warning restore IDISP007
         }
         _cache.Clear();
     }
@@ -77,22 +78,16 @@ public sealed class TileDrawableCache : IDrawableCache
         {
             if (counter >= numberToRemove) break;
             if (!_cache.TryRemove(key, out var entry)) continue;
-            DisposeDrawables(entry.Drawables);
+#pragma warning disable IDISP007 // Don't dispose injected - cache owns these drawables
+            entry.Drawable.Dispose();
+#pragma warning restore IDISP007
             counter++;
         }
     }
 
-    private static void DisposeDrawables(IReadOnlyList<IDrawable> drawables)
+    private sealed class CacheEntry(IDrawable drawable, long iteration)
     {
-        foreach (var drawable in drawables)
-        {
-            drawable.Dispose();
-        }
-    }
-
-    private sealed class CacheEntry(IReadOnlyList<IDrawable> drawables, long iteration)
-    {
-        public IReadOnlyList<IDrawable> Drawables { get; } = drawables;
+        public IDrawable Drawable { get; } = drawable;
         public long Iteration { get; set; } = iteration;
     }
 }

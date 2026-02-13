@@ -8,7 +8,6 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
-using System.Collections.Generic;
 using VexTile.Renderer.Mvt.AliFlux;
 using VexVectorStyle = VexTile.Renderer.Mvt.AliFlux.VectorStyle;
 
@@ -18,7 +17,7 @@ namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 /// Two-step renderer for VexTileStyle. The renderer itself has no cache interaction —
 /// it just creates drawables and draws them. Caching is managed externally.
 /// <list type="bullet">
-///   <item><description><see cref="CreateDrawables"/>: Renders vector tile data to an <see cref="SKImage"/>
+///   <item><description><see cref="CreateDrawable"/>: Renders vector tile data to an <see cref="SKImage"/>
 ///         (expensive, runs on a background thread).</description></item>
 ///   <item><description><see cref="DrawDrawable"/>: Blits a cached tile image to the canvas (fast, render thread).</description></item>
 /// </list>
@@ -31,18 +30,18 @@ public class TwoStepVexTileStyleRenderer : ITwoStepStyleRenderer
     public IDrawableCache CreateCache() => new TileDrawableCache();
 
     /// <inheritdoc />
-    public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
+    public IDrawable? CreateDrawable(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
     {
         if (feature is not VexTileFeature vexTileFeature)
-            return [];
+            return null;
 
         if (style is not VexTileStyle vexTileStyle)
-            return [];
+            return null;
 
         var extent = feature.Extent;
         if (extent is null)
-            return [];
+            return null;
 
         try
         {
@@ -50,12 +49,12 @@ public class TwoStepVexTileStyleRenderer : ITwoStepStyleRenderer
             var image = RenderToImage(vexTileFeature, vexTileStyle.VexStyle);
 #pragma warning restore IDISP001
             var opacity = (float)(layer.Opacity * style.Opacity);
-            return [new VexTileStyleDrawable(image, extent, opacity)];
+            return new VexTileStyleDrawable(image, extent, opacity);
         }
         catch (Exception ex)
         {
             Logger.Log(LogLevel.Error, $"Error creating VexTile drawable: {ex.Message}", ex);
-            return [];
+            return null;
         }
     }
 

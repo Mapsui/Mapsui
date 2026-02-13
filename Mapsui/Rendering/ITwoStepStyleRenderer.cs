@@ -1,6 +1,5 @@
 using Mapsui.Layers;
 using Mapsui.Styles;
-using System.Collections.Generic;
 
 namespace Mapsui.Rendering;
 
@@ -12,9 +11,9 @@ namespace Mapsui.Rendering;
 ///
 /// When a renderer implements this interface:
 /// 1. <see cref="CreateCache"/> is called once per layer to create the appropriate cache type.
-/// 2. <see cref="CreateDrawables"/> is called on a background thread — the caller stores the
-///    returned drawables in the cache.
-/// 3. On the render thread, the caller fetches cached drawables and passes them to
+/// 2. <see cref="CreateDrawable"/> is called on a background thread — the caller stores the
+///    returned drawable in the cache.
+/// 3. On the render thread, the caller fetches the cached drawable and passes it to
 ///    <see cref="DrawDrawable"/>.
 ///
 /// Renderers that do NOT implement this interface work as before — everything runs
@@ -30,10 +29,11 @@ public interface ITwoStepStyleRenderer : IStyleRenderer
     IDrawableCache CreateCache();
 
     /// <summary>
-    /// Creates drawable objects for the given feature on a background thread.
+    /// Creates a drawable object for the given feature on a background thread.
     /// The caller is responsible for storing the result in the layer's cache.
+    /// Returns null if the feature cannot be rendered.
     /// </summary>
-    IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
+    IDrawable? CreateDrawable(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService);
 
     /// <summary>

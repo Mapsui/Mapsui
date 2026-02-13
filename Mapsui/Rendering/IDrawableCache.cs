@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Mapsui.Rendering;
 
@@ -12,18 +11,18 @@ namespace Mapsui.Rendering;
 public interface IDrawableCache : IDisposable
 {
     /// <summary>
-    /// Gets the drawables for a feature, or null if not cached.
+    /// Gets the drawable for a feature, or null if not cached.
     /// Stamps the entry with <paramref name="iteration"/> so that
     /// <see cref="Cleanup"/> knows the entry is still in use.
     /// </summary>
-    IReadOnlyList<IDrawable> Get(long featureId, long iteration);
+    IDrawable? Get(long featureId, long iteration);
 
     /// <summary>
-    /// Stores drawables for a feature. Feature IDs are immutable generation IDs —
+    /// Stores a drawable for a feature. Feature IDs are immutable generation IDs —
     /// each ID is only ever set once. If the entry already exists it is not replaced.
     /// The entry is stamped with <paramref name="iteration"/>.
     /// </summary>
-    void Set(long featureId, IReadOnlyList<IDrawable> drawables, long iteration);
+    void Set(long featureId, IDrawable drawable, long iteration);
 
     /// <summary>
     /// Evicts stale cache entries. The exact strategy depends on the implementation:

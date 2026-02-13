@@ -18,7 +18,7 @@ namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 /// Two-step renderer for VectorStyle. No cache interaction inside the renderer —
 /// caching is managed externally by the orchestrator.
 /// <list type="bullet">
-///   <item><description><see cref="CreateDrawables"/>: Creates SKPath objects in world coordinates
+///   <item><description><see cref="CreateDrawable"/>: Creates SKPath objects in world coordinates
 ///         (expensive, runs on background thread).</description></item>
 ///   <item><description><see cref="DrawDrawable"/>: Transforms and draws a single pre-created drawable
 ///         (fast, render thread).</description></item>
@@ -31,8 +31,10 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
     public IDrawableCache CreateCache() => new DrawableCache();
 
     /// <inheritdoc />
-    public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
+#pragma warning disable IDISP015 // Member should not return created and cached instance - ownership transfers to cache
+    public IDrawable? CreateDrawable(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
+#pragma warning restore IDISP015
     {
         if (style is not VectorStyle vectorStyle)
             throw new ArgumentException($"Expected {nameof(VectorStyle)} but got {style?.GetType().Name}");
@@ -60,7 +62,12 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
 
-        return drawables;
+        return drawables.Count switch
+        {
+            0 => null,
+            1 => drawables[0],
+            _ => new CompositeDrawable(drawables)
+        };
     }
 
     /// <inheritdoc />
@@ -76,6 +83,10 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
                 break;
             case VectorStyleDrawable vectorDrawable:
                 DrawVectorDrawable(skCanvas, viewport, vectorDrawable);
+                break;
+            case CompositeDrawable composite:
+                foreach (var child in composite.Children)
+                    DrawDrawable(canvas, viewport, child, layer);
                 break;
         }
     }
