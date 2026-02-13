@@ -7,8 +7,7 @@ namespace Mapsui.Rendering;
 
 public sealed class RenderService : IDisposable
 {
-    private readonly ConcurrentDictionary<int, FeatureIdTileCache> _layerFeatureIdTileCaches = new();
-    private readonly ConcurrentDictionary<int, DrawableCache> _layerDrawableCaches = new();
+    private readonly ConcurrentDictionary<int, IDrawableCache> _layerDrawableCaches = new();
 
     public RenderService(int vectorCacheCapacity = 30000)
     {
@@ -17,6 +16,12 @@ public sealed class RenderService : IDisposable
         ImageSourceCache = new ImageSourceCache();
         VectorCache = new VectorCache(this, vectorCacheCapacity);
     }
+
+    /// <summary>
+    /// The current render iteration. Incremented by the map renderer after each render pass.
+    /// Used by drawable caches to track which entries are still in use and which can be evicted.
+    /// </summary>
+    public long CurrentIteration { get; set; }
 
     public DrawableImageCache DrawableImageCache { get; }
     public VectorCache VectorCache { get; }
@@ -27,26 +32,28 @@ public sealed class RenderService : IDisposable
     public ImageSourceCache ImageSourceCache { get; }
 
     /// <summary>
-    /// Gets or creates a FeatureIdTileCache for the specified layer.
-    /// Each layer gets its own cache to avoid competition for cache space.
-    /// Uses feature Id as cache key.
+    /// Gets or creates a drawable cache for the specified layer.
+    /// Each layer gets its own cache for pre-created drawable objects.
+    /// Uses a <see cref="DrawableCache"/> by default.
     /// </summary>
     /// <param name="layerId">The unique identifier of the layer.</param>
-    /// <returns>A FeatureIdTileCache dedicated to the specified layer.</returns>
-    public FeatureIdTileCache GetLayerFeatureIdTileCache(int layerId)
+    /// <returns>An IDrawableCache dedicated to the specified layer.</returns>
+    public IDrawableCache GetLayerDrawableCache(int layerId)
     {
-        return _layerFeatureIdTileCaches.GetOrAdd(layerId, _ => new FeatureIdTileCache());
+        return _layerDrawableCaches.GetOrAdd(layerId, _ => new DrawableCache());
     }
 
     /// <summary>
-    /// Gets or creates a DrawableCache for the specified layer.
-    /// Each layer gets its own cache for pre-created drawable objects.
+    /// Gets or creates a drawable cache for the specified layer using a custom factory.
+    /// This allows renderers to specify their own cache type (e.g. <see cref="TileDrawableCache"/>).
+    /// If a cache already exists for this layer, it is returned regardless of the factory.
     /// </summary>
     /// <param name="layerId">The unique identifier of the layer.</param>
-    /// <returns>A DrawableCache dedicated to the specified layer.</returns>
-    public DrawableCache GetLayerDrawableCache(int layerId)
+    /// <param name="cacheFactory">Factory to create the cache if it doesn't exist yet.</param>
+    /// <returns>An IDrawableCache dedicated to the specified layer.</returns>
+    public IDrawableCache GetOrCreateLayerDrawableCache(int layerId, Func<IDrawableCache> cacheFactory)
     {
-        return _layerDrawableCaches.GetOrAdd(layerId, _ => new DrawableCache());
+        return _layerDrawableCaches.GetOrAdd(layerId, _ => cacheFactory());
     }
 
     /// <summary>
@@ -68,11 +75,6 @@ public sealed class RenderService : IDisposable
     /// <param name="layerId">The unique identifier of the layer.</param>
     public void CleanupLayerCaches(int layerId)
     {
-        if (_layerFeatureIdTileCaches.TryRemove(layerId, out var featureIdTileCache))
-        {
-            featureIdTileCache.Dispose();
-        }
-
         if (_layerDrawableCaches.TryRemove(layerId, out var drawableCache))
         {
             drawableCache.Dispose();
@@ -86,12 +88,6 @@ public sealed class RenderService : IDisposable
         TileCache.Dispose();
 
         // Dispose per-layer caches
-        foreach (var cache in _layerFeatureIdTileCaches.Values)
-        {
-            cache.Dispose();
-        }
-        _layerFeatureIdTileCaches.Clear();
-
         foreach (var cache in _layerDrawableCaches.Values)
         {
             cache.Dispose();

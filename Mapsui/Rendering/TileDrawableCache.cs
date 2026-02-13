@@ -1,16 +1,19 @@
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Rendering;
 
 /// <summary>
-/// Caches drawable objects per feature (keyed by feature Id within a layer).
-/// Thread-safe: drawables are created on a background thread and read on the UI thread.
-/// Uses strict iteration-based eviction: anything not stamped with the current
-/// iteration is removed on <see cref="Cleanup"/>.
+/// Drawable cache for tile layers with LRU-style eviction based on render iteration.
+/// Keeps more tiles than strictly needed so that zooming in/out
+/// doesn't immediately discard previously rendered tiles.
 /// </summary>
-public sealed class DrawableCache : IDrawableCache
+public sealed class TileDrawableCache : IDrawableCache
 {
+    private const int _minimumTilesToKeep = 256;
+
     private readonly ConcurrentDictionary<long, CacheEntry> _cache = new();
 
     /// <inheritdoc />
@@ -32,21 +35,17 @@ public sealed class DrawableCache : IDrawableCache
 
     /// <inheritdoc />
     /// <remarks>
-    /// Strict cleanup: removes and disposes every entry whose iteration is not
-    /// <paramref name="currentIteration"/>. This ensures that features no longer
-    /// in the viewport are cleaned up immediately.
+    /// LRU cleanup: counts the tiles stamped with <paramref name="currentIteration"/>
+    /// as "active", then keeps up to <c>3× active</c> (minimum 256) total entries.
+    /// Excess entries are removed oldest-iteration-first.
     /// </remarks>
     public void Cleanup(long currentIteration)
     {
-        foreach (var key in _cache.Keys)
+        var activeCount = _cache.Values.Count(e => e.Iteration == currentIteration);
+        var tilesToRemove = _cache.Count - _minimumTilesToKeep;
+        if (tilesToRemove > 0)
         {
-            if (_cache.TryGetValue(key, out var entry) && entry.Iteration != currentIteration)
-            {
-                if (_cache.TryRemove(key, out var removed))
-                {
-                    DisposeDrawables(removed.Drawables);
-                }
-            }
+            RemoveOldest(tilesToRemove);
         }
     }
 
@@ -63,6 +62,24 @@ public sealed class DrawableCache : IDrawableCache
     public void Dispose()
     {
         Clear();
+    }
+
+    private void RemoveOldest(int numberToRemove)
+    {
+        var counter = 0;
+        var orderedKeys = _cache
+            .Where(kvp => kvp.Value is not null)
+            .OrderBy(kvp => kvp.Value.Iteration)
+            .Select(kvp => kvp.Key)
+            .ToList();
+
+        foreach (var key in orderedKeys)
+        {
+            if (counter >= numberToRemove) break;
+            if (!_cache.TryRemove(key, out var entry)) continue;
+            DisposeDrawables(entry.Drawables);
+            counter++;
+        }
     }
 
     private static void DisposeDrawables(IReadOnlyList<IDrawable> drawables)

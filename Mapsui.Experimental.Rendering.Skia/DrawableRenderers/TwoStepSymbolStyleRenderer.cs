@@ -12,18 +12,22 @@ using System.Collections.Generic;
 namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 
 /// <summary>
-/// Creates and draws SymbolStyle drawables using the two-step architecture.
-/// Step 1 (CreateDrawables): Creates SKPath and SKPaint objects on a background thread.
-/// Step 2 (DrawDrawable): Applies viewport transform and draws to the canvas on the UI thread.
-/// Reuses the static helper methods from <see cref="SymbolStyleRenderer"/> for creating Skia objects.
+/// Two-step renderer for SymbolStyle. No cache interaction inside the renderer.
+/// <list type="bullet">
+///   <item><description><see cref="CreateDrawables"/>: Creates SKPath and SKPaint objects
+///         (expensive, runs on background thread).</description></item>
+///   <item><description><see cref="DrawDrawable"/>: Applies viewport transform and draws
+///         (fast, render thread).</description></item>
+/// </list>
+/// Does NOT implement <c>ISkiaStyleRenderer</c> — features that haven't been prepared yet
+/// simply won't render until the background thread catches up.
 /// </summary>
-public class SymbolStyleDrawableRenderer : IDrawableStyleRenderer
+public class TwoStepSymbolStyleRenderer : ITwoStepStyleRenderer
 {
     /// <inheritdoc />
-    /// <remarks>
-    /// Creates one <see cref="SymbolStyleDrawable"/> per coordinate in the feature,
-    /// building the <see cref="SKPath"/> and <see cref="SKPaint"/> objects on the calling (background) thread.
-    /// </remarks>
+    public IDrawableCache CreateCache() => new DrawableCache();
+
+    /// <inheritdoc />
     public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
     {
@@ -40,6 +44,15 @@ public class SymbolStyleDrawableRenderer : IDrawableStyleRenderer
         });
 
         return drawables;
+    }
+
+    /// <inheritdoc />
+    public void DrawDrawable(object canvas, Viewport viewport, IDrawable drawable, ILayer layer)
+    {
+        if (canvas is not SKCanvas skCanvas || drawable is not SymbolStyleDrawable symbolDrawable)
+            return;
+
+        DrawSymbolDrawable(skCanvas, viewport, symbolDrawable);
     }
 
     internal static SymbolStyleDrawable CreateSymbolDrawable(double worldX, double worldY,
@@ -81,22 +94,6 @@ public class SymbolStyleDrawableRenderer : IDrawableStyleRenderer
             relativeOffsetY: (float)-relativeOffset.Y,
             opacity: opacity
         );
-    }
-
-    /// <inheritdoc />
-    /// <remarks>
-    /// Applies world-to-screen transform, scale, rotation, and offsets, then draws the
-    /// pre-created path with pre-created paints. This is the fast UI-thread step.
-    /// </remarks>
-    public void DrawDrawable(object canvas, Viewport viewport, IDrawable drawable, ILayer layer)
-    {
-        if (canvas is not SKCanvas skCanvas)
-            throw new ArgumentException($"Expected {nameof(SKCanvas)} but got {canvas?.GetType().Name}");
-
-        if (drawable is not SymbolStyleDrawable symbolDrawable)
-            throw new ArgumentException($"Expected {nameof(SymbolStyleDrawable)} but got {drawable?.GetType().Name}");
-
-        DrawSymbolDrawable(skCanvas, viewport, symbolDrawable);
     }
 
     internal static void DrawSymbolDrawable(SKCanvas canvas, Viewport viewport, SymbolStyleDrawable drawable)

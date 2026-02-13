@@ -21,6 +21,7 @@ using System.Linq;
 using Mapsui.Rendering;
 using Mapsui.Experimental.VectorTiles.Tiling;
 using Mapsui.Experimental.Rendering.Skia.MapInfos;
+using Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -44,15 +45,15 @@ public sealed class MapRenderer : IMapRenderer
 
     private static void InitRenderer()
     {
-        _styleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
-        _styleRenderers[typeof(VectorStyle)] = new DrawableRenderers.VectorStyleDrawableRenderer();
+        _styleRenderers[typeof(RasterStyle)] = new DrawableRenderers.TwoStepRasterStyleRenderer();
+        _styleRenderers[typeof(VectorStyle)] = new DrawableRenderers.TwoStepVectorStyleRenderer();
         _styleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
-        _styleRenderers[typeof(SymbolStyle)] = new DrawableRenderers.SymbolStyleDrawableRenderer();
+        _styleRenderers[typeof(SymbolStyle)] = new DrawableRenderers.TwoStepSymbolStyleRenderer();
         _styleRenderers[typeof(ImageStyle)] = new ImageStyleRenderer();
         _styleRenderers[typeof(CustomPointStyle)] = new CustomPointStyleRenderer();
         _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
         _styleRenderers[typeof(VectorTileStyle)] = new VectorTileStyleRenderer();
-        _styleRenderers[typeof(VexTileStyle)] = new VexTileStyleRenderer();
+        _styleRenderers[typeof(VexTileStyle)] = new TwoStepVexTileStyleRenderer();
 
         _widgetRenderers[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
         _widgetRenderers[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
@@ -319,6 +320,7 @@ public sealed class MapRenderer : IMapRenderer
                 (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService));
 
             _currentIteration++;
+            renderService.CurrentIteration = _currentIteration;
         }
         catch (Exception exception)
         {
@@ -340,25 +342,25 @@ public sealed class MapRenderer : IMapRenderer
         if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
             throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
-        if (styleRenderer is IDrawableStyleRenderer drawableStyleRenderer)
+        // Two-step path: draw from pre-created cached drawables (cache managed externally).
+        if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
         {
-            // Two-step drawable path: draw from pre-created cached drawables
-            var drawables = DrawableRenderer.TryGetDrawables(renderService, layer.Id, feature.Id);
+            var drawables = DrawableRenderer.TryGetDrawables(renderService, layer.Id, feature.Id, iteration);
             if (drawables is not null)
             {
                 var saveCount = canvas.Save();
                 foreach (var drawable in drawables)
                 {
-                    drawableStyleRenderer.DrawDrawable(canvas, viewport, drawable, layer);
+                    twoStepRenderer.DrawDrawable(canvas, viewport, drawable, layer);
                 }
                 canvas.RestoreToCount(saveCount);
+                return;
             }
-            return;
         }
 
+        // Fallback / non-preparable path: render everything on the render thread.
         if (styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
         {
-            // Legacy rendering path
             var saveCount = canvas.Save();
             skiaStyleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
             canvas.RestoreToCount(saveCount);
@@ -441,18 +443,22 @@ public sealed class MapRenderer : IMapRenderer
                                 throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
                             var saveCount = surface.Canvas.Save();
-                            if (styleRenderer is IDrawableStyleRenderer drawableStyleRenderer)
+                            var rendered = false;
+
+                            // Try two-step path first (cached drawables)
+                            if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
                             {
-                                var drawables = DrawableRenderer.TryGetDrawables(renderService, layer.Id, feature.Id);
+                                var drawables = DrawableRenderer.TryGetDrawables(renderService, layer.Id, feature.Id, iteration);
                                 if (drawables is not null)
                                 {
                                     foreach (var drawable in drawables)
-                                    {
-                                        drawableStyleRenderer.DrawDrawable(surface.Canvas, viewport, drawable, layer);
-                                    }
+                                        twoStepRenderer.DrawDrawable(surface.Canvas, viewport, drawable, layer);
+                                    rendered = true;
                                 }
                             }
-                            else if (styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
+
+                            // Fallback to direct rendering
+                            if (!rendered && styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
                             {
                                 skiaStyleRenderer.Draw(surface.Canvas, viewport, layer, feature, style, renderService, iteration);
                             }

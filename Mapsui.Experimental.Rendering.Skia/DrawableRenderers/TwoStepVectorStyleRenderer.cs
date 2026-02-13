@@ -15,22 +15,22 @@ using System.Collections.Generic;
 namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 
 /// <summary>
-/// Creates and draws VectorStyle drawables using the two-step architecture.
-/// Step 1 (CreateDrawables): Creates SKPath objects in world coordinates and SKPaint objects
-/// on a background thread. Points delegate to SymbolStyleDrawableRenderer.
-/// Step 2 (DrawDrawable): Builds a world-to-screen matrix, clones and transforms the path,
-/// then draws with pre-created paints. The path clone + native matrix transform is fast.
+/// Two-step renderer for VectorStyle. No cache interaction inside the renderer —
+/// caching is managed externally by the orchestrator.
+/// <list type="bullet">
+///   <item><description><see cref="CreateDrawables"/>: Creates SKPath objects in world coordinates
+///         (expensive, runs on background thread).</description></item>
+///   <item><description><see cref="DrawDrawable"/>: Transforms and draws a single pre-created drawable
+///         (fast, render thread).</description></item>
+/// </list>
 /// </summary>
-public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
+public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
 {
 
     /// <inheritdoc />
-    /// <remarks>
-    /// Creates drawables for polygon, linestring, point, and geometry collection features.
-    /// Polygons and linestrings produce <see cref="VectorStyleDrawable"/> with world-coordinate
-    /// <see cref="SKPath"/>s and plain .NET style parameters. Points delegate to
-    /// <see cref="SymbolStyleDrawableRenderer.CreateSymbolDrawable"/>.
-    /// </remarks>
+    public IDrawableCache CreateCache() => new DrawableCache();
+
+    /// <inheritdoc />
     public IReadOnlyList<IDrawable> CreateDrawables(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
     {
@@ -51,7 +51,7 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
                     CreateGeometryDrawables(drawables, geometryFeature.Geometry, vectorStyle, opacity, viewport, renderService);
                     break;
                 default:
-                    Logger.Log(LogLevel.Warning, $"{nameof(VectorStyleDrawableRenderer)} can not render feature of type '{feature.GetType()}'");
+                    Logger.Log(LogLevel.Warning, $"{nameof(TwoStepVectorStyleRenderer)} can not render feature of type '{feature.GetType()}'");
                     break;
             }
         }
@@ -64,20 +64,15 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
     }
 
     /// <inheritdoc />
-    /// <remarks>
-    /// Concatenates a world-to-screen affine matrix onto the canvas, creates <see cref="SKPaint"/>
-    /// locally from the stored style parameters, and draws the world-coordinate path.
-    /// Dispatches to <see cref="SymbolStyleDrawableRenderer.DrawSymbolDrawable"/> for point drawables.
-    /// </remarks>
     public void DrawDrawable(object canvas, Viewport viewport, IDrawable drawable, ILayer layer)
     {
         if (canvas is not SKCanvas skCanvas)
-            throw new ArgumentException($"Expected {nameof(SKCanvas)} but got {canvas?.GetType().Name}");
+            return;
 
         switch (drawable)
         {
             case SymbolStyleDrawable symbolDrawable:
-                SymbolStyleDrawableRenderer.DrawSymbolDrawable(skCanvas, viewport, symbolDrawable);
+                TwoStepSymbolStyleRenderer.DrawSymbolDrawable(skCanvas, viewport, symbolDrawable);
                 break;
             case VectorStyleDrawable vectorDrawable:
                 DrawVectorDrawable(skCanvas, viewport, vectorDrawable);
@@ -116,7 +111,7 @@ public class VectorStyleDrawableRenderer : IDrawableStyleRenderer
     {
         // Convert VectorStyle to SymbolStyle for point rendering (same as legacy VectorStyleRenderer)
         var symbolStyle = new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line };
-        return SymbolStyleDrawableRenderer.CreateSymbolDrawable(worldX, worldY, symbolStyle, opacity);
+        return TwoStepSymbolStyleRenderer.CreateSymbolDrawable(worldX, worldY, symbolStyle, opacity);
     }
 
     private static VectorStyleDrawable CreatePolygonDrawable(Polygon polygon, VectorStyle vectorStyle,

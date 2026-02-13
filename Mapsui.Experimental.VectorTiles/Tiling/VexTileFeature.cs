@@ -9,7 +9,7 @@ namespace Mapsui.Experimental.VectorTiles.Tiling;
 
 /// <summary>
 /// Feature representing a VexTile vector tile with its render parameters.
-/// The actual rendering to SKImage happens in the VexTileStyleRenderer.
+/// The actual rendering to SKImage happens in the TwoStepVexTileStyleRenderer.
 /// </summary>
 public class VexTileFeature : BaseFeature
 {
