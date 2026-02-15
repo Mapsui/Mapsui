@@ -3,7 +3,7 @@ using System;
 namespace Mapsui.Rendering;
 
 /// <summary>
-/// Interface for caches that store pre-created drawable objects per feature.
+/// Interface for caches that store pre-created drawable objects per (feature, style) combination.
 /// Different implementations can use different eviction strategies
 /// (e.g. strict iteration-based for regular layers, LRU for tile layers).
 /// Each entry is stamped with the iteration at which it was last used.
@@ -11,18 +11,23 @@ namespace Mapsui.Rendering;
 public interface IDrawableCache : IDisposable
 {
     /// <summary>
-    /// Gets the drawable for a feature, or null if not cached.
+    /// Gets the drawable for a (feature, style) combination, or null if not cached.
     /// Stamps the entry with <paramref name="iteration"/> so that
     /// <see cref="Cleanup"/> knows the entry is still in use.
     /// </summary>
-    IDrawable? Get(long featureId, long iteration);
+    /// <param name="key">The composite key of feature and style GenerationIds.</param>
+    /// <param name="iteration">The current render iteration.</param>
+    IDrawable? Get(DrawableCacheKey key, long iteration);
 
     /// <summary>
-    /// Stores a drawable for a feature. Feature IDs are immutable generation IDs —
-    /// each ID is only ever set once. If the entry already exists it is not replaced.
+    /// Stores a drawable for a (feature, style) combination. GenerationIds are immutable —
+    /// each combination is only ever set once. If the entry already exists it is not replaced.
     /// The entry is stamped with <paramref name="iteration"/>.
     /// </summary>
-    void Set(long featureId, IDrawable drawable, long iteration);
+    /// <param name="key">The composite key of feature and style GenerationIds.</param>
+    /// <param name="drawable">The drawable to cache.</param>
+    /// <param name="iteration">The current render iteration.</param>
+    void Set(DrawableCacheKey key, IDrawable drawable, long iteration);
 
     /// <summary>
     /// Evicts stale cache entries. The exact strategy depends on the implementation:

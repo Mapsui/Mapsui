@@ -35,6 +35,9 @@ public abstract class BaseFeature : IFeature
     public long Id { get; private set; }
 
     /// <inheritdoc />
+    public long GenerationId => Id;
+
+    /// <inheritdoc />
     public ICollection<IStyle> Styles { get; set; } = [];
 
     /// <inheritdoc />

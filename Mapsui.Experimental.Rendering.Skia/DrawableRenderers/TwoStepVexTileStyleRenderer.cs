@@ -8,7 +8,6 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
-using VexTile.Renderer.Mvt.AliFlux;
 using VexVectorStyle = VexTile.Renderer.Mvt.AliFlux.VectorStyle;
 
 namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
@@ -83,7 +82,7 @@ public class TwoStepVexTileStyleRenderer : ITwoStepStyleRenderer
     /// </summary>
     private static SKImage RenderToImage(VexTileFeature feature, VexVectorStyle vectorStyle)
     {
-        var skiaCanvas = new SkiaCanvas();
+        using var skiaCanvas = new SkiaCanvas((int)feature.VexTileInfo.ScaledSizeX, (int)feature.VexTileInfo.ScaledSizeY);
         VexTileRenderer.Render(feature.VectorTile, vectorStyle, skiaCanvas, feature.VexTileInfo);
         return skiaCanvas.ToSKImage();
     }

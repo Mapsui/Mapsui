@@ -30,7 +30,6 @@ namespace Mapsui.Experimental.Rendering.Skia;
 /// </summary>
 public sealed class MapRenderer : IMapRenderer
 {
-    private long _currentIteration;
     private static readonly Dictionary<Type, ISkiaWidgetRenderer> _widgetRenderers = [];
     private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
     private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
@@ -318,12 +317,11 @@ public sealed class MapRenderer : IMapRenderer
                 }
             }
 
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration,
+            VisibleFeatureIterator.IterateLayers(viewport, layers, renderService.CurrentIteration,
                 (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, i),
                 (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService));
 
-            _currentIteration++;
-            renderService.CurrentIteration = _currentIteration;
+            renderService.CurrentIteration++;
         }
         catch (Exception exception)
         {
@@ -349,7 +347,7 @@ public sealed class MapRenderer : IMapRenderer
         if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
         {
 #pragma warning disable IDISP001 // Dispose created - drawable is cache-managed, not owned here
-            var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.Id, iteration);
+            var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.GenerationId, style.GenerationId, iteration);
 #pragma warning restore IDISP001
             if (drawable is not null)
             {
@@ -451,7 +449,7 @@ public sealed class MapRenderer : IMapRenderer
                             if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
                             {
 #pragma warning disable IDISP001 // Dispose created - drawable is cache-managed, not owned here
-                                var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.Id, iteration);
+                                var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.GenerationId, style.GenerationId, iteration);
 #pragma warning restore IDISP001
                                 if (drawable is not null)
                                 {

@@ -1,21 +1,22 @@
+using Mapsui.Logging;
 using System.Collections.Concurrent;
 
 namespace Mapsui.Rendering;
 
 /// <summary>
-/// Caches drawable objects per feature (keyed by feature Id within a layer).
+/// Caches drawable objects per (feature, style) combination.
 /// Thread-safe: drawables are created on a background thread and read on the UI thread.
 /// Uses strict iteration-based eviction: anything not stamped with the current
 /// iteration is removed on <see cref="Cleanup"/>.
 /// </summary>
 public sealed class DrawableCache : IDrawableCache
 {
-    private readonly ConcurrentDictionary<long, CacheEntry> _cache = new();
+    private readonly ConcurrentDictionary<DrawableCacheKey, CacheEntry> _cache = new();
 
     /// <inheritdoc />
-    public IDrawable? Get(long featureId, long iteration)
+    public IDrawable? Get(DrawableCacheKey key, long iteration)
     {
-        if (_cache.TryGetValue(featureId, out var entry))
+        if (_cache.TryGetValue(key, out var entry))
         {
             entry.Iteration = iteration;
             return entry.Drawable;
@@ -24,9 +25,17 @@ public sealed class DrawableCache : IDrawableCache
     }
 
     /// <inheritdoc />
-    public void Set(long featureId, IDrawable drawable, long iteration)
+    public void Set(DrawableCacheKey key, IDrawable drawable, long iteration)
     {
-        _cache.TryAdd(featureId, new CacheEntry(drawable, iteration));
+        if (!_cache.TryAdd(key, new CacheEntry(drawable, iteration)))
+        {
+            Logger.Log(LogLevel.Warning, $"DrawableCache: Failed to add drawable for key ({key.FeatureGenerationId}, {key.StyleGenerationId}) (iteration {iteration}). Key already exists.");
+            // Key already exists (race between DataChanged and Render threads).
+            // Dispose the new drawable to avoid leaking native resources (e.g. SKImage).
+#pragma warning disable IDISP007 // Don't dispose injected - we own this drawable, cache rejected it
+            drawable.Dispose();
+#pragma warning restore IDISP007
+        }
     }
 
     /// <inheritdoc />

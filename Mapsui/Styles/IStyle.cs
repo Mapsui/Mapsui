@@ -12,6 +12,12 @@ namespace Mapsui.Styles;
 public interface IStyle
 {
     /// <summary>
+    /// Gets the generation identifier for this style instance. This changes when
+    /// <see cref="Modified"/> is called to signal that cached drawables should be invalidated.
+    /// </summary>
+    long GenerationId { get; }
+
+    /// <summary>
     /// Gets or sets the minimum zoom value where the style is applied
     /// </summary>
     double MinVisible { get; set; }
@@ -30,4 +36,10 @@ public interface IStyle
     /// Gets or sets the objects overall opacity
     /// </summary>
     float Opacity { get; set; }
+
+    /// <summary>
+    /// Signals that the style has been modified. This updates the <see cref="GenerationId"/>
+    /// so that cached drawables using this style can be invalidated.
+    /// </summary>
+    void Modified();
 }

@@ -1,4 +1,4 @@
-using System;
+using Mapsui.Logging;
 using System.Collections.Concurrent;
 using System.Linq;
 
@@ -11,14 +11,14 @@ namespace Mapsui.Rendering;
 /// </summary>
 public sealed class TileDrawableCache : IDrawableCache
 {
-    private const int _minimumTilesToKeep = 256;
+    private const int _minimumTilesToKeep = 64;
 
-    private readonly ConcurrentDictionary<long, CacheEntry> _cache = new();
+    private readonly ConcurrentDictionary<DrawableCacheKey, CacheEntry> _cache = new();
 
     /// <inheritdoc />
-    public IDrawable? Get(long featureId, long iteration)
+    public IDrawable? Get(DrawableCacheKey key, long iteration)
     {
-        if (_cache.TryGetValue(featureId, out var entry))
+        if (_cache.TryGetValue(key, out var entry))
         {
             entry.Iteration = iteration;
             return entry.Drawable;
@@ -27,9 +27,17 @@ public sealed class TileDrawableCache : IDrawableCache
     }
 
     /// <inheritdoc />
-    public void Set(long featureId, IDrawable drawable, long iteration)
+    public void Set(DrawableCacheKey key, IDrawable drawable, long iteration)
     {
-        _cache.TryAdd(featureId, new CacheEntry(drawable, iteration));
+        if (!_cache.TryAdd(key, new CacheEntry(drawable, iteration)))
+        {
+            Logger.Log(LogLevel.Warning, $"Drawable for key ({key.FeatureGenerationId}, {key.StyleGenerationId}) already exists in cache. This may indicate a race condition between DataChanged and Render threads.");
+            // Key already exists (race between DataChanged and Render threads).
+            // Dispose the new drawable to avoid leaking native resources (e.g. SKImage).
+#pragma warning disable IDISP007 // Don't dispose injected - we own this drawable, cache rejected it
+            drawable.Dispose();
+#pragma warning restore IDISP007
+        }
     }
 
     /// <inheritdoc />

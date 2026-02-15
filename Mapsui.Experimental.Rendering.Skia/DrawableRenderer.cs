@@ -3,6 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,11 @@ namespace Mapsui.Experimental.Rendering.Skia;
 public static class DrawableRenderer
 {
     /// <summary>
-    /// Updates drawables for a layer on a background thread. For each feature that is not
-    /// yet cached, calls <see cref="ITwoStepStyleRenderer.CreateDrawable"/> and stores
-    /// the result in the cache. Then calls <see cref="IDrawableCache.Cleanup"/> to evict
-    /// stale entries based on the current render iteration.
+    /// Updates drawables for a layer on a background thread. For each (feature, style) 
+    /// combination that is not yet cached, calls <see cref="ITwoStepStyleRenderer.CreateDrawable"/> 
+    /// and stores the result in the cache. Iterates in style-first order to match the
+    /// rendering order used by VisibleFeatureIterator.
+    /// Then calls <see cref="IDrawableCache.Cleanup"/> to evict stale entries.
     /// </summary>
     public static void UpdateDrawables(Viewport viewport, ILayer layer,
         IReadOnlyDictionary<Type, IStyleRenderer> styleRenderers, RenderService renderService)
@@ -43,20 +45,46 @@ public static class DrawableRenderer
 
             var currentIteration = renderService.CurrentIteration;
 
-            // Create drawables only for features not yet in the cache.
-            // Get stamps existing entries with the current iteration so
-            // Cleanup knows they are still in use.
+            // Part 1: Layer styles (style-first order)
+            var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);
+            foreach (var layerStyle in layerStyles)
+            {
+                foreach (var feature in features)
+                {
+                    if (layerStyle is IThemeStyle themeStyle)
+                    {
+                        var stylesFromTheme = themeStyle.GetStyle(feature, viewport).GetStylesToApply(viewport.Resolution);
+                        foreach (var style in stylesFromTheme)
+                        {
+                            CreateAndCacheDrawable(viewport, layer, feature, style, styleRenderers, renderService, cache, currentIteration);
+                        }
+                    }
+                    else
+                    {
+                        CreateAndCacheDrawable(viewport, layer, feature, layerStyle, styleRenderers, renderService, cache, currentIteration);
+                    }
+                }
+            }
+
+            // Part 2: Feature styles (feature-first order, as in VisibleFeatureIterator)
             foreach (var feature in features)
             {
-                if (cache.Get(feature.Id, currentIteration) is not null)
-                    continue; // Already cached and stamped, skip.
-
-#pragma warning disable IDISP001 // Dispose created - ownership transfers to cache via Set
-                var drawable = CreateDrawableForFeature(viewport, layer, feature, styleRenderers, renderService);
-#pragma warning restore IDISP001
-                if (drawable is not null)
+                if (feature.Styles is null) continue;
+                foreach (var style in feature.Styles)
                 {
-                    cache.Set(feature.Id, drawable, currentIteration);
+                    if (style is IThemeStyle)
+                    {
+                        // ThemeStyles on features are not supported, skip (logged in VisibleFeatureIterator)
+                        continue;
+                    }
+                    if (style is StyleCollection)
+                    {
+                        // StyleCollections on features are not supported, skip
+                        continue;
+                    }
+                    if (!style.ShouldBeApplied(viewport.Resolution)) continue;
+
+                    CreateAndCacheDrawable(viewport, layer, feature, style, styleRenderers, renderService, cache, currentIteration);
                 }
             }
 
@@ -71,14 +99,43 @@ public static class DrawableRenderer
     }
 
     /// <summary>
-    /// Tries to get a cached drawable for a feature. Called from the render thread.
+    /// Creates a drawable for a (feature, style) combination and caches it if not already cached.
+    /// </summary>
+    private static void CreateAndCacheDrawable(Viewport viewport, ILayer layer, IFeature feature, IStyle style,
+        IReadOnlyDictionary<Type, IStyleRenderer> styleRenderers, RenderService renderService,
+        IDrawableCache cache, long currentIteration)
+    {
+        if (!styleRenderers.TryGetValue(style.GetType(), out var renderer) ||
+            renderer is not ITwoStepStyleRenderer twoStepRenderer)
+            return;
+
+        var key = new DrawableCacheKey(feature.GenerationId, style.GenerationId);
+
+        // Check if already cached
+        if (cache.Get(key, currentIteration) is not null)
+            return;
+
+#pragma warning disable IDISP001 // Dispose created - ownership transfers to cache via Set
+        var drawable = twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
+#pragma warning restore IDISP001
+
+        if (drawable is not null)
+        {
+            cache.Set(key, drawable, currentIteration);
+        }
+    }
+
+    /// <summary>
+    /// Tries to get a cached drawable for a (feature, style) combination. Called from the render thread.
     /// Stamps the cache entry with <paramref name="iteration"/> so that Cleanup
     /// knows the entry was recently used.
     /// </summary>
-    public static IDrawable? TryGetDrawable(RenderService renderService, int layerId, long featureId, long iteration)
+    public static IDrawable? TryGetDrawable(RenderService renderService, int layerId,
+        long featureGenerationId, long styleGenerationId, long iteration)
     {
+        var key = new DrawableCacheKey(featureGenerationId, styleGenerationId);
 #pragma warning disable IDISP001, IDISP004 // Cache managed by RenderService
-        return renderService.GetLayerDrawableCache(layerId).Get(featureId, iteration);
+        return renderService.GetLayerDrawableCache(layerId).Get(key, iteration);
 #pragma warning restore IDISP001, IDISP004
     }
 
@@ -112,63 +169,5 @@ public static class DrawableRenderer
                 return twoStep;
         }
         return null;
-    }
-
-    /// <summary>
-    /// Calls <see cref="ITwoStepStyleRenderer.CreateDrawable"/> for each applicable style
-    /// on the feature. Returns the combined drawable, or null if none were created.
-    /// </summary>
-#pragma warning disable IDISP015 // Member should not return created and cached instance - ownership transfers to caller
-    private static IDrawable? CreateDrawableForFeature(Viewport viewport, ILayer layer,
-        IFeature feature, IReadOnlyDictionary<Type, IStyleRenderer> styleRenderers, RenderService renderService)
-#pragma warning restore IDISP015
-    {
-        List<IDrawable>? result = null;
-
-        // Check layer styles
-        var layerStyles = layer.Style?.GetStylesToApply(feature, viewport);
-        if (layerStyles is not null)
-        {
-            foreach (var style in layerStyles)
-            {
-                if (!styleRenderers.TryGetValue(style.GetType(), out var renderer)
-                    || renderer is not ITwoStepStyleRenderer twoStepRenderer)
-                    continue;
-
-#pragma warning disable IDISP001 // Dispose created - ownership transfers to caller/cache
-                var drawable = twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
-#pragma warning restore IDISP001
-                if (drawable is not null)
-                {
-                    result ??= [];
-                    result.Add(drawable);
-                }
-            }
-        }
-
-        // Check feature styles
-        if (feature.Styles is not null)
-        {
-            foreach (var style in feature.Styles)
-            {
-                if (!style.ShouldBeApplied(viewport.Resolution)) continue;
-
-                if (!styleRenderers.TryGetValue(style.GetType(), out var renderer)
-                    || renderer is not ITwoStepStyleRenderer twoStepRenderer)
-                    continue;
-
-#pragma warning disable IDISP001 // Dispose created - ownership transfers to caller/cache
-                var drawable = twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
-#pragma warning restore IDISP001
-                if (drawable is not null)
-                {
-                    result ??= [];
-                    result.Add(drawable);
-                }
-            }
-        }
-
-        if (result is null) return null;
-        return result.Count == 1 ? result[0] : new CompositeDrawable(result);
     }
 }
