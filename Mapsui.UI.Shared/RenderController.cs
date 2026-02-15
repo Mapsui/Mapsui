@@ -45,6 +45,18 @@ public sealed class RenderController : IDisposable
     public void SetMapRenderer(IMapRenderer mapRenderer) => _mapRenderer = mapRenderer;
 
     /// <summary>
+    /// Sets up the drawable factory on the RenderService. This wires the renderer's
+    /// <see cref="IMapRenderer.CreateDrawableForFeature"/> method to the
+    /// <see cref="RenderService.CreateDrawable"/> delegate, enabling the fetch pipeline
+    /// to create drawables without direct access to the renderer.
+    /// </summary>
+    /// <param name="renderService">The render service to configure.</param>
+    public void SetupDrawableFactory(RenderService renderService)
+    {
+        renderService.CreateDrawable = _mapRenderer.CreateDrawableForFeature;
+    }
+
+    /// <summary>
     /// Delegates to the map renderer's UpdateDrawables to create pre-rendered objects.
     /// Called when layer data changes.
     /// </summary>

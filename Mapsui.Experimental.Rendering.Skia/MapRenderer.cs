@@ -90,6 +90,18 @@ public sealed class MapRenderer : IMapRenderer
         DrawableRenderer.UpdateDrawables(viewport, layer, _styleRenderers, renderService);
     }
 
+    /// <inheritdoc />
+    public IDrawable? CreateDrawableForFeature(Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService)
+    {
+        if (!_styleRenderers.TryGetValue(style.GetType(), out var renderer))
+            return null;
+
+        if (renderer is not ITwoStepStyleRenderer twoStepRenderer)
+            return null;
+
+        return twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
+    }
+
     private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
         IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
     {

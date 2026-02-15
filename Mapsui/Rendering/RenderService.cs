@@ -1,3 +1,4 @@
+using Mapsui.Layers;
 using Mapsui.Rendering.Caching;
 using Mapsui.Styles;
 using System;
@@ -22,6 +23,14 @@ public sealed class RenderService : IDisposable
     /// Used by drawable caches to track which entries are still in use and which can be evicted.
     /// </summary>
     public long CurrentIteration { get; set; }
+
+    /// <summary>
+    /// Factory delegate for creating drawables from features and styles.
+    /// Set by the MapRenderer during initialization when the Map is assigned to a MapControl.
+    /// This enables the fetch pipeline to create drawables directly without needing
+    /// access to renderer internals.
+    /// </summary>
+    public Func<Viewport, ILayer, IFeature, IStyle, RenderService, IDrawable?>? CreateDrawable { get; set; }
 
     public DrawableImageCache DrawableImageCache { get; }
     public VectorCache VectorCache { get; }
