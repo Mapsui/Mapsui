@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Mapsui.Rendering.Caching;
@@ -45,15 +44,14 @@ public sealed class FeatureIdTileCache : IDisposable
             RemoveOldEntries(_tileCache, tilesToRemove);
     }
 
-    private static void RemoveOldEntries(IDictionary<long, ITileCacheEntry> cache, int numberToRemove)
+    private static void RemoveOldEntries(ConcurrentDictionary<long, ITileCacheEntry> cache, int numberToRemove)
     {
         var counter = 0;
         var orderedKeys = cache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();
         foreach (var key in orderedKeys)
         {
             if (counter >= numberToRemove) break;
-            var entry = cache[key];
-            _ = cache.Remove(key);
+            if (!cache.TryRemove(key, out var entry)) continue;
 #pragma warning disable IDISP007
             if (entry.Data is IDisposable disposable)
                 disposable.Dispose();

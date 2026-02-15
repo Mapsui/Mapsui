@@ -85,25 +85,9 @@ public static class VexTileRenderer
             canvas.ClipOverflow = true;
         }
 
-        // Normalize the points from 0 to size
-        foreach (var vectorLayer in vectorTile.Layers)
-        {
-            foreach (var feature in vectorLayer.Features)
-            {
-                foreach (var geometry in feature.Geometry)
-                {
-                    for (int i = 0; i < geometry.Count; i++)
-                    {
-                        var point = geometry[i];
-                        // Note, to normalize the tile we change the geometry inside the tile. This is not typically
-                        // something you want to do in a renderer. If the source tile is cached, reused and rendered 
-                        // again the position would be incorrect. This is not a problem in the current implementation
-                        // but something to keep in mind.
-                        geometry[i] = new(point.X / feature.Extent * sizeX, point.Y / feature.Extent * sizeY);
-                    }
-                }
-            }
-        }
+        // Note: Geometry normalization (from tile-internal space to pixel space) is now
+        // performed at fetch time in VexTileSource.NormalizeGeometry, so the renderer
+        // receives pre-normalized coordinates and does not mutate the tile geometry.
 
         foreach (var tileLayer in vectorTile.Layers)
         {

@@ -30,8 +30,8 @@ public sealed class RasterizingTileLayerWithCustomPointStyleSample : ISample
         map.Navigator.ZoomToBox(extent);
 
         Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
-        // You can add the Mapsui.Experimental.Rendering.Skia package and use the Experimental RegisterPointStyleRenderer to get accss to the IFeature parameter.
-        // Uncomment: Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
+        // To use the experimental renderer you need to add the Mapsui.Experimental.Rendering.Skia package. It adds the IFeature parameter.
+        // Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyExperimentalBasicCustomStyleRenderer);
 
         return Task.FromResult(map);
     }
@@ -42,6 +42,11 @@ public sealed class RasterizingTileLayerWithCustomPointStyleSample : ISample
     };
 
     private static void MyBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, RenderService renderService, float opacity)
+    {
+        canvas.DrawRect(-5f, -5f, 10f, 10f, _paint);
+    }
+
+    private static void MyExperimentalBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, IFeature feature, RenderService renderService, float opacity)
     {
         canvas.DrawRect(-5f, -5f, 10f, 10f, _paint);
     }

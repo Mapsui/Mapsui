@@ -28,7 +28,7 @@ public class BasicMapInfoSample : ISample, ISampleTest
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreateInfoLayer(map.Extent));
+        map.Layers.Add(CreatePointLayer(map.Extent));
         map.Layers.Add(CreatePolygonLayer());
         map.Layers.Add(CreateLineLayer());
 
@@ -129,9 +129,9 @@ public class BasicMapInfoSample : ISample, ISampleTest
         ]);
     }
 
-    private static Layer CreateInfoLayer(MRect? envelope) => new(_infoLayerName)
+    private static MemoryLayer CreatePointLayer(MRect? envelope) => new(_infoLayerName)
     {
-        DataSource = RandomPointsBuilder.CreateProviderWithRandomPoints(envelope, 25, new Random(7)),
+        Features = RandomPointsBuilder.CreateRandomFeatures(envelope, 25, new Random(7)),
         Style = CreateSymbolStyle(),
     };
 

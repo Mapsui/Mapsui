@@ -21,6 +21,7 @@ using System.Linq;
 using Mapsui.Rendering;
 using Mapsui.Experimental.VectorTiles.Tiling;
 using Mapsui.Experimental.Rendering.Skia.MapInfos;
+using Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -29,9 +30,8 @@ namespace Mapsui.Experimental.Rendering.Skia;
 /// </summary>
 public sealed class MapRenderer : IMapRenderer
 {
-    private long _currentIteration;
     private static readonly Dictionary<Type, ISkiaWidgetRenderer> _widgetRenderers = [];
-    private static readonly Dictionary<Type, ISkiaStyleRenderer> _styleRenderers = [];
+    private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
     private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
     private static readonly Dictionary<string, CustomLayerRenderer.RenderHandler> _layerRenderers = [];
 
@@ -44,15 +44,15 @@ public sealed class MapRenderer : IMapRenderer
 
     private static void InitRenderer()
     {
-        _styleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
-        _styleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
+        _styleRenderers[typeof(RasterStyle)] = new DrawableRenderers.TwoStepRasterStyleRenderer();
+        _styleRenderers[typeof(VectorStyle)] = new DrawableRenderers.TwoStepVectorStyleRenderer();
         _styleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
-        _styleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
+        _styleRenderers[typeof(SymbolStyle)] = new DrawableRenderers.TwoStepSymbolStyleRenderer();
         _styleRenderers[typeof(ImageStyle)] = new ImageStyleRenderer();
         _styleRenderers[typeof(CustomPointStyle)] = new CustomPointStyleRenderer();
         _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
         _styleRenderers[typeof(VectorTileStyle)] = new VectorTileStyleRenderer();
-        _styleRenderers[typeof(VexTileStyle)] = new VexTileStyleRenderer();
+        _styleRenderers[typeof(VexTileStyle)] = new TwoStepVexTileStyleRenderer();
 
         _widgetRenderers[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
         _widgetRenderers[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
@@ -82,6 +82,12 @@ public sealed class MapRenderer : IMapRenderer
         var allWidgets = widgets.Concat(attributions);
 
         RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, renderService, background);
+    }
+
+    /// <inheritdoc />
+    public void UpdateDrawables(Viewport viewport, ILayer layer, RenderService renderService)
+    {
+        DrawableRenderer.UpdateDrawables(viewport, layer, _styleRenderers, renderService);
     }
 
     private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
@@ -220,13 +226,7 @@ public sealed class MapRenderer : IMapRenderer
     /// <returns>True if the renderer was found, false otherwise.</returns>
     public bool TryGetStyleRenderer(Type styleType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
     {
-        if (_styleRenderers.TryGetValue(styleType, out var outStyleRenderer))
-        {
-            styleRenderer = outStyleRenderer;
-            return true;
-        }
-        styleRenderer = null;
-        return false;
+        return _styleRenderers.TryGetValue(styleType, out styleRenderer);
     }
 
     /// <summary>
@@ -251,7 +251,7 @@ public sealed class MapRenderer : IMapRenderer
     /// </summary>
     /// <param name="type">The type of the style.</param>
     /// <param name="renderer">The renderer.</param>
-    public static void RegisterStyleRenderer(Type type, ISkiaStyleRenderer renderer)
+    public static void RegisterStyleRenderer(Type type, IStyleRenderer renderer)
     {
         _styleRenderers[type] = renderer;
     }
@@ -303,11 +303,25 @@ public sealed class MapRenderer : IMapRenderer
     {
         try
         {
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration,
+            // Ensure drawables are up to date for all two-step layers. This covers:
+            // 1. Layers that already have features but missed the DataChanged event
+            //    (e.g. MemoryLayer features set before the layer was added to the map).
+            // 2. Features that entered the viewport due to panning/zooming but are
+            //    already in the layer's memory cache, so no DataChanged fires
+            //    (e.g. coarser tile levels when zooming out).
+            foreach (var layer in layers)
+            {
+                if (layer.Enabled)
+                {
+                    DrawableRenderer.UpdateDrawables(viewport, layer, _styleRenderers, renderService);
+                }
+            }
+
+            VisibleFeatureIterator.IterateLayers(viewport, layers, renderService.CurrentIteration,
                 (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, i),
                 (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService));
 
-            _currentIteration++;
+            renderService.CurrentIteration++;
         }
         catch (Exception exception)
         {
@@ -329,9 +343,28 @@ public sealed class MapRenderer : IMapRenderer
         if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
             throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
-        var saveCount = canvas.Save(); // Save canvas
-        styleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
-        canvas.RestoreToCount(saveCount); // Restore old canvas
+        // Two-step path: draw from pre-created cached drawables (cache managed externally).
+        if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
+        {
+#pragma warning disable IDISP001 // Dispose created - drawable is cache-managed, not owned here
+            var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.GenerationId, style.GenerationId, iteration);
+#pragma warning restore IDISP001
+            if (drawable is not null)
+            {
+                var saveCount = canvas.Save();
+                twoStepRenderer.DrawDrawable(canvas, viewport, drawable, layer);
+                canvas.RestoreToCount(saveCount);
+                return;
+            }
+        }
+
+        // Fallback / non-preparable path: render everything on the render thread.
+        if (styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
+        {
+            var saveCount = canvas.Save();
+            skiaStyleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
+            canvas.RestoreToCount(saveCount);
+        }
     }
 
     private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity)
@@ -409,9 +442,28 @@ public sealed class MapRenderer : IMapRenderer
                             if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
                                 throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
-                            var saveCount = surface.Canvas.Save(); // Save canvas
-                            styleRenderer.Draw(surface.Canvas, viewport, layer, feature, style, renderService, iteration);
-                            surface.Canvas.RestoreToCount(saveCount); // Restore old canvas
+                            var saveCount = surface.Canvas.Save();
+                            var rendered = false;
+
+                            // Try two-step path first (cached drawables)
+                            if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
+                            {
+#pragma warning disable IDISP001 // Dispose created - drawable is cache-managed, not owned here
+                                var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.GenerationId, style.GenerationId, iteration);
+#pragma warning restore IDISP001
+                                if (drawable is not null)
+                                {
+                                    twoStepRenderer.DrawDrawable(surface.Canvas, viewport, drawable, layer);
+                                    rendered = true;
+                                }
+                            }
+
+                            // Fallback to direct rendering
+                            if (!rendered && styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
+                            {
+                                skiaStyleRenderer.Draw(surface.Canvas, viewport, layer, feature, style, renderService, iteration);
+                            }
+                            surface.Canvas.RestoreToCount(saveCount);
 
                             // 3) Check if the pixel has changed.
                             if (originalColor != pixMap.GetPixelColor(intX, intY))
