@@ -268,17 +268,19 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
     private static SKPaint CreateStrokePaint(Pen pen, float? widthOverride, float opacity, float resolution)
     {
         var lineWidth = (widthOverride ?? (float)pen.Width) * resolution;
-        var paint = new SKPaint { IsAntialias = true };
-        paint.IsStroke = true;
-        paint.StrokeWidth = lineWidth;
-        paint.Color = pen.Color.ToSkia(opacity);
-        paint.StrokeCap = pen.PenStrokeCap.ToSkia();
-        paint.StrokeJoin = pen.StrokeJoin.ToSkia();
-        paint.StrokeMiter = pen.StrokeMiterLimit;
-        paint.PathEffect = pen.PenStyle != PenStyle.Solid
-            ? pen.PenStyle.ToSkia(lineWidth, pen.DashArray, pen.DashOffset)
-            : null;
-        return paint;
+        return new SKPaint
+        {
+            IsAntialias = true,
+            IsStroke = true,
+            StrokeWidth = lineWidth,
+            Color = pen.Color.ToSkia(opacity),
+            StrokeCap = pen.PenStrokeCap.ToSkia(),
+            StrokeJoin = pen.StrokeJoin.ToSkia(),
+            StrokeMiter = pen.StrokeMiterLimit,
+            PathEffect = pen.PenStyle != PenStyle.Solid
+                ? pen.PenStyle.ToSkia(lineWidth, pen.DashArray, pen.DashOffset)
+                : null
+        };
     }
 
     /// <summary>
