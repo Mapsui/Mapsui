@@ -15,11 +15,11 @@ namespace Mapsui.Experimental.VectorTiles.Rendering;
 
 public sealed class SkiaCanvas : ICanvas, IDisposable
 {
-    private int _width;
+    private readonly int _width;
 
-    private int _height;
+    private readonly int _height;
 
-    private SKSurface _surface;
+    private readonly SKSurface _surface;
 
     private Rect _clipRectangle;
 
@@ -27,9 +27,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
     private readonly ConcurrentDictionary<string, SKTypeface> _fontPairs = new();
 
-    private static readonly object SFontLock = new object();
+    private static readonly object _fontLock = new();
 
-    private readonly List<Rect> _textRectangles = new List<Rect>();
+    private readonly List<Rect> _textRectangles = [];
 
     public bool ClipOverflow { get; set; }
 
@@ -69,7 +69,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         _surface.Canvas.Clear(SKColorFactory.MakeColor(color.Red, color.Green, color.Blue, color.Alpha, "DrawBackground"));
     }
 
-    private SKStrokeCap ConvertCap(PenLineCap cap)
+    private static SKStrokeCap ConvertCap(PenLineCap cap)
     {
         return cap switch
         {
@@ -79,7 +79,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         };
     }
 
-    private double Clamp(double number, double min = 0.0, double max = 1.0)
+    private static double Clamp(double number, double min = 0.0, double max = 1.0)
     {
         return Math.Max(min, Math.Min(max, number));
     }
@@ -101,7 +101,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             return list2.Select((List<IntPoint> s) => s.Select((IntPoint item) => new Point(item.X, item.Y)).ToList()).ToList();
         }
 
-        return null;
+        return [];
     }
 
     private SKPath GetPathFromGeometry(List<Point> geometry)
@@ -155,9 +155,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         using var sKPaint = new SKPaint
         {
             Style = SKPaintStyle.Stroke,
-            StrokeCap = ConvertCap(style.Paint.LineCap),
+            StrokeCap = SkiaCanvas.ConvertCap(style.Paint.LineCap),
             StrokeWidth = (float)style.Paint.LineWidth,
-            Color = SKColorFactory.MakeColor(lineColor.Red, lineColor.Green, lineColor.Blue, (byte)Clamp((double)(int)lineColor.Alpha * style.Paint.LineOpacity, 0.0, 255.0), "DrawLineString"),
+            Color = SKColorFactory.MakeColor(lineColor.Red, lineColor.Green, lineColor.Blue, (byte)SkiaCanvas.Clamp((double)(int)lineColor.Alpha * style.Paint.LineOpacity, 0.0, 255.0), "DrawLineString"),
             IsAntialias = true
         };
         if (style.Paint.LineDashArray.Any())
@@ -169,7 +169,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         _surface.Canvas.DrawPath(pathFromGeometry, sKPaint);
     }
 
-    private SKTextAlign ConvertAlignment(TextAlignment alignment)
+    private static SKTextAlign ConvertAlignment(TextAlignment alignment)
     {
         return alignment switch
         {
@@ -187,7 +187,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         {
             IsStroke = true,
             StrokeWidth = (float)style.Paint.TextStrokeWidth,
-            Color = SKColorFactory.MakeColor(textStrokeColor.Red, textStrokeColor.Green, textStrokeColor.Blue, (byte)Clamp((double)(int)textStrokeColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextStrokePaint"),
+            Color = SKColorFactory.MakeColor(textStrokeColor.Red, textStrokeColor.Green, textStrokeColor.Blue, (byte)SkiaCanvas.Clamp((double)(int)textStrokeColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextStrokePaint"),
             TextSize = (float)style.Paint.TextSize,
             IsAntialias = true,
             TextEncoding = SKTextEncoding.Utf32,
@@ -201,7 +201,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         SKColor textColor = style.Paint.TextColor;
         return new SKPaint
         {
-            Color = SKColorFactory.MakeColor(textColor.Red, textColor.Green, textColor.Blue, (byte)Clamp((double)(int)textColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextPaint"),
+            Color = SKColorFactory.MakeColor(textColor.Red, textColor.Green, textColor.Blue, (byte)SkiaCanvas.Clamp((double)(int)textColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextPaint"),
             TextSize = (float)style.Paint.TextSize,
             IsAntialias = true,
             TextEncoding = SKTextEncoding.Utf32,
@@ -274,7 +274,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
     private SKTypeface GetFont(string[] familyNames, Brush style)
     {
-        lock (SFontLock)
+        lock (_fontLock)
         {
             foreach (string text in familyNames)
             {
@@ -411,10 +411,6 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         return false;
     }
 
-    private void DebugRectangle(Rect rectangle, SKColor color)
-    {
-    }
-
     public void DrawTextOnPath(List<Point> geometry, Brush style)
     {
         geometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
@@ -439,19 +435,13 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         double num5 = (double)bounds.Bottom + style.Paint.TextSize + num;
         Rect rect = new Rect(num2, num3, num4 - num2, num5 - num3);
         if (TextCollides(rect))
-        {
-            DebugRectangle(rect, SKColorFactory.MakeColor(100, byte.MaxValue, 100, 128, "DrawTextOnPath"));
             return;
-        }
 
         _textRectangles.Add(rect);
-        if (style.Text.Length * style.Paint.TextSize * 0.2 >= GetPathLength(geometry))
-        {
-            DebugRectangle(rect, SKColorFactory.MakeColor(100, 100, byte.MaxValue, 128, "DrawTextOnPath"));
-            return;
-        }
 
-        DebugRectangle(rect, SKColorFactory.MakeColor(byte.MaxValue, 0, 0, 150, "DrawTextOnPath"));
+        if (style.Text.Length * style.Paint.TextSize * 0.2 >= GetPathLength(geometry))
+            return;
+
         SKPoint offset = new SKPoint((float)style.Paint.TextOffset.X, (float)style.Paint.TextOffset.Y);
         if (style.Paint.TextStrokeWidth != 0.0)
         {
@@ -498,7 +488,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
                 break;
             }
 
-            SKColor color = ((!background.HasValue || !IsClockwise(geometry)) ? SKColorFactory.MakeColor(style.Paint.FillColor.Red, style.Paint.FillColor.Green, style.Paint.FillColor.Blue, (byte)Clamp((double)(int)style.Paint.FillColor.Alpha * style.Paint.FillOpacity, 0.0, 255.0), "DrawPolygon") : background.Value);
+            SKColor color = ((!background.HasValue || !IsClockwise(geometry)) ? SKColorFactory.MakeColor(style.Paint.FillColor.Red, style.Paint.FillColor.Green, style.Paint.FillColor.Blue, (byte)SkiaCanvas.Clamp((double)(int)style.Paint.FillColor.Alpha * style.Paint.FillOpacity, 0.0, 255.0), "DrawPolygon") : background.Value);
             using var paint = new SKPaint
             {
                 Style = SKPaintStyle.Fill,
@@ -541,22 +531,6 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
     public void DrawDebugBox(TileInfo tileData, SKColor color)
     {
-        using var paint = new SKPaint
-        {
-            Color = color,
-            Style = SKPaintStyle.Stroke
-        };
-        _surface.Canvas.DrawRect(new SKRect(0f, 0f, _width, _height), paint);
-        using var textPaint = new SKPaint
-        {
-            FakeBoldText = true,
-            TextSize = 14f,
-            Color = color,
-            Style = SKPaintStyle.Stroke
-        };
-
-        var text = $"({tileData.X}, {tileData.Y}, {(int)tileData.Zoom})";
-        _surface.Canvas.DrawText(text, new SKPoint(20f, 20f), textPaint);
     }
 
     public byte[] ToPngByteArray(int quality = 80)
