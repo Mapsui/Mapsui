@@ -33,11 +33,21 @@ internal class Program
 {
     private const int TileSize = 256;
     private const int WarmupIterations = 3;
-    private const int MeasuredIterations = 10;
+    private const int MeasuredIterations = 50;
 
     // Zurich city center coordinates
     private const double ZurichLat = 47.374444;
     private const double ZurichLon = 8.541111;
+
+    // Saved baseline numbers for comparison (from BASELINE.md)
+    private static readonly Dictionary<int, (double AvgMs, double MedianMs, double AllocMb)> BaselineNumbers = new()
+    {
+        { 10, (77.7, 74.0, 3166.8) },
+        { 12, (76.4, 72.1, 2915.3) },
+        { 14, (106.4, 98.2, 3047.3) },
+        { 16, (101.1, 92.6, 3528.6) },
+        { 20, (129.7, 133.0, 4299.4) },
+    };
 
     static async Task Main(string[] args)
     {
@@ -87,34 +97,81 @@ internal class Program
         await RunWarmup(tileSource, style, testCases);
         Console.WriteLine();
 
-        // Collect results for summary matrix
+        // ==========================================
+        // RUN PERFORMANCE TEST
+        // ==========================================
+        Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════╗");
+        Console.WriteLine("║                         PERFORMANCE RESULTS                                       ║");
+        Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════╝");
+
         var results = new List<TestResult>();
 
-        // Run measured tests and save each tile
+        // Run measured tests
         foreach (var (zoom, x, y, description) in testCases)
         {
             var result = await RunTileTest(tileSource, style, zoom, x, y, description, outputDir);
             results.Add(result);
         }
 
+        PrintSummaryMatrix(results, "CURRENT");
+
+        // ==========================================
+        // COMPARISON WITH BASELINE
+        // ==========================================
+        Console.WriteLine();
+        Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════╗");
+        Console.WriteLine("║                         COMPARISON WITH BASELINE                                  ║");
+        Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════╝");
+        Console.WriteLine();
+        PrintBaselineComparison(results);
+
         // Diagnostic: Compare tile contents at different zoom levels
         Console.WriteLine("\n--- Tile Content Analysis ---");
         await AnalyzeTileContents(tileSource, style, testCases);
-
-        // Run grid test at zoom 14
-        var (gridX, gridY) = LatLonToTileTms(ZurichLat, ZurichLon, 14);
-        Console.WriteLine("\n--- Grid Test: 4x4 tiles at zoom 14 ---");
-        var gridResult = await RunGridTest(tileSource, style, zoom: 14, centerX: gridX, centerY: gridY, gridSize: 4, outputDir: outputDir);
-        results.Add(gridResult);
-
-        // Print summary matrix
-        PrintSummaryMatrix(results);
 
         Console.WriteLine("\nDone. Press any key to exit.");
         Console.ReadKey();
     }
 
-    private static void PrintSummaryMatrix(List<TestResult> results)
+    private static void PrintBaselineComparison(List<TestResult> current)
+    {
+        Console.WriteLine("Test                     │ Baseline │ Current  │ Speedup │ Notes");
+        Console.WriteLine("─────────────────────────┼──────────┼──────────┼─────────┼──────────────────");
+
+        foreach (var r in current)
+        {
+            // Extract zoom from name like "Z10 (536,665)"
+            var zoomStr = r.Name.Split(' ')[0].TrimStart('Z');
+            if (int.TryParse(zoomStr, out int zoom) && BaselineNumbers.TryGetValue(zoom, out var baseline))
+            {
+                var speedup = baseline.AvgMs / r.AvgMs;
+                var note = speedup > 1.05 ? "✓ faster" : speedup < 0.95 ? "✗ slower" : "≈ same";
+                Console.WriteLine($"{r.Name,-24} │ {baseline.AvgMs,6:F1}ms │ {r.AvgMs,6:F1}ms │ {speedup,5:F2}x  │ {note}");
+            }
+            else
+            {
+                Console.WriteLine($"{r.Name,-24} │    N/A   │ {r.AvgMs,6:F1}ms │   N/A   │");
+            }
+        }
+    }
+
+    private static void PrintComparison(List<TestResult> baseline, List<TestResult> pooled)
+    {
+        Console.WriteLine("Test                     │ Baseline │  Pooled  │ Speedup │ Alloc Reduction");
+        Console.WriteLine("─────────────────────────┼──────────┼──────────┼─────────┼─────────────────");
+
+        for (var i = 0; i < Math.Min(baseline.Count, pooled.Count); i++)
+        {
+            var b = baseline[i];
+            var p = pooled[i];
+            var speedup = b.AvgMs / p.AvgMs;
+            var allocReduction = b.AllocatedBytes > 0 ? (1.0 - (double)p.AllocatedBytes / b.AllocatedBytes) * 100 : 0;
+
+            Console.WriteLine($"{b.Name,-24} │ {b.AvgMs,6:F1}ms │ {p.AvgMs,6:F1}ms │ {speedup,5:F2}x  │ {allocReduction,5:F1}%");
+        }
+    }
+
+    private static void PrintSummaryMatrix(List<TestResult> results, string title)
     {
         Console.WriteLine();
         Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════╗");
