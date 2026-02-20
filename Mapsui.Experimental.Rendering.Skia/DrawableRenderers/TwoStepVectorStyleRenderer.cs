@@ -128,10 +128,15 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
     private static VectorStyleDrawable CreatePolygonDrawable(Polygon polygon, VectorStyle vectorStyle,
         float opacity, Viewport viewport, RenderService renderService)
     {
+        // Centroid for IDrawable.WorldX/WorldY and as reference point for relative coordinates
+        var envelope = polygon.EnvelopeInternal;
+        var centroidX = (envelope.MinX + envelope.MaxX) / 2.0;
+        var centroidY = (envelope.MinY + envelope.MaxY) / 2.0;
+
         // Path uses relative coordinates (centered at centroid) to avoid float precision loss.
         // Large world coordinates (e.g., EPSG:3857 values in millions) lose precision when cast to float.
         // By subtracting the centroid, coordinates stay small (~meters) and preserve precision.
-        var worldPath = polygon.ToWorldPath(polygon.Centroid);
+        var worldPath = polygon.ToWorldPath(centroidX, centroidY);
 
         var fillStyle = vectorStyle.Fill?.FillStyle ?? FillStyle.Solid;
 
@@ -157,7 +162,7 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
         }
 
         return new VectorStyleDrawable(
-            polygon.Centroid.X, polygon.Centroid.Y, worldPath,
+            centroidX, centroidY, worldPath,
             fillPaint: fillPaint,
             fillStyle: fillStyle,
             outlinePaint: outlinePaint,
@@ -169,10 +174,15 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
     private static VectorStyleDrawable CreateLineStringDrawable(LineString lineString,
         VectorStyle vectorStyle, float opacity)
     {
+        // Centroid for IDrawable.WorldX/WorldY and as reference point for relative coordinates
+        var envelope = lineString.EnvelopeInternal;
+        var centroidX = (envelope.MinX + envelope.MaxX) / 2.0;
+        var centroidY = (envelope.MinY + envelope.MaxY) / 2.0;
+
         // Path uses relative coordinates (centered at centroid) to avoid float precision loss.
         // Large world coordinates (e.g., EPSG:3857 values in millions) lose precision when cast to float.
         // By subtracting the centroid, coordinates stay small (~meters) and preserve precision.
-        var worldPath = lineString.ToWorldPath(lineString.Centroid);
+        var worldPath = lineString.ToWorldPath(centroidX, centroidY);
 
         // Pre-create outline paint (if both line and outline are visible)
         SKPaint? outlinePaint = null;
@@ -193,7 +203,7 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
         }
 
         return new VectorStyleDrawable(
-            lineString.Centroid.X, lineString.Centroid.Y, worldPath,
+            centroidX, centroidY, worldPath,
             fillPaint: null,
             fillStyle: FillStyle.Solid,
             outlinePaint: outlinePaint,
