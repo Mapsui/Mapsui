@@ -128,69 +128,78 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
     private static VectorStyleDrawable CreatePolygonDrawable(Polygon polygon, VectorStyle vectorStyle,
         float opacity, Viewport viewport, RenderService renderService)
     {
-        // Create path in world coordinates (viewport-independent)
-        var worldPath = polygon.ToWorldPath();
-
-        // Centroid for IDrawable.WorldX/WorldY
-        var envelope = polygon.EnvelopeInternal;
-        var centroidX = (envelope.MinX + envelope.MaxX) / 2.0;
-        var centroidY = (envelope.MinY + envelope.MaxY) / 2.0;
+        // Path uses relative coordinates (centered at centroid) to avoid float precision loss.
+        // Large world coordinates (e.g., EPSG:3857 values in millions) lose precision when cast to float.
+        // By subtracting the centroid, coordinates stay small (~meters) and preserve precision.
+        var worldPath = polygon.ToWorldPath(polygon.Centroid);
 
         var fillStyle = vectorStyle.Fill?.FillStyle ?? FillStyle.Solid;
 
-        // Pre-extract SKImage for bitmap fills (cache-owned, safe to store)
-        SKImage? bitmapFillImage = null;
-        if (fillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated && vectorStyle.Fill?.Image is not null)
+        // Pre-create fill paint
+        SKPaint? fillPaint = null;
+        if (vectorStyle.Fill.IsVisible())
         {
-            bitmapFillImage = PolygonRenderer.GetSKImage(renderService, vectorStyle.Fill.Image);
+            SKImage? bitmapFillImage = null;
+            if (fillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated && vectorStyle.Fill?.Image is not null)
+            {
+                bitmapFillImage = PolygonRenderer.GetSKImage(renderService, vectorStyle.Fill.Image);
+            }
+            fillPaint = CreateFillPaint(vectorStyle.Fill!, opacity, viewport.Rotation, bitmapFillImage);
+        }
+
+        // Pre-create outline paint
+        SKPaint? outlinePaint = null;
+        float baseOutlineWidth = 0;
+        if (vectorStyle.Outline.IsVisible())
+        {
+            baseOutlineWidth = (float)vectorStyle.Outline!.Width;
+            outlinePaint = CreateStrokePaint(vectorStyle.Outline, null, opacity);
         }
 
         return new VectorStyleDrawable(
-            centroidX, centroidY, worldPath,
-            brush: vectorStyle.Fill.IsVisible() ? vectorStyle.Fill : null,
-            fillOpacity: opacity,
-            viewportRotation: viewport.Rotation,
-            bitmapFillImage: bitmapFillImage,
-            outlinePen: vectorStyle.Outline.IsVisible() ? vectorStyle.Outline : null,
-            outlineWidthOverride: null,
-            outlineOpacity: opacity,
-            linePen: null,
-            lineOpacity: 0,
-            fillStyle: fillStyle);
+            polygon.Centroid.X, polygon.Centroid.Y, worldPath,
+            fillPaint: fillPaint,
+            fillStyle: fillStyle,
+            outlinePaint: outlinePaint,
+            baseOutlineWidth: baseOutlineWidth,
+            linePaint: null,
+            baseLineWidth: 0);
     }
 
     private static VectorStyleDrawable CreateLineStringDrawable(LineString lineString,
         VectorStyle vectorStyle, float opacity)
     {
-        // Create path in world coordinates (viewport-independent)
-        var worldPath = lineString.ToWorldPath();
+        // Path uses relative coordinates (centered at centroid) to avoid float precision loss.
+        // Large world coordinates (e.g., EPSG:3857 values in millions) lose precision when cast to float.
+        // By subtracting the centroid, coordinates stay small (~meters) and preserve precision.
+        var worldPath = lineString.ToWorldPath(lineString.Centroid);
 
-        // Centroid for IDrawable.WorldX/WorldY
-        var envelope = lineString.EnvelopeInternal;
-        var centroidX = (envelope.MinX + envelope.MaxX) / 2.0;
-        var centroidY = (envelope.MinY + envelope.MaxY) / 2.0;
-
-        // Compute outline width override if both line and outline are visible
-        float? outlineWidthOverride = null;
-        Pen? outlinePen = null;
+        // Pre-create outline paint (if both line and outline are visible)
+        SKPaint? outlinePaint = null;
+        float baseOutlineWidth = 0;
         if (vectorStyle.Line.IsVisible() && vectorStyle.Outline?.Width > 0)
         {
-            outlineWidthOverride = (float)(vectorStyle.Outline.Width + vectorStyle.Outline.Width + (vectorStyle.Line?.Width ?? 1));
-            outlinePen = vectorStyle.Outline;
+            baseOutlineWidth = (float)(vectorStyle.Outline.Width + vectorStyle.Outline.Width + (vectorStyle.Line?.Width ?? 1));
+            outlinePaint = CreateStrokePaint(vectorStyle.Outline, baseOutlineWidth, opacity);
+        }
+
+        // Pre-create line paint
+        SKPaint? linePaint = null;
+        float baseLineWidth = 0;
+        if (vectorStyle.Line.IsVisible())
+        {
+            baseLineWidth = (float)(vectorStyle.Line?.Width ?? 1);
+            linePaint = CreateStrokePaint(vectorStyle.Line!, null, opacity);
         }
 
         return new VectorStyleDrawable(
-            centroidX, centroidY, worldPath,
-            brush: null,
-            fillOpacity: 0,
-            viewportRotation: 0,
-            bitmapFillImage: null,
-            outlinePen: outlinePen,
-            outlineWidthOverride: outlineWidthOverride,
-            outlineOpacity: opacity,
-            linePen: vectorStyle.Line.IsVisible() ? vectorStyle.Line : null,
-            lineOpacity: opacity,
-            fillStyle: FillStyle.Solid);
+            lineString.Centroid.X, lineString.Centroid.Y, worldPath,
+            fillPaint: null,
+            fillStyle: FillStyle.Solid,
+            outlinePaint: outlinePaint,
+            baseOutlineWidth: baseOutlineWidth,
+            linePaint: linePaint,
+            baseLineWidth: baseLineWidth);
     }
 
     private static void DrawVectorDrawable(SKCanvas canvas, Viewport viewport, VectorStyleDrawable drawable)
@@ -198,40 +207,43 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
         // Build the world-to-screen transformation matrix
         var matrix = CreateWorldToScreenMatrix(viewport);
 
-        // Concat the matrix onto the canvas so the GPU applies the world-to-screen
-        // transform directly. Using Concat (not SetMatrix) preserves any existing
-        // canvas transformation (pixel density, layout offset, etc.).
+        // Create translation matrix to move from origin to the drawable's reference point (centroid).
+        // The path is stored in relative coordinates (centered at origin), so we translate to the
+        // actual world position before applying the world-to-screen transform.
+        var translateToWorld = SKMatrix.CreateTranslation((float)drawable.WorldX, (float)drawable.WorldY);
+
+        // Combine: first translate to world position, then apply world-to-screen transform
+        var combinedMatrix = SKMatrix.Concat(matrix, translateToWorld);
+
+        // Concat the matrix onto the canvas so the GPU applies the combined transform directly.
+        // Using Concat (not SetMatrix) preserves any existing canvas transformation (pixel density, layout offset, etc.).
         //
         // The canvas matrix scales geometry by 1/resolution. Stroke widths would be
         // scaled down by the matrix, so we compensate by multiplying with resolution.
-        // All SKPaint objects are created locally (no cached native objects) to avoid
-        // lifecycle issues between background and UI threads.
         var res = (float)viewport.Resolution;
 
         using (new SKAutoCanvasRestore(canvas))
         {
-            canvas.Concat(matrix);
+            canvas.Concat(combinedMatrix);
 
             // Draw fill (polygon only) — must come first, outline goes on top
-            if (drawable.Brush is not null)
+            if (drawable.FillPaint is not null)
             {
-                using var fillPaint = CreateFillPaint(drawable.Brush, drawable.FillOpacity,
-                    drawable.ViewportRotation, drawable.BitmapFillImage);
-                DrawFillPath(canvas, drawable.WorldPath, fillPaint, drawable.FillStyle);
+                DrawFillPath(canvas, drawable.WorldPath, drawable.FillPaint, drawable.FillStyle);
             }
 
             // Draw outline (polygon outline or linestring outline — for linestring, drawn under line)
-            if (drawable.OutlinePen is not null)
+            if (drawable.OutlinePaint is not null)
             {
-                using var outlinePaint = CreateStrokePaint(drawable.OutlinePen, drawable.OutlineWidthOverride, drawable.OutlineOpacity, res);
-                canvas.DrawPath(drawable.WorldPath, outlinePaint);
+                drawable.OutlinePaint.StrokeWidth = drawable.BaseOutlineWidth * res;
+                canvas.DrawPath(drawable.WorldPath, drawable.OutlinePaint);
             }
 
             // Draw line (linestring only — drawn on top of outline)
-            if (drawable.LinePen is not null)
+            if (drawable.LinePaint is not null)
             {
-                using var linePaint = CreateStrokePaint(drawable.LinePen, null, drawable.LineOpacity, res);
-                canvas.DrawPath(drawable.WorldPath, linePaint);
+                drawable.LinePaint.StrokeWidth = drawable.BaseLineWidth * res;
+                canvas.DrawPath(drawable.WorldPath, drawable.LinePaint);
             }
         }
     }
@@ -263,22 +275,23 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
 
     /// <summary>
     /// Creates an SKPaint for stroke rendering from a Mapsui Pen.
-    /// This is created locally at draw time to avoid native-object lifecycle issues.
+    /// Pre-created at drawable creation time; stroke width is scaled by resolution at draw time.
     /// </summary>
-    private static SKPaint CreateStrokePaint(Pen pen, float? widthOverride, float opacity, float resolution)
+    private static SKPaint CreateStrokePaint(Pen pen, float? widthOverride, float opacity)
     {
-        var lineWidth = (widthOverride ?? (float)pen.Width) * resolution;
+        var baseWidth = widthOverride ?? (float)pen.Width;
         return new SKPaint
         {
             IsAntialias = true,
             IsStroke = true,
-            StrokeWidth = lineWidth,
+            StrokeWidth = baseWidth, // Will be scaled by resolution at draw time
             Color = pen.Color.ToSkia(opacity),
             StrokeCap = pen.PenStrokeCap.ToSkia(),
             StrokeJoin = pen.StrokeJoin.ToSkia(),
             StrokeMiter = pen.StrokeMiterLimit,
+            // Note: Dash pattern uses base width. The pattern will scale with the stroke width at draw time.
             PathEffect = pen.PenStyle != PenStyle.Solid
-                ? pen.PenStyle.ToSkia(lineWidth, pen.DashArray, pen.DashOffset)
+                ? pen.PenStyle.ToSkia(baseWidth, pen.DashArray, pen.DashOffset)
                 : null
         };
     }
@@ -286,7 +299,7 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
     /// <summary>
     /// Creates an SKPaint for fill rendering from a Mapsui Brush.
     /// Handles solid fills, pattern fills (Cross, Dotted, etc.), and bitmap fills.
-    /// Created locally at draw time to avoid native-object lifecycle issues.
+    /// Pre-created at drawable creation time to avoid allocations during rendering.
     /// </summary>
     private static SKPaint CreateFillPaint(Brush brush, float opacity, double viewportRotation, SKImage? bitmapImage)
     {
