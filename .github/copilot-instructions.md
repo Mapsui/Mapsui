@@ -24,6 +24,18 @@ These instructions guide GitHub Copilot (and Copilot Chat) when helping in this 
 - Keep public APIs stable; avoid breaking changes without prior discussion.
 - Add/adjust XML doc comments when modifying public-facing types/members.
 
+## Code style
+Mapsui prefers a **compact code style**. The repository uses `.editorconfig` to enforce these conventions:
+
+- **Use `var` everywhere** — even for built-in types (`var count = 5;` not `int count = 5;`)
+- **Braces are optional** for single-statement blocks (`if (x) DoIt();` is acceptable)
+- **Compact object initializers** — members on same line when practical
+- **Prefer expression-bodied members** (`=>` syntax) for methods, properties, constructors
+- **Private fields**: `_camelCase` prefix (also for consts and statics, no `s_` prefix for statics)
+- **File-scoped namespaces**: `namespace Mapsui.Rendering;`
+
+Run `dotnet format` to apply these rules automatically.
+
 ## Contributions Copilot should optimize for
 - Clear, small changes with strong rationale.
 - Tests when fixing bugs or adding non-trivial behavior.
