@@ -36,10 +36,16 @@ Mapsui prefers a **compact code style**. The repository uses `.editorconfig` to 
 
 Run `dotnet format` to apply these rules automatically.
 
+## Comments
+- **Explain why, not what** — comments should capture the reasoning behind code, not describe what the code does (which is visible from reading it).
+- Focus on historical context, edge cases, performance considerations, or workarounds that aren't obvious from the code itself.
+- Good: `// Use relative coordinates to avoid float precision loss with large EPSG:3857 values`
+- Bad: `// Create path from polygon`
+
 ## Contributions Copilot should optimize for
 - Clear, small changes with strong rationale.
 - Tests when fixing bugs or adding non-trivial behavior.
-- Helpful comments where logic is non-obvious.
+- Meaningful comments that explain *why* (see Comments section above).
 - Performance awareness in hot paths; avoid allocations and unnecessary LINQ in tight loops.
 
 ## What to avoid
