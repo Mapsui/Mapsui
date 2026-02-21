@@ -1,17 +1,10 @@
-﻿// defining this will add a box around the tile boundary and also
-// burn in the XYZ value of the tile. This is very handy for debugging
-//#define USE_DEBUG_BOX
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using SkiaSharp;
 using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
-
-
-// Prefer our local copies over the AliFlux library types with the same names.
 using ICanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.ICanvas;
 using VectorTile = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTile;
 using VectorTileLayer = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTileLayer;
