@@ -1,10 +1,10 @@
 using BruTile;
 using BruTile.Predefined;
 using Mapsui.Experimental.VectorTiles.Tiling;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using System.Threading;
 using System.Threading.Tasks;
 using VexTile.Common.Sources;
-using VexTile.Renderer.Mvt.AliFlux.Sources;
 using VexTileInfo = VexTile.Renderer.Mvt.AliFlux.TileInfo;
 
 namespace Mapsui.Experimental.VectorTiles;
@@ -73,7 +73,7 @@ public sealed class VexTileSource : ILocalFeatureTileSource
     /// and must only be called once per tile, at fetch time.
     /// </summary>
     private static void NormalizeGeometry(
-        VexTile.Renderer.Mvt.AliFlux.VectorTile vectorTile, double sizeX, double sizeY)
+        VectorTile vectorTile, double sizeX, double sizeY)
     {
         foreach (var vectorLayer in vectorTile.Layers)
         {

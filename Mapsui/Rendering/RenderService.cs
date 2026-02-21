@@ -41,15 +41,18 @@ public sealed class RenderService : IDisposable
     public ImageSourceCache ImageSourceCache { get; }
 
     /// <summary>
-    /// Gets or creates a drawable cache for the specified layer.
-    /// Each layer gets its own cache for pre-created drawable objects.
-    /// Uses a <see cref="DrawableCache"/> by default.
+    /// Returns the drawable cache for the specified layer, or null if it has not been created yet.
+    /// The cache is always created through <see cref="GetOrCreateLayerDrawableCache"/> so that
+    /// the correct type is chosen by the renderer (e.g. <see cref="TileDrawableCache"/> vs
+    /// <see cref="DrawableCache"/>). A silent <see cref="DrawableCache"/> fallback here would
+    /// create the wrong type and cause tile-layer entries to be evicted unexpectedly.
     /// </summary>
     /// <param name="layerId">The unique identifier of the layer.</param>
-    /// <returns>An IDrawableCache dedicated to the specified layer.</returns>
-    public IDrawableCache GetLayerDrawableCache(int layerId)
+    /// <returns>The cache, or null when the layer has not yet been through UpdateDrawables.</returns>
+    public IDrawableCache? GetLayerDrawableCache(int layerId)
     {
-        return _layerDrawableCaches.GetOrAdd(layerId, _ => new DrawableCache());
+        _layerDrawableCaches.TryGetValue(layerId, out var cache);
+        return cache;
     }
 
     /// <summary>
@@ -63,18 +66,6 @@ public sealed class RenderService : IDisposable
     public IDrawableCache GetOrCreateLayerDrawableCache(int layerId, Func<IDrawableCache> cacheFactory)
     {
         return _layerDrawableCaches.GetOrAdd(layerId, _ => cacheFactory());
-    }
-
-    /// <summary>
-    /// Checks whether a drawable cache exists for the specified layer.
-    /// Used to detect layers that missed the DataChanged event and need
-    /// their drawables created on the first render.
-    /// </summary>
-    /// <param name="layerId">The unique identifier of the layer.</param>
-    /// <returns>True if a drawable cache already exists for this layer.</returns>
-    public bool HasLayerDrawableCache(int layerId)
-    {
-        return _layerDrawableCaches.ContainsKey(layerId);
     }
 
     /// <summary>

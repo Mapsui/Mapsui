@@ -5,20 +5,19 @@ using System.Threading.Tasks;
 using VexTile.Common.Enums;
 using VexTile.Common.Sources;
 using VexTile.Renderer.Mvt.AliFlux;
-using VexTile.Renderer.Mvt.AliFlux.Sources;
 
 namespace Mapsui.Experimental.VectorTiles;
 
 public sealed class RasterizedVectorTileSource : ILocalTileSource
 {
-    private readonly VectorTilesSource _tileSource;
+    private readonly VexTileCopies.VectorTilesSource _tileSource;
     private readonly VectorStyle _style = new(VectorStyleKind.Default);
     private readonly ITileSchema _schema;
 
     public RasterizedVectorTileSource(ITileDataSource tileDataSource, ITileSchema? schema = null)
     {
         _schema = schema ?? new GlobalSphericalMercator { YAxis = YAxis.OSM };
-        _tileSource = new VectorTilesSource(tileDataSource);
+        _tileSource = new VexTileCopies.VectorTilesSource(tileDataSource);
         _style.SetSourceProvider("openmaptiles", _tileSource);
     }
 
@@ -65,7 +64,7 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
         }
 
         // Render using our renderer
-        using var canvas = new Rendering.SkiaCanvas((int)vexTileInfo.ScaledSizeX, (int)vexTileInfo.ScaledSizeY);
+        using var canvas = new VexTileCopies.SkiaCanvas((int)vexTileInfo.ScaledSizeX, (int)vexTileInfo.ScaledSizeY);
         VexTileRenderer.Render(vectorTile, _style, canvas, vexTileInfo);
         return canvas.ToPngByteArray();
     }

@@ -6,10 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using SkiaSharp;
 using VexTile.Renderer.Mvt.AliFlux;
-using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
+
+
+// Prefer our local copies over the AliFlux library types with the same names.
+using ICanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.ICanvas;
+using VectorTile = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTile;
+using VectorTileLayer = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTileLayer;
 
 namespace Mapsui.Experimental.VectorTiles.Rendering;
 
@@ -32,7 +38,7 @@ public static class VexTileRenderer
     /// <param name="whiteListLayers">Optional whitelist to reduce layers to render.</param>
     /// <param name="overrideBackground">Override the default background color.</param>
     public static void Render(
-        VectorTile vectorTile,
+        VexTileCopies.VectorTile vectorTile,
         VectorStyle style,
         ICanvas canvas,
         int x, int y, double zoom,
@@ -134,7 +140,7 @@ public static class VexTileRenderer
                                     continue;
                                 }
 
-                                visualLayers.Add(new()
+                                visualLayers.Add(new VisualLayer
                                 {
                                     Type = VisualLayerType.Vector,
                                     VectorTileFeature = feature,

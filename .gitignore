@@ -71,3 +71,6 @@ AppPackages/
 /docs/samples
 /docs/api/pages
 .vscode
+/Benchmarks/Mapsui.Rendering.Benchmarks/BenchmarkDotNet.Artifacts/results
+/Benchmarks/Mapsui.Rendering.Benchmarks/BenchmarkDotNet.Artifacts/*.log
+

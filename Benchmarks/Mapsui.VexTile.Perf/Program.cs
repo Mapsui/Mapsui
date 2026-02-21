@@ -1,11 +1,11 @@
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using Mapsui.Samples.Common.Utilities;
 using SQLite;
 using System.Diagnostics;
 using VexTile.Common.Enums;
 using VexTile.Data.Sources;
 using VexTile.Renderer.Mvt.AliFlux;
-using VexTile.Renderer.Mvt.AliFlux.Sources;
-using SkiaCanvas = Mapsui.Experimental.VectorTiles.Rendering.SkiaCanvas;
+using SkiaCanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.SkiaCanvas;
 using VexTileRenderer = Mapsui.Experimental.VectorTiles.Rendering.VexTileRenderer;
 
 namespace Mapsui.VexTile.Perf;
@@ -33,7 +33,7 @@ internal class Program
 {
     private const int TileSize = 256;
     private const int WarmupIterations = 3;
-    private const int MeasuredIterations = 50;
+    private const int MeasuredIterations = 20;
 
     // Zurich city center coordinates
     private const double ZurichLat = 47.374444;
@@ -135,8 +135,8 @@ internal class Program
 
     private static void PrintBaselineComparison(List<TestResult> current)
     {
-        Console.WriteLine("Test                     │ Baseline │ Current  │ Speedup │ Notes");
-        Console.WriteLine("─────────────────────────┼──────────┼──────────┼─────────┼──────────────────");
+        Console.WriteLine("Test                     │ Baseline │ Current  │ Speedup │ Alloc   │ Notes");
+        Console.WriteLine("─────────────────────────┼──────────┼──────────┼─────────┼─────────┼──────────────────");
 
         foreach (var r in current)
         {
@@ -145,12 +145,15 @@ internal class Program
             if (int.TryParse(zoomStr, out int zoom) && BaselineNumbers.TryGetValue(zoom, out var baseline))
             {
                 var speedup = baseline.AvgMs / r.AvgMs;
+                var currentAllocMb = r.AllocatedBytes / 1024.0 / 1024.0;
+                var allocRatio = currentAllocMb / baseline.AllocMb;
                 var note = speedup > 1.05 ? "✓ faster" : speedup < 0.95 ? "✗ slower" : "≈ same";
-                Console.WriteLine($"{r.Name,-24} │ {baseline.AvgMs,6:F1}ms │ {r.AvgMs,6:F1}ms │ {speedup,5:F2}x  │ {note}");
+                var allocNote = allocRatio < 0.95 ? "✓" : allocRatio > 1.05 ? "✗" : "≈";
+                Console.WriteLine($"{r.Name,-24} │ {baseline.AvgMs,6:F1}ms │ {r.AvgMs,6:F1}ms │ {speedup,5:F2}x  │ {allocRatio,5:F2}x {allocNote} │ {note}");
             }
             else
             {
-                Console.WriteLine($"{r.Name,-24} │    N/A   │ {r.AvgMs,6:F1}ms │   N/A   │");
+                Console.WriteLine($"{r.Name,-24} │    N/A   │ {r.AvgMs,6:F1}ms │   N/A   │   N/A   │");
             }
         }
     }
@@ -394,7 +397,7 @@ internal class Program
             pngBytes?.Length ?? 0);
     }
 
-    private static void NormalizeGeometry(VectorTile vectorTile, double sizeX, double sizeY)
+    private static void NormalizeGeometry(Experimental.VectorTiles.VexTileCopies.VectorTile vectorTile, double sizeX, double sizeY)
     {
         foreach (var vectorLayer in vectorTile.Layers)
         {

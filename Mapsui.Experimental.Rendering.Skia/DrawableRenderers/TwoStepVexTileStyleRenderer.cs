@@ -1,6 +1,7 @@
 using Mapsui.Experimental.Rendering.Skia.SkiaStyles;
 using Mapsui.Experimental.VectorTiles.Rendering;
 using Mapsui.Experimental.VectorTiles.Tiling;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
