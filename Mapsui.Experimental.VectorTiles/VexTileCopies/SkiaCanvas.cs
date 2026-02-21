@@ -43,6 +43,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     // Cache for dash array conversions - avoids repeated float[] allocation for shared style objects
     private IEnumerable<double>? _lastDashArray;
     private float[]? _lastDashFloats;
+    private bool _lastDashIsNonEmpty;
 
     public SkiaCanvas(int width, int height)
     {
@@ -100,13 +101,14 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         _strokePaint.Color = color;
 
         var dashArray = style.Paint.LineDashArray;
-        if (dashArray.Any())
+        if (!ReferenceEquals(_lastDashArray, dashArray))
         {
-            if (!ReferenceEquals(_lastDashArray, dashArray))
-            {
-                _lastDashFloats = dashArray.Select(n => (float)n).ToArray();
-                _lastDashArray = dashArray;
-            }
+            _lastDashFloats = dashArray.Select(n => (float)n).ToArray();
+            _lastDashIsNonEmpty = _lastDashFloats.Length > 0;
+            _lastDashArray = dashArray;
+        }
+        if (_lastDashIsNonEmpty)
+        {
             _strokePaint.PathEffect = SKPathEffect.CreateDash(_lastDashFloats!, 0f);
         }
         else
