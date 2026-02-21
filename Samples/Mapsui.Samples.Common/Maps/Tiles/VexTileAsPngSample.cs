@@ -11,23 +11,23 @@ using VexTile.Data.Sources;
 
 namespace Mapsui.Samples.Common.Maps.Tiles;
 
-public sealed class RasterizedVectorTilesSample : ISample, IDisposable
+public sealed class VexTileAsPngSample : ISample, IDisposable
 {
     SqliteDataSource _sqliteDataSource;
 
-    static RasterizedVectorTilesSample()
+    static VexTileAsPngSample()
     {
         MbTilesDeployer.CopyEmbeddedResourceToFile("zurich.mbtiles");
         SQLitePCL.Batteries.Init();
     }
 
-    public RasterizedVectorTilesSample()
+    public VexTileAsPngSample()
     {
         _sqliteDataSource = CreateSqliteDataSource();
     }
 
-    public string Name => "RasterizedVectorTiles";
-    public string Category => "VectorTiles";
+    public string Name => "VexTileAsPng";
+    public string Category => "BetaVectorTiles";
 
     public Task<Map> CreateMapAsync()
     {

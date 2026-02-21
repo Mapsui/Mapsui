@@ -82,9 +82,9 @@ public class TwoStepVexTileStyleRenderer : ITwoStepStyleRenderer
     /// </summary>
     private static SKImage RenderToImage(VexTileFeature feature, VexVectorStyle vectorStyle)
     {
-        using var skiaCanvas = new SkiaCanvas((int)feature.VexTileInfo.ScaledSizeX, (int)feature.VexTileInfo.ScaledSizeY);
-        VexTileRenderer.Render(feature.VectorTile, vectorStyle, skiaCanvas, feature.VexTileInfo);
-        return skiaCanvas.ToSKImage();
+        using var canvas = new SkiaCanvas((int)feature.VexTileInfo.ScaledSizeX, (int)feature.VexTileInfo.ScaledSizeY);
+        VexTileRenderer.Render(feature.VectorTile, vectorStyle, canvas, feature.VexTileInfo);
+        return canvas.ToSKImage();
     }
 
     private static SKMatrix CreateRotationMatrix(Viewport viewport, MRect rect, SKMatrix priorMatrix)

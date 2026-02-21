@@ -1,5 +1,6 @@
 ﻿using BruTile;
 using BruTile.Predefined;
+using Mapsui.Experimental.VectorTiles.Rendering;
 using System.Threading.Tasks;
 using VexTile.Common.Enums;
 using VexTile.Common.Sources;
@@ -27,7 +28,6 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
 
     public async Task<byte[]?> GetTileAsync(BruTile.TileInfo tileInfo)
     {
-        var canvas = new SkiaCanvas();
         var col = tileInfo.Index.Col;
 
         // Flip Y only when using OSM axis direction
@@ -38,8 +38,35 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
 
         var tileWidth = _schema.GetTileWidth(tileInfo.Index.Level);
         var tileHeight = _schema.GetTileHeight(tileInfo.Index.Level);
-        await TileRendererFactory.RenderAsync(_style, canvas, col, row, tileInfo.Index.Level,
-            tileWidth, tileHeight);
+
+        // Fetch the vector tile
+        var vectorTile = await _tileSource.GetVectorTileAsync(col, row, tileInfo.Index.Level);
+        if (vectorTile == null)
+            return null;
+
+        var vexTileInfo = new VexTile.Renderer.Mvt.AliFlux.TileInfo(col, row, tileInfo.Index.Level, tileWidth, tileHeight);
+
+        // Normalize geometry
+        foreach (var vectorLayer in vectorTile.Layers)
+        {
+            foreach (var feature in vectorLayer.Features)
+            {
+                foreach (var geometry in feature.Geometry)
+                {
+                    for (int i = 0; i < geometry.Count; i++)
+                    {
+                        var point = geometry[i];
+                        geometry[i] = new VexTile.Renderer.Mvt.AliFlux.Drawing.Point(
+                            point.X / feature.Extent * vexTileInfo.ScaledSizeX,
+                            point.Y / feature.Extent * vexTileInfo.ScaledSizeY);
+                    }
+                }
+            }
+        }
+
+        // Render using our renderer
+        using var canvas = new Rendering.SkiaCanvas((int)vexTileInfo.ScaledSizeX, (int)vexTileInfo.ScaledSizeY);
+        VexTileRenderer.Render(vectorTile, _style, canvas, vexTileInfo);
         return canvas.ToPngByteArray();
     }
 }

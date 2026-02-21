@@ -167,8 +167,14 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
             fillStyle: fillStyle,
             outlinePaint: outlinePaint,
             baseOutlineWidth: baseOutlineWidth,
+            outlinePenStyle: vectorStyle.Outline?.PenStyle ?? PenStyle.Solid,
+            outlineDashArray: vectorStyle.Outline?.DashArray,
+            outlineDashOffset: vectorStyle.Outline?.DashOffset ?? 0,
             linePaint: null,
-            baseLineWidth: 0);
+            baseLineWidth: 0,
+            linePenStyle: PenStyle.Solid,
+            lineDashArray: null,
+            lineDashOffset: 0);
     }
 
     private static VectorStyleDrawable CreateLineStringDrawable(LineString lineString,
@@ -208,24 +214,25 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
             fillStyle: FillStyle.Solid,
             outlinePaint: outlinePaint,
             baseOutlineWidth: baseOutlineWidth,
+            outlinePenStyle: vectorStyle.Outline?.PenStyle ?? PenStyle.Solid,
+            outlineDashArray: vectorStyle.Outline?.DashArray,
+            outlineDashOffset: vectorStyle.Outline?.DashOffset ?? 0,
             linePaint: linePaint,
-            baseLineWidth: baseLineWidth);
+            baseLineWidth: baseLineWidth,
+            linePenStyle: vectorStyle.Line?.PenStyle ?? PenStyle.Solid,
+            lineDashArray: vectorStyle.Line?.DashArray,
+            lineDashOffset: vectorStyle.Line?.DashOffset ?? 0);
     }
 
     private static void DrawVectorDrawable(SKCanvas canvas, Viewport viewport, VectorStyleDrawable drawable)
     {
-        // Build the world-to-screen transformation matrix
-        var matrix = CreateWorldToScreenMatrix(viewport);
+        // Build world-to-screen transformation matrix with the drawable's reference point.
+        // The path uses relative coordinates centered at (drawable.WorldX, drawable.WorldY).
+        // We incorporate this offset into the matrix calculation in double precision to avoid
+        // float precision loss that would cause features to disappear at certain viewport positions.
+        var matrix = CreateWorldToScreenMatrix(viewport, drawable.WorldX, drawable.WorldY);
 
-        // Create translation matrix to move from origin to the drawable's reference point (centroid).
-        // The path is stored in relative coordinates (centered at origin), so we translate to the
-        // actual world position before applying the world-to-screen transform.
-        var translateToWorld = SKMatrix.CreateTranslation((float)drawable.WorldX, (float)drawable.WorldY);
-
-        // Combine: first translate to world position, then apply world-to-screen transform
-        var combinedMatrix = SKMatrix.Concat(matrix, translateToWorld);
-
-        // Concat the matrix onto the canvas so the GPU applies the combined transform directly.
+        // Concat the matrix onto the canvas so the GPU applies the transform directly.
         // Using Concat (not SetMatrix) preserves any existing canvas transformation (pixel density, layout offset, etc.).
         //
         // The canvas matrix scales geometry by 1/resolution. Stroke widths would be
@@ -234,7 +241,7 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
 
         using (new SKAutoCanvasRestore(canvas))
         {
-            canvas.Concat(combinedMatrix);
+            canvas.Concat(matrix);
 
             // Draw fill (polygon only) — must come first, outline goes on top
             if (drawable.FillPaint is not null)
@@ -246,6 +253,8 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
             if (drawable.OutlinePaint is not null)
             {
                 drawable.OutlinePaint.StrokeWidth = drawable.BaseOutlineWidth * res;
+                UpdatePathEffect(drawable.OutlinePaint, drawable.OutlinePenStyle,
+                    drawable.BaseOutlineWidth * res, drawable.OutlineDashArray, drawable.OutlineDashOffset);
                 canvas.DrawPath(drawable.WorldPath, drawable.OutlinePaint);
             }
 
@@ -253,9 +262,28 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
             if (drawable.LinePaint is not null)
             {
                 drawable.LinePaint.StrokeWidth = drawable.BaseLineWidth * res;
+                UpdatePathEffect(drawable.LinePaint, drawable.LinePenStyle,
+                    drawable.BaseLineWidth * res, drawable.LineDashArray, drawable.LineDashOffset);
                 canvas.DrawPath(drawable.WorldPath, drawable.LinePaint);
             }
         }
+    }
+
+    /// <summary>
+    /// Recreates the dash PathEffect on a paint using the resolution-scaled width.
+    /// The path is in world coordinates so dash intervals must be in world units;
+    /// multiplying the base width by resolution keeps dashes at a consistent
+    /// screen-pixel size regardless of zoom level.
+    /// </summary>
+    private static void UpdatePathEffect(SKPaint paint, PenStyle penStyle, float scaledWidth,
+        float[]? dashArray, float dashOffset)
+    {
+#pragma warning disable IDISP007 // Don't dispose injected - we replace the old PathEffect with a new one each frame
+        paint.PathEffect?.Dispose();
+#pragma warning restore IDISP007
+        paint.PathEffect = penStyle != PenStyle.Solid
+            ? penStyle.ToSkia(scaledWidth, dashArray, dashOffset)
+            : null;
     }
 
     /// <summary>
@@ -285,7 +313,8 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
 
     /// <summary>
     /// Creates an SKPaint for stroke rendering from a Mapsui Pen.
-    /// Pre-created at drawable creation time; stroke width is scaled by resolution at draw time.
+    /// Pre-created at drawable creation time; stroke width and dash PathEffect are scaled
+    /// by resolution at draw time since the path is in world coordinates.
     /// </summary>
     private static SKPaint CreateStrokePaint(Pen pen, float? widthOverride, float opacity)
     {
@@ -294,15 +323,13 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
         {
             IsAntialias = true,
             IsStroke = true,
-            StrokeWidth = baseWidth, // Will be scaled by resolution at draw time
+            StrokeWidth = baseWidth,
             Color = pen.Color.ToSkia(opacity),
             StrokeCap = pen.PenStrokeCap.ToSkia(),
             StrokeJoin = pen.StrokeJoin.ToSkia(),
             StrokeMiter = pen.StrokeMiterLimit,
-            // Note: Dash pattern uses base width. The pattern will scale with the stroke width at draw time.
-            PathEffect = pen.PenStyle != PenStyle.Solid
-                ? pen.PenStyle.ToSkia(baseWidth, pen.DashArray, pen.DashOffset)
-                : null
+            // PathEffect is set at draw time with resolution-scaled width so dash intervals
+            // stay at a consistent screen-pixel size regardless of zoom level.
         };
     }
 
@@ -430,6 +457,45 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
             // Skia's CreateRotationDegrees with positive angle in screen coords (Y-down)
             // matches the clockwise rotation by -viewport.Rotation used in WorldToScreenXY.
             var rotateAroundCenter = SKMatrix.CreateRotationDegrees((float)viewport.Rotation, screenCenterX, screenCenterY);
+            matrix = SKMatrix.Concat(rotateAroundCenter, matrix);
+        }
+
+        return matrix;
+    }
+
+    /// <summary>
+    /// Creates an SKMatrix for relative coordinates centered at (referenceX, referenceY).
+    /// Computes translation in double precision to avoid float precision loss with large world coordinates.
+    /// </summary>
+    internal static SKMatrix CreateWorldToScreenMatrix(Viewport viewport, double referenceX, double referenceY)
+    {
+        var res = viewport.Resolution;
+        var screenCenterX = viewport.Width / 2.0;
+        var screenCenterY = viewport.Height / 2.0;
+
+        // Path coordinates are relative to (referenceX, referenceY).
+        // Transform: screen = ((relative + reference) - center) / resolution + screenCenter
+        //          = (relative + (reference - center) / resolution) + screenCenter
+        // 
+        // Compute offset in double precision, then cast to float for matrix.
+        var offsetX = (float)((referenceX - viewport.CenterX) / res);
+        var offsetY = (float)((referenceY - viewport.CenterY) / res);
+
+        var matrix = new SKMatrix(
+            scaleX: (float)(1.0 / res),
+            skewX: 0,
+            transX: offsetX + (float)screenCenterX,
+            skewY: 0,
+            scaleY: (float)(-1.0 / res),
+            transY: -offsetY + (float)screenCenterY,
+            persp0: 0,
+            persp1: 0,
+            persp2: 1
+        );
+
+        if (viewport.Rotation != 0)
+        {
+            var rotateAroundCenter = SKMatrix.CreateRotationDegrees((float)viewport.Rotation, (float)screenCenterX, (float)screenCenterY);
             matrix = SKMatrix.Concat(rotateAroundCenter, matrix);
         }
 

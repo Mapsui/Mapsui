@@ -44,4 +44,20 @@ public interface IDrawableCache : IDisposable
     /// Clears all cached entries and disposes them.
     /// </summary>
     void Clear();
+
+    /// <summary>
+    /// Attempts to reserve a key for creation. If the key is already reserved by another
+    /// thread (creation in progress) or already exists in the cache, returns false.
+    /// Use this before creating an expensive drawable to avoid duplicate work.
+    /// </summary>
+    /// <param name="key">The composite key of feature and style GenerationIds.</param>
+    /// <returns>True if the reservation was successful; false if already reserved or cached.</returns>
+    bool TryReserve(DrawableCacheKey key);
+
+    /// <summary>
+    /// Releases a reservation previously acquired via <see cref="TryReserve"/>.
+    /// Call this in a finally block after creation completes (success or failure).
+    /// </summary>
+    /// <param name="key">The composite key to release.</param>
+    void ReleaseReservation(DrawableCacheKey key);
 }

@@ -100,6 +100,7 @@ public static class DrawableRenderer
 
     /// <summary>
     /// Creates a drawable for a (feature, style) combination and caches it if not already cached.
+    /// Uses TryReserve to avoid duplicate creation when multiple threads process the same key.
     /// </summary>
     private static void CreateAndCacheDrawable(Viewport viewport, ILayer layer, IFeature feature, IStyle style,
         IReadOnlyDictionary<Type, IStyleRenderer> styleRenderers, RenderService renderService,
@@ -115,13 +116,24 @@ public static class DrawableRenderer
         if (cache.Get(key, currentIteration) is not null)
             return;
 
+        // Try to reserve this key for creation. If another thread is already creating it, skip.
+        if (!cache.TryReserve(key))
+            return;
+
+        try
+        {
 #pragma warning disable IDISP001 // Dispose created - ownership transfers to cache via Set
-        var drawable = twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
+            var drawable = twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
 #pragma warning restore IDISP001
 
-        if (drawable is not null)
+            if (drawable is not null)
+            {
+                cache.Set(key, drawable, currentIteration);
+            }
+        }
+        finally
         {
-            cache.Set(key, drawable, currentIteration);
+            cache.ReleaseReservation(key);
         }
     }
 
@@ -142,32 +154,36 @@ public static class DrawableRenderer
     private static void EnsureDrawableCache(ILayer layer,
         IReadOnlyDictionary<Type, IStyleRenderer> styleRenderers, RenderService renderService)
     {
-        if (renderService.HasLayerDrawableCache(layer.Id)) return;
+        if (renderService.HasLayerDrawableCache(layer.Id))
+            return;
 
         var twoStep = FindTwoStepRenderer(layer, styleRenderers);
-        if (twoStep is not null)
-        {
 #pragma warning disable IDISP004 // Don't ignore created IDisposable - cache managed by RenderService
+        if (twoStep is not null)
             renderService.GetOrCreateLayerDrawableCache(layer.Id, twoStep.CreateCache);
+        else
+            // For layers whose style doesn't map directly to a two-step renderer
+            // (e.g. ThemeStyle, StyleCollection), use DrawableCache as the safe default.
+            // TileDrawableCache would evict entries over its capacity limit, which breaks
+            // feature layers with many geometries.
+            renderService.GetOrCreateLayerDrawableCache(layer.Id, () => new DrawableCache());
 #pragma warning restore IDISP004
-        }
     }
 
     private static ITwoStepStyleRenderer? FindTwoStepRenderer(ILayer layer,
         IReadOnlyDictionary<Type, IStyleRenderer> styleRenderers)
     {
-        if (layer.Style is not null)
-        {
-            var styleType = layer.Style.GetType();
-            if (styleRenderers.TryGetValue(styleType, out var renderer) && renderer is ITwoStepStyleRenderer p)
-                return p;
-        }
+        if (layer.Style is null)
+            return null;
 
-        foreach (var renderer in styleRenderers.Values)
-        {
-            if (renderer is ITwoStepStyleRenderer twoStep)
-                return twoStep;
-        }
+        var styleType = layer.Style.GetType();
+        if (styleRenderers.TryGetValue(styleType, out var renderer) && renderer is ITwoStepStyleRenderer p)
+            return p;
+
+        // Don't fall through to an arbitrary renderer. When the layer's style type
+        // doesn't have a direct renderer (e.g. ThemeStyle wrapping VectorStyle),
+        // returning the wrong renderer would create the wrong cache type
+        // (e.g. TileDrawableCache instead of DrawableCache), causing feature eviction.
         return null;
     }
 }

@@ -1,3 +1,4 @@
+using BruTile.Predefined;
 using Mapsui.Experimental.VectorTiles;
 using Mapsui.Experimental.VectorTiles.Tiling;
 using Mapsui.Samples.Common.Utilities;
@@ -14,25 +15,25 @@ namespace Mapsui.Samples.Common.Maps.Tiles;
 
 /// <summary>
 /// Sample demonstrating the VexTileSource which fetches vector tile data
-/// and renders it using VexTileStyleRenderer with caching.
+/// and renders it using TwoStepVexTileStyleRenderer with caching.
 /// </summary>
-public sealed class VexTileSample : ISample, IDisposable
+public sealed class VexTileAsSKImageSample : ISample, IDisposable
 {
     private SqliteDataSource? _sqliteDataSource;
 
-    static VexTileSample()
+    static VexTileAsSKImageSample()
     {
         MbTilesDeployer.CopyEmbeddedResourceToFile("zurich.mbtiles");
         SQLitePCL.Batteries.Init();
     }
 
-    public VexTileSample()
+    public VexTileAsSKImageSample()
     {
         _sqliteDataSource = CreateSqliteDataSource();
     }
 
-    public string Name => "VexTiles";
-    public string Category => "Experimental";
+    public string Name => "VexTileAsSKImage";
+    public string Category => "BetaVectorTiles";
 
     public Task<Map> CreateMapAsync()
     {
@@ -52,7 +53,7 @@ public sealed class VexTileSample : ISample, IDisposable
         var vectorStyle = new VectorStyle(VectorStyleKind.Default);
 
         // Create the tile source (fetches vector tile data)
-        var tileSource = new VexTileSource(sqliteDataSource);
+        var tileSource = new VexTileSource(sqliteDataSource, new GlobalSphericalMercator(0, 14));
 
         return new TileLayer(tileSource)
         {

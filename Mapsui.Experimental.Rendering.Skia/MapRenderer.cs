@@ -44,10 +44,10 @@ public sealed class MapRenderer : IMapRenderer
 
     private static void InitRenderer()
     {
-        _styleRenderers[typeof(RasterStyle)] = new DrawableRenderers.TwoStepRasterStyleRenderer();
-        _styleRenderers[typeof(VectorStyle)] = new DrawableRenderers.TwoStepVectorStyleRenderer();
+        _styleRenderers[typeof(RasterStyle)] = new TwoStepRasterStyleRenderer();
+        _styleRenderers[typeof(VectorStyle)] = new TwoStepVectorStyleRenderer();
         _styleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
-        _styleRenderers[typeof(SymbolStyle)] = new DrawableRenderers.TwoStepSymbolStyleRenderer();
+        _styleRenderers[typeof(SymbolStyle)] = new TwoStepSymbolStyleRenderer();
         _styleRenderers[typeof(ImageStyle)] = new ImageStyleRenderer();
         _styleRenderers[typeof(CustomPointStyle)] = new CustomPointStyleRenderer();
         _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
@@ -455,7 +455,6 @@ public sealed class MapRenderer : IMapRenderer
                                 throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
                             var saveCount = surface.Canvas.Save();
-                            var rendered = false;
 
                             // Try two-step path first (cached drawables)
                             if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
@@ -466,15 +465,9 @@ public sealed class MapRenderer : IMapRenderer
                                 if (drawable is not null)
                                 {
                                     twoStepRenderer.DrawDrawable(surface.Canvas, viewport, drawable, layer);
-                                    rendered = true;
                                 }
                             }
 
-                            // Fallback to direct rendering
-                            if (!rendered && styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
-                            {
-                                skiaStyleRenderer.Draw(surface.Canvas, viewport, layer, feature, style, renderService, iteration);
-                            }
                             surface.Canvas.RestoreToCount(saveCount);
 
                             // 3) Check if the pixel has changed.

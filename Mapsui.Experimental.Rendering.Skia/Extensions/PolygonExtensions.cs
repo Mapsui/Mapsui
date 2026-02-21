@@ -84,12 +84,16 @@ internal static class PolygonExtensions
     }
 
     /// <summary>
-    /// Converts a Polygon into a SKPath using raw world coordinates (no viewport transformation).
-    /// The path is intended to be transformed to screen coordinates at draw time using a matrix.
+    /// Converts a Polygon into a SKPath using coordinates relative to a reference point.
+    /// Using relative coordinates keeps float values small, avoiding precision loss for large world coordinates.
+    /// The path is intended to be transformed to screen coordinates at draw time using a matrix,
+    /// after translating to the reference point.
     /// </summary>
     /// <param name="polygon">Polygon to convert</param>
-    /// <returns>SKPath in world coordinates</returns>
-    public static SKPath ToWorldPath(this Polygon polygon)
+    /// <param name="referenceX">Reference X coordinate (typically centroid) to subtract from all points</param>
+    /// <param name="referenceY">Reference Y coordinate (typically centroid) to subtract from all points</param>
+    /// <returns>SKPath in relative world coordinates (centered around origin)</returns>
+    public static SKPath ToWorldPath(this Polygon polygon, double referenceX, double referenceY)
     {
         var path = new SKPath();
 
@@ -103,9 +107,10 @@ internal static class PolygonExtensions
         if (coords == null || coords.Length == 0)
             return path;
 
-        path.MoveTo((float)coords[0].X, (float)coords[0].Y);
+        // Subtract reference point to keep float values small and preserve precision
+        path.MoveTo((float)(coords[0].X - referenceX), (float)(coords[0].Y - referenceY));
         for (var i = 1; i < coords.Length; i++)
-            path.LineTo((float)coords[i].X, (float)coords[i].Y);
+            path.LineTo((float)(coords[i].X - referenceX), (float)(coords[i].Y - referenceY));
         path.Close();
 
         foreach (var interiorRing in polygon.InteriorRings)
@@ -125,9 +130,9 @@ internal static class PolygonExtensions
             if (innerCoords == null || innerCoords.Length == 0)
                 continue;
 
-            path.MoveTo((float)innerCoords[0].X, (float)innerCoords[0].Y);
+            path.MoveTo((float)(innerCoords[0].X - referenceX), (float)(innerCoords[0].Y - referenceY));
             for (var i = 1; i < innerCoords.Length; i++)
-                path.LineTo((float)innerCoords[i].X, (float)innerCoords[i].Y);
+                path.LineTo((float)(innerCoords[i].X - referenceX), (float)(innerCoords[i].Y - referenceY));
         }
 
         path.Close();

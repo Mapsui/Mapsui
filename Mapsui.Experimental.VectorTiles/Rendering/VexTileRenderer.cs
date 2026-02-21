@@ -72,11 +72,6 @@ public static class VexTileRenderer
             actualZoom = tileInfo.Zoom - zoomDelta;
         }
 
-        var sizeX = tileInfo.ScaledSizeX;
-        var sizeY = tileInfo.ScaledSizeY;
-
-        canvas.StartDrawing(sizeX, sizeY);
-
         var visualLayers = new List<VisualLayer>();
 
         // Process the pre-fetched tile

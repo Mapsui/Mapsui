@@ -1,5 +1,6 @@
 using Mapsui.Logging;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Mapsui.Rendering;
@@ -14,6 +15,8 @@ public sealed class TileDrawableCache : IDrawableCache
     private const int _minimumTilesToKeep = 64;
 
     private readonly ConcurrentDictionary<DrawableCacheKey, CacheEntry> _cache = new();
+    private readonly HashSet<DrawableCacheKey> _inProgress = [];
+    private readonly object _inProgressLock = new();
 
     /// <inheritdoc />
     public IDrawable? Get(DrawableCacheKey key, long iteration)
@@ -66,6 +69,33 @@ public sealed class TileDrawableCache : IDrawableCache
 #pragma warning restore IDISP007
         }
         _cache.Clear();
+    }
+
+    /// <inheritdoc />
+    public bool TryReserve(DrawableCacheKey key)
+    {
+        // Fast path: already cached
+        if (_cache.ContainsKey(key))
+            return false;
+
+        lock (_inProgressLock)
+        {
+            // Double-check cache under lock
+            if (_cache.ContainsKey(key))
+                return false;
+
+            // Try to reserve
+            return _inProgress.Add(key);
+        }
+    }
+
+    /// <inheritdoc />
+    public void ReleaseReservation(DrawableCacheKey key)
+    {
+        lock (_inProgressLock)
+        {
+            _inProgress.Remove(key);
+        }
     }
 
     public void Dispose()

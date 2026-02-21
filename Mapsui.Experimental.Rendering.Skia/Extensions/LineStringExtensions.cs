@@ -33,12 +33,16 @@ internal static class LineStringExtensions
     }
 
     /// <summary>
-    /// Converts a LineString into a SKPath using raw world coordinates (no viewport transformation).
-    /// The path is intended to be transformed to screen coordinates at draw time using a matrix.
+    /// Converts a LineString into a SKPath using coordinates relative to a reference point.
+    /// Using relative coordinates keeps float values small, avoiding precision loss for large world coordinates.
+    /// The path is intended to be transformed to screen coordinates at draw time using a matrix,
+    /// after translating to the reference point.
     /// </summary>
     /// <param name="lineString">LineString in Mapsui world coordinates.</param>
-    /// <returns>SKPath in world coordinates</returns>
-    public static SKPath ToWorldPath(this LineString lineString)
+    /// <param name="referenceX">Reference X coordinate (typically centroid) to subtract from all points</param>
+    /// <param name="referenceY">Reference Y coordinate (typically centroid) to subtract from all points</param>
+    /// <returns>SKPath in relative world coordinates (centered around origin)</returns>
+    public static SKPath ToWorldPath(this LineString lineString, double referenceX, double referenceY)
     {
         var coordinates = lineString.Coordinates;
         var path = new SKPath();
@@ -46,9 +50,10 @@ internal static class LineStringExtensions
         if (coordinates.Length == 0)
             return path;
 
-        path.MoveTo((float)coordinates[0].X, (float)coordinates[0].Y);
+        // Subtract reference point to keep float values small and preserve precision
+        path.MoveTo((float)(coordinates[0].X - referenceX), (float)(coordinates[0].Y - referenceY));
         for (var i = 1; i < coordinates.Length; i++)
-            path.LineTo((float)coordinates[i].X, (float)coordinates[i].Y);
+            path.LineTo((float)(coordinates[i].X - referenceX), (float)(coordinates[i].Y - referenceY));
 
         return path;
     }

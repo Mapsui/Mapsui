@@ -1,4 +1,4 @@
-﻿using Mapsui.Logging;
+using Mapsui.Logging;
 using SkiaSharp;
 using System;
 using System.Collections.Concurrent;
@@ -13,49 +13,54 @@ using VexTile.Renderer.Mvt.AliFlux.Enums;
 
 namespace Mapsui.Experimental.VectorTiles.Rendering;
 
+/// <summary>
+/// Canvas implementation for vector tile rendering.
+/// Uses reusable paint objects to minimize allocations.
+/// </summary>
 public sealed class SkiaCanvas : ICanvas, IDisposable
 {
     private readonly int _width;
     private readonly int _height;
     private readonly SKSurface _surface;
     private Rect _clipRectangle;
-    private List<IntPoint> _clipRectanglePath;
-    private readonly ConcurrentDictionary<string, SKTypeface> _fontPairs = new();
-    private static readonly object _fontLock = new();
-    private readonly List<Rect> _textRectangles = [];
+    private readonly List<IntPoint> _clipRectanglePath = new(4);
+    private readonly List<Rect> _textRectangles = new();
+
+    // Shared font cache across all canvas instances
+    private static readonly ConcurrentDictionary<string, SKTypeface> _fontCache = new();
+
+    // Reusable paint objects - configured per-use instead of recreating
+    private readonly SKPaint _fillPaint = new() { IsAntialias = true };
+    private readonly SKPaint _strokePaint = new() { IsAntialias = true, Style = SKPaintStyle.Stroke };
+    private readonly SKPaint _textPaint = new() { IsAntialias = true };
+    private readonly SKPaint _textStrokePaint = new() { IsAntialias = true, IsStroke = true };
+
+    // Reusable path object
+    private readonly SKPath _path = new() { FillType = SKPathFillType.EvenOdd };
 
     public SkiaCanvas(int width, int height)
     {
         _width = width;
         _height = height;
-        _surface = SKSurface.Create(new SKImageInfo(width, _height, SKImageInfo.PlatformColorType, SKAlphaType.Premul));
+        _surface = SKSurface.Create(new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul));
+
+        // Initialize clip rectangle
+        double margin = -5.0;
+        _clipRectangle = new Rect(margin, margin, _width - margin * 2.0, _height - margin * 2.0);
+
+        // Build clip path efficiently
+        _clipRectanglePath.Clear();
+        CollectionsMarshal.SetCount(_clipRectanglePath, 4);
+        var span = CollectionsMarshal.AsSpan(_clipRectanglePath);
+        span[0] = new IntPoint((int)_clipRectangle.Top, (int)_clipRectangle.Left);
+        span[1] = new IntPoint((int)_clipRectangle.Top, (int)_clipRectangle.Right);
+        span[2] = new IntPoint((int)_clipRectangle.Bottom, (int)_clipRectangle.Right);
+        span[3] = new IntPoint((int)_clipRectangle.Bottom, (int)_clipRectangle.Left);
     }
 
     public bool ClipOverflow { get; set; }
 
     public SKColor BackgroundColor { get; private set; } = SKColors.White;
-
-
-    public void StartDrawing(double width, double height)
-    {
-        // Ignore width and height. It is in the interface but initialization was move to the constructor.
-
-        double num = -5.0;
-        _clipRectangle = new Rect(num, num, _width - num * 2.0, _height - num * 2.0);
-        int num2 = 4;
-        List<IntPoint> list = new List<IntPoint>(num2);
-        CollectionsMarshal.SetCount(list, num2);
-        Span<IntPoint> span = CollectionsMarshal.AsSpan(list);
-        int num3 = 0;
-        span[num3] = new IntPoint((int)_clipRectangle.Top, (int)_clipRectangle.Left);
-        num3++;
-        span[num3] = new IntPoint((int)_clipRectangle.Top, (int)_clipRectangle.Right);
-        num3++;
-        span[num3] = new IntPoint((int)_clipRectangle.Bottom, (int)_clipRectangle.Right);
-        num3++;
-        span[num3] = new IntPoint((int)_clipRectangle.Bottom, (int)_clipRectangle.Left);
-        _clipRectanglePath = list;
-    }
 
     public void DrawBackground(SKColor color)
     {
@@ -63,54 +68,218 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         _surface.Canvas.Clear(SKColorFactory.MakeColor(color.Red, color.Green, color.Blue, color.Alpha, "DrawBackground"));
     }
 
-    private static SKStrokeCap ConvertCap(PenLineCap cap)
+    public void DrawLineString(List<Point> geometry, Brush style)
     {
-        return cap switch
+        if (ClipOverflow)
         {
-            PenLineCap.Flat => SKStrokeCap.Butt,
-            PenLineCap.Round => SKStrokeCap.Round,
-            _ => SKStrokeCap.Square,
-        };
+            geometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
+            if (geometry == null)
+                return;
+        }
+
+        if (geometry.Count == 0) return;
+
+        SKColor lineColor = style.Paint.LineColor;
+        var color = SKColorFactory.MakeColor(lineColor.Red, lineColor.Green, lineColor.Blue,
+            (byte)Clamp(lineColor.Alpha * style.Paint.LineOpacity, 0.0, 255.0), "DrawLineString");
+
+        _path.Reset();
+        BuildPath(_path, geometry);
+
+        _strokePaint.Reset();
+        _strokePaint.IsAntialias = true;
+        _strokePaint.Style = SKPaintStyle.Stroke;
+        _strokePaint.StrokeCap = ConvertCap(style.Paint.LineCap);
+        _strokePaint.StrokeWidth = (float)style.Paint.LineWidth;
+        _strokePaint.Color = color;
+
+        if (style.Paint.LineDashArray.Any())
+        {
+            _strokePaint.PathEffect = SKPathEffect.CreateDash(
+                style.Paint.LineDashArray.Select((double n) => (float)n).ToArray(), 0f);
+        }
+        else
+        {
+            _strokePaint.PathEffect = null;
+        }
+
+        _surface.Canvas.DrawPath(_path, _strokePaint);
     }
+
+    public void DrawPolygon(List<Point> geometry, Brush style, SKColor? background = null)
+    {
+        if (geometry.Count == 0)
+            return;
+
+        SKColor color = (!background.HasValue || !IsClockwise(geometry))
+            ? SKColorFactory.MakeColor(style.Paint.FillColor.Red, style.Paint.FillColor.Green, style.Paint.FillColor.Blue,
+                (byte)Clamp(style.Paint.FillColor.Alpha * style.Paint.FillOpacity, 0.0, 255.0), "DrawPolygon")
+            : background.Value;
+
+        _fillPaint.Reset();
+        _fillPaint.IsAntialias = true;
+        _fillPaint.Style = SKPaintStyle.Fill;
+        _fillPaint.StrokeCap = ConvertCap(style.Paint.LineCap);
+        _fillPaint.Color = color;
+
+        _path.Reset();
+        BuildPath(_path, geometry);
+
+        _surface.Canvas.DrawPath(_path, _fillPaint);
+    }
+
+    public void DrawPoint(Point geometry, Brush style)
+    {
+        _ = style.Paint.IconImage;
+    }
+
+    public void DrawText(Point geometry, Brush style)
+    {
+        _ = style.Paint.TextOptional;
+        var typeface = GetFont(style.Paint.TextFont, style);
+        typeface = QualifyTypeface(style, typeface);
+        using var font = new SKFont(typeface, (float)style.Paint.TextSize) { Hinting = SKFontHinting.Normal };
+
+        ConfigureTextPaint(_textPaint, style);
+        ConfigureTextStrokePaint(_textStrokePaint, style);
+
+        var textAlign = ConvertAlignment(style.Paint.TextJustify);
+        string[] array = TransformText(style.Text, style).Split('\n');
+        if (array.Length != 0)
+        {
+            string s = array.OrderBy((string line) => line.Length).Last();
+            int num = (int)font.MeasureText(s, _textPaint);
+            int num2 = (int)(geometry.X - num / 2);
+            int num3 = (int)(geometry.Y - style.Paint.TextSize / 2.0 * array.Length);
+            int num4 = (int)(style.Paint.TextSize * array.Length);
+            Rect rect = new Rect(num2, num3, num, num4);
+            rect = rect.Inflate(5.0, 5.0);
+            if ((ClipOverflow && !_clipRectangle.Contains(rect)) || TextCollides(rect))
+                return;
+
+            _textRectangles.Add(rect);
+        }
+
+        int num5 = 0;
+        foreach (string text in array)
+        {
+            float num7 = (float)(num5 * style.Paint.TextSize) - array.Length * (float)style.Paint.TextSize / 2f + (float)style.Paint.TextSize;
+            SKPoint p = new SKPoint((float)geometry.X + (float)(style.Paint.TextOffset.X * style.Paint.TextSize), (float)geometry.Y + (float)(style.Paint.TextOffset.Y * style.Paint.TextSize) + num7);
+            if (style.Paint.TextStrokeWidth != 0.0)
+            {
+                _surface.Canvas.DrawText(text, p, textAlign, font, _textStrokePaint);
+            }
+
+            _surface.Canvas.DrawText(text, p, textAlign, font, _textPaint);
+            num5++;
+        }
+    }
+
+    public void DrawTextOnPath(List<Point> geometry, Brush style)
+    {
+        geometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
+        if (geometry == null)
+            return;
+
+        string text = TransformText(style.Text, style);
+        if (CheckPathSqueezing(geometry))
+            return;
+
+        using var pathFromGeometry = CreatePathFromGeometry(geometry);
+        SKRect bounds = pathFromGeometry.Bounds;
+        double num = 2.0;
+        double num2 = (double)bounds.Left - style.Paint.TextSize - num;
+        double num3 = (double)bounds.Top - style.Paint.TextSize - num;
+        double num4 = (double)bounds.Right + style.Paint.TextSize + num;
+        double num5 = (double)bounds.Bottom + style.Paint.TextSize + num;
+        Rect rect = new Rect(num2, num3, num4 - num2, num5 - num3);
+        if (TextCollides(rect))
+            return;
+
+        _textRectangles.Add(rect);
+
+        if (style.Text.Length * style.Paint.TextSize * 0.2 >= GetPathLength(geometry))
+            return;
+
+        SKPoint offset = new SKPoint((float)style.Paint.TextOffset.X, (float)style.Paint.TextOffset.Y);
+        using var font = CreateTextFont(style);
+        var textAlign = ConvertAlignment(style.Paint.TextJustify);
+
+        if (style.Paint.TextStrokeWidth != 0.0)
+        {
+            ConfigureTextStrokePaint(_textStrokePaint, style);
+            _surface.Canvas.DrawTextOnPath(text, pathFromGeometry, offset, warpGlyphs: true, textAlign, font, _textStrokePaint);
+        }
+
+        ConfigureTextPaint(_textPaint, style);
+        _surface.Canvas.DrawTextOnPath(text, pathFromGeometry, offset, warpGlyphs: true, textAlign, font, _textPaint);
+    }
+
+    public void DrawImage(byte[] imageData, Brush style)
+    {
+        try
+        {
+            SKBitmap bitmap = SKBitmap.Decode(imageData);
+            _surface.Canvas.DrawBitmap(bitmap, new SKPoint(0f, 0f));
+        }
+        catch (Exception)
+        {
+            Logger.Log(LogLevel.Error, "Failed to decode image data for DrawImage.");
+        }
+    }
+
+    public void DrawUnknown(List<List<Point>> geometry, Brush style)
+    {
+    }
+
+    public byte[] ToPngByteArray(int quality = 80)
+    {
+        using SKImage image = _surface.Snapshot();
+        using SKData data = image.Encode(SKEncodedImageFormat.Png, quality);
+        using MemoryStream stream = new MemoryStream();
+        data.SaveTo(stream);
+        return stream.ToArray();
+    }
+
+    public SKImage ToSKImage()
+    {
+        return _surface.Snapshot();
+    }
+
+    public void Dispose()
+    {
+        _surface?.Dispose();
+        _fillPaint?.Dispose();
+        _strokePaint?.Dispose();
+        _textPaint?.Dispose();
+        _textStrokePaint?.Dispose();
+        _path?.Dispose();
+    }
+
+    #region Private helper methods
+
+    private static SKStrokeCap ConvertCap(PenLineCap cap) => cap switch
+    {
+        PenLineCap.Flat => SKStrokeCap.Butt,
+        PenLineCap.Round => SKStrokeCap.Round,
+        _ => SKStrokeCap.Square,
+    };
 
     private static double Clamp(double number, double min = 0.0, double max = 1.0)
     {
         return Math.Max(min, Math.Min(max, number));
     }
 
-    private List<List<Point>> ClipPolygon(List<Point> geometry)
+    private static void BuildPath(SKPath path, List<Point> geometry)
     {
-        Clipper clipper = new Clipper();
-        List<IntPoint> list = new List<IntPoint>();
-        foreach (Point item in geometry)
-        {
-            list.Add(new IntPoint((int)item.X, (int)item.Y));
-        }
-
-        clipper.AddPolygon(list, PolyType.ptSubject);
-        clipper.AddPolygon(_clipRectanglePath, PolyType.ptClip);
-        List<List<IntPoint>> list2 = new List<List<IntPoint>>();
-        if (clipper.Execute(ClipType.ctIntersection, list2, PolyFillType.pftNonZero, PolyFillType.pftEvenOdd) && list2.Count > 0)
-        {
-            return list2.Select((List<IntPoint> s) => s.Select((IntPoint item) => new Point(item.X, item.Y)).ToList()).ToList();
-        }
-
-        return [];
-    }
-
-    private static SKPath GetPathFromGeometry(List<Point> geometry)
-    {
-        SKPath sKPath = new SKPath
-        {
-            FillType = SKPathFillType.EvenOdd
-        };
+        if (geometry.Count == 0) return;
         Point point = geometry[0];
-        sKPath.MoveTo((float)point.X, (float)point.Y);
-        foreach (Point item in geometry.Skip(1))
+        path.MoveTo((float)point.X, (float)point.Y);
+        for (var i = 1; i < geometry.Count; i++)
         {
-            sKPath.LineTo((float)item.X, (float)item.Y);
+            var item = geometry[i];
+            path.LineTo((float)item.X, (float)item.Y);
         }
-        return sKPath;
     }
 
     private static bool IsLeftToRight(List<Point> geometry)
@@ -120,40 +289,16 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         return point.X <= point2.X;
     }
 
-    public void DrawLineString(List<Point> geometry, Brush style)
+    private static bool IsClockwise(List<Point> polygon)
     {
-        if (ClipOverflow)
+        double num = 0.0;
+        for (int i = 0; i < polygon.Count; i++)
         {
-            geometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
-            if (geometry == null)
-            {
-                return;
-            }
+            Point point = polygon[i];
+            Point point2 = polygon[(i + 1) % polygon.Count];
+            num += (point2.X - point.X) * (point2.Y + point.Y);
         }
-
-        using var pathFromGeometry = GetPathFromGeometry(geometry);
-        if (pathFromGeometry == null)
-        {
-            return;
-        }
-
-        SKColor lineColor = style.Paint.LineColor;
-        using var sKPaint = new SKPaint
-        {
-            Style = SKPaintStyle.Stroke,
-            StrokeCap = ConvertCap(style.Paint.LineCap),
-            StrokeWidth = (float)style.Paint.LineWidth,
-            Color = SKColorFactory.MakeColor(lineColor.Red, lineColor.Green, lineColor.Blue, (byte)SkiaCanvas.Clamp((double)(int)lineColor.Alpha * style.Paint.LineOpacity, 0.0, 255.0), "DrawLineString"),
-            IsAntialias = true
-        };
-
-        if (style.Paint.LineDashArray.Any())
-        {
-            SKPathEffect pathEffect = SKPathEffect.CreateDash(style.Paint.LineDashArray.Select((double n) => (float)n).ToArray(), 0f);
-            sKPaint.PathEffect = pathEffect;
-        }
-
-        _surface.Canvas.DrawPath(pathFromGeometry, sKPaint);
+        return num > 0.0;
     }
 
     private static SKTextAlign ConvertAlignment(TextAlignment alignment) => alignment switch
@@ -164,29 +309,27 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         _ => SKTextAlign.Center,
     };
 
-    private static SKPaint CreateTextStrokePaint(Brush style)
-    {
-        SKColor textStrokeColor = style.Paint.TextStrokeColor;
-        return new SKPaint
-        {
-            IsStroke = true,
-            StrokeWidth = (float)style.Paint.TextStrokeWidth,
-            Color = SKColorFactory.MakeColor(textStrokeColor.Red, textStrokeColor.Green, textStrokeColor.Blue, (byte)Clamp(textStrokeColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextStrokePaint"),
-            IsAntialias = true
-        };
-    }
-
-    private static SKPaint GetTextPaint(Brush style)
+    private static void ConfigureTextPaint(SKPaint paint, Brush style)
     {
         SKColor textColor = style.Paint.TextColor;
-        return new SKPaint
-        {
-            Color = SKColorFactory.MakeColor(textColor.Red, textColor.Green, textColor.Blue, (byte)Clamp(textColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextPaint"),
-            IsAntialias = true
-        };
+        paint.Reset();
+        paint.Color = SKColorFactory.MakeColor(textColor.Red, textColor.Green, textColor.Blue,
+            (byte)Clamp(textColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextPaint");
+        paint.IsAntialias = true;
     }
 
-    private SKFont CreateTextFont(Brush style)
+    private static void ConfigureTextStrokePaint(SKPaint paint, Brush style)
+    {
+        SKColor textStrokeColor = style.Paint.TextStrokeColor;
+        paint.Reset();
+        paint.IsStroke = true;
+        paint.StrokeWidth = (float)style.Paint.TextStrokeWidth;
+        paint.Color = SKColorFactory.MakeColor(textStrokeColor.Red, textStrokeColor.Green, textStrokeColor.Blue,
+            (byte)Clamp(textStrokeColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextStrokePaint");
+        paint.IsAntialias = true;
+    }
+
+    private static SKFont CreateTextFont(Brush style)
     {
         var typeface = GetFont(style.Paint.TextFont, style);
         return new SKFont(typeface, (float)style.Paint.TextSize)
@@ -195,21 +338,15 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         };
     }
 
-    private string TransformText(string text, Brush style)
+    private static string TransformText(string text, Brush style)
     {
         if (text.Length == 0)
-        {
             return string.Empty;
-        }
 
         if (style.Paint.TextTransform == TextTransform.Uppercase)
-        {
             text = text.ToUpper();
-        }
         else if (style.Paint.TextTransform == TextTransform.Lowercase)
-        {
             text = text.ToLower();
-        }
 
         using var font = CreateTextFont(style);
         text = BreakText(text, font, style);
@@ -251,52 +388,44 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             if (textRectangle.IntersectsWith(rectangle))
                 return true;
         }
-
         return false;
     }
 
-    private SKTypeface GetFont(string[] familyNames, Brush style)
+    private static SKTypeface GetFont(string[] familyNames, Brush style)
     {
-        lock (_fontLock)
+        foreach (string text in familyNames)
         {
-            foreach (string text in familyNames)
+            if (_fontCache.TryGetValue(text, out var value))
+                return value;
+
+            if (VectorStyleReader.TryGetFont(text, out var stream))
             {
-                if (_fontPairs.TryGetValue(text, out var value))
+                SKTypeface sKTypeface = SKTypeface.FromStream(stream);
+                if (sKTypeface != null)
                 {
-                    return value;
-                }
-
-                if (VectorStyleReader.TryGetFont(text, out var stream))
-                {
-                    SKTypeface sKTypeface = SKTypeface.FromStream(stream);
-                    if (sKTypeface != null)
-                    {
-                        _fontPairs[text] = sKTypeface;
-                        return sKTypeface;
-                    }
-                }
-
-                SKTypeface sKTypeface2 = SKTypeface.FromFamilyName(text);
-                if (sKTypeface2.FamilyName == text)
-                {
-                    _fontPairs[text] = sKTypeface2;
-                    return sKTypeface2;
+                    _fontCache[text] = sKTypeface;
+                    return sKTypeface;
                 }
             }
 
-            SKTypeface sKTypeface3 = SKTypeface.FromFamilyName(familyNames.First());
-            _fontPairs[familyNames.First()] = sKTypeface3;
-            return sKTypeface3;
+            SKTypeface sKTypeface2 = SKTypeface.FromFamilyName(text);
+            if (sKTypeface2.FamilyName == text)
+            {
+                _fontCache[text] = sKTypeface2;
+                return sKTypeface2;
+            }
         }
+
+        SKTypeface sKTypeface3 = SKTypeface.FromFamilyName(familyNames.First());
+        _fontCache[familyNames.First()] = sKTypeface3;
+        return sKTypeface3;
     }
 
     private static SKTypeface QualifyTypeface(Brush style, SKTypeface typeface)
     {
         ushort[] array = new ushort[typeface.CountGlyphs(style.Text)];
         if (array.Length >= style.Text.Length)
-        {
             return typeface;
-        }
 
         SKFontManager sKFontManager = SKFontManager.Default;
         using var sKTypeface = sKFontManager.MatchCharacter(style.Text[array.Length]);
@@ -309,49 +438,6 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         return typeface;
     }
 
-    public void DrawText(Point geometry, Brush style)
-    {
-        _ = style.Paint.TextOptional;
-        var typeface = GetFont(style.Paint.TextFont, style);
-        typeface = QualifyTypeface(style, typeface);
-        using var font = new SKFont(typeface, (float)style.Paint.TextSize) { Hinting = SKFontHinting.Normal };
-        using var textPaint = GetTextPaint(style);
-        using var textStrokePaint = CreateTextStrokePaint(style);
-        var textAlign = ConvertAlignment(style.Paint.TextJustify);
-        string[] array = TransformText(style.Text, style).Split('\n');
-        if (array.Length != 0)
-        {
-            string s = array.OrderBy((string line) => line.Length).Last();
-            int num = (int)font.MeasureText(s, textPaint);
-            int num2 = (int)(geometry.X - num / 2);
-            int num3 = (int)(geometry.Y - style.Paint.TextSize / 2.0 * array.Length);
-            int num4 = (int)(style.Paint.TextSize * array.Length);
-            Rect rect = new Rect(num2, num3, num, num4);
-            rect.Inflate(5.0, 5.0);
-            if ((ClipOverflow && !_clipRectangle.Contains(rect)) || TextCollides(rect))
-            {
-                return;
-            }
-
-            _textRectangles.Add(rect);
-        }
-
-        int num5 = 0;
-        string[] array2 = array;
-        foreach (string text in array2)
-        {
-            float num7 = (float)(num5 * style.Paint.TextSize) - array.Length * (float)style.Paint.TextSize / 2f + (float)style.Paint.TextSize;
-            SKPoint p = new SKPoint((float)geometry.X + (float)(style.Paint.TextOffset.X * style.Paint.TextSize), (float)geometry.Y + (float)(style.Paint.TextOffset.Y * style.Paint.TextSize) + num7);
-            if (style.Paint.TextStrokeWidth != 0.0)
-            {
-                _surface.Canvas.DrawText(text, p, textAlign, font, textStrokePaint);
-            }
-
-            _surface.Canvas.DrawText(text, p, textAlign, font, textPaint);
-            num5++;
-        }
-    }
-
     private static double GetPathLength(List<Point> path)
     {
         double num = 0.0;
@@ -360,7 +446,6 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             double length = Subtract(path[i], path[i + 1]).Length;
             num += length;
         }
-
         return num;
     }
 
@@ -382,61 +467,16 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             Vector vector = Subtract(path[i], path[i + 1]);
             double num = Math.Atan2(vector.Y, vector.X);
             if (Math.Abs(GetAbsoluteDiff2Angles(num, y)) > Math.PI / 3.0)
-            {
                 return true;
-            }
-
             y = num;
         }
-
         return false;
-    }
-
-    public void DrawTextOnPath(List<Point> geometry, Brush style)
-    {
-        geometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
-        if (geometry == null)
-            return;
-
-        string text = TransformText(style.Text, style);
-        if (CheckPathSqueezing(geometry))
-            return;
-
-        using var pathFromGeometry = CreatePathFromGeometry(geometry);
-        SKRect bounds = pathFromGeometry.Bounds;
-        double num = 2.0;
-        double num2 = (double)bounds.Left - style.Paint.TextSize - num;
-        double num3 = (double)bounds.Top - style.Paint.TextSize - num;
-        double num4 = (double)bounds.Right + style.Paint.TextSize + num;
-        double num5 = (double)bounds.Bottom + style.Paint.TextSize + num;
-        Rect rect = new Rect(num2, num3, num4 - num2, num5 - num3);
-        if (TextCollides(rect))
-            return;
-
-        _textRectangles.Add(rect);
-
-        if (style.Text.Length * style.Paint.TextSize * 0.2 >= GetPathLength(geometry))
-            return;
-
-        SKPoint offset = new SKPoint((float)style.Paint.TextOffset.X, (float)style.Paint.TextOffset.Y);
-        using var font = CreateTextFont(style);
-        var textAlign = ConvertAlignment(style.Paint.TextJustify);
-        if (style.Paint.TextStrokeWidth != 0.0)
-        {
-            using var textStrokePaint = CreateTextStrokePaint(style);
-            _surface.Canvas.DrawTextOnPath(text, pathFromGeometry, offset, warpGlyphs: true, textAlign, font, textStrokePaint);
-        }
-
-        using var textPaint = GetTextPaint(style);
-        _surface.Canvas.DrawTextOnPath(text, pathFromGeometry, offset, warpGlyphs: true, textAlign, font, textPaint);
     }
 
     private static SKPath CreatePathFromGeometry(List<Point> geometry)
     {
         if (IsLeftToRight(geometry))
-        {
             return GetPathFromGeometry(geometry);
-        }
         else
         {
             List<Point> list = new List<Point>(geometry);
@@ -445,85 +485,12 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         }
     }
 
-    public void DrawPoint(Point geometry, Brush style)
+    private static SKPath GetPathFromGeometry(List<Point> geometry)
     {
-        _ = style.Paint.IconImage;
+        SKPath sKPath = new SKPath { FillType = SKPathFillType.EvenOdd };
+        BuildPath(sKPath, geometry);
+        return sKPath;
     }
 
-    public void DrawPolygon(List<Point> geometry, Brush style, SKColor? background = null)
-    {
-        List<List<Point>> list = (!ClipOverflow) ? new List<List<Point>> { geometry } : ClipPolygon(geometry);
-        if (list == null)
-            return;
-
-        foreach (List<Point> item in list)
-        {
-            using var pathFromGeometry = GetPathFromGeometry(item);
-            if (pathFromGeometry == null)
-                break;
-
-            SKColor color = (!background.HasValue || !IsClockwise(geometry)) ? SKColorFactory.MakeColor(style.Paint.FillColor.Red, style.Paint.FillColor.Green, style.Paint.FillColor.Blue, (byte)SkiaCanvas.Clamp((double)(int)style.Paint.FillColor.Alpha * style.Paint.FillOpacity, 0.0, 255.0), "DrawPolygon") : background.Value;
-            using var paint = new SKPaint
-            {
-                Style = SKPaintStyle.Fill,
-                StrokeCap = ConvertCap(style.Paint.LineCap),
-                Color = color,
-                IsAntialias = true,
-            };
-            _surface.Canvas.DrawPath(pathFromGeometry, paint);
-        }
-    }
-
-    private static bool IsClockwise(List<Point> polygon)
-    {
-        double num = 0.0;
-        for (int i = 0; i < polygon.Count; i++)
-        {
-            Point point = polygon[i];
-            Point point2 = polygon[(i + 1) % polygon.Count];
-            num += (point2.X - point.X) * (point2.Y + point.Y);
-        }
-
-        return num > 0.0;
-    }
-
-    public void DrawImage(byte[] imageData, Brush style)
-    {
-        try
-        {
-            SKBitmap bitmap = SKBitmap.Decode(imageData);
-            _surface.Canvas.DrawBitmap(bitmap, new SKPoint(0f, 0f));
-        }
-        catch (Exception)
-        {
-            Logger.Log(LogLevel.Error, "Failed to decode image data for DrawImage.");
-        }
-    }
-
-    public void DrawUnknown(List<List<Point>> geometry, Brush style)
-    {
-    }
-
-    public void DrawDebugBox(TileInfo tileData, SKColor color)
-    {
-    }
-
-    public byte[] ToPngByteArray(int quality = 80)
-    {
-        using SKImage sKImage = _surface.Snapshot();
-        using SKData sKData = sKImage.Encode(SKEncodedImageFormat.Png, quality);
-        using MemoryStream memoryStream = new MemoryStream();
-        sKData.SaveTo(memoryStream);
-        return memoryStream.ToArray();
-    }
-
-    public SKImage ToSKImage()
-    {
-        return _surface.Snapshot();
-    }
-
-    public void Dispose()
-    {
-        _surface?.Dispose();
-    }
+    #endregion
 }

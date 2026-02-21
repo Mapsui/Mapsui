@@ -17,6 +17,10 @@
       <BuildType Solution="Ad-Hoc|*" Project="Debug" />
       <BuildType Solution="AppStore|*" Project="Debug" />
     </Project>
+    <Project Path="Benchmarks/Mapsui.VexTile.Perf/Mapsui.VexTile.Perf.csproj">
+      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+      <BuildType Solution="AppStore|*" Project="Debug" />
+    </Project>
   </Folder>
   <Folder Name="/docs/">
     <File Path="docs/CNAME" />
