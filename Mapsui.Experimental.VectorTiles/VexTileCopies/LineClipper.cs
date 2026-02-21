@@ -6,11 +6,11 @@ using NLog;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
 
-namespace Mapsui.Experimental.VectorTiles.Rendering;
+namespace Mapsui.Experimental.VectorTiles.VexTileCopies;
 
 public static class LineClipper
 {
-    private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+    private static readonly Logger _log = LogManager.GetCurrentClassLogger();
 
     private static OutCode ComputeOutCode(double x, double y, Rect r)
     {
@@ -72,7 +72,7 @@ public static class LineClipper
         throw new ArgumentOutOfRangeException("clipTo = " + clipTo);
     }
 
-    private static Tuple<Point, Point> ClipSegment(Rect r, Point p1, Point p2)
+    private static Tuple<Point, Point>? ClipSegment(Rect r, Point p1, Point p2)
     {
         OutCode outCode = ComputeOutCode(p1, r);
         OutCode outCode2 = ComputeOutCode(p2, r);
@@ -144,7 +144,7 @@ public static class LineClipper
         return new Rect(num, num2, num3 - num, num4 - num2);
     }
 
-    public static List<Point> ClipPolyline(List<Point> polyLine, Rect bounds)
+    public static List<Point>? ClipPolyline(List<Point> polyLine, Rect bounds)
     {
         Rect lineRect = GetLineRect(polyLine);
         if (!bounds.IntersectsWith(lineRect))
@@ -152,12 +152,12 @@ public static class LineClipper
             return null;
         }
 
-        List<Point> list = null;
+        List<Point>? list = null;
         for (int i = 1; i < polyLine.Count; i++)
         {
             Point p = polyLine[i - 1];
             Point p2 = polyLine[i];
-            Tuple<Point, Point> tuple = ClipSegment(bounds, p, p2);
+            Tuple<Point, Point>? tuple = ClipSegment(bounds, p, p2);
             if (tuple != null)
             {
                 if (list == null)
@@ -184,7 +184,7 @@ public static class LineClipper
             }
             else
             {
-                Log.Debug("Segment is null");
+                _log.Debug("Segment is null");
             }
         }
 

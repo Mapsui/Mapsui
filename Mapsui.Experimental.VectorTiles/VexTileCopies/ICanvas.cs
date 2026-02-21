@@ -2,7 +2,7 @@
 using SkiaSharp;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 
-namespace Mapsui.Experimental.VectorTiles.Rendering;
+namespace Mapsui.Experimental.VectorTiles.VexTileCopies;
 
 /// <summary>
 /// Canvas interface for vector tile rendering.

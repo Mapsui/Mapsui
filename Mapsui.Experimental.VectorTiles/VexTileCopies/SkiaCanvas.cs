@@ -11,7 +11,7 @@ using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
 
-namespace Mapsui.Experimental.VectorTiles.Rendering;
+namespace Mapsui.Experimental.VectorTiles.VexTileCopies;
 
 /// <summary>
 /// Canvas implementation for vector tile rendering.
