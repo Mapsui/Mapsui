@@ -163,13 +163,13 @@ public static class DrawableRenderer
             return null;
 
         var twoStep = FindTwoStepRenderer(layer, styleRenderers);
+        // For layers whose style doesn't map directly to a two-step renderer
+        // (e.g. ThemeStyle, StyleCollection), use DrawableCache as the safe default.
+        // TileDrawableCache would evict entries over its capacity limit, which breaks
+        // feature layers with many geometries.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable - cache managed by RenderService
         Func<IDrawableCache> factory = twoStep is not null
             ? twoStep.CreateCache
-            // For layers whose style doesn't map directly to a two-step renderer
-            // (e.g. ThemeStyle, StyleCollection), use DrawableCache as the safe default.
-            // TileDrawableCache would evict entries over its capacity limit, which breaks
-            // feature layers with many geometries.
             : static () => new DrawableCache();
         return renderService.GetOrCreateLayerDrawableCache(layer.Id, factory);
 #pragma warning restore IDISP004

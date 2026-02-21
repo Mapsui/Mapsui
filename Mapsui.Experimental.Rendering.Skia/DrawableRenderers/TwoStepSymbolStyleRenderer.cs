@@ -27,8 +27,8 @@ public class TwoStepSymbolStyleRenderer : ITwoStepStyleRenderer
     /// <inheritdoc />
     public IDrawableCache CreateCache() => new DrawableCache();
 
-    /// <inheritdoc />
 #pragma warning disable IDISP015 // Member should not return created and cached instance - ownership transfers to cache
+    /// <inheritdoc />
     public IDrawable? CreateDrawable(Viewport viewport, ILayer layer, IFeature feature,
         IStyle style, RenderService renderService)
 #pragma warning restore IDISP015
