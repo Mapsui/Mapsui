@@ -5,9 +5,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using VexTile.ClipperLib;
 using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
@@ -24,7 +22,6 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     private readonly int _height;
     private readonly SKSurface _surface;
     private Rect _clipRectangle;
-    private readonly List<IntPoint> _clipRectanglePath = new(4);
     private readonly List<Rect> _textRectangles = new();
 
     // Shared font cache across all canvas instances
@@ -40,6 +37,10 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     // Reusable path object
     private readonly SKPath _path = new() { FillType = SKPathFillType.EvenOdd };
 
+    // Reusable buffer for LineClipper output — avoids List<Point> allocation per clip call
+    private readonly List<Point> _clipBuffer = new();
+    private readonly List<Point> _clipBufferText = new();
+
     // Cache for dash array conversions - avoids repeated float[] allocation for shared style objects
     private IEnumerable<double>? _lastDashArray;
     private float[]? _lastDashFloats;
@@ -54,15 +55,6 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         // Initialize clip rectangle
         double margin = -5.0;
         _clipRectangle = new Rect(margin, margin, _width - margin * 2.0, _height - margin * 2.0);
-
-        // Build clip path efficiently
-        _clipRectanglePath.Clear();
-        CollectionsMarshal.SetCount(_clipRectanglePath, 4);
-        var span = CollectionsMarshal.AsSpan(_clipRectanglePath);
-        span[0] = new IntPoint((int)_clipRectangle.Top, (int)_clipRectangle.Left);
-        span[1] = new IntPoint((int)_clipRectangle.Top, (int)_clipRectangle.Right);
-        span[2] = new IntPoint((int)_clipRectangle.Bottom, (int)_clipRectangle.Right);
-        span[3] = new IntPoint((int)_clipRectangle.Bottom, (int)_clipRectangle.Left);
     }
 
     public bool ClipOverflow { get; set; }
@@ -79,9 +71,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     {
         if (ClipOverflow)
         {
-            geometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
-            if (geometry == null)
+            if (!LineClipper.ClipPolyline(geometry, _clipRectangle, _clipBuffer))
                 return;
+            geometry = _clipBuffer;
         }
 
         if (geometry.Count == 0) return;
@@ -192,10 +184,12 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
     public void DrawTextOnPath(List<Point> geometry, Brush style)
     {
-        var clippedGeometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
-        if (clippedGeometry == null)
-            return;
-        geometry = clippedGeometry;
+        if (ClipOverflow)
+        {
+            if (!LineClipper.ClipPolyline(geometry, _clipRectangle, _clipBufferText))
+                return;
+            geometry = _clipBufferText;
+        }
         string text = TransformText(style.Text, style);
         if (CheckPathSqueezing(geometry))
             return;

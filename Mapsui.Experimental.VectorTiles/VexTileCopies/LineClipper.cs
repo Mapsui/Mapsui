@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using NLog;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
@@ -143,43 +142,40 @@ public static class LineClipper
         return new Rect(num, num2, num3 - num, num4 - num2);
     }
 
-    public static List<Point>? ClipPolyline(List<Point> polyLine, Rect bounds)
+    /// <summary>
+    /// Clips a polyline to the given bounds, writing visible segments into <paramref name="result"/>.
+    /// The caller owns <paramref name="result"/> and can reuse it across calls to avoid allocations.
+    /// </summary>
+    /// <returns>true if any visible segments remain; false if the line is fully outside.</returns>
+    public static bool ClipPolyline(List<Point> polyLine, Rect bounds, List<Point> result)
     {
+        result.Clear();
+
         Rect lineRect = GetLineRect(polyLine);
         if (!bounds.IntersectsWith(lineRect))
-        {
-            return null;
-        }
+            return false;
 
-        List<Point>? list = null;
-        for (int i = 1; i < polyLine.Count; i++)
+        for (var i = 1; i < polyLine.Count; i++)
         {
-            Point p = polyLine[i - 1];
-            Point p2 = polyLine[i];
+            var p = polyLine[i - 1];
+            var p2 = polyLine[i];
             var tuple = ClipSegment(bounds, p, p2);
             if (tuple != null)
             {
                 var (seg1, seg2) = tuple.Value;
-                if (list == null)
+                if (result.Count == 0)
                 {
-                    int num = 2;
-                    List<Point> list2 = new List<Point>(num);
-                    CollectionsMarshal.SetCount(list2, num);
-                    Span<Point> span = CollectionsMarshal.AsSpan(list2);
-                    int num2 = 0;
-                    span[num2] = seg1;
-                    num2++;
-                    span[num2] = seg2;
-                    list = list2;
+                    result.Add(seg1);
+                    result.Add(seg2);
                 }
-                else if (list[^1] == seg1)
+                else if (result[^1] == seg1)
                 {
-                    list.Add(seg2);
+                    result.Add(seg2);
                 }
                 else
                 {
-                    list.Add(seg1);
-                    list.Add(seg2);
+                    result.Add(seg1);
+                    result.Add(seg2);
                 }
             }
             else
@@ -188,6 +184,6 @@ public static class LineClipper
             }
         }
 
-        return list;
+        return result.Count > 0;
     }
 }
