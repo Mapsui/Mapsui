@@ -192,10 +192,10 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
     public void DrawTextOnPath(List<Point> geometry, Brush style)
     {
-        geometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
-        if (geometry == null)
+        var clippedGeometry = LineClipper.ClipPolyline(geometry, _clipRectangle);
+        if (clippedGeometry == null)
             return;
-
+        geometry = clippedGeometry;
         string text = TransformText(style.Text, style);
         if (CheckPathSqueezing(geometry))
             return;
