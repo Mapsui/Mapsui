@@ -9,43 +9,29 @@ public class VectorTile
 
     public bool IsOverZoomed { get; set; }
 
-    public VectorTile ApplyExtent(Rect extent)
+    /// <summary>
+    /// Transforms geometry coordinates from the given source extent to [0..feature.Extent]
+    /// by mutating in place. Safe to call because tiles are always freshly decoded from PBF
+    /// bytes and are not shared or cached.
+    /// </summary>
+    public void ApplyExtentInPlace(Rect extent)
     {
-        VectorTile vectorTile = new VectorTile
+        foreach (var layer in Layers)
         {
-            IsOverZoomed = IsOverZoomed
-        };
-        foreach (VectorTileLayer layer in Layers)
-        {
-            VectorTileLayer vectorTileLayer = new VectorTileLayer
+            foreach (var feature in layer.Features)
             {
-                Name = layer.Name
-            };
-            foreach (VectorTileFeature feature in layer.Features)
-            {
-                VectorTileFeature vectorTileFeature = new VectorTileFeature
+                var featureExtent = feature.Extent;
+                foreach (var ring in feature.Geometry)
                 {
-                    Attributes = new Dictionary<string, object>(feature.Attributes),
-                    Extent = feature.Extent,
-                    GeometryType = feature.GeometryType
-                };
-                List<List<Point>> list = new List<List<Point>>();
-                foreach (List<Point> item in feature.Geometry)
-                {
-                    List<Point> list2 = new List<Point>();
-                    foreach (Point item2 in item)
+                    for (var i = 0; i < ring.Count; i++)
                     {
-                        double x = Utils.ConvertRange(item2.X, extent.Left, extent.Right, 0.0, vectorTileFeature.Extent);
-                        double y = Utils.ConvertRange(item2.Y, extent.Top, extent.Bottom, 0.0, vectorTileFeature.Extent);
-                        list2.Add(new Point(x, y));
+                        var p = ring[i];
+                        ring[i] = new Point(
+                            Utils.ConvertRange(p.X, extent.Left, extent.Right, 0.0, featureExtent),
+                            Utils.ConvertRange(p.Y, extent.Top, extent.Bottom, 0.0, featureExtent));
                     }
-                    list.Add(list2);
                 }
-                vectorTileFeature.Geometry = list;
-                vectorTileLayer.Features.Add(vectorTileFeature);
             }
-            vectorTile.Layers.Add(vectorTileLayer);
         }
-        return vectorTile;
     }
 }

@@ -92,7 +92,7 @@ public sealed class VectorTilesSource : IVectorTileSource, IBaseTileSource
     {
         try
         {
-            ITile tile = _sharedDataSource.GetTile(x, y, zoom);
+            ITile? tile = _sharedDataSource.GetTile(x, y, zoom);
             if (tile != null)
             {
                 return tile.TileData;
@@ -157,7 +157,8 @@ public sealed class VectorTilesSource : IVectorTileSource, IBaseTileSource
             if (vectorTile != null)
             {
                 vectorTile.IsOverZoomed = overZoomed;
-                return vectorTile.ApplyExtent(extent);
+                vectorTile.ApplyExtentInPlace(extent);
+                return vectorTile;
             }
         }
         catch (Exception value)
@@ -173,8 +174,7 @@ public sealed class VectorTilesSource : IVectorTileSource, IBaseTileSource
         byte[]? rawTile = GetRawTile(x, y, zoom);
         if (rawTile != null)
         {
-            VectorTile vectorTile = await new PbfTileSource(rawTile).GetTileAsync();
-            return vectorTile;
+            return await new PbfTileSource(rawTile).GetTileAsync();
         }
 
         return null;

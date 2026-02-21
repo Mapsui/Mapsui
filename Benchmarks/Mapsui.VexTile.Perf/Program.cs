@@ -129,8 +129,7 @@ internal class Program
         Console.WriteLine("\n--- Tile Content Analysis ---");
         await AnalyzeTileContents(tileSource, style, testCases);
 
-        Console.WriteLine("\nDone. Press any key to exit.");
-        Console.ReadKey();
+        Console.WriteLine("\nDone.");
     }
 
     private static void PrintBaselineComparison(List<TestResult> current)

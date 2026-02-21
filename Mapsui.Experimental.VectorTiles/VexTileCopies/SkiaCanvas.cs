@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using VexTile.ClipperLib;
 using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
@@ -34,9 +35,14 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     private readonly SKPaint _strokePaint = new() { IsAntialias = true, Style = SKPaintStyle.Stroke };
     private readonly SKPaint _textPaint = new() { IsAntialias = true };
     private readonly SKPaint _textStrokePaint = new() { IsAntialias = true, IsStroke = true };
+    private readonly SKPaint _breakPaint = new();
 
     // Reusable path object
     private readonly SKPath _path = new() { FillType = SKPathFillType.EvenOdd };
+
+    // Cache for dash array conversions - avoids repeated float[] allocation for shared style objects
+    private IEnumerable<double>? _lastDashArray;
+    private float[]? _lastDashFloats;
 
     public SkiaCanvas(int width, int height)
     {
@@ -93,10 +99,15 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         _strokePaint.StrokeWidth = (float)style.Paint.LineWidth;
         _strokePaint.Color = color;
 
-        if (style.Paint.LineDashArray.Any())
+        var dashArray = style.Paint.LineDashArray;
+        if (dashArray.Any())
         {
-            _strokePaint.PathEffect = SKPathEffect.CreateDash(
-                style.Paint.LineDashArray.Select((double n) => (float)n).ToArray(), 0f);
+            if (!ReferenceEquals(_lastDashArray, dashArray))
+            {
+                _lastDashFloats = dashArray.Select(n => (float)n).ToArray();
+                _lastDashArray = dashArray;
+            }
+            _strokePaint.PathEffect = SKPathEffect.CreateDash(_lastDashFloats!, 0f);
         }
         else
         {
@@ -147,7 +158,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         string[] array = TransformText(style.Text, style).Split('\n');
         if (array.Length != 0)
         {
-            string s = array.OrderBy((string line) => line.Length).Last();
+            string s = array[0];
+            for (var li = 1; li < array.Length; li++)
+                if (array[li].Length > s.Length) s = array[li];
             int num = (int)font.MeasureText(s, _textPaint);
             int num2 = (int)(geometry.X - num / 2);
             int num3 = (int)(geometry.Y - style.Paint.TextSize / 2.0 * array.Length);
@@ -219,7 +232,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     {
         try
         {
-            SKBitmap bitmap = SKBitmap.Decode(imageData);
+            using var bitmap = SKBitmap.Decode(imageData);
             _surface.Canvas.DrawBitmap(bitmap, new SKPoint(0f, 0f));
         }
         catch (Exception)
@@ -270,15 +283,21 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         return Math.Max(min, Math.Min(max, number));
     }
 
-    private static void BuildPath(SKPath path, List<Point> geometry)
+    private static void BuildPath(SKPath path, List<Point> geometry, bool reverse = false)
     {
         if (geometry.Count == 0) return;
-        Point point = geometry[0];
-        path.MoveTo((float)point.X, (float)point.Y);
-        for (var i = 1; i < geometry.Count; i++)
+        if (!reverse)
         {
-            var item = geometry[i];
-            path.LineTo((float)item.X, (float)item.Y);
+            path.MoveTo((float)geometry[0].X, (float)geometry[0].Y);
+            for (var i = 1; i < geometry.Count; i++)
+                path.LineTo((float)geometry[i].X, (float)geometry[i].Y);
+        }
+        else
+        {
+            var last = geometry.Count - 1;
+            path.MoveTo((float)geometry[last].X, (float)geometry[last].Y);
+            for (var i = last - 1; i >= 0; i--)
+                path.LineTo((float)geometry[i].X, (float)geometry[i].Y);
         }
     }
 
@@ -338,7 +357,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         };
     }
 
-    private static string TransformText(string text, Brush style)
+    private string TransformText(string text, Brush style)
     {
         if (text.Length == 0)
             return string.Empty;
@@ -349,36 +368,36 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             text = text.ToLower();
 
         using var font = CreateTextFont(style);
-        text = BreakText(text, font, style);
+        text = BreakText(text, font, style, _breakPaint);
         return text;
     }
 
-    private static string BreakText(string input, SKFont font, Brush style)
+    private static string BreakText(string input, SKFont font, Brush style, SKPaint paint)
     {
         string text = input;
-        string text2 = string.Empty;
-        using var paint = new SKPaint();
+        var sb = new StringBuilder();
         do
         {
             long num = font.BreakText(text, (float)(style.Paint.TextMaxWidth * style.Paint.TextSize), paint);
             if (num == text.Length)
             {
-                text2 += text.Trim();
+                sb.Append(text.Trim());
                 break;
             }
 
             int num2 = text.LastIndexOf(' ', (int)(num - 1));
             if ((uint)(num2 - -1) <= 1u)
             {
-                text2 += text.Trim();
+                sb.Append(text.Trim());
                 break;
             }
 
-            text2 = text2 + text.Substring(0, num2).Trim() + "\n";
+            sb.Append(text.Substring(0, num2).Trim());
+            sb.Append('\n');
             text = text.Substring(num2, text.Length - num2);
         }
         while (text.Length > 0);
-        return text2.Trim();
+        return sb.ToString().Trim();
     }
 
     private bool TextCollides(Rect rectangle)
@@ -416,25 +435,23 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             }
         }
 
-        SKTypeface sKTypeface3 = SKTypeface.FromFamilyName(familyNames.First());
-        _fontCache[familyNames.First()] = sKTypeface3;
+        SKTypeface sKTypeface3 = SKTypeface.FromFamilyName(familyNames[0]);
+        _fontCache[familyNames[0]] = sKTypeface3;
         return sKTypeface3;
     }
 
     private static SKTypeface QualifyTypeface(Brush style, SKTypeface typeface)
     {
-        ushort[] array = new ushort[typeface.CountGlyphs(style.Text)];
-        if (array.Length >= style.Text.Length)
+        // CountGlyphs returns an int directly — no array allocation needed.
+        int glyphCount = typeface.CountGlyphs(style.Text);
+        if (glyphCount >= style.Text.Length)
             return typeface;
 
         SKFontManager sKFontManager = SKFontManager.Default;
-        using var sKTypeface = sKFontManager.MatchCharacter(style.Text[array.Length]);
-        array = new ushort[sKTypeface.CountGlyphs(style.Text)];
-        if (array.Length < style.Text.Length)
-        {
-            int num = (array.Length != 0) ? array.Length : 0;
-            style.Text = style.Text[..num];
-        }
+        using var fallbackTypeface = sKFontManager.MatchCharacter(style.Text[glyphCount]);
+        int fallbackGlyphCount = fallbackTypeface.CountGlyphs(style.Text);
+        if (fallbackGlyphCount < style.Text.Length)
+            style.Text = style.Text[..fallbackGlyphCount];
         return typeface;
     }
 
@@ -475,21 +492,10 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
     private static SKPath CreatePathFromGeometry(List<Point> geometry)
     {
-        if (IsLeftToRight(geometry))
-            return GetPathFromGeometry(geometry);
-        else
-        {
-            List<Point> list = new List<Point>(geometry);
-            list.Reverse();
-            return GetPathFromGeometry(list);
-        }
-    }
-
-    private static SKPath GetPathFromGeometry(List<Point> geometry)
-    {
-        SKPath sKPath = new SKPath { FillType = SKPathFillType.EvenOdd };
-        BuildPath(sKPath, geometry);
-        return sKPath;
+        var reverse = !IsLeftToRight(geometry);
+        var path = new SKPath { FillType = SKPathFillType.EvenOdd };
+        BuildPath(path, geometry, reverse);
+        return path;
     }
 
     #endregion

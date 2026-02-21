@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using SkiaSharp;
 using VexTile.Renderer.Mvt.AliFlux;
@@ -92,13 +91,17 @@ public static class VexTileRenderer
 
         foreach (var tileLayer in vectorTile.Layers)
         {
-            if (!categorizedVectorLayers.ContainsKey(tileLayer.Name))
+            if (!categorizedVectorLayers.TryGetValue(tileLayer.Name, out var layerList))
             {
-                categorizedVectorLayers[tileLayer.Name] = new();
+                layerList = new List<VectorTileLayer>();
+                categorizedVectorLayers[tileLayer.Name] = layerList;
             }
-
-            categorizedVectorLayers[tileLayer.Name].Add(tileLayer);
+            layerList.Add(tileLayer);
         }
+
+        // Reusable attribute dict — avoids per-feature allocation in the hot style loop.
+        // Safe because ValidateLayer/ParseStyle are synchronous and don't hold onto the dict.
+        var attributes = new Dictionary<string, object>();
 
         // Apply styling
         foreach (var layer in style.Layers)
@@ -124,12 +127,12 @@ public static class VexTileRenderer
                     {
                         foreach (var feature in tileLayer.Features)
                         {
-                            Dictionary<string, object> attributes = new(feature.Attributes)
-                            {
-                                ["$type"] = feature.GeometryType,
-                                ["$id"] = layer.ID,
-                                ["$zoom"] = actualZoom
-                            };
+                            attributes.Clear();
+                            foreach (var kv in feature.Attributes)
+                                attributes[kv.Key] = kv.Value;
+                            attributes["$type"] = feature.GeometryType;
+                            attributes["$id"] = layer.ID;
+                            attributes["$zoom"] = actualZoom;
 
                             if (style.ValidateLayer(layer, actualZoom, attributes))
                             {
@@ -175,9 +178,13 @@ public static class VexTileRenderer
 
     private static void RenderVisualLayers(ICanvas canvas, List<VisualLayer> visualLayers)
     {
-        // deferred rendering to preserve text drawing order
-        foreach (var layer in visualLayers.OrderBy(item => item.Brush.ZIndex))
+        // Sort once in-place — avoids two separate LINQ OrderBy heap allocations.
+        visualLayers.Sort((a, b) => a.Brush.ZIndex.CompareTo(b.Brush.ZIndex));
+
+        // First pass: shapes, ascending z-order
+        for (var vi = 0; vi < visualLayers.Count; vi++)
         {
+            var layer = visualLayers[vi];
             if (layer.Type == VisualLayerType.Vector)
             {
                 var feature = layer.VectorTileFeature;
@@ -195,7 +202,7 @@ public static class VexTileRenderer
                     {
                         foreach (var point in geometry)
                         {
-                            canvas.DrawPoint(point.First(), brush);
+                            if (point.Count > 0) canvas.DrawPoint(point[0], brush);
                         }
                     }
                     else if (feature.GeometryType == "LineString")
@@ -240,8 +247,10 @@ public static class VexTileRenderer
             }
         }
 
-        foreach (var layer in visualLayers.OrderBy(item => item.Brush.ZIndex).Reverse())
+        // Second pass: text labels, descending z-order (reverse of sorted list)
+        for (var vi = visualLayers.Count - 1; vi >= 0; vi--)
         {
+            var layer = visualLayers[vi];
             if (layer.Type == VisualLayerType.Vector)
             {
                 var feature = layer.VectorTileFeature;
@@ -259,7 +268,7 @@ public static class VexTileRenderer
                     {
                         if (brush.Text != null)
                         {
-                            canvas.DrawText(point.First(), brush);
+                            if (point.Count > 0) canvas.DrawText(point[0], brush);
                         }
                     }
                 }

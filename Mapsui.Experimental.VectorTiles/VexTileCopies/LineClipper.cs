@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using NLog;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
@@ -72,7 +71,7 @@ public static class LineClipper
         throw new ArgumentOutOfRangeException("clipTo = " + clipTo);
     }
 
-    private static Tuple<Point, Point>? ClipSegment(Rect r, Point p1, Point p2)
+    private static (Point, Point)? ClipSegment(Rect r, Point p1, Point p2)
     {
         OutCode outCode = ComputeOutCode(p1, r);
         OutCode outCode2 = ComputeOutCode(p2, r);
@@ -106,7 +105,7 @@ public static class LineClipper
 
         if (flag)
         {
-            return new Tuple<Point, Point>(p1, p2);
+            return (p1, p2);
         }
 
         return null;
@@ -157,9 +156,10 @@ public static class LineClipper
         {
             Point p = polyLine[i - 1];
             Point p2 = polyLine[i];
-            Tuple<Point, Point>? tuple = ClipSegment(bounds, p, p2);
+            var tuple = ClipSegment(bounds, p, p2);
             if (tuple != null)
             {
+                var (seg1, seg2) = tuple.Value;
                 if (list == null)
                 {
                     int num = 2;
@@ -167,19 +167,19 @@ public static class LineClipper
                     CollectionsMarshal.SetCount(list2, num);
                     Span<Point> span = CollectionsMarshal.AsSpan(list2);
                     int num2 = 0;
-                    span[num2] = tuple.Item1;
+                    span[num2] = seg1;
                     num2++;
-                    span[num2] = tuple.Item2;
+                    span[num2] = seg2;
                     list = list2;
                 }
-                else if (list.Last() == tuple.Item1)
+                else if (list[^1] == seg1)
                 {
-                    list.Add(tuple.Item2);
+                    list.Add(seg2);
                 }
                 else
                 {
-                    list.Add(tuple.Item1);
-                    list.Add(tuple.Item2);
+                    list.Add(seg1);
+                    list.Add(seg2);
                 }
             }
             else
