@@ -1,20 +1,20 @@
 # VexTile Rendering Performance Baseline
 
-**Captured:** 2026-02-21  
+**Captured:** 2026-02-22  
 **Configuration:** Release, .NET 9.0, Windows  
 **Tile Size:** 256×256  
 **Iterations:** 20  
 **Location:** Zurich (47.374444°N, 8.541111°E)  
 
-## Baseline Results (After Memory Optimizations)
+## Baseline Results (After Dict Reuse + LINQ Optimizations)
 
 | Zoom | Tile | Avg ms | Min ms | Max ms | Med ms | Alloc MB | Used MB | Features | Layers |
 |------|------|--------|--------|--------|--------|----------|---------|----------|--------|
-| Z10 | 536,665 | 60.0 | 50.8 | 80.4 | 57.3 | 848.6 | 14.0 | 6,254 | 11 |
-| Z12 | 2145,2661 | 60.1 | 53.8 | 75.5 | 59.8 | 759.3 | 8.7 | 5,255 | 11 |
-| Z14 | 8580,10646 | 105.1 | 95.3 | 127.3 | 103.6 | 1680.3 | 22.9 | 16,241 | 11 |
-| Z16 | 34322,42585 | 100.1 | 78.7 | 117.9 | 100.3 | 1679.1 | 25.5 | 16,241 | 11 (overzoom) |
-| Z20 | 549165,681369 | 125.9 | 105.3 | 152.2 | 125.7 | 1961.4 | 41.2 | 16,241 | 11 (overzoom) |
+| Z10 | 536,665 | 59.6 | 55.7 | 73.6 | 57.6 | 749.9 | 8.3 | 6,254 | 11 |
+| Z12 | 2145,2661 | 61.1 | 53.4 | 77.3 | 60.2 | 662.4 | 9.0 | 5,255 | 11 |
+| Z14 | 8580,10646 | 109.8 | 92.9 | 155.0 | 106.6 | 1600.4 | 25.0 | 16,241 | 11 |
+| Z16 | 34322,42585 | 97.4 | 84.7 | 127.0 | 96.9 | 1587.0 | 18.4 | 16,241 | 11 (overzoom) |
+| Z20 | 549165,681369 | 121.6 | 104.1 | 137.5 | 122.5 | 1839.9 | 18.6 | 16,241 | 11 (overzoom) |
 
 ## Prior Baseline (Original Implementation, 2026-02-17)
 
@@ -41,6 +41,8 @@
 - Zero-alloc LineClipper (reusable output buffer)
 - Dead code removal (Sha256, _clipRectanglePath)
 - Conditional DrawTextOnPath clipping
+- Local VectorStyle copy (from AliFlux NuGet)
+- LINQ replacement in GetValue/InterpolateValues (pre-allocated arrays, value tuples)
 
 ## Feature Distribution (Z14)
 

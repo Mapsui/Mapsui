@@ -143,13 +143,31 @@ public class VectorStyle : IVectorStyle
         return list.ToArray();
     }
 
+    private static readonly string[] DefaultTextFont = ["Open Sans Regular", "Arial Unicode MS Regular"];
+
     public Brush ParseStyle(Layer layer, double scale, Dictionary<string, object> attributes)
     {
+        var brush = new Brush { Paint = new Paint() };
+        ParseStyleInto(brush, layer, scale, attributes);
+        return brush;
+    }
+
+    /// <summary>
+    /// Populates a pre-allocated Brush+Paint with style values for the given layer and attributes.
+    /// Resets all Paint properties to defaults first so leftover state from a previous use is cleared.
+    /// </summary>
+    public void ParseStyleInto(Brush brush, Layer layer, double scale, Dictionary<string, object> attributes)
+    {
+        brush.ZIndex = layer.Index;
+        brush.Layer = layer;
+        brush.Text = null;
+        brush.TextField = null;
+
+        var paint2 = brush.Paint;
+        ResetPaint(paint2);
+
         var paint = layer.Paint;
         var layout = layer.Layout;
-        var index = layer.Index;
-        var brush = new Brush { ZIndex = index, Layer = layer };
-        var paint2 = brush.Paint = new Paint();
 
         if (paint != null)
         {
@@ -183,8 +201,13 @@ public class VectorStyle : IVectorStyle
                 paint2.LineOffset = Convert.ToDouble(GetValue(value14, attributes)) * scale;
             if (paint.TryGetValue("line-dasharray", out var value15))
             {
-                var source = GetValue(value15, attributes) as object[];
-                paint2.LineDashArray = source.Select(item => Convert.ToDouble(item) * scale).ToArray();
+                if (GetValue(value15, attributes) is object[] source)
+                {
+                    var dashes = new double[source.Length];
+                    for (var i = 0; i < source.Length; i++)
+                        dashes[i] = Convert.ToDouble(source[i]) * scale;
+                    paint2.LineDashArray = dashes;
+                }
             }
             if (paint.TryGetValue("text-halo-color", out var value16))
                 paint2.TextStrokeColor = ParseColor(GetValue(value16, attributes));
@@ -217,7 +240,13 @@ public class VectorStyle : IVectorStyle
                 }).Trim();
             }
             if (layout.TryGetValue("text-font", out var value22))
-                paint2.TextFont = ((object[])GetValue(value22, attributes)).Select(item => (string)item).ToArray();
+            {
+                var fontArray = (object[])GetValue(value22, attributes);
+                var fonts = new string[fontArray.Length];
+                for (var i = 0; i < fontArray.Length; i++)
+                    fonts[i] = (string)fontArray[i];
+                paint2.TextFont = fonts;
+            }
             if (layout.TryGetValue("text-size", out var value23))
                 paint2.TextSize = Convert.ToDouble(GetValue(value23, attributes)) * scale;
             if (layout.TryGetValue("text-max-width", out var value24))
@@ -244,8 +273,50 @@ public class VectorStyle : IVectorStyle
             if (layout.TryGetValue("icon-image", out var value29))
                 paint2.IconImage = (string)GetValue(value29, attributes);
         }
+    }
 
-        return brush;
+    /// <summary>
+    /// Resets all Paint properties to their constructor defaults.
+    /// Point is a struct so default is (0,0).
+    /// </summary>
+    internal static void ResetPaint(Paint p)
+    {
+        p.BackgroundColor = default;
+        p.BackgroundPattern = null;
+        p.BackgroundOpacity = 1.0;
+        p.FillColor = default;
+        p.FillPattern = null;
+        p.FillTranslate = default;
+        p.FillOpacity = 1.0;
+        p.LineColor = default;
+        p.LinePattern = null;
+        p.LineTranslate = default;
+        p.LineCap = default;
+        p.LineWidth = 1.0;
+        p.LineOffset = 0;
+        p.LineBlur = 0;
+        p.LineDashArray = Array.Empty<double>();
+        p.LineOpacity = 1.0;
+        p.SymbolPlacement = default;
+        p.IconScale = 1.0;
+        p.IconImage = null;
+        p.IconRotate = 0;
+        p.IconOffset = default;
+        p.IconOpacity = 1.0;
+        p.TextColor = default;
+        p.TextFont = DefaultTextFont;
+        p.TextSize = 16.0;
+        p.TextMaxWidth = 10.0;
+        p.TextJustify = default;
+        p.TextRotate = 0;
+        p.TextOffset = default;
+        p.TextStrokeColor = default;
+        p.TextStrokeWidth = 0;
+        p.TextStrokeBlur = 0;
+        p.TextOptional = false;
+        p.TextTransform = default;
+        p.TextOpacity = 1.0;
+        p.Visibility = true;
     }
 
     private static string StripBraces(string s)

@@ -3,17 +3,44 @@ using System.Collections.Generic;
 using System.Drawing;
 using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using SkiaSharp;
+using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
 using ICanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.ICanvas;
 using TileInfo = VexTile.Renderer.Mvt.AliFlux.TileInfo;
 using VectorTile = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTile;
 using VectorTileLayer = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTileLayer;
+using VisualLayer = Mapsui.Experimental.VectorTiles.VexTileCopies.VisualLayer;
 
 namespace Mapsui.Experimental.VectorTiles.Rendering;
 
 public static class VexTileRenderer
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
+
+    // Pool of pre-allocated Brush+Paint pairs, reused across tile renders on the same thread.
+    // On the first render the pool is empty so all objects are freshly allocated;
+    // subsequent renders reuse them, eliminating per-feature Brush+Paint allocations.
+    [ThreadStatic] private static List<Brush>? t_brushPool;
+
+    private static Brush RentBrush()
+    {
+        t_brushPool ??= new List<Brush>();
+        var count = t_brushPool.Count;
+        if (count > 0)
+        {
+            var b = t_brushPool[count - 1];
+            t_brushPool.RemoveAt(count - 1);
+            return b;
+        }
+        return new Brush { Paint = new Paint() };
+    }
+
+    private static void ReturnBrushes(List<VisualLayer> layers)
+    {
+        t_brushPool ??= new List<Brush>();
+        for (var i = 0; i < layers.Count; i++)
+            t_brushPool.Add(layers[i].Brush);
+    }
 
     /// <summary>
     /// Renders a pre-fetched vector tile to the canvas synchronously.
@@ -132,7 +159,8 @@ public static class VexTileRenderer
 
                             if (style.ValidateLayer(layer, actualZoom, attributes))
                             {
-                                var brush = style.ParseStyle(layer, tileInfo.Scale, attributes);
+                                var brush = RentBrush();
+                                style.ParseStyleInto(brush, layer, tileInfo.Scale, attributes);
 
                                 if (!brush.Paint.Visibility)
                                 {
@@ -174,6 +202,7 @@ public static class VexTileRenderer
             AllocProfile.Record("StyleEval", GC.GetAllocatedBytesForCurrentThread() - styleAllocBefore);
 
         RenderVisualLayers(canvas, visualLayers);
+        ReturnBrushes(visualLayers);
     }
 
     private static void RenderVisualLayers(ICanvas canvas, List<VisualLayer> visualLayers)

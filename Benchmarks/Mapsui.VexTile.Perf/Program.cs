@@ -4,8 +4,9 @@ using SQLite;
 using System.Diagnostics;
 using VexTile.Common.Enums;
 using VexTile.Data.Sources;
-using VexTile.Renderer.Mvt.AliFlux;
 using SkiaCanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.SkiaCanvas;
+using TileInfo = VexTile.Renderer.Mvt.AliFlux.TileInfo;
+using VectorStyle = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorStyle;
 using VexTileRenderer = Mapsui.Experimental.VectorTiles.Rendering.VexTileRenderer;
 
 namespace Mapsui.VexTile.Perf;
@@ -42,11 +43,11 @@ internal class Program
     // Saved baseline numbers for comparison (from BASELINE.md)
     private static readonly Dictionary<int, (double AvgMs, double MedianMs, double AllocMb)> BaselineNumbers = new()
     {
-        { 10, (60.0, 57.3, 848.6) },
-        { 12, (60.1, 59.8, 759.3) },
-        { 14, (105.1, 103.6, 1680.3) },
-        { 16, (100.1, 100.3, 1679.1) },
-        { 20, (125.9, 125.7, 1961.4) },
+        { 10, (59.6, 57.6, 749.9) },
+        { 12, (61.1, 60.2, 662.4) },
+        { 14, (109.8, 106.6, 1600.4) },
+        { 16, (97.4, 96.9, 1587.0) },
+        { 20, (121.6, 122.5, 1839.9) },
     };
 
     static async Task Main(string[] args)
