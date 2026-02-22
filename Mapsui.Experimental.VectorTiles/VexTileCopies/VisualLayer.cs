@@ -23,4 +23,10 @@ public class VisualLayer
     public required string SourceName { get; set; }
 
     public required string SourceLayer { get; set; }
+
+    /// <summary>
+    /// Insertion order index used as a tiebreaker in sorting to preserve
+    /// the stable ordering that the original LINQ OrderBy provides.
+    /// </summary>
+    public int InsertionOrder { get; set; }
 }

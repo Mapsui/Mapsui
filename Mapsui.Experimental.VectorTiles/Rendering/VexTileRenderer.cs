@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using SkiaSharp;
 using VexTile.Renderer.Mvt.AliFlux;
@@ -92,9 +93,7 @@ public static class VexTileRenderer
             layerList.Add(tileLayer);
         }
 
-        // Reusable attribute dict — avoids per-feature allocation in the hot style loop.
-        // Safe because ValidateLayer/ParseStyle are synchronous and don't hold onto the dict.
-        var attributes = new Dictionary<string, object>();
+        var styleAllocBefore = AllocProfile.Enabled ? GC.GetAllocatedBytesForCurrentThread() : 0L;
 
         // Apply styling
         foreach (var layer in style.Layers)
@@ -120,12 +119,14 @@ public static class VexTileRenderer
                     {
                         foreach (var feature in tileLayer.Features)
                         {
-                            attributes.Clear();
-                            foreach (var kv in feature.Attributes)
-                                attributes[kv.Key] = kv.Value;
-                            attributes["$type"] = feature.GeometryType;
-                            attributes["$id"] = layer.ID;
-                            attributes["$zoom"] = actualZoom;
+                            // Must create a new dict per feature — ParseStyle may capture
+                            // a reference for lazy text-field resolution (e.g. "{name}").
+                            var attributes = new Dictionary<string, object>(feature.Attributes)
+                            {
+                                ["$type"] = feature.GeometryType,
+                                ["$id"] = layer.ID,
+                                ["$zoom"] = actualZoom,
+                            };
 
                             if (style.ValidateLayer(layer, actualZoom, attributes))
                             {
@@ -145,6 +146,7 @@ public static class VexTileRenderer
                                     LayerId = layer.ID,
                                     SourceName = layer.SourceName,
                                     SourceLayer = layer.SourceLayer,
+                                    InsertionOrder = visualLayers.Count,
                                 });
                             }
                         }
@@ -166,18 +168,17 @@ public static class VexTileRenderer
             }
         }
 
+        if (AllocProfile.Enabled)
+            AllocProfile.Record("StyleEval", GC.GetAllocatedBytesForCurrentThread() - styleAllocBefore);
+
         RenderVisualLayers(canvas, visualLayers);
     }
 
     private static void RenderVisualLayers(ICanvas canvas, List<VisualLayer> visualLayers)
     {
-        // Sort once in-place — avoids two separate LINQ OrderBy heap allocations.
-        visualLayers.Sort((a, b) => a.Brush.ZIndex.CompareTo(b.Brush.ZIndex));
-
         // First pass: shapes, ascending z-order
-        for (var vi = 0; vi < visualLayers.Count; vi++)
+        foreach (var layer in visualLayers.OrderBy(v => v.Brush.ZIndex))
         {
-            var layer = visualLayers[vi];
             if (layer.Type == VisualLayerType.Vector)
             {
                 var feature = layer.VectorTileFeature;
@@ -240,10 +241,9 @@ public static class VexTileRenderer
             }
         }
 
-        // Second pass: text labels, descending z-order (reverse of sorted list)
-        for (var vi = visualLayers.Count - 1; vi >= 0; vi--)
+        // Second pass: text labels, descending z-order
+        foreach (var layer in visualLayers.OrderBy(v => v.Brush.ZIndex).Reverse())
         {
-            var layer = visualLayers[vi];
             if (layer.Type == VisualLayerType.Vector)
             {
                 var feature = layer.VectorTileFeature;

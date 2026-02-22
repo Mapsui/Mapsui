@@ -6,11 +6,46 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
 
 namespace Mapsui.Experimental.VectorTiles.VexTileCopies;
+
+/// <summary>
+/// Per-method allocation profiler. Thread-static counters keyed by method name.
+/// Enable with <see cref="Enabled"/>, then read results via <see cref="GetReport"/>.
+/// </summary>
+public static class AllocProfile
+{
+    // Must be field (not property) for Interlocked use
+    private static int _enabled;
+    public static bool Enabled
+    {
+        get => _enabled != 0;
+        set => Interlocked.Exchange(ref _enabled, value ? 1 : 0);
+    }
+
+    // Counters: method name → (totalBytes, callCount)
+    private static readonly ConcurrentDictionary<string, (long Bytes, long Calls)> _counters = new();
+
+    public static void Record(string method, long bytes)
+    {
+        if (_enabled == 0) return;
+        _counters.AddOrUpdate(method,
+            (bytes, 1),
+            (_, prev) => (prev.Bytes + bytes, prev.Calls + 1));
+    }
+
+    public static void Reset()
+    {
+        _counters.Clear();
+    }
+
+    public static IReadOnlyDictionary<string, (long Bytes, long Calls)> GetReport() =>
+        new Dictionary<string, (long, long)>(_counters);
+}
 
 /// <summary>
 /// Canvas implementation for vector tile rendering.
@@ -69,6 +104,8 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
     public void DrawLineString(List<Point> geometry, Brush style)
     {
+        var allocBefore = AllocProfile.Enabled ? GC.GetAllocatedBytesForCurrentThread() : 0;
+
         if (ClipOverflow)
         {
             if (!LineClipper.ClipPolyline(geometry, _clipRectangle, _clipBuffer))
@@ -109,12 +146,37 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         }
 
         _surface.Canvas.DrawPath(_path, _strokePaint);
+
+        if (AllocProfile.Enabled)
+            AllocProfile.Record("DrawLineString", GC.GetAllocatedBytesForCurrentThread() - allocBefore);
     }
 
     public void DrawPolygon(List<Point> geometry, Brush style, SKColor? background = null)
     {
         if (geometry.Count == 0)
             return;
+
+        var allocBefore = AllocProfile.Enabled ? GC.GetAllocatedBytesForCurrentThread() : 0;
+
+        // Early-out: skip polygons entirely outside the clip area during overzoom
+        if (ClipOverflow)
+        {
+            var minX = double.MaxValue;
+            var minY = double.MaxValue;
+            var maxX = double.MinValue;
+            var maxY = double.MinValue;
+            for (var i = 0; i < geometry.Count; i++)
+            {
+                var p = geometry[i];
+                if (p.X < minX) minX = p.X;
+                if (p.Y < minY) minY = p.Y;
+                if (p.X > maxX) maxX = p.X;
+                if (p.Y > maxY) maxY = p.Y;
+            }
+            if (maxX < _clipRectangle.Left || minX > _clipRectangle.Right ||
+                maxY < _clipRectangle.Top || minY > _clipRectangle.Bottom)
+                return;
+        }
 
         SKColor color = (!background.HasValue || !IsClockwise(geometry))
             ? SKColorFactory.MakeColor(style.Paint.FillColor.Red, style.Paint.FillColor.Green, style.Paint.FillColor.Blue,
@@ -131,6 +193,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         BuildPath(_path, geometry);
 
         _surface.Canvas.DrawPath(_path, _fillPaint);
+
+        if (AllocProfile.Enabled)
+            AllocProfile.Record("DrawPolygon", GC.GetAllocatedBytesForCurrentThread() - allocBefore);
     }
 
     public void DrawPoint(Point geometry, Brush style)
@@ -140,6 +205,8 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
     public void DrawText(Point geometry, Brush style)
     {
+        var allocBefore = AllocProfile.Enabled ? GC.GetAllocatedBytesForCurrentThread() : 0;
+
         _ = style.Paint.TextOptional;
         var typeface = GetFont(style.Paint.TextFont, style);
         typeface = QualifyTypeface(style, typeface);
@@ -160,9 +227,17 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             int num3 = (int)(geometry.Y - style.Paint.TextSize / 2.0 * array.Length);
             int num4 = (int)(style.Paint.TextSize * array.Length);
             Rect rect = new Rect(num2, num3, num, num4);
-            rect = rect.Inflate(5.0, 5.0);
+            // Note: the original AliFlux code calls rect.Inflate(5, 5) without
+            // assigning the result. Rect is a struct and Inflate returns a new Rect,
+            // so the inflation is effectively a no-op. We match that behavior here
+            // to keep collision detection identical to main branch.
+            rect.Inflate(5.0, 5.0);
             if ((ClipOverflow && !_clipRectangle.Contains(rect)) || TextCollides(rect))
+            {
+                if (AllocProfile.Enabled)
+                    AllocProfile.Record("DrawText.Skipped", GC.GetAllocatedBytesForCurrentThread() - allocBefore);
                 return;
+            }
 
             _textRectangles.Add(rect);
         }
@@ -180,10 +255,15 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             _surface.Canvas.DrawText(text, p, textAlign, font, _textPaint);
             num5++;
         }
+
+        if (AllocProfile.Enabled)
+            AllocProfile.Record("DrawText.Drawn", GC.GetAllocatedBytesForCurrentThread() - allocBefore);
     }
 
     public void DrawTextOnPath(List<Point> geometry, Brush style)
     {
+        var allocBefore = AllocProfile.Enabled ? GC.GetAllocatedBytesForCurrentThread() : 0;
+
         if (ClipOverflow)
         {
             if (!LineClipper.ClipPolyline(geometry, _clipRectangle, _clipBufferText))
@@ -222,6 +302,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
         ConfigureTextPaint(_textPaint, style);
         _surface.Canvas.DrawTextOnPath(text, pathFromGeometry, offset, warpGlyphs: true, textAlign, font, _textPaint);
+
+        if (AllocProfile.Enabled)
+            AllocProfile.Record("DrawTextOnPath", GC.GetAllocatedBytesForCurrentThread() - allocBefore);
     }
 
     public void DrawImage(byte[] imageData, Brush style)
