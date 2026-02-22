@@ -528,40 +528,51 @@ public class VectorStyle : IVectorStyle
         }
 
         if (token.GetType().IsArray)
-            return (token as object[]).Select(token2 => GetValue(token2, attributes)).ToArray();
+        {
+            var src = (object[])token;
+            var result = new object[src.Length];
+            for (var i = 0; i < src.Length; i++)
+                result[i] = GetValue(src[i], attributes);
+            return result;
+        }
 
         if (token is Dictionary<string, object> dictionary && dictionary.TryGetValue("stops", out var value) && value is object[] source)
         {
-            var list = source.Select(obj => new Tuple<double, object>(
-                Convert.ToDouble((obj as object[])[0]), (obj as object[])[1])).ToList();
-            var num = (double)attributes["$zoom"];
-            var item = list.First().Item1;
-            var item2 = list.Last().Item1;
-            var power = 1.0;
-            var zoomA = item;
-            var zoomB = item2;
-            var index = 0;
-            var index2 = list.Count - 1;
-            if (num <= item)
-                return list.First().Item2;
-            if (num >= item2)
-                return list.Last().Item2;
-            for (var num2 = 1; num2 < list.Count; num2++)
+            var stopCount = source.Length;
+            var stops = new (double Zoom, object Value)[stopCount];
+            for (var i = 0; i < stopCount; i++)
             {
-                var item3 = list[num2 - 1].Item1;
-                var item4 = list[num2].Item1;
-                if (num >= item3 && num <= item4)
+                var pair = (object[])source[i];
+                stops[i] = (Convert.ToDouble(pair[0]), pair[1]);
+            }
+            var num = (double)attributes["$zoom"];
+            var firstZoom = stops[0].Zoom;
+            var lastZoom = stops[stopCount - 1].Zoom;
+            var power = 1.0;
+            var zoomA = firstZoom;
+            var zoomB = lastZoom;
+            var index = 0;
+            var index2 = stopCount - 1;
+            if (num <= firstZoom)
+                return stops[0].Value;
+            if (num >= lastZoom)
+                return stops[stopCount - 1].Value;
+            for (var i = 1; i < stopCount; i++)
+            {
+                var prevZoom = stops[i - 1].Zoom;
+                var curZoom = stops[i].Zoom;
+                if (num >= prevZoom && num <= curZoom)
                 {
-                    zoomA = item3;
-                    zoomB = item4;
-                    index = num2 - 1;
-                    index2 = num2;
+                    zoomA = prevZoom;
+                    zoomB = curZoom;
+                    index = i - 1;
+                    index2 = i;
                     break;
                 }
             }
             if (dictionary.TryGetValue("base", out var value2))
                 power = Convert.ToDouble(GetValue(value2, attributes));
-            return InterpolateValues(list[index].Item2, list[index2].Item2, zoomA, zoomB, num, power);
+            return InterpolateValues(stops[index].Value, stops[index2].Value, zoomA, zoomB, num, power);
         }
 
         return token;
@@ -579,15 +590,12 @@ public class VectorStyle : IVectorStyle
         }
         if (startValue.GetType().IsArray)
         {
-            var list = new List<object>();
-            var array = startValue as object[];
-            var array2 = endValue as object[];
-            for (var i = 0; i < array.Count(); i++)
-            {
-                var item = InterpolateValues(array[i], array2[i], zoomA, zoomB, zoom, power, clamp);
-                list.Add(item);
-            }
-            return list.ToArray();
+            var array = (object[])startValue;
+            var array2 = (object[])endValue;
+            var result = new object[array.Length];
+            for (var i = 0; i < array.Length; i++)
+                result[i] = InterpolateValues(array[i], array2[i], zoomA, zoomB, zoom, power, clamp);
+            return result;
         }
         if (IsNumber(startValue))
         {
