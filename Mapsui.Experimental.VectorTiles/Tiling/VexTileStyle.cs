@@ -1,5 +1,5 @@
 using Mapsui.Styles;
-using VexVectorStyle = VexTile.Renderer.Mvt.AliFlux.VectorStyle;
+using VexVectorStyle = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorStyle;
 
 namespace Mapsui.Experimental.VectorTiles.Tiling;
 

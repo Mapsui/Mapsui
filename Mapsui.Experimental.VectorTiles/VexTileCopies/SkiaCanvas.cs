@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
 
@@ -496,9 +495,12 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             if (_fontCache.TryGetValue(text, out var value))
                 return value;
 
+#pragma warning disable IDISP001 // Dispose created - stream ownership transfers to SKTypeface.FromStream
             if (VectorStyleReader.TryGetFont(text, out var stream))
+#pragma warning restore IDISP001
             {
-                SKTypeface sKTypeface = SKTypeface.FromStream(stream);
+                SKTypeface sKTypeface = SKTypeface.FromStream(stream); // IDISP001 suppressed: stream ownership transfers to SKTypeface
+                stream.Dispose();
                 if (sKTypeface != null)
                 {
                     _fontCache[text] = sKTypeface;

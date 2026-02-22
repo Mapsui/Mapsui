@@ -4,13 +4,13 @@ using Mapsui.Experimental.VectorTiles.Rendering;
 using System.Threading.Tasks;
 using VexTile.Common.Enums;
 using VexTile.Common.Sources;
-using VexTile.Renderer.Mvt.AliFlux;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 
 namespace Mapsui.Experimental.VectorTiles;
 
 public sealed class RasterizedVectorTileSource : ILocalTileSource
 {
-    private readonly VexTileCopies.VectorTilesSource _tileSource;
+    private readonly VectorTilesSource _tileSource;
     private readonly VectorStyle _style = new(VectorStyleKind.Default);
     private readonly ITileSchema _schema;
 

@@ -9,7 +9,7 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
-using VexVectorStyle = VexTile.Renderer.Mvt.AliFlux.VectorStyle;
+using VexVectorStyle = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorStyle;
 
 namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 

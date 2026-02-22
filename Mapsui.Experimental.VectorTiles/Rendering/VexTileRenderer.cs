@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using SkiaSharp;
-using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
 using ICanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.ICanvas;
+using TileInfo = VexTile.Renderer.Mvt.AliFlux.TileInfo;
 using VectorTile = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTile;
 using VectorTileLayer = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTileLayer;
 
@@ -176,9 +175,18 @@ public static class VexTileRenderer
 
     private static void RenderVisualLayers(ICanvas canvas, List<VisualLayer> visualLayers)
     {
-        // First pass: shapes, ascending z-order
-        foreach (var layer in visualLayers.OrderBy(v => v.Brush.ZIndex))
+        // Sort once in-place — avoids two separate LINQ OrderBy heap allocations.
+        // InsertionOrder tiebreaker preserves stable ordering for equal ZIndex values.
+        visualLayers.Sort((a, b) =>
         {
+            var cmp = a.Brush.ZIndex.CompareTo(b.Brush.ZIndex);
+            return cmp != 0 ? cmp : a.InsertionOrder.CompareTo(b.InsertionOrder);
+        });
+
+        // First pass: shapes, ascending z-order
+        for (var vi = 0; vi < visualLayers.Count; vi++)
+        {
+            var layer = visualLayers[vi];
             if (layer.Type == VisualLayerType.Vector)
             {
                 var feature = layer.VectorTileFeature;
@@ -241,9 +249,10 @@ public static class VexTileRenderer
             }
         }
 
-        // Second pass: text labels, descending z-order
-        foreach (var layer in visualLayers.OrderBy(v => v.Brush.ZIndex).Reverse())
+        // Second pass: text labels, descending z-order (reverse of sorted list)
+        for (var vi = visualLayers.Count - 1; vi >= 0; vi--)
         {
+            var layer = visualLayers[vi];
             if (layer.Type == VisualLayerType.Vector)
             {
                 var feature = layer.VectorTileFeature;

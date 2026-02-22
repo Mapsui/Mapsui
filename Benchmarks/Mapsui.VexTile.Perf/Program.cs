@@ -42,11 +42,11 @@ internal class Program
     // Saved baseline numbers for comparison (from BASELINE.md)
     private static readonly Dictionary<int, (double AvgMs, double MedianMs, double AllocMb)> BaselineNumbers = new()
     {
-        { 10, (77.7, 74.0, 3166.8) },
-        { 12, (76.4, 72.1, 2915.3) },
-        { 14, (106.4, 98.2, 3047.3) },
-        { 16, (101.1, 92.6, 3528.6) },
-        { 20, (129.7, 133.0, 4299.4) },
+        { 10, (60.0, 57.3, 848.6) },
+        { 12, (60.1, 59.8, 759.3) },
+        { 14, (105.1, 103.6, 1680.3) },
+        { 16, (100.1, 100.3, 1679.1) },
+        { 20, (125.9, 125.7, 1961.4) },
     };
 
     static async Task Main(string[] args)
@@ -68,7 +68,7 @@ internal class Program
         var tileSource = new VectorTilesSource(dataSource);
         var style = new VectorStyle(VectorStyleKind.Default);
 
-        Console.WriteLine($"Target: Zurich ({ZurichLat}°N, {ZurichLon}°E)");
+        Console.WriteLine($"Target: Zurich ({ZurichLat}N, {ZurichLon}E)");
         Console.WriteLine();
 
         // First, discover available tiles
@@ -100,9 +100,9 @@ internal class Program
         // ==========================================
         // RUN PERFORMANCE TEST
         // ==========================================
-        Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║                         PERFORMANCE RESULTS                                       ║");
-        Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════╝");
+        Console.WriteLine("+---------------------------------------------------------------------------------+");
+        Console.WriteLine("|                         PERFORMANCE RESULTS                                     |");
+        Console.WriteLine("+---------------------------------------------------------------------------------+");
 
         var results = new List<TestResult>();
 
@@ -119,9 +119,9 @@ internal class Program
         // COMPARISON WITH BASELINE
         // ==========================================
         Console.WriteLine();
-        Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║                         COMPARISON WITH BASELINE                                  ║");
-        Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════╝");
+        Console.WriteLine("+---------------------------------------------------------------------------------+");
+        Console.WriteLine("|                         COMPARISON WITH BASELINE                                  |");
+        Console.WriteLine("+---------------------------------------------------------------------------------+");
         Console.WriteLine();
         PrintBaselineComparison(results);
 
@@ -129,13 +129,57 @@ internal class Program
         Console.WriteLine("\n--- Tile Content Analysis ---");
         await AnalyzeTileContents(tileSource, style, testCases);
 
+        // ==========================================
+        // ALLOCATION PROFILING (1 iteration per zoom)
+        // ==========================================
+        Console.WriteLine();
+        Console.WriteLine("+---------------------------------------------------------------------------------+");
+        Console.WriteLine("|                         ALLOCATION PROFILE                                       |");
+        Console.WriteLine("+---------------------------------------------------------------------------------+");
+        Console.WriteLine();
+
+        foreach (var (zoom, x, y, description) in testCases)
+        {
+            AllocProfile.Reset();
+            AllocProfile.Enabled = true;
+
+            // Single render with profiling enabled
+            var vectorTile = await tileSource.GetVectorTileAsync(x, y, zoom);
+            if (vectorTile == null) continue;
+
+            var profTileInfo = new TileInfo(x, y, zoom, TileSize, TileSize);
+            NormalizeGeometry(vectorTile, profTileInfo.ScaledSizeX, profTileInfo.ScaledSizeY);
+
+            using (var profCanvas = new SkiaCanvas((int)profTileInfo.ScaledSizeX, (int)profTileInfo.ScaledSizeY))
+            {
+                VexTileRenderer.Render(vectorTile, style, profCanvas, profTileInfo);
+            }
+
+            AllocProfile.Enabled = false;
+            var report = AllocProfile.GetReport();
+
+            Console.WriteLine($"--- {description} (Z{zoom}) ---");
+            Console.WriteLine($"  {"Method",-24} {"Calls",8} {"Total KB",10} {"Avg B/call",12}");
+            Console.WriteLine($"  {"--------",-24} {"-----",8} {"--------",10} {"----------",12}");
+
+            long totalBytes = 0;
+            foreach (var (method, (bytes, calls)) in report.OrderByDescending(kv => kv.Value.Bytes))
+            {
+                var avgPerCall = calls > 0 ? bytes / calls : 0;
+                Console.WriteLine($"  {method,-24} {calls,8} {bytes / 1024.0,10:F1} {avgPerCall,12}");
+                totalBytes += bytes;
+            }
+            Console.WriteLine($"  {"TOTAL",-24} {"",8} {totalBytes / 1024.0,10:F1}");
+            Console.WriteLine();
+        }
+
         Console.WriteLine("\nDone.");
     }
 
     private static void PrintBaselineComparison(List<TestResult> current)
     {
-        Console.WriteLine("Test                     │ Baseline │ Current  │ Speedup │ Alloc   │ Notes");
-        Console.WriteLine("─────────────────────────┼──────────┼──────────┼─────────┼─────────┼──────────────────");
+        Console.WriteLine("Test                     | Baseline | Current  | Speedup | Alloc   | Notes");
+        Console.WriteLine("-------------------------|----------|----------|---------|---------|------------------");
 
         foreach (var r in current)
         {
@@ -146,21 +190,21 @@ internal class Program
                 var speedup = baseline.AvgMs / r.AvgMs;
                 var currentAllocMb = r.AllocatedBytes / 1024.0 / 1024.0;
                 var allocRatio = currentAllocMb / baseline.AllocMb;
-                var note = speedup > 1.05 ? "✓ faster" : speedup < 0.95 ? "✗ slower" : "≈ same";
-                var allocNote = allocRatio < 0.95 ? "✓" : allocRatio > 1.05 ? "✗" : "≈";
-                Console.WriteLine($"{r.Name,-24} │ {baseline.AvgMs,6:F1}ms │ {r.AvgMs,6:F1}ms │ {speedup,5:F2}x  │ {allocRatio,5:F2}x {allocNote} │ {note}");
+                var note = speedup > 1.05 ? "^ faster" : speedup < 0.95 ? "v slower" : "= same";
+                var allocNote = allocRatio < 0.95 ? "^" : allocRatio > 1.05 ? "v" : "=";
+                Console.WriteLine($"{r.Name,-24} | {baseline.AvgMs,6:F1}ms | {r.AvgMs,6:F1}ms | {speedup,5:F2}x  | {allocRatio,5:F2}x {allocNote} | {note}");
             }
             else
             {
-                Console.WriteLine($"{r.Name,-24} │    N/A   │ {r.AvgMs,6:F1}ms │   N/A   │   N/A   │");
+                Console.WriteLine($"{r.Name,-24} |    N/A   | {r.AvgMs,6:F1}ms |   N/A   |   N/A   |");
             }
         }
     }
 
     private static void PrintComparison(List<TestResult> baseline, List<TestResult> pooled)
     {
-        Console.WriteLine("Test                     │ Baseline │  Pooled  │ Speedup │ Alloc Reduction");
-        Console.WriteLine("─────────────────────────┼──────────┼──────────┼─────────┼─────────────────");
+        Console.WriteLine("Test                     | Baseline |  Pooled  | Speedup | Alloc Reduction");
+        Console.WriteLine("-------------------------|----------|----------|---------|-------------------");
 
         for (var i = 0; i < Math.Min(baseline.Count, pooled.Count); i++)
         {
@@ -169,27 +213,27 @@ internal class Program
             var speedup = b.AvgMs / p.AvgMs;
             var allocReduction = b.AllocatedBytes > 0 ? (1.0 - (double)p.AllocatedBytes / b.AllocatedBytes) * 100 : 0;
 
-            Console.WriteLine($"{b.Name,-24} │ {b.AvgMs,6:F1}ms │ {p.AvgMs,6:F1}ms │ {speedup,5:F2}x  │ {allocReduction,5:F1}%");
+            Console.WriteLine($"{b.Name,-24} | {b.AvgMs,6:F1}ms | {p.AvgMs,6:F1}ms | {speedup,5:F2}x  | {allocReduction,5:F1}%");
         }
     }
 
     private static void PrintSummaryMatrix(List<TestResult> results, string title)
     {
         Console.WriteLine();
-        Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════╗");
-        Console.WriteLine("║                         PERFORMANCE SUMMARY MATRIX                                ║");
-        Console.WriteLine("╠════════════════════════╦════════╦════════╦════════╦════════╦═══════════╦══════════╣");
-        Console.WriteLine("║ Test                   ║ Avg ms ║ Min ms ║ Max ms ║ Med ms ║ Alloc MB  ║ Used MB  ║");
-        Console.WriteLine("╠════════════════════════╬════════╬════════╬════════╬════════╬═══════════╬══════════╣");
+        Console.WriteLine("+---------------------------------------------------------------------------------+");
+        Console.WriteLine("|                         PERFORMANCE SUMMARY MATRIX                                |");
+        Console.WriteLine("+------------------------+--------+--------+--------+--------+-----------+----------+");
+        Console.WriteLine("| Test                   | Avg ms | Min ms | Max ms | Med ms | Alloc MB  | Used MB  |");
+        Console.WriteLine("+------------------------+--------+--------+--------+--------+-----------+----------+");
 
         foreach (var r in results)
         {
             var allocMb = Math.Abs(r.AllocatedBytes / (1024.0 * 1024.0));
             var usedMb = Math.Abs(r.MemoryUsedBytes / (1024.0 * 1024.0));
-            Console.WriteLine($"║ {r.Name,-22} ║ {r.AvgMs,6:F1} ║ {r.MinMs,6:F1} ║ {r.MaxMs,6:F1} ║ {r.MedianMs,6:F1} ║ {allocMb,9:F1} ║ {usedMb,8:F1} ║");
+            Console.WriteLine($"| {r.Name,-22} | {r.AvgMs,6:F1} | {r.MinMs,6:F1} | {r.MaxMs,6:F1} | {r.MedianMs,6:F1} | {allocMb,9:F1} | {usedMb,8:F1} |");
         }
 
-        Console.WriteLine("╚════════════════════════╩════════╩════════╩════════╩════════╩═══════════╩══════════╝");
+        Console.WriteLine("+------------------------+--------+--------+--------+--------+-----------+----------+");
     }
 
     private static async Task RunWarmup(
