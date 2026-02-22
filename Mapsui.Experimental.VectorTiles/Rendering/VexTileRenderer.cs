@@ -94,6 +94,11 @@ public static class VexTileRenderer
 
         var styleAllocBefore = AllocProfile.Enabled ? GC.GetAllocatedBytesForCurrentThread() : 0L;
 
+        // Reuse a single attributes dict across all layers/features.
+        // ParseStyle's Regex.Replace for text-field substitution runs synchronously —
+        // it does not capture the dict reference, so reuse is safe.
+        var attributes = new Dictionary<string, object>();
+
         // Apply styling
         foreach (var layer in style.Layers)
         {
@@ -118,14 +123,12 @@ public static class VexTileRenderer
                     {
                         foreach (var feature in tileLayer.Features)
                         {
-                            // Must create a new dict per feature — ParseStyle may capture
-                            // a reference for lazy text-field resolution (e.g. "{name}").
-                            var attributes = new Dictionary<string, object>(feature.Attributes)
-                            {
-                                ["$type"] = feature.GeometryType,
-                                ["$id"] = layer.ID,
-                                ["$zoom"] = actualZoom,
-                            };
+                            attributes.Clear();
+                            foreach (var kvp in feature.Attributes)
+                                attributes[kvp.Key] = kvp.Value;
+                            attributes["$type"] = feature.GeometryType;
+                            attributes["$id"] = layer.ID;
+                            attributes["$zoom"] = actualZoom;
 
                             if (style.ValidateLayer(layer, actualZoom, attributes))
                             {
