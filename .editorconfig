@@ -1,6 +1,9 @@
 # Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
 
+[*]
+end_of_line = lf
+
 # Rules in this file were initially inferred by Visual Studio IntelliCode from the C:\Users\ts\Documents\GitHub\Mapsui codebase based on best match to current usage at 10/23/2021
 # You can modify the rules from these initially generated values to suit your own policies
 # You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
@@ -18,14 +21,14 @@ csharp_prefer_braces = true:silent
 csharp_style_namespace_declarations = file_scoped:warning
 csharp_style_prefer_method_group_conversion = true:silent
 csharp_style_prefer_top_level_statements = true:silent
-csharp_style_expression_bodied_methods = false:silent
-csharp_style_expression_bodied_constructors = false:silent
-csharp_style_expression_bodied_operators = false:silent
+csharp_style_expression_bodied_methods = true:silent
+csharp_style_expression_bodied_constructors = true:silent
+csharp_style_expression_bodied_operators = true:silent
 csharp_style_expression_bodied_properties = true:silent
 csharp_style_expression_bodied_indexers = true:silent
 csharp_style_expression_bodied_accessors = true:silent
 csharp_style_expression_bodied_lambdas = true:silent
-csharp_style_expression_bodied_local_functions = false:silent
+csharp_style_expression_bodied_local_functions = true:silent
 csharp_style_inlined_variable_declaration = true:suggestion
 csharp_style_deconstructed_variable_declaration = true:silent
 csharp_style_var_for_built_in_types = true:silent
@@ -104,12 +107,12 @@ csharp_prefer_braces = false:suggestion
 
 #prefer expression-bodied members for accessors
 csharp_style_expression_bodied_accessors = true:suggestion
-#prefer block bodies for constructors
-csharp_style_expression_bodied_constructors = false:suggestion
-#prefer block bodies for methods
-csharp_style_expression_bodied_methods = false:suggestion
-#prefer block bodies for operators
-csharp_style_expression_bodied_operators = false:suggestion
+#prefer expression-bodied members for constructors
+csharp_style_expression_bodied_constructors = true:suggestion
+#prefer expression-bodied members for methods
+csharp_style_expression_bodied_methods = true:suggestion
+#prefer expression-bodied members for operators
+csharp_style_expression_bodied_operators = true:suggestion
 #prefer expression-bodied members for properties
 csharp_style_expression_bodied_properties = true:suggestion
 

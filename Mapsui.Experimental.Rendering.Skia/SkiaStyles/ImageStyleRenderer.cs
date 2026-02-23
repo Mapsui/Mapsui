@@ -7,6 +7,7 @@ using SkiaSharp;
 using Svg.Skia;
 using System;
 using Mapsui.Rendering;
+using SvgColorModifier = Mapsui.Experimental.Rendering.Skia.SkiaStyles.SvgColorModifier;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 

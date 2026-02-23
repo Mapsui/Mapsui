@@ -33,10 +33,10 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     SymbolStyleRenderer.DrawStatic(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), feature, renderService);
                     break;
                 case Polygon polygon:
-                    PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderService.VectorCache, position);
+                    PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderService, position);
                     break;
                 case LineString lineString:
-                    LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, renderService, position);
+                    LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, position);
                     break;
                 case null: // A geometry may be null. It might be a mistake but logging in the renderer would flood the log.
                     break;

@@ -1,5 +1,4 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Rendering.Caching;
 using Mapsui.Experimental.Rendering.Skia.Extensions;
 using Mapsui.Experimental.Rendering.Skia.Images;
 using Mapsui.Styles;
@@ -17,37 +16,26 @@ internal static class PolygonRenderer
     private const float _scale = 10.0f;
 
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle vectorStyle, IFeature feature,
-        Polygon polygon, float opacity, VectorCache vectorCache, int position)
+        Polygon polygon, float opacity, Mapsui.Rendering.RenderService renderService, int position)
     {
-        // polygon - relevant for GeometryCollection children
-        SKPath ToPath((long featureId, int position, MRect extent, double rotation, float lineWidth) valueTuple)
-        {
-            var result = polygon.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
-            return result;
-        }
-
         if (vectorStyle == null)
             return;
 
-        var extent = viewport.ToExtent();
-        var rotation = viewport.Rotation;
-        float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
-
-        using var path = vectorCache.GetOrCreate((feature.Id, position, extent, rotation, lineWidth), ToPath);
+        using var path = polygon.ToSkiaPath(viewport);
         if (vectorStyle.Fill.IsVisible())
         {
-            using var fillPaint = vectorCache.GetOrCreate((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
+            using var fillPaint = CreateSkPaint((vectorStyle.Fill, opacity, viewport.Rotation), renderService);
             DrawPath(canvas, vectorStyle, path, fillPaint);
         }
 
         if (vectorStyle.Outline.IsVisible())
         {
-            using var paint = vectorCache.GetOrCreate((vectorStyle.Outline, opacity), CreateSkPaint);
+            using var paint = CreateSkPaint((vectorStyle.Outline, opacity));
             canvas.DrawPath(path, paint);
         }
     }
 
-    internal static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, CacheTracker<SKPath> path, CacheTracker<SKPaint> paintFill)
+    internal static void DrawPath(SKCanvas canvas, VectorStyle vectorStyle, SKPath path, SKPaint paintFill)
     {
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
         {
@@ -58,11 +46,10 @@ internal static class PolygonRenderer
             // Do this, because if not, path isn't filled complete
             using (new SKAutoCanvasRestore(canvas))
             {
-                var skPath = path.Instance;
-                canvas.ClipPath(skPath);
-                var bounds = skPath.Bounds;
+                canvas.ClipPath(path);
+                var bounds = path.Bounds;
                 // Make sure, that the brush starts with the correct position
-                var inflate = ((int)skPath.Bounds.Width * 0.3f / _scale) * _scale;
+                var inflate = ((int)path.Bounds.Width * 0.3f / _scale) * _scale;
                 bounds.Inflate(inflate, inflate);
                 // Draw rect with bigger size, which is clipped by path
                 canvas.DrawRect(bounds, paintFill);
@@ -209,7 +196,7 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetSKImage(Mapsui.Rendering.RenderService renderService, Image image)
+    internal static SKImage? GetSKImage(Mapsui.Rendering.RenderService renderService, Image image)
     {
         if (image is null)
             return null;

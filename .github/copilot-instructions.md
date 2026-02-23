@@ -2,6 +2,12 @@
 
 These instructions guide GitHub Copilot (and Copilot Chat) when helping in this repository.
 
+## Critical: Do not make changes without explicit request
+- **Never start editing code, creating files unless the user explicitly asks you to do so.**
+- When the user asks a question, discusses architecture, or explores options — respond with analysis, explanations, or plans only.
+- Wait for clear instructions like "implement this", "make this change", "create this file", or "update the code" before touching any files.
+- If unsure whether the user wants changes made, ask first.
+
 ## Project overview
 - This repository contains the Mapsui project, a .NET/C# mapping and map-rendering toolkit used across multiple app platforms.
 - Typical technologies you will see: C#, .NET, build/test via dotnet CLI, sample apps, and cross-platform UI integrations.
@@ -18,10 +24,28 @@ These instructions guide GitHub Copilot (and Copilot Chat) when helping in this 
 - Keep public APIs stable; avoid breaking changes without prior discussion.
 - Add/adjust XML doc comments when modifying public-facing types/members.
 
+## Code style
+Mapsui prefers a **compact code style**. The repository uses `.editorconfig` to enforce these conventions:
+
+- **Use `var` everywhere** — even for built-in types (`var count = 5;` not `int count = 5;`)
+- **Braces are optional** for single-statement blocks (`if (x) DoIt();` is acceptable)
+- **Compact object initializers** — members on same line when practical
+- **Prefer expression-bodied members** (`=>` syntax) for methods, properties, constructors
+- **Private fields**: `_camelCase` prefix (also for consts and statics, no `s_` prefix for statics)
+- **File-scoped namespaces**: `namespace Mapsui.Rendering;`
+
+Run `dotnet format` to apply these rules automatically.
+
+## Comments
+- **Explain why, not what** — comments should capture the reasoning behind code, not describe what the code does (which is visible from reading it).
+- Focus on historical context, edge cases, performance considerations, or workarounds that aren't obvious from the code itself.
+- Good: `// Use relative coordinates to avoid float precision loss with large EPSG:3857 values`
+- Bad: `// Create path from polygon`
+
 ## Contributions Copilot should optimize for
 - Clear, small changes with strong rationale.
 - Tests when fixing bugs or adding non-trivial behavior.
-- Helpful comments where logic is non-obvious.
+- Meaningful comments that explain *why* (see Comments section above).
 - Performance awareness in hot paths; avoid allocations and unnecessary LINQ in tight loops.
 
 ## What to avoid

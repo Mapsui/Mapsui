@@ -1,21 +1,46 @@
-﻿// defining this will add a box around the tile boundary and also
-// burn in the XYZ value of the tile. This is very handy for debugging
-//#define USE_DEBUG_BOX
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using SkiaSharp;
-using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
+using ICanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.ICanvas;
+using TileInfo = VexTile.Renderer.Mvt.AliFlux.TileInfo;
+using VectorTile = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTile;
+using VectorTileLayer = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorTileLayer;
+using VisualLayer = Mapsui.Experimental.VectorTiles.VexTileCopies.VisualLayer;
 
 namespace Mapsui.Experimental.VectorTiles.Rendering;
 
 public static class VexTileRenderer
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
+
+    // Pool of pre-allocated Brush+Paint pairs, reused across tile renders on the same thread.
+    // On the first render the pool is empty so all objects are freshly allocated;
+    // subsequent renders reuse them, eliminating per-feature Brush+Paint allocations.
+    [ThreadStatic] private static List<Brush>? t_brushPool;
+
+    private static Brush RentBrush()
+    {
+        t_brushPool ??= new List<Brush>();
+        var count = t_brushPool.Count;
+        if (count > 0)
+        {
+            var b = t_brushPool[count - 1];
+            t_brushPool.RemoveAt(count - 1);
+            return b;
+        }
+        return new Brush();
+    }
+
+    private static void ReturnBrushes(List<VisualLayer> layers)
+    {
+        t_brushPool ??= new List<Brush>();
+        for (var i = 0; i < layers.Count; i++)
+            t_brushPool.Add(layers[i].Brush);
+    }
 
     /// <summary>
     /// Renders a pre-fetched vector tile to the canvas synchronously.
@@ -32,7 +57,7 @@ public static class VexTileRenderer
     /// <param name="whiteListLayers">Optional whitelist to reduce layers to render.</param>
     /// <param name="overrideBackground">Override the default background color.</param>
     public static void Render(
-        VectorTile vectorTile,
+        VexTileCopies.VectorTile vectorTile,
         VectorStyle style,
         ICanvas canvas,
         int x, int y, double zoom,
@@ -72,11 +97,6 @@ public static class VexTileRenderer
             actualZoom = tileInfo.Zoom - zoomDelta;
         }
 
-        var sizeX = tileInfo.ScaledSizeX;
-        var sizeY = tileInfo.ScaledSizeY;
-
-        canvas.StartDrawing(sizeX, sizeY);
-
         var visualLayers = new List<VisualLayer>();
 
         // Process the pre-fetched tile
@@ -85,35 +105,26 @@ public static class VexTileRenderer
             canvas.ClipOverflow = true;
         }
 
-        // Normalize the points from 0 to size
-        foreach (var vectorLayer in vectorTile.Layers)
-        {
-            foreach (var feature in vectorLayer.Features)
-            {
-                foreach (var geometry in feature.Geometry)
-                {
-                    for (int i = 0; i < geometry.Count; i++)
-                    {
-                        var point = geometry[i];
-                        // Note, to normalize the tile we change the geometry inside the tile. This is not typically
-                        // something you want to do in a renderer. If the source tile is cached, reused and rendered 
-                        // again the position would be incorrect. This is not a problem in the current implementation
-                        // but something to keep in mind.
-                        geometry[i] = new(point.X / feature.Extent * sizeX, point.Y / feature.Extent * sizeY);
-                    }
-                }
-            }
-        }
+        // Note: Geometry normalization (from tile-internal space to pixel space) is now
+        // performed at fetch time in VexTileSource.NormalizeGeometry, so the renderer
+        // receives pre-normalized coordinates and does not mutate the tile geometry.
 
         foreach (var tileLayer in vectorTile.Layers)
         {
-            if (!categorizedVectorLayers.ContainsKey(tileLayer.Name))
+            if (!categorizedVectorLayers.TryGetValue(tileLayer.Name, out var layerList))
             {
-                categorizedVectorLayers[tileLayer.Name] = new();
+                layerList = new List<VectorTileLayer>();
+                categorizedVectorLayers[tileLayer.Name] = layerList;
             }
-
-            categorizedVectorLayers[tileLayer.Name].Add(tileLayer);
+            layerList.Add(tileLayer);
         }
+
+        var styleAllocBefore = AllocProfile.Enabled ? GC.GetAllocatedBytesForCurrentThread() : 0L;
+
+        // Reuse a single attributes dict across all layers/features.
+        // ParseStyle's Regex.Replace for text-field substitution runs synchronously —
+        // it does not capture the dict reference, so reuse is safe.
+        var attributes = new Dictionary<string, object>();
 
         // Apply styling
         foreach (var layer in style.Layers)
@@ -126,36 +137,32 @@ public static class VexTileRenderer
                 continue;
             }
 
-            if (layer.Source != null)
+            if (!string.IsNullOrEmpty(layer.SourceName))
             {
-                if (layer.Source.Type == "raster")
-                {
-                    continue;
-                }
-
                 if (categorizedVectorLayers.TryGetValue(layer.SourceLayer, out var tileLayers))
                 {
                     foreach (var tileLayer in tileLayers)
                     {
                         foreach (var feature in tileLayer.Features)
                         {
-                            Dictionary<string, object> attributes = new(feature.Attributes)
-                            {
-                                ["$type"] = feature.GeometryType,
-                                ["$id"] = layer.ID,
-                                ["$zoom"] = actualZoom
-                            };
+                            attributes.Clear();
+                            foreach (var kvp in feature.Attributes)
+                                attributes[kvp.Key] = kvp.Value;
+                            attributes["$type"] = feature.GeometryType;
+                            attributes["$id"] = layer.ID;
+                            attributes["$zoom"] = actualZoom;
 
                             if (style.ValidateLayer(layer, actualZoom, attributes))
                             {
-                                var brush = style.ParseStyle(layer, tileInfo.Scale, attributes);
+                                var brush = RentBrush();
+                                style.ParseStyleInto(brush, layer, tileInfo.Scale, attributes);
 
                                 if (!brush.Paint.Visibility)
                                 {
                                     continue;
                                 }
 
-                                visualLayers.Add(new()
+                                visualLayers.Add(new VisualLayer
                                 {
                                     Type = VisualLayerType.Vector,
                                     VectorTileFeature = feature,
@@ -164,6 +171,7 @@ public static class VexTileRenderer
                                     LayerId = layer.ID,
                                     SourceName = layer.SourceName,
                                     SourceLayer = layer.SourceLayer,
+                                    InsertionOrder = visualLayers.Count,
                                 });
                             }
                         }
@@ -185,14 +193,27 @@ public static class VexTileRenderer
             }
         }
 
+        if (AllocProfile.Enabled)
+            AllocProfile.Record("StyleEval", GC.GetAllocatedBytesForCurrentThread() - styleAllocBefore);
+
         RenderVisualLayers(canvas, visualLayers);
+        ReturnBrushes(visualLayers);
     }
 
     private static void RenderVisualLayers(ICanvas canvas, List<VisualLayer> visualLayers)
     {
-        // deferred rendering to preserve text drawing order
-        foreach (var layer in visualLayers.OrderBy(item => item.Brush.ZIndex))
+        // Sort once in-place — avoids two separate LINQ OrderBy heap allocations.
+        // InsertionOrder tiebreaker preserves stable ordering for equal ZIndex values.
+        visualLayers.Sort((a, b) =>
         {
+            var cmp = a.Brush.ZIndex.CompareTo(b.Brush.ZIndex);
+            return cmp != 0 ? cmp : a.InsertionOrder.CompareTo(b.InsertionOrder);
+        });
+
+        // First pass: shapes, ascending z-order
+        for (var vi = 0; vi < visualLayers.Count; vi++)
+        {
+            var layer = visualLayers[vi];
             if (layer.Type == VisualLayerType.Vector)
             {
                 var feature = layer.VectorTileFeature;
@@ -210,7 +231,7 @@ public static class VexTileRenderer
                     {
                         foreach (var point in geometry)
                         {
-                            canvas.DrawPoint(point.First(), brush);
+                            if (point.Count > 0) canvas.DrawPoint(point[0], brush);
                         }
                     }
                     else if (feature.GeometryType == "LineString")
@@ -255,8 +276,10 @@ public static class VexTileRenderer
             }
         }
 
-        foreach (var layer in visualLayers.OrderBy(item => item.Brush.ZIndex).Reverse())
+        // Second pass: text labels, descending z-order (reverse of sorted list)
+        for (var vi = visualLayers.Count - 1; vi >= 0; vi--)
         {
+            var layer = visualLayers[vi];
             if (layer.Type == VisualLayerType.Vector)
             {
                 var feature = layer.VectorTileFeature;
@@ -274,7 +297,7 @@ public static class VexTileRenderer
                     {
                         if (brush.Text != null)
                         {
-                            canvas.DrawText(point.First(), brush);
+                            if (point.Count > 0) canvas.DrawText(point[0], brush);
                         }
                     }
                 }

@@ -1,0 +1,503 @@
+using Mapsui.Experimental.Rendering.Skia.Drawables;
+using Mapsui.Experimental.Rendering.Skia.Extensions;
+using Mapsui.Experimental.Rendering.Skia.SkiaStyles;
+using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Logging;
+using Mapsui.Nts;
+using Mapsui.Rendering;
+using Mapsui.Styles;
+using NetTopologySuite.Geometries;
+using SkiaSharp;
+using System;
+using System.Collections.Generic;
+
+namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
+
+/// <summary>
+/// Two-step renderer for VectorStyle. No cache interaction inside the renderer —
+/// caching is managed externally by the orchestrator.
+/// <list type="bullet">
+///   <item><description><see cref="CreateDrawable"/>: Creates SKPath objects in world coordinates
+///         (expensive, runs on background thread).</description></item>
+///   <item><description><see cref="DrawDrawable"/>: Transforms and draws a single pre-created drawable
+///         (fast, render thread).</description></item>
+/// </list>
+/// </summary>
+public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
+{
+    /// <inheritdoc />
+    public IDrawableCache CreateCache() => new DrawableCache();
+
+#pragma warning disable IDISP015 // Member should not return created and cached instance - ownership transfers to cache
+    /// <inheritdoc />
+    public IDrawable? CreateDrawable(Viewport viewport, ILayer layer, IFeature feature,
+        IStyle style, RenderService renderService)
+#pragma warning restore IDISP015
+    {
+        if (style is not VectorStyle vectorStyle)
+            throw new ArgumentException($"Expected {nameof(VectorStyle)} but got {style?.GetType().Name}");
+
+        var opacity = (float)(layer.Opacity * style.Opacity);
+        var drawables = new List<IDrawable>();
+
+        try
+        {
+            switch (feature)
+            {
+                case PointFeature pointFeature:
+                    drawables.Add(CreatePointDrawable(pointFeature.Point.X, pointFeature.Point.Y, vectorStyle, opacity));
+                    break;
+                case GeometryFeature geometryFeature:
+                    CreateGeometryDrawables(drawables, geometryFeature.Geometry, vectorStyle, opacity, viewport, renderService);
+                    break;
+                default:
+                    Logger.Log(LogLevel.Warning, $"{nameof(TwoStepVectorStyleRenderer)} can not render feature of type '{feature.GetType()}'");
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+
+        return drawables.Count switch
+        {
+            0 => null,
+            1 => drawables[0],
+            _ => new CompositeDrawable(drawables)
+        };
+    }
+
+    /// <inheritdoc />
+    public void DrawDrawable(object canvas, Viewport viewport, IDrawable drawable, ILayer layer)
+    {
+        if (canvas is not SKCanvas skCanvas)
+            return;
+
+        switch (drawable)
+        {
+            case SymbolStyleDrawable symbolDrawable:
+                TwoStepSymbolStyleRenderer.DrawSymbolDrawable(skCanvas, viewport, symbolDrawable);
+                break;
+            case VectorStyleDrawable vectorDrawable:
+                DrawVectorDrawable(skCanvas, viewport, vectorDrawable);
+                break;
+            case CompositeDrawable composite:
+                foreach (var child in composite.Children)
+                    DrawDrawable(canvas, viewport, child, layer);
+                break;
+        }
+    }
+
+    private static void CreateGeometryDrawables(List<IDrawable> drawables, Geometry? geometry,
+        VectorStyle vectorStyle, float opacity, Viewport viewport, RenderService renderService, int position = 0)
+    {
+        switch (geometry)
+        {
+            case GeometryCollection collection:
+                for (var i = 0; i < collection.Count; i++)
+                    CreateGeometryDrawables(drawables, collection[i], vectorStyle, opacity, viewport, renderService, i);
+                break;
+            case Point point:
+                drawables.Add(CreatePointDrawable(point.X, point.Y, vectorStyle, opacity));
+                break;
+            case Polygon polygon:
+                drawables.Add(CreatePolygonDrawable(polygon, vectorStyle, opacity, viewport, renderService));
+                break;
+            case LineString lineString:
+                drawables.Add(CreateLineStringDrawable(lineString, vectorStyle, opacity));
+                break;
+            case null:
+                break;
+            default:
+                Logger.Log(LogLevel.Warning, $"Unknown geometry type: {geometry.GetType()}");
+                break;
+        }
+    }
+
+    private static SymbolStyleDrawable CreatePointDrawable(double worldX, double worldY,
+        VectorStyle vectorStyle, float opacity)
+    {
+        // Convert VectorStyle to SymbolStyle for point rendering (same as legacy VectorStyleRenderer)
+        var symbolStyle = new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line };
+        return TwoStepSymbolStyleRenderer.CreateSymbolDrawable(worldX, worldY, symbolStyle, opacity);
+    }
+
+    private static VectorStyleDrawable CreatePolygonDrawable(Polygon polygon, VectorStyle vectorStyle,
+        float opacity, Viewport viewport, RenderService renderService)
+    {
+        // Centroid for IDrawable.WorldX/WorldY and as reference point for relative coordinates
+        var envelope = polygon.EnvelopeInternal;
+        var centroidX = (envelope.MinX + envelope.MaxX) / 2.0;
+        var centroidY = (envelope.MinY + envelope.MaxY) / 2.0;
+
+        // Path uses relative coordinates (centered at centroid) to avoid float precision loss.
+        // Large world coordinates (e.g., EPSG:3857 values in millions) lose precision when cast to float.
+        // By subtracting the centroid, coordinates stay small (~meters) and preserve precision.
+        var worldPath = polygon.ToWorldPath(centroidX, centroidY);
+
+        var fillStyle = vectorStyle.Fill?.FillStyle ?? FillStyle.Solid;
+
+        // Pre-create fill paint
+        SKPaint? fillPaint = null;
+        if (vectorStyle.Fill.IsVisible())
+        {
+            SKImage? bitmapFillImage = null;
+            if (fillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated && vectorStyle.Fill?.Image is not null)
+            {
+                bitmapFillImage = PolygonRenderer.GetSKImage(renderService, vectorStyle.Fill.Image);
+            }
+            fillPaint = CreateFillPaint(vectorStyle.Fill!, opacity, viewport.Rotation, bitmapFillImage);
+        }
+
+        // Pre-create outline paint
+        SKPaint? outlinePaint = null;
+        float baseOutlineWidth = 0;
+        if (vectorStyle.Outline.IsVisible())
+        {
+            baseOutlineWidth = (float)vectorStyle.Outline!.Width;
+            outlinePaint = CreateStrokePaint(vectorStyle.Outline, null, opacity);
+        }
+
+        return new VectorStyleDrawable(
+            centroidX, centroidY, worldPath,
+            fillPaint: fillPaint,
+            fillStyle: fillStyle,
+            outlinePaint: outlinePaint,
+            baseOutlineWidth: baseOutlineWidth,
+            outlinePenStyle: vectorStyle.Outline?.PenStyle ?? PenStyle.Solid,
+            outlineDashArray: vectorStyle.Outline?.DashArray,
+            outlineDashOffset: vectorStyle.Outline?.DashOffset ?? 0,
+            linePaint: null,
+            baseLineWidth: 0,
+            linePenStyle: PenStyle.Solid,
+            lineDashArray: null,
+            lineDashOffset: 0);
+    }
+
+    private static VectorStyleDrawable CreateLineStringDrawable(LineString lineString,
+        VectorStyle vectorStyle, float opacity)
+    {
+        // Centroid for IDrawable.WorldX/WorldY and as reference point for relative coordinates
+        var envelope = lineString.EnvelopeInternal;
+        var centroidX = (envelope.MinX + envelope.MaxX) / 2.0;
+        var centroidY = (envelope.MinY + envelope.MaxY) / 2.0;
+
+        // Path uses relative coordinates (centered at centroid) to avoid float precision loss.
+        // Large world coordinates (e.g., EPSG:3857 values in millions) lose precision when cast to float.
+        // By subtracting the centroid, coordinates stay small (~meters) and preserve precision.
+        var worldPath = lineString.ToWorldPath(centroidX, centroidY);
+
+        // Pre-create outline paint (if both line and outline are visible)
+        SKPaint? outlinePaint = null;
+        float baseOutlineWidth = 0;
+        if (vectorStyle.Line.IsVisible() && vectorStyle.Outline?.Width > 0)
+        {
+            baseOutlineWidth = (float)(vectorStyle.Outline.Width + vectorStyle.Outline.Width + (vectorStyle.Line?.Width ?? 1));
+            outlinePaint = CreateStrokePaint(vectorStyle.Outline, baseOutlineWidth, opacity);
+        }
+
+        // Pre-create line paint
+        SKPaint? linePaint = null;
+        float baseLineWidth = 0;
+        if (vectorStyle.Line.IsVisible())
+        {
+            baseLineWidth = (float)(vectorStyle.Line?.Width ?? 1);
+            linePaint = CreateStrokePaint(vectorStyle.Line!, null, opacity);
+        }
+
+        return new VectorStyleDrawable(
+            centroidX, centroidY, worldPath,
+            fillPaint: null,
+            fillStyle: FillStyle.Solid,
+            outlinePaint: outlinePaint,
+            baseOutlineWidth: baseOutlineWidth,
+            outlinePenStyle: vectorStyle.Outline?.PenStyle ?? PenStyle.Solid,
+            outlineDashArray: vectorStyle.Outline?.DashArray,
+            outlineDashOffset: vectorStyle.Outline?.DashOffset ?? 0,
+            linePaint: linePaint,
+            baseLineWidth: baseLineWidth,
+            linePenStyle: vectorStyle.Line?.PenStyle ?? PenStyle.Solid,
+            lineDashArray: vectorStyle.Line?.DashArray,
+            lineDashOffset: vectorStyle.Line?.DashOffset ?? 0);
+    }
+
+    private static void DrawVectorDrawable(SKCanvas canvas, Viewport viewport, VectorStyleDrawable drawable)
+    {
+        // Build world-to-screen transformation matrix with the drawable's reference point.
+        // The path uses relative coordinates centered at (drawable.WorldX, drawable.WorldY).
+        // We incorporate this offset into the matrix calculation in double precision to avoid
+        // float precision loss that would cause features to disappear at certain viewport positions.
+        var matrix = CreateWorldToScreenMatrix(viewport, drawable.WorldX, drawable.WorldY);
+
+        // Concat the matrix onto the canvas so the GPU applies the transform directly.
+        // Using Concat (not SetMatrix) preserves any existing canvas transformation (pixel density, layout offset, etc.).
+        //
+        // The canvas matrix scales geometry by 1/resolution. Stroke widths would be
+        // scaled down by the matrix, so we compensate by multiplying with resolution.
+        var res = (float)viewport.Resolution;
+
+        using (new SKAutoCanvasRestore(canvas))
+        {
+            canvas.Concat(matrix);
+
+            // Draw fill (polygon only) — must come first, outline goes on top
+            if (drawable.FillPaint is not null)
+            {
+                DrawFillPath(canvas, drawable.WorldPath, drawable.FillPaint, drawable.FillStyle);
+            }
+
+            // Draw outline (polygon outline or linestring outline — for linestring, drawn under line)
+            if (drawable.OutlinePaint is not null)
+            {
+                drawable.OutlinePaint.StrokeWidth = drawable.BaseOutlineWidth * res;
+                UpdatePathEffect(drawable.OutlinePaint, drawable.OutlinePenStyle,
+                    drawable.BaseOutlineWidth * res, drawable.OutlineDashArray, drawable.OutlineDashOffset);
+                canvas.DrawPath(drawable.WorldPath, drawable.OutlinePaint);
+            }
+
+            // Draw line (linestring only — drawn on top of outline)
+            if (drawable.LinePaint is not null)
+            {
+                drawable.LinePaint.StrokeWidth = drawable.BaseLineWidth * res;
+                UpdatePathEffect(drawable.LinePaint, drawable.LinePenStyle,
+                    drawable.BaseLineWidth * res, drawable.LineDashArray, drawable.LineDashOffset);
+                canvas.DrawPath(drawable.WorldPath, drawable.LinePaint);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Recreates the dash PathEffect on a paint using the resolution-scaled width.
+    /// The path is in world coordinates so dash intervals must be in world units;
+    /// multiplying the base width by resolution keeps dashes at a consistent
+    /// screen-pixel size regardless of zoom level.
+    /// </summary>
+    private static void UpdatePathEffect(SKPaint paint, PenStyle penStyle, float scaledWidth,
+        float[]? dashArray, float dashOffset)
+    {
+#pragma warning disable IDISP007 // Don't dispose injected - we replace the old PathEffect with a new one each frame
+        paint.PathEffect?.Dispose();
+#pragma warning restore IDISP007
+        paint.PathEffect = penStyle != PenStyle.Solid
+            ? penStyle.ToSkia(scaledWidth, dashArray, dashOffset)
+            : null;
+    }
+
+    /// <summary>
+    /// Draws a filled path, handling both solid fills and patterned fills (Cross, Dotted, etc.).
+    /// For non-solid fills, clips the canvas to the path and draws a larger rect with the pattern paint.
+    /// </summary>
+    private static void DrawFillPath(SKCanvas canvas, SKPath path, SKPaint fillPaint, FillStyle fillStyle)
+    {
+        if (fillStyle == FillStyle.Solid)
+        {
+            canvas.DrawPath(path, fillPaint);
+        }
+        else
+        {
+            // For non-solid fills, clip to the path and draw a larger rect so the pattern fills completely.
+            using (new SKAutoCanvasRestore(canvas))
+            {
+                canvas.ClipPath(path);
+                var bounds = path.Bounds;
+                // Inflate in world units (the canvas matrix will scale to screen)
+                var inflate = bounds.Width * 0.3f;
+                bounds.Inflate(inflate, inflate);
+                canvas.DrawRect(bounds, fillPaint);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Creates an SKPaint for stroke rendering from a Mapsui Pen.
+    /// Pre-created at drawable creation time; stroke width and dash PathEffect are scaled
+    /// by resolution at draw time since the path is in world coordinates.
+    /// </summary>
+    private static SKPaint CreateStrokePaint(Pen pen, float? widthOverride, float opacity)
+    {
+        var baseWidth = widthOverride ?? (float)pen.Width;
+        return new SKPaint
+        {
+            IsAntialias = true,
+            IsStroke = true,
+            StrokeWidth = baseWidth,
+            Color = pen.Color.ToSkia(opacity),
+            StrokeCap = pen.PenStrokeCap.ToSkia(),
+            StrokeJoin = pen.StrokeJoin.ToSkia(),
+            StrokeMiter = pen.StrokeMiterLimit,
+            // PathEffect is set at draw time with resolution-scaled width so dash intervals
+            // stay at a consistent screen-pixel size regardless of zoom level.
+        };
+    }
+
+    /// <summary>
+    /// Creates an SKPaint for fill rendering from a Mapsui Brush.
+    /// Handles solid fills, pattern fills (Cross, Dotted, etc.), and bitmap fills.
+    /// Pre-created at drawable creation time to avoid allocations during rendering.
+    /// </summary>
+    private static SKPaint CreateFillPaint(Brush brush, float opacity, double viewportRotation, SKImage? bitmapImage)
+    {
+        var fillColor = brush.Color ?? new Color(128, 128, 128); // default gray
+        var paint = new SKPaint { IsAntialias = true };
+
+        if (brush.FillStyle == FillStyle.Solid)
+        {
+            paint.StrokeWidth = 0;
+            paint.Style = SKPaintStyle.Fill;
+            paint.Color = fillColor.ToSkia(opacity);
+        }
+        else if (brush.FillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated)
+        {
+            paint.Style = SKPaintStyle.Fill;
+            if (bitmapImage != null)
+            {
+                if (brush.FillStyle == FillStyle.BitmapRotated)
+                {
+                    paint.Shader = bitmapImage.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat,
+                        SKMatrix.CreateRotation((float)(viewportRotation * Math.PI / 180.0f),
+                            bitmapImage.Width >> 1, bitmapImage.Height >> 1));
+                }
+                else
+                {
+                    paint.Shader = bitmapImage.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
+                }
+            }
+        }
+        else
+        {
+            // Pattern fills (Cross, Dotted, etc.)
+            const float scale = 10.0f;
+            paint.StrokeWidth = 1;
+            paint.Style = SKPaintStyle.Stroke;
+            paint.Color = fillColor.ToSkia(opacity);
+            using var fillPath = new SKPath();
+            var matrix = SKMatrix.CreateScale(scale, scale);
+
+            switch (brush.FillStyle)
+            {
+                case FillStyle.Cross:
+                    fillPath.MoveTo(scale * 0.8f, scale * 0.8f);
+                    fillPath.LineTo(0, 0);
+                    fillPath.MoveTo(0, scale * 0.8f);
+                    fillPath.LineTo(scale * 0.8f, 0);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.DiagonalCross:
+                    fillPath.MoveTo(scale, scale);
+                    fillPath.LineTo(0, 0);
+                    fillPath.MoveTo(0, scale);
+                    fillPath.LineTo(scale, 0);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.BackwardDiagonal:
+                    fillPath.MoveTo(0, scale);
+                    fillPath.LineTo(scale, 0);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.ForwardDiagonal:
+                    fillPath.MoveTo(scale, scale);
+                    fillPath.LineTo(0, 0);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.Dotted:
+                    paint.Style = SKPaintStyle.StrokeAndFill;
+                    fillPath.AddCircle(scale * 0.5f, scale * 0.5f, scale * 0.35f);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.Horizontal:
+                    fillPath.MoveTo(0, scale * 0.5f);
+                    fillPath.LineTo(scale, scale * 0.5f);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+                case FillStyle.Vertical:
+                    fillPath.MoveTo(scale * 0.5f, 0);
+                    fillPath.LineTo(scale * 0.5f, scale);
+                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    break;
+            }
+        }
+
+        return paint;
+    }
+
+    /// <summary>
+    /// Creates an SKMatrix that transforms world coordinates to screen coordinates.
+    /// The matrix handles: translation to center, scaling by 1/resolution, Y-axis flip,
+    /// and optional viewport rotation around the screen center.
+    /// </summary>
+    internal static SKMatrix CreateWorldToScreenMatrix(Viewport viewport)
+    {
+        var res = (float)viewport.Resolution;
+        var centerX = (float)viewport.CenterX;
+        var centerY = (float)viewport.CenterY;
+        var screenCenterX = (float)(viewport.Width / 2.0);
+        var screenCenterY = (float)(viewport.Height / 2.0);
+
+        // The unrotated world-to-screen transform:
+        //   screenX = (worldX - centerX) / resolution + screenCenterX
+        //   screenY = (centerY - worldY) / resolution + screenCenterY
+        var matrix = new SKMatrix(
+            scaleX: 1f / res,
+            skewX: 0,
+            transX: -centerX / res + screenCenterX,
+            skewY: 0,
+            scaleY: -1f / res,
+            transY: centerY / res + screenCenterY,
+            persp0: 0,
+            persp1: 0,
+            persp2: 1
+        );
+
+        if (viewport.Rotation != 0)
+        {
+            // Rotate around the screen center, matching ViewportExtensions.WorldToScreenXY behavior.
+            // Skia's CreateRotationDegrees with positive angle in screen coords (Y-down)
+            // matches the clockwise rotation by -viewport.Rotation used in WorldToScreenXY.
+            var rotateAroundCenter = SKMatrix.CreateRotationDegrees((float)viewport.Rotation, screenCenterX, screenCenterY);
+            matrix = SKMatrix.Concat(rotateAroundCenter, matrix);
+        }
+
+        return matrix;
+    }
+
+    /// <summary>
+    /// Creates an SKMatrix for relative coordinates centered at (referenceX, referenceY).
+    /// Computes translation in double precision to avoid float precision loss with large world coordinates.
+    /// </summary>
+    internal static SKMatrix CreateWorldToScreenMatrix(Viewport viewport, double referenceX, double referenceY)
+    {
+        var res = viewport.Resolution;
+        var screenCenterX = viewport.Width / 2.0;
+        var screenCenterY = viewport.Height / 2.0;
+
+        // Path coordinates are relative to (referenceX, referenceY).
+        // Transform: screen = ((relative + reference) - center) / resolution + screenCenter
+        //          = (relative + (reference - center) / resolution) + screenCenter
+        // 
+        // Compute offset in double precision, then cast to float for matrix.
+        var offsetX = (float)((referenceX - viewport.CenterX) / res);
+        var offsetY = (float)((referenceY - viewport.CenterY) / res);
+
+        var matrix = new SKMatrix(
+            scaleX: (float)(1.0 / res),
+            skewX: 0,
+            transX: offsetX + (float)screenCenterX,
+            skewY: 0,
+            scaleY: (float)(-1.0 / res),
+            transY: -offsetY + (float)screenCenterY,
+            persp0: 0,
+            persp1: 0,
+            persp2: 1
+        );
+
+        if (viewport.Rotation != 0)
+        {
+            var rotateAroundCenter = SKMatrix.CreateRotationDegrees((float)viewport.Rotation, (float)screenCenterX, (float)screenCenterY);
+            matrix = SKMatrix.Concat(rotateAroundCenter, matrix);
+        }
+
+        return matrix;
+    }
+}

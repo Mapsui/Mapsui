@@ -1,5 +1,5 @@
-﻿using NetTopologySuite.Geometries;
-using Mapsui.Experimental.Rendering.Skia.Functions;
+﻿using Mapsui.Extensions;
+using NetTopologySuite.Geometries;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -8,22 +8,19 @@ namespace Mapsui.Experimental.Rendering.Skia.Extensions;
 public static class PointExtensions
 {
     /// <summary>
-    /// Converts a LineString in world coordinates to a Skia path
+    /// Converts a Point in world coordinates to a Skia path
     /// </summary>
-    /// <param name="point">List of points in Mapsui world coordinates.</param>
+    /// <param name="point">Point in Mapsui world coordinates.</param>
     /// <param name="viewport">The Viewport that is used for the conversions.</param>
-    /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
-    /// <param name="strokeWidth">stroke Width</param>
     /// <returns></returns>
-    public static SKPath ToSkiaPath(this Point point, Viewport viewport, SKRect clipRect, float strokeWidth)
+    public static SKPath ToSkiaPath(this Point point, Viewport viewport)
     {
         var width = (float)SymbolStyle.DefaultWidth;
         var halfWidth = width / 2;
-        var points = ClippingFunctions.ReducePointsToClipRect(new[] { point.Coordinate }, viewport, SKRect.Inflate(clipRect, width + strokeWidth, width + strokeWidth));
-        var transformed = points[0];
+        var (screenX, screenY) = viewport.WorldToScreenXY(point.X, point.Y);
 
         var skPath = new SKPath();
-        skPath.AddCircle(transformed.X, transformed.Y, halfWidth);
+        skPath.AddCircle((float)screenX, (float)screenY, halfWidth);
 
         return skPath;
     }

@@ -1,10 +1,10 @@
 using Mapsui.Styles;
-using VexVectorStyle = VexTile.Renderer.Mvt.AliFlux.VectorStyle;
+using VexVectorStyle = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorStyle;
 
 namespace Mapsui.Experimental.VectorTiles.Tiling;
 
 /// <summary>
-/// Style for VexTile features. This style triggers the VexTileStyleRenderer.
+/// Style for VexTile features. This style triggers the TwoStepVexTileStyleRenderer.
 /// </summary>
 public class VexTileStyle : BaseStyle
 {

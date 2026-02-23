@@ -204,6 +204,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         try
         {
+            if (sender is ILayer layer)
+            {
+                _renderController?.UpdateDrawables(Map.Navigator.Viewport, layer, Map.RenderService);
+            }
+
             if (e == null)
             {
                 Logger.Log(LogLevel.Warning, "Unexpected error: DataChangedEventArgs can not be null");
@@ -336,6 +341,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return; // Although the Map property can not null the map argument can null during initializing and binding.
         TryUpdateViewportSize();
         SubscribeToMapEvents(map);
+        _renderController?.SetupDrawableFactory(map.RenderService);
         Refresh();
     }
 

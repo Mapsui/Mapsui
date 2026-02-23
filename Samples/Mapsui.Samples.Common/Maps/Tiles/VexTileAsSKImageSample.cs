@@ -7,32 +7,32 @@ using System.IO;
 using System.Threading.Tasks;
 using VexTile.Common.Enums;
 using VexTile.Data.Sources;
-using VexTile.Renderer.Mvt.AliFlux;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using TileLayer = Mapsui.Experimental.VectorTiles.Tiling.TileLayer;
 
 namespace Mapsui.Samples.Common.Maps.Tiles;
 
 /// <summary>
 /// Sample demonstrating the VexTileSource which fetches vector tile data
-/// and renders it using VexTileStyleRenderer with caching.
+/// and renders it using TwoStepVexTileStyleRenderer with caching.
 /// </summary>
-public sealed class VexTileSample : ISample, IDisposable
+public sealed class VexTileAsSKImageSample : ISample, IDisposable
 {
     private SqliteDataSource? _sqliteDataSource;
 
-    static VexTileSample()
+    static VexTileAsSKImageSample()
     {
         MbTilesDeployer.CopyEmbeddedResourceToFile("zurich.mbtiles");
         SQLitePCL.Batteries.Init();
     }
 
-    public VexTileSample()
+    public VexTileAsSKImageSample()
     {
         _sqliteDataSource = CreateSqliteDataSource();
     }
 
-    public string Name => "VexTiles";
-    public string Category => "Experimental";
+    public string Name => "VexTileAsSKImage";
+    public string Category => "ExperimentalVectorTiles";
 
     public Task<Map> CreateMapAsync()
     {
