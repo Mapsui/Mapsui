@@ -3,6 +3,7 @@ using Mapsui.Rendering.Caching;
 using Mapsui.Styles;
 using System;
 using System.Collections.Concurrent;
+using System.Threading;
 
 namespace Mapsui.Rendering;
 
@@ -19,10 +20,19 @@ public sealed class RenderService : IDisposable
     }
 
     /// <summary>
-    /// The current render iteration. Incremented by the map renderer after each render pass.
-    /// Used by drawable caches to track which entries are still in use and which can be evicted.
+    /// The current render iteration. Incremented atomically by the map renderer after each
+    /// render pass. Read by background threads during UpdateDrawables to stamp cache entries.
+    /// Uses Interlocked for thread-safe access.
     /// </summary>
-    public long CurrentIteration { get; set; }
+    private long _currentIteration;
+    public long CurrentIteration
+    {
+        get => Interlocked.Read(ref _currentIteration);
+        set => Interlocked.Exchange(ref _currentIteration, value);
+    }
+
+    /// <summary>Atomically increments CurrentIteration and returns the new value.</summary>
+    public long IncrementIteration() => Interlocked.Increment(ref _currentIteration);
 
     /// <summary>
     /// Factory delegate for creating drawables from features and styles.

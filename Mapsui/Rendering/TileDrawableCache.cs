@@ -51,7 +51,6 @@ public sealed class TileDrawableCache : IDrawableCache
     /// </remarks>
     public void Cleanup(long currentIteration)
     {
-        var activeCount = _cache.Values.Count(e => e.Iteration == currentIteration);
         var tilesToRemove = _cache.Count - _minimumTilesToKeep;
         if (tilesToRemove > 0)
         {
