@@ -8,10 +8,6 @@ namespace Mapsui.Experimental.VectorTiles.VexTileCopies;
 
 internal static class KnownColors
 {
-    private const int SZeroChar = 48;
-    private const int SALower = 97;
-    private const int SAUpper = 65;
-    private const string SContextColor = "ContextColor ";
     internal const string SContextColorNoSpace = "ContextColor";
 
     private static readonly Dictionary<string, SKColor> s_knownArgbColors;
@@ -44,8 +40,6 @@ internal static class KnownColors
         if (text.StartsWith("sc#", StringComparison.Ordinal))
         {
             isScRgbColor = true;
-            isKnownColor = false;
-            isContextColor = false;
         }
         else
         {
@@ -117,11 +111,11 @@ internal static class KnownColors
             num4 = ParseHexChar(trimmedColor[3]);
             num4 += num4 * 16;
         }
-        return SKColorFactory.MakeColor((byte)num2, (byte)num3, (byte)num4, (byte)num, "ParseHexColor");
+        return SKColorFactory.MakeColor((byte)num2, (byte)num3, (byte)num4, (byte)num);
     }
 
     private static SKColor ColorStringToKnownColor(string colorString) =>
-        SKColorFactory.LogColor(InternalColorStringToKnownColor(colorString), "ColorStringToKnownColor");
+        SKColorFactory.LogColor(InternalColorStringToKnownColor(colorString));
 
     private static SKColor InternalColorStringToKnownColor(string colorString)
     {

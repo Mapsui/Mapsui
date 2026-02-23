@@ -32,7 +32,7 @@ public static class VexTileRenderer
             t_brushPool.RemoveAt(count - 1);
             return b;
         }
-        return new Brush { Paint = new Paint() };
+        return new Brush();
     }
 
     private static void ReturnBrushes(List<VisualLayer> layers)

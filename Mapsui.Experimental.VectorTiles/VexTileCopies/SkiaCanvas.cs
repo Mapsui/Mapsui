@@ -98,7 +98,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     public void DrawBackground(SKColor color)
     {
         BackgroundColor = color;
-        _surface.Canvas.Clear(SKColorFactory.MakeColor(color.Red, color.Green, color.Blue, color.Alpha, "DrawBackground"));
+        _surface.Canvas.Clear(SKColorFactory.MakeColor(color.Red, color.Green, color.Blue, color.Alpha));
     }
 
     public void DrawLineString(List<Point> geometry, Brush style)
@@ -116,7 +116,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
         SKColor lineColor = style.Paint.LineColor;
         var color = SKColorFactory.MakeColor(lineColor.Red, lineColor.Green, lineColor.Blue,
-            (byte)Clamp(lineColor.Alpha * style.Paint.LineOpacity, 0.0, 255.0), "DrawLineString");
+            (byte)Clamp(lineColor.Alpha * style.Paint.LineOpacity, 0.0, 255.0));
 
         _path.Reset();
         BuildPath(_path, geometry);
@@ -179,7 +179,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
         SKColor color = (!background.HasValue || !IsClockwise(geometry))
             ? SKColorFactory.MakeColor(style.Paint.FillColor.Red, style.Paint.FillColor.Green, style.Paint.FillColor.Blue,
-                (byte)Clamp(style.Paint.FillColor.Alpha * style.Paint.FillOpacity, 0.0, 255.0), "DrawPolygon")
+                (byte)Clamp(style.Paint.FillColor.Alpha * style.Paint.FillOpacity, 0.0, 255.0))
             : background.Value;
 
         _fillPaint.Reset();
@@ -411,7 +411,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         SKColor textColor = style.Paint.TextColor;
         paint.Reset();
         paint.Color = SKColorFactory.MakeColor(textColor.Red, textColor.Green, textColor.Blue,
-            (byte)Clamp(textColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextPaint");
+            (byte)Clamp(textColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0));
         paint.IsAntialias = true;
     }
 
@@ -422,7 +422,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         paint.IsStroke = true;
         paint.StrokeWidth = (float)style.Paint.TextStrokeWidth;
         paint.Color = SKColorFactory.MakeColor(textStrokeColor.Red, textStrokeColor.Green, textStrokeColor.Blue,
-            (byte)Clamp(textStrokeColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0), "GetTextStrokePaint");
+            (byte)Clamp(textStrokeColor.Alpha * style.Paint.TextOpacity, 0.0, 255.0));
         paint.IsAntialias = true;
     }
 

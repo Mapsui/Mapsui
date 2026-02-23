@@ -37,11 +37,11 @@ public class PbfTileSource(byte[] bytes) : IPbfTileSource
             {
                 await zipStream.CopyToAsync(resultStream);
                 resultStream.Seek(0, SeekOrigin.Begin);
-                return PbfTileSource.LoadData(ReadTillEnd(resultStream));
+                return LoadData(ReadTillEnd(resultStream));
             }
         }
 
-        return PbfTileSource.LoadData(data);
+        return LoadData(data);
     }
 
     private static VectorTile LoadData(byte[] stream)
@@ -98,11 +98,6 @@ public class PbfTileSource(byte[] bytes) : IPbfTileSource
                         double dY = coordinate.Y / (double)lyr.Extent;
 
                         vectorPoints.Add(new Point(dX, dY));
-
-                        //var newX = Utils.ConvertRange(dX, extent.Left, extent.Right, 0, vectorFeature.Extent);
-                        //var newY = Utils.ConvertRange(dY, extent.Top, extent.Bottom, 0, vectorFeature.Extent);
-
-                        //vectorPoints.Add(new Point(newX, newY));
                     }
 
                     vectorGeometry.Add(vectorPoints);
@@ -134,7 +129,7 @@ public class PbfTileSource(byte[] bytes) : IPbfTileSource
 
     private bool IsGZipped(byte[] data) { return IsZipped(data, 3, "1F-8B-08"); }
 
-    private bool IsZipped(byte[] data, int signatureSize = 4, string expectedSignature = "50-4B-03-04")
+    private static bool IsZipped(byte[] data, int signatureSize = 4, string expectedSignature = "50-4B-03-04")
     {
         if (data.Length < signatureSize) return false;
         byte[] signature = new byte[signatureSize];

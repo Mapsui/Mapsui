@@ -140,7 +140,7 @@ public class VectorStyle : IVectorStyle
     /// </summary>
     private sealed class SkiaLayerStyle
     {
-        public Paint Paint { get; } = new();
+        public Paint Paint { get; set; } = new();
         /// <summary>Resolved text-field template (before per-feature substitution), null if none.</summary>
         public string? TextField;
     }
@@ -151,7 +151,6 @@ public class VectorStyle : IVectorStyle
     /// Default Paint with constructor defaults. Used as the starting state for
     /// cache-miss resolution. Treat as immutable.
     /// </summary>
-    private static readonly Paint DefaultPaint = CreateDefaultPaint();
 
     private static Paint CreateDefaultPaint() => new Paint
     {
@@ -169,51 +168,14 @@ public class VectorStyle : IVectorStyle
         Visibility = true
     };
 
-    /// <summary>Copies every property from one Paint to another.</summary>
-    private static void CopyPaint(Paint source, Paint target)
-    {
-        target.BackgroundColor = source.BackgroundColor;
-        target.BackgroundPattern = source.BackgroundPattern;
-        target.BackgroundOpacity = source.BackgroundOpacity;
-        target.FillColor = source.FillColor;
-        target.FillPattern = source.FillPattern;
-        target.FillTranslate = source.FillTranslate;
-        target.FillOpacity = source.FillOpacity;
-        target.LineColor = source.LineColor;
-        target.LinePattern = source.LinePattern;
-        target.LineTranslate = source.LineTranslate;
-        target.LineCap = source.LineCap;
-        target.LineWidth = source.LineWidth;
-        target.LineOffset = source.LineOffset;
-        target.LineBlur = source.LineBlur;
-        target.LineDashArray = source.LineDashArray;
-        target.LineOpacity = source.LineOpacity;
-        target.SymbolPlacement = source.SymbolPlacement;
-        target.IconScale = source.IconScale;
-        target.IconImage = source.IconImage;
-        target.IconRotate = source.IconRotate;
-        target.IconOffset = source.IconOffset;
-        target.IconOpacity = source.IconOpacity;
-        target.TextColor = source.TextColor;
-        target.TextFont = source.TextFont;
-        target.TextSize = source.TextSize;
-        target.TextMaxWidth = source.TextMaxWidth;
-        target.TextJustify = source.TextJustify;
-        target.TextRotate = source.TextRotate;
-        target.TextOffset = source.TextOffset;
-        target.TextStrokeColor = source.TextStrokeColor;
-        target.TextStrokeWidth = source.TextStrokeWidth;
-        target.TextStrokeBlur = source.TextStrokeBlur;
-        target.TextOptional = source.TextOptional;
-        target.TextTransform = source.TextTransform;
-        target.TextOpacity = source.TextOpacity;
-        target.Visibility = source.Visibility;
-    }
+
 
     /// <summary>Applies a cached SkiaLayerStyle to a Brush, with per-feature text substitution.</summary>
     private static void ApplySkiaLayerStyle(SkiaLayerStyle style, Brush brush, Dictionary<string, object> attributes)
     {
-        CopyPaint(style.Paint, brush.Paint);
+        // Share the cached Paint reference — no per-feature copy needed.
+        // The cached Paint is never mutated after construction (SkiaCanvas reads only).
+        brush.Paint = style.Paint;
 
         if (style.TextField != null)
         {
@@ -228,7 +190,7 @@ public class VectorStyle : IVectorStyle
 
     public Brush ParseStyle(Layer layer, double scale, Dictionary<string, object> attributes)
     {
-        var brush = new Brush { Paint = new Paint() };
+        var brush = new Brush();
         ParseStyleInto(brush, layer, scale, attributes);
         return brush;
     }
@@ -254,10 +216,10 @@ public class VectorStyle : IVectorStyle
             return;
         }
 
-        // Cache miss — resolve into the entry's Paint, then copy to brush
+        // Cache miss — resolve style into a fresh Paint that will be shared by all features
         var entry = new SkiaLayerStyle();
-        var paint2 = entry.Paint;
-        CopyPaint(DefaultPaint, paint2);
+        var paint2 = CreateDefaultPaint();
+        entry.Paint = paint2;
 
         var paint = layer.Paint;
         var layout = layer.Layout;
@@ -409,7 +371,7 @@ public class VectorStyle : IVectorStyle
         var green = 255.0 * num3 > 255.0 ? byte.MaxValue : (byte)(255.0 * num3);
         var blue = 255.0 * num4 > 255.0 ? byte.MaxValue : (byte)(255.0 * num4);
         var alpha = (byte)ta;
-        return SKColorFactory.MakeColor(red, green, blue, alpha, "HslaToColor");
+        return SKColorFactory.MakeColor(red, green, blue, alpha);
     }
 
     private static double GetColorComponent(double temp1, double temp2, double temp3)
@@ -437,12 +399,12 @@ public class VectorStyle : IVectorStyle
     {
         var provider = new CultureInfo("en-US", useUserOverride: true);
         if (iColor is Color color)
-            return SKColorFactory.MakeColor(color.R, color.G, color.B, color.A, "ParseColor");
+            return SKColorFactory.MakeColor(color.R, color.G, color.B, color.A);
         if (iColor is SKColor color2)
-            return SKColorFactory.LogColor(color2, "ParseColor");
+            return SKColorFactory.LogColor(color2);
         var text = (string)iColor;
         if (text[0] == '#')
-            return SKColorFactory.LogColor(SKColor.Parse(text), "ParseColor");
+            return SKColorFactory.LogColor(SKColor.Parse(text));
         if (text.StartsWith("hsl("))
         {
             var array = text.Replace('%', '\0').Split(new char[] { ',', '(', ')' });
@@ -467,7 +429,7 @@ public class VectorStyle : IVectorStyle
             var num2 = double.Parse(array3[2], provider);
             var num3 = double.Parse(array3[3], provider);
             var num4 = double.Parse(array3[4], provider) * 255.0;
-            return SKColorFactory.MakeColor((byte)num, (byte)num2, (byte)num3, (byte)num4, "ParseColor");
+            return SKColorFactory.MakeColor((byte)num, (byte)num2, (byte)num3, (byte)num4);
         }
         if (text.StartsWith("rgb("))
         {
@@ -475,11 +437,11 @@ public class VectorStyle : IVectorStyle
             var num5 = double.Parse(array4[1], provider);
             var num6 = double.Parse(array4[2], provider);
             var num7 = double.Parse(array4[3], provider);
-            return SKColorFactory.MakeColor((byte)num5, (byte)num6, (byte)num7, byte.MaxValue, "ParseColor");
+            return SKColorFactory.MakeColor((byte)num5, (byte)num6, (byte)num7, byte.MaxValue);
         }
         try
         {
-            return SKColorFactory.LogColor(ConvertFromString(text), "ParseColor");
+            return SKColorFactory.LogColor(ConvertFromString(text));
         }
         catch (Exception value)
         {
@@ -527,9 +489,6 @@ public class VectorStyle : IVectorStyle
 
     private bool ValidateUsingFilter(object[] filterArray, Dictionary<string, object> attributes)
     {
-        if (filterArray.Length == 0)
-            Console.WriteLine("nothing");
-
         var text = filterArray[0] as string;
         switch (text)
         {
@@ -633,8 +592,6 @@ public class VectorStyle : IVectorStyle
             default:
                 return false;
         }
-
-        return false;
     }
 
     private object GetValue(object token, Dictionary<string, object> attributes = null)
