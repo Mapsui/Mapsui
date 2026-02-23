@@ -27,7 +27,7 @@ public sealed class VexTileAsPngSample : ISample, IDisposable
     }
 
     public string Name => "VexTileAsPng";
-    public string Category => "BetaVectorTiles";
+    public string Category => "ExperimentalVectorTiles";
 
     public Task<Map> CreateMapAsync()
     {

@@ -1,4 +1,3 @@
-using BruTile.Predefined;
 using Mapsui.Experimental.VectorTiles;
 using Mapsui.Experimental.VectorTiles.Tiling;
 using Mapsui.Samples.Common.Utilities;
@@ -8,7 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 using VexTile.Common.Enums;
 using VexTile.Data.Sources;
-using VexTile.Renderer.Mvt.AliFlux;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using TileLayer = Mapsui.Experimental.VectorTiles.Tiling.TileLayer;
 
 namespace Mapsui.Samples.Common.Maps.Tiles;
@@ -33,7 +32,7 @@ public sealed class VexTileAsSKImageSample : ISample, IDisposable
     }
 
     public string Name => "VexTileAsSKImage";
-    public string Category => "BetaVectorTiles";
+    public string Category => "ExperimentalVectorTiles";
 
     public Task<Map> CreateMapAsync()
     {
@@ -53,7 +52,7 @@ public sealed class VexTileAsSKImageSample : ISample, IDisposable
         var vectorStyle = new VectorStyle(VectorStyleKind.Default);
 
         // Create the tile source (fetches vector tile data)
-        var tileSource = new VexTileSource(sqliteDataSource, new GlobalSphericalMercator(0, 14));
+        var tileSource = new VexTileSource(sqliteDataSource);
 
         return new TileLayer(tileSource)
         {
