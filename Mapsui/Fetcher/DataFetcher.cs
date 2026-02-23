@@ -5,43 +5,61 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher;
 
-public sealed class DataFetcher
+public sealed class DataFetcher : IDisposable
 {
     private readonly int _maxConcurrentFetches = 8;
     private readonly ConcurrentDictionary<long, FetchJob> _activeFetches = new();
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
     private readonly Func<IEnumerable<IFetchableSource>> _getFetchableSources;
-
     private readonly Channel<bool> _channel = Channel.CreateBounded<bool>(new BoundedChannelOptions(1) { AllowSynchronousContinuations = false, SingleReader = false });
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
+    private readonly Task _consumerTask;
+    private bool _disposed;
 
     public DataFetcher(Func<IEnumerable<IFetchableSource>> getFetchableSources) // The constructor accepts a function so that it works for changes to the layer list.
     {
         _getFetchableSources = getFetchableSources;
-        _ = Task.Run(() => AddConsumerAsync(_channel).ConfigureAwait(false));
+        _consumerTask = Task.Run(() => AddConsumerAsync(_channel, _cancellationTokenSource.Token));
     }
 
     public void ViewportChanged(FetchInfo fetchInfo)
     {
+        if (_disposed)
+            return;
+
         _latestFetchInfo.Overwrite(fetchInfo);
         UpdateViewports(fetchInfo);
         _ = _channel.Writer.TryWrite(true);
     }
 
-    private async Task AddConsumerAsync(Channel<bool> channel)
+    private async Task AddConsumerAsync(Channel<bool> channel, CancellationToken cancellationToken)
     {
-        await foreach (var _ in channel.Reader.ReadAllAsync().ConfigureAwait(false))
+        try
         {
-            UpdateFetches();
+            await foreach (var _ in channel.Reader.ReadAllAsync(cancellationToken).ConfigureAwait(false))
+            {
+                UpdateFetches();
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (ChannelClosedException)
+        {
         }
     }
 
     private void UpdateViewports(FetchInfo fetchInfo)
     {
+        if (_disposed)
+            return;
+
         if (fetchInfo.Section.CheckIfAreaIsTooBig())
         {
             Logger.Log(LogLevel.Error, $"The area of the section is too big in the DataFetcher.UpdateViewports method with parameters: Extent: {fetchInfo.Extent}, Resolution: {fetchInfo.Resolution}");
@@ -56,6 +74,9 @@ public sealed class DataFetcher
 
     private void UpdateFetches()
     {
+        if (_disposed)
+            return;
+
         foreach (var fetchableSource in _getFetchableSources())
         {
             try
@@ -93,5 +114,17 @@ public sealed class DataFetcher
                 Logger.Log(LogLevel.Error, $"Error updating fetches for fetchable source {fetchableSource.Id}: {ex.Message}", ex);
             }
         }
+    }
+
+    public void Dispose()
+    {
+        if (_disposed)
+            return;
+
+        _disposed = true;
+        _cancellationTokenSource.Cancel();
+        _channel.Writer.TryComplete();
+        _activeFetches.Clear();
+        _cancellationTokenSource.Dispose();
     }
 }
