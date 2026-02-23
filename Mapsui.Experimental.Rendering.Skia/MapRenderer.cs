@@ -321,6 +321,7 @@ public sealed class MapRenderer : IMapRenderer
             // 2. Features that entered the viewport due to panning/zooming but are
             //    already in the layer's memory cache, so no DataChanged fires
             //    (e.g. coarser tile levels when zooming out).
+            // Note: This is workaround. Eventually we should never create drawable on the render thread.
             foreach (var layer in layers)
             {
                 if (layer.Enabled)
@@ -333,7 +334,7 @@ public sealed class MapRenderer : IMapRenderer
                 (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, i),
                 (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService));
 
-            renderService.CurrentIteration++;
+            renderService.IncrementIteration();
         }
         catch (Exception exception)
         {
