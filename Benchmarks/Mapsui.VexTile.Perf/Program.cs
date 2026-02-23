@@ -43,11 +43,11 @@ internal class Program
     // Saved baseline numbers for comparison (from BASELINE.md)
     private static readonly Dictionary<int, (double AvgMs, double MedianMs, double AllocMb)> BaselineNumbers = new()
     {
-        { 10, (59.6, 57.6, 749.9) },
-        { 12, (61.1, 60.2, 662.4) },
-        { 14, (109.8, 106.6, 1600.4) },
-        { 16, (97.4, 96.9, 1587.0) },
-        { 20, (121.6, 122.5, 1839.9) },
+        { 10, (51.8, 48.2, 614.0) },
+        { 12, (48.7, 47.0, 526.9) },
+        { 14, (89.3, 92.7, 1388.5) },
+        { 16, (80.8, 78.5, 1371.2) },
+        { 20, (90.9, 94.8, 1484.5) },
     };
 
     static async Task Main(string[] args)

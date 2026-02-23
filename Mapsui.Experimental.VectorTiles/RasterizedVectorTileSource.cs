@@ -17,8 +17,7 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
     public RasterizedVectorTileSource(ITileDataSource tileDataSource, ITileSchema? schema = null)
     {
         _schema = schema ?? new GlobalSphericalMercator { YAxis = YAxis.OSM };
-        _tileSource = new VexTileCopies.VectorTilesSource(tileDataSource);
-        _style.SetSourceProvider("openmaptiles", _tileSource);
+        _tileSource = new VectorTilesSource(tileDataSource);
     }
 
     public ITileSchema Schema => _schema;

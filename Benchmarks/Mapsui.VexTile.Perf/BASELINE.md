@@ -6,15 +6,15 @@
 **Iterations:** 20  
 **Location:** Zurich (47.374444°N, 8.541111°E)  
 
-## Baseline Results (After Dict Reuse + LINQ Optimizations)
+## Baseline Results (After Interpolation Cache)
 
 | Zoom | Tile | Avg ms | Min ms | Max ms | Med ms | Alloc MB | Used MB | Features | Layers |
 |------|------|--------|--------|--------|--------|----------|---------|----------|--------|
-| Z10 | 536,665 | 59.6 | 55.7 | 73.6 | 57.6 | 749.9 | 8.3 | 6,254 | 11 |
-| Z12 | 2145,2661 | 61.1 | 53.4 | 77.3 | 60.2 | 662.4 | 9.0 | 5,255 | 11 |
-| Z14 | 8580,10646 | 109.8 | 92.9 | 155.0 | 106.6 | 1600.4 | 25.0 | 16,241 | 11 |
-| Z16 | 34322,42585 | 97.4 | 84.7 | 127.0 | 96.9 | 1587.0 | 18.4 | 16,241 | 11 (overzoom) |
-| Z20 | 549165,681369 | 121.6 | 104.1 | 137.5 | 122.5 | 1839.9 | 18.6 | 16,241 | 11 (overzoom) |
+| Z10 | 536,665 | 51.8 | 41.0 | 69.6 | 48.2 | 614.0 | 25.8 | 6,254 | 11 |
+| Z12 | 2145,2661 | 48.7 | 42.6 | 66.1 | 47.0 | 526.9 | 25.1 | 5,255 | 11 |
+| Z14 | 8580,10646 | 89.3 | 73.7 | 105.4 | 92.7 | 1388.5 | 15.9 | 16,241 | 11 |
+| Z16 | 34322,42585 | 80.8 | 63.9 | 121.5 | 78.5 | 1371.2 | 16.9 | 16,241 | 11 (overzoom) |
+| Z20 | 549165,681369 | 90.9 | 74.8 | 111.4 | 94.8 | 1484.5 | 21.1 | 16,241 | 11 (overzoom) |
 
 ## Prior Baseline (Original Implementation, 2026-02-17)
 
@@ -43,6 +43,8 @@
 - Conditional DrawTextOnPath clipping
 - Local VectorStyle copy (from AliFlux NuGet)
 - LINQ replacement in GetValue/InterpolateValues (pre-allocated arrays, value tuples)
+- Brush/Paint object pooling (reuse via ParseStyleInto + ResetPaint)
+- Interpolation cache per (layer, zoom, scale) — skip GetValue/interpolation for repeated layer+zoom combos
 
 ## Feature Distribution (Z14)
 
@@ -63,8 +65,8 @@
 ## Quick Reference (Avg render times)
 
 ```
-Z10: 77.7ms → 60.0ms (1.29x)
-Z12: 76.4ms → 60.1ms (1.27x)
-Z14: 106.4ms → 105.1ms (1.01x)
-Z16: 101.1ms → 100.1ms (1.01x)
-Z20: 129.7ms → 125.9ms (1.03x)
+Z10: 77.7ms → 51.8ms (1.50x)
+Z12: 76.4ms → 48.7ms (1.57x)
+Z14: 106.4ms → 89.3ms (1.19x)
+Z16: 101.1ms → 80.8ms (1.25x)
+Z20: 129.7ms → 90.9ms (1.43x)

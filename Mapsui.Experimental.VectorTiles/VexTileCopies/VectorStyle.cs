@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -8,7 +9,6 @@ using NLog;
 using Newtonsoft.Json.Linq;
 using SkiaSharp;
 using VexTile.Common.Enums;
-using VexTile.Common.Sources;
 using VexTile.Renderer.Mvt.AliFlux;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
@@ -17,13 +17,11 @@ namespace Mapsui.Experimental.VectorTiles.VexTileCopies;
 
 public class VectorStyle : IVectorStyle
 {
-    private readonly Logger log = LogManager.GetCurrentClassLogger();
+    private readonly Logger _log = LogManager.GetCurrentClassLogger();
 
     public string Hash { get; }
 
     public List<Layer> Layers { get; } = new List<Layer>();
-
-    public Dictionary<string, Source> Sources { get; } = new Dictionary<string, Source>();
 
     public Dictionary<string, object> Metadata { get; }
 
@@ -45,27 +43,19 @@ public class VectorStyle : IVectorStyle
         }
 
         var jObject = JObject.Parse(text);
-        if (jObject["metadata"] != null)
-            Metadata = jObject["metadata"].ToObject<Dictionary<string, object>>();
+        Metadata = jObject["metadata"]?.ToObject<Dictionary<string, object>>() ?? new Dictionary<string, object>();
 
+        // Parse sources from style JSON to determine source types (used to pre-filter raster layers)
+        var sourceTypes = new Dictionary<string, string>();
         var jToken = jObject["sources"];
         if (jToken != null)
         {
             foreach (var item in (IEnumerable<JToken>)jToken)
             {
-                var source = new Source();
                 if (item is JProperty prop && prop.Value is IDictionary<string, JToken> dictionary)
                 {
-                    source.Name = prop.Name;
-                    if (dictionary.TryGetValue("url", out var value))
-                        source.URL = SimplifyJson(value) as string;
-                    if (dictionary.TryGetValue("type", out var value2))
-                        source.Type = SimplifyJson(value2) as string;
-                    if (dictionary.TryGetValue("minzoom", out var value3))
-                        source.MinZoom = Convert.ToDouble(SimplifyJson(value3));
-                    if (dictionary.TryGetValue("maxzoom", out var value4))
-                        source.MaxZoom = Convert.ToDouble(SimplifyJson(value4));
-                    Sources[prop.Name] = source;
+                    if (dictionary.TryGetValue("type", out var typeToken))
+                        sourceTypes[prop.Name] = SimplifyJson(typeToken) as string ?? "";
                 }
             }
         }
@@ -86,10 +76,7 @@ public class VectorStyle : IVectorStyle
                 if (((IDictionary<string, JToken>)item2).TryGetValue("type", out var value8))
                     layer.Type = SimplifyJson(value8) as string;
                 if (((IDictionary<string, JToken>)item2).TryGetValue("source", out var value9))
-                {
                     layer.SourceName = SimplifyJson(value9) as string;
-                    layer.Source = Sources[layer.SourceName];
-                }
                 if (((IDictionary<string, JToken>)item2).TryGetValue("source-layer", out var value10))
                     layer.SourceLayer = SimplifyJson(value10) as string;
                 if (((IDictionary<string, JToken>)item2).TryGetValue("paint", out var value11))
@@ -101,17 +88,19 @@ public class VectorStyle : IVectorStyle
                     var token = value13 as JArray;
                     layer.Filter = SimplifyJson(token) as object[];
                 }
+                // Skip raster-sourced layers — this is a vector tile renderer
+                if (layer.SourceName != null && sourceTypes.TryGetValue(layer.SourceName, out var sourceType) && sourceType == "raster")
+                {
+                    num++;
+                    continue;
+                }
+
                 Layers.Add(layer);
                 num++;
             }
         }
 
         Hash = Utils.Sha256(text);
-    }
-
-    public void SetSourceProvider(string name, IBaseTileSource provider)
-    {
-        Sources[name].Provider = provider;
     }
 
     private static object SimplifyJson(JToken token)
@@ -145,6 +134,98 @@ public class VectorStyle : IVectorStyle
 
     private static readonly string[] DefaultTextFont = ["Open Sans Regular", "Arial Unicode MS Regular"];
 
+    /// <summary>
+    /// A resolved Skia style for a specific layer and zoom. All properties only
+    /// depend on zoom (via interpolation stops), not on per-feature attributes.
+    /// </summary>
+    private sealed class SkiaLayerStyle
+    {
+        public Paint Paint { get; } = new();
+        /// <summary>Resolved text-field template (before per-feature substitution), null if none.</summary>
+        public string? TextField;
+    }
+
+    private readonly ConcurrentDictionary<(int LayerIndex, double Zoom), SkiaLayerStyle> _layerStyleCache = new();
+
+    /// <summary>
+    /// Default Paint with constructor defaults. Used as the starting state for
+    /// cache-miss resolution. Treat as immutable.
+    /// </summary>
+    private static readonly Paint DefaultPaint = CreateDefaultPaint();
+
+    private static Paint CreateDefaultPaint() => new Paint
+    {
+        BackgroundOpacity = 1.0,
+        FillOpacity = 1.0,
+        LineWidth = 1.0,
+        LineDashArray = Array.Empty<double>(),
+        LineOpacity = 1.0,
+        IconScale = 1.0,
+        IconOpacity = 1.0,
+        TextFont = DefaultTextFont,
+        TextSize = 16.0,
+        TextMaxWidth = 10.0,
+        TextOpacity = 1.0,
+        Visibility = true
+    };
+
+    /// <summary>Copies every property from one Paint to another.</summary>
+    private static void CopyPaint(Paint source, Paint target)
+    {
+        target.BackgroundColor = source.BackgroundColor;
+        target.BackgroundPattern = source.BackgroundPattern;
+        target.BackgroundOpacity = source.BackgroundOpacity;
+        target.FillColor = source.FillColor;
+        target.FillPattern = source.FillPattern;
+        target.FillTranslate = source.FillTranslate;
+        target.FillOpacity = source.FillOpacity;
+        target.LineColor = source.LineColor;
+        target.LinePattern = source.LinePattern;
+        target.LineTranslate = source.LineTranslate;
+        target.LineCap = source.LineCap;
+        target.LineWidth = source.LineWidth;
+        target.LineOffset = source.LineOffset;
+        target.LineBlur = source.LineBlur;
+        target.LineDashArray = source.LineDashArray;
+        target.LineOpacity = source.LineOpacity;
+        target.SymbolPlacement = source.SymbolPlacement;
+        target.IconScale = source.IconScale;
+        target.IconImage = source.IconImage;
+        target.IconRotate = source.IconRotate;
+        target.IconOffset = source.IconOffset;
+        target.IconOpacity = source.IconOpacity;
+        target.TextColor = source.TextColor;
+        target.TextFont = source.TextFont;
+        target.TextSize = source.TextSize;
+        target.TextMaxWidth = source.TextMaxWidth;
+        target.TextJustify = source.TextJustify;
+        target.TextRotate = source.TextRotate;
+        target.TextOffset = source.TextOffset;
+        target.TextStrokeColor = source.TextStrokeColor;
+        target.TextStrokeWidth = source.TextStrokeWidth;
+        target.TextStrokeBlur = source.TextStrokeBlur;
+        target.TextOptional = source.TextOptional;
+        target.TextTransform = source.TextTransform;
+        target.TextOpacity = source.TextOpacity;
+        target.Visibility = source.Visibility;
+    }
+
+    /// <summary>Applies a cached SkiaLayerStyle to a Brush, with per-feature text substitution.</summary>
+    private static void ApplySkiaLayerStyle(SkiaLayerStyle style, Brush brush, Dictionary<string, object> attributes)
+    {
+        CopyPaint(style.Paint, brush.Paint);
+
+        if (style.TextField != null)
+        {
+            brush.TextField = style.TextField;
+            brush.Text = Regex.Replace(style.TextField, "\\{([A-Za-z0-9\\-\\:_]+)\\}", delegate (Match m)
+            {
+                var key = StripBraces(m.Value);
+                return attributes.TryGetValue(key, out var val) ? val.ToString() : string.Empty;
+            }).Trim();
+        }
+    }
+
     public Brush ParseStyle(Layer layer, double scale, Dictionary<string, object> attributes)
     {
         var brush = new Brush { Paint = new Paint() };
@@ -154,7 +235,8 @@ public class VectorStyle : IVectorStyle
 
     /// <summary>
     /// Populates a pre-allocated Brush+Paint with style values for the given layer and attributes.
-    /// Resets all Paint properties to defaults first so leftover state from a previous use is cleared.
+    /// Uses a per-(layer, zoom) cache to skip redundant GetValue/interpolation work.
+    /// Only text-field substitution (which depends on per-feature attributes) is computed each time.
     /// </summary>
     public void ParseStyleInto(Brush brush, Layer layer, double scale, Dictionary<string, object> attributes)
     {
@@ -163,8 +245,19 @@ public class VectorStyle : IVectorStyle
         brush.Text = null;
         brush.TextField = null;
 
-        var paint2 = brush.Paint;
-        ResetPaint(paint2);
+        var zoom = (double)attributes["$zoom"];
+        var cacheKey = (layer.Index, zoom);
+
+        if (_layerStyleCache.TryGetValue(cacheKey, out var cached))
+        {
+            ApplySkiaLayerStyle(cached, brush, attributes);
+            return;
+        }
+
+        // Cache miss — resolve into the entry's Paint, then copy to brush
+        var entry = new SkiaLayerStyle();
+        var paint2 = entry.Paint;
+        CopyPaint(DefaultPaint, paint2);
 
         var paint = layer.Paint;
         var layout = layer.Layout;
@@ -232,12 +325,7 @@ public class VectorStyle : IVectorStyle
                 paint2.Visibility = (string)GetValue(value20, attributes) == "visible";
             if (layout.TryGetValue("text-field", out var value21))
             {
-                brush.TextField = (string)GetValue(value21, attributes);
-                brush.Text = Regex.Replace(brush.TextField, "\\{([A-Za-z0-9\\-\\:_]+)\\}", delegate (Match m)
-                {
-                    var key = StripBraces(m.Value);
-                    return attributes.TryGetValue(key, out var value30) ? value30.ToString() : string.Empty;
-                }).Trim();
+                entry.TextField = (string)GetValue(value21, attributes);
             }
             if (layout.TryGetValue("text-font", out var value22))
             {
@@ -273,50 +361,11 @@ public class VectorStyle : IVectorStyle
             if (layout.TryGetValue("icon-image", out var value29))
                 paint2.IconImage = (string)GetValue(value29, attributes);
         }
-    }
 
-    /// <summary>
-    /// Resets all Paint properties to their constructor defaults.
-    /// Point is a struct so default is (0,0).
-    /// </summary>
-    internal static void ResetPaint(Paint p)
-    {
-        p.BackgroundColor = default;
-        p.BackgroundPattern = null;
-        p.BackgroundOpacity = 1.0;
-        p.FillColor = default;
-        p.FillPattern = null;
-        p.FillTranslate = default;
-        p.FillOpacity = 1.0;
-        p.LineColor = default;
-        p.LinePattern = null;
-        p.LineTranslate = default;
-        p.LineCap = default;
-        p.LineWidth = 1.0;
-        p.LineOffset = 0;
-        p.LineBlur = 0;
-        p.LineDashArray = Array.Empty<double>();
-        p.LineOpacity = 1.0;
-        p.SymbolPlacement = default;
-        p.IconScale = 1.0;
-        p.IconImage = null;
-        p.IconRotate = 0;
-        p.IconOffset = default;
-        p.IconOpacity = 1.0;
-        p.TextColor = default;
-        p.TextFont = DefaultTextFont;
-        p.TextSize = 16.0;
-        p.TextMaxWidth = 10.0;
-        p.TextJustify = default;
-        p.TextRotate = 0;
-        p.TextOffset = default;
-        p.TextStrokeColor = default;
-        p.TextStrokeWidth = 0;
-        p.TextStrokeBlur = 0;
-        p.TextOptional = false;
-        p.TextTransform = default;
-        p.TextOpacity = 1.0;
-        p.Visibility = true;
+        _layerStyleCache.TryAdd(cacheKey, entry);
+
+        // Copy the resolved style to the caller's brush
+        ApplySkiaLayerStyle(entry, brush, attributes);
     }
 
     private static string StripBraces(string s)
@@ -434,7 +483,7 @@ public class VectorStyle : IVectorStyle
         }
         catch (Exception value)
         {
-            log.Error(value);
+            _log.Error(value);
             throw new VectorStyleException("Not implemented color format: " + text);
         }
     }

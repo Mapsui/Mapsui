@@ -137,13 +137,8 @@ public static class VexTileRenderer
                 continue;
             }
 
-            if (layer.Source != null)
+            if (!string.IsNullOrEmpty(layer.SourceName))
             {
-                if (layer.Source.Type == "raster")
-                {
-                    continue;
-                }
-
                 if (categorizedVectorLayers.TryGetValue(layer.SourceLayer, out var tileLayers))
                 {
                     foreach (var tileLayer in tileLayers)
