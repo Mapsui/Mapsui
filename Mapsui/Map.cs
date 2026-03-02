@@ -17,6 +17,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui;
 
@@ -232,6 +233,31 @@ public class Map : INotifyPropertyChanged, IDisposable
 
         if (changeType == ChangeType.Discrete)
             _dataFetcher.ViewportChanged(fetchInfo);
+    }
+
+    /// <summary>
+    /// Refresh data of Map asynchronously. Returns when all data fetches have completed.
+    /// </summary>
+    public async Task RefreshDataAsync(Viewport? viewport = null)
+    {
+        var fetchInfo = ToFetchInfo(viewport ?? Navigator.Viewport, ChangeType.Discrete, CRS);
+        if (fetchInfo == null)
+            return;
+
+        // The IAsyncDataFetcher is the legacy fetch interface. It is being replaced by the
+        // IFetchableSource/DataFetcher mechanism, but some layers may still implement it.
+        // We collect their tasks here so we can await them alongside the DataFetcher work.
+        var legacyTasks = new List<Task>();
+        foreach (var layer in _layers.ToList())
+        {
+            if (layer is IAsyncDataFetcher asyncDataFetcher)
+                asyncDataFetcher.RefreshData(fetchInfo, func => legacyTasks.Add(func()));
+        }
+
+        // This is the main fetch path using DataFetcher which drives all IFetchableSource layers.
+        var dataFetcherTask = _dataFetcher.ViewportChangedAsync(fetchInfo);
+
+        await Task.WhenAll(legacyTasks.Append(dataFetcherTask)).ConfigureAwait(false);
     }
 
     private static FetchInfo? ToFetchInfo(Viewport viewport, ChangeType changeType, string? CRS)
