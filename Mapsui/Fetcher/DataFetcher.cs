@@ -85,7 +85,13 @@ public sealed class DataFetcher
             }
 
             if (tasks.Count == 0)
-                break;
+            {
+                if (_activeFetches.IsEmpty)
+                    break;
+                // Active fetches from concurrent path — wait briefly and retry
+                await Task.Delay(16).ConfigureAwait(false);
+                continue;
+            }
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
         }
