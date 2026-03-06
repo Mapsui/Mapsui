@@ -4,7 +4,6 @@
 
 using System;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
@@ -26,21 +25,21 @@ internal static class SampleHelper
         }
 
         await sample.SetupAsync(mapControl);
-        await mapControl.WaitForLoadingAsync();
+        await mapControl.Map.RefreshDataAsync();
 
         if (sample is ISampleTest sampleTest)
         {
             await sampleTest.InitializeTestAsync(mapControl).ConfigureAwait(false);
         }
 
-        await mapControl.WaitForLoadingAsync();
+        await mapControl.Map.RefreshDataAsync();
 
         return mapControl;
     }
 
     public static async Task DisplayMapAsync(IMapControl mapControl)
     {
-        await mapControl.WaitForLoadingAsync().ConfigureAwait(false);
+        await mapControl.Map.RefreshDataAsync().ConfigureAwait(false);
 
         // wait for rendering to finish to make the Tests more reliable
         await Task.Delay(300).ConfigureAwait(false);

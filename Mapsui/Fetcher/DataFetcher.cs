@@ -32,6 +32,71 @@ public sealed class DataFetcher
         _ = _channel.Writer.TryWrite(true);
     }
 
+    /// <summary>
+    /// Awaitable version of <see cref="ViewportChanged"/>. Returns when all fetches triggered
+    /// by this viewport change (including cascading fetches) have completed.
+    /// </summary>
+    public async Task ViewportChangedAsync(FetchInfo fetchInfo)
+    {
+        _latestFetchInfo.Overwrite(fetchInfo);
+        UpdateViewports(fetchInfo);
+
+        // Drive the fetch loop ourselves instead of writing to _channel,
+        // so we can await completion of all cascading fetches.
+        while (true)
+        {
+            var tasks = new List<Task>();
+
+            foreach (var fetchableSource in _getFetchableSources())
+            {
+                try
+                {
+                    var activeFetchCountForSource = _activeFetches.Count(kvp => kvp.Value.FetchableSourceId == fetchableSource.Id);
+                    var availableFetchSlots = _maxConcurrentFetches - _activeFetches.Count;
+                    if (availableFetchSlots <= 0)
+                        break;
+
+                    var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCountForSource, availableFetchSlots);
+
+                    foreach (var fetchJob in fetchJobs)
+                    {
+                        _activeFetches[fetchJob.JobId] = fetchJob;
+                        tasks.Add(Task.Run(async () =>
+                        {
+                            try
+                            {
+                                await fetchJob.FetchFunc().ConfigureAwait(false);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.Log(LogLevel.Error, $"Error fetching data for fetchable source {fetchableSource.Id}: {ex.Message}", ex);
+                            }
+                            finally
+                            {
+                                _ = _activeFetches.Remove(fetchJob.JobId, out _);
+                            }
+                        }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, $"Error updating fetches for fetchable source {fetchableSource.Id}: {ex.Message}", ex);
+                }
+            }
+
+            if (tasks.Count == 0)
+            {
+                if (_activeFetches.IsEmpty)
+                    break;
+                // Active fetches from concurrent path — wait briefly and retry
+                await Task.Delay(16).ConfigureAwait(false);
+                continue;
+            }
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+        }
+    }
+
     private async Task AddConsumerAsync(Channel<bool> channel)
     {
         await foreach (var _ in channel.Reader.ReadAllAsync().ConfigureAwait(false))
