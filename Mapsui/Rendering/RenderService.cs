@@ -50,6 +50,22 @@ public sealed class RenderService : IDisposable
     public TileCache TileCache { get; }
     public ImageSourceCache ImageSourceCache { get; }
 
+    // Opaque handle to a renderer-owned persistent render surface (e.g. an off-screen SKSurface).
+    // Typed as object so that the core assembly has no dependency on SkiaSharp.
+    // Managed exclusively through GetPersistentRenderSurface; disposed by Dispose().
+    private object? _persistentRenderSurface;
+
+    /// <summary>
+    /// Returns the current persistent render surface, first passing it through <paramref name="ensure"/>.
+    /// The delegate receives the current value (possibly null or stale), disposes it if needed,
+    /// and returns the valid surface. Ownership stays with this <see cref="RenderService"/>.
+    /// </summary>
+    public object GetPersistentRenderSurface(Func<object?, object> ensure)
+    {
+        _persistentRenderSurface = ensure(_persistentRenderSurface);
+        return _persistentRenderSurface;
+    }
+
     /// <summary>
     /// Returns the drawable cache for the specified layer, or null if it has not been created yet.
     /// The cache is always created through <see cref="GetOrCreateLayerDrawableCache"/> so that
@@ -96,6 +112,9 @@ public sealed class RenderService : IDisposable
         DrawableImageCache.Dispose();
         VectorCache.Dispose();
         TileCache.Dispose();
+#pragma warning disable IDISP007 // _persistentRenderSurface is created and owned here; disposal is intentional
+        (_persistentRenderSurface as IDisposable)?.Dispose();
+#pragma warning restore IDISP007
 
         // Dispose per-layer caches
         foreach (var cache in _layerDrawableCaches.Values)
