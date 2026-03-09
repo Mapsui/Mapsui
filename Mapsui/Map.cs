@@ -271,6 +271,10 @@ public class Map : INotifyPropertyChanged, IDisposable
         return new FetchInfo(viewport.ToSection(), CRS, changeType);
     }
 
+    /// <summary>
+    /// Signals that the entire map needs to be redrawn on the next render cycle.
+    /// Use <see cref="RefreshGraphics(MRect)"/> instead when only a small area has changed.
+    /// </summary>
     public void RefreshGraphics()
     {
         RefreshGraphicsRequest?.Invoke(this, new RefreshGraphicsEventArgs(RefreshRequest.Full));

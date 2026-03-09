@@ -11,6 +11,21 @@ namespace Mapsui.Rendering;
 
 public static class VisibleFeatureIterator
 {
+    /// <summary>
+    /// Iterates over all visible features in the given layers and calls <paramref name="callback"/> for each
+    /// feature/style combination that should be rendered.
+    /// Layers that are disabled or outside their visible resolution range are skipped.
+    /// </summary>
+    /// <param name="viewport">The current viewport.</param>
+    /// <param name="layers">The layers to iterate.</param>
+    /// <param name="iteration">A monotonically increasing counter used to track render cycles.</param>
+    /// <param name="callback">Called for each (viewport, layer, style, feature, opacity, iteration) combination.</param>
+    /// <param name="customLayerRendererCallback">Optional callback for layers that use a custom renderer
+    /// (identified by <c>ILayer.CustomLayerRendererName</c>). When provided, such layers call this instead
+    /// of the normal feature callback.</param>
+    /// <param name="queryExtent">World-coordinate extent to use when querying features from each layer.
+    /// Defaults to the full viewport extent when <see langword="null"/>.
+    /// Pass a smaller rect to limit feature queries during partial rendering.</param>
     public static void IterateLayers(Viewport viewport, IEnumerable<ILayer> layers, long iteration,
         Action<Viewport, ILayer, IStyle, IFeature, float, long> callback, Action<ILayer>? customLayerRendererCallback = null,
         MRect? queryExtent = null)
