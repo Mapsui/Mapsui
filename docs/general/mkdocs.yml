@@ -30,6 +30,7 @@ nav:
   - 'imagesource.md'
   - 'mapinfo.md'
   - 'experimental-packages.md'
+  - 'experimental-renderer.md'
   - 'documentation-of-v4.md'
   
   - Upgrade guides:
