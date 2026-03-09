@@ -1,8 +1,16 @@
 # Experimental Renderer
 
-`Mapsui.Experimental.Rendering.Skia` is a rewrite of the Skia-based renderer. See [experimental-packages.md](experimental-packages.md) for how to switch to it.
+`Mapsui.Experimental.Rendering.Skia` is a rewrite of the Skia-based renderer. See [experimental-packages.md](experimental-packages.md) for background on the experimental packages approach.
 
 ## Partial Rendering
+
+> **Requires the experimental renderer.** Partial rendering is only implemented in `Mapsui.Experimental.Rendering.Skia`. The standard renderer always redraws the full screen. To enable it, install the `Mapsui.Experimental.Rendering.Skia` NuGet package and set it on your `MapControl`:
+>
+> ```cs
+> MapControl.SetMapRenderer(new Mapsui.Experimental.Rendering.Skia.MapRenderer());
+> ```
+>
+> See [experimental-packages.md](experimental-packages.md) for more detail, including how to re-register custom style and widget renderers when switching.
 
 By default the map redraws the entire screen on every refresh. Partial rendering means only a small part of the screen is redrawn — the area that actually changed. This saves work, which matters especially for apps that update the map often, like a GPS tracking app where the location marker moves every second.
 
