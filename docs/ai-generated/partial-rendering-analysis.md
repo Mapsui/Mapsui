@@ -93,28 +93,39 @@ Changes to non-experimental packages (`Mapsui` core, `Mapsui.Rendering.Skia`, `M
 
 ---
 
-### Stage 2 — `RefreshRegion` API
+### Stage 2 — `RefreshRegion` API + Dirty Rect Parameter ✅
 
-**What:** Add a way for callers to say "only this world rect changed" instead of always triggering a full canvas redraw.
+**What:** Add a way for callers to say "only this world rect changed". The dirty rect is **accumulated in `RenderController`** — the timing/coordination layer — snapshotted atomically just before each paint, and **passed as an explicit parameter to `IMapRenderer.Render()`**. This keeps the renderer a stateless function of its inputs; it receives everything it needs at call time and holds no cross-call mutable state.
 
-**Non-experimental additive changes required:**
+**Why accumulation belongs in `RenderController`, not the renderer:**
+`RenderController` already owns `AsyncAutoResetEvent _needsRefresh`, which gates whether a render cycle happens at all. It is the natural place to accumulate "what changed since the last paint." Storing the dirty rect on the renderer instead would mean one method call (`SetDirtyRect`) mutates state that a different later call (`Render`) consumes — exactly the coupling between distant code that makes systems hard to reason about.
+
+**Accumulated dirty-rect state machine (in `RenderController`):**
+- `RefreshGraphics()` → full refresh; accumulated partial rect is discarded.
+- `RefreshRegion(rect)` → if no full refresh is pending, union with accumulated rect.
+- `RefreshRegion(rect)` when a full refresh is already pending → ignored (can't downgrade).
+- Just before `Render()` is called: snapshot & reset atomically (`TakePendingDirtyRect()`).
+
+**Changes required:**
 
 | File | Change | Breaking? |
 |------|--------|-----------|
-| `Mapsui/Map.cs` | Add `public void RefreshRegion(MRect? worldRect)` method + `event EventHandler<MRect?>? RefreshRegionRequest` | No — new members |
-| `Mapsui.UI.Shared/MapControl.cs` | Subscribe to `Map.RefreshRegionRequest`; add `public void RefreshRegion(MRect? worldRect)` that calls `_renderController.RefreshRegion(rect)` | No — new members |
-| `Mapsui.UI.Shared/RenderController.cs` | Add `public void RefreshRegion(MRect? worldRect)`: if the renderer implements `IPartialRenderingSupport`, set the dirty rect on it, then call `_needsRefresh.Set()`. Otherwise fall through to a full `RefreshGraphics()`. | No — new method |
-| `Mapsui/Rendering/IPartialRenderingSupport.cs` | **New interface** in the core rendering namespace: `void SetDirtyRect(MRect? worldRect)` | No — new file |
-
-`IPartialRenderingSupport` lives in `Mapsui.Rendering` (core), not the experimental package, so `RenderController` (in `Mapsui.UI.Shared`) can reference it without a dependency on the experimental package. `RenderController` checks at runtime: `if (_mapRenderer is IPartialRenderingSupport p) p.SetDirtyRect(worldRect);`.
+| `Mapsui/Map.cs` | Add `public void RefreshRegion(MRect? worldRect)` + `event EventHandler<MRect?>? RefreshRegionRequest` | No — new members |
+| `Mapsui/Rendering/IMapRenderer.cs` | Add `MRect? dirtyRegion = null` optional parameter to `Render()` | Source-compatible for callers; all in-repo implementors updated |
+| `Mapsui.UI.Shared/MapControl.cs` | Subscribe to `Map.RefreshRegionRequest`; forward to `_renderController?.RefreshRegion(worldRect)` | No — new members |
+| `Mapsui.UI.Shared/RenderController.cs` | Add `_fullRefreshPending`, `_pendingDirtyRect`, `_dirtyLock`; update `RefreshGraphics()`; add `RefreshRegion(MRect?)`; add `TakePendingDirtyRect()`; pass result to `_mapRenderer.Render()` | No — new method + internal update |
+| `Mapsui.Rendering.Skia/MapRenderer.cs` | Accept new `dirtyRegion` parameter; ignore it (always full render) | No — adding optional param |
 
 **Experimental-only changes:**
 
-The experimental `MapRenderer` implements `IPartialRenderingSupport`, stores the accumulated dirty world rect (union of any `SetDirtyRect` calls since the last render), clears it after each render pass.
+The experimental `MapRenderer.Render()` accepts `MRect? dirtyRegion = null`. In this stage the parameter is received but not yet used for clipping — that is Stage 3. No cross-call state remains on the renderer.
 
-**Existing `RefreshGraphics()` path:** unchanged. A `null` dirty rect is treated as a full refresh, so `RefreshGraphics()` internally calls `RefreshRegion(null)`, or both code paths simply coexist and the dirty rect is left null on a full refresh.
+**What was removed vs the initial Stage 2 sketch:**
+- `IPartialRenderingSupport` interface — unnecessary; the dirty rect is now a `Render()` parameter.
+- `SetDirtyRect()` — same reason.
+- State accumulation on the renderer — moved to `RenderController`.
 
-**Risk:** Low — all non-experimental changes are purely additive. `IPartialRenderingSupport` is opt-in; renderers that don't implement it silently fall back to full refresh.
+**Risk:** Low. `RefreshGraphics()` and the full-render path are completely unchanged for all existing callers. The default `dirtyRegion = null` in `Render()` means every existing call site continues to trigger a full render.
 
 ---
 
@@ -191,9 +202,9 @@ All meaningful new logic lives in `Mapsui.Experimental.Rendering.Skia`. Non-expe
 
 | Package | Additive changes |
 |---------|-----------------|
-| `Mapsui` core | `Map.RefreshRegion(MRect?)` + `RefreshRegionRequest` event; new `VisibleFeatureIterator.IterateLayers` overload with `queryExtent`; `DataChangedEventArgs.DirtyRegion` nullable property; `IPartialRenderingSupport` interface |
-| `Mapsui.UI.Shared` | `RenderController.RefreshRegion(MRect?)`; `MapControl.RefreshRegion(MRect?)` wiring |
+| `Mapsui` core | `Map.RefreshRegion(MRect?)` + `RefreshRegionRequest` event; `IMapRenderer.Render()` `dirtyRegion` optional param; new `VisibleFeatureIterator.IterateLayers` overload with `queryExtent`; `DataChangedEventArgs.DirtyRegion` nullable property |
+| `Mapsui.UI.Shared` | `RenderController.RefreshRegion(MRect?)` with dirty-rect accumulation; `MapControl.RefreshRegion(MRect?)` wiring |
 | `Mapsui.Rendering.Skia` | No changes |
-| `Mapsui.Experimental.Rendering.Skia` | Persistent `SKSurface`; `IPartialRenderingSupport` implementation; dirty-rect clip + `queryExtent` render path |
+| `Mapsui.Experimental.Rendering.Skia` | Persistent `SKSurface`; `dirtyRegion` parameter used for dirty-rect clip + `queryExtent` render path |
 
 No existing method signatures, interface members, or event types change. The standard renderer and all non-experimental UI code behave identically to today.

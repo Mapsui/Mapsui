@@ -1,4 +1,5 @@
 ﻿#pragma warning disable IDE0005 // Using directive is unnecessary.
+using Mapsui;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -33,6 +34,9 @@ public sealed class RenderController : IDisposable
     private readonly Stopwatch _stopwatch = new(); // Stopwatch for measuring drawing times
     private IMapRenderer _mapRenderer = new MapRenderer();
     private readonly Func<Map?> _getMap;
+    // Pending refresh request: null = nothing pending yet, otherwise accumulates since the last render.
+    private RefreshRequest? _pendingRefresh;
+    private readonly object _refreshLock = new();
 
     public RenderController(Func<Map?> getMap, Action InvalidateCanvas)
     {
@@ -65,9 +69,39 @@ public sealed class RenderController : IDisposable
         _mapRenderer.UpdateDrawables(viewport, layer, renderService);
     }
 
+    /// <summary>
+    /// Signals that the entire viewport needs to be redrawn on the next render cycle.
+    /// </summary>
     public void RefreshGraphics()
     {
+        lock (_refreshLock)
+            _pendingRefresh = _pendingRefresh == null ? RefreshRequest.Full : _pendingRefresh.Accumulate(RefreshRequest.Full);
         _needsRefresh.Set();
+    }
+
+    /// <summary>
+    /// Signals that only the given world-coordinate rectangle needs to be redrawn.
+    /// Multiple calls before the next render are unioned into one accumulated dirty rect.
+    /// If a full refresh is already pending, the dirty rect is ignored.
+    /// </summary>
+    /// <param name="dirtyRect">The world-coordinate region that changed, or <see langword="null"/> to force a full refresh.</param>
+    public void RefreshGraphics(MRect? dirtyRect)
+    {
+        var incoming = dirtyRect == null ? RefreshRequest.Full : new RefreshRequest(dirtyRect);
+        lock (_refreshLock)
+            _pendingRefresh = _pendingRefresh == null ? incoming : _pendingRefresh.Accumulate(incoming);
+        _needsRefresh.Set();
+    }
+
+    // Atomically take and reset the pending refresh. Returns null when nothing is pending.
+    private RefreshRequest? TakePendingRefresh()
+    {
+        lock (_refreshLock)
+        {
+            var r = _pendingRefresh;
+            _pendingRefresh = null;
+            return r;
+        }
     }
 
     public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService,
@@ -140,7 +174,7 @@ public sealed class RenderController : IDisposable
         _stopwatch.Restart();
         _timestampStartDraw = GetTimestampInMilliseconds();
 
-        _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor);
+        _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor, TakePendingRefresh()?.DirtyRect);
 
         _isDrawingDone.Set();
         _stopwatch.Stop();

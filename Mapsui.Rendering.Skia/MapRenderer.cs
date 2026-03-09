@@ -58,7 +58,7 @@ public sealed class MapRenderer : IMapRenderer
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null)
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
 

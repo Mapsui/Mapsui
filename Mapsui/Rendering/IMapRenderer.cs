@@ -32,7 +32,7 @@ public interface IMapRenderer
     /// <returns>A drawable, or null if this renderer doesn't support creating drawables for this style.</returns>
     IDrawable? CreateDrawableForFeature(Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService);
 
-    void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null);
+    void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null);
     MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
         RenderService renderService, Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100);
     bool TryGetWidgetRenderer(Type widgetType, out IWidgetRenderer? widgetRenderer);
