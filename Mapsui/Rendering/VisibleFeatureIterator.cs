@@ -12,7 +12,8 @@ namespace Mapsui.Rendering;
 public static class VisibleFeatureIterator
 {
     public static void IterateLayers(Viewport viewport, IEnumerable<ILayer> layers, long iteration,
-        Action<Viewport, ILayer, IStyle, IFeature, float, long> callback, Action<ILayer>? customLayerRendererCallback = null)
+        Action<Viewport, ILayer, IStyle, IFeature, float, long> callback, Action<ILayer>? customLayerRendererCallback = null,
+        MRect? queryExtent = null)
     {
         foreach (var layer in layers)
         {
@@ -23,14 +24,14 @@ public static class VisibleFeatureIterator
             if (layer.CustomLayerRendererName is not null && customLayerRendererCallback is not null)
                 customLayerRendererCallback(layer);
             else
-                IterateLayer(viewport, layer, iteration, callback);
+                IterateLayer(viewport, layer, iteration, callback, queryExtent);
         }
     }
 
     private static void IterateLayer(Viewport viewport, ILayer layer, long iteration,
-        Action<Viewport, ILayer, IStyle, IFeature, float, long> callback)
+        Action<Viewport, ILayer, IStyle, IFeature, float, long> callback, MRect? queryExtent = null)
     {
-        var extent = viewport.ToExtent();
+        var extent = queryExtent ?? viewport.ToExtent();
         if (extent is null) return;
 
         var features = layer.SortFeatures(layer.GetFeatures(extent, viewport.Resolution)).ToList();

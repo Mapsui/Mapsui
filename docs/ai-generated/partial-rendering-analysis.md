@@ -125,6 +125,16 @@ The experimental `MapRenderer.Render()` accepts `MRect? dirtyRegion = null`. In 
 - `SetDirtyRect()` — same reason.
 - State accumulation on the renderer — moved to `RenderController`.
 
+**`RefreshRequest` record:**
+Accumulation logic lives in a single `RefreshRequest` sealed record (in `Mapsui` core):
+- `RefreshRequest.Full` — singleton for full-viewport refresh.
+- `new RefreshRequest(MRect dirtyRect)` — partial refresh.
+- `Accumulate(other)` — returns the union: full + anything = full; two rects = joined rect.
+
+`RenderController` holds one `RefreshRequest? _pendingRefresh` field (null = nothing pending yet). Both `RefreshGraphics()` overloads call `Accumulate`; `TakePendingRefresh()` atomically snapshots and resets it. The result's `DirtyRect` (null for full) is passed directly to `_mapRenderer.Render()`.
+
+**`RefreshGraphicsEventArgs`** now carries a `RefreshRequest Request` property instead of a raw `MRect?`. `Map.RefreshGraphics()` fires with `RefreshRequest.Full`; `Map.RefreshGraphics(MRect)` fires with `new RefreshRequest(rect)`.
+
 **Risk:** Low. `RefreshGraphics()` and the full-render path are completely unchanged for all existing callers. The default `dirtyRegion = null` in `Render()` means every existing call site continues to trigger a full render.
 
 ---
@@ -145,9 +155,10 @@ The existing `IterateLayers(viewport, layers, iteration, callback, customLayerCa
 
 > canvas.Save()
 > canvas.ClipRect(dirtyScreenRect)       ← Skia clips all draws outside this rect
-> canvas.Clear(background)               ← clears only the dirty region
+> canvas.DrawColor(background)           ← clears only the dirty region (respects clip, unlike canvas.Clear)
 > VisibleFeatureIterator.IterateLayers(..., queryExtent: dirtyWorldRect)
-> canvas.Restore()
+> Render(canvas, viewport, widgets, ...)  ← widgets inside dirty rect are redrawn; outside are no-ops (clip discards)
+> canvas.Restore()                        ← pixels outside dirty rect from the persistent surface are untouched
 
 **Why this is efficient:** `layer.GetFeatures(dirtyWorldRect, resolution)` queries the spatial index with the tiny dirty bbox — e.g. the union of the old and new GPS symbol envelopes. For the GPS scenario this returns 1–2 features. The tile layer, vector base layer, and all other layers return zero features for that tiny rect. The Skia clip provides a second safety net for any draw calls that might slip through.
 
@@ -202,8 +213,8 @@ All meaningful new logic lives in `Mapsui.Experimental.Rendering.Skia`. Non-expe
 
 | Package | Additive changes |
 |---------|-----------------|
-| `Mapsui` core | `Map.RefreshRegion(MRect?)` + `RefreshRegionRequest` event; `IMapRenderer.Render()` `dirtyRegion` optional param; new `VisibleFeatureIterator.IterateLayers` overload with `queryExtent`; `DataChangedEventArgs.DirtyRegion` nullable property |
-| `Mapsui.UI.Shared` | `RenderController.RefreshRegion(MRect?)` with dirty-rect accumulation; `MapControl.RefreshRegion(MRect?)` wiring |
+| `Mapsui` core | `Map.RefreshGraphics(MRect)` overload; `RefreshGraphicsEventArgs` with `RefreshRequest`; `RefreshRequest` record; `IMapRenderer.Render()` `dirtyRegion` optional param; new `VisibleFeatureIterator.IterateLayers` overload with `queryExtent`; `DataChangedEventArgs.DirtyRegion` nullable property |
+| `Mapsui.UI.Shared` | `RenderController.RefreshGraphics(MRect?)` overload with `RefreshRequest` accumulation; `MapControl` wiring |
 | `Mapsui.Rendering.Skia` | No changes |
 | `Mapsui.Experimental.Rendering.Skia` | Persistent `SKSurface`; `dirtyRegion` parameter used for dirty-rect clip + `queryExtent` render path |
 
