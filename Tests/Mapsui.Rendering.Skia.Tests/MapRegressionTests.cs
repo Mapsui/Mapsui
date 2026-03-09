@@ -130,8 +130,12 @@ public class MapRegressionTests
                     }
                     else
                     {
+                        var generatedPath = File.GetGeneratedRegressionPath(fileName);
+                        var originalPath = File.GetOriginalRegressionPath(fileName);
                         Assert.That(BitmapComparer.Compare(originalStream, bitmap, 1, 0.995), Is.True,
-                            $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
+                            $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.\n" +
+                            $"Generated: file:///{generatedPath.Replace('\\', '/')}\n" +
+                            $"Reference: file:///{originalPath.Replace('\\', '/')}");
                     }
                 }
                 else
