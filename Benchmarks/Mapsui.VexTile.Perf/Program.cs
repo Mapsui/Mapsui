@@ -2,7 +2,6 @@ using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using Mapsui.Samples.Common.Utilities;
 using SQLite;
 using System.Diagnostics;
-using VexTile.Common.Enums;
 using VexTile.Data.Sources;
 using SkiaCanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.SkiaCanvas;
 using TileInfo = VexTile.Renderer.Mvt.AliFlux.TileInfo;
