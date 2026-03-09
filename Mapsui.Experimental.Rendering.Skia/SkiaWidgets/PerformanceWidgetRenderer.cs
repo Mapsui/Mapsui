@@ -10,7 +10,7 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
     private readonly string[] _textHeader = { "FPS", "V. FPS", "Mean", "Min", "Max", "Last", "Count" };
     private readonly string[] _text = new string[7];
 
-    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService, float layerOpacity)
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService, float layerOpacity, SKRect? dirtyScreenRect)
     {
         var performanceWidget = (PerformanceWidget)widget;
         if (!performanceWidget.Performance.GetIsActive())

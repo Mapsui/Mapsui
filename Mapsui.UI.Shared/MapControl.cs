@@ -174,7 +174,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void Map_RefreshGraphicsRequest(object? sender, EventArgs e)
     {
-        RefreshGraphics();
+        var request = (e as RefreshGraphicsEventArgs)?.Request;
+        _renderController?.RefreshGraphics(request?.DirtyRect);
     }
 
     /// <summary>

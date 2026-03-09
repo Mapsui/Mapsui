@@ -58,7 +58,7 @@ public sealed class MapRenderer : IMapRenderer
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null)
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
 
@@ -183,9 +183,9 @@ public sealed class MapRenderer : IMapRenderer
         return false;
     }
 
-    public bool TryGetStyleRenderer(Type widgetType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
+    public bool TryGetStyleRenderer(Type styleType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
     {
-        if (_styleRenderers.TryGetValue(widgetType, out var outStyleRenderer))
+        if (_styleRenderers.TryGetValue(styleType, out var outStyleRenderer))
         {
             styleRenderer = outStyleRenderer;
             return true;

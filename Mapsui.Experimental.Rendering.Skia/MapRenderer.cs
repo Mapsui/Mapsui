@@ -32,6 +32,7 @@ public sealed class MapRenderer : IMapRenderer
 {
     private static readonly Dictionary<Type, ISkiaWidgetRenderer> _widgetRenderers = [];
     private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
+
     private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
     private static readonly Dictionary<string, CustomLayerRenderer.RenderHandler> _layerRenderers = [];
 
@@ -65,23 +66,23 @@ public sealed class MapRenderer : IMapRenderer
         _widgetRenderers[typeof(PerformanceWidget)] = new PerformanceWidgetRenderer();
     }
 
-    /// <summary>
-    /// Renders the map to the target.
-    /// </summary>
-    /// <param name="target">The target to render to.</param>
-    /// <param name="viewport">The viewport to render.</param>
-    /// <param name="layers">The layers to render.</param>
-    /// <param name="widgets">The widgets to render.</param>
-    /// <param name="renderService">The render service.</param>
-    /// <param name="background">The background color.</param>
+    /// <inheritdoc />
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null)
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
-
         var allWidgets = widgets.Concat(attributions);
 
-        RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, renderService, background);
+#pragma warning disable IDISP005 // EnsurePersistentSurface returns a surface whose ownership transfers to RenderService
+        var surface = (PersistentSurface)renderService.GetPersistentRenderSurface(current => EnsurePersistentSurface(current, viewport));
+#pragma warning restore IDISP005
+
+        RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, dirtyRegion);
+
+        // Blit the persistent surface to the platform-provided canvas.
+        surface.SKSurface.Canvas.Flush();
+        using var snapshot = surface.SKSurface.Snapshot();
+        ((SKCanvas)target).DrawImage(snapshot, 0, 0);
     }
 
     /// <inheritdoc />
@@ -103,13 +104,29 @@ public sealed class MapRenderer : IMapRenderer
     }
 
     private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null)
     {
         if (!viewport.HasSize()) return;
 
-        if (background is not null) canvas.Clear(background.ToSkia());
-        Render(canvas, viewport, layers, renderService);
-        Render(canvas, viewport, widgets, renderService, 1);
+        if (dirtyRegion is not null)
+        {
+            // Clip the entire render (layers + widgets) to the dirty screen region.
+            // Widgets outside the dirty rect produce no pixel changes — their pixels
+            // are already correct in the persistent surface and remain untouched.
+            var screenRect = viewport.WorldToScreen(dirtyRegion).ToSkia();
+            var saveCount = canvas.Save();
+            canvas.ClipRect(screenRect);
+            if (background is not null) canvas.DrawColor(background.ToSkia());
+            Render(canvas, viewport, layers, renderService, dirtyRegion);
+            Render(canvas, viewport, widgets, renderService, 1, screenRect);
+            canvas.RestoreToCount(saveCount);
+        }
+        else
+        {
+            if (background is not null) canvas.Clear(background.ToSkia());
+            Render(canvas, viewport, layers, renderService);
+            Render(canvas, viewport, widgets, renderService, 1);
+        }
     }
 
     /// <summary>
@@ -311,7 +328,31 @@ public sealed class MapRenderer : IMapRenderer
             Render(skCanvas, viewport, widgets, renderService, 1);
     }
 
-    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService)
+    private static object EnsurePersistentSurface(object? current, Viewport viewport)
+    {
+        var width = (int)Math.Round(viewport.Width);
+        var height = (int)Math.Round(viewport.Height);
+        if (current is PersistentSurface { Width: var w, Height: var h } && w == width && h == height)
+            return current;
+
+#pragma warning disable IDISP007 // current was created by this renderer and placed in RenderService; disposing it on resize is intentional
+        (current as IDisposable)?.Dispose();
+#pragma warning restore IDISP007
+#pragma warning disable IDISP005 // Ownership transfers to RenderService via the Func<object?,object> delegate
+        return new PersistentSurface(width, height);
+#pragma warning restore IDISP005
+    }
+
+    // SKSurface is created internally so this class owns and disposes it.
+    private sealed class PersistentSurface(int width, int height) : IDisposable
+    {
+        public SKSurface SKSurface { get; } = SKSurface.Create(new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul));
+        public int Width { get; } = width;
+        public int Height { get; } = height;
+        public void Dispose() => SKSurface.Dispose();
+    }
+
+    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService, MRect? dirtyRegion = null)
     {
         try
         {
@@ -332,7 +373,8 @@ public sealed class MapRenderer : IMapRenderer
 
             VisibleFeatureIterator.IterateLayers(viewport, layers, renderService.CurrentIteration,
                 (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, i),
-                (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService));
+                (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService),
+                dirtyRegion);
 
             renderService.IncrementIteration();
         }
@@ -380,9 +422,9 @@ public sealed class MapRenderer : IMapRenderer
         }
     }
 
-    private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity)
+    private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity, SKRect? dirtyScreenRect = null)
     {
-        WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, renderService, layerOpacity);
+        WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, renderService, layerOpacity, dirtyScreenRect);
     }
 
     /// <summary>

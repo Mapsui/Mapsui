@@ -11,7 +11,7 @@ public class RulerWidgetRenderer : ISkiaWidgetRenderer
 {
     private static readonly TextBoxWidgetRenderer _textBoxRenderer = new();
 
-    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService, float layerOpacity)
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService, float layerOpacity, SKRect? dirtyScreenRect)
     {
         if (widget is RulerWidget rulerWidget)
         {
@@ -21,13 +21,13 @@ public class RulerWidgetRenderer : ISkiaWidgetRenderer
             if (!rulerWidget.IsActive)
                 return;
 
-            DrawLine(canvas, viewport, rulerWidget, renderService, layerOpacity);
+            DrawLine(canvas, viewport, rulerWidget, renderService, layerOpacity, dirtyScreenRect);
         }
         else
             throw new Exception($"Widget is not a {nameof(RulerWidget)}");
     }
 
-    public static void DrawLine(SKCanvas canvas, Viewport viewport, RulerWidget rulerWidget, Mapsui.Rendering.RenderService renderService, float layerOpacity)
+    public static void DrawLine(SKCanvas canvas, Viewport viewport, RulerWidget rulerWidget, Mapsui.Rendering.RenderService renderService, float layerOpacity, SKRect? dirtyScreenRect = null)
     {
         if (rulerWidget.StartPosition is MPoint start && rulerWidget.CurrentPosition is MPoint current && rulerWidget.DistanceInKilometers is not null)
         {
@@ -44,7 +44,7 @@ public class RulerWidgetRenderer : ISkiaWidgetRenderer
                 var offSet = 4;
                 rulerWidget.InfoBox.Margin = new MRect((int)screenCurrent.X + offSet, (int)(viewport.Height - screenCurrent.Y + offSet));
             }
-            _textBoxRenderer.Draw(canvas, viewport, rulerWidget.InfoBox, renderService, layerOpacity);
+            _textBoxRenderer.Draw(canvas, viewport, rulerWidget.InfoBox, renderService, layerOpacity, dirtyScreenRect);
 
             // Use the envelope to draw
             using var skPaint = new SKPaint { Color = rulerWidget.Color.ToSkia(), StrokeWidth = 3, IsAntialias = true };

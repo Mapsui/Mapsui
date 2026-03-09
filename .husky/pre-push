@@ -16,4 +16,4 @@
 ## pass hook arguments to task
 #husky run --args "$1" "$2"
 
-# Format whitespace check moved to pre-push hook
+dotnet husky run --group pre-push

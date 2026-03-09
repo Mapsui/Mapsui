@@ -17,9 +17,16 @@
       <BuildType Solution="Ad-Hoc|*" Project="Debug" />
       <BuildType Solution="AppStore|*" Project="Debug" />
     </Project>
+    <Project Path="Benchmarks/Mapsui.Rendering.Perf/Mapsui.Rendering.Perf.csproj">
+      <BuildType Solution="Ad-Hoc|*" Project="Release" />
+      <BuildType Solution="AppStore|*" Project="Release" />
+    </Project>
     <Project Path="Benchmarks/Mapsui.VexTile.Perf/Mapsui.VexTile.Perf.csproj">
-      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
-      <BuildType Solution="AppStore|*" Project="Debug" />
+      <BuildType Solution="Ad-Hoc|*" Project="Release" />
+      <BuildType Solution="AppStore|*" Project="Release" />
+      <Build Solution="Ad-Hoc|*" Project="false" />
+      <Build Solution="AppStore|*" Project="false" />
+      <Build Solution="Debug|*" Project="false" />
     </Project>
   </Folder>
   <Folder Name="/docs/">
@@ -265,6 +272,7 @@
   </Folder>
   <Folder Name="/Solution Items/husky/">
     <File Path=".husky/pre-commit" />
+    <File Path=".husky/pre-push" />
     <File Path=".husky/task-runner.json" />
   </Folder>
   <Folder Name="/SourceGenerators/">

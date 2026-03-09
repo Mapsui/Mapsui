@@ -1,13 +1,11 @@
+
+#pragma warning disable IDE0005 // Supress because it fails on the build server. It much be a bug/glitch in the tooling.
 using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using Mapsui.Samples.Common.Utilities;
 using SQLite;
 using System.Diagnostics;
 using VexTile.Common.Enums;
 using VexTile.Data.Sources;
-using SkiaCanvas = Mapsui.Experimental.VectorTiles.VexTileCopies.SkiaCanvas;
-using TileInfo = VexTile.Renderer.Mvt.AliFlux.TileInfo;
-using VectorStyle = Mapsui.Experimental.VectorTiles.VexTileCopies.VectorStyle;
-using VexTileRenderer = Mapsui.Experimental.VectorTiles.Rendering.VexTileRenderer;
 
 namespace Mapsui.VexTile.Perf;
 
@@ -148,12 +146,12 @@ internal class Program
             var vectorTile = await tileSource.GetVectorTileAsync(x, y, zoom);
             if (vectorTile == null) continue;
 
-            var profTileInfo = new TileInfo(x, y, zoom, TileSize, TileSize);
+            var profTileInfo = new global::VexTile.Renderer.Mvt.AliFlux.TileInfo(x, y, zoom, TileSize, TileSize);
             NormalizeGeometry(vectorTile, profTileInfo.ScaledSizeX, profTileInfo.ScaledSizeY);
 
             using (var profCanvas = new SkiaCanvas((int)profTileInfo.ScaledSizeX, (int)profTileInfo.ScaledSizeY))
             {
-                VexTileRenderer.Render(vectorTile, style, profCanvas, profTileInfo);
+                Mapsui.Experimental.VectorTiles.Rendering.VexTileRenderer.Render(vectorTile, style, profCanvas, profTileInfo);
             }
 
             AllocProfile.Enabled = false;
@@ -401,11 +399,11 @@ internal class Program
         if (vectorTile == null)
             return null;
 
-        var tileInfo = new TileInfo(x, y, zoom, TileSize, TileSize);
+        var tileInfo = new global::VexTile.Renderer.Mvt.AliFlux.TileInfo(x, y, zoom, TileSize, TileSize);
         NormalizeGeometry(vectorTile, tileInfo.ScaledSizeX, tileInfo.ScaledSizeY);
 
         using var canvas = new SkiaCanvas((int)tileInfo.ScaledSizeX, (int)tileInfo.ScaledSizeY);
-        VexTileRenderer.Render(vectorTile, style, canvas, tileInfo);
+        Mapsui.Experimental.VectorTiles.Rendering.VexTileRenderer.Render(vectorTile, style, canvas, tileInfo);
         return canvas.ToPngByteArray();
     }
 
@@ -422,13 +420,13 @@ internal class Program
         if (vectorTile == null)
             return (0, 0, 0, 0, 0);
 
-        var tileInfo = new TileInfo(x, y, zoom, TileSize, TileSize);
+        var tileInfo = new global::VexTile.Renderer.Mvt.AliFlux.TileInfo(x, y, zoom, TileSize, TileSize);
         NormalizeGeometry(vectorTile, tileInfo.ScaledSizeX, tileInfo.ScaledSizeY);
 
         // Render
         var renderSw = Stopwatch.StartNew();
         using var canvas = new SkiaCanvas((int)tileInfo.ScaledSizeX, (int)tileInfo.ScaledSizeY);
-        VexTileRenderer.Render(vectorTile, style, canvas, tileInfo);
+        Mapsui.Experimental.VectorTiles.Rendering.VexTileRenderer.Render(vectorTile, style, canvas, tileInfo);
         var pngBytes = canvas.ToPngByteArray();
         renderSw.Stop();
 

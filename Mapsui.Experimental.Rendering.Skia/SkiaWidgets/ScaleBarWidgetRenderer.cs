@@ -17,7 +17,7 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     private readonly SKFont _paintScaleTextStrokeFont = CreateFont();
 
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService,
-        float layerOpacity)
+        float layerOpacity, SKRect? dirtyScreenRect)
     {
         var scaleBar = (ScaleBarWidget)widget;
         if (!scaleBar.CanProject()) return;

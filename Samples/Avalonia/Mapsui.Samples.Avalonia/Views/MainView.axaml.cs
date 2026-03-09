@@ -27,8 +27,6 @@ public partial class MainView : UserControl
 
         MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         MapControl.Map.Navigator.RotationLock = false;
-        MapControl.SetMapRenderer(new Experimental.Rendering.Skia.MapRenderer());
-        //!!!MapControl.UseContinuousMouseWheelZoom = true;
 
         RotationSlider.PointerMoved += RotationSliderOnPointerMoved;
 

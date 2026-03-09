@@ -62,6 +62,7 @@ Run `dotnet format` to apply these rules automatically.
 ## Documentation
 - Update README or docs when behavior changes or new features are added.
 - Keep commit messages and PR descriptions concise and informative (what/why/impact).
+- AI-generated design documents (architecture analyses, stage plans, etc.) live in [docs/ai-generated/](../docs/ai-generated/). Add new ones there.
 
 ## Pull requests
 - Keep PRs small and focused; link to any related issues.
@@ -76,3 +77,26 @@ Run `dotnet format` to apply these rules automatically.
 - Provide concrete file paths, types, and examples.
 - Ask for tests and edge cases.
 - Request refactors in small, verifiable steps.
+
+## Contributor guidelines summary
+
+Full guidelines: [docs/general/markdown/contributors-guidelines.md](../docs/general/markdown/contributors-guidelines.md)
+
+### Move problematic code toward the root
+In the Mapsui hierarchy (`DataSource → Fetcher → Layer → Map → MapControl`), keep the core clean. Push `IDisposable`, `async/await`, nullable fields, and exception-throwing code toward the root (surface projects / `MapControl`), not into the core. The core should be simple, predictable, and free of these concerns.
+
+### Disposability
+- Do not make classes `IDisposable` just to hold a Skia resource (`SKSurface`, `SKPaint`, `SKPath`, etc.).
+- Renderer-owned resources whose lifetime is tied to the map should be stored in `RenderService` (already `IDisposable`, owned by `Map`). Use `RenderService.GetPersistentRenderSurface(Func<object?, object> ensure)` as the pattern.
+- `RenderService.Dispose()` handles cleanup — the renderer itself stays free of `IDisposable`.
+
+### No rendering in the draw/paint loop
+Separate *rendering* (creating platform resources, e.g. `SKPath path = ToSKPath(...)`) from *drawing* (using them on the canvas, e.g. `canvas.DrawPath(...)`). Resources should be prepared before the paint loop, not inside it.
+
+### lon/lat ordering
+Always use **lon, lat** order (consistent with x, y). Example: `SphericalMercator.FromLonLat(lon, lat)`. Prefer named properties (`Longitude`, `Latitude`) when ordering would be ambiguous.
+
+### Extension methods
+- Always in an `Extensions` folder, in a class named `{TypeItExtends}Extensions` (drop the `I` for interfaces: `ILayer` → `LayerExtensions`).
+- Namespace follows the folder, not the type being extended.
+- Collection extensions for a type live in the same class as the individual-type extensions.

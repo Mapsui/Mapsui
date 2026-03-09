@@ -186,6 +186,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public event DataChangedEventHandler? DataChanged;
 
+    // TODO: change type to EventHandler<RefreshGraphicsEventArgs> in the next major (breaking) version.
     public event EventHandler? RefreshGraphicsRequest;
 
     /// <summary>
@@ -270,9 +271,24 @@ public class Map : INotifyPropertyChanged, IDisposable
         return new FetchInfo(viewport.ToSection(), CRS, changeType);
     }
 
+    /// <summary>
+    /// Signals that the entire map needs to be redrawn on the next render cycle.
+    /// Use <see cref="RefreshGraphics(MRect)"/> instead when only a small area has changed.
+    /// </summary>
     public void RefreshGraphics()
     {
-        RefreshGraphicsRequest?.Invoke(this, EventArgs.Empty);
+        RefreshGraphicsRequest?.Invoke(this, new RefreshGraphicsEventArgs(RefreshRequest.Full));
+    }
+
+    /// <summary>
+    /// Signals that only the given world-coordinate rectangle needs to be redrawn.
+    /// Use this instead of <see cref="RefreshGraphics()"/> when a data change affects only a
+    /// small region, so the render controller can limit work to that area.
+    /// </summary>
+    /// <param name="dirtyRect">The world-coordinate region that changed.</param>
+    public void RefreshGraphics(MRect dirtyRect)
+    {
+        RefreshGraphicsRequest?.Invoke(this, new RefreshGraphicsEventArgs(new RefreshRequest(dirtyRect)));
     }
 
     public void OnViewportSizeInitialized()
