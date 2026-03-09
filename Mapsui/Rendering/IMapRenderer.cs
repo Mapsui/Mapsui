@@ -73,10 +73,10 @@ public interface IMapRenderer
     /// <summary>
     /// Looks up the style renderer registered for the given style type.
     /// </summary>
-    /// <param name="widgetType">The runtime type of the style.</param>
-    /// <param name="widgetRenderer">Set to the registered renderer, or <see langword="null"/> if none is found.</param>
+    /// <param name="styleType">The runtime type of the style.</param>
+    /// <param name="styleRenderer">Set to the registered renderer, or <see langword="null"/> if none is found.</param>
     /// <returns><see langword="true"/> if a renderer was found; otherwise <see langword="false"/>.</returns>
-    bool TryGetStyleRenderer(Type widgetType, out IStyleRenderer? widgetRenderer);
+    bool TryGetStyleRenderer(Type styleType, out IStyleRenderer? styleRenderer);
 
     /// <summary>
     /// Returns information about the map feature(s) at the given screen position.

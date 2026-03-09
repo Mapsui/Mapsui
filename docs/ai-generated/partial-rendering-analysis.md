@@ -168,25 +168,19 @@ The existing `IterateLayers(viewport, layers, iteration, callback, customLayerCa
 
 ---
 
-### Stage 4 — Propagate Dirty Rect via DataChanged Event
+### Stage 4 — Partial Refresh in MyLocationLayer
 
-**What:** Allow callers to signal a dirty world rect through the `DataChanged` event, so `MapControl` automatically routes it to a partial refresh rather than a full refresh.
+**What (as implemented):** `MyLocationLayer` calls `map.RefreshGraphics(dirtyRect)` directly rather than routing through the `DataChanged` event. This keeps the change entirely self-contained inside the layer with no changes to core event types.
 
-**Non-experimental additive changes required:**
+**Files changed:**
 
-| File | Change | Breaking? |
-|------|--------|-----------|
-| `Mapsui/Fetcher/IAsyncDataFetcher.cs` | Add `public MRect? DirtyRegion { get; init; }` to `DataChangedEventArgs`. No constructor changes — `init` leaves all existing `new DataChangedEventArgs(...)` callers unaffected. | No — new nullable property, null by default |
-| `Mapsui/Layers/BaseLayer.cs` | Add `DataHasChanged(MRect dirtyRegion)` overload alongside the existing parameterless one. Fires `OnDataChanged(new DataChangedEventArgs(Name) { DirtyRegion = dirtyRegion })`. | No — new overload |
-| `Mapsui.UI.Shared/MapControl.cs` | In `Map_DataChanged` success path: replace `RefreshGraphics()` with `_renderController?.RefreshGraphics(e.DirtyRegion)`. `RenderController.RefreshGraphics(MRect?)` already treats `null` as a full refresh. | No — behavior-equivalent for null; partial for non-null |
+| File | Change |
+|------|--------|
+| `Mapsui/Layers/MyLocationLayer.cs` | `InternalUpdateMyLocation(MPoint)` returns `MRect?` covering old + new symbol extents. `DirtyRectForSymbol(MPoint)` computes a symbol-sized world rect. All update paths call `map.RefreshGraphics(DirtyRectForSymbol(...))`. |
 
-**Why not auto-fire from WritableLayer mutations?** `WritableLayer` currently does not fire `DataChanged` inside `Add`/`TryRemove`/`AddRange` — callers control when to notify (via `DataHasChanged()`). Auto-firing inside mutations would cause a double-fire for existing code that calls `DataHasChanged()` afterward, silently degrading to two full refreshes. Leaving mutations silent and exposing a `DataHasChanged(MRect)` overload is the non-breaking equivalent.
+**Note:** An earlier design considered adding `DirtyRegion` to `DataChangedEventArgs` and a `DataHasChanged(MRect)` overload to `BaseLayer` so that `MapControl.Map_DataChanged` could route partial refreshes automatically. That approach was not taken — it adds surface area to core event types that only one built-in layer currently needs. The direct `map.RefreshGraphics(rect)` call is simpler and does not require any changes to `DataChangedEventArgs`, `BaseLayer`, or `MapControl`.
 
-**For the GPS use case:** compute `dirtyRect = oldFeature.Extent!.Join(newFeature.Extent!)`, mutate the `WritableLayer` (remove old, add new), then call `layer.DataHasChanged(dirtyRect)` → `MapControl` receives `DataChanged` with `DirtyRegion` set → calls `_renderController?.RefreshGraphics(dirtyRect)` → only the tiny region re-renders.
-
-**Layers that don't compute a dirty rect** (e.g. remote tile layers, custom layers) continue to call `DataHasChanged()` with no argument, firing `DataChanged` with `DirtyRegion = null`, which maps to a full refresh — unchanged behavior.
-
-**Risk:** Low — all changes are additive. Existing `DataChanged` subscribers simply ignore the new `DirtyRegion` property.
+**Risk:** Low. The dirty rect is computed from the symbol size and position — callers of `UpdateMyLocation` see no API changes.
 
 ## Battery Impact Estimate
 

@@ -14,9 +14,6 @@ namespace Mapsui.Rendering.Perf;
 ///
 /// Run with both scenarios in the same process — no stored baseline file is needed.
 /// The FullRender time IS the reference; the PartialRender row below shows the speedup.
-///
-/// PartialRender is currently a placeholder (marked TODO) until Stage 3 is implemented.
-/// When Stage 3 ships, add the PartialRender measurement and re-run to see the ratio.
 /// </summary>
 internal class Program
 {
