@@ -5,6 +5,7 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using SkiaSharp;
 using System.Diagnostics;
+using ExperimentalRenderer = Mapsui.Experimental.Rendering.Skia.MapRenderer;
 
 namespace Mapsui.Rendering.Perf;
 
@@ -73,7 +74,9 @@ internal class Program
         await gpsLayer.FetchAsync(fetchInfo, 1).ConfigureAwait(false);
 
         var renderer = new MapRenderer();
+        var experimentalRenderer = new ExperimentalRenderer();
         using var renderService = new RenderService();
+        using var experimentalRenderService = new RenderService();
 
         using var bmp = new SKBitmap(ViewW, ViewH);
         using var canvas = new SKCanvas(bmp);
@@ -81,6 +84,10 @@ internal class Program
         // Warmup: ensures any lazy initialisation (style caches etc.) is paid before measuring
         for (var i = 0; i < WarmupIterations; i++)
             renderer.Render(canvas, viewport, allLayers, [], renderService, Color.White);
+        for (var i = 0; i < WarmupIterations; i++)
+            experimentalRenderer.Render(canvas, viewport, allLayers, [], experimentalRenderService, Color.White);
+        for (var i = 0; i < WarmupIterations; i++)
+            experimentalRenderer.Render(canvas, viewport, allLayers, [], experimentalRenderService, Color.White, dirtyRect);
 
         // ── Information ──────────────────────────────────────────────────────────
         var countFull = allLayers.Sum(l => l.GetFeatures(fullExtent, Resolution).Count());
@@ -106,6 +113,10 @@ internal class Program
         var tGetPartial = Measure(MeasuredIterations, () => { foreach (var l in allLayers) _ = l.GetFeatures(dirtyRect, Resolution).Count(); });
         var tFullRender = Measure(MeasuredIterations, () =>
             renderer.Render(canvas, viewport, allLayers, [], renderService, Color.White));
+        var tExperimentalFullRender = Measure(MeasuredIterations, () =>
+            experimentalRenderer.Render(canvas, viewport, allLayers, [], experimentalRenderService, Color.White));
+        var tPartialRender = Measure(MeasuredIterations, () =>
+            experimentalRenderer.Render(canvas, viewport, allLayers, [], experimentalRenderService, Color.White, dirtyRect));
 
         // ── Results ───────────────────────────────────────────────────────────────
         Console.WriteLine("+----------------------------------------------------------------+");
@@ -113,15 +124,16 @@ internal class Program
         Console.WriteLine($"  {"--------",-40} {"------",8} {"------",8} {"------",8}");
         PrintRow("GetFeatures — full viewport", tGetFull);
         PrintRow("GetFeatures — dirty rect", tGetPartial);
-        PrintRow("FullRender (all layers)", tFullRender);
-        PrintRow("PartialRender (TODO: Stage 3)", null); // fill in after Stage 3
+        PrintRow("FullRender — standard renderer", tFullRender);
+        PrintRow("FullRender — experimental renderer", tExperimentalFullRender);
+        PrintRow("PartialRender — experimental renderer", tPartialRender);
         Console.WriteLine("+----------------------------------------------------------------+");
 
         Console.WriteLine();
-        Console.WriteLine("  Once Stage 3 is implemented:");
-        Console.WriteLine($"    Expected PartialRender ≈ GetFeatures_dirty + render {countPartial} feature(s)");
-        Console.WriteLine($"    Predicted speedup        ≈ {tFullRender.Avg / Math.Max(tGetPartial.Avg, 0.001):F0}×  " +
-                          "(if render overhead ≈ GetFeatures cost)");
+        if (tExperimentalFullRender.Avg > 0)
+            Console.WriteLine($"  Partial vs experimental full : {tExperimentalFullRender.Avg / tPartialRender.Avg,6:F1}×  speedup");
+        if (tFullRender.Avg > 0)
+            Console.WriteLine($"  Partial vs standard full     : {tFullRender.Avg / tPartialRender.Avg,6:F1}×  speedup");
         Console.WriteLine();
         Console.WriteLine("Done.");
     }

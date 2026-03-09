@@ -8,7 +8,7 @@ namespace Mapsui.Experimental.Rendering.Skia.SkiaWidgets;
 public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 {
     public virtual void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService,
-        float layerOpacity)
+        float layerOpacity, SKRect? dirtyScreenRect)
     {
         DrawText(canvas, viewport, widget, layerOpacity);
     }

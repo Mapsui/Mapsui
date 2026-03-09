@@ -168,21 +168,23 @@ The existing `IterateLayers(viewport, layers, iteration, callback, customLayerCa
 
 ---
 
-### Stage 4 — Auto-Propagate Dirty Rect from Layer Data Changes
+### Stage 4 — Propagate Dirty Rect via DataChanged Event
 
-**What:** When features are added, removed, or replaced in a `WritableLayer`, the layer computes the affected world rect automatically and exposes it on the `DataChanged` event, so the `MapControl` can call `RefreshRegion` without callers having to compute it manually.
+**What:** Allow callers to signal a dirty world rect through the `DataChanged` event, so `MapControl` automatically routes it to a partial refresh rather than a full refresh.
 
 **Non-experimental additive changes required:**
 
 | File | Change | Breaking? |
 |------|--------|-----------|
-| `Mapsui/Fetcher/DataChangedEventArgs.cs` | Add `public MRect? DirtyRegion { get; init; }` property (null = full refresh). No constructor changes — use `init` so existing `new DataChangedEventArgs(...)` callers are unaffected. | No — new nullable property with null default |
-| `Mapsui/Layers/WritableLayer.cs` | In `Add`, `TryRemove`, `AddRange`, etc.: compute the bbox of affected features and pass it via `OnDataChanged(new DataChangedEventArgs(Name) { DirtyRegion = rect })`. | No — internal behavior change, public API unchanged |
-| `Mapsui.UI.Shared/MapControl.cs` | In the `DataChanged` handler: if `e.DirtyRegion != null`, call `RefreshRegion(e.DirtyRegion)` instead of `RefreshGraphics()`. | No — extending existing event handler logic |
+| `Mapsui/Fetcher/IAsyncDataFetcher.cs` | Add `public MRect? DirtyRegion { get; init; }` to `DataChangedEventArgs`. No constructor changes — `init` leaves all existing `new DataChangedEventArgs(...)` callers unaffected. | No — new nullable property, null by default |
+| `Mapsui/Layers/BaseLayer.cs` | Add `DataHasChanged(MRect dirtyRegion)` overload alongside the existing parameterless one. Fires `OnDataChanged(new DataChangedEventArgs(Name) { DirtyRegion = dirtyRegion })`. | No — new overload |
+| `Mapsui.UI.Shared/MapControl.cs` | In `Map_DataChanged` success path: replace `RefreshGraphics()` with `_renderController?.RefreshGraphics(e.DirtyRegion)`. `RenderController.RefreshGraphics(MRect?)` already treats `null` as a full refresh. | No — behavior-equivalent for null; partial for non-null |
 
-**For the GPS use case:** update the GPS feature's position in the `WritableLayer` → `WritableLayer` records the old extent before the swap and the new extent after → fires `DataChanged` with `DirtyRegion = oldBbox.Join(newBbox)` → `MapControl` calls `RefreshRegion(tinyRect)` → only the tiny dirty region re-renders.
+**Why not auto-fire from WritableLayer mutations?** `WritableLayer` currently does not fire `DataChanged` inside `Add`/`TryRemove`/`AddRange` — callers control when to notify (via `DataHasChanged()`). Auto-firing inside mutations would cause a double-fire for existing code that calls `DataHasChanged()` afterward, silently degrading to two full refreshes. Leaving mutations silent and exposing a `DataHasChanged(MRect)` overload is the non-breaking equivalent.
 
-**Layers that don't compute a dirty rect** (e.g. remote tile layers, custom layers) continue to fire `DataChanged` with `DirtyRegion = null`, which maps to `RefreshGraphics()` — full refresh, unchanged behavior.
+**For the GPS use case:** compute `dirtyRect = oldFeature.Extent!.Join(newFeature.Extent!)`, mutate the `WritableLayer` (remove old, add new), then call `layer.DataHasChanged(dirtyRect)` → `MapControl` receives `DataChanged` with `DirtyRegion` set → calls `_renderController?.RefreshGraphics(dirtyRect)` → only the tiny region re-renders.
+
+**Layers that don't compute a dirty rect** (e.g. remote tile layers, custom layers) continue to call `DataHasChanged()` with no argument, firing `DataChanged` with `DirtyRegion = null`, which maps to a full refresh — unchanged behavior.
 
 **Risk:** Low — all changes are additive. Existing `DataChanged` subscribers simply ignore the new `DirtyRegion` property.
 
@@ -213,7 +215,7 @@ All meaningful new logic lives in `Mapsui.Experimental.Rendering.Skia`. Non-expe
 
 | Package | Additive changes |
 |---------|-----------------|
-| `Mapsui` core | `Map.RefreshGraphics(MRect)` overload; `RefreshGraphicsEventArgs` with `RefreshRequest`; `RefreshRequest` record; `IMapRenderer.Render()` `dirtyRegion` optional param; new `VisibleFeatureIterator.IterateLayers` overload with `queryExtent`; `DataChangedEventArgs.DirtyRegion` nullable property |
+| `Mapsui` core | `Map.RefreshGraphics(MRect)` overload; `RefreshGraphicsEventArgs` with `RefreshRequest`; `RefreshRequest` record; `IMapRenderer.Render()` `dirtyRegion` optional param; new `VisibleFeatureIterator.IterateLayers` overload with `queryExtent`; `DataChangedEventArgs.DirtyRegion` nullable property; `BaseLayer.DataHasChanged(MRect)` overload |
 | `Mapsui.UI.Shared` | `RenderController.RefreshGraphics(MRect?)` overload with `RefreshRequest` accumulation; `MapControl` wiring |
 | `Mapsui.Rendering.Skia` | No changes |
 | `Mapsui.Experimental.Rendering.Skia` | Persistent `SKSurface`; `dirtyRegion` parameter used for dirty-rect clip + `queryExtent` render path |

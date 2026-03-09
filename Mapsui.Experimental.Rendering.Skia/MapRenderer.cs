@@ -118,7 +118,7 @@ public sealed class MapRenderer : IMapRenderer
             canvas.ClipRect(screenRect);
             if (background is not null) canvas.DrawColor(background.ToSkia());
             Render(canvas, viewport, layers, renderService, dirtyRegion);
-            Render(canvas, viewport, widgets, renderService, 1);
+            Render(canvas, viewport, widgets, renderService, 1, screenRect);
             canvas.RestoreToCount(saveCount);
         }
         else
@@ -422,9 +422,9 @@ public sealed class MapRenderer : IMapRenderer
         }
     }
 
-    private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity)
+    private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity, SKRect? dirtyScreenRect = null)
     {
-        WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, renderService, layerOpacity);
+        WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, renderService, layerOpacity, dirtyScreenRect);
     }
 
     /// <summary>
