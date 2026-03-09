@@ -272,6 +272,7 @@
   </Folder>
   <Folder Name="/Solution Items/husky/">
     <File Path=".husky/pre-commit" />
+    <File Path=".husky/pre-push" />
     <File Path=".husky/task-runner.json" />
   </Folder>
   <Folder Name="/SourceGenerators/">
