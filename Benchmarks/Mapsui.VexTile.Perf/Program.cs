@@ -1,3 +1,5 @@
+
+#pragma warning disable IDE0005 // Supress because it fails on the build server. It much be a bug/glitch in the tooling.
 using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using Mapsui.Samples.Common.Utilities;
 using SQLite;
