@@ -2,68 +2,21 @@
 
 ## Summary
 
-Mapsui 3.0 supports a widget, that could show the main performance values for drawing the map.
+Mapsui supports a widget that shows the main performance values for drawing the map.
 
 ## How it works
 
-1) Create a new Performance object for the MapControl, where the values could be stored
+The `PerformanceWidget`, `Performance` object, tapped-to-clear behavior, and widget renderer are all set up automatically as part of the `Map`. Nothing needs to be created or registered manually.
+
+By default, the widget is only shown when the debugger is attached (`ActiveMode.OnlyInDebugMode`). To show it in a released app, activate it and optionally customize its appearance:
 
 ```csharp
-if (mapControl.Performance == null)
-    mapControl.Performance = new Utilities.Performance(10);
-```
-
-2) Create the PerformanceWidget. As parameter you have to provide the Performance object, that the widget should use
-
-```csharp
-var widget = new Widgets.Performance.PerformanceWidget(mapControl.Performance);
-```
-
-3) If you want to clear all values of the Performance object, then add the following event handler for the touch event of the widget
-
-```csharp
-widget.WidgetTouched += (sender, args) =>
-{
-    mapControl?.Performance.Clear();
-    mapControl?.RefreshGraphics();
-
-    args.Handled = true;
-};
-```
-
-4) Add the widget to the list of known widgets
-
-```csharp
-mapControl.Map.Widgets.Add(widget);
-```
-
-5) To draw the widget on the screen, we need a widget renderer. To use the default widget renderer, use the following lines
-
-```csharp
-Mapsui.Rendering.SkiaMapRenderer.RegisterWidgetRenderer(typeof(Widgets.Performance.PerformanceWidget), 
-  new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White));
-```
-
-The first two parameters are the X and Y coordinates for the widget. Third parameter is the text size. Fourth is the text color and fifth is the background color.
-## Code copy
-
-```csharp
-if (mapControl.Performance == null)
-    mapControl.Performance = new Utilities.Performance();
-
-var widget = new Widgets.Performance.PerformanceWidget(mapControl.Performance);
-
-widget.WidgetTouched += (sender, args) =>
-{
-    mapControl?.Performance.Clear();
-    mapControl?.RefreshGraphics();
-
-    args.Handled = true;
-};
-
-mapControl.Map.Widgets.Add(widget);
-Mapsui.Rendering.SkiaMapRenderer.RegisterWidgetRenderer(typeof(Widgets.Performance.PerformanceWidget), 
-  new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White));
+// The PerformanceWidget is created as part of the map.
+var performanceWidget = map.Widgets.OfType<PerformanceWidget>().First();
+// The default is ActiveMode.OnlyInDebugMode, which is usually the best option.
+performanceWidget.Performance.IsActive = ActiveMode.Yes;
+performanceWidget.BackColor = Color.FromRgba(255, 255, 32, 32);
+performanceWidget.Opacity = 1;
 ```
 
 ## Values
