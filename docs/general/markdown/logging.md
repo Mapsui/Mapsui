@@ -1,5 +1,5 @@
 # Logging
-Sooner or later there comes a time where you are struggling with a bug. You can save yourself some time by writing the Mapsui log events to your own log from the start of your project. In Mapsui errors and warnings are logged to a static class which has an event handler you can listen to. You can paste the code below anywhere in your app to start receiving log messages.
+Sooner or later there comes a time when you are struggling with a bug. You can save yourself some time by writing the Mapsui log events to your own log from the start of your project. In Mapsui, errors and warnings are logged to a static class which has an event handler you can listen to. You can paste the code below anywhere in your app to start receiving log messages.
 
 ```csharp
 Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =>
@@ -37,8 +37,8 @@ This is an example of how to forward Mapsui logging to the de facto standard ```
 ## Show logging in the map
 
 It is possible to show all Mapsui logging in the map. There are three possible configurations *Yes*, *No*, and *OnlyInDebugMode*. 
-That last one is the default and it means that the logging will show if the debugger is attached and not when it is not attached
-(Note, that this is not the same thing as building in Debug or Release mode, you can run either build with or without the debugger 
+That last one is the default and it means that the logging will show if the debugger is attached and hidden when it is not attached
+(Note that this is not the same thing as building in Debug or Release mode, you can run either build with or without the debugger 
 attached). **In most scenarios this is what you want and you don't have to change anything for a release of your app**. 
 
 In some cases you want to enable it for the released app. For instance if you need to debug something that happens only with the released app. 
@@ -60,7 +60,7 @@ The logging settings are global, so if you have two maps in your app both will b
 setting.
 
 ### Logging of Map and Widget pointer events
-It is possible to enable logging of the Map and/or Widget pointer events by changing the settings of the static Logger:
+It is possible to enable logging of the Map and/or Widget pointer events by changing the settings of the static `Logger`:
 ```csharp
 Logger.Settings.LogMapEvents = true;
 Logger.Settings.LogWidgetEvents = true;
