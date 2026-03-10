@@ -34,6 +34,10 @@ The implementation of these strategies can be overridden by the user by implemen
 
 These strategies should be tuned to work together. For instance, in the current implementation, the renderer uses higher level tiles when the optimal tiles are not available, and the fetcher pre-fetches tiles that are likely to be requested soon.
 
+## DataFetcher
+
+Mapsui v5 has a centralized async DataFetcher which can limit the number of parallel requests.
+
 ```mermaid
 sequenceDiagram
     participant UI as MapControl
@@ -68,6 +72,3 @@ flowchart TD
     MC -->|"IRenderFetchStrategy\nfinds best available tile"| R[Renderer]
     MC -.->|"pre-fetched higher-level\ntiles as fallback"| R
 ```
-
-## Data fetching in other layers
-Other layers like the Layer and ImageLayer have their own implementation. They use a delay mechanism in fetching new data and ignore ChangeType.Continuous.
