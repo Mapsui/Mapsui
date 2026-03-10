@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Nts.Extensions;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
+using Mapsui.Widgets.ButtonWidgets;
+using Mapsui.Widgets.InfoWidgets;
+using NetTopologySuite.Geometries;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Styles;
+
+public class ChangeLabelsSample : ISample
+{
+    public string Name => "ChangeLabels";
+    public string Category => "Labels";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        map.Layers.Add(CreateLayerWithBackgroundSquare());
+
+        // Local (captured) state: 0 = Uppercase, 1 = Lowercase, 2 = Number, 3 = Null
+        var labelMode = 0;
+
+        var labelStyle = CreateAlphabeticLabelStyle(() => labelMode);
+        var features = CreateFeatures(RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898));
+        map.Layers.Add(CreatePinLayer(features, labelStyle));
+
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins")
+        {
+            HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Right
+        });
+        map.Widgets.Add(new ButtonWidget()
+        {
+            Text = "Change Labels",
+            TextSize = 24,
+            Margin = new MRect(10),
+            CornerRadius = 6,
+            BackColor = new Color(204, 85, 51),
+            TextColor = Color.White,
+            Padding = new MRect(4),
+            VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Bottom,
+            HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Left,
+            WithTappedEvent = (s, e) =>
+            {
+                labelMode = (labelMode + 1) % 4;
+                map.RefreshData(); // Re-evaluate labels
+            },
+        });
+
+        map.Navigator.ZoomToBox(map.Extent!.Grow(2000000));
+        return map;
+    }
+
+    private static LabelStyle CreateAlphabeticLabelStyle(Func<int> getLabelMode) => new()
+    {
+        LabelMethod = f => getLabelMode() switch
+        {
+            0 => f["Uppercase"]?.ToString(),
+            1 => f["Lowercase"]?.ToString(),
+            2 => f["Number"]?.ToString(),
+            3 => null,
+            _ => null
+        },
+        Offset = new Offset(20, -56),
+        Font = new Font { Size = 32 },
+        BorderThickness = 1,
+        BorderColor = Color.DimGray,
+    };
+
+    private static MemoryLayer CreatePinLayer(IEnumerable<IFeature> features, LabelStyle labelStyle) => new()
+    {
+        Name = "Pins",
+        Features = features,
+        Style = new StyleCollection
+        {
+            Styles = {
+                CreateSmallCircleSymbol(),
+                CreatePinSymbol(),
+                labelStyle,
+            },
+        },
+    };
+
+    private static SymbolStyle CreateSmallCircleSymbol() => new()
+    {
+        SymbolType = SymbolType.Ellipse,
+        SymbolScale = 0.5,
+        Outline = new Pen(new Color(8, 8, 8)),
+        Fill = null,
+    };
+
+    private static List<IFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
+    {
+        var features = new List<IFeature>();
+        var i = 0;
+        foreach (var point in randomPoints)
+        {
+            var feature = new PointFeature(point);
+            var uppercaseChar = (char)('A' + (i % 26));
+            var lowercaseChar = (char)('a' + (i % 26));
+            feature["Uppercase"] = uppercaseChar.ToString();
+            feature["Lowercase"] = lowercaseChar.ToString();
+            feature["Number"] = (i % 26 + 1).ToString();
+            i++;
+            features.Add(feature);
+        }
+        return features;
+    }
+
+    private static ImageStyle CreatePinSymbol() => new()
+    {
+        Image = new Image
+        {
+            Source = "embedded://Mapsui.Resources.Images.pin.svg",
+            SvgFillColor = Color.FromString("#4193CF"),
+            SvgStrokeColor = Color.DimGray,
+        },
+        RelativeOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.
+    };
+
+    public static Layer CreateLayerWithBackgroundSquare() => new("Background")
+    {
+        DataSource = new MemoryProvider(CreateSquarePolygon(5000000).ToFeature()),
+        Style = new VectorStyle
+        {
+            Fill = new Brush(Color.LightGray),
+            Outline = new Pen
+            {
+                Color = Color.DimGray,
+                Width = 1,
+            }
+        }
+    };
+
+    private static Polygon CreateSquarePolygon(int halfWidth) => new(new LinearRing(new[]
+    {
+        new Coordinate(-halfWidth, -halfWidth),
+        new Coordinate(-halfWidth, halfWidth),
+        new Coordinate(halfWidth, halfWidth),
+        new Coordinate(halfWidth, -halfWidth),
+        new Coordinate(-halfWidth, -halfWidth) // Closing the ring
+    }));
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
