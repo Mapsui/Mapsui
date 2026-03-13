@@ -7,7 +7,6 @@ using Mapsui.Experimental.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
-using Topten.RichTextKit;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -102,50 +101,50 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
         else
         {
-            var styleSubtitle = new Topten.RichTextKit.Style();
-            var styleTitle = new Topten.RichTextKit.Style();
-            var textBlockTitle = new TextBlock();
-            var textBlockSubtitle = new TextBlock();
+            using var titleFont = CreateSkFont(callout.TitleFont);
+            using var titlePaint = new SKPaint { Color = callout.TitleFontColor.ToSkia(), IsAntialias = true };
+            var (titleLines, titleWidth, titleHeight) = SkiaTextLayoutHelper.LayoutText(
+                callout.Title, titleFont, titlePaint, (float)callout.MaxWidth, callout.TitleTextAlignment);
+
+            var subtitleLines = Array.Empty<SkiaTextLayoutHelper.Line>();
+            var subtitleWidth = 0f;
+            var subtitleHeight = 0f;
+            SKFont? subtitleFont = null;
+            SKPaint? subtitlePaint = null;
 
             if (callout.Type == CalloutType.Detail)
             {
-                styleSubtitle.FontFamily = callout.SubtitleFont.FontFamily;
-                styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
-                styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
-                styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
-                styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
-
-                textBlockSubtitle.AddText(callout.Subtitle, styleSubtitle);
-                textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
+                subtitleFont = CreateSkFont(callout.SubtitleFont);
+                subtitlePaint = new SKPaint { Color = callout.SubtitleFontColor.ToSkia(), IsAntialias = true };
+                (subtitleLines, subtitleWidth, subtitleHeight) = SkiaTextLayoutHelper.LayoutText(
+                    callout.Subtitle, subtitleFont, subtitlePaint, (float)callout.MaxWidth, callout.SubtitleTextAlignment);
             }
-            styleTitle.FontFamily = callout.TitleFont.FontFamily;
-            styleTitle.FontSize = (float)callout.TitleFont.Size;
-            styleTitle.FontItalic = callout.TitleFont.Italic;
-            styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
-            styleTitle.TextColor = callout.TitleFontColor.ToSkia();
 
-            textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
-            textBlockTitle.AddText(callout.Title, styleTitle);
+            var width = Math.Max(titleWidth, subtitleWidth);
+            var height = titleHeight + (callout.Type == CalloutType.Detail ? subtitleHeight + (float)callout.Spacing : 0f);
 
-            textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = (float)callout.MaxWidth;
-            // Layout TextBlocks
-            textBlockTitle.Layout();
-            textBlockSubtitle.Layout();
-            // Get sizes
-            var width = Math.Max(textBlockTitle.MeasuredWidth, textBlockSubtitle.MeasuredWidth);
-            var height = textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? textBlockSubtitle.MeasuredHeight + (float)callout.Spacing : 0f);
-            // Now we have the correct width, so make a new layout cycle for text alignment
-            textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = width;
-            textBlockTitle.Layout();
-            textBlockSubtitle.Layout();
-            // Create bitmap from TextBlock
             using var recorder = new SKPictureRecorder();
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, width, height));
-            // Draw text to canvas
-            textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+
+            SkiaTextLayoutHelper.DrawTextBlock(canvas, titleLines, titleFont, titlePaint, 0, 0, width, callout.TitleTextAlignment);
+
             if (callout.Type == CalloutType.Detail)
-                textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+                SkiaTextLayoutHelper.DrawTextBlock(canvas, subtitleLines, subtitleFont!, subtitlePaint!, 0, titleHeight + (float)callout.Spacing, width, callout.SubtitleTextAlignment);
+
+            subtitleFont?.Dispose();
+            subtitlePaint?.Dispose();
+
             return recorder.EndRecording();
         }
+    }
+
+    private static SKFont CreateSkFont(Font font)
+    {
+        var typeface = SKTypeface.FromFamilyName(font.FontFamily,
+            font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+            SKFontStyleWidth.Normal,
+            font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
+
+        return new SKFont { Size = (float)font.Size, Typeface = typeface };
     }
 }

@@ -29,7 +29,6 @@ public class Font
             {
                 _fontFamily = value;
             }
-
         }
     }
 
@@ -42,7 +41,6 @@ public class Font
             {
                 _size = value;
             }
-
         }
     }
 
@@ -55,7 +53,6 @@ public class Font
             {
                 _italic = value;
             }
-
         }
     }
     public bool Bold
@@ -67,7 +64,6 @@ public class Font
             {
                 _bold = value;
             }
-
         }
     }
 
