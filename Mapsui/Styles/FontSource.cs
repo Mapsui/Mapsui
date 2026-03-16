@@ -3,14 +3,29 @@ using System.Collections.Concurrent;
 
 namespace Mapsui.Styles;
 
+/// <summary>
+/// Identifies a font file that Mapsui should load and use when rendering text.
+/// The font is located via a URI using one of the supported schemes:
+/// <c>embedded://</c>, <c>file://</c>, <c>http://</c>, or <c>https://</c>.
+/// Assign to <see cref="Font.FontSource"/> to override the system font with a custom typeface.
+/// </summary>
 public class FontSource
 {
     // Note, this is a static field and in the current implementation this dictionary can only grow, not shrink.
     // The idea is that the application holds a limited number of these font resources.
+    /// <summary>
+    /// Registry that maps each unique font source URI to a stable GUID-based identifier.
+    /// The identifier is used as the cache key in <see cref="FontSourceCache"/>.
+    /// </summary>
     public static ConcurrentDictionary<string, string> SourceToSourceId { get; } = [];
 
     private string _source = string.Empty;
 
+    /// <summary>
+    /// The URI of the font file. Must use one of the supported schemes:
+    /// <c>embedded://</c>, <c>file://</c>, <c>http://</c>, or <c>https://</c>.
+    /// Assigning an unsupported scheme throws <see cref="ArgumentException"/> immediately.
+    /// </summary>
     public required string Source
     {
         get => _source;

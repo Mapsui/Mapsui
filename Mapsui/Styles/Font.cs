@@ -70,6 +70,14 @@ public class Font
         }
     }
 
+    /// <summary>
+    /// Optional custom font to use when rendering text with this style.
+    /// When set, the renderer loads the font from the specified URI instead of resolving
+    /// the system font by <see cref="FontFamily"/>.
+    /// Supported URI schemes: <c>embedded://</c>, <c>file://</c>, <c>http://</c>, <c>https://</c>.
+    /// Currently only supported by the experimental Skia renderer
+    /// (<c>Mapsui.Experimental.Rendering.Skia</c>).
+    /// </summary>
     public FontSource? FontSource { get; set; }
 
     [Obsolete("There is no need to indicate invalidation", true)]

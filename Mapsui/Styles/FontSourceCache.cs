@@ -7,12 +7,21 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
 
+/// <summary>
+/// Cache that stores loaded font bytes keyed by <see cref="FontSource.SourceId"/>.
+/// It implements <see cref="IFetchableSource"/> so that the <see cref="Mapsui.Fetcher.DataFetcher"/>
+/// automatically populates it when the viewport changes, including during
+/// <see cref="Map.RefreshDataAsync"/>.
+/// Accessed via <see cref="Mapsui.Rendering.RenderService.FontSourceCache"/>.
+/// </summary>
 public sealed class FontSourceCache : IFetchableSource
 {
     private readonly System.Collections.Concurrent.ConcurrentDictionary<string, byte[]> _register = [];
 
+    /// <inheritdoc/>
     public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
+    /// <inheritdoc/>
     public int Id => -2; // Distinct from ImageSourceCache's -1. Not a layer Id.
 
     /// <summary>Get cached font bytes for the given FontSource, or null if not yet loaded.</summary>
@@ -55,6 +64,7 @@ public sealed class FontSourceCache : IFetchableSource
         }
     }
 
+    /// <inheritdoc/>
     public FetchJob[] GetFetchJobs(int activeFetchCount, int availableFetchSlots)
     {
         if (!NeedsFetching())
@@ -66,8 +76,10 @@ public sealed class FontSourceCache : IFetchableSource
         return [new FetchJob(Id, async () => await FetchAllFontDataAsync())];
     }
 
+    /// <inheritdoc/>
     public void ViewportChanged(FetchInfo fetchInfo) { }
 
+    /// <summary>Clears all cached font bytes and requests a new fetch cycle.</summary>
     public void ClearCache()
     {
         _register.Clear();
