@@ -23,6 +23,7 @@ nav:
   - 'nuget-of-latest-build.md'
   - 'mapsui-components.md'
   - 'async-fetching.md'
+  - 'static-image-generation.md'
   - 'resolution.md'
   - 'projections.md'
   - 'custom-style-renders.md'
