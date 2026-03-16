@@ -86,6 +86,9 @@ dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "TestSampleAsync"
 ```
 Then revert any files that were not actually affected by your change (avoid unnecessary binary diffs in git history).
 
+### Sample registration — automatic via source generator
+Samples **do not need to be manually registered**. The `Mapsui.Sample.SourceGenerator` (in `SourceGenerators/`) scans all classes that implement `ISample`, `ISampleBase`, `ISampleTest`, or `IMapViewSample` at build time and generates a `Samples.Register()` method in the assembly. Adding a new sample class that implements one of these interfaces is sufficient — no call to `AllSamples.Register()` is needed. The regression tests in `Mapsui.Rendering.Skia.Tests` pick up samples through the same mechanism.
+
 ### Experimental renderer and text layout
 The experimental renderer (`Mapsui.Experimental.Rendering.Skia`) replaces RichTextKit (RTK) with a custom `SkiaTextLayoutHelper`. When measuring line height, always use `font.Spacing` (= ascent + descent + leading) rather than tight glyph bounds (`rect.Bottom - rect.Top`), so the spacing matches RTK's `TextBlock.MeasuredHeight` behavior. The `CalloutStyle.Spacing` property defaults to `0` — the leading built into the font provides the natural gap between title and subtitle.
 
