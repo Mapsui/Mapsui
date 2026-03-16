@@ -13,6 +13,7 @@ using Mapsui.Samples.Common.Maps.MapInfo;
 using Mapsui.Samples.Common.Maps.Performance;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Styles;
+using Mapsui.Samples.Common.Maps.Tests;
 using Mapsui.Samples.Common.Maps.WFS;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Samples.Common.Maps.WMS;
@@ -63,6 +64,7 @@ public class MapRegressionTests
             new WfsGeometryFilterSample(), // Crashes on the build server.
             new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
             new ArcGISImageServiceSample(), // Changes and we did not cache the reponse in the sqlite yet.
+            new CalloutWrapAroundSample(), // Reference image uses FontSource (custom font) which renders Chinese text. The standard renderer does not support FontSource so it produces tofu instead.
         ];
 
     [Test]
