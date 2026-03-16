@@ -47,6 +47,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         Navigator.FetchRequested += Navigator_FetchRequested;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
         RenderService.ImageSourceCache.FetchRequested += FetchableSource_FetchRequested;
+        RenderService.FontSourceCache.FetchRequested += FetchableSource_FetchRequested;
     }
 
     public FetchMachine FetchMachine { get; } = new(16); // This is still needed because we support the IAsyncDataFetcher interface.
@@ -542,6 +543,6 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private IEnumerable<IFetchableSource> GetFetchableSources()
     {
-        return _layers.OfType<IFetchableSource>().Concat(new[] { RenderService.ImageSourceCache });
+        return _layers.OfType<IFetchableSource>().Concat(new IFetchableSource[] { RenderService.ImageSourceCache, RenderService.FontSourceCache });
     }
 }

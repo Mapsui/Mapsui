@@ -16,6 +16,7 @@ public sealed class RenderService : IDisposable
         DrawableImageCache = new DrawableImageCache();
         TileCache = new TileCache();
         ImageSourceCache = new ImageSourceCache();
+        FontSourceCache = new FontSourceCache();
         VectorCache = new VectorCache(this, vectorCacheCapacity);
     }
 
@@ -49,6 +50,7 @@ public sealed class RenderService : IDisposable
     /// </summary>
     public TileCache TileCache { get; }
     public ImageSourceCache ImageSourceCache { get; }
+    public FontSourceCache FontSourceCache { get; }
 
     // Opaque handle to a renderer-owned persistent render surface (e.g. an off-screen SKSurface).
     // Typed as object so that the core assembly has no dependency on SkiaSharp.

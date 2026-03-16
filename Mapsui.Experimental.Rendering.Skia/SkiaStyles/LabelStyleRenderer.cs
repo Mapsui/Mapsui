@@ -7,13 +7,11 @@ using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Experimental.Rendering.Skia.Images;
 using Mapsui.Rendering.Caching;
 using Mapsui.Rendering;
+using Line = Mapsui.Experimental.Rendering.Skia.Extensions.SkiaTextLayoutHelper.Line;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -141,7 +139,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             // Text has a line feed or should be shortened by character wrap
             if (hasNewline || style.WordWrap == LabelStyle.LineBreakMode.CharacterWrap)
             {
-                lines = SplitLines(text, font, paint, hasNewline ? drawRect.Width : maxWidth, string.Empty);
+                lines = SkiaTextLayoutHelper.SplitLines(text, font, paint, hasNewline ? drawRect.Width : maxWidth, string.Empty);
                 var width = 0f;
                 for (var i = 0; i < lines.Length; i++)
                 {
@@ -155,7 +153,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             // Text is too long, so wrap it by words
             if (style.WordWrap == LabelStyle.LineBreakMode.WordWrap)
             {
-                lines = SplitLines(text, font, paint, maxWidth, " ");
+                lines = SkiaTextLayoutHelper.SplitLines(text, font, paint, maxWidth, " ");
                 var width = 0f;
                 for (var i = 0; i < lines.Length; i++)
                 {
@@ -353,25 +351,31 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return paint;
     }
 
-    private static SKFont CreateFont(Font font)
+    private static SKFont CreateFont(Font font, Mapsui.Rendering.RenderService renderService)
     {
-        var typeface = SKTypeface.FromFamilyName(font.FontFamily,
+        SKTypeface? typeface = null;
+
+        if (font.FontSource != null)
+        {
+            var bytes = renderService.FontSourceCache.Get(font.FontSource);
+            if (bytes != null)
+            {
+                using var stream = new System.IO.MemoryStream(bytes);
+                typeface = SKTypeface.FromStream(stream);
+            }
+        }
+
+        typeface ??= SKTypeface.FromFamilyName(font.FontFamily,
             font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
             SKFontStyleWidth.Normal,
             font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
 
-        SKFont skFont = new()
+        return new SKFont
         {
             Embolden = false,
-            //EmbeddedBitmaps = true,
             Size = (float)font.Size,
             Typeface = typeface,
-            //Subpixel = true,
-            //Hinting = SKFontHinting.None,
-            //Edging = SKFontEdging.Antialias,
         };
-
-        return skFont;
     }
 
     private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style)
@@ -380,65 +384,6 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         paint.Style = style.PaintStyle;
         paint.StrokeWidth = style.StrokeWidth;
         return paint;
-    }
-
-    private class Line
-    {
-        public string? Value { get; set; }
-        public float Width { get; set; } // Advance width used for wrapping decisions
-        public float Baseline { get; set; } // Baseline y for the line
-        public float BoundsLeft { get; set; } // Measured bounding box left (can be negative)
-        public float BoundsWidth { get; set; } // Measured bounding box width
-    }
-
-    private static Line[] SplitLines(string? text, SKFont font, SKPaint paint, float maxWidth, string splitCharacter)
-    {
-        if (text == null)
-            return [];
-
-        var spaceWidth = font.MeasureText(" ", paint);
-        var lines = text.Split('\n');
-
-        return lines.SelectMany(line =>
-        {
-            var result = new List<Line>();
-            string[] words;
-
-            if (splitCharacter == string.Empty)
-            {
-                words = line.ToCharArray().Select(x => x.ToString()).ToArray();
-                spaceWidth = 0;
-            }
-            else
-            {
-                words = line.Split(new[] { splitCharacter }, StringSplitOptions.None);
-            }
-
-            var lineResult = new StringBuilder();
-            float width = 0;
-            foreach (var word in words)
-            {
-                var wordWidth = font.MeasureText(word, paint);
-                var wordWithSpaceWidth = wordWidth + spaceWidth;
-                var wordWithSpace = word + splitCharacter;
-
-                if (width + wordWidth > maxWidth)
-                {
-                    result.Add(new Line { Value = lineResult.ToString(), Width = width });
-                    lineResult = new StringBuilder(wordWithSpace);
-                    width = wordWithSpaceWidth;
-                }
-                else
-                {
-                    lineResult.Append(wordWithSpace);
-                    width += wordWithSpaceWidth;
-                }
-            }
-
-            result.Add(new Line { Value = lineResult.ToString(), Width = width });
-
-            return result.ToArray();
-        }).ToArray();
     }
 
     bool IFeatureSize.NeedsFeature => true;

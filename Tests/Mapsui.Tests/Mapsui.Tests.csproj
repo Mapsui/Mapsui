@@ -13,6 +13,14 @@
 		<None Remove="Resources\example.tfw" />
 		<None Remove="Resources\example.tif" />
 		<None Remove="Resources\Images\image.png" />
+		<None Remove="Resources\Fonts\OpenSans-Regular.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Fonts\OpenSans-Regular.ttf" />
+		<Content Include="Resources\Fonts\OpenSans-Regular.ttf">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>

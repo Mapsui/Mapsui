@@ -59,6 +59,39 @@ Run `dotnet format` to apply these rules automatically.
 - Use existing test patterns and helpers found in the repo.
 - Ensure tests are deterministic and fast; no live network or external service calls unless explicitly mocked.
 
+### Rendering regression tests — important validation step
+Any change that affects rendering (styles, renderers, callouts, widgets, etc.) **must** be validated against the rendering regression tests in `Tests/Mapsui.Rendering.Skia.Tests`. These tests render every sample and compare the output pixel-by-pixel against a stored reference image.
+
+**Run a single sample's regression test** (fastest way to validate a targeted change):
+```ps
+dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "FullyQualifiedName~CalloutSample"
+```
+Replace `CalloutSample` with the class name of the affected sample.
+
+**Run all regression tests:**
+```ps
+dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "TestSampleAsync"
+```
+
+**Interpret results:**
+- `Passed` — output matches the reference image.
+- `Inconclusive` — no reference image exists yet; the test generated one in `GeneratedRegression/`.
+- `Failed` — pixel difference exceeded the threshold. Compare:
+  - Generated: `Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Resources/Images/GeneratedRegression/`
+  - Reference: `Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Resources/Images/OriginalRegression/`
+
+**Update reference images** after intentional rendering changes:
+```ps
+.\Scripts\CopyGeneratedImagesOverOriginalImages.ps1
+```
+Then revert any files that were not actually affected by your change (avoid unnecessary binary diffs in git history).
+
+### Sample registration — automatic via source generator
+Samples **do not need to be manually registered**. The `Mapsui.Sample.SourceGenerator` (in `SourceGenerators/`) scans all classes that implement `ISample`, `ISampleBase`, `ISampleTest`, or `IMapViewSample` at build time and generates a `Samples.Register()` method in the assembly. Adding a new sample class that implements one of these interfaces is sufficient — no call to `AllSamples.Register()` is needed. The regression tests in `Mapsui.Rendering.Skia.Tests` pick up samples through the same mechanism.
+
+### Experimental renderer and text layout
+The experimental renderer (`Mapsui.Experimental.Rendering.Skia`) replaces RichTextKit (RTK) with a custom `SkiaTextLayoutHelper`. When measuring line height, always use `font.Spacing` (= ascent + descent + leading) rather than tight glyph bounds (`rect.Bottom - rect.Top`), so the spacing matches RTK's `TextBlock.MeasuredHeight` behavior. The `CalloutStyle.Spacing` property defaults to `0` — the leading built into the font provides the natural gap between title and subtitle.
+
 ## Documentation
 - Update README or docs when behavior changes or new features are added.
 - Keep commit messages and PR descriptions concise and informative (what/why/impact).

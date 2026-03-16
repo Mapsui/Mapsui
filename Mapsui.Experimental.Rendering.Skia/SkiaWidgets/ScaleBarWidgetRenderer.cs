@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Mapsui.Experimental.Rendering.Skia.Extensions;
+using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;
@@ -29,13 +31,12 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         _paintScaleBarStroke.StrokeWidth = (float)(scaleBar.StrokeWidthHalo * scaleBar.Scale);
         _paintScaleText!.Color = scaleBar.TextColor.ToSkia(layerOpacity);
         _paintScaleText.StrokeWidth = (float)(scaleBar.StrokeWidth * scaleBar.Scale);
-        _paintScaleTextFont.Typeface = SKTypeface.FromFamilyName(scaleBar.Font?.FontFamily,
-            SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+        var typeface = CreateTypeface(scaleBar.Font, renderService);
+        _paintScaleTextFont.Typeface = typeface;
         _paintScaleTextFont.Size = (float)((scaleBar.Font?.Size ?? 10) * scaleBar.Scale);
         _paintScaleTextStroke!.Color = scaleBar.Halo.ToSkia(layerOpacity);
         _paintScaleTextStroke.StrokeWidth = (float)(scaleBar.StrokeWidthHalo / 2 * scaleBar.Scale);
-        _paintScaleTextStrokeFont.Typeface = SKTypeface.FromFamilyName(scaleBar.Font?.FontFamily,
-            SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+        _paintScaleTextStrokeFont.Typeface = typeface;
         _paintScaleTextStrokeFont.Size = (float)((scaleBar.Font?.Size ?? 10) * scaleBar.Scale);
 
         double scaleBarLength1;
@@ -143,6 +144,22 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
             Style = style,
             IsAntialias = true
         };
+    }
+
+    private static SKTypeface CreateTypeface(Font? font, Mapsui.Rendering.RenderService renderService)
+    {
+        if (font?.FontSource != null)
+        {
+            var bytes = renderService.FontSourceCache.Get(font.FontSource);
+            if (bytes != null)
+            {
+                using var stream = new MemoryStream(bytes);
+                return SKTypeface.FromStream(stream);
+            }
+        }
+
+        return SKTypeface.FromFamilyName(font?.FontFamily,
+            SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
     }
 
     private static SKFont CreateFont()
