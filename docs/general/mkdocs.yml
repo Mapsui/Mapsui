@@ -28,6 +28,7 @@ nav:
   - 'custom-style-renders.md'
   - 'performance-widget.md'
   - 'imagesource.md'
+  - 'fontsource.md'
   - 'mapinfo.md'
   - 'experimental-packages.md'
   - 'experimental-renderer.md'
