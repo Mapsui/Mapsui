@@ -101,7 +101,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
         else
         {
-            using var titleFont = CreateSkFont(callout.TitleFont);
+            using var titleFont = CreateSkFont(callout.TitleFont, renderService);
             using var titlePaint = new SKPaint { Color = callout.TitleFontColor.ToSkia(), IsAntialias = true };
             var (titleLines, titleWidth, titleHeight) = SkiaTextLayoutHelper.LayoutText(
                 callout.Title, titleFont, titlePaint, (float)callout.MaxWidth, callout.TitleTextAlignment);
@@ -114,7 +114,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
             if (callout.Type == CalloutType.Detail)
             {
-                subtitleFont = CreateSkFont(callout.SubtitleFont);
+                subtitleFont = CreateSkFont(callout.SubtitleFont, renderService);
                 subtitlePaint = new SKPaint { Color = callout.SubtitleFontColor.ToSkia(), IsAntialias = true };
                 (subtitleLines, subtitleWidth, subtitleHeight) = SkiaTextLayoutHelper.LayoutText(
                     callout.Subtitle, subtitleFont, subtitlePaint, (float)callout.MaxWidth, callout.SubtitleTextAlignment);
@@ -138,9 +138,21 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
     }
 
-    private static SKFont CreateSkFont(Font font)
+    private static SKFont CreateSkFont(Font font, Mapsui.Rendering.RenderService renderService)
     {
-        var typeface = SKTypeface.FromFamilyName(font.FontFamily,
+        SKTypeface? typeface = null;
+
+        if (font.FontSource != null)
+        {
+            var bytes = renderService.FontSourceCache.Get(font.FontSource);
+            if (bytes != null)
+            {
+                using var stream = new System.IO.MemoryStream(bytes);
+                typeface = SKTypeface.FromStream(stream);
+            }
+        }
+
+        typeface ??= SKTypeface.FromFamilyName(font.FontFamily,
             font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
             SKFontStyleWidth.Normal,
             font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);

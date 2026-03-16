@@ -1,9 +1,9 @@
 using Mapsui.Widgets;
 using SkiaSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Topten.RichTextKit;
 
 namespace Mapsui.Experimental.Rendering.Skia.Extensions;
 
@@ -23,49 +23,85 @@ public static class SkiaTextLayoutHelper
         if (text == null)
             return [];
 
-        var spaceWidth = font.MeasureText(" ", paint);
         var lines = text.Split('\n');
 
         return lines.SelectMany(line =>
         {
-            var result = new List<Line>();
-            string[] words;
-
             if (splitCharacter == string.Empty)
-            {
-                words = line.ToCharArray().Select(x => x.ToString()).ToArray();
-                spaceWidth = 0;
-            }
-            else
-            {
-                words = line.Split(new[] { splitCharacter }, StringSplitOptions.None);
-            }
+                return SplitByCharacter(line, font, paint, maxWidth);
 
-            var lineResult = new StringBuilder();
-            float width = 0;
-            foreach (var word in words)
-            {
-                var wordWidth = font.MeasureText(word, paint);
-                var wordWithSpaceWidth = wordWidth + spaceWidth;
-                var wordWithSpace = word + splitCharacter;
-
-                if (width + wordWidth > maxWidth)
-                {
-                    result.Add(new Line { Value = lineResult.ToString(), Width = width });
-                    lineResult = new StringBuilder(wordWithSpace);
-                    width = wordWithSpaceWidth;
-                }
-                else
-                {
-                    lineResult.Append(wordWithSpace);
-                    width += wordWithSpaceWidth;
-                }
-            }
-
-            result.Add(new Line { Value = lineResult.ToString(), Width = width });
-
-            return result.ToArray();
+            return SplitByWordUnicode(line, font, paint, maxWidth);
         }).ToArray();
+    }
+
+    private static List<Line> SplitByCharacter(string line, SKFont font, SKPaint paint, float maxWidth)
+    {
+        var result = new List<Line>();
+        var lineResult = new StringBuilder();
+        float width = 0;
+
+        foreach (var ch in line)
+        {
+            var charStr = ch.ToString();
+            var charWidth = font.MeasureText(charStr, paint);
+
+            if (width + charWidth > maxWidth && lineResult.Length > 0)
+            {
+                result.Add(new Line { Value = lineResult.ToString(), Width = width });
+                lineResult = new StringBuilder();
+                width = 0;
+            }
+
+            lineResult.Append(charStr);
+            width += charWidth;
+        }
+
+        result.Add(new Line { Value = lineResult.ToString(), Width = width });
+        return result;
+    }
+
+    private static List<Line> SplitByWordUnicode(string line, SKFont font, SKPaint paint, float maxWidth)
+    {
+        var result = new List<Line>();
+        if (line.Length == 0)
+        {
+            result.Add(new Line { Value = "", Width = 0 });
+            return result;
+        }
+
+        // Use RichTextKit's TextBlock for UAX#14-compliant line breaking.
+        // TextBlock.Layout() uses the Unicode Line Break Algorithm internally.
+        // Set a custom FontMapper so RTK measures line-break positions using the
+        // same typeface that will be used for drawing (important for custom fonts).
+        var textBlock = new TextBlock();
+        if (font.Typeface != null)
+            textBlock.FontMapper = new MapsuiFontMapper(font.Typeface);
+        textBlock.AddText(line, new Style
+        {
+            FontFamily = font.Typeface?.FamilyName ?? "Arial",
+            FontSize = font.Size,
+        });
+        textBlock.MaxWidth = maxWidth;
+        textBlock.Layout();
+
+        foreach (var textLine in textBlock.Lines)
+        {
+            var lineText = line.Substring(textLine.Start, textLine.Length).TrimEnd();
+            var lineWidth = font.MeasureText(lineText, paint);
+            result.Add(new Line { Value = lineText, Width = lineWidth });
+        }
+
+        if (result.Count == 0)
+            result.Add(new Line { Value = "", Width = 0 });
+
+        return result;
+    }
+
+    // Redirects all RTK font lookups to a specific pre-loaded SKTypeface so that
+    // line-break measurements match the typeface that will actually be drawn.
+    private sealed class MapsuiFontMapper(SKTypeface typeface) : FontMapper
+    {
+        public override SKTypeface TypefaceFromStyle(IStyle style, bool ignoreFontVariants) => typeface;
     }
 
     /// <summary>

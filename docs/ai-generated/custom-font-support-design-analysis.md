@@ -1,8 +1,35 @@
 # Custom Font Support — Design Analysis
 
-**Date:** 2026-03-12  
-**Status:** Phase 1 — Broad research  
+**Date:** 2026-03-12 (updated 2026-03-16)  
+**Status:** Phase 1 complete ✅ — Phase 2 mostly complete ✅ (widgets with no Font property still pending)  
 **Related issues:** #3159, #3233, #3280, #3058, #3074
+
+## Decisions Made
+
+- **Option B selected**: Create a separate `FontSource` class (mirrors `Image`), do NOT add `Source` directly to `Font` class.
+- **Scope**: `Mapsui.Experimental.Rendering.Skia` only. `Mapsui.Rendering.Skia` (non-experimental, stable renderer) is **out of scope** and will be deleted before v6 release.
+- **Reuse `ImageFetcher`**: `FontSourceCache` calls `ImageFetcher.FetchBytesFromImageSourceAsync()` — same URI→bytes logic, no duplication.
+- **LabelStyle first**: CalloutStyle and ScaleBarWidget FontSource support also completed in the same pass. Only widgets with no `Font` property at all remain as future work.
+- **All four URI schemes supported** (`embedded://`, `file://`, `http://`, `https://`): implemented in `FontSource.ValidateUriScheme()` from the start (reuses `ImageFetcher` which already handles all four).
+- **RTK FontMapper completed**: `MapsuiFontMapper` nested class in `SkiaTextLayoutHelper` overrides `FontMapper.TypefaceFromStyle()` to return the typeface already on the `SKFont`, ensuring RTK line-break measurements match the custom typeface metrics.
+
+## Completed Work
+
+- ✅ **RTK line-breaking in experimental renderer** (`chore/remove-richtextkit` branch): `SkiaTextLayoutHelper.SplitLines()` now uses `TextBlock.Layout()` (UAX#14) instead of ASCII-space-only splits. Added `Topten.RichTextKit` dependency back to `Mapsui.Experimental.Rendering.Skia.csproj`.
+- ✅ **Regression test**: `CalloutWrapAroundSample` added to Tests category with reference image.
+- ✅ **RTK `LineBreaker` confirmed internal**: Uses public `TextBlock` API instead; `FontMapper.TypefaceFromStyle()` is `virtual` and overridden by `MapsuiFontMapper`.
+- ✅ **`MapsuiFontMapper`** added to `SkiaTextLayoutHelper`: 3-line nested class overriding `FontMapper` to return the `SKFont`'s existing typeface for RTK line-break measurements — ensures UAX#14 breaks use custom typeface metrics.
+- ✅ **`FontSource` class** (`Mapsui/Styles/FontSource.cs`): URI validation, `SourceToSourceId` GUID registry, implicit `string` conversion. Supports `embedded://`, `file://`, `http://`, `https://` (not `svg-content://` or `base64-content://`).
+- ✅ **`FontSourceCache`** (`Mapsui/Styles/FontSourceCache.cs`): Implements `IFetchableSource`, keyed by `SourceId` (GUID), reuses `ImageFetcher.FetchBytesFromImageSourceAsync()`.
+- ✅ **`Font.FontSource`** property added, copy ctor fixed (Bold/Italic were missing), `Equals`/`GetHashCode` updated.
+- ✅ **`RenderService.FontSourceCache`** property added; `Map.GetFetchableSources()` includes it.
+- ✅ **`LabelStyleRenderer`** (experimental): `CreateFont()` checks `font.FontSource`, loads `SKTypeface.FromStream()`.
+- ✅ **`CalloutStyleRenderer`** (experimental): `CreateSkFont()` checks `font.FontSource` for both `TitleFont` and `SubtitleFont`.
+- ✅ **`ScaleBarWidgetRenderer`** (experimental): `CreateTypeface()` helper checks `font.FontSource`.
+- ✅ **`CustomFontSample`**: Demonstrates embedded font (`OpenSans-Regular.ttf`) in `LabelStyle`.
+- ✅ **`FontSourceCacheTests`** (10 tests) and **`FontTests`** (5 tests).
+- ✅ **`fontsource.md`** documentation page added to MkDocs.
+
 
 ## Problem Statement
 
@@ -192,30 +219,26 @@ Several widgets (TextBoxWidget, LoggingWidget, PerformanceWidget) have either on
 
 ## Phased Strategy
 
-### Phase 1: Add support via experimental approach (non-breaking, current release)
+### Phase 1: `FontSource` for `LabelStyle` in experimental renderer ✅ COMPLETE
 
-**Goal:** Enable custom fonts for `LabelStyle` without breaking changes.
+**Goal:** Enable custom fonts for `LabelStyle` in `Mapsui.Experimental.Rendering.Skia` without breaking changes.
 
-1. Add `string? Source` property to `Font` class (optional, defaults to null)
-2. Update `Font.Equals`/`GetHashCode` to include `Source`
-3. Modify `LabelStyleRenderer.CreateFont()`: if `Font.Source` is set, load via a `FontSourceCache` → `SKTypeface.FromStream()` instead of `SKTypeface.FromFamilyName()`
-4. Create `FontSourceCache` + `FontFetcher` (modeled after `ImageSourceCache` + `ImageFetcher`)
-5. Wire `FontSourceCache` into `RenderService` and `Map.GetFetchableSources()`
-6. Initially support `embedded://` scheme only
+**Decision:** Option B — separate `FontSource` class, optional property on `Font`.
 
-**Scope:** LabelStyle only. Callout and widgets addressed later.  
+All steps complete — see Completed Work above.
+
 **Breaking changes:** None — all additions are optional.
 
-### Phase 2: Extend to Callout and Widgets (current release or next minor)
+### Phase 2: Extend to Callout and Widgets — partially complete
 
-1. Investigate RichTextKit `FontMapper` to enable custom fonts in CalloutStyle **in the main renderer**. For the experimental renderer this is already unblocked — `SkiaTextLayoutHelper` uses raw `SKFont` and only needs to respect `Font.Source` when creating the typeface.
-2. Add `Font` property to `TextBoxWidget` and `BoxWidget` (replacing bare `TextSize`)
-3. Update `ScaleBarWidgetRenderer` to use `FontSourceCache` when `Source` is set
-4. Update widget renderers to check `Font.Source`
+1. ✅ **`MapsuiFontMapper` for RichTextKit**: Implemented as nested class in `SkiaTextLayoutHelper`. Overrides `TypefaceFromStyle()` to return the typeface already on the `SKFont`. Set on `textBlock.FontMapper` in `SplitByWordUnicode()` when typeface is non-null.
+2. ❌ Add `Font` property to `TextBoxWidget`/`BoxWidget` (replacing bare `TextSize`) — still pending
+3. ✅ **`ScaleBarWidgetRenderer`** uses `FontSourceCache` via `CreateTypeface()` helper
+4. ✅ **`CalloutStyleRenderer`** checks `Font.FontSource` for title and subtitle fonts
 
 ### Phase 3: Full implementation (next major version, breaking changes allowed)
 
-1. Potentially make `Font.Source` required (or create a new `FontRef` type)
+1. Potentially make `Font.FontSource` required (or create a new `FontRef` type)
 2. Potentially introduce `FontRegistry` on `Map` for shared font management
 3. Deprecate system-font-name-only resolution
 4. Add `file://` and `http://` scheme support
@@ -225,7 +248,8 @@ Several widgets (TextBoxWidget, LoggingWidget, PerformanceWidget) have either on
 
 ## Open Questions for Further Investigation
 
-1. **RichTextKit FontMapper**: Can we provide a custom `FontMapper` implementation to RichTextKit that knows about our loaded typefaces? This is critical for Callout support **in the main renderer**. We should read the RichTextKit source or docs for `FontMapper.Default`. Note: the experimental renderer has already bypassed this problem by replacing RichTextKit with `SkiaTextLayoutHelper`.
+
+1. ~~**RichTextKit FontMapper**~~ ✅ RESOLVED: `MapsuiFontMapper` (nested in `SkiaTextLayoutHelper`) overrides `FontMapper.TypefaceFromStyle()` to return the custom typeface for RTK line-break measurements. The experimental renderer uses this; the main (non-experimental) renderer does not support `FontSource` and is out of scope.
 
 2. **Font collection files (.ttc)**: Should we support TrueType Collection files where one file contains multiple typefaces? `SKTypeface.FromStream()` has an `index` parameter for this.
 

@@ -18,6 +18,9 @@ public class Font
     {
         FontFamily = font.FontFamily != null ? new string(font.FontFamily.ToCharArray()) : null;
         Size = font.Size;
+        Bold = font.Bold;
+        Italic = font.Italic;
+        FontSource = font.FontSource;
     }
 
     public string? FontFamily
@@ -67,17 +70,21 @@ public class Font
         }
     }
 
+    public FontSource? FontSource { get; set; }
+
     [Obsolete("There is no need to indicate invalidation", true)]
     public bool Invalidated { get; set; }
 
     public override string ToString()
     {
-        return (string.IsNullOrEmpty(_fontFamily) ? "unknown" : _fontFamily) + ", size=" + _size + ", bold=" + _bold + ", italic=" + _italic;
+        return (string.IsNullOrEmpty(_fontFamily) ? "unknown" : _fontFamily) + ", size=" + _size + ", bold=" + _bold + ", italic=" + _italic
+            + (FontSource != null ? ", source=" + FontSource : "");
     }
 
     protected bool Equals(Font other)
     {
-        return _fontFamily == other._fontFamily && _size.Equals(other._size) && _italic == other._italic && _bold == other._bold;
+        return _fontFamily == other._fontFamily && _size.Equals(other._size) && _italic == other._italic && _bold == other._bold
+            && Equals(FontSource, other.FontSource);
     }
 
     public override bool Equals(object? obj)
@@ -108,6 +115,7 @@ public class Font
             hashCode = (hashCode * 397) ^ _size.GetHashCode();
             hashCode = (hashCode * 397) ^ _italic.GetHashCode();
             hashCode = (hashCode * 397) ^ _bold.GetHashCode();
+            hashCode = (hashCode * 397) ^ (FontSource != null ? FontSource.GetHashCode() : 0);
             return hashCode;
         }
     }

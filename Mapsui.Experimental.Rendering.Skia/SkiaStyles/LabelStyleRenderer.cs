@@ -351,25 +351,31 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return paint;
     }
 
-    private static SKFont CreateFont(Font font)
+    private static SKFont CreateFont(Font font, Mapsui.Rendering.RenderService renderService)
     {
-        var typeface = SKTypeface.FromFamilyName(font.FontFamily,
+        SKTypeface? typeface = null;
+
+        if (font.FontSource != null)
+        {
+            var bytes = renderService.FontSourceCache.Get(font.FontSource);
+            if (bytes != null)
+            {
+                using var stream = new System.IO.MemoryStream(bytes);
+                typeface = SKTypeface.FromStream(stream);
+            }
+        }
+
+        typeface ??= SKTypeface.FromFamilyName(font.FontFamily,
             font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
             SKFontStyleWidth.Normal,
             font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
 
-        SKFont skFont = new()
+        return new SKFont
         {
             Embolden = false,
-            //EmbeddedBitmaps = true,
             Size = (float)font.Size,
             Typeface = typeface,
-            //Subpixel = true,
-            //Hinting = SKFontHinting.None,
-            //Edging = SKFontEdging.Antialias,
         };
-
-        return skFont;
     }
 
     private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style)
