@@ -245,6 +245,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             return;
         }
 
+        // Keep the GPU context current so the renderer can create GPU-backed surfaces.
+        Map.RenderService.GpuContext = _glView.GRContext;
+
         // Called on UI thread
         PaintSurface(args.Surface.Canvas);
     }

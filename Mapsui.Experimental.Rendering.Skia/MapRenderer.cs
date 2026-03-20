@@ -74,7 +74,8 @@ public sealed class MapRenderer : IMapRenderer
         var allWidgets = widgets.Concat(attributions);
 
 #pragma warning disable IDISP005 // EnsurePersistentSurface returns a surface whose ownership transfers to RenderService
-        var surface = (PersistentSurface)renderService.GetPersistentRenderSurface(current => EnsurePersistentSurface(current, viewport));
+        var grContext = renderService.GpuContext as GRContext;
+        var surface = (PersistentSurface)renderService.GetPersistentRenderSurface(current => EnsurePersistentSurface(current, viewport, grContext));
 #pragma warning restore IDISP005
 
         RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, dirtyRegion);
@@ -328,28 +329,41 @@ public sealed class MapRenderer : IMapRenderer
             Render(skCanvas, viewport, widgets, renderService, 1);
     }
 
-    private static object EnsurePersistentSurface(object? current, Viewport viewport)
+    private static object EnsurePersistentSurface(object? current, Viewport viewport, GRContext? grContext)
     {
         var width = (int)Math.Round(viewport.Width);
         var height = (int)Math.Round(viewport.Height);
-        if (current is PersistentSurface { Width: var w, Height: var h } && w == width && h == height)
+        if (current is PersistentSurface { Width: var w, Height: var h, GrContext: var ctx }
+            && w == width && h == height && ReferenceEquals(ctx, grContext))
             return current;
 
 #pragma warning disable IDISP007 // current was created by this renderer and placed in RenderService; disposing it on resize is intentional
         (current as IDisposable)?.Dispose();
 #pragma warning restore IDISP007
 #pragma warning disable IDISP005 // Ownership transfers to RenderService via the Func<object?,object> delegate
-        return new PersistentSurface(width, height);
+        return new PersistentSurface(width, height, grContext);
 #pragma warning restore IDISP005
     }
 
     // SKSurface is created internally so this class owns and disposes it.
-    private sealed class PersistentSurface(int width, int height) : IDisposable
+    // When a GRContext is available the surface is GPU-backed (stays in VRAM across frames);
+    // falls back to a CPU raster surface when GPU rendering is not in use.
+    private sealed class PersistentSurface(int width, int height, GRContext? grContext) : IDisposable
     {
-        public SKSurface SKSurface { get; } = SKSurface.Create(new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul));
+        public SKSurface SKSurface { get; } = CreateSurface(width, height, grContext);
+        public GRContext? GrContext { get; } = grContext;
         public int Width { get; } = width;
         public int Height { get; } = height;
         public void Dispose() => SKSurface.Dispose();
+
+        private static SKSurface CreateSurface(int width, int height, GRContext? grContext)
+        {
+            var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul);
+            // GPU-backed when a GRContext is available; falls back to CPU if GPU surface creation fails.
+            return grContext is not null
+                ? SKSurface.Create(grContext, budgeted: true, imageInfo) ?? SKSurface.Create(imageInfo)
+                : SKSurface.Create(imageInfo);
+        }
     }
 
     private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService, MRect? dirtyRegion = null)
