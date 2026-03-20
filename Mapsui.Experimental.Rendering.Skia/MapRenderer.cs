@@ -36,6 +36,10 @@ public sealed class MapRenderer : IMapRenderer
     private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
     private static readonly Dictionary<string, CustomLayerRenderer.RenderHandler> _layerRenderers = [];
 
+    // True when the persistent surface does not reflect the last full frame.
+    // Starts true so the first partial update triggers a catch-up full render.
+    private bool _persistentSurfaceIsStale = true;
+
     static MapRenderer()
     {
         InitRenderer();
@@ -72,18 +76,52 @@ public sealed class MapRenderer : IMapRenderer
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
         var allWidgets = widgets.Concat(attributions);
+        var targetCanvas = (SKCanvas)target;
 
+        // Full update (or nearly full): render directly to the platform canvas — no intermediate
+        // surface, no Snapshot(), no DrawImage(). The persistent surface becomes stale because it
+        // no longer reflects the current frame.
+        if (dirtyRegion == null || IsNearlyFullScreen(dirtyRegion, viewport))
+        {
+            _persistentSurfaceIsStale = true;
+            RenderTypeSave(targetCanvas, viewport, layers, allWidgets, renderService, background, null);
+            return;
+        }
+
+        // Partial update: use the persistent surface as the backing "previous full frame" so we
+        // only redraw the dirty region while the rest of the image stays intact.
 #pragma warning disable IDISP005 // EnsurePersistentSurface returns a surface whose ownership transfers to RenderService
         var grContext = renderService.GpuContext as GRContext;
         var surface = (PersistentSurface)renderService.GetPersistentRenderSurface(current => EnsurePersistentSurface(current, viewport, grContext));
 #pragma warning restore IDISP005
 
+        if (_persistentSurfaceIsStale)
+        {
+            // The persistent surface is out of date (e.g. after panning). Do a one-time catch-up
+            // full render so it contains the correct base frame before applying the small delta.
+            _persistentSurfaceIsStale = false;
+            RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, null);
+        }
+
         RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, dirtyRegion);
 
-        // Blit the persistent surface to the platform-provided canvas.
+        // Blit the persistent surface (full frame + delta) to the platform-provided canvas.
         surface.SKSurface.Canvas.Flush();
         using var snapshot = surface.SKSurface.Snapshot();
-        ((SKCanvas)target).DrawImage(snapshot, 0, 0);
+        targetCanvas.DrawImage(snapshot, 0, 0);
+    }
+
+    // Threshold above which a "partial" update is treated as a full update to avoid the overhead
+    // of reading back the persistent surface for a region that covers nearly everything anyway.
+    private const double NearlyFullScreenThreshold = 0.8;
+
+    private static bool IsNearlyFullScreen(MRect dirtyRegion, Viewport viewport)
+    {
+        // Convert the dirty world rect to screen pixels and compare against the viewport area.
+        var screenRect = viewport.WorldToScreen(dirtyRegion);
+        var dirtyArea = screenRect.Width * screenRect.Height;
+        var totalArea = viewport.Width * viewport.Height;
+        return totalArea <= 0 || dirtyArea / totalArea >= NearlyFullScreenThreshold;
     }
 
     /// <inheritdoc />
