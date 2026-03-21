@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="GeoData\GeoJson\countries.geojson" />
     <None Remove="GeoData\MbTiles\zurich.mbtiles" />
+    <None Remove="GeoData\GpsTracks\gps_luckydaxiang.csv" />
     <None Remove="GeoData\TrueMarble\0\0\0.png" />
     <None Remove="GeoData\TrueMarble\1\0\0.png" />
     <None Remove="GeoData\TrueMarble\1\0\1.png" />
@@ -78,6 +79,7 @@
     <EmbeddedResource Include="GeoData\Json\cities.json" />
     <EmbeddedResource Include="GeoData\Json\congo.json" />
     <EmbeddedResource Include="GeoData\Json\countries-hires.json" />
+    <EmbeddedResource Include="GeoData\GpsTracks\gps_luckydaxiang.csv" />
     <EmbeddedResource Include="GeoData\MbTiles\el-molar.mbtiles" />
     <EmbeddedResource Include="GeoData\MbTiles\torrejon-de-ardoz.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
