@@ -154,13 +154,13 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         {
             var tileData = await httpTileSource.GetTileAsync(GetHttpClient(), tileInfo).ConfigureAwait(false);
             var mRaster = ToRaster(tileInfo, tileData);
-            return new RasterFeature(mRaster);
+            return mRaster == null ? null : new RasterFeature(mRaster);
         }
         else if (_tileSource is ILocalTileSource localTileSource)
         {
             var tileData = await localTileSource.GetTileAsync(tileInfo).ConfigureAwait(false);
             var mRaster = ToRaster(tileInfo, tileData);
-            return new RasterFeature(mRaster);
+            return mRaster == null ? null : new RasterFeature(mRaster);
         }
         else
         {
