@@ -43,6 +43,11 @@ public sealed class RenderService : IDisposable
     /// </summary>
     public Func<Viewport, ILayer, IFeature, IStyle, RenderService, IDrawable?>? CreateDrawable { get; set; }
 
+    // Opaque handle to the GPU context (e.g. GRContext from SkiaSharp). Typed as object so the
+    // core assembly has no dependency on SkiaSharp. Set by the platform MapControl on every
+    // GL paint event; null when CPU rendering is in use.
+    public object? GpuContext { get; set; }
+
     public DrawableImageCache DrawableImageCache { get; }
     public VectorCache VectorCache { get; }
     /// <summary>
