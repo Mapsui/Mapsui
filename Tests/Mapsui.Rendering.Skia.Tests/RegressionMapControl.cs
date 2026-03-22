@@ -19,9 +19,12 @@ public sealed class RegressionMapControl : IMapControl
 {
     private Map _map;
 
-    public RegressionMapControl(MapRenderer? mapRenderer = null)
+    // Override this in LocalRendererConfig.cs (git-ignored) to switch to a different renderer locally.
+    public static Func<IMapRenderer> CreateRenderer { get; set; } = () => new MapRenderer();
+
+    public RegressionMapControl(IMapRenderer? mapRenderer = null)
     {
-        Renderer = mapRenderer ?? new MapRenderer();
+        Renderer = mapRenderer ?? CreateRenderer();
         _map = new();
     }
 

@@ -64,7 +64,7 @@ public class MapRegressionTests
             new WfsGeometryFilterSample(), // Crashes on the build server.
             new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
             new ArcGISImageServiceSample(), // Changes and we did not cache the reponse in the sqlite yet.
-            new CalloutWrapAroundSample(), // Reference image uses FontSource (custom font) which renders Chinese text. The standard renderer does not support FontSource so it produces tofu instead.
+            new CalloutWrapAroundSample(), // FontSource (custom font) renders Chinese text; the standard renderer doesn't support it.
         ];
 
     [Test]
@@ -100,8 +100,7 @@ public class MapRegressionTests
             var map = mapControl.Map;
             await SampleHelper.DisplayMapAsync(mapControl).ConfigureAwait(false);
             Performance.DefaultIsActive = ActiveMode.No; // Never show performance in rendering tests so that Release and Debug runs generate the same image.
-            MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
-            var mapRenderer = new MapRenderer();
+            Mapsui.Rendering.Skia.MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
 
             if (map != null)
             {
@@ -109,7 +108,7 @@ public class MapRegressionTests
 
                 _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
-                using var bitmap = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
+                using var bitmap = mapControl.Renderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                     map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
                 // aside
