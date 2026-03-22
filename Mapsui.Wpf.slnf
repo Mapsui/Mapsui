@@ -4,6 +4,7 @@
     "projects": [
       "Benchmarks\\Mapsui.Rendering.Benchmarks\\Mapsui.Rendering.Benchmarks.csproj",
       "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
+      "Mapsui.Experimental.Rendering.Skia\\Mapsui.Experimental.Rendering.Skia.csproj",
       "Mapsui.Extensions\\Mapsui.Extensions.csproj",
       "Mapsui.Nts\\Mapsui.Nts.csproj",
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
