@@ -15,6 +15,11 @@ public partial class SampleWindow : Form
     private readonly TrackBar _rotationSlider;
     private readonly CheckedListBox _layerList;
 
+    static SampleWindow()
+    {
+        SampleConfiguration.ApplyRendererConfig();
+    }
+
     public SampleWindow()
     {
         InitializeComponent();

@@ -16,6 +16,7 @@ public partial class Window1
 {
     static Window1()
     {
+        SampleConfiguration.ApplyRendererConfig();
         Common.Samples.Register();
     }
 
@@ -24,9 +25,6 @@ public partial class Window1
         InitializeComponent();
 
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-        // Uncomment the line below to use the Experimental Skia renderer
-        // MapControl.SetMapRenderer(new Experimental.Rendering.Skia.MapRenderer());
         MapControl.Map.Navigator.RotationLock = false;
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;

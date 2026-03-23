@@ -32,7 +32,10 @@ public sealed class RenderController : IDisposable
     private bool _isRunning = true;
     private int _timestampStartDraw;
     private readonly Stopwatch _stopwatch = new(); // Stopwatch for measuring drawing times
-    private IMapRenderer _mapRenderer = new MapRenderer();
+    // Use the explicit factory if one was configured (e.g. by SampleConfiguration.ApplyRendererConfig());
+    // otherwise fall back to direct construction which triggers MapRenderer's static ctor and
+    // registers the standard Skia renderer as the default factory.
+    private IMapRenderer _mapRenderer = DefaultRendererFactory.IsConfigured ? DefaultRendererFactory.Create() : new MapRenderer();
     private readonly Func<Map?> _getMap;
     // Pending refresh request: null = nothing pending yet, otherwise accumulates since the last render.
     private RefreshRequest? _pendingRefresh;
