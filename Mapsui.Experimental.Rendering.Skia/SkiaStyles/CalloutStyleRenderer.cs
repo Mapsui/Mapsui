@@ -7,6 +7,7 @@ using Mapsui.Experimental.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using Topten.RichTextKit;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -102,37 +103,40 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         else
         {
             using var titleFont = CreateSkFont(callout.TitleFont, renderService);
-            using var titlePaint = new SKPaint { Color = callout.TitleFontColor.ToSkia(), IsAntialias = true };
-            var (titleLines, titleWidth, titleHeight) = SkiaTextLayoutHelper.LayoutText(
-                callout.Title, titleFont, titlePaint, (float)callout.MaxWidth, callout.TitleTextAlignment);
+            var titleTextBlock = SkiaTextLayoutHelper.CreateTextBlock(
+                callout.Title, titleFont, callout.TitleTextAlignment, callout.TitleFontColor.ToSkia(), (float)callout.MaxWidth);
 
-            var subtitleLines = Array.Empty<SkiaTextLayoutHelper.Line>();
-            var subtitleWidth = 0f;
-            var subtitleHeight = 0f;
+            TextBlock? subtitleTextBlock = null;
             SKFont? subtitleFont = null;
-            SKPaint? subtitlePaint = null;
 
             if (callout.Type == CalloutType.Detail)
             {
                 subtitleFont = CreateSkFont(callout.SubtitleFont, renderService);
-                subtitlePaint = new SKPaint { Color = callout.SubtitleFontColor.ToSkia(), IsAntialias = true };
-                (subtitleLines, subtitleWidth, subtitleHeight) = SkiaTextLayoutHelper.LayoutText(
-                    callout.Subtitle, subtitleFont, subtitlePaint, (float)callout.MaxWidth, callout.SubtitleTextAlignment);
+                subtitleTextBlock = SkiaTextLayoutHelper.CreateTextBlock(
+                    callout.Subtitle, subtitleFont, callout.SubtitleTextAlignment, callout.SubtitleFontColor.ToSkia(), (float)callout.MaxWidth);
             }
 
-            var width = Math.Max(titleWidth, subtitleWidth);
-            var height = titleHeight + (callout.Type == CalloutType.Detail ? subtitleHeight + (float)callout.Spacing : 0f);
+            var width = Math.Max(titleTextBlock.MeasuredWidth, subtitleTextBlock?.MeasuredWidth ?? 0);
+            var height = titleTextBlock.MeasuredHeight + (subtitleTextBlock != null ? subtitleTextBlock.MeasuredHeight + (float)callout.Spacing : 0f);
+
+            // Re-layout with final width so text alignment works correctly
+            titleTextBlock.MaxWidth = width;
+            titleTextBlock.Layout();
+            if (subtitleTextBlock != null)
+            {
+                subtitleTextBlock.MaxWidth = width;
+                subtitleTextBlock.Layout();
+            }
 
             using var recorder = new SKPictureRecorder();
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, width, height));
 
-            SkiaTextLayoutHelper.DrawTextBlock(canvas, titleLines, titleFont, titlePaint, 0, 0, width, callout.TitleTextAlignment);
+            SkiaTextLayoutHelper.PaintTextBlock(canvas, titleTextBlock, 0, 0);
 
-            if (callout.Type == CalloutType.Detail)
-                SkiaTextLayoutHelper.DrawTextBlock(canvas, subtitleLines, subtitleFont!, subtitlePaint!, 0, titleHeight + (float)callout.Spacing, width, callout.SubtitleTextAlignment);
+            if (subtitleTextBlock != null)
+                SkiaTextLayoutHelper.PaintTextBlock(canvas, subtitleTextBlock, 0, titleTextBlock.MeasuredHeight + (float)callout.Spacing);
 
             subtitleFont?.Dispose();
-            subtitlePaint?.Dispose();
 
             return recorder.EndRecording();
         }

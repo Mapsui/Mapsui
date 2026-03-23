@@ -29,6 +29,12 @@
 - ✅ **`CustomFontSample`**: Demonstrates embedded font (`OpenSans-Regular.ttf`) in `LabelStyle`.
 - ✅ **`FontSourceCacheTests`** (10 tests) and **`FontTests`** (5 tests).
 - ✅ **`fontsource.md`** documentation page added to MkDocs.
+- ✅ **`LabelStyle.TextAlignment`** property added (`Mapsui/Styles/LabelStyle.cs`, type `Alignment`). Independent of `HorizontalAlignment` (which governs the label box position relative to the anchor) — `TextAlignment` governs glyph alignment within the text box. Used by `LabelStyleRenderer` for per-line alignment via `CalcLineOriginX`.
+- ✅ **`RightToLeftSample`** added to Tests category: Arabic text using NotoSansArabic FontSource in both `LabelStyle` and `CalloutStyle`, demonstrating the new `TextAlignment` property.
+- ✅ **`EmojiSample`** added to Tests category: emoji text in `LabelStyle` and `CalloutStyle`, demonstrating the RTK-based emoji/bidi fallback in `LabelStyleRenderer`.
+- ✅ **RTK single-line path in `LabelStyleRenderer`**: single-line labels now use `SkiaTextLayoutHelper.CreateTextBlock` + `PaintTextBlock` instead of `SKCanvas.DrawText`. RTK handles bidi reordering (UAX#9), font fallback (emoji), and HarfBuzz glyph shaping. Multi-line per-line path also updated to use RTK.
+- ✅ **Vertical alignment fix for RTK labels**: `drawRect.Height` now uses `font.Spacing` (= ascent + descent + leading) instead of tight glyph bounds (`rect.Bottom - rect.Top`). RTK renders with `font.Spacing` height, so `drawRect` must use the same metric for correct vertical centering — previously RTL labels with Arabic (NotoSansArabic) appeared shifted because tight glyph bounds typically differ from `font.Spacing` for Arabic script.
+- ✅ **Split regression test excluded samples**: `MapRegressionTests` now has `AlwaysExcludedSamples` (animations, network, unreliable — excluded in all modes) and `ExperimentalOnlySamples` (samples requiring experimental renderer: `RightToLeftSample`, `CalloutWrapAroundSample`, `EmojiSample` — excluded only in standard-renderer mode). `TestConfiguration.IsExperimentalRenderer` is eagerly computed from `config.json` / `config.local.json` so it is available during NUnit test-case discovery (before `[SetUpFixture]` runs).
 
 
 ## Problem Statement
@@ -262,3 +268,15 @@ All steps complete — see Completed Work above.
 6. **Font metrics consistency**: When switching from a system font to a custom font (same visual design), label sizes might change. Should we worry about layout stability?
 
 7. **Sample app**: Issue #3159 specifically asks for a sample demonstrating custom font usage. Once the basic mechanism is in place, we should create a sample that demonstrates it end-to-end.
+
+---
+
+## Later Concerns (deferred)
+
+These were identified during Phase 2 work but deferred for a later PR:
+
+1. **Bold/Italic with FontSource**: When a `Font` has both `FontSource` and `Bold`/`Italic` set, the weight/slant flags are currently ignored — `SKTypeface.FromStream()` returns whatever style the font file contains. To support bold/italic with custom fonts you would need to load a separate font file per variant (or use a variable font), or synthesize the style with `SKFont.Embolden`/`SKFont.SkewX`. Declared "fancy feature" — not in scope for the current PR.
+
+2. **Scale bar widget using `LabelStyle`/`Font`**: The `ScaleBarWidget` accesses `Font` directly; it does not go through `LabelStyle`. Unifying scale bar text rendering to use common `LabelStyle` infrastructure would improve consistency but requires a broader refactor.
+
+3. **Experimental renderer switching centralization**: A `config.json` / `config.local.json` mechanism is in place for the regression tests. Centralizing the switch so that all sample apps (WPF, MAUI, etc.) read from the same config would make it easier to test the experimental renderer end-to-end. Scheduled for a separate PR.

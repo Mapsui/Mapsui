@@ -50,21 +50,37 @@ public class MapRegressionTests
             .All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName),
     ];
 
+    // Samples excluded in every rendering mode (animations, network-dependent, unreliable).
+    public static ISampleBase[] AlwaysExcludedSamples =>
+    [
+        new AnimatedPointsSample(), // We have no reliable way yet to compare animations.
+        new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
+        new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
+        new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
+        new CustomSvgColorSample(), // Is currently not functioning and should be fixed with a redesign.
+        new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
+        new WmsBasilicataSample(), // Times out,
+        new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
+        new WfsGeometryFilterSample(), // Crashes on the build server.
+        new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
+        new ArcGISImageServiceSample(), // Changes and we did not cache the reponse in the sqlite yet.
+    ];
+
+    // Samples that require the experimental renderer (FontSource, RTK bidi/emoji).
+    // Excluded when running with the standard renderer; included when running with the experimental renderer.
+    public static ISampleBase[] ExperimentalOnlySamples =>
+    [
+        new CalloutWrapAroundSample(), // FontSource (custom font) renders Chinese text; the standard renderer doesn't support it.
+        new RightToLeftSample(), // Uses FontSource for Arabic font; the standard renderer doesn't support FontSource.
+        new EmojiSample(), // Emoji rendering requires RTK bidi/font-fallback in the experimental renderer.
+    ];
+
     public static object[] ExcludedSamples =>
         _excludedSamples ??=
         [
-            new AnimatedPointsSample(), // We have no reliable way yet to compare animations.
-            new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
-            new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
-            new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
-            new CustomSvgColorSample(), // Is currently not functioning and should be fixed with a redesign.
-            new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
-            new WmsBasilicataSample(), // Times out,
-            new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
-            new WfsGeometryFilterSample(), // Crashes on the build server.
-            new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
-            new ArcGISImageServiceSample(), // Changes and we did not cache the reponse in the sqlite yet.
-            new CalloutWrapAroundSample(), // FontSource (custom font) renders Chinese text; the standard renderer doesn't support it.
+            .. AlwaysExcludedSamples,
+            // In standard-renderer mode, also exclude samples that only work with the experimental renderer.
+            .. (TestConfiguration.IsExperimentalRenderer ? [] : ExperimentalOnlySamples),
         ];
 
     [Test]
@@ -107,6 +123,7 @@ public class MapRegressionTests
                 // Act
 
                 _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+                await map.RenderService.FontSourceCache.FetchAllFontDataAsync();
 
                 using var bitmap = mapControl.Renderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                     map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());

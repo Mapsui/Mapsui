@@ -21,6 +21,8 @@ public sealed class FontSourceCache : IFetchableSource
     /// <inheritdoc/>
     public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
+
+
     /// <inheritdoc/>
     public int Id => -2; // Distinct from ImageSourceCache's -1. Not a layer Id.
 

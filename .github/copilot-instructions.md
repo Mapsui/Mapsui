@@ -92,10 +92,52 @@ Samples **do not need to be manually registered**. The `Mapsui.Sample.SourceGene
 ### Experimental renderer and text layout
 The experimental renderer (`Mapsui.Experimental.Rendering.Skia`) replaces RichTextKit (RTK) with a custom `SkiaTextLayoutHelper`. When measuring line height, always use `font.Spacing` (= ascent + descent + leading) rather than tight glyph bounds (`rect.Bottom - rect.Top`), so the spacing matches RTK's `TextBlock.MeasuredHeight` behavior. The `CalloutStyle.Spacing` property defaults to `0` — the leading built into the font provides the natural gap between title and subtitle.
 
+## After making changes — checklist
+
+After completing any non-trivial change, work through this checklist in order:
+
+### 1. Build — no errors allowed
+```ps
+dotnet build
+```
+Fix all build errors before proceeding.
+
+### 2. Unit tests — run first (fast)
+```ps
+dotnet test --filter "Category!=Regression"
+```
+Or target the affected project directly. These are fast and catch most logic errors.
+
+### 3. Rendering regression tests — run after unit tests (slower)
+Required for any change that touches rendering (styles, renderers, callouts, widgets, etc.):
+```ps
+dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "TestSampleAsync"
+```
+See the **Rendering regression tests** section in Testing guidance for how to interpret results and update reference images.
+
+### 4. Code style and guidelines check
+- Does the code follow the compact Mapsui style (see **Code style** section)?
+- Are comments explaining *why*, not *what*?
+- Are new public APIs documented with XML doc comments?
+- Are there any guideline violations (disposability, rendering in draw loop, lon/lat order, extension methods)?
+
+### 5. Documentation — does anything need updating?
+- **Upgrade guide** (see below): are there breaking changes?
+- **README or user-facing docs** (`docs/general/markdown/`): does behavior change in a way users need to know?
+- **mkdocs nav** (`docs/general/mkdocs.yml`): if a new doc page was added, register it in the nav.
+
+### 6. Breaking changes → update the upgrade guide
+If the change removes, renames, or alters the behavior of any public API, **update the upgrade guide** for the current major version:
+- Location: `docs/general/markdown/v6.0-upgrade-guide.md`
+- Describe what changed, why, and how users should migrate.
+- Keep entries concise: old API → new API, with a one-sentence rationale.
+
+There are no E2E tests in this repository, so step 3 (regression tests) is the closest equivalent.
+
 ## Documentation
 - Update README or docs when behavior changes or new features are added.
 - Keep commit messages and PR descriptions concise and informative (what/why/impact).
-- AI-generated design documents (architecture analyses, stage plans, etc.) live in [docs/ai-generated/](../docs/ai-generated/). Add new ones there.
+- AI-generated design documents (architecture analyses, stage plans, etc.) live in [docs/ai-generated/](../docs/ai-generated/). Add new ones there. This includes design notes, proposals, working documents, and any file generated during a chat session for reference. When Copilot produces a document that is not user-facing documentation or source code — such as a design analysis, a proposal, an upgrade plan, or a discussion summary — it must be placed in `docs/ai-generated/` rather than in the project root or any other location.
 
 ## Pull requests
 - Keep PRs small and focused; link to any related issues.
