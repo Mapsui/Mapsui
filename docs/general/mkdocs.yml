@@ -27,6 +27,8 @@ nav:
   - 'resolution.md'
   - 'projections.md'
   - 'custom-style-renders.md'
+  - 'custom-point-style-renderer.md'
+  - 'custom-layer-renderer.md'
   - 'performance-widget.md'
   - 'imagesource.md'
   - 'fontsource.md'
