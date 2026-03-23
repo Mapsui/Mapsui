@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Mapsui.Rendering </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Mapsui.Rendering ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Rendering">
+
+  <h1 id="Mapsui_Rendering" data-uid="Mapsui.Rendering" class="text-break">Namespace Mapsui.Rendering</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Mapsui.Rendering.CompositeDrawable.html">CompositeDrawable</a></h4>
+      <section><p>A drawable that wraps multiple child drawables into a single cache entry.
+Used when a single feature produces multiple drawable objects (e.g. a
+GeometryCollection with polygons and lines, or a feature with multiple coordinates).
+The composite uses the centroid of all children's world positions.</p>
+</section>
+      <h4><a class="xref" href="Mapsui.Rendering.DefaultRendererFactory.html">DefaultRendererFactory</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Mapsui.Rendering.DrawableCache.html">DrawableCache</a></h4>
+      <section><p>Caches drawable objects per (feature, style) combination.
+Thread-safe: drawables are created on a background thread and read on the UI thread.
+Uses strict iteration-based eviction: anything not stamped with the current
+iteration is removed on <a class="xref" href="Mapsui.Rendering.DrawableCache.html#Mapsui_Rendering_DrawableCache_Cleanup_System_Int64_">Cleanup(long)</a>.</p>
+</section>
+      <h4><a class="xref" href="Mapsui.Rendering.MapInfoRecord.html">MapInfoRecord</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Mapsui.Rendering.RenderController.html">RenderController</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Mapsui.Rendering.RenderException.html">RenderException</a></h4>
+      <section><p>Exception thrown when a layer rendering fails</p>
+</section>
+      <h4><a class="xref" href="Mapsui.Rendering.RenderService.html">RenderService</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Mapsui.Rendering.TileDrawableCache.html">TileDrawableCache</a></h4>
+      <section><p>Drawable cache for tile layers with LRU-style eviction based on render iteration.
+Keeps more tiles than strictly needed so that zooming in/out
+doesn't immediately discard previously rendered tiles.</p>
+</section>
+      <h4><a class="xref" href="Mapsui.Rendering.VisibleFeatureIterator.html">VisibleFeatureIterator</a></h4>
+      <section></section>
+    <h3 id="structs">
+Structs
+</h3>
+      <h4><a class="xref" href="Mapsui.Rendering.DrawableCacheKey.html">DrawableCacheKey</a></h4>
+      <section><p>Composite key for caching drawables, combining feature and style generation IDs.
+When either the feature or style is modified (calling Modified()), the GenerationId
+changes, causing the old cache entry to become stale and a new drawable to be created.</p>
+</section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Mapsui.Rendering.IDrawable.html">IDrawable</a></h4>
+      <section><p>Represents a pre-created rendering object that can be drawn quickly on the render thread.
+Drawables store world coordinates and pre-built platform-specific objects (e.g. SKPath, SKPaint)
+so that the draw step on the UI thread is minimal.</p>
+</section>
+      <h4><a class="xref" href="Mapsui.Rendering.IDrawableCache.html">IDrawableCache</a></h4>
+      <section><p>Interface for caches that store pre-created drawable objects per (feature, style) combination.
+Different implementations can use different eviction strategies
+(e.g. strict iteration-based for regular layers, LRU for tile layers).
+Each entry is stamped with the iteration at which it was last used.</p>
+</section>
+      <h4><a class="xref" href="Mapsui.Rendering.IDrawableImage.html">IDrawableImage</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Mapsui.Rendering.IDrawableStyleRenderer.html">IDrawableStyleRenderer</a></h4>
+      <section><p>A style renderer that supports the two-step drawable architecture:</p>
+<ol>
+<li>CreateDrawables: Creates platform-specific drawable objects (can run on a background thread).</li>
+<li>DrawDrawable: Draws a pre-created drawable to the canvas (runs on the UI thread, should be fast).</li>
+</ol>
+</section>
+      <h4><a class="xref" href="Mapsui.Rendering.IMapRenderer.html">IMapRenderer</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Mapsui.Rendering.ITwoStepStyleRenderer.html">ITwoStepStyleRenderer</a></h4>
+      <section><p>Optional interface that style renderers can implement to support two-step rendering
+with background preparation. The caching is managed externally by the drawable renderer
+orchestrator (background thread) and the map renderer (render thread).
+Renderers that implement this interface do NOT interact with the cache directly.</p>
+<p>When a renderer implements this interface:</p>
+<ol>
+<li><a class="xref" href="Mapsui.Rendering.ITwoStepStyleRenderer.html#Mapsui_Rendering_ITwoStepStyleRenderer_CreateCache">CreateCache()</a> is called once per layer to create the appropriate cache type.</li>
+<li><a class="xref" href="Mapsui.Rendering.ITwoStepStyleRenderer.html#Mapsui_Rendering_ITwoStepStyleRenderer_CreateDrawable_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_RenderService_">CreateDrawable(Viewport, ILayer, IFeature, IStyle, RenderService)</a> is called on a background thread — the caller stores the
+returned drawable in the cache.</li>
+<li>On the render thread, the caller fetches the cached drawable and passes it to
+<a class="xref" href="Mapsui.Rendering.ITwoStepStyleRenderer.html#Mapsui_Rendering_ITwoStepStyleRenderer_DrawDrawable_System_Object_Mapsui_Viewport_Mapsui_Rendering_IDrawable_Mapsui_Layers_ILayer_">DrawDrawable(object, Viewport, IDrawable, ILayer)</a>.</li>
+</ol>
+<p>Renderers that do NOT implement this interface work as before — everything runs
+on the render thread via <code>ISkiaStyleRenderer.Draw</code>.</p>
+</section>
+    <h3 id="enums">
+Enums
+</h3>
+      <h4><a class="xref" href="Mapsui.Rendering.RenderFormat.html">RenderFormat</a></h4>
+      <section><p>Formats the MapRenderer should render to</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
