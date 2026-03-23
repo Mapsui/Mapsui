@@ -26,7 +26,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static void DrawSymbolStyle(SKCanvas canvas, IPointStyle pointStyle, IFeature feature, Mapsui.Rendering.RenderService renderService, float opacity)
+    private static void DrawSymbolStyle(SKCanvas canvas, IPointStyle pointStyle, Mapsui.Rendering.RenderService renderService, float opacity)
     {
         if (pointStyle is SymbolStyle symbolStyle)
         {

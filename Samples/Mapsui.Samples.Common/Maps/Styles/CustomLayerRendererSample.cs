@@ -27,6 +27,8 @@ public class CustomLayerRendererSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreatePointLayer(map));
         MapRenderer.RegisterLayerRenderer("custom-layer-renderer", CustomLayerRenderer);
+        // Also register for the experimental renderer (needed when running with LocalRendererConfig.cs).
+        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterLayerRenderer("custom-layer-renderer", CustomLayerRenderer);
         map.Widgets.Add(new MapInfoWidget(map, map.Layers.OfType<MemoryLayer>));
         return map;
     }

@@ -45,6 +45,8 @@ public class CustomPointStyleAdvancedSample : ISample
         map.Widgets.Add(new MapInfoWidget(map, [map.Layers.Last()]));
 
         MapRenderer.RegisterPointStyleRenderer("custom-style-advanced", MyCustomStyleRenderer);
+        // Also register for the experimental renderer (needed when running with LocalRendererConfig.cs).
+        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-advanced", MyCustomStyleRenderer);
 
         return map;
     }

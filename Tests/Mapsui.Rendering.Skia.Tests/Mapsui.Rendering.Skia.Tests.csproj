@@ -43,6 +43,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- config.json is committed and contains default test settings (see TestConfiguration.cs). -->
+    <!-- config.local.json is git-ignored and overrides config.json when present. -->
+    <None Include="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="config.local.json" Condition="Exists('config.local.json')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Resources\Cache\ArcGisImageServiceSample.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

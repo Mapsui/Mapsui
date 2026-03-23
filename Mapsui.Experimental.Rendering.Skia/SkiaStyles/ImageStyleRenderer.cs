@@ -26,7 +26,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, IFeature feature, RenderService renderService, float opacity)
+    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, RenderService renderService, float opacity)
     {
         if (pointStyle is ImageStyle imageStyle)
         {
