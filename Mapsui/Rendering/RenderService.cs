@@ -18,6 +18,7 @@ public sealed class RenderService : IDisposable
         ImageSourceCache = new ImageSourceCache();
         FontSourceCache = new FontSourceCache();
         VectorCache = new VectorCache(this, vectorCacheCapacity);
+
     }
 
     /// <summary>

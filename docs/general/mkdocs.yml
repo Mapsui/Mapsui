@@ -38,6 +38,7 @@ nav:
   - Upgrade guides:
     - 'v4.0-upgrade-guide.md'
     - 'v5.0-upgrade-guide.md'
+    - 'v6.0-upgrade-guide.md'
 
   - Contributing to Mapsui:
     - 'contributors-guidelines.md'

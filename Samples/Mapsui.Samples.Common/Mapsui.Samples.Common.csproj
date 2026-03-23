@@ -65,6 +65,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\OpenSans-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\NotoSansArabic-Regular.ttf" />
     <EmbeddedResource Include="GeoData\GeoJson\cities.geojson" />
     <EmbeddedResource Include="GeoData\GeoJson\countries.geojson" />
     <EmbeddedResource Include="GeoData\GeoTiff\example.tfw">

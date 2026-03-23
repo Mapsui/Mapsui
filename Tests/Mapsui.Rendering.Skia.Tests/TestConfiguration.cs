@@ -17,23 +17,31 @@ using System.Text.Json;
 [SetUpFixture]
 public class TestConfiguration
 {
+    // Eagerly computed from config files so it is available when NUnit evaluates
+    // [TestCaseSource] at test-discovery time — before [OneTimeSetUp] runs.
+    public static bool IsExperimentalRenderer { get; } = ReadIsExperimental();
+
     [OneTimeSetUp]
     public void Setup()
     {
-        var dir = TestContext.CurrentContext.TestDirectory;
-        // Read default config first, then let config.local.json override it.
-        var cfg = ReadConfig(System.IO.Path.Combine(dir, "config.json"));
-        var local = ReadConfig(System.IO.Path.Combine(dir, "config.local.json"));
-        if (local is not null) cfg = local;
-
-        if (cfg?.ExperimentalRenderer == true)
+        if (IsExperimentalRenderer)
             RegressionMapControl.CreateRenderer = () => new MapRenderer();
+    }
+
+    private static bool ReadIsExperimental()
+    {
+        var dir = System.IO.Path.GetDirectoryName(typeof(TestConfiguration).Assembly.Location)
+                  ?? System.AppDomain.CurrentDomain.BaseDirectory;
+        var cfg = ReadConfig(System.IO.Path.Combine(dir, "config.local.json"))
+                  ?? ReadConfig(System.IO.Path.Combine(dir, "config.json"));
+        return cfg?.ExperimentalRenderer == true;
     }
 
     private static LocalConfig? ReadConfig(string path)
     {
         if (!System.IO.File.Exists(path)) return null;
-        return JsonSerializer.Deserialize<LocalConfig>(System.IO.File.ReadAllText(path));
+        return JsonSerializer.Deserialize<LocalConfig>(System.IO.File.ReadAllText(path),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
 
     private sealed class LocalConfig

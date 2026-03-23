@@ -160,4 +160,45 @@ public static class SkiaTextLayoutHelper
             canvas.DrawText(line.Value, lineX, y + line.Baseline, SKTextAlign.Left, font, paint);
         }
     }
+
+    /// <summary>
+    /// Create a RichTextKit TextBlock with proper font mapping for the given font.
+    /// The TextBlock handles bidi reordering (UAX#9) and font fallback internally.
+    /// </summary>
+    public static TextBlock CreateTextBlock(string? text, SKFont font, Alignment alignment,
+        SKColor textColor, float maxWidth = 0)
+    {
+        var textBlock = new TextBlock();
+        if (font.Typeface != null)
+            textBlock.FontMapper = new MapsuiFontMapper(font.Typeface);
+
+        textBlock.AddText(text ?? "", new Style
+        {
+            FontFamily = font.Typeface?.FamilyName ?? "Arial",
+            FontSize = font.Size,
+            FontWeight = font.Typeface?.IsBold == true ? 700 : 400,
+            FontItalic = font.Typeface?.IsItalic ?? false,
+            TextColor = textColor,
+        });
+
+        textBlock.Alignment = alignment switch
+        {
+            Alignment.Center => TextAlignment.Center,
+            Alignment.Right => TextAlignment.Right,
+            _ => TextAlignment.Left,
+        };
+
+        if (maxWidth > 0)
+            textBlock.MaxWidth = maxWidth;
+        textBlock.Layout();
+
+        return textBlock;
+    }
+
+    /// <summary>
+    /// Paint a RichTextKit TextBlock onto the canvas. Handles bidi reordering,
+    /// font fallback, and proper glyph shaping via HarfBuzz.
+    /// </summary>
+    public static void PaintTextBlock(SKCanvas canvas, TextBlock textBlock, float x, float y) =>
+        textBlock.Paint(canvas, new SKPoint(x, y), new TextPaintOptions { Edging = SKFontEdging.Antialias });
 }
