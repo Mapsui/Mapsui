@@ -90,7 +90,7 @@ Then revert any files that were not actually affected by your change (avoid unne
 Samples **do not need to be manually registered**. The `Mapsui.Sample.SourceGenerator` (in `SourceGenerators/`) scans all classes that implement `ISample`, `ISampleBase`, `ISampleTest`, or `IMapViewSample` at build time and generates a `Samples.Register()` method in the assembly. Adding a new sample class that implements one of these interfaces is sufficient — no call to `AllSamples.Register()` is needed. The regression tests in `Mapsui.Rendering.Skia.Tests` pick up samples through the same mechanism.
 
 ### Experimental renderer and text layout
-The experimental renderer (`Mapsui.Experimental.Rendering.Skia`) replaces RichTextKit (RTK) with a custom `SkiaTextLayoutHelper`. When measuring line height, always use `font.Spacing` (= ascent + descent + leading) rather than tight glyph bounds (`rect.Bottom - rect.Top`), so the spacing matches RTK's `TextBlock.MeasuredHeight` behavior. The `CalloutStyle.Spacing` property defaults to `0` — the leading built into the font provides the natural gap between title and subtitle.
+The experimental renderer (`Mapsui.Experimental.Rendering.Skia`) wraps RichTextKit (RTK) inside `SkiaTextLayoutHelper`. RTK remains a required dependency — it provides UAX#14 line breaking, BiDi, and font fallback. When measuring line height, always use `font.Spacing` (ascent + descent + leading) rather than tight glyph bounds. See `.github/instructions/richtextkit.instructions.md` for full RTK guidance.
 
 ## After making changes — checklist
 
@@ -147,11 +147,6 @@ There are no E2E tests in this repository, so step 3 (regression tests) is the c
 ## Security and licensing
 - Do not commit secrets.
 - Adhere to repository licensing; ensure any copied code is compatible and attributed when needed.
-
-## How to ask Copilot for better help
-- Provide concrete file paths, types, and examples.
-- Ask for tests and edge cases.
-- Request refactors in small, verifiable steps.
 
 ## Contributor guidelines summary
 
