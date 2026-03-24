@@ -33,7 +33,10 @@ public sealed class MapRenderer : IMapRenderer
     {
         InitRenderer();
 
-        DefaultRendererFactory.Create = () => new MapRenderer();
+        // Only register as the default factory if nothing has been explicitly configured yet.
+        // This prevents overwriting a factory set by SampleConfiguration.ApplyRendererConfig().
+        if (!DefaultRendererFactory.IsConfigured)
+            DefaultRendererFactory.Create = () => new MapRenderer();
     }
 
     private static void InitRenderer()

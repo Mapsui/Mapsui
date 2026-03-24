@@ -15,6 +15,7 @@ public class MainForm : Form
 {
     static MainForm()
     {
+        SampleConfiguration.ApplyRendererConfig();
         Common.Samples.Register();
     }
 

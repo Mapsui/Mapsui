@@ -13,6 +13,7 @@ public partial class MainView : UserControl
 {
     static MainView()
     {
+        SampleConfiguration.ApplyRendererConfig();
         Common.Samples.Register();
     }
 
