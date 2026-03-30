@@ -10,6 +10,22 @@ The most common reason is that the default user-agent used by the osm layer is b
 MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer("your-user-agent"));
 ```
 
+### How do I set User-Agent or Referer headers on a tiled map source?
+Use the `configureHttpRequestMessage` parameter of `HttpTileSource` to add any HTTP headers, including `Referer`:
+
+```csharp
+var tileSource = new HttpTileSource(new GlobalSphericalMercator(),
+    "https://example.com/tiles/{z}/{x}/{y}.png",
+    configureHttpRequestMessage: (r) =>
+    {
+        r.Headers.TryAddWithoutValidation("User-Agent", "your-app-name");
+        r.Headers.TryAddWithoutValidation("Referer", "https://yoursite.com");
+    });
+MapControl.Map.Layers.Add(new TileLayer(tileSource));
+```
+
+This is also how `OpenStreetMap.CreateTileLayer` sets its user-agent internally.
+
 ### Why is all my data in a small area near the west coast of Africa?
 This is because the background data is in SphericalMercator (it is in the SphericalMercator 
 coordinate system) and the foreground data is in WGS84 (latlon). Use 
@@ -21,3 +37,4 @@ This is because the coordinates you pass to NavigateTo are in WGS84 whereas the
 background data is in SphericalMercator. Use SphericalMercator.FromLonLat to transform 
 the NavigateTo arguments to SphericalMercator.
 Note: There can be many other forms of mixing up coordinate systems, but this is the most common.
+
