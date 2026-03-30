@@ -26,6 +26,8 @@ nav:
   - 'static-image-generation.md'
   - 'resolution.md'
   - 'projections.md'
+  - 'wms.md'
+  - 'vector-style.md'
   - 'custom-style-renders.md'
   - 'custom-point-style-renderer.md'
   - 'custom-layer-renderer.md'
