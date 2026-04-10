@@ -11,13 +11,14 @@ namespace Mapsui.Experimental.VectorTiles;
 public sealed class RasterizedVectorTileSource : ILocalTileSource
 {
     private readonly VectorTilesSource _tileSource;
-    private readonly VectorStyle _style = new(VectorStyleKind.Default);
+    private readonly VectorStyle _style;
     private readonly ITileSchema _schema;
 
-    public RasterizedVectorTileSource(ITileDataSource tileDataSource, ITileSchema? schema = null)
+    public RasterizedVectorTileSource(ITileDataSource tileDataSource, ITileSchema? schema = null, VectorStyle? style = null)
     {
         _schema = schema ?? new GlobalSphericalMercator { YAxis = YAxis.OSM };
         _tileSource = new VectorTilesSource(tileDataSource);
+        _style = style ?? new VectorStyle(VectorStyleKind.Default);
     }
 
     public ITileSchema Schema => _schema;
