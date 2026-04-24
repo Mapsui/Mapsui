@@ -11,33 +11,38 @@
     <Company>Mapsui Developers</Company>
     <EnablePackageValidation>true</EnablePackageValidation>
     <PackageReleaseNotes>Release notes are at https://github.com/Mapsui/Mapsui/releases</PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
     <PackageTags>map maps mapping geo gis osm</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
     <!--Disable Run Api Compat Task causes Build failure on github actions with visual studio 2022 17.5 and .net Compilers Toolset 4.6-->
     <RunApiCompat>false</RunApiCompat>
-	  <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
-	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
-	  <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
     <MauiVersion>9.0.50</MauiVersion>
     <Maui8Version>8.0.100</Maui8Version>
   </PropertyGroup>
 
-	<!--Package Icon Include -->
-	<ItemGroup>
-		<None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
-		<None Include="..\LICENSE" Pack="true" PackagePath="\" />
-	</ItemGroup>
+  <!--Package Icon Include -->
+  <ItemGroup>
+    <None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <!-- Common Project Properties -->
   <PropertyGroup>
-	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
-	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <LangVersion>13.0</LangVersion>
-      <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
-      <!-- Enable Windows Targeting on non Windows platforms -->
-      <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <LangVersion>13.0</LangVersion>
+    <DebugType>portable</DebugType>
+    <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
+    <!-- Enable Windows Targeting on non Windows platforms -->
+    <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <ItemGroup>
