@@ -274,7 +274,7 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     /// <summary>
     /// Signals that the entire map needs to be redrawn on the next render cycle.
-    /// Use <see cref="RefreshGraphics(MRect)"/> instead when only a small area has changed.
+    /// Use <see cref="RefreshGraphics(MRect, CoordinateSpace)"/> instead when only a small area has changed.
     /// </summary>
     public void RefreshGraphics()
     {
@@ -282,14 +282,16 @@ public class Map : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
-    /// Signals that only the given world-coordinate rectangle needs to be redrawn.
-    /// Use this instead of <see cref="RefreshGraphics()"/> when a data change affects only a
-    /// small region, so the render controller can limit work to that area.
+    /// Signals that only the given rectangle needs to be redrawn.
+    /// Use <paramref name="coordinateSpace"/> to specify whether <paramref name="dirtyRect"/>
+    /// is in world coordinates (e.g. for a moving GPS marker) or in screen coordinates
+    /// (e.g. for a widget area fixed to the screen).
     /// </summary>
-    /// <param name="dirtyRect">The world-coordinate region that changed.</param>
-    public void RefreshGraphics(MRect dirtyRect)
+    /// <param name="dirtyRect">The region that changed.</param>
+    /// <param name="coordinateSpace">The coordinate space of <paramref name="dirtyRect"/>. Defaults to <see cref="CoordinateSpace.World"/>.</param>
+    public void RefreshGraphics(MRect dirtyRect, CoordinateSpace coordinateSpace = CoordinateSpace.World)
     {
-        RefreshGraphicsRequest?.Invoke(this, new RefreshGraphicsEventArgs(new RefreshRequest(dirtyRect)));
+        RefreshGraphicsRequest?.Invoke(this, new RefreshGraphicsEventArgs(new RefreshRequest(dirtyRect, coordinateSpace)));
     }
 
     public void OnViewportSizeInitialized()

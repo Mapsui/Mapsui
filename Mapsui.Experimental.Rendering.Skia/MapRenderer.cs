@@ -74,25 +74,39 @@ public sealed class MapRenderer : IMapRenderer
     }
 
     /// <inheritdoc />
+    // Resolves the dirty rect to a screen-space SKRect once here and passes it
+    // through to the internal helpers, so screen-space requests never need world conversion.
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null, CoordinateSpace coordinateSpace = CoordinateSpace.World)
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
         var allWidgets = widgets.Concat(attributions);
         var targetCanvas = (SKCanvas)target;
 
-        // Full update (or nearly full): render directly to the platform canvas — no intermediate
-        // surface, no Snapshot(), no DrawImage(). The persistent surface becomes stale because it
-        // no longer reflects the current frame.
-        if (dirtyRegion == null || IsNearlyFullScreen(dirtyRegion, viewport))
+        // Resolve the dirty rect to a screen-space SKRect and, for world-space requests only,
+        // a world-coord MRect for feature-query filtering.
+        SKRect? dirtyScreenRect = null;
+        MRect? worldDirtyRegion = null;
+        if (dirtyRegion is not null)
+        {
+            if (coordinateSpace == CoordinateSpace.Screen)
+                dirtyScreenRect = dirtyRegion.ToSkia();
+            else
+            {
+                worldDirtyRegion = dirtyRegion;
+                dirtyScreenRect = viewport.WorldToScreen(worldDirtyRegion).ToSkia();
+            }
+        }
+
+        // Full update (or nearly full): render directly to the platform canvas.
+        if (dirtyScreenRect == null || IsNearlyFullScreen(dirtyScreenRect.Value, viewport))
         {
             _persistentSurfaceIsStale = true;
             RenderTypeSave(targetCanvas, viewport, layers, allWidgets, renderService, background, null);
             return;
         }
 
-        // Partial update: use the persistent surface as the backing "previous full frame" so we
-        // only redraw the dirty region while the rest of the image stays intact.
+        // Partial update: use the persistent surface as the backing "previous full frame".
 #pragma warning disable IDISP005 // EnsurePersistentSurface returns a surface whose ownership transfers to RenderService
         var grContext = renderService.GpuContext as GRContext;
         var surface = (PersistentSurface)renderService.GetPersistentRenderSurface(current => EnsurePersistentSurface(current, viewport, grContext));
@@ -100,15 +114,12 @@ public sealed class MapRenderer : IMapRenderer
 
         if (_persistentSurfaceIsStale)
         {
-            // The persistent surface is out of date (e.g. after panning). Do a one-time catch-up
-            // full render so it contains the correct base frame before applying the small delta.
             _persistentSurfaceIsStale = false;
             RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, null);
         }
 
-        RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, dirtyRegion);
+        RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, dirtyScreenRect, worldDirtyRegion);
 
-        // Blit the persistent surface (full frame + delta) to the platform-provided canvas.
         surface.SKSurface.Canvas.Flush();
         using var snapshot = surface.SKSurface.Snapshot();
         targetCanvas.DrawImage(snapshot, 0, 0);
@@ -118,11 +129,9 @@ public sealed class MapRenderer : IMapRenderer
     // of reading back the persistent surface for a region that covers nearly everything anyway.
     private const double NearlyFullScreenThreshold = 0.8;
 
-    private static bool IsNearlyFullScreen(MRect dirtyRegion, Viewport viewport)
+    private static bool IsNearlyFullScreen(SKRect dirtyScreenRect, Viewport viewport)
     {
-        // Convert the dirty world rect to screen pixels and compare against the viewport area.
-        var screenRect = viewport.WorldToScreen(dirtyRegion);
-        var dirtyArea = screenRect.Width * screenRect.Height;
+        var dirtyArea = dirtyScreenRect.Width * dirtyScreenRect.Height;
         var totalArea = viewport.Width * viewport.Height;
         return totalArea <= 0 || dirtyArea / totalArea >= NearlyFullScreenThreshold;
     }
@@ -146,21 +155,21 @@ public sealed class MapRenderer : IMapRenderer
     }
 
     private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null,
+        SKRect? dirtyScreenRect = null, MRect? worldDirtyRegion = null)
     {
         if (!viewport.HasSize()) return;
 
-        if (dirtyRegion is not null)
+        if (dirtyScreenRect is not null)
         {
             // Clip the entire render (layers + widgets) to the dirty screen region.
             // Widgets outside the dirty rect produce no pixel changes — their pixels
             // are already correct in the persistent surface and remain untouched.
-            var screenRect = viewport.WorldToScreen(dirtyRegion).ToSkia();
             var saveCount = canvas.Save();
-            canvas.ClipRect(screenRect);
+            canvas.ClipRect(dirtyScreenRect.Value);
             if (background is not null) canvas.DrawColor(background.ToSkia());
-            Render(canvas, viewport, layers, renderService, dirtyRegion);
-            Render(canvas, viewport, widgets, renderService, 1, screenRect);
+            Render(canvas, viewport, layers, renderService, worldDirtyRegion);
+            Render(canvas, viewport, widgets, renderService, 1, dirtyScreenRect);
             canvas.RestoreToCount(saveCount);
         }
         else
