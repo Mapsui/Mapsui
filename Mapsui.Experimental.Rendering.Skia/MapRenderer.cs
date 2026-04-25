@@ -71,6 +71,8 @@ public sealed class MapRenderer : IMapRenderer
         _widgetRenderers[typeof(InputOnlyWidget)] = new InputOnlyWidgetRenderer();
         _widgetRenderers[typeof(RulerWidget)] = new RulerWidgetRenderer();
         _widgetRenderers[typeof(PerformanceWidget)] = new PerformanceWidgetRenderer();
+
+        _layerRenderers[GridLayer.LayerRendererName] = GridLayerRenderer.Render;
     }
 
     /// <inheritdoc />
