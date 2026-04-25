@@ -808,8 +808,71 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             WithTappedEvent = tapped
         };
 
+    private void DetachHandlers()
+    {
+        SizeChanged -= HandlerSizeChanged;
+
+        if (Map != null)
+        {
+            Map.Navigator.ViewportChanged -= HandlerViewportChanged;
+            Map.Layers.Changed -= HandleLayersChanged;
+        }
+
+        _pins.CollectionChanged -= HandlerPinsOnCollectionChanged;
+        _drawables.CollectionChanged -= HandlerDrawablesOnCollectionChanged;
+
+        foreach (var pin in _pins.ToList())
+        {
+            pin.PropertyChanged -= HandlerPinPropertyChanged;
+        }
+
+        foreach (var drawable in _drawables.OfType<INotifyPropertyChanged>().ToList())
+        {
+            drawable.PropertyChanged -= HandlerDrawablePropertyChanged;
+        }
+    }
+
+    private void CleanupMapViewResources()
+    {
+        SelectedPin = null;
+        MyLocationLayer.Enabled = false;
+        MyLocationLayer.IsMoving = false;
+        MyLocationLayer.ShowCallout = false;
+
+        HideCallouts();
+        _pins.Clear();
+        _drawables.Clear();
+        _callouts.Clear();
+
+        RemoveButtons();
+        RemoveLayers();
+
+        if (Map != null)
+        {
+            Map.Widgets.Clear();
+            Map.Layers.Clear();
+        }
+
+        _mapZoomInButton = null;
+        _mapZoomOutButton = null;
+        _mapMyLocationButton = null;
+        _mapNorthingButton = null;
+    }
+
+    private void TryStopMyLocationAnimations()
+    {
+        MyLocationLayer.StopAnimations();
+    }
+
     protected override void Dispose(bool disposing)
     {
+        if (disposing)
+        {
+            DetachHandlers();
+            TryStopMyLocationAnimations();
+            CleanupMapViewResources();
+        }
+
         base.Dispose(disposing);
         if (disposing)
         {

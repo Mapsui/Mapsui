@@ -484,6 +484,32 @@ public class MyLocationLayer : BaseLayer
         }
     }
 
+    internal void StopAnimations()
+    {
+        if (_animationMyLocation != null)
+        {
+            Animation.Stop(_mapView, _animationMyLocation, callFinal: false);
+            _animations.TryRemove(_animationMyLocation);
+            _animationMyLocation = null;
+        }
+
+        if (_animationMyDirection != null)
+        {
+            Animation.Stop(_mapView, _animationMyDirection, callFinal: false);
+            _animations.TryRemove(_animationMyDirection);
+            _animationMyDirection = null;
+        }
+
+        if (_animationMyViewDirection != null)
+        {
+            Animation.Stop(_mapView, _animationMyViewDirection, callFinal: false);
+            _animations.TryRemove(_animationMyViewDirection);
+            _animationMyViewDirection = null;
+        }
+
+        _animations.Clear();
+    }
+
     private bool InternalUpdateMyLocation(Position newLocation)
     {
         var modified = false;
