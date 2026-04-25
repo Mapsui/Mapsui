@@ -31,9 +31,6 @@ changelog:
     - title: "📝 Documentation"
       labels:
         - "PR type: 📝 Documentation"
-    - title: "☢️ Experimental"
-      labels:
-        - "PR type: ☢️ Experimental"
     # Optional: catch-all for PRs/issues without recognized type labels
     - title: "💩 Other Changes"
       labels:
