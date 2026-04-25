@@ -83,14 +83,14 @@ public sealed class RenderController : IDisposable
     }
 
     /// <summary>
-    /// Signals that only the given world-coordinate rectangle needs to be redrawn.
-    /// Multiple calls before the next render are unioned into one accumulated dirty rect.
-    /// If a full refresh is already pending, the dirty rect is ignored.
+    /// Signals that only the given region needs to be redrawn.
+    /// Multiple calls before the next render are accumulated.
+    /// If a full refresh is already pending, the incoming request is ignored.
     /// </summary>
-    /// <param name="dirtyRect">The world-coordinate region that changed, or <see langword="null"/> to force a full refresh.</param>
-    public void RefreshGraphics(MRect? dirtyRect)
+    /// <param name="request">The refresh request, or <see langword="null"/> to force a full refresh.</param>
+    public void RefreshGraphics(RefreshRequest? request)
     {
-        var incoming = dirtyRect == null ? RefreshRequest.Full : new RefreshRequest(dirtyRect);
+        var incoming = request ?? RefreshRequest.Full;
         lock (_refreshLock)
             _pendingRefresh = _pendingRefresh == null ? incoming : _pendingRefresh.Accumulate(incoming);
         _needsRefresh.Set();
@@ -177,7 +177,8 @@ public sealed class RenderController : IDisposable
         _stopwatch.Restart();
         _timestampStartDraw = GetTimestampInMilliseconds();
 
-        _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor, TakePendingRefresh()?.DirtyRect);
+        var pending = TakePendingRefresh();
+        _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor, pending?.DirtyRect, pending?.CoordinateSpace ?? CoordinateSpace.World);
 
         _isDrawingDone.Set();
         _stopwatch.Stop();

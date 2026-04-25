@@ -41,10 +41,11 @@ public interface IMapRenderer
     /// <param name="widgets">The widgets to draw on top of the map.</param>
     /// <param name="renderService">The render service, which holds shared caches and resources.</param>
     /// <param name="background">Optional background color to fill before drawing layers. Pass <see langword="null"/> to skip.</param>
-    /// <param name="dirtyRegion">World-coordinate rectangle of the area that needs to be redrawn.
+    /// <param name="dirtyRegion">Rectangle of the area that needs to be redrawn, interpreted in <paramref name="coordinateSpace"/>.
     /// Pass <see langword="null"/> to redraw the full viewport.
     /// When provided, only this region is repainted (canvas is clipped and feature queries are limited to this area).</param>
-    void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null);
+    /// <param name="coordinateSpace">The coordinate space of <paramref name="dirtyRegion"/>. Ignored when <paramref name="dirtyRegion"/> is <see langword="null"/>.</param>
+    void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null, CoordinateSpace coordinateSpace = CoordinateSpace.World);
 
     /// <summary>
     /// Renders the map to a PNG (or other format) bitmap and returns it as a stream.

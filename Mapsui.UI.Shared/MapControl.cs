@@ -175,7 +175,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private void Map_RefreshGraphicsRequest(object? sender, EventArgs e)
     {
         var request = (e as RefreshGraphicsEventArgs)?.Request;
-        _renderController?.RefreshGraphics(request?.DirtyRect);
+        _renderController?.RefreshGraphics(request);
     }
 
     /// <summary>
@@ -534,7 +534,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             handled = true;
         if (UseFling)
             _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
-        Refresh();
+        // Only refresh when nothing claimed the event. A handler that sets e.Handled = true
+        // takes ownership of the event and is responsible for calling map.RefreshGraphics()
+        // itself — either directly or via a side effect such as a viewport change. Calling
+        // Refresh() unconditionally would upgrade any targeted partial refresh to a full one.
+        if (!handled)
+            Refresh();
         return handled;
     }
 
