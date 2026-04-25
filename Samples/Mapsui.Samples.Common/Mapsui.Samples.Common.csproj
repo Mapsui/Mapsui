@@ -245,8 +245,5 @@
     <EmbeddedResource Include="..\..\Tests\Mapsui.Rendering.Skia.Tests\Resources\Cache\WmsSample.sqlite" Link="GeoData\Cache\WmsSample.sqlite" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <DebugType>portable</DebugType>
-  </PropertyGroup>
 
 </Project>

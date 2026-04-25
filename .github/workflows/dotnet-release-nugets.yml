@@ -64,4 +64,4 @@ jobs:
 
     - name: Release NuGets
       if: ${{ inputs.release_nugets }} 
-      run: nuget push "nugets\**\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_APIKEY}}
+      run: dotnet nuget push "nugets\**\*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{secrets.NUGET_APIKEY}}

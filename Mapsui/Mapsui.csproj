@@ -22,8 +22,5 @@
     <EmbeddedResource Include="Resources\Images\Pin.svg" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <DebugType>portable</DebugType>
-  </PropertyGroup>
 
 </Project>
