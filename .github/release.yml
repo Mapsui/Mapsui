@@ -16,6 +16,9 @@ changelog:
     - title: "📦 Updates"
       labels:
         - "PR type: 📦 Update"
+    - title: "⚡Performance"
+      labels:
+        - "PR type:⚡Performance"
     - title: "🛠️ Maintenance"
       labels:
         - "PR type: 🛠️ Maintenance"

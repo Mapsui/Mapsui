@@ -94,6 +94,11 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
 
         var resolution = tileResolution.UnitsPerPixel;
         var section = new MSection(tileInfo.Extent.ToMRect(), resolution);
+        // Layers with a custom renderer handle their own data access; skip the feature-fetch and
+        // RenderLayer wrapper so the renderer receives the original layer and can cast it directly.
+        if (_layer.CustomLayerRendererName is not null)
+            return (section, _layer);
+
         var featureSearchGrowth = await GetAdditionalSearchSizeAroundAsync(tileInfo, renderer, section, renderService);
         var extent = section.Extent;
         if (featureSearchGrowth > 0)

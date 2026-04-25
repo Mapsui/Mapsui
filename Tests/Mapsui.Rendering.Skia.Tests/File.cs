@@ -62,6 +62,12 @@ internal static class File
         return new FileStream(filePath, FileMode.Open, FileAccess.Read);
     }
 
+    public static string GetGeneratedRegressionPath(string fileName) =>
+        Path.Combine(_imagesGeneratedRegressionFolder, fileName);
+
+    public static string GetOriginalRegressionPath(string fileName) =>
+        Path.Combine(_imagesOriginalRegressionFolder, fileName);
+
     public static SqlitePersistentCache ReadFromCacheFolder(string fileName)
     {
         var filePath = Path.Combine(_cacheFolder, fileName);

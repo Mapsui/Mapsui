@@ -45,6 +45,13 @@ public interface IFeature : ICloneable
     long Id => 0;
 
     /// <summary>
+    /// Gets the generation identifier for this feature instance. This changes when
+    /// <see cref="Modified"/> is called to signal that cached drawables should be invalidated.
+    /// By default, returns the same value as <see cref="Id"/>.
+    /// </summary>
+    long GenerationId => Id;
+
+    /// <summary>
     /// Object to store additional data.
     /// </summary>
     object? Data { get; set; }

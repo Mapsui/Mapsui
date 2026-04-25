@@ -107,7 +107,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         set
         {
             _coStyle.Title = value;
-            _map.Refresh();
+            _map.RefreshGraphics(); // Callout size is variable so full refresh is needed.
         }
     }
 
@@ -120,7 +120,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         set
         {
             _coStyle.Enabled = value;
-            _map.Refresh();
+            _map.RefreshGraphics(); // Callout size is variable so full refresh is needed.
         }
     }
 
@@ -244,14 +244,16 @@ public class MyLocationLayer : BaseLayer, IDisposable
                         animationEnd: 1,
                         tick: (map, entry, v) =>
                         {
-                            var modified = InternalUpdateMyLocation(new MPoint(_animationStart.X + deltaX * v, _animationStart.Y + deltaY * v));
+                            var dirtyRect = InternalUpdateMyLocation(new MPoint(_animationStart.X + deltaX * v, _animationStart.Y + deltaY * v));
+                            if (dirtyRect is not null) map.RefreshGraphics(dirtyRect);
                             return new AnimationResult<Map>(map, true);
                         },
                         final: (map, entry) =>
                         {
                             if (!MyLocation.Equals(_animationEnd))
                             {
-                                InternalUpdateMyLocation(_animationEnd);
+                                var dirtyRect = InternalUpdateMyLocation(_animationEnd);
+                                if (dirtyRect is not null) map.RefreshGraphics(dirtyRect);
                             }
 
                             return new AnimationResult<Map>(map, false);
@@ -269,7 +271,8 @@ public class MyLocationLayer : BaseLayer, IDisposable
             }
             else
             {
-                var modified = InternalUpdateMyLocation(newLocation);
+                var dirtyRect = InternalUpdateMyLocation(newLocation);
+                if (dirtyRect is not null) _map.RefreshGraphics(dirtyRect);
 
                 // Update viewport
                 if (_isCentered)
@@ -328,7 +331,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
                         if ((int)symbolRotation != (int)_locStyle.SymbolRotation)
                         {
                             _locStyle.SymbolRotation = symbolRotation;
-                            map.Refresh();
+                            map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
                         }
 
                         return new AnimationResult<Map>(map, true);
@@ -338,7 +341,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
                         if ((int)_locStyle.SymbolRotation != (int)endRotation)
                         {
                             _locStyle.SymbolRotation = endRotation;
-                            map.Refresh();
+                            map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
                         }
 
                         return new AnimationResult<Map>(map, false);
@@ -350,7 +353,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
             else
             {
                 _locStyle.SymbolRotation = endRotation;
-                _map.Refresh();
+                _map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
             }
         }
     }
@@ -376,7 +379,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         }
 
         if (modified)
-            _map.Refresh();
+            _map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
     }
 
     /// <summary>
@@ -433,7 +436,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
                         if ((int)symbolRotation != (int)_dirStyle.SymbolRotation)
                         {
                             _dirStyle.SymbolRotation = symbolRotation;
-                            map.Refresh();
+                            map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
                         }
 
                         return new AnimationResult<Map>(map, true);
@@ -443,7 +446,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
                         if ((int)_dirStyle.SymbolRotation != endRotation)
                         {
                             _dirStyle.SymbolRotation = endRotation;
-                            map.Refresh();
+                            map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
                         }
 
                         return new AnimationResult<Map>(map, false);
@@ -455,7 +458,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
             else
             {
                 _dirStyle.SymbolRotation = endRotation;
-                _map.Refresh();
+                _map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
             }
         }
     }
@@ -476,20 +479,24 @@ public class MyLocationLayer : BaseLayer, IDisposable
         return _features;
     }
 
-    private bool InternalUpdateMyLocation(MPoint newLocation)
+    private MRect? InternalUpdateMyLocation(MPoint newLocation)
     {
-        var modified = false;
+        if (_myLocation.Equals(newLocation)) return null;
+        var oldLocation = _myLocation;
+        _myLocation = newLocation;
+        _feature.Modified();
+        _feature.Point.X = _myLocation.X;
+        _feature.Point.Y = _myLocation.Y;
+        // Union old and new symbol extents so the old symbol position is also cleared.
+        return DirtyRectForSymbol(oldLocation).Join(DirtyRectForSymbol(newLocation));
+    }
 
-        if (!_myLocation.Equals(newLocation))
-        {
-            _myLocation = newLocation;
-            _feature.Modified();
-            _feature.Point.X = _myLocation.X;
-            _feature.Point.Y = _myLocation.Y;
-            modified = true;
-        }
-
-        return modified;
+    private MRect DirtyRectForSymbol(MPoint location)
+    {
+        // Full symbol width used as the half-extent on each side — a conservative world-space bound
+        // that covers the rendered pixel footprint regardless of sub-pixel offsets or anti-aliasing.
+        var halfWorld = SymbolStyle.DefaultWidth * _locStyle.SymbolScale * _map.Navigator.Viewport.Resolution;
+        return new MRect(location.X - halfWorld, location.Y - halfWorld, location.X + halfWorld, location.Y + halfWorld);
     }
 
     private void MapTapped(object? s, MapEventArgs e)

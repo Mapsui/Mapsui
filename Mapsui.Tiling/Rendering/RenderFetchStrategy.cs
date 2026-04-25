@@ -4,6 +4,7 @@ using System.Linq;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Tiling.Extensions;
+using Mapsui.Tiling.Fetcher;
 
 namespace Mapsui.Tiling.Rendering;
 
@@ -79,10 +80,10 @@ public class RenderFetchStrategy : IRenderFetchStrategy
         {
             var feature = cache.Find(tileInfo.Index);
 
-            // Geometry can be null for some tile sources to indicate the tile is not present.
-            // It is stored in the tile cache to prevent retries. It should not be returned to the 
-            // renderer.
-            if (feature == null)
+            // A null feature means the tile has not been fetched yet.
+            // A TileFetchStatusFeature means the tile source confirmed the tile is unavailable.
+            // In both cases fall back to a lower-resolution tile rather than rendering a blank.
+            if (feature == null || feature is TileFetchStatusFeature)
             {
                 // only continue the recursive search if this tile is within the extent and we haven't exceeded the max levels up
                 if (tileInfo.Extent.Intersects(extent) && currentLevelsUp < maxLevelsUp)

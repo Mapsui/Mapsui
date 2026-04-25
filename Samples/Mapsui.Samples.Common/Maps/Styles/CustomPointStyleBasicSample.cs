@@ -29,6 +29,8 @@ public class CustomPointStyleBasicSample : ISample
             Style = new CustomPointStyle { RendererName = "custom-style-basic" },
         });
         MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
+        // Also register for the experimental renderer (needed when running with LocalRendererConfig.cs).
+        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
         return map;
     }
 

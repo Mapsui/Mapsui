@@ -3,18 +3,18 @@
 This part will talk about a few of Mapsui's core components. These are:
 
 - **MapControl**: UI component to add to your page.
-- **Map**: UI indepenent part which holds most of the state of the map. 
+- **Map**: UI independent part which holds most of the state of the map.
 - **Navigator**: Controls all mutations of the Viewport.
 - **Viewport**: The state that defines which part is visible in the MapControl.
 - **MapRenderer**: Draws the map in the MapControl.
 
 ### MapControl
 
-This is the UI component that you add to you app. It is derived from a base UI component of the framework and inherits many properties related to that framework. You can control its size and positioning like any other component in your framework.
+This is the UI component that you add to your app. It is derived from a base UI component of the framework and inherits many properties related to that framework. You can control its size and positioning like any other component in your framework.
 
 ### Map
 
-The most important property of the MapControl is the Map. Unlike the MapControl the Map is platform independent. Most of the time you will be dealing with the Map or it's children. 
+The most important property of the MapControl is the Map. Unlike the MapControl, the Map is platform independent. Most of the time you will be dealing with the Map or its children. 
 
 ### Navigator
 

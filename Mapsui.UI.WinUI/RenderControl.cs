@@ -102,6 +102,9 @@ partial class SKSwapChainPanelRenderControl : RenderControl
 
     private void SwapChainPanelOnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs e)
     {
+        // Keep the GPU context current so the renderer can create GPU-backed surfaces.
+        Owner.Map.RenderService.GpuContext = e.Surface.Context;
+
         if (GetPixelDensity() is { } pixelDensity)
         {
             var canvas = e.Surface.Canvas;

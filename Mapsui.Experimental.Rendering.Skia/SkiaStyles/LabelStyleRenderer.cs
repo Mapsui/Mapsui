@@ -4,16 +4,16 @@ using Mapsui.Nts;
 using Mapsui.Experimental.Rendering.Skia.Extensions;
 using Mapsui.Experimental.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
+using Mapsui.Widgets;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Experimental.Rendering.Skia.Images;
 using Mapsui.Rendering.Caching;
 using Mapsui.Rendering;
+using Line = Mapsui.Experimental.Rendering.Skia.Extensions.SkiaTextLayoutHelper.Line;
+using RTKTextBlock = Topten.RichTextKit.TextBlock;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -107,6 +107,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private static void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, Mapsui.Rendering.RenderService renderService)
     {
+        // Skip rendering while the custom font is still loading — same behaviour as images.
+        // This avoids caching an SKFont built from a fallback typeface, which would persist
+        // in VectorCache and require explicit invalidation when the real bytes arrive.
+        if (style.Font.FontSource != null && renderService.FontSourceCache.Get(style.Font.FontSource) == null)
+            return;
+
         using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, CreateFont);
         using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
@@ -133,15 +139,17 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         // Baseline is distance from top of bounds to baseline
         var baseline = -rect.Top;
 
-        // We will use bounding box width/height (Right-Left, Bottom-Top), not advance width
-        var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
+        // Use font.Spacing as height so RTK's rendering (which uses font-level metrics) aligns
+        // with the positioned drawRect. Tight glyph bounds (rect.Bottom - rect.Top) differ per text content
+        // and cause vertical mis-centering, especially for Arabic/RTL scripts.
+        var drawRect = new SKRect(0, 0, rect.Right - rect.Left, font.Spacing);
 
         if ((style.MaxWidth > 0 && drawRect.Width > maxWidth) || hasNewline)
         {
             // Text has a line feed or should be shortened by character wrap
             if (hasNewline || style.WordWrap == LabelStyle.LineBreakMode.CharacterWrap)
             {
-                lines = SplitLines(text, font, paint, hasNewline ? drawRect.Width : maxWidth, string.Empty);
+                lines = SkiaTextLayoutHelper.SplitLines(text, font, paint, hasNewline ? drawRect.Width : maxWidth, string.Empty);
                 var width = 0f;
                 for (var i = 0; i < lines.Length; i++)
                 {
@@ -155,7 +163,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             // Text is too long, so wrap it by words
             if (style.WordWrap == LabelStyle.LineBreakMode.WordWrap)
             {
-                lines = SplitLines(text, font, paint, maxWidth, " ");
+                lines = SkiaTextLayoutHelper.SplitLines(text, font, paint, maxWidth, " ");
                 var width = 0f;
                 for (var i = 0; i < lines.Length; i++)
                 {
@@ -232,6 +240,16 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             drawRect = new SKRect(0, 0, maxBoundWidth, drawRect.Height);
         }
 
+        // For single-line labels, measure with RTK so the box matches the actual rendered width.
+        // RTK accounts for glyph shaping (Arabic, Devanagari, etc.) where SKFont.MeasureText may differ.
+        // The same TextBlock is reused for drawing to avoid measuring twice.
+        RTKTextBlock? singleLineTextBlock = null;
+        if (lines == null)
+        {
+            singleLineTextBlock = SkiaTextLayoutHelper.CreateTextBlock(text, font, style.TextAlignment, paint.Color);
+            drawRect = new SKRect(0, 0, singleLineTextBlock.MeasuredWidth, drawRect.Height);
+        }
+
         var offset = style.Offset.Combine(style.RelativeOffset.GetAbsoluteOffset(drawRect.Width, drawRect.Height));
 
         drawRect.Offset(
@@ -258,12 +276,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 foreach (var line in lines)
                 {
                     // For alignment, use bounding widths and compensate left bearing (line.BoundsLeft)
-                    float desiredLeft =
-                        style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center
-                            ? (float)(left + (drawRect.Width - line.BoundsWidth) * 0.5)
-                            : style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right
-                                ? left + drawRect.Width - line.BoundsWidth
-                                : left;
+                    float desiredLeft = CalcLineOriginX(style.TextAlignment, left, drawRect.Width, line.BoundsWidth);
 
                     // Origin x = desiredLeft - boundsLeft so that the bounding box's left edge equals desiredLeft
                     float originX = desiredLeft - line.BoundsLeft;
@@ -277,27 +290,28 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
         }
 
-        // Text
+        // Text — draw via RichTextKit TextBlock for emoji/bidi font fallback.
+        // All layout, alignment and positioning are computed above; RTK is used only for the actual glyph drawing.
         if (lines != null)
         {
             var left = drawRect.Left;
-            foreach (var line in lines)
+            for (var i = 0; i < lines.Length; i++)
             {
-                float desiredLeft =
-                    style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center
-                        ? (float)(left + (drawRect.Width - line.BoundsWidth) * 0.5)
-                        : style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right
-                            ? left + drawRect.Width - line.BoundsWidth
-                            : left;
-
-                float originX = desiredLeft - line.BoundsLeft;
-                target.DrawText(line.Value, originX, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paint);
+                var line = lines[i];
+                float desiredLeft = CalcLineOriginX(style.TextAlignment, left, drawRect.Width, line.BoundsWidth);
+                // Top of line i: drawRect.Top + i * lineHeight * emHeight (baseline offset minus ascent cancels out)
+                var lineTop = drawRect.Top + (float)(style.LineHeight * emHeight * i);
+                // Alignment is already handled by desiredLeft, so use Alignment.Left for the block itself
+                var lineBlock = SkiaTextLayoutHelper.CreateTextBlock(line.Value, font, Alignment.Left, paint.Color);
+                SkiaTextLayoutHelper.PaintTextBlock(target, lineBlock, desiredLeft, lineTop);
             }
         }
         else
         {
-            // Single line: compensate horizontal left bearing with -rect.Left
-            target.DrawText(text, drawRect.Left - rect.Left, drawRect.Top + baseline, SKTextAlign.Left, font, paint);
+            // MaxWidth must be set so that Right/Center alignment has a container width to align against.
+            singleLineTextBlock!.MaxWidth = drawRect.Width;
+            singleLineTextBlock.Layout();
+            SkiaTextLayoutHelper.PaintTextBlock(target, singleLineTextBlock, drawRect.Left, drawRect.Top);
         }
     }
 
@@ -316,6 +330,16 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return 1f;
         throw new ArgumentException($"Unknown {nameof(LabelStyle.VerticalAlignmentEnum)} type '{nameof(verticalAlignment)}");
     }
+
+    // Returns the left edge of a line inside the draw box, based on TextAlignment.
+    // Auto falls back to Left — bidi-aware auto-detection is a future enhancement.
+    private static float CalcLineOriginX(Alignment textAlignment, float boxLeft, float boxWidth, float lineWidth) =>
+        textAlignment switch
+        {
+            Alignment.Center => (float)(boxLeft + (boxWidth - lineWidth) * 0.5),
+            Alignment.Right => boxLeft + boxWidth - lineWidth,
+            _ => boxLeft, // Left and Auto
+        };
 
     private static void DrawBackground(LabelStyle style, SKRect rect, SKCanvas target, float layerOpacity)
     {
@@ -353,25 +377,31 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return paint;
     }
 
-    private static SKFont CreateFont(Font font)
+    private static SKFont CreateFont(Font font, Mapsui.Rendering.RenderService renderService)
     {
-        var typeface = SKTypeface.FromFamilyName(font.FontFamily,
+        SKTypeface? typeface = null;
+
+        if (font.FontSource != null)
+        {
+            var bytes = renderService.FontSourceCache.Get(font.FontSource);
+            if (bytes != null)
+            {
+                using var stream = new System.IO.MemoryStream(bytes);
+                typeface = SKTypeface.FromStream(stream);
+            }
+        }
+
+        typeface ??= SKTypeface.FromFamilyName(font.FontFamily,
             font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
             SKFontStyleWidth.Normal,
             font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
 
-        SKFont skFont = new()
+        return new SKFont
         {
             Embolden = false,
-            //EmbeddedBitmaps = true,
             Size = (float)font.Size,
             Typeface = typeface,
-            //Subpixel = true,
-            //Hinting = SKFontHinting.None,
-            //Edging = SKFontEdging.Antialias,
         };
-
-        return skFont;
     }
 
     private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style)
@@ -380,65 +410,6 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         paint.Style = style.PaintStyle;
         paint.StrokeWidth = style.StrokeWidth;
         return paint;
-    }
-
-    private class Line
-    {
-        public string? Value { get; set; }
-        public float Width { get; set; } // Advance width used for wrapping decisions
-        public float Baseline { get; set; } // Baseline y for the line
-        public float BoundsLeft { get; set; } // Measured bounding box left (can be negative)
-        public float BoundsWidth { get; set; } // Measured bounding box width
-    }
-
-    private static Line[] SplitLines(string? text, SKFont font, SKPaint paint, float maxWidth, string splitCharacter)
-    {
-        if (text == null)
-            return [];
-
-        var spaceWidth = font.MeasureText(" ", paint);
-        var lines = text.Split('\n');
-
-        return lines.SelectMany(line =>
-        {
-            var result = new List<Line>();
-            string[] words;
-
-            if (splitCharacter == string.Empty)
-            {
-                words = line.ToCharArray().Select(x => x.ToString()).ToArray();
-                spaceWidth = 0;
-            }
-            else
-            {
-                words = line.Split(new[] { splitCharacter }, StringSplitOptions.None);
-            }
-
-            var lineResult = new StringBuilder();
-            float width = 0;
-            foreach (var word in words)
-            {
-                var wordWidth = font.MeasureText(word, paint);
-                var wordWithSpaceWidth = wordWidth + spaceWidth;
-                var wordWithSpace = word + splitCharacter;
-
-                if (width + wordWidth > maxWidth)
-                {
-                    result.Add(new Line { Value = lineResult.ToString(), Width = width });
-                    lineResult = new StringBuilder(wordWithSpace);
-                    width = wordWithSpaceWidth;
-                }
-                else
-                {
-                    lineResult.Append(wordWithSpace);
-                    width += wordWithSpaceWidth;
-                }
-            }
-
-            result.Add(new Line { Value = lineResult.ToString(), Width = width });
-
-            return result.ToArray();
-        }).ToArray();
     }
 
     bool IFeatureSize.NeedsFeature => true;
@@ -462,7 +433,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (string.IsNullOrEmpty(text))
             return 0;
 
-        // for measuring the text size the opacity can be set to 1try
+        // Font not loaded yet: return an estimate based on font size × text length so that
+        // RasterizingTileSource still fetches a reasonable extra buffer area near tile borders.
+        if (labelStyle.Font.FontSource != null && renderService.FontSourceCache.Get(labelStyle.Font.FontSource) == null)
+            return labelStyle.Font.Size * (text?.Length ?? 1);
+
+        // for measuring the text size the opacity can be set to 1
         using var fontHolder = renderService.VectorCache.GetOrCreate(labelStyle.Font, CreateFont);
         using var paintHolder = labelStyle.Halo != null
             ? renderService.VectorCache.GetOrCreate((labelStyle, labelStyle.Halo), CreateHaloPaintHolder)

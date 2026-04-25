@@ -115,6 +115,9 @@ public partial class MapControl : UIView, IMapControl
         if (GetPixelDensity() is not float pixelDensity)
             return;
 
+        // Keep the GPU context current so the renderer can create GPU-backed surfaces.
+        Map.RenderService.GpuContext = args.Surface.Context;
+
         var canvas = args.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
         _renderController?.Render(canvas);

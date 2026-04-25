@@ -23,18 +23,26 @@ nav:
   - 'nuget-of-latest-build.md'
   - 'mapsui-components.md'
   - 'async-fetching.md'
+  - 'static-image-generation.md'
   - 'resolution.md'
   - 'projections.md'
+  - 'wms.md'
+  - 'vector-style.md'
   - 'custom-style-renders.md'
+  - 'custom-point-style-renderer.md'
+  - 'custom-layer-renderer.md'
   - 'performance-widget.md'
   - 'imagesource.md'
+  - 'fontsource.md'
   - 'mapinfo.md'
   - 'experimental-packages.md'
+  - 'experimental-renderer.md'
   - 'documentation-of-v4.md'
   
   - Upgrade guides:
     - 'v4.0-upgrade-guide.md'
     - 'v5.0-upgrade-guide.md'
+    - 'v6.0-upgrade-guide.md'
 
   - Contributing to Mapsui:
     - 'contributors-guidelines.md'
@@ -64,5 +72,9 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
- 
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+

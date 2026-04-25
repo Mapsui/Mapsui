@@ -26,7 +26,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static void DrawSymbolStyle(SKCanvas canvas, IPointStyle pointStyle, IFeature feature, Mapsui.Rendering.RenderService renderService, float opacity)
+    private static void DrawSymbolStyle(SKCanvas canvas, IPointStyle pointStyle, Mapsui.Rendering.RenderService renderService, float opacity)
     {
         if (pointStyle is SymbolStyle symbolStyle)
         {
@@ -54,7 +54,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             throw new ArgumentException($"Expected {nameof(SymbolStyle)} but got {pointStyle?.GetType().Name}");
     }
 
-    private static SKPath CreatePath(SymbolType symbolType)
+    internal static SKPath CreatePath(SymbolType symbolType)
     {
         var width = (float)SymbolStyle.DefaultWidth;
         var halfWidth = width / 2;
@@ -79,7 +79,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return skPath;
     }
 
-    private static SKPaint CreateLinePaint((Pen outline, float opacity) valueTuple)
+    internal static SKPaint CreateLinePaint((Pen outline, float opacity) valueTuple)
     {
         var outline = valueTuple.outline;
         var opacity = valueTuple.opacity;
@@ -95,7 +95,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         };
     }
 
-    private static SKPaint CreateFillPaint((Brush fill, float opacity) valueTuple)
+    internal static SKPaint CreateFillPaint((Brush fill, float opacity) valueTuple)
     {
         var fill = valueTuple.fill;
         var opacity = valueTuple.opacity;

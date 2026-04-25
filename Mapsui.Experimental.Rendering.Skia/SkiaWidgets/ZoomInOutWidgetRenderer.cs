@@ -10,7 +10,7 @@ public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
     private const float _stroke = 3;
 
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService,
-        float layerOpacity)
+        float layerOpacity, SKRect? dirtyScreenRect)
     {
         var zoomInOut = (ZoomInOutWidget)widget;
 

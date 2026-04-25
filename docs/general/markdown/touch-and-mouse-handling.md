@@ -1,16 +1,16 @@
 # Touch and mouse handling
 
-In Mapsui v5 (at the moment of writing this is beta.1) most of the touch and mouse handling code is now shared over UI frameworks. There are a lot of differences between the frameworks so we need some non-shared code but we try to map it early to shared methods and components.
+In Mapsui v5 most of the touch and mouse handling code is now shared over UI frameworks. There are many differences between the frameworks so we need some non-shared code but we try to convert it early to shared methods and components.
 
 ## Widget Event types
-In v5 beta.1 we have four new event types:
+In v5 we have four event types:
 
 - PointerPressed (down)
 - PointerMoved (can be hover for mouse)
 - PointerReleased (up)
 - Tapped. This can be single tap, double tap or long press.
 
-The names were taken from Uno/WinUI and Avalonia. Perhaps we will need other pointer event types in the future. We still have the Info event type, but this could now be replaced by the other event types because they also can be used to get the MapInfo through a WidgetEventArgs.GetMapInfo() call.
+The names were taken from Uno/WinUI and Avalonia. Perhaps we will need other pointer event types in the future. We still have the Info event type, but this could now be replaced by the other event types because they also can be used to get the MapInfo through a `MapEventArgs.GetMapInfo()` call.
 
 ## Components
 - ManipulationTracker: This component is called from the MapControl with an array of pointer positions (could be mouse or touch, or multitouch) and based on that calculates a new manipulation state (translate, scale, rotate). It is used for both drag and pinch, the difference being that while dragging the scale and rotate fields will have neutral values. The ManipulationTracker is also responsible for rotation snapping (snap out of rotation lock only when the rotation is bigger than some theshold, and snap back in when rotation is close to zero). Rotation snap was previously implemented on only a few platforms.

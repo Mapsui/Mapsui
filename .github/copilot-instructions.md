@@ -2,6 +2,12 @@
 
 These instructions guide GitHub Copilot (and Copilot Chat) when helping in this repository.
 
+## Critical: Do not make changes without explicit request
+- **Never start editing code, creating files unless the user explicitly asks you to do so.**
+- When the user asks a question, discusses architecture, or explores options — respond with analysis, explanations, or plans only.
+- Wait for clear instructions like "implement this", "make this change", "create this file", or "update the code" before touching any files.
+- If unsure whether the user wants changes made, ask first.
+
 ## Project overview
 - This repository contains the Mapsui project, a .NET/C# mapping and map-rendering toolkit used across multiple app platforms.
 - Typical technologies you will see: C#, .NET, build/test via dotnet CLI, sample apps, and cross-platform UI integrations.
@@ -18,10 +24,28 @@ These instructions guide GitHub Copilot (and Copilot Chat) when helping in this 
 - Keep public APIs stable; avoid breaking changes without prior discussion.
 - Add/adjust XML doc comments when modifying public-facing types/members.
 
+## Code style
+Mapsui prefers a **compact code style**. The repository uses `.editorconfig` to enforce these conventions:
+
+- **Use `var` everywhere** — even for built-in types (`var count = 5;` not `int count = 5;`)
+- **Braces are optional** for single-statement blocks (`if (x) DoIt();` is acceptable)
+- **Compact object initializers** — members on same line when practical
+- **Prefer expression-bodied members** (`=>` syntax) for methods, properties, constructors
+- **Private fields**: `_camelCase` prefix (also for consts and statics, no `s_` prefix for statics)
+- **File-scoped namespaces**: `namespace Mapsui.Rendering;`
+
+Run `dotnet format` to apply these rules automatically.
+
+## Comments
+- **Explain why, not what** — comments should capture the reasoning behind code, not describe what the code does (which is visible from reading it).
+- Focus on historical context, edge cases, performance considerations, or workarounds that aren't obvious from the code itself.
+- Good: `// Use relative coordinates to avoid float precision loss with large EPSG:3857 values`
+- Bad: `// Create path from polygon`
+
 ## Contributions Copilot should optimize for
 - Clear, small changes with strong rationale.
 - Tests when fixing bugs or adding non-trivial behavior.
-- Helpful comments where logic is non-obvious.
+- Meaningful comments that explain *why* (see Comments section above).
 - Performance awareness in hot paths; avoid allocations and unnecessary LINQ in tight loops.
 
 ## What to avoid
@@ -35,9 +59,85 @@ These instructions guide GitHub Copilot (and Copilot Chat) when helping in this 
 - Use existing test patterns and helpers found in the repo.
 - Ensure tests are deterministic and fast; no live network or external service calls unless explicitly mocked.
 
+### Rendering regression tests — important validation step
+Any change that affects rendering (styles, renderers, callouts, widgets, etc.) **must** be validated against the rendering regression tests in `Tests/Mapsui.Rendering.Skia.Tests`. These tests render every sample and compare the output pixel-by-pixel against a stored reference image.
+
+**Run a single sample's regression test** (fastest way to validate a targeted change):
+```ps
+dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "FullyQualifiedName~CalloutSample"
+```
+Replace `CalloutSample` with the class name of the affected sample.
+
+**Run all regression tests:**
+```ps
+dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "TestSampleAsync"
+```
+
+**Interpret results:**
+- `Passed` — output matches the reference image.
+- `Inconclusive` — no reference image exists yet; the test generated one in `GeneratedRegression/`.
+- `Failed` — pixel difference exceeded the threshold. Compare:
+  - Generated: `Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Resources/Images/GeneratedRegression/`
+  - Reference: `Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Resources/Images/OriginalRegression/`
+
+**Update reference images** after intentional rendering changes:
+```ps
+.\Scripts\CopyGeneratedImagesOverOriginalImages.ps1
+```
+Then revert any files that were not actually affected by your change (avoid unnecessary binary diffs in git history).
+
+### Sample registration — automatic via source generator
+Samples **do not need to be manually registered**. The `Mapsui.Sample.SourceGenerator` (in `SourceGenerators/`) scans all classes that implement `ISample`, `ISampleBase`, `ISampleTest`, or `IMapViewSample` at build time and generates a `Samples.Register()` method in the assembly. Adding a new sample class that implements one of these interfaces is sufficient — no call to `AllSamples.Register()` is needed. The regression tests in `Mapsui.Rendering.Skia.Tests` pick up samples through the same mechanism.
+
+### Experimental renderer and text layout
+The experimental renderer (`Mapsui.Experimental.Rendering.Skia`) wraps RichTextKit (RTK) inside `SkiaTextLayoutHelper`. RTK remains a required dependency — it provides UAX#14 line breaking, BiDi, and font fallback. When measuring line height, always use `font.Spacing` (ascent + descent + leading) rather than tight glyph bounds. See `.github/instructions/richtextkit.instructions.md` for full RTK guidance.
+
+## After making changes — checklist
+
+After completing any non-trivial change, work through this checklist in order:
+
+### 1. Build — no errors allowed
+```ps
+dotnet build
+```
+Fix all build errors before proceeding.
+
+### 2. Unit tests — run first (fast)
+```ps
+dotnet test --filter "Category!=Regression"
+```
+Or target the affected project directly. These are fast and catch most logic errors.
+
+### 3. Rendering regression tests — run after unit tests (slower)
+Required for any change that touches rendering (styles, renderers, callouts, widgets, etc.):
+```ps
+dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "TestSampleAsync"
+```
+See the **Rendering regression tests** section in Testing guidance for how to interpret results and update reference images.
+
+### 4. Code style and guidelines check
+- Does the code follow the compact Mapsui style (see **Code style** section)?
+- Are comments explaining *why*, not *what*?
+- Are new public APIs documented with XML doc comments?
+- Are there any guideline violations (disposability, rendering in draw loop, lon/lat order, extension methods)?
+
+### 5. Documentation — does anything need updating?
+- **Upgrade guide** (see below): are there breaking changes?
+- **README or user-facing docs** (`docs/general/markdown/`): does behavior change in a way users need to know?
+- **mkdocs nav** (`docs/general/mkdocs.yml`): if a new doc page was added, register it in the nav.
+
+### 6. Breaking changes → update the upgrade guide
+If the change removes, renames, or alters the behavior of any public API, **update the upgrade guide** for the current major version:
+- Location: `docs/general/markdown/v6.0-upgrade-guide.md`
+- Describe what changed, why, and how users should migrate.
+- Keep entries concise: old API → new API, with a one-sentence rationale.
+
+There are no E2E tests in this repository, so step 3 (regression tests) is the closest equivalent.
+
 ## Documentation
 - Update README or docs when behavior changes or new features are added.
 - Keep commit messages and PR descriptions concise and informative (what/why/impact).
+- AI-generated design documents (architecture analyses, stage plans, etc.) live in [docs/ai-generated/](../docs/ai-generated/). Add new ones there. This includes design notes, proposals, working documents, and any file generated during a chat session for reference. When Copilot produces a document that is not user-facing documentation or source code — such as a design analysis, a proposal, an upgrade plan, or a discussion summary — it must be placed in `docs/ai-generated/` rather than in the project root or any other location.
 
 ## Pull requests
 - Keep PRs small and focused; link to any related issues.
@@ -48,7 +148,25 @@ These instructions guide GitHub Copilot (and Copilot Chat) when helping in this 
 - Do not commit secrets.
 - Adhere to repository licensing; ensure any copied code is compatible and attributed when needed.
 
-## How to ask Copilot for better help
-- Provide concrete file paths, types, and examples.
-- Ask for tests and edge cases.
-- Request refactors in small, verifiable steps.
+## Contributor guidelines summary
+
+Full guidelines: [docs/general/markdown/contributors-guidelines.md](../docs/general/markdown/contributors-guidelines.md)
+
+### Move problematic code toward the root
+In the Mapsui hierarchy (`DataSource → Fetcher → Layer → Map → MapControl`), keep the core clean. Push `IDisposable`, `async/await`, nullable fields, and exception-throwing code toward the root (surface projects / `MapControl`), not into the core. The core should be simple, predictable, and free of these concerns.
+
+### Disposability
+- Do not make classes `IDisposable` just to hold a Skia resource (`SKSurface`, `SKPaint`, `SKPath`, etc.).
+- Renderer-owned resources whose lifetime is tied to the map should be stored in `RenderService` (already `IDisposable`, owned by `Map`). Use `RenderService.GetPersistentRenderSurface(Func<object?, object> ensure)` as the pattern.
+- `RenderService.Dispose()` handles cleanup — the renderer itself stays free of `IDisposable`.
+
+### No rendering in the draw/paint loop
+Separate *rendering* (creating platform resources, e.g. `SKPath path = ToSKPath(...)`) from *drawing* (using them on the canvas, e.g. `canvas.DrawPath(...)`). Resources should be prepared before the paint loop, not inside it.
+
+### lon/lat ordering
+Always use **lon, lat** order (consistent with x, y). Example: `SphericalMercator.FromLonLat(lon, lat)`. Prefer named properties (`Longitude`, `Latitude`) when ordering would be ambiguous.
+
+### Extension methods
+- Always in an `Extensions` folder, in a class named `{TypeItExtends}Extensions` (drop the `I` for interfaces: `ILayer` → `LayerExtensions`).
+- Namespace follows the folder, not the type being extended.
+- Collection extensions for a type live in the same class as the individual-type extensions.

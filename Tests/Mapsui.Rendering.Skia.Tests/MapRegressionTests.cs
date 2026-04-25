@@ -13,6 +13,7 @@ using Mapsui.Samples.Common.Maps.MapInfo;
 using Mapsui.Samples.Common.Maps.Performance;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Styles;
+using Mapsui.Samples.Common.Maps.Tests;
 using Mapsui.Samples.Common.Maps.WFS;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Samples.Common.Maps.WMS;
@@ -49,20 +50,37 @@ public class MapRegressionTests
             .All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName),
     ];
 
+    // Samples excluded in every rendering mode (animations, network-dependent, unreliable).
+    public static ISampleBase[] AlwaysExcludedSamples =>
+    [
+        new AnimatedPointsSample(), // We have no reliable way yet to compare animations.
+        new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
+        new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
+        new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
+        new CustomSvgColorSample(), // Is currently not functioning and should be fixed with a redesign.
+        new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
+        new WmsBasilicataSample(), // Times out,
+        new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
+        new WfsGeometryFilterSample(), // Crashes on the build server.
+        new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
+        new ArcGISImageServiceSample(), // Changes and we did not cache the reponse in the sqlite yet.
+    ];
+
+    // Samples that require the experimental renderer (FontSource, RTK bidi/emoji).
+    // Excluded when running with the standard renderer; included when running with the experimental renderer.
+    public static ISampleBase[] ExperimentalOnlySamples =>
+    [
+        new CalloutWrapAroundSample(), // FontSource (custom font) renders Chinese text; the standard renderer doesn't support it.
+        new RightToLeftSample(), // Uses FontSource for Arabic font; the standard renderer doesn't support FontSource.
+        new EmojiSample(), // Emoji rendering requires RTK bidi/font-fallback in the experimental renderer.
+    ];
+
     public static object[] ExcludedSamples =>
         _excludedSamples ??=
         [
-            new AnimatedPointsSample(), // We have no reliable way yet to compare animations.
-            new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
-            new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
-            new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
-            new CustomSvgColorSample(), // Is currently not functioning and should be fixed with a redesign.
-            new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
-            new WmsBasilicataSample(), // Times out,
-            new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
-            new WfsGeometryFilterSample(), // Crashes on the build server.
-            new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
-            new ArcGISImageServiceSample(), // Changes and we did not cache the reponse in the sqlite yet.
+            .. AlwaysExcludedSamples,
+            // In standard-renderer mode, also exclude samples that only work with the experimental renderer.
+            .. (TestConfiguration.IsExperimentalRenderer ? [] : ExperimentalOnlySamples),
         ];
 
     [Test]
@@ -98,16 +116,16 @@ public class MapRegressionTests
             var map = mapControl.Map;
             await SampleHelper.DisplayMapAsync(mapControl).ConfigureAwait(false);
             Performance.DefaultIsActive = ActiveMode.No; // Never show performance in rendering tests so that Release and Debug runs generate the same image.
-            MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
-            var mapRenderer = new MapRenderer();
+            Mapsui.Rendering.Skia.MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
 
             if (map != null)
             {
                 // Act
 
                 _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+                await map.RenderService.FontSourceCache.FetchAllFontDataAsync();
 
-                using var bitmap = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
+                using var bitmap = mapControl.Renderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                     map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
                 // aside
@@ -130,8 +148,12 @@ public class MapRegressionTests
                     }
                     else
                     {
+                        var generatedPath = File.GetGeneratedRegressionPath(fileName);
+                        var originalPath = File.GetOriginalRegressionPath(fileName);
                         Assert.That(BitmapComparer.Compare(originalStream, bitmap, 1, 0.995), Is.True,
-                            $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
+                            $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.\n" +
+                            $"Generated: file:///{generatedPath.Replace('\\', '/')}\n" +
+                            $"Reference: file:///{originalPath.Replace('\\', '/')}");
                     }
                 }
                 else

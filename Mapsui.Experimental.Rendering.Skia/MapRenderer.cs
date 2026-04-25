@@ -21,6 +21,7 @@ using System.Linq;
 using Mapsui.Rendering;
 using Mapsui.Experimental.VectorTiles.Tiling;
 using Mapsui.Experimental.Rendering.Skia.MapInfos;
+using Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -29,30 +30,37 @@ namespace Mapsui.Experimental.Rendering.Skia;
 /// </summary>
 public sealed class MapRenderer : IMapRenderer
 {
-    private long _currentIteration;
     private static readonly Dictionary<Type, ISkiaWidgetRenderer> _widgetRenderers = [];
-    private static readonly Dictionary<Type, ISkiaStyleRenderer> _styleRenderers = [];
+    private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
+
     private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
     private static readonly Dictionary<string, CustomLayerRenderer.RenderHandler> _layerRenderers = [];
+
+    // True when the persistent surface does not reflect the last full frame.
+    // Starts true so the first partial update triggers a catch-up full render.
+    private bool _persistentSurfaceIsStale = true;
 
     static MapRenderer()
     {
         InitRenderer();
 
-        DefaultRendererFactory.Create = () => new MapRenderer();
+        // Only register as the default factory if nothing has been explicitly configured yet.
+        // This prevents overwriting a factory set by SampleConfiguration.ApplyRendererConfig().
+        if (!DefaultRendererFactory.IsConfigured)
+            DefaultRendererFactory.Create = () => new MapRenderer();
     }
 
     private static void InitRenderer()
     {
         _styleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
-        _styleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
+        _styleRenderers[typeof(VectorStyle)] = new TwoStepVectorStyleRenderer();
         _styleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
-        _styleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
+        _styleRenderers[typeof(SymbolStyle)] = new TwoStepSymbolStyleRenderer();
         _styleRenderers[typeof(ImageStyle)] = new ImageStyleRenderer();
         _styleRenderers[typeof(CustomPointStyle)] = new CustomPointStyleRenderer();
         _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
         _styleRenderers[typeof(VectorTileStyle)] = new VectorTileStyleRenderer();
-        _styleRenderers[typeof(VexTileStyle)] = new VexTileStyleRenderer();
+        _styleRenderers[typeof(VexTileStyle)] = new TwoStepVexTileStyleRenderer();
 
         _widgetRenderers[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
         _widgetRenderers[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
@@ -65,33 +73,111 @@ public sealed class MapRenderer : IMapRenderer
         _widgetRenderers[typeof(PerformanceWidget)] = new PerformanceWidgetRenderer();
     }
 
-    /// <summary>
-    /// Renders the map to the target.
-    /// </summary>
-    /// <param name="target">The target to render to.</param>
-    /// <param name="viewport">The viewport to render.</param>
-    /// <param name="layers">The layers to render.</param>
-    /// <param name="widgets">The widgets to render.</param>
-    /// <param name="renderService">The render service.</param>
-    /// <param name="background">The background color.</param>
+    /// <inheritdoc />
+    // Resolves the dirty rect to a screen-space SKRect once here and passes it
+    // through to the internal helpers, so screen-space requests never need world conversion.
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null, CoordinateSpace coordinateSpace = CoordinateSpace.World)
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
-
         var allWidgets = widgets.Concat(attributions);
+        var targetCanvas = (SKCanvas)target;
 
-        RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, renderService, background);
+        // Resolve the dirty rect to a screen-space SKRect and, for world-space requests only,
+        // a world-coord MRect for feature-query filtering.
+        SKRect? dirtyScreenRect = null;
+        MRect? worldDirtyRegion = null;
+        if (dirtyRegion is not null)
+        {
+            if (coordinateSpace == CoordinateSpace.Screen)
+                dirtyScreenRect = dirtyRegion.ToSkia();
+            else
+            {
+                worldDirtyRegion = dirtyRegion;
+                dirtyScreenRect = viewport.WorldToScreen(worldDirtyRegion).ToSkia();
+            }
+        }
+
+        // Full update (or nearly full): render directly to the platform canvas.
+        if (dirtyScreenRect == null || IsNearlyFullScreen(dirtyScreenRect.Value, viewport))
+        {
+            _persistentSurfaceIsStale = true;
+            RenderTypeSave(targetCanvas, viewport, layers, allWidgets, renderService, background, null);
+            return;
+        }
+
+        // Partial update: use the persistent surface as the backing "previous full frame".
+#pragma warning disable IDISP005 // EnsurePersistentSurface returns a surface whose ownership transfers to RenderService
+        var grContext = renderService.GpuContext as GRContext;
+        var surface = (PersistentSurface)renderService.GetPersistentRenderSurface(current => EnsurePersistentSurface(current, viewport, grContext));
+#pragma warning restore IDISP005
+
+        if (_persistentSurfaceIsStale)
+        {
+            _persistentSurfaceIsStale = false;
+            RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, null);
+        }
+
+        RenderTypeSave(surface.SKSurface.Canvas, viewport, layers, allWidgets, renderService, background, dirtyScreenRect, worldDirtyRegion);
+
+        surface.SKSurface.Canvas.Flush();
+        using var snapshot = surface.SKSurface.Snapshot();
+        targetCanvas.DrawImage(snapshot, 0, 0);
+    }
+
+    // Threshold above which a "partial" update is treated as a full update to avoid the overhead
+    // of reading back the persistent surface for a region that covers nearly everything anyway.
+    private const double NearlyFullScreenThreshold = 0.8;
+
+    private static bool IsNearlyFullScreen(SKRect dirtyScreenRect, Viewport viewport)
+    {
+        var dirtyArea = dirtyScreenRect.Width * dirtyScreenRect.Height;
+        var totalArea = viewport.Width * viewport.Height;
+        return totalArea <= 0 || dirtyArea / totalArea >= NearlyFullScreenThreshold;
+    }
+
+    /// <inheritdoc />
+    public void UpdateDrawables(Viewport viewport, ILayer layer, RenderService renderService)
+    {
+        DrawableRenderer.UpdateDrawables(viewport, layer, _styleRenderers, renderService);
+    }
+
+    /// <inheritdoc />
+    public IDrawable? CreateDrawableForFeature(Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService)
+    {
+        if (!_styleRenderers.TryGetValue(style.GetType(), out var renderer))
+            return null;
+
+        if (renderer is not ITwoStepStyleRenderer twoStepRenderer)
+            return null;
+
+        return twoStepRenderer.CreateDrawable(viewport, layer, feature, style, renderService);
     }
 
     private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null,
+        SKRect? dirtyScreenRect = null, MRect? worldDirtyRegion = null)
     {
         if (!viewport.HasSize()) return;
 
-        if (background is not null) canvas.Clear(background.ToSkia());
-        Render(canvas, viewport, layers, renderService);
-        Render(canvas, viewport, widgets, renderService, 1);
+        if (dirtyScreenRect is not null)
+        {
+            // Clip the entire render (layers + widgets) to the dirty screen region.
+            // Widgets outside the dirty rect produce no pixel changes — their pixels
+            // are already correct in the persistent surface and remain untouched.
+            var saveCount = canvas.Save();
+            canvas.ClipRect(dirtyScreenRect.Value);
+            if (background is not null) canvas.DrawColor(background.ToSkia());
+            Render(canvas, viewport, layers, renderService, worldDirtyRegion);
+            Render(canvas, viewport, widgets, renderService, 1, dirtyScreenRect);
+            canvas.RestoreToCount(saveCount);
+        }
+        else
+        {
+            if (background is not null) canvas.Clear(background.ToSkia());
+            Render(canvas, viewport, layers, renderService);
+            Render(canvas, viewport, widgets, renderService, 1);
+        }
     }
 
     /// <summary>
@@ -220,13 +306,7 @@ public sealed class MapRenderer : IMapRenderer
     /// <returns>True if the renderer was found, false otherwise.</returns>
     public bool TryGetStyleRenderer(Type styleType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
     {
-        if (_styleRenderers.TryGetValue(styleType, out var outStyleRenderer))
-        {
-            styleRenderer = outStyleRenderer;
-            return true;
-        }
-        styleRenderer = null;
-        return false;
+        return _styleRenderers.TryGetValue(styleType, out styleRenderer);
     }
 
     /// <summary>
@@ -251,7 +331,7 @@ public sealed class MapRenderer : IMapRenderer
     /// </summary>
     /// <param name="type">The type of the style.</param>
     /// <param name="renderer">The renderer.</param>
-    public static void RegisterStyleRenderer(Type type, ISkiaStyleRenderer renderer)
+    public static void RegisterStyleRenderer(Type type, IStyleRenderer renderer)
     {
         _styleRenderers[type] = renderer;
     }
@@ -299,15 +379,68 @@ public sealed class MapRenderer : IMapRenderer
             Render(skCanvas, viewport, widgets, renderService, 1);
     }
 
-    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService)
+    private static object EnsurePersistentSurface(object? current, Viewport viewport, GRContext? grContext)
+    {
+        var width = (int)Math.Round(viewport.Width);
+        var height = (int)Math.Round(viewport.Height);
+        if (current is PersistentSurface { Width: var w, Height: var h, GrContext: var ctx }
+            && w == width && h == height && ReferenceEquals(ctx, grContext))
+            return current;
+
+#pragma warning disable IDISP007 // current was created by this renderer and placed in RenderService; disposing it on resize is intentional
+        (current as IDisposable)?.Dispose();
+#pragma warning restore IDISP007
+#pragma warning disable IDISP005 // Ownership transfers to RenderService via the Func<object?,object> delegate
+        return new PersistentSurface(width, height, grContext);
+#pragma warning restore IDISP005
+    }
+
+    // SKSurface is created internally so this class owns and disposes it.
+    // When a GRContext is available the surface is GPU-backed (stays in VRAM across frames);
+    // falls back to a CPU raster surface when GPU rendering is not in use.
+    private sealed class PersistentSurface(int width, int height, GRContext? grContext) : IDisposable
+    {
+        public SKSurface SKSurface { get; } = CreateSurface(width, height, grContext);
+        public GRContext? GrContext { get; } = grContext;
+        public int Width { get; } = width;
+        public int Height { get; } = height;
+        public void Dispose() => SKSurface.Dispose();
+
+        private static SKSurface CreateSurface(int width, int height, GRContext? grContext)
+        {
+            var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul);
+            // GPU-backed when a GRContext is available; falls back to CPU if GPU surface creation fails.
+            return grContext is not null
+                ? SKSurface.Create(grContext, budgeted: true, imageInfo) ?? SKSurface.Create(imageInfo)
+                : SKSurface.Create(imageInfo);
+        }
+    }
+
+    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService, MRect? dirtyRegion = null)
     {
         try
         {
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration,
-                (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, i),
-                (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService));
+            // Ensure drawables are up to date for all two-step layers. This covers:
+            // 1. Layers that already have features but missed the DataChanged event
+            //    (e.g. MemoryLayer features set before the layer was added to the map).
+            // 2. Features that entered the viewport due to panning/zooming but are
+            //    already in the layer's memory cache, so no DataChanged fires
+            //    (e.g. coarser tile levels when zooming out).
+            // Note: This is workaround. Eventually we should never create drawable on the render thread.
+            foreach (var layer in layers)
+            {
+                if (layer.Enabled)
+                {
+                    DrawableRenderer.UpdateDrawables(viewport, layer, _styleRenderers, renderService);
+                }
+            }
 
-            _currentIteration++;
+            VisibleFeatureIterator.IterateLayers(viewport, layers, renderService.CurrentIteration,
+                (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, renderService, i),
+                (l) => CustomLayerRendererCallback(canvas, viewport, l, renderService),
+                dirtyRegion);
+
+            renderService.IncrementIteration();
         }
         catch (Exception exception)
         {
@@ -329,14 +462,33 @@ public sealed class MapRenderer : IMapRenderer
         if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
             throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
-        var saveCount = canvas.Save(); // Save canvas
-        styleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
-        canvas.RestoreToCount(saveCount); // Restore old canvas
+        // Two-step path: draw from pre-created cached drawables (cache managed externally).
+        if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
+        {
+#pragma warning disable IDISP001 // Dispose created - drawable is cache-managed, not owned here
+            var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.GenerationId, style.GenerationId, iteration);
+#pragma warning restore IDISP001
+            if (drawable is not null)
+            {
+                var saveCount = canvas.Save();
+                twoStepRenderer.DrawDrawable(canvas, viewport, drawable, layer);
+                canvas.RestoreToCount(saveCount);
+                return;
+            }
+        }
+
+        // Fallback / non-preparable path: render everything on the render thread.
+        if (styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
+        {
+            var saveCount = canvas.Save();
+            skiaStyleRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
+            canvas.RestoreToCount(saveCount);
+        }
     }
 
-    private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity)
+    private static void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, RenderService renderService, float layerOpacity, SKRect? dirtyScreenRect = null)
     {
-        WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, renderService, layerOpacity);
+        WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, renderService, layerOpacity, dirtyScreenRect);
     }
 
     /// <summary>
@@ -409,9 +561,21 @@ public sealed class MapRenderer : IMapRenderer
                             if (!_styleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
                                 throw new Exception($"Style renderer not found for {style.GetType().Name}");
 
-                            var saveCount = surface.Canvas.Save(); // Save canvas
-                            styleRenderer.Draw(surface.Canvas, viewport, layer, feature, style, renderService, iteration);
-                            surface.Canvas.RestoreToCount(saveCount); // Restore old canvas
+                            var saveCount = surface.Canvas.Save();
+
+                            // Try two-step path first (cached drawables)
+                            if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
+                            {
+#pragma warning disable IDISP001 // Dispose created - drawable is cache-managed, not owned here
+                                var drawable = DrawableRenderer.TryGetDrawable(renderService, layer.Id, feature.GenerationId, style.GenerationId, iteration);
+#pragma warning restore IDISP001
+                                if (drawable is not null)
+                                {
+                                    twoStepRenderer.DrawDrawable(surface.Canvas, viewport, drawable, layer);
+                                }
+                            }
+
+                            surface.Canvas.RestoreToCount(saveCount);
 
                             // 3) Check if the pixel has changed.
                             if (originalColor != pixMap.GetPixelColor(intX, intY))

@@ -174,7 +174,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void Map_RefreshGraphicsRequest(object? sender, EventArgs e)
     {
-        RefreshGraphics();
+        var request = (e as RefreshGraphicsEventArgs)?.Request;
+        _renderController?.RefreshGraphics(request);
     }
 
     /// <summary>
@@ -204,6 +205,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         try
         {
+            if (sender is ILayer layer)
+            {
+                _renderController?.UpdateDrawables(Map.Navigator.Viewport, layer, Map.RenderService);
+            }
+
             if (e == null)
             {
                 Logger.Log(LogLevel.Warning, "Unexpected error: DataChangedEventArgs can not be null");
@@ -336,6 +342,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return; // Although the Map property can not null the map argument can null during initializing and binding.
         TryUpdateViewportSize();
         SubscribeToMapEvents(map);
+        _renderController?.SetupDrawableFactory(map.RenderService);
         Refresh();
     }
 
@@ -529,7 +536,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             handled = true;
         if (UseFling)
             _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
-        Refresh();
+        // Only refresh when nothing claimed the event. A handler that sets e.Handled = true
+        // takes ownership of the event and is responsible for calling map.RefreshGraphics()
+        // itself — either directly or via a side effect such as a viewport change. Calling
+        // Refresh() unconditionally would upgrade any targeted partial refresh to a full one.
+        if (!handled)
+            Refresh();
         return handled;
     }
 

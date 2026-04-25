@@ -79,7 +79,12 @@ public partial class MapControl : ComponentBase, IMapControl
 
     protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e) => OnPaintSurface(e.Surface.Canvas, e.Info);
 
-    protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e) => OnPaintSurface(e.Surface.Canvas, e.Info);
+    protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e)
+    {
+        // Keep the GPU context current so the renderer can create GPU-backed surfaces.
+        Map.RenderService.GpuContext = e.Surface.Context;
+        OnPaintSurface(e.Surface.Canvas, e.Info);
+    }
 
     protected void OnPaintSurface(SKCanvas canvas, SKImageInfo info)
     {

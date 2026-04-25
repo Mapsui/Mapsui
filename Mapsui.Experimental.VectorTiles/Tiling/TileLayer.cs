@@ -79,7 +79,9 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     /// <inheritdoc />
     public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
     {
-        if (_tileSource.Schema == null) return [];
+        if (_tileSource.Schema == null)
+            return [];
+
         _tileCache.UpdateMinAndMaxTilesInCache(_tileFetchPlanner.NumberTilesNeeded);
         return _renderFetchStrategy.Get(extent, resolution, _tileSource.Schema, _tileCache);
     }

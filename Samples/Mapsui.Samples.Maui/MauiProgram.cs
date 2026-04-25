@@ -8,6 +8,8 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+        Mapsui.Samples.Common.SampleConfiguration.ApplyRendererConfig();
+
         var builder = MauiApp.CreateBuilder();
         // Without the UseSkiaSharp(true) line below the app will crash with this exception:
         // "Catastrophic failure (0x8000FFFF (E_UNEXPECTED))".

@@ -23,7 +23,12 @@ class Program
                 // Not in v11. Is there an alternative?: EnableMultitouch = true,
                 // Egl does not work on all platforms for example not on Windows on Arm so only use software rendering for now.
                 // This was in earlier versions AllowEglInitialization = false
-                RenderingMode = new ReadOnlyCollection<Win32RenderingMode>(new[] { Win32RenderingMode.Software }),
+                RenderingMode = new ReadOnlyCollection<Win32RenderingMode>(new[] {
+                    Win32RenderingMode.Vulkan,    // Try Vulkan first (fastest if supported)
+                    Win32RenderingMode.AngleEgl,  // Try ANGLE first (uses DirectX)
+                    Win32RenderingMode.Wgl,       // Then try native OpenGL
+                    Win32RenderingMode.Software   // Fall back to software if needed    
+                }),
             })
             .LogToTrace()
             .WithInterFont()

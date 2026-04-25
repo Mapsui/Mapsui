@@ -70,25 +70,27 @@ public class VectorTileStyleRenderer(MapRenderer? mapRenderer = null) : ISkiaSty
                     var featureStyles = vectorTileStyle.Style.GetStylesToApply(mapsuiFeature, viewport);
                     foreach (var featureStyle in featureStyles)
                     {
-                        if (_mapRenderer.TryGetStyleRenderer(featureStyle.GetType(), out var styleRenderer))
-                        {
-                            var skiaStyleRenderer = styleRenderer as ISkiaStyleRenderer;
-                            if (skiaStyleRenderer != null)
-                            {
-                                if (mapsuiFeature is Point)
-                                    return false;
-                                skiaStyleRenderer.Draw(canvas, viewport, layer, mapsuiFeature, featureStyle, renderService, iteration);
-                            }
-                            else
-                            {
-                                Logger.Log(LogLevel.Warning, $"Registered style renderer for style type {featureStyle.GetType().FullName} does not implement {nameof(ISkiaStyleRenderer)} (Layer: {layer.Name}, Iteration: {iteration}).");
-                                continue;
-                            }
-                        }
-                        else
+                        if (!_mapRenderer.TryGetStyleRenderer(featureStyle.GetType(), out var styleRenderer))
                         {
                             Logger.Log(LogLevel.Warning, $"No style renderer registered for style type {featureStyle.GetType().FullName} (Layer: {layer.Name}, Iteration: {iteration}).");
                             continue;
+                        }
+
+                        if (styleRenderer is ITwoStepStyleRenderer twoStepRenderer)
+                        {
+                            using var drawable = twoStepRenderer.CreateDrawable(viewport, layer, mapsuiFeature, featureStyle, renderService);
+                            if (drawable is not null)
+                                twoStepRenderer.DrawDrawable(canvas, viewport, drawable, layer);
+                        }
+                        else if (styleRenderer is ISkiaStyleRenderer skiaStyleRenderer)
+                        {
+                            if (mapsuiFeature is Point)
+                                return false;
+                            skiaStyleRenderer.Draw(canvas, viewport, layer, mapsuiFeature, featureStyle, renderService, iteration);
+                        }
+                        else
+                        {
+                            Logger.Log(LogLevel.Warning, $"Registered style renderer for style type {featureStyle.GetType().FullName} does not implement {nameof(ISkiaStyleRenderer)} or {nameof(ITwoStepStyleRenderer)} (Layer: {layer.Name}, Iteration: {iteration}).");
                         }
                     }
                 }

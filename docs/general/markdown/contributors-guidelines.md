@@ -48,7 +48,13 @@ Code depends on other code. In a hierarchy, it is better to have high-quality co
 - Code that could throw exceptions, forcing the caller to catch them - or perhaps the caller should not need to catch them (it's better if you do not have to decide).
 - Fields that are nullable. Check for null early at the surface before passing it along to the core.
 
+### Disposable DataSources
+
 A practical example of a problematic design in our own code is the dependency chain of: `DataSource <- Fetcher <- Layer <- Map <- MapControl`. The `DataSource` is disposable, and because of this, all other classes become disposable. We want to improve this by moving the disposable parts to a centralized data fetcher.
+
+### Disposable Drawables
+
+Skia objects such as `SKSurface`, `SKPaint`, and `SKPath` are `IDisposable`. Renderers that create these objects should not become disposable themselves, because that would propagate `IDisposable` up through `IMapRenderer` and into `MapControl`. Instead, renderer-owned resources with a lifetime tied to the map should be stored in `RenderService`, which is already disposable and is owned by `Map` (which is owned by `MapControl`). A concrete example is the persistent off-screen `SKSurface` used by the experimental renderer: it is stored in `RenderService.GetPersistentRenderSurface` and cleaned up when `RenderService.Dispose()` is called, keeping the renderer itself free of `IDisposable`.
 
 ## Prefer pure functions and immutable data
 

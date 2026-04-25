@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
+using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -24,6 +25,8 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
+    private bool _hasAnimatedFeatures;
+    private FetchInfo? _lastFetchInfo;
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
 
@@ -46,7 +49,14 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
         {
             if (_dataSource == value) return;
 
+            if (_dataSource is IDynamic oldDynamic)
+                oldDynamic.DataChanged -= OnDataSourceDataChanged;
+
             _dataSource = value;
+
+            if (_dataSource is IDynamic newDynamic)
+                newDynamic.DataChanged += OnDataSourceDataChanged;
+
             ClearCache();
             OnPropertyChanged(nameof(DataSource));
             OnPropertyChanged(nameof(Extent));
@@ -88,7 +98,25 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
             if (animation())
                 areAnimationsRunning = true;
         }
+        if (_hasAnimatedFeatures)
+        {
+            foreach (var feature in _cache)
+            {
+                if (feature is IAnimatedFeature animatedFeature && animatedFeature.UpdateAnimation())
+                    areAnimationsRunning = true;
+            }
+        }
         return areAnimationsRunning;
+    }
+
+    private void OnDataSourceDataChanged(object? sender, EventArgs e)
+    {
+        if (_lastFetchInfo is { } fetchInfo)
+        {
+            Busy = true;
+            _latestFetchInfo.Overwrite(fetchInfo);
+            OnFetchRequested();
+        }
     }
 
     private async Task FetchAsync(FetchInfo fetchInfo)
@@ -110,6 +138,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
             fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
             var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : [];
             _cache = features.ToArray();
+            _hasAnimatedFeatures = _cache.Any(f => f is IAnimatedFeature);
             if (_refreshCounter == refreshCounter)
                 Busy = false;
             OnDataChanged(new DataChangedEventArgs(Name));
@@ -138,6 +167,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
 
     public void ViewportChanged(FetchInfo fetchInfo)
     {
+        _lastFetchInfo = fetchInfo;
         Busy = true;
         _latestFetchInfo.Overwrite(fetchInfo);
     }

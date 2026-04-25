@@ -5,6 +5,7 @@
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 using System;
+using Mapsui.Widgets;
 
 namespace Mapsui.Styles;
 
@@ -88,6 +89,7 @@ public class LabelStyle : BaseStyle
         BackColor = new Brush { Color = Color.White };
         HorizontalAlignment = HorizontalAlignmentEnum.Center;
         VerticalAlignment = VerticalAlignmentEnum.Center;
+        TextAlignment = Alignment.Left;
         MaxWidth = 0;
         LineHeight = 1.0;
         WordWrap = LineBreakMode.NoWrap;
@@ -106,6 +108,7 @@ public class LabelStyle : BaseStyle
         BackColor = labelStyle.BackColor == null ? null : new Brush(labelStyle.BackColor);
         HorizontalAlignment = labelStyle.HorizontalAlignment;
         VerticalAlignment = labelStyle.VerticalAlignment;
+        TextAlignment = labelStyle.TextAlignment;
         MaxWidth = labelStyle.MaxWidth;
         WordWrap = labelStyle.WordWrap;
         LineHeight = labelStyle.LineHeight;
@@ -172,14 +175,22 @@ public class LabelStyle : BaseStyle
     public bool CollisionDetection { get; set; }
 
     /// <summary>
-    /// The horizontal alignment of the text in relation to the label point
+    /// The horizontal alignment of the label box in relation to the label point.
     /// </summary>
     public HorizontalAlignmentEnum HorizontalAlignment { get; set; }
 
     /// <summary>
-    /// The horizontal alignment of the text in relation to the label point
+    /// The vertical alignment of the label box in relation to the label point.
     /// </summary>
     public VerticalAlignmentEnum VerticalAlignment { get; set; }
+
+    /// <summary>
+    /// The alignment of text lines within the label box.
+    /// Only supported by the experimental renderer; ignored by the standard renderer.
+    /// Use <see cref="Alignment.Right"/> for RTL scripts such as Arabic or Hebrew.
+    /// Use <see cref="Alignment.Auto"/> to detect text direction automatically from the content.
+    /// </summary>
+    public Alignment TextAlignment { get; set; }
 
     /// <summary>
     /// Maximum width of text in em. If text is wider than this, text is shorten or 

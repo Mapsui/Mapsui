@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RTK = Topten.RichTextKit;
 
 namespace Mapsui.Samples.Common.Maps.MapInfo;
 
@@ -140,51 +139,40 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         // up to you when working with a custom callout style.
 
         var title = "title";
-        var titleFont = new Font { FontFamily = null, Size = 15, Italic = false, Bold = true };
-        var TitleFontColor = Color.Black;
+        var titleFontColor = Color.Black;
         var subtitle = "subtitle";
-        var subtitleFont = new Font { FontFamily = null, Size = 12, Italic = false, Bold = true };
         var subtitleFontColor = Color.Gray;
-        var maxWidth = 120;
 
-        var styleSubtitle = new RTK.Style();
-        var styleTitle = new RTK.Style();
-        var textBlockTitle = new RTK.TextBlock();
-        var textBlockSubtitle = new RTK.TextBlock();
+        using var titleTypeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+        using var subtitleTypeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
 
-        styleSubtitle.FontFamily = subtitleFont.FontFamily;
-        styleSubtitle.FontSize = (float)subtitleFont.Size;
-        styleSubtitle.FontItalic = subtitleFont.Italic;
-        styleSubtitle.FontWeight = subtitleFont.Bold ? 700 : 400;
-        styleSubtitle.TextColor = subtitleFontColor.ToSkia();
+        using var titleSkFont = new SKFont { Typeface = titleTypeface, Size = 15 };
+        using var subtitleSkFont = new SKFont { Typeface = subtitleTypeface, Size = 12 };
 
-        textBlockSubtitle.AddText(subtitle, styleSubtitle);
+        using var titlePaint = new SKPaint { Color = titleFontColor.ToSkia(), IsAntialias = true };
+        using var subtitlePaint = new SKPaint { Color = subtitleFontColor.ToSkia(), IsAntialias = true };
 
-        styleTitle.FontFamily = titleFont.FontFamily;
-        styleTitle.FontSize = (float)titleFont.Size;
-        styleTitle.FontItalic = titleFont.Italic;
-        styleTitle.FontWeight = titleFont.Bold ? 700 : 400;
-        styleTitle.TextColor = TitleFontColor.ToSkia();
+        // Measure text
+        titleSkFont.MeasureText(title, out var titleBounds, titlePaint);
+        subtitleSkFont.MeasureText(subtitle, out var subtitleBounds, subtitlePaint);
 
-        textBlockTitle.AddText(title, styleTitle);
+        var titleWidth = titleBounds.Right - titleBounds.Left;
+        var subtitleWidth = subtitleBounds.Right - subtitleBounds.Left;
+        var subtitleHeight = subtitleBounds.Bottom - subtitleBounds.Top;
 
-        textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = maxWidth;
-        // Layout TextBlocks
-        textBlockTitle.Layout();
-        textBlockSubtitle.Layout();
-        // Get sizes
-        var width = Math.Max(textBlockTitle.MeasuredWidth, textBlockSubtitle.MeasuredWidth);
-        var height = textBlockTitle.MeasuredHeight + textBlockSubtitle.MeasuredHeight;
-        // Now we have the correct width, so make a new layout cycle for text alignment
-        textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = width;
-        textBlockTitle.Layout();
-        textBlockSubtitle.Layout();
-        // Create bitmap from TextBlock
+        // Use tight glyph height plus a small explicit gap for a compact but readable separation.
+        var titleLineHeight = (titleBounds.Bottom - titleBounds.Top) + titleSkFont.Size * 0.25f;
+
+        var width = Math.Max(titleWidth, subtitleWidth);
+        var height = titleLineHeight + subtitleHeight;
+
+        // Draw text to canvas
         using var recorder = new SKPictureRecorder();
         using var canvas = recorder.BeginRecording(new SKRect(0, 0, width, height));
-        // Draw text to canvas
-        textBlockTitle.Paint(canvas, new RTK.TextPaintOptions() { Edging = SKFontEdging.Antialias });
-        textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight), new RTK.TextPaintOptions() { Edging = SKFontEdging.Antialias });
+
+        canvas.DrawText(title, -titleBounds.Left, -titleBounds.Top, SKTextAlign.Left, titleSkFont, titlePaint);
+        canvas.DrawText(subtitle, -subtitleBounds.Left, titleLineHeight - subtitleBounds.Top, SKTextAlign.Left, subtitleSkFont, subtitlePaint);
+
         return recorder.EndRecording();
     }
 }

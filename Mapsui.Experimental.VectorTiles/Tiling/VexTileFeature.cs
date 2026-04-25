@@ -1,22 +1,22 @@
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using Mapsui.Layers;
 using Mapsui.Tiling.Extensions;
 using System;
 using BruTileInfo = BruTile.TileInfo;
 using VexTileInfo = VexTile.Renderer.Mvt.AliFlux.TileInfo;
-using VexVectorTile = VexTile.Renderer.Mvt.AliFlux.VectorTile;
 
 namespace Mapsui.Experimental.VectorTiles.Tiling;
 
 /// <summary>
 /// Feature representing a VexTile vector tile with its render parameters.
-/// The actual rendering to SKImage happens in the VexTileStyleRenderer.
+/// The actual rendering to SKImage happens in the TwoStepVexTileStyleRenderer.
 /// </summary>
 public class VexTileFeature : BaseFeature
 {
     /// <summary>
     /// The vector tile data.
     /// </summary>
-    public VexVectorTile VectorTile { get; }
+    public VectorTile VectorTile { get; }
 
     /// <summary>
     /// The VexTile tile info (render parameters: col, row, zoom, width, height).
@@ -34,7 +34,7 @@ public class VexTileFeature : BaseFeature
     /// <param name="vectorTile">The vector tile data.</param>
     /// <param name="vexTileInfo">The VexTile render parameters.</param>
     /// <param name="tileInfo">The BruTile tile info.</param>
-    public VexTileFeature(VexVectorTile vectorTile, VexTileInfo vexTileInfo, BruTileInfo tileInfo)
+    public VexTileFeature(VectorTile vectorTile, VexTileInfo vexTileInfo, BruTileInfo tileInfo)
     {
         VectorTile = vectorTile;
         VexTileInfo = vexTileInfo;

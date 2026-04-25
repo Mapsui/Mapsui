@@ -1,4 +1,4 @@
-﻿using Mapsui.Experimental.Rendering.Skia.Functions;
+﻿using Mapsui.Extensions;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
 
@@ -11,37 +11,50 @@ internal static class LineStringExtensions
     /// </summary>
     /// <param name="lineString">List of points in Mapsui world coordinates.</param>
     /// <param name="viewport">The Viewport that is used for the conversions.</param>
-    /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
-    /// <param name="strokeWidth">stroke Width</param>
     /// <returns></returns>
-    public static SKPath ToSkiaPath(this LineString lineString, Viewport viewport, SKRect clipRect, float strokeWidth)
+    public static SKPath ToSkiaPath(this LineString lineString, Viewport viewport)
     {
         var coordinates = lineString.Coordinates;
-
-        // First convert List<Points> to screen coordinates
-        var vertices = ClippingFunctions.WorldToScreen(viewport, coordinates);
-
         var path = new SKPath();
-        var lastPoint = SKPoint.Empty;
 
-        for (var i = 1; i < vertices.Count; i++)
+        if (coordinates.Length == 0)
+            return path;
+
+        var (startX, startY) = viewport.WorldToScreenXY(coordinates[0].X, coordinates[0].Y);
+        path.MoveTo((float)startX, (float)startY);
+
+        for (var i = 1; i < coordinates.Length; i++)
         {
-            // Check each part of LineString, if it is inside or intersects the clipping rectangle
-            var intersect = ClippingFunctions.LiangBarskyClip(vertices[i - 1], vertices[i], SKRect.Inflate(clipRect, strokeWidth, strokeWidth), out var intersectionPoint1, out var intersectionPoint2);
-
-            if (intersect != ClippingFunctions.Intersection.CompleteOutside)
-            {
-                // If the last point isn't the same as actual starting point ...
-                if (lastPoint.IsEmpty || !lastPoint.Equals(intersectionPoint1))
-                    // ... than move to this point
-                    path.MoveTo(intersectionPoint1);
-                // Draw line
-                path.LineTo(intersectionPoint2);
-
-                // Save last end point for later use
-                lastPoint = intersectionPoint2;
-            }
+            var (screenX, screenY) = viewport.WorldToScreenXY(coordinates[i].X, coordinates[i].Y);
+            path.LineTo((float)screenX, (float)screenY);
         }
+
+        return path;
+    }
+
+    /// <summary>
+    /// Converts a LineString into a SKPath using coordinates relative to a reference point.
+    /// Using relative coordinates keeps float values small, avoiding precision loss for large world coordinates.
+    /// The path is intended to be transformed to screen coordinates at draw time using a matrix,
+    /// after translating to the reference point.
+    /// </summary>
+    /// <param name="lineString">LineString in Mapsui world coordinates.</param>
+    /// <param name="referenceX">Reference X coordinate (typically centroid) to subtract from all points</param>
+    /// <param name="referenceY">Reference Y coordinate (typically centroid) to subtract from all points</param>
+    /// <returns>SKPath in relative world coordinates (centered around origin)</returns>
+    public static SKPath ToWorldPath(this LineString lineString, double referenceX, double referenceY)
+    {
+        var coordinates = lineString.Coordinates;
+        var path = new SKPath();
+
+        if (coordinates.Length == 0)
+            return path;
+
+        // Subtract reference point to keep float values small and preserve precision
+        path.MoveTo((float)(coordinates[0].X - referenceX), (float)(coordinates[0].Y - referenceY));
+        for (var i = 1; i < coordinates.Length; i++)
+            path.LineTo((float)(coordinates[i].X - referenceX), (float)(coordinates[i].Y - referenceY));
+
         return path;
     }
 }

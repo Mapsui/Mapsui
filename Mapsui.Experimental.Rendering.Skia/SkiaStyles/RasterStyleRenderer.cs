@@ -8,12 +8,13 @@ using Mapsui.Experimental.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using Mapsui.Rendering;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
 public class RasterStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, Mapsui.Rendering.RenderService renderService, long currentIteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long currentIteration)
     {
         try
         {
@@ -28,14 +29,10 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             if (style is not RasterStyle)
                 throw new ArgumentException("Excepted a RasterStyle in the RasterStyleRenderer");
 
-            // Use per-layer cache to avoid competition for cache space between layers
-            // The cache is managed by RenderService and disposed when the layer is removed
-#pragma warning disable IDISP001 // Dispose created
-            var featureIdTileCache = renderService.GetLayerFeatureIdTileCache(layer.Id);
-#pragma warning restore IDISP001
-            featureIdTileCache.UpdateCache(currentIteration);
+            var tileCache = renderService.TileCache;
+            tileCache.UpdateCache(currentIteration);
 
-            var tile = featureIdTileCache.GetOrAdd(feature.Id, _ => ToTileCacheEntry(raster), currentIteration);
+            var tile = tileCache.GetOrAdd(raster, ToTileCacheEntry, currentIteration);
             if (tile is null)
                 return false;
 

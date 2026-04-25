@@ -11,4 +11,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 Mapsui.Logging.Logger.LogDelegate += (l, m, e) => Console.WriteLine(m + e);
 
+Mapsui.Samples.Common.SampleConfiguration.ApplyRendererConfig();
+
 await builder.Build().RunAsync();

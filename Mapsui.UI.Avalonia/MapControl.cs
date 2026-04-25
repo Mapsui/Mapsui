@@ -172,7 +172,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     public override void Render(DrawingContext context)
     {
-        _drawOperation ??= new MapsuiCustomDrawOperation(new Rect(0, 0, Bounds.Width, Bounds.Height), _renderController);
+        _drawOperation ??= new MapsuiCustomDrawOperation(new Rect(0, 0, Bounds.Width, Bounds.Height), _renderController, ctx => Map.RenderService.GpuContext = ctx);
         _drawOperation.Bounds = new Rect(0, 0, Bounds.Width, Bounds.Height);
         context.Custom(_drawOperation);
     }
@@ -206,7 +206,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         return (float?)VisualRoot?.RenderScaling;
     }
 
-    private sealed class MapsuiCustomDrawOperation(Rect bounds, RenderController? renderController) : ICustomDrawOperation
+    private sealed class MapsuiCustomDrawOperation(Rect bounds, RenderController? renderController, Action<object?> setGpuContext) : ICustomDrawOperation
     {
         private readonly RenderController? _renderController = renderController;
 
@@ -221,6 +221,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             if (leaseFeature == null)
                 return;
             using var lease = leaseFeature.Lease();
+            // Keep the GPU context current so the renderer can create GPU-backed surfaces.
+            setGpuContext(lease.GrContext);
             var canvas = lease.SkCanvas;
             canvas.Save();
             _renderController?.Render(canvas);

@@ -33,7 +33,10 @@ public sealed class MapRenderer : IMapRenderer
     {
         InitRenderer();
 
-        DefaultRendererFactory.Create = () => new MapRenderer();
+        // Only register as the default factory if nothing has been explicitly configured yet.
+        // This prevents overwriting a factory set by SampleConfiguration.ApplyRendererConfig().
+        if (!DefaultRendererFactory.IsConfigured)
+            DefaultRendererFactory.Create = () => new MapRenderer();
     }
 
     private static void InitRenderer()
@@ -58,13 +61,27 @@ public sealed class MapRenderer : IMapRenderer
     }
 
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null)
+        IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null, MRect? dirtyRegion = null, CoordinateSpace coordinateSpace = CoordinateSpace.World)
     {
         var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
 
         var allWidgets = widgets.Concat(attributions);
 
         RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, renderService, background);
+    }
+
+    /// <inheritdoc />
+    public void UpdateDrawables(Viewport viewport, ILayer layer, RenderService renderService)
+    {
+        // No-op: the default renderer does not use the two-step drawable architecture.
+    }
+
+    /// <inheritdoc />
+    public IDrawable? CreateDrawableForFeature(Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService)
+    {
+        // The default renderer does not use the two-step drawable architecture.
+        // Return null to indicate this renderer doesn't support creating drawables.
+        return null;
     }
 
     private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
@@ -169,9 +186,9 @@ public sealed class MapRenderer : IMapRenderer
         return false;
     }
 
-    public bool TryGetStyleRenderer(Type widgetType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
+    public bool TryGetStyleRenderer(Type styleType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
     {
-        if (_styleRenderers.TryGetValue(widgetType, out var outStyleRenderer))
+        if (_styleRenderers.TryGetValue(styleType, out var outStyleRenderer))
         {
             styleRenderer = outStyleRenderer;
             return true;

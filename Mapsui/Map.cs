@@ -17,6 +17,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui;
 
@@ -46,6 +47,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         Navigator.FetchRequested += Navigator_FetchRequested;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
         RenderService.ImageSourceCache.FetchRequested += FetchableSource_FetchRequested;
+        RenderService.FontSourceCache.FetchRequested += FetchableSource_FetchRequested;
     }
 
     public FetchMachine FetchMachine { get; } = new(16); // This is still needed because we support the IAsyncDataFetcher interface.
@@ -185,6 +187,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </summary>
     public event DataChangedEventHandler? DataChanged;
 
+    // TODO: change type to EventHandler<RefreshGraphicsEventArgs> in the next major (breaking) version.
     public event EventHandler? RefreshGraphicsRequest;
 
     /// <summary>
@@ -234,6 +237,31 @@ public class Map : INotifyPropertyChanged, IDisposable
             _dataFetcher.ViewportChanged(fetchInfo);
     }
 
+    /// <summary>
+    /// Refresh data of Map asynchronously. Returns when all data fetches have completed.
+    /// </summary>
+    public async Task RefreshDataAsync(Viewport? viewport = null)
+    {
+        var fetchInfo = ToFetchInfo(viewport ?? Navigator.Viewport, ChangeType.Discrete, CRS);
+        if (fetchInfo == null)
+            return;
+
+        // The IAsyncDataFetcher is the legacy fetch interface. It is being replaced by the
+        // IFetchableSource/DataFetcher mechanism, but some layers may still implement it.
+        // We collect their tasks here so we can await them alongside the DataFetcher work.
+        var legacyTasks = new List<Task>();
+        foreach (var layer in _layers.ToList())
+        {
+            if (layer is IAsyncDataFetcher asyncDataFetcher)
+                asyncDataFetcher.RefreshData(fetchInfo, func => legacyTasks.Add(func()));
+        }
+
+        // This is the main fetch path using DataFetcher which drives all IFetchableSource layers.
+        var dataFetcherTask = _dataFetcher.ViewportChangedAsync(fetchInfo);
+
+        await Task.WhenAll(legacyTasks.Append(dataFetcherTask)).ConfigureAwait(false);
+    }
+
     private static FetchInfo? ToFetchInfo(Viewport viewport, ChangeType changeType, string? CRS)
     {
         if (viewport.ToExtent() is null)
@@ -244,9 +272,26 @@ public class Map : INotifyPropertyChanged, IDisposable
         return new FetchInfo(viewport.ToSection(), CRS, changeType);
     }
 
+    /// <summary>
+    /// Signals that the entire map needs to be redrawn on the next render cycle.
+    /// Use <see cref="RefreshGraphics(MRect, CoordinateSpace)"/> instead when only a small area has changed.
+    /// </summary>
     public void RefreshGraphics()
     {
-        RefreshGraphicsRequest?.Invoke(this, EventArgs.Empty);
+        RefreshGraphicsRequest?.Invoke(this, new RefreshGraphicsEventArgs(RefreshRequest.Full));
+    }
+
+    /// <summary>
+    /// Signals that only the given rectangle needs to be redrawn.
+    /// Use <paramref name="coordinateSpace"/> to specify whether <paramref name="dirtyRect"/>
+    /// is in world coordinates (e.g. for a moving GPS marker) or in screen coordinates
+    /// (e.g. for a widget area fixed to the screen).
+    /// </summary>
+    /// <param name="dirtyRect">The region that changed.</param>
+    /// <param name="coordinateSpace">The coordinate space of <paramref name="dirtyRect"/>. Defaults to <see cref="CoordinateSpace.World"/>.</param>
+    public void RefreshGraphics(MRect dirtyRect, CoordinateSpace coordinateSpace = CoordinateSpace.World)
+    {
+        RefreshGraphicsRequest?.Invoke(this, new RefreshGraphicsEventArgs(new RefreshRequest(dirtyRect, coordinateSpace)));
     }
 
     public void OnViewportSizeInitialized()
@@ -501,6 +546,6 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     private IEnumerable<IFetchableSource> GetFetchableSources()
     {
-        return _layers.OfType<IFetchableSource>().Concat(new[] { RenderService.ImageSourceCache });
+        return _layers.OfType<IFetchableSource>().Concat(new IFetchableSource[] { RenderService.ImageSourceCache, RenderService.FontSourceCache });
     }
 }

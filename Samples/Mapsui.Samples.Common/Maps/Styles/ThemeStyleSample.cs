@@ -53,38 +53,54 @@ public class ThemeStyleSample : ISample
 
     private static ThemeStyle CreateThemeStyle()
     {
+        // Pre-create styles to enable caching. Each style instance has a stable GenerationId,
+        // allowing the drawable cache to reuse cached drawables for features with the same style.
+        // Creating new style instances on every call would defeat caching since each would have
+        // a different GenerationId.
+        var brazilStyle = new VectorStyle
+        {
+            Fill = new Brush(Color.Green),
+            Outline = new Pen(Color.Black)
+        };
+
+        var usaStyle = new VectorStyle
+        {
+            Fill = new Brush(Color.Violet),
+            Outline = new Pen(Color.Black)
+        };
+
+        var chinaStyle = new VectorStyle
+        {
+            Fill = new Brush(Color.Orange),
+            Outline = new Pen(Color.Black)
+        };
+
+        var japanStyle = new VectorStyle
+        {
+            Fill = new Brush(Color.Cyan),
+            Outline = new Pen(Color.Black)
+        };
+
+        var defaultStyle = new VectorStyle
+        {
+            Fill = new Brush(Color.Gray),
+            Outline = new Pen(Color.FromArgb(0, 64, 64, 64))
+        };
+
         return new ThemeStyle(f =>
         {
             if (f is GeometryFeature geometryFeature)
                 if (geometryFeature.Geometry is Point)
                     return null;
 
-            var style = new VectorStyle();
-
-            switch (f["NAME"]?.ToString()?.ToLower())
+            return f["NAME"]?.ToString()?.ToLower() switch
             {
-                case "brazil": //If country name is Brazil, fill it with green
-                    style.Fill = new Brush(Color.Green);
-                    style.Outline = new Pen(Color.Black);
-                    break;
-                case "united states": //If country name is USA, fill it with violet
-                    style.Fill = new Brush(Color.Violet);
-                    style.Outline = new Pen(Color.Black);
-                    break;
-                case "china": //If country name is China, fill it with orange
-                    style.Fill = new Brush(Color.Orange);
-                    style.Outline = new Pen(Color.Black);
-                    break;
-                case "japan": //If country name is Japan, fill it with cyan
-                    style.Fill = new Brush(Color.Cyan);
-                    style.Outline = new Pen(Color.Black);
-                    break;
-                default:
-                    style.Fill = new Brush(Color.Gray);
-                    style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64));
-                    break;
-            }
-            return style;
+                "brazil" => brazilStyle,
+                "united states" => usaStyle,
+                "china" => chinaStyle,
+                "japan" => japanStyle,
+                _ => defaultStyle
+            };
         });
     }
 

@@ -28,6 +28,8 @@ public class CustomStyleSample : ISample
         // This is the crucial part where we tell the renderer that a CustomStyle should be
         // rendered with the SkiaCustomStyleRenderer
         MapRenderer.RegisterStyleRenderer(typeof(CustomStyle), new SkiaCustomStyleRenderer());
+        // Also register for the experimental renderer (needed when running with LocalRendererConfig.cs).
+        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterStyleRenderer(typeof(CustomStyle), new SkiaCustomStyleRenderer());
 
         var map = new Map();
 

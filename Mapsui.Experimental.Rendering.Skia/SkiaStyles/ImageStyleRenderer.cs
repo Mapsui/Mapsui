@@ -7,6 +7,7 @@ using SkiaSharp;
 using Svg.Skia;
 using System;
 using Mapsui.Rendering;
+using SvgColorModifier = Mapsui.Experimental.Rendering.Skia.SkiaStyles.SvgColorModifier;
 
 namespace Mapsui.Experimental.Rendering.Skia;
 
@@ -25,7 +26,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, IFeature feature, RenderService renderService, float opacity)
+    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, RenderService renderService, float opacity)
     {
         if (pointStyle is ImageStyle imageStyle)
         {

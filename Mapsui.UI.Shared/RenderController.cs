@@ -1,4 +1,5 @@
 ﻿#pragma warning disable IDE0005 // Using directive is unnecessary.
+using Mapsui;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -31,8 +32,14 @@ public sealed class RenderController : IDisposable
     private bool _isRunning = true;
     private int _timestampStartDraw;
     private readonly Stopwatch _stopwatch = new(); // Stopwatch for measuring drawing times
-    private IMapRenderer _mapRenderer = new MapRenderer();
+    // Use the explicit factory if one was configured (e.g. by SampleConfiguration.ApplyRendererConfig());
+    // otherwise fall back to direct construction which triggers MapRenderer's static ctor and
+    // registers the standard Skia renderer as the default factory.
+    private IMapRenderer _mapRenderer = DefaultRendererFactory.IsConfigured ? DefaultRendererFactory.Create() : new MapRenderer();
     private readonly Func<Map?> _getMap;
+    // Pending refresh request: null = nothing pending yet, otherwise accumulates since the last render.
+    private RefreshRequest? _pendingRefresh;
+    private readonly object _refreshLock = new();
 
     public RenderController(Func<Map?> getMap, Action InvalidateCanvas)
     {
@@ -44,9 +51,60 @@ public sealed class RenderController : IDisposable
 
     public void SetMapRenderer(IMapRenderer mapRenderer) => _mapRenderer = mapRenderer;
 
+    /// <summary>
+    /// Sets up the drawable factory on the RenderService. This wires the renderer's
+    /// <see cref="IMapRenderer.CreateDrawableForFeature"/> method to the
+    /// <see cref="RenderService.CreateDrawable"/> delegate, enabling the fetch pipeline
+    /// to create drawables without direct access to the renderer.
+    /// </summary>
+    /// <param name="renderService">The render service to configure.</param>
+    public void SetupDrawableFactory(RenderService renderService)
+    {
+        renderService.CreateDrawable = _mapRenderer.CreateDrawableForFeature;
+    }
+
+    /// <summary>
+    /// Delegates to the map renderer's UpdateDrawables to create pre-rendered objects.
+    /// Called when layer data changes.
+    /// </summary>
+    public void UpdateDrawables(Viewport viewport, ILayer layer, RenderService renderService)
+    {
+        _mapRenderer.UpdateDrawables(viewport, layer, renderService);
+    }
+
+    /// <summary>
+    /// Signals that the entire viewport needs to be redrawn on the next render cycle.
+    /// </summary>
     public void RefreshGraphics()
     {
+        lock (_refreshLock)
+            _pendingRefresh = _pendingRefresh == null ? RefreshRequest.Full : _pendingRefresh.Accumulate(RefreshRequest.Full);
         _needsRefresh.Set();
+    }
+
+    /// <summary>
+    /// Signals that only the given region needs to be redrawn.
+    /// Multiple calls before the next render are accumulated.
+    /// If a full refresh is already pending, the incoming request is ignored.
+    /// </summary>
+    /// <param name="request">The refresh request, or <see langword="null"/> to force a full refresh.</param>
+    public void RefreshGraphics(RefreshRequest? request)
+    {
+        var incoming = request ?? RefreshRequest.Full;
+        lock (_refreshLock)
+            _pendingRefresh = _pendingRefresh == null ? incoming : _pendingRefresh.Accumulate(incoming);
+        _needsRefresh.Set();
+    }
+
+    // Atomically take and reset the pending refresh. Returns null when nothing is pending.
+    private RefreshRequest? TakePendingRefresh()
+    {
+        lock (_refreshLock)
+        {
+            var r = _pendingRefresh;
+            _pendingRefresh = null;
+            return r;
+        }
     }
 
     public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService,
@@ -121,7 +179,8 @@ public sealed class RenderController : IDisposable
         _stopwatch.Restart();
         _timestampStartDraw = GetTimestampInMilliseconds();
 
-        _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor);
+        var pending = TakePendingRefresh();
+        _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor, pending?.DirtyRect, pending?.CoordinateSpace ?? CoordinateSpace.World);
 
         _isDrawingDone.Set();
         _stopwatch.Stop();

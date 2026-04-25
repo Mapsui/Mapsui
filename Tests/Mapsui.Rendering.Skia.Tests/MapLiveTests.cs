@@ -2,7 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Tests.Helpers;
 using Mapsui.Samples.Common;
@@ -132,7 +131,7 @@ public class MapLiveTests
 
     private static async Task DisplayMapAsync(IMapControl mapControl)
     {
-        await mapControl.WaitForLoadingAsync().ConfigureAwait(false);
+        await mapControl.Map.RefreshDataAsync().ConfigureAwait(false);
 
         // wait for rendering to finish to make the Tests more reliable
         await Task.Delay(300).ConfigureAwait(false);

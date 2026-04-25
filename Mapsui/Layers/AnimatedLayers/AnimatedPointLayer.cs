@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Mapsui.Animations;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
-using Mapsui.Layers.AnimationLayers;
 using Mapsui.Providers;
 
 namespace Mapsui.Layers.AnimatedLayers;
@@ -86,7 +85,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
             var animatedPointFeature = FindPrevious(_features, target, IdField);
             if (animatedPointFeature is null)
             {
-                animatedPointFeature = new AnimatedPointFeature(target.Point.X, target.Point.Y);
+                animatedPointFeature = new AnimatedPointFeature(target.Point.X, target.Point.Y, AnimationDuration, Easing, DistanceThreshold);
                 _features.Add(animatedPointFeature);
             }
             else
@@ -129,7 +128,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
         var animating = false;
         foreach (var feature in _features)
         {
-            if (feature.UpdateAnimation(AnimationDuration, Easing, DistanceThreshold))
+            if (feature.UpdateAnimation())
                 animating = true;
         }
         return animating;

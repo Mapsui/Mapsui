@@ -1,0 +1,81 @@
+using Mapsui.Experimental.VectorTiles;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Tiling;
+using Mapsui.Tiling.Fetcher;
+using Mapsui.Tiling.Layers;
+using SQLite;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using VexTile.Common.Enums;
+using VexTile.Data.Sources;
+
+namespace Mapsui.Samples.Common.Maps.Tiles;
+
+public sealed class VexTileAsPngCustomStyleSample : ISample, IDisposable
+{
+    SqliteDataSource _sqliteDataSource;
+
+    static VexTileAsPngCustomStyleSample()
+    {
+        MbTilesDeployer.CopyEmbeddedResourceToFile("zurich.mbtiles");
+        SQLitePCL.Batteries.Init();
+    }
+
+    public VexTileAsPngCustomStyleSample()
+    {
+        _sqliteDataSource = CreateSqliteDataSource();
+    }
+
+    public string Name => "VexTileAsPngCustomStyle";
+    public string Category => "ExperimentalVectorTiles";
+
+    public Task<Map> CreateMapAsync()
+    {
+        return Task.FromResult(CreateMap(_sqliteDataSource));
+    }
+
+    public static Map CreateMap(SqliteDataSource sqliteDataSource)
+    {
+        var map = new Map();
+
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateLayer(sqliteDataSource));
+
+        return map;
+    }
+
+    private static TileLayer CreateLayer(SqliteDataSource sqliteDataSource)
+    {
+        // This is the default style JSON with all symbol layers (labels) removed.
+        // Symbol layers have type "symbol" and render text labels on the map.
+        // Edit the JSON below to customize colors, widths, visibility, etc.
+        var style = new VectorStyle(VectorStyleKind.Custom, customStyle: StyleJson);
+        var tileSource = new RasterizedVectorTileSource(sqliteDataSource, style: style);
+        return new TileLayer(tileSource, dataFetchStrategy: new MinimalDataFetchStrategy())
+        {
+            Name = "VexTile.TileSource.Mvt",
+        };
+    }
+
+    private static SqliteDataSource CreateSqliteDataSource()
+    {
+        var path = Path.Combine(MbTilesDeployer.MbTilesLocation, "zurich.mbtiles");
+        SQLiteConnectionString val = new SQLiteConnectionString(path, (SQLiteOpenFlags)1, false);
+        return new SqliteDataSource(val);
+    }
+
+    void IDisposable.Dispose()
+    {
+        _sqliteDataSource.Dispose();
+    }
+
+    // Default style JSON (from VexTile.Renderer.Mvt.AliFlux embedded resource) with all
+    // symbol layers removed so no labels are rendered. To re-enable labels, add back
+    // layers with "type":"symbol". To change a color, find the layer by "id" and edit
+    // the "paint" values — e.g. change "fill-color" on the "water" layer to make water red.
+    private const string StyleJson = """
+        {"version":8,"name":"AliFlux","metadata":{},"center":[8.54806714892635,47.37180823552663],"zoom":12.241790506353492,"bearing":0,"pitch":0,"sources":{"openmaptiles":{"type":"vector","url":"https://api.maptiler.com/tiles/v3/tiles.json?key={key}"}},"sprite":"https://openmaptiles.github.io/osm-bright-gl-style/sprite","glyphs":"https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}","layers":[{"id":"background","type":"background","paint":{"background-color":{"stops":[[0,"rgba(236, 238, 241, 1)"],[6,"rgba(236, 238, 241, 1)"],[10,"rgba(236, 238, 241, 1)"]]}}},{"id":"landuse-residential","type":"fill","source":"openmaptiles","source-layer":"landuse","filter":["all",["==","$type","Polygon"],["==","class","residential"]],"layout":{"visibility":"visible"},"paint":{"fill-color":{"stops":[[0,"rgba(216, 221, 223, 1)"],[6,"rgba(216, 221, 223, 1)"],[10,"rgba(216, 221, 223, 1)"]]},"fill-opacity":0.7}},{"id":"landcover_grass","type":"fill","source":"openmaptiles","source-layer":"landcover","filter":["==","class","grass"],"paint":{"fill-color":"hsl(100, 58%, 76%)","fill-opacity":{"stops":[[5,0],[6,1]]}}},{"id":"park","type":"fill","source":"openmaptiles","source-layer":"park","paint":{"fill-color":"rgba(192, 216, 151, 0.53)","fill-opacity":1}},{"id":"landcover_wood","type":"fill","source":"openmaptiles","source-layer":"landcover","filter":["==","class","wood"],"paint":{"fill-color":"hsl(100, 58%, 76%)","fill-opacity":{"base":1,"stops":[[8,0.6],[12,0.6]]}}},{"id":"water","type":"fill","source":"openmaptiles","source-layer":"water","filter":["==","$type","Polygon"],"paint":{"fill-color":"rgba(103, 166, 196, 1)","fill-opacity":0.5}},{"id":"landcover-ice-shelf","type":"fill","source":"openmaptiles","source-layer":"landcover","filter":["==","subclass","ice_shelf"],"layout":{"visibility":"visible"},"paint":{"fill-color":"hsl(47, 26%, 88%)","fill-opacity":0.8}},{"id":"landcover-glacier","type":"fill","source":"openmaptiles","source-layer":"landcover","filter":["==","subclass","glacier"],"layout":{"visibility":"visible"},"paint":{"fill-color":"hsl(47, 22%, 94%)","fill-opacity":{"base":1,"stops":[[0,1],[8,0.5]]}}},{"id":"landuse","type":"fill","source":"openmaptiles","source-layer":"landuse","filter":["==","class","agriculture"],"layout":{"visibility":"visible"},"paint":{"fill-color":"#eae0d0"}},{"id":"landuse_overlay_national_park","type":"fill","source":"openmaptiles","source-layer":"landcover","filter":["==","class","national_park"],"paint":{"fill-color":"#E1EBB0","fill-opacity":{"base":1,"stops":[[5,0],[9,0.75]]}}},{"id":"park_outline","type":"line","source":"openmaptiles","source-layer":"park","layout":{},"paint":{"line-color":"rgba(159, 183, 118, 0.69)","line-dasharray":[0.5,1]}},{"id":"waterway-tunnel","type":"line","source":"openmaptiles","source-layer":"waterway","filter":["all",["==","$type","LineString"],["==","brunnel","tunnel"]],"paint":{"line-color":"hsl(205, 56%, 73%)","line-width":{"base":1.4,"stops":[[8,1],[20,2]]},"line-opacity":1,"line-gap-width":{"stops":[[12,0],[20,6]]},"line-dasharray":[3,3]}},{"id":"waterway","type":"line","source":"openmaptiles","source-layer":"waterway","filter":["all",["==","$type","LineString"],["!in","brunnel","tunnel","bridge"]],"paint":{"line-color":"hsl(205, 56%, 73%)","line-width":{"base":1.4,"stops":[[8,1],[20,8],[21,8]]},"line-opacity":1}},{"id":"tunnel_railway_transit","type":"line","source":"openmaptiles","source-layer":"transportation","minzoom":0,"filter":["all",["==","$type","LineString"],["==","brunnel","tunnel"],["==","class","transit"]],"layout":{"line-cap":"butt","line-join":"miter"},"paint":{"line-color":"hsl(34, 12%, 66%)","line-opacity":{"base":1,"stops":[[11,0],[16,1]]},"line-dasharray":[3,3]}},{"id":"building","type":"fill","source":"openmaptiles","source-layer":"building","paint":{"fill-color":"rgba(210, 223, 228, 1)","fill-outline-color":{"stops":[[15,"rgba(212, 177, 146, 0)"],[16,"rgba(212, 177, 146, 0.5)"]]},"fill-opacity":{"base":1,"stops":[[13,0],[15,1]]},"fill-antialias":true}},{"id":"road_path","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["in","class","path","track"]],"layout":{"line-cap":"square","line-join":"bevel"},"paint":{"line-color":"hsl(0, 0%, 97%)","line-dasharray":[1,1],"line-width":{"base":1.55,"stops":[[4,0.25],[20,10]]}}},{"id":"road_minor","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["in","class","minor","service"]],"layout":{"line-cap":"round","line-join":"round"},"paint":{"line-color":"hsl(0, 0%, 97%)","line-width":{"base":1.55,"stops":[[4,0.25],[20,30]]}}},{"id":"tunnel_minor","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["==","brunnel","tunnel"],["==","class","minor_road"]],"layout":{"line-cap":"butt","line-join":"miter"},"paint":{"line-color":"#efefef","line-width":{"base":1.55,"stops":[[4,0.25],[20,30]]},"line-dasharray":[0.36,0.18]}},{"id":"tunnel_major","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["==","brunnel","tunnel"],["in","class","primary","secondary","tertiary","trunk"]],"layout":{"line-cap":"butt","line-join":"miter"},"paint":{"line-color":"#fff","line-width":{"base":1.4,"stops":[[6,0.5],[20,30]]},"line-dasharray":[0.28,0.14]}},{"id":"aeroway-area","type":"fill","metadata":{"mapbox:group":"1444849345966.4436"},"source":"openmaptiles","source-layer":"aeroway","minzoom":4,"filter":["all",["==","$type","Polygon"],["in","class","runway","taxiway"]],"layout":{"visibility":"visible"},"paint":{"fill-opacity":{"base":1,"stops":[[13,0],[14,1]]},"fill-color":"rgba(255, 255, 255, 1)"}},{"id":"aeroway-taxiway","type":"line","metadata":{"mapbox:group":"1444849345966.4436"},"source":"openmaptiles","source-layer":"aeroway","minzoom":12,"filter":["all",["in","class","taxiway"],["==","$type","LineString"]],"layout":{"line-cap":"round","line-join":"round","visibility":"visible"},"paint":{"line-color":"rgba(255, 255, 255, 1)","line-width":{"base":1.5,"stops":[[12,1],[17,10]]},"line-opacity":1}},{"id":"aeroway-runway","type":"line","metadata":{"mapbox:group":"1444849345966.4436"},"source":"openmaptiles","source-layer":"aeroway","minzoom":4,"filter":["all",["in","class","runway"],["==","$type","LineString"]],"layout":{"line-cap":"round","line-join":"round","visibility":"visible"},"paint":{"line-color":"hsl(230, 23%, 82%)","line-width":{"base":1.5,"stops":[[11,4],[17,50]]},"line-opacity":1}},{"id":"road_trunk_primary","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["in","class","trunk","primary"]],"layout":{"line-cap":"round","line-join":"round"},"paint":{"line-color":{"base":1,"stops":[[9,"hsl(0, 0%, 100%)"],[11,"#fed330"]]},"line-width":{"base":1.4,"stops":[[6,0.5],[20,30]]}}},{"id":"road_secondary_tertiary","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["in","class","secondary","tertiary"]],"layout":{"line-cap":"round","line-join":"round"},"paint":{"line-color":"#fff","line-width":{"base":1.4,"stops":[[6,0.5],[20,20]]}}},{"id":"road_major_motorway","type":"line","source":"openmaptiles","source-layer":"transportation","minzoom":9,"filter":["all",["==","$type","LineString"],["==","class","motorway"]],"layout":{"line-cap":"round","line-join":"round"},"paint":{"line-color":{"stops":[[6,"rgba(230, 126, 34,1.0)"],[10,"#fed330"],[11,"#ff7f50"]]},"line-width":{"base":1.4,"stops":[[8,1],[16,10]]},"line-offset":0}},{"id":"railway-transit","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","class","transit"],["!=","brunnel","tunnel"]],"layout":{"visibility":"visible"},"paint":{"line-color":"hsl(34, 12%, 66%)","line-opacity":{"base":1,"stops":[[11,0],[16,1]]}}},{"id":"railway","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["==","class","rail"],"layout":{"visibility":"visible"},"paint":{"line-color":"hsl(34, 12%, 66%)","line-opacity":{"base":1,"stops":[[11,0],[16,1]]}}},{"id":"waterway-bridge-case","type":"line","source":"openmaptiles","source-layer":"waterway","filter":["all",["==","$type","LineString"],["==","brunnel","bridge"]],"layout":{"line-cap":"butt","line-join":"miter"},"paint":{"line-color":"#bbbbbb","line-width":{"base":1.6,"stops":[[12,0.5],[20,10]]},"line-gap-width":{"base":1.55,"stops":[[4,0.25],[20,30]]}}},{"id":"waterway-bridge","type":"line","source":"openmaptiles","source-layer":"waterway","filter":["all",["==","$type","LineString"],["==","brunnel","bridge"]],"layout":{"line-cap":"round","line-join":"round"},"paint":{"line-color":"hsl(205, 56%, 73%)","line-width":{"base":1.55,"stops":[[4,0.25],[20,30]]}}},{"id":"bridge_minor case","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["==","brunnel","bridge"],["==","class","minor_road"]],"layout":{"line-cap":"butt","line-join":"miter","visibility":"none"},"paint":{"line-color":"#dedede","line-width":{"base":1.6,"stops":[[12,0.5],[20,10]]},"line-gap-width":{"base":1.55,"stops":[[4,0.25],[20,30]]}}},{"id":"bridge_major case","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["==","brunnel","bridge"],["in","class","primary","secondary","tertiary","trunk"]],"layout":{"line-cap":"butt","line-join":"miter","visibility":"none"},"paint":{"line-color":"#dedede","line-width":{"base":1.6,"stops":[[12,0.5],[20,10]]},"line-gap-width":{"base":1.55,"stops":[[4,0.25],[20,30]]}}},{"id":"bridge_minor","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["==","brunnel","bridge"],["==","class","minor_road"]],"layout":{"line-cap":"round","line-join":"round"},"paint":{"line-color":"#efefef","line-width":{"base":1.55,"stops":[[4,0.25],[20,30]]}}},{"id":"bridge_major","type":"line","source":"openmaptiles","source-layer":"transportation","filter":["all",["==","$type","LineString"],["==","brunnel","bridge"],["in","class","primary","secondary","tertiary","trunk"]],"layout":{"line-cap":"round","line-join":"round"},"paint":{"line-color":{"base":1,"stops":[[6,"hsl(0, 0%, 100%)"],[9,"#fed330"]]},"line-width":{"base":1.4,"stops":[[6,0.5],[20,30]]}}},{"id":"admin_sub","type":"line","source":"openmaptiles","source-layer":"boundary","filter":["in","admin_level",4,6,8],"layout":{"visibility":"visible"},"paint":{"line-color":"#34495e","line-dasharray":[2,1],"line-opacity":0.5}},{"id":"admin_country","type":"line","metadata":{"mapbox:group":"a14c9607bc7954ba1df7205bf660433f"},"source":"openmaptiles","source-layer":"boundary","filter":["all",["==","admin_level",2]],"layout":{"line-join":"round"},"paint":{"line-color":"rgb(80, 100, 110)","line-width":{"base":1.1,"stops":[[3,1],[22,20]]},"line-opacity":0.6}}],"id":"klokantech-basic"}
+        """;
+}
