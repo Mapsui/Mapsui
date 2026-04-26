@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Rendering;
+using Mapsui.Rendering.Skia;
+using Mapsui.Rendering.Skia.SkiaStyles;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Mapsui.Widgets.InfoWidgets;
+using SkiaSharp;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Styles;
+
+public class CustomLayerRendererSample : ISample
+{
+    public string Name => $"{nameof(Rendering.Skia.CustomLayerRenderer)}";
+    public string Category => $"{nameof(Rendering.Skia.CustomLayerRenderer)}";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreatePointLayer(map));
+        MapRenderer.RegisterLayerRenderer("custom-layer-renderer", CustomLayerRenderer);
+        map.Widgets.Add(new MapInfoWidget(map, map.Layers.OfType<MemoryLayer>));
+        return map;
+    }
+
+    private static MemoryLayer CreatePointLayer(Map map)
+    {
+        return new MemoryLayer($"{nameof(CustomLayerRenderer)}")
+        {
+            Features = CreateFeatures(map.Extent!, 1_000).ToList(),
+            Style = new SymbolStyle(),
+            CustomLayerRendererName = "custom-layer-renderer"
+        };
+    }
+
+    private static void CustomLayerRenderer(SKCanvas canvas, Viewport viewport, ILayer layer, RenderService renderService)
+    {
+        foreach (var feature in layer.GetFeatures(viewport.ToExtent(), viewport.Resolution))
+        {
+            var point = ((PointFeature)feature).Point;
+            var style = new SymbolStyle { SymbolType = SymbolType.Rectangle };
+            var opacity = (float)(layer.Opacity * style.Opacity);
+            // Here the PointStyleRenderer is reused but you don't have to. You can also draw the point directly.
+            PointStyleRenderer.DrawPointStyle(canvas, viewport, point.X, point.Y, style, renderService, opacity, DrawSymbolStyle);
+        }
+    }
+
+    private static void DrawSymbolStyle(SKCanvas canvas, IPointStyle style, RenderService renderService, float opacity)
+    {
+        using var paint = new SKPaint { Color = new SKColor(79, 10, 107, 192), IsAntialias = true };
+        canvas.DrawCircle(0f, 0f, 10f, paint);
+    }
+
+    private static PointFeature[] CreateFeatures(MRect envelope, int count) =>
+        RandomPointsBuilder.GenerateRandomPoints(envelope, count, new Random(934))
+            .Select(p => new PointFeature(p)).ToArray();
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
