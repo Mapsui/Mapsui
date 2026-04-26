@@ -10,16 +10,16 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
     public virtual void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService,
         float layerOpacity, SKRect? dirtyScreenRect)
     {
-        DrawText(canvas, viewport, widget, layerOpacity);
+        DrawText(canvas, viewport, widget, renderService, layerOpacity);
     }
 
-    public static void DrawText(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    public static void DrawText(SKCanvas canvas, Viewport viewport, IWidget widget, Mapsui.Rendering.RenderService renderService, float layerOpacity)
     {
         var textBox = (TextBoxWidget)widget;
 
         if (string.IsNullOrEmpty(textBox.Text)) return;
 
-        using var skFont = new SKFont() { Size = (float)textBox.TextSize };
+        using var skFont = SkiaTextLayoutHelper.CreateSkFont(textBox.Font, (float)textBox.TextSize, renderService);
         using var textPaint = new SKPaint { Color = textBox.TextColor.ToSkia(layerOpacity), IsAntialias = true };
         using var backPaint = new SKPaint { Color = textBox.BackColor.ToSkia(layerOpacity), IsAntialias = true };
         // The textRect has an offset which can be confusing. 

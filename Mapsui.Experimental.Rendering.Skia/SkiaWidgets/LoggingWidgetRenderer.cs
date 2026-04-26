@@ -1,9 +1,9 @@
-﻿using Mapsui.Logging;
+﻿using System;
+using Mapsui.Logging;
 using Mapsui.Experimental.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
-using System;
 
 namespace Mapsui.Experimental.Rendering.Skia.SkiaWidgets;
 
@@ -13,14 +13,12 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     private readonly SKPaint _warningTextPaint;
     private readonly SKPaint _errorTextPaint;
     private readonly SKPaint _backgroundPaint;
-    private readonly SKFont _font;
 
     /// <summary>
     /// Renderer for LoggingWidget
     /// </summary>
     public LoggingWidgetRenderer()
     {
-        _font = new SKFont() { Size = 12 };
         _informationTextPaint = new SKPaint { Color = SKColors.Black };
         _warningTextPaint = new SKPaint { Color = SKColors.Orange, };
         _errorTextPaint = new SKPaint { Color = SKColors.Red, };
@@ -56,7 +54,9 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
             (float)(rect.Right - loggingWidget.Padding.Right),
             (float)(rect.Bottom - loggingWidget.Padding.Bottom));
 
+        using var font = SkiaTextLayoutHelper.CreateSkFont(loggingWidget.Font, (float)loggingWidget.TextSize, renderService);
         var line = 0;
+        var effectiveTextSize = font.Size;
 
         canvas.Save();
         canvas.ClipRect(rect);
@@ -66,7 +66,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
             if (entry.LogLevel > loggingWidget.LogLevelFilter)
                 continue;
 
-            var top = marginY + (paddingY * line) + loggingWidget.TextSize * (line + 1);
+            var top = marginY + (paddingY * line) + effectiveTextSize * (line + 1);
 
             if (top >= loggingWidget.Envelope.Height)
                 break;
@@ -78,7 +78,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
                 _ => _informationTextPaint,
             };
 
-            canvas.DrawText(entry.FormattedLogLine, (float)(marginX + paddingX), (float)(marginY + (paddingX * line) + loggingWidget.TextSize * (line + 1)), SKTextAlign.Left, _font, paint);
+            canvas.DrawText(entry.FormattedLogLine, (float)(marginX + paddingX), (float)(marginY + (paddingX * line) + effectiveTextSize * (line + 1)), SKTextAlign.Left, font, paint);
 
             line++;
         }
@@ -92,14 +92,12 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         _warningTextPaint.Dispose();
         _errorTextPaint.Dispose();
         _backgroundPaint.Dispose();
-        _font.Dispose();
     }
 
     private void UpdateSettings(LoggingWidget loggingWidget)
     {
         _backgroundPaint.Color = loggingWidget.BackColor.ToSkia().WithAlpha((byte)(255.0f * loggingWidget.Opacity));
         _errorTextPaint.Color = loggingWidget.ErrorTextColor.ToSkia();
-        _font.Size = (float)loggingWidget.TextSize;
         _warningTextPaint.Color = loggingWidget.WarningTextColor.ToSkia();
         _informationTextPaint.Color = loggingWidget.InformationTextColor.ToSkia();
     }

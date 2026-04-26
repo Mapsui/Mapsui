@@ -71,6 +71,7 @@ public class MapRegressionTests
     public static ISampleBase[] ExperimentalOnlySamples =>
     [
         new CalloutWrapAroundSample(), // FontSource (custom font) renders Chinese text; the standard renderer doesn't support it.
+        new CustomFontWidgetSample(), // Uses FontSource for Arabic and Chinese fonts; the standard renderer doesn't support FontSource.
         new RightToLeftSample(), // Uses FontSource for Arabic font; the standard renderer doesn't support FontSource.
         new EmojiSample(), // Emoji rendering requires RTK bidi/font-fallback in the experimental renderer.
     ];

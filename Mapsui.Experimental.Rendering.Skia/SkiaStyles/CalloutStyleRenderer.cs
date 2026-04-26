@@ -102,7 +102,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
         else
         {
-            using var titleFont = CreateSkFont(callout.TitleFont, renderService);
+            using var titleFont = SkiaTextLayoutHelper.CreateSkFont(callout.TitleFont, renderService);
             var titleTextBlock = SkiaTextLayoutHelper.CreateTextBlock(
                 callout.Title, titleFont, callout.TitleTextAlignment, callout.TitleFontColor.ToSkia(), (float)callout.MaxWidth);
 
@@ -111,7 +111,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
             if (callout.Type == CalloutType.Detail)
             {
-                subtitleFont = CreateSkFont(callout.SubtitleFont, renderService);
+                subtitleFont = SkiaTextLayoutHelper.CreateSkFont(callout.SubtitleFont, renderService);
                 subtitleTextBlock = SkiaTextLayoutHelper.CreateTextBlock(
                     callout.Subtitle, subtitleFont, callout.SubtitleTextAlignment, callout.SubtitleFontColor.ToSkia(), (float)callout.MaxWidth);
             }
@@ -142,25 +142,4 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
     }
 
-    private static SKFont CreateSkFont(Font font, Mapsui.Rendering.RenderService renderService)
-    {
-        SKTypeface? typeface = null;
-
-        if (font.FontSource != null)
-        {
-            var bytes = renderService.FontSourceCache.Get(font.FontSource);
-            if (bytes != null)
-            {
-                using var stream = new System.IO.MemoryStream(bytes);
-                typeface = SKTypeface.FromStream(stream);
-            }
-        }
-
-        typeface ??= SKTypeface.FromFamilyName(font.FontFamily,
-            font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
-            SKFontStyleWidth.Normal,
-            font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
-
-        return new SKFont { Size = (float)font.Size, Typeface = typeface };
-    }
 }

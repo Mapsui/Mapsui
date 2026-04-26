@@ -26,4 +26,11 @@ public class TextBoxWidget : BoxWidget
     /// Text color of text inside of box
     /// </summary>
     public Color TextColor { get; set; } = new(0, 0, 0);
+
+    /// <summary>
+    /// Optional font to use when rendering text. When set, <see cref="Font.Size"/> overrides
+    /// <see cref="TextSize"/> and <see cref="Font.FontSource"/> allows loading a custom typeface.
+    /// When null, the renderer falls back to <see cref="TextSize"/> with the system default typeface.
+    /// </summary>
+    public Font? Font { get; set; }
 }

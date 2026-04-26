@@ -1,7 +1,7 @@
 # Custom Font Support — Design Analysis
 
-**Date:** 2026-03-12 (updated 2026-03-16)  
-**Status:** Phase 1 complete ✅ — Phase 2 mostly complete ✅ (widgets with no Font property still pending)  
+**Date:** 2026-03-12 (updated 2026-04-25)  
+**Status:** Phase 1 complete ✅ — Phase 2 complete ✅  
 **Related issues:** #3159, #3233, #3280, #3058, #3074
 
 ## Decisions Made
@@ -33,6 +33,10 @@
 - ✅ **`RightToLeftSample`** added to Tests category: Arabic text using NotoSansArabic FontSource in both `LabelStyle` and `CalloutStyle`, demonstrating the new `TextAlignment` property.
 - ✅ **`EmojiSample`** added to Tests category: emoji text in `LabelStyle` and `CalloutStyle`, demonstrating the RTK-based emoji/bidi fallback in `LabelStyleRenderer`.
 - ✅ **RTK single-line path in `LabelStyleRenderer`**: single-line labels now use `SkiaTextLayoutHelper.CreateTextBlock` + `PaintTextBlock` instead of `SKCanvas.DrawText`. RTK handles bidi reordering (UAX#9), font fallback (emoji), and HarfBuzz glyph shaping. Multi-line per-line path also updated to use RTK.
+- ✅ **`TextBoxWidget.Font`** property added (`Font?`). Covers `TextBoxWidget` and all subclasses: `ButtonWidget`, `LoggingWidget`, `MouseCoordinatesWidget`, `MapInfoWidget`, and `RulerWidget.InfoBox`. When set, `Font.Size` overrides `TextSize` and `Font.FontSource` selects the typeface.
+- ✅ **`TextBoxWidgetRenderer`** (experimental): updated `DrawText` to accept `renderService`, calls `CreateSkFont(textBox.Font, textBox.TextSize, renderService)` to resolve typeface from `FontSource`.
+- ✅ **`PerformanceWidgetRenderer`** (experimental): uses `CreateSkFont(performanceWidget.Font, textSize, renderService)`.
+- ✅ **`LoggingWidgetRenderer`** (experimental): `UpdateSettings` now takes `renderService`, rebuilds `_font` when `FontSource`/typeface changes.
 - ✅ **Vertical alignment fix for RTK labels**: `drawRect.Height` now uses `font.Spacing` (= ascent + descent + leading) instead of tight glyph bounds (`rect.Bottom - rect.Top`). RTK renders with `font.Spacing` height, so `drawRect` must use the same metric for correct vertical centering — previously RTL labels with Arabic (NotoSansArabic) appeared shifted because tight glyph bounds typically differ from `font.Spacing` for Arabic script.
 - ✅ **Split regression test excluded samples**: `MapRegressionTests` now has `AlwaysExcludedSamples` (animations, network, unreliable — excluded in all modes) and `ExperimentalOnlySamples` (samples requiring experimental renderer: `RightToLeftSample`, `CalloutWrapAroundSample`, `EmojiSample` — excluded only in standard-renderer mode). `TestConfiguration.IsExperimentalRenderer` is eagerly computed from `config.json` / `config.local.json` so it is available during NUnit test-case discovery (before `[SetUpFixture]` runs).
 
@@ -238,7 +242,7 @@ All steps complete — see Completed Work above.
 ### Phase 2: Extend to Callout and Widgets — partially complete
 
 1. ✅ **`MapsuiFontMapper` for RichTextKit**: Implemented as nested class in `SkiaTextLayoutHelper`. Overrides `TypefaceFromStyle()` to return the typeface already on the `SKFont`. Set on `textBlock.FontMapper` in `SplitByWordUnicode()` when typeface is non-null.
-2. ❌ Add `Font` property to `TextBoxWidget`/`BoxWidget` (replacing bare `TextSize`) — still pending
+2. ✅ Add `Font` property to `TextBoxWidget` (replacing bare `TextSize`) — `TextBoxWidget`, `PerformanceWidget`, `LoggingWidget`, `MouseCoordinatesWidget`, `MapInfoWidget` and `RulerWidget.InfoBox` all support `FontSource` now
 3. ✅ **`ScaleBarWidgetRenderer`** uses `FontSourceCache` via `CreateTypeface()` helper
 4. ✅ **`CalloutStyleRenderer`** checks `Font.FontSource` for title and subtitle fonts
 

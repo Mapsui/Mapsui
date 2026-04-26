@@ -55,6 +55,13 @@ public class GridLayer : BaseLayer
     public float LabelSize { get; set; } = 12f;
 
     /// <summary>
+    /// Optional font to use for coordinate labels. When set, <see cref="Font.Size"/> overrides
+    /// <see cref="LabelSize"/> and <see cref="Font.FontSource"/> allows loading a custom typeface.
+    /// When null, the renderer falls back to <see cref="LabelSize"/> with the system default typeface.
+    /// </summary>
+    public Font? LabelFont { get; set; }
+
+    /// <summary>
     /// Target number of grid lines to show across the wider viewport dimension.
     /// The actual count will vary because intervals snap to "nice" values (1, 2, 5 × 10^n).
     /// Default: 6.

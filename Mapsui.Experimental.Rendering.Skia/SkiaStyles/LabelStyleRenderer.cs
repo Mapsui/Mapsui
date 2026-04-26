@@ -78,7 +78,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         var style = valueTuple.Style;
         var layerOpacity = valueTuple.LayerOpacity;
-        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, CreateFont);
+        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, SkiaTextLayoutHelper.CreateSkFont);
         using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
@@ -113,7 +113,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (style.Font.FontSource != null && renderService.FontSourceCache.Get(style.Font.FontSource) == null)
             return;
 
-        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, CreateFont);
+        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, SkiaTextLayoutHelper.CreateSkFont);
         using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
@@ -377,32 +377,6 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return paint;
     }
 
-    private static SKFont CreateFont(Font font, Mapsui.Rendering.RenderService renderService)
-    {
-        SKTypeface? typeface = null;
-
-        if (font.FontSource != null)
-        {
-            var bytes = renderService.FontSourceCache.Get(font.FontSource);
-            if (bytes != null)
-            {
-                using var stream = new System.IO.MemoryStream(bytes);
-                typeface = SKTypeface.FromStream(stream);
-            }
-        }
-
-        typeface ??= SKTypeface.FromFamilyName(font.FontFamily,
-            font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
-            SKFontStyleWidth.Normal,
-            font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
-
-        return new SKFont
-        {
-            Embolden = false,
-            Size = (float)font.Size,
-            Typeface = typeface,
-        };
-    }
 
     private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style)
     {
@@ -439,7 +413,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return labelStyle.Font.Size * (text?.Length ?? 1);
 
         // for measuring the text size the opacity can be set to 1
-        using var fontHolder = renderService.VectorCache.GetOrCreate(labelStyle.Font, CreateFont);
+        using var fontHolder = renderService.VectorCache.GetOrCreate(labelStyle.Font, SkiaTextLayoutHelper.CreateSkFont);
         using var paintHolder = labelStyle.Halo != null
             ? renderService.VectorCache.GetOrCreate((labelStyle, labelStyle.Halo), CreateHaloPaintHolder)
             : renderService.VectorCache.GetOrCreate((labelStyle.ForeColor, 1f), CreatePaint);
