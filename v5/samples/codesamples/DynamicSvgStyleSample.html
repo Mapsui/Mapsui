@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Layers;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Tiling;
+using Mapsui.Utilities;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Styles;
+
+public class DynamicSvgStyleSample : ISample
+{
+    public string Name => "DynamicSvgStyle";
+    public string Category => "Styles";
+
+    private string Description => "Tab or click in the map to see the change in symbols. This sample shows you can " +
+        "change the size, rotation and color (using BlendModeColor) of a single SVG resource if you use a ThemeStyle";
+
+    private const double circumferenceOfTheEarth = 40075017;
+
+    public Task<Map> CreateMapAsync()
+    {
+        var tapPosition = new MPoint();
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateLayerWithDynamicSvgStyle(() => tapPosition, map)); // Use 'closure capture' to keep a reference to the tapPosition.
+        map.Tapped += (s, e) =>
+        {
+            tapPosition = e.WorldPosition; // Assign a new tap position to modify the dynamic style.
+            e.Map.Layers.First().DataHasChanged(); // Notify that the map needs to be redraw.
+            e.Handled = true;
+        };
+        return Task.FromResult(map);
+    }
+
+    private MemoryLayer CreateLayerWithDynamicSvgStyle(Func<MPoint> getTapPosition, Map map) => new()
+    {
+        Name = "Dynamic Svg Style",
+        Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 1000),
+        Style = CreateDynamicSvgStyle(getTapPosition)
+    };
+
+    private ThemeStyle CreateDynamicSvgStyle(Func<MPoint> getTapPosition) // Use Func to make it get the latest clicked position
+    {
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.arrow.svg";
+
+        return new ThemeStyle((f) =>
+        {
+            var tapPosition = getTapPosition();
+            var featurePoint = ((PointFeature)f).Point;
+            var distance = Algorithms.Distance(tapPosition, featurePoint);
+            var distanceBetweenZeroAndOne = Math.Min(distance / circumferenceOfTheEarth, 1);
+
+            return new ImageStyle
+            {
+                Image = new Image
+                {
+                    Source = imageSource,
+                    BlendModeColor = ToColor(distanceBetweenZeroAndOne) // 3. Use BlendModeColor to change the color of the svg
+                },
+                RelativeOffset = new RelativeOffset(0.0, 0.0),
+                // 1. Change scale based on the distance
+                SymbolScale = 0.25 + 0.25 * distanceBetweenZeroAndOne,
+                // 2. Change angle pointing to the info click position
+                SymbolRotation = -CalculateAngle(tapPosition, featurePoint) - 90,
+                RotateWithMap = true,
+                Opacity = 0.9f,
+            };
+        });
+    }
+
+    private static Color ToColor(double distanceBetweenZeroAndOne)
+    {
+        // Just improvising a bit with the color gradient.
+        var red = 32;
+        var green = 200 - (int)(distanceBetweenZeroAndOne * 200);
+        var blue = 32;
+        return Color.FromArgb(255, red, green, blue);
+    }
+
+    private double CalculateAngle(MPoint point1, MPoint point2)
+    {
+        // Use Atan2 for angle
+        var radians = Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+
+        // Radians into degrees
+        return radians * (180 / Math.PI);
+    }
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>

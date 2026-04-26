@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Animations;
+using Mapsui.Extensions;
+using Mapsui.Tiling;
+using Mapsui.Widgets;
+using Mapsui.Widgets.ButtonWidgets;
+using System.Threading.Tasks;
+using Mapsui.Styles;
+using Mapsui.Widgets.BoxWidgets;
+
+namespace Mapsui.Samples.Common.Maps.ViewportAnimations;
+
+public class ViewportZoomAroundLocationAnimationSample : ISample
+{
+    public string Name => "ZoomAroundLocation";
+    public string Category => "ViewportAnimations";
+
+    public static int mode = 1;
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map { CRS = "EPSG:3857" };
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
+        map.Widgets.Add(CreateTextBox("Tap on the map to zoom in the location where you tapped. " +
+            "The map will stay centered on the place where you tap."));
+        map.Tapped += (m, e) =>
+        {
+            // Zoom in while keeping centerOfZoom at the same position. If you click somewhere to zoom in the mouse pointer
+            // will still be above the same location in the map. This can be you used for mouse wheel zoom.
+            e.Map.Navigator.ZoomTo(e.Map.Navigator.Viewport.Resolution * 0.5, e.ScreenPosition!, 500, Easing.CubicOut);
+            e.Handled = true;
+        };
+        return map;
+    }
+
+    private static IWidget CreateTextBox(string text) => new TextBoxWidget()
+    {
+        Text = text,
+        VerticalAlignment = VerticalAlignment.Top,
+        HorizontalAlignment = HorizontalAlignment.Left,
+        Margin = new MRect(10),
+        Padding = new MRect(8),
+        CornerRadius = 4,
+        BackColor = new Color(108, 117, 125, 128),
+        TextColor = Color.White,
+    };
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
