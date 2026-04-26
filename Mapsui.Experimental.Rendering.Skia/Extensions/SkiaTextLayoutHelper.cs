@@ -1,6 +1,8 @@
+using Mapsui.Rendering;
 using Mapsui.Widgets;
 using SkiaSharp;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Topten.RichTextKit;
@@ -201,4 +203,52 @@ public static class SkiaTextLayoutHelper
     /// </summary>
     public static void PaintTextBlock(SKCanvas canvas, TextBlock textBlock, float x, float y) =>
         textBlock.Paint(canvas, new SKPoint(x, y), new TextPaintOptions { Edging = SKFontEdging.Antialias });
+
+    /// <summary>
+    /// Create an <see cref="SKFont"/> from a non-nullable <see cref="Mapsui.Styles.Font"/>, loading a custom
+    /// typeface from <see cref="Mapsui.Styles.Font.FontSource"/> when set, otherwise resolving via family name.
+    /// </summary>
+    public static SKFont CreateSkFont(Mapsui.Styles.Font font, RenderService renderService)
+    {
+        var typeface = CreateTypeface(font.FontSource, font.FontFamily, font.Bold, font.Italic, renderService);
+        return new SKFont { Size = (float)font.Size, Typeface = typeface };
+    }
+
+    /// <summary>
+    /// Create an <see cref="SKFont"/> from an optional <see cref="Mapsui.Styles.Font"/>, falling back to
+    /// <paramref name="fallbackSize"/> when <paramref name="font"/> is null or has no size.
+    /// </summary>
+    public static SKFont CreateSkFont(Mapsui.Styles.Font? font, float fallbackSize, RenderService renderService)
+    {
+        var typeface = font != null
+            ? CreateTypeface(font.FontSource, font.FontFamily, font.Bold, font.Italic, renderService)
+            : null;
+        return new SKFont { Size = font?.Size > 0 ? (float)font.Size : fallbackSize, Typeface = typeface };
+    }
+
+    private static SKTypeface? CreateTypeface(Mapsui.Styles.FontSource? fontSource, string? fontFamily, bool bold, bool italic, RenderService renderService)
+    {
+        if (fontSource != null)
+        {
+            var bytes = renderService.FontSourceCache.Get(fontSource);
+            if (bytes != null)
+            {
+                // Performance note: SKTypeface.FromStream is called on every draw frame for custom
+                // fonts because there is no typeface cache. A cache keyed by FontSource.SourceId
+                // would eliminate this cost. Caching is deferred because SKTypeface is Skia-specific
+                // while the natural cache owner (FontSourceCache) is platform-independent —
+                // ownership is non-trivial to resolve across that boundary.
+                using var stream = new MemoryStream(bytes);
+                return SKTypeface.FromStream(stream);
+            }
+        }
+
+        if (fontFamily != null)
+            return SKTypeface.FromFamilyName(fontFamily,
+                bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+                SKFontStyleWidth.Normal,
+                italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
+
+        return null;
+    }
 }

@@ -10,7 +10,7 @@ namespace Mapsui.Experimental.Rendering.Skia;
 
 internal static class GridLayerRenderer
 {
-    public static void Render(SKCanvas canvas, Viewport viewport, ILayer layer, RenderService _renderService)
+    public static void Render(SKCanvas canvas, Viewport viewport, ILayer layer, RenderService renderService)
     {
         var gridLayer = (GridLayer)layer;
         var opacity = (float)layer.Opacity;
@@ -34,7 +34,7 @@ internal static class GridLayerRenderer
         DrawHorizontalLines(canvas, viewport, extent, step, linePaint);
 
         if (gridLayer.ShowCoordinateLabels)
-            DrawLabels(canvas, viewport, extent, step, gridLayer, opacity);
+            DrawLabels(canvas, viewport, extent, step, gridLayer, opacity, renderService);
     }
 
     private static void DrawVerticalLines(SKCanvas canvas, Viewport viewport, MRect extent, double step, SKPaint paint)
@@ -59,13 +59,13 @@ internal static class GridLayerRenderer
         }
     }
 
-    private static void DrawLabels(SKCanvas canvas, Viewport viewport, MRect extent, double step, GridLayer gridLayer, float opacity)
+    private static void DrawLabels(SKCanvas canvas, Viewport viewport, MRect extent, double step, GridLayer gridLayer, float opacity, RenderService renderService)
     {
         var decimals = (int)Math.Max(0, Math.Ceiling(-Math.Log10(step)));
         var format = $"F{decimals}";
-        var labelMargin = gridLayer.LabelSize * 0.5f;
 
-        using var font = new SKFont { Size = gridLayer.LabelSize };
+        using var font = SkiaTextLayoutHelper.CreateSkFont(gridLayer.LabelFont, gridLayer.LabelSize, renderService);
+        var labelMargin = font.Size * 0.5f;
         using var textPaint = new SKPaint { Color = gridLayer.LabelColor.ToSkia(opacity), IsAntialias = true };
 
         // X labels near the bottom edge, at each vertical grid line
@@ -108,4 +108,5 @@ internal static class GridLayerRenderer
 
         return niceFraction * magnitude;
     }
+
 }
