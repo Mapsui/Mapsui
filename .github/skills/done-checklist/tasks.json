@@ -1,0 +1,140 @@
+{
+  "tasks": [
+    {
+      "id": "build",
+      "label-for-human": "Build solution",
+      "type": "command",
+      "command": "dotnet build",
+      "instruction": "Run the full solution build. Read ALL output. Fix every compilation error and warning before marking complete.",
+      "optional": false
+    },
+    {
+      "id": "unit-tests",
+      "label-for-human": "Run unit tests",
+      "type": "command",
+      "command": "dotnet test --filter \"Category!=Regression\"",
+      "instruction": "Run all unit tests (excluding rendering regression tests). Every test must be green — zero failures. Fix any failure before marking complete.",
+      "optional": false
+    },
+    {
+      "id": "regression-tests",
+      "label-for-human": "Run rendering regression tests",
+      "type": "agent",
+      "command": "dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter \"TestSampleAsync\"",
+      "instruction": "Run all rendering regression tests. Results: Passed = matches reference image (good); Inconclusive = no reference yet, one was generated — review the generated image visually before marking complete; Failed = pixel difference exceeded threshold — compare Generated vs Original images (both under Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Resources/Images/), fix the rendering cause, re-run until no Failed results remain. Never mark complete with any Failed results.",
+      "optional": true
+    },
+    {
+      "id": "update-regression-images",
+      "label-for-human": "Update regression reference images",
+      "type": "agent",
+      "command": null,
+      "instruction": "Run .\\Scripts\\CopyGeneratedImagesOverOriginalImages.ps1 to promote generated images to reference images. Then run 'git diff --name-only' and revert any image files that were NOT affected by your intentional rendering change — avoid committing unrelated binary diffs. Report which images were updated before marking complete.",
+      "optional": true
+    },
+    {
+      "id": "no-todos-left",
+      "label-for-human": "No untracked TODOs",
+      "type": "agent",
+      "command": null,
+      "instruction": "Search all changed files for TODO, FIXME, and HACK comments introduced by this change. Each one must be resolved now or tracked as a GitHub issue. Do not leave untracked debt in the codebase. Report any found before marking complete.",
+      "optional": false
+    },
+    {
+      "id": "code-style",
+      "label-for-human": "Code style check",
+      "type": "agent",
+      "command": null,
+      "instruction": "Run 'dotnet format --check'. If violations are found, run 'dotnet format' to fix them automatically, then re-run 'dotnet build' to confirm nothing broke. Report what was changed before marking complete. If no violations, mark complete immediately.",
+      "optional": false
+    },
+    {
+      "id": "copilot-guidelines",
+      "label-for-human": "Mapsui guidelines review",
+      "type": "agent",
+      "command": null,
+      "instruction": "Review all changed code against .github/copilot-instructions.md. Check: (1) compact style — var everywhere, expression-bodied members, optional braces for single-statement blocks; (2) comments explain *why* not *what*; (3) no rendering (SKPath creation etc.) inside the draw/paint loop — separate rendering from drawing; (4) lon/lat ordering — always SphericalMercator.FromLonLat(lon, lat); (5) extension methods in Extensions/ folder, class named {TypeItExtends}Extensions; (6) no new IDisposable on renderer classes for Skia resources — store in RenderService instead; (7) new public members have XML doc comments. Fix any violation before marking complete.",
+      "optional": false
+    },
+    {
+      "id": "upgrade-guide",
+      "label-for-human": "Upgrade guide — breaking changes",
+      "type": "agent",
+      "command": null,
+      "instruction": "Check whether any public API was removed, renamed, or had its observable behavior changed. If yes, add an entry to docs/general/markdown/v6.0-upgrade-guide.md: old API → new API with a one-sentence rationale. Keep entries concise. If no breaking changes, mark complete immediately.",
+      "optional": false
+    },
+    {
+      "id": "documentation",
+      "label-for-human": "Update documentation",
+      "type": "agent",
+      "command": null,
+      "instruction": "Review all changes and update any affected user-facing docs in docs/general/markdown/. Consider whether new documentation is needed (new concepts, new public API, behavior changes). If a new doc page was added, register it in docs/general/mkdocs.yml. Report what was done before marking complete.",
+      "optional": false
+    },
+    {
+      "id": "architecture",
+      "label-for-human": "Architecture review",
+      "type": "agent",
+      "command": null,
+      "instruction": "Review changes for architecture implications against the Mapsui hierarchy (DataSource → Fetcher → Layer → Map → MapControl). Check: does anything push IDisposable, async/await, or exception-throwing code deeper into core than it should be? Does anything render inside a draw loop? Is anything coupled that should be independent? If NO refactoring needed: mark complete immediately. If YES: discuss with the user and get explicit agreement before proceeding. Never silently mark complete if refactoring is needed.",
+      "optional": false
+    },
+    {
+      "id": "improve-instructions",
+      "label-for-human": "Improve instructions from friction",
+      "type": "agent",
+      "command": null,
+      "instruction": "Reflect on this session: was there anything that took several attempts, required searching in multiple places, or was unexpectedly hard to figure out? If yes, improve the relevant instructions or skill so the next session goes faster. Good candidates: a convention that wasn't documented, a command that wasn't obvious, a pattern that needed several searches to locate, a gotcha in the codebase. Update .github/copilot-instructions.md for general conventions, a specific .github/instructions/*.instructions.md for subsystem-specific knowledge, or a skill file for workflow steps. Report what you added or changed, or explain why nothing needed updating. Mark complete only after making the improvement (or genuinely concluding nothing was friction).",
+      "optional": false
+    },
+    {
+      "id": "code-review",
+      "label-for-human": "Thorough code review — pass 1",
+      "type": "agent",
+      "command": null,
+      "instruction": "Perform a thorough review of ALL changes made for this feature: correctness, edge cases, dead code, security, naming consistency, adherence to project conventions (copilot-instructions.md). List ALL findings clearly. Do NOT fix anything yet — fixes happen in code-review-fixes-1. If you found nothing at all, mark code-review-fixes-1, code-review-2, code-review-fixes-2, code-review-3, and code-review-fixes-3 as completed immediately.",
+      "optional": false
+    },
+    {
+      "id": "code-review-fixes-1",
+      "label-for-human": "Apply code review fixes — pass 1",
+      "type": "agent",
+      "command": null,
+      "instruction": "Apply every fix identified in code-review. Re-run build and unit tests after applying fixes. If nothing was found in code-review, mark this task and all remaining review tasks (code-review-2, code-review-fixes-2, code-review-3, code-review-fixes-3) complete immediately.",
+      "optional": false
+    },
+    {
+      "id": "code-review-2",
+      "label-for-human": "Thorough code review — pass 2",
+      "type": "agent",
+      "command": null,
+      "instruction": "Second pass review focusing on anything changed in code-review-fixes-1. List ALL findings. Do NOT fix yet. If nothing found, mark code-review-fixes-2, code-review-3, and code-review-fixes-3 complete immediately.",
+      "optional": false
+    },
+    {
+      "id": "code-review-fixes-2",
+      "label-for-human": "Apply code review fixes — pass 2",
+      "type": "agent",
+      "command": null,
+      "instruction": "Apply every fix identified in code-review-2. Re-run build and unit tests after applying fixes. If nothing was found in code-review-2, mark this task and the remaining two (code-review-3, code-review-fixes-3) complete immediately.",
+      "optional": false
+    },
+    {
+      "id": "code-review-3",
+      "label-for-human": "Thorough code review — pass 3",
+      "type": "agent",
+      "command": null,
+      "instruction": "Third and final pass review focusing on anything changed in code-review-fixes-2. List ALL findings. Do NOT fix yet. If nothing found, mark code-review-fixes-3 complete immediately.",
+      "optional": false
+    },
+    {
+      "id": "code-review-fixes-3",
+      "label-for-human": "Apply code review fixes — pass 3",
+      "type": "agent",
+      "command": null,
+      "instruction": "Apply every fix identified in code-review-3. Re-run build and unit tests after applying fixes. If nothing was found in code-review-3, mark complete immediately.",
+      "optional": false
+    }
+  ]
+}
