@@ -1,0 +1,2 @@
+# Ignore all state files — these are local per-developer, per-branch tracking files.
+*.json

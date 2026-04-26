@@ -1,8 +1,16 @@
 ---
-applyTo: "Mapsui.Rendering.Skia/**,Mapsui.Experimental.Rendering.Skia/**"
+name: richtextkit
+description: >
+  Reference and usage guide for RichTextKit (Topten.RichTextKit) in Mapsui's Skia renderers.
+  Load this skill when implementing or modifying any text rendering feature that involves
+  word wrap, BiDi/RTL text, emoji, font fallback, callouts, or multi-style text blocks.
 ---
 
-When working in this area, load and read `.github/skills/richtextkit/SKILL.md` for the full RichTextKit reference (usage patterns, FontMapper, pitfalls, performance notes).
+# RichTextKit (Topten.RichTextKit) in Mapsui
+
+RichTextKit provides text layout capabilities that SkiaSharp alone doesn't offer: Unicode line-breaking (UAX #14), bidirectional text (UAX #9), and font fallback for emoji and international scripts. Both renderers depend on it — it is not being replaced.
+
+NuGet package: `Topten.RichTextKit`
 
 ---
 
@@ -150,13 +158,13 @@ subtitleBlock.Layout();
 ```csharp
 foreach (var line in block.Lines)
 {
-    int  start    = line.Start;                // code-point index into original string
-    int  length   = line.Length;               // use text.Substring(start, length)
-    float top     = line.YCoord;
-    float baseline= line.YCoord + line.BaseLine;
-    float height  = line.Height;               // ascent + descent + leading
-    float width   = line.Width;                // excludes trailing whitespace
-    var  nextLine = line.NextLine;             // null on last line
+    int   start    = line.Start;                // code-point index into original string
+    int   length   = line.Length;               // use text.Substring(start, length)
+    float top      = line.YCoord;
+    float baseline = line.YCoord + line.BaseLine;
+    float height   = line.Height;               // ascent + descent + leading
+    float width    = line.Width;                // excludes trailing whitespace
+    var   nextLine = line.NextLine;             // null on last line
 }
 ```
 
@@ -214,13 +222,3 @@ Per-thread default: `StyleManager.Default`.
 | Custom font ignored by RTK line breaker | Set `block.FontMapper` before `AddText()` |
 | `Truncated` always false | `MaxHeight` or `MaxLines` must be set |
 | Style changes after adding to block | Styles are read at layout time — mutate before `AddText()`, or use `Style.Seal()` |
-| `CS0104: 'IStyle' is ambiguous` in `SkiaTextLayoutHelper.cs` | `Topten.RichTextKit.IStyle` clashes with `Mapsui.Styles.IStyle`. Never add `using Mapsui.Styles;` to this file. Use fully-qualified names (`Mapsui.Styles.Font`, `Mapsui.Styles.FontSource`) instead. |
-
----
-
-## Key files
-
-- [Mapsui.Experimental.Rendering.Skia/Extensions/SkiaTextLayoutHelper.cs](../../Mapsui.Experimental.Rendering.Skia/Extensions/SkiaTextLayoutHelper.cs) — RTK wrappers: `CreateTextBlock`, `PaintTextBlock`, `SplitByWordUnicode`, `MapsuiFontMapper`
-- [Mapsui.Experimental.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs](../../Mapsui.Experimental.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs) — label rendering
-- [Mapsui.Experimental.Rendering.Skia/SkiaStyles/CalloutStyleRenderer.cs](../../Mapsui.Experimental.Rendering.Skia/SkiaStyles/CalloutStyleRenderer.cs) — callout rendering (double-layout pattern)
-- [Mapsui.Rendering.Skia/SkiaStyles/CalloutStyleRenderer.cs](../../Mapsui.Rendering.Skia/SkiaStyles/CalloutStyleRenderer.cs) — standard renderer callout (raw RTK API)
