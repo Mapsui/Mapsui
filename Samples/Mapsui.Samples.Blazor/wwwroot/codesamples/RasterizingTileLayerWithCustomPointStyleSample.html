@@ -19,49 +19,73 @@
     <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
     <pre><code class="csharp">using Mapsui.Layers;
 using Mapsui.Rendering;
-using Mapsui.Rendering.Skia;
-using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Tiling.Layers;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Styles;
+namespace Mapsui.Samples.Common.Maps.Performance;
 
-public class CustomPointStyleBasicSample : ISample
+/// <summary>
+/// This sample demonstrates how to use a RasterizingTileLayer with a CustomPointStyle renderer for improved 
+/// performance when rendering one million points.
+/// </summary>
+public sealed class RasterizingTileLayerWithCustomPointStyleSample : ISample
 {
-    public string Name => $"Basic";
-    public string Category => $"{nameof(CustomPointStyle)}";
+    public string Name => "RasterizingTileLayerUsingCustomPointStyle";
+    public string Category => "Performance";
 
-    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+    static readonly SKPaint _paint = new() { Color = new SKColor(79, 10, 107, 192), IsAntialias = true };
 
-    public static Map CreateMap()
+    public Task<Map> CreateMapAsync()
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new MemoryLayer($"{nameof(CustomPointStyle)}")
-        {
-            Features = CreateFeatures(map.Extent!, 32).ToList(),
-            Style = new CustomPointStyle { RendererName = "custom-style-basic" },
-        });
-        MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
-        // Also register for the experimental renderer (needed when running with LocalRendererConfig.cs).
-        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
-        return map;
+        map.Layers.Add(CreateRasterizingTileLayer());
+        var extent = map.Layers.Get(1).Extent!.Grow(map.Layers.Get(1).Extent!.Width * 0.1);
+        map.Navigator.ZoomToBox(extent);
+
+        Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
+        // To use the experimental renderer you need to add the Mapsui.Experimental.Rendering.Skia package. It adds the IFeature parameter.
+        // Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyExperimentalBasicCustomStyleRenderer);
+
+        return Task.FromResult(map);
     }
+
+    private static RasterizingTileLayer CreateRasterizingTileLayer() => new(CreateRandomPointLayer())
+    {
+        Style = new RasterStyle { Outline = new Pen(Color.Gray, 1) },
+    };
 
     private static void MyBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, RenderService renderService, float opacity)
     {
-        using var paint = new SKPaint { Color = new SKColor(79, 10, 107, 192), IsAntialias = true };
-        canvas.DrawCircle(0f, 0f, 10f, paint);
+        canvas.DrawRect(-5f, -5f, 10f, 10f, _paint);
     }
 
-    private static List<PointFeature> CreateFeatures(MRect envelope, int count) =>
-        RandomPointsBuilder.GenerateRandomPoints(envelope, count, new Random(934))
-            .Select(p => new PointFeature(p)).ToList();
+    private static void MyExperimentalBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, IFeature feature, RenderService renderService, float opacity)
+    {
+        canvas.DrawRect(-5f, -5f, 10f, 10f, _paint);
+    }
+
+    private static MemoryLayer CreateRandomPointLayer()
+    {
+        var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
+        var features = new List<IFeature>();
+        for (var i = 0; i < 1_000_000; i++)
+        {
+            features.Add(new PointFeature(new MPoint(rnd.Next(-3_000_000, 3_000_000), rnd.Next(-3_000_000, 3_000_000))));
+        }
+
+        return new MemoryLayer
+        {
+            Name = "Points",
+            Features = features,
+            Style = new CustomPointStyle { RendererName = "custom-style-basic" },
+        };
+    }
 }
 </code></pre>
 </div>

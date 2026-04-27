@@ -17,51 +17,98 @@
 <body>
 <div class="code-container">
     <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
-    <pre><code class="csharp">using Mapsui.Layers;
-using Mapsui.Rendering;
-using Mapsui.Rendering.Skia;
-using Mapsui.Samples.Common.DataBuilders;
-using Mapsui.Styles;
-using Mapsui.Tiling;
-using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+    <pre><code class="csharp">using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.Layers;
+using Mapsui.Styles;
 
-namespace Mapsui.Samples.Common.Maps.Styles;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
-public class CustomPointStyleBasicSample : ISample
+public class EmojiSample : ISample
 {
-    public string Name => $"Basic";
-    public string Category => $"{nameof(CustomPointStyle)}";
+    public string Name => "Emoji";
+
+    public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
-        var map = new Map();
-        map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new MemoryLayer($"{nameof(CustomPointStyle)}")
+        var layer = CreateLayer();
+
+        var map = new Map
         {
-            Features = CreateFeatures(map.Extent!, 32).ToList(),
-            Style = new CustomPointStyle { RendererName = "custom-style-basic" },
-        });
-        MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
-        // Also register for the experimental renderer (needed when running with LocalRendererConfig.cs).
-        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
+            BackColor = Color.WhiteSmoke,
+        };
+
+        map.Navigator.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 2));
+        map.Layers.Add(layer);
+
         return map;
     }
 
-    private static void MyBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, RenderService renderService, float opacity)
-    {
-        using var paint = new SKPaint { Color = new SKColor(79, 10, 107, 192), IsAntialias = true };
-        canvas.DrawCircle(0f, 0f, 10f, paint);
-    }
+    private static MemoryLayer CreateLayer() =>
+        new()
+        {
+            Features = CreateFeatures(),
+            Name = "Emoji Text",
+            Style = null
+        };
 
-    private static List<PointFeature> CreateFeatures(MRect envelope, int count) =>
-        RandomPointsBuilder.GenerateRandomPoints(envelope, count, new Random(934))
-            .Select(p => new PointFeature(p)).ToList();
+    private static IEnumerable<IFeature> CreateFeatures() =>
+        new List<IFeature>
+        {
+            // Label with emoji using the system (default) font â€” no FontSource.
+            // This tests whether the renderer falls back to the emoji font for
+            // glyphs not found in the primary typeface.
+            new PointFeature(new MPoint(-50, 50))
+            {
+                Styles = new List<IStyle>
+                {
+                    new LabelStyle
+                    {
+                        Text = "Hello ðŸŒ World ðŸŽ‰",
+                        Font = { Size = 18 },
+                        BackColor = new Brush(Color.White),
+                        ForeColor = Color.Black,
+                        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                    }
+                }
+            },
+            // Callout with emoji in title and subtitle, also using the system font.
+            new PointFeature(new MPoint(50, -50))
+            {
+                Styles = new List<IStyle>
+                {
+                    CreatePointStyle(),
+                    new CalloutStyle
+                    {
+                        Title = "Hello ðŸŒ World",
+                        TitleFont = { Size = 15 },
+                        TitleFontColor = Color.Black,
+                        Subtitle = "Party ðŸŽ‰ and Stars â­",
+                        SubtitleFont = { Size = 12 },
+                        SubtitleFontColor = Color.Gray,
+                        Type = CalloutType.Detail,
+                        MaxWidth = 200,
+                        Enabled = true,
+                        Offset = new Offset(0, SymbolStyle.DefaultHeight * 1f),
+                        BalloonDefinition = new CalloutBalloonDefinition
+                        {
+                            RectRadius = 10,
+                            ShadowWidth = 4,
+                        },
+                    }
+                }
+            },
+        };
+
+    private static SymbolStyle CreatePointStyle() =>
+        new()
+        {
+            Fill = new Brush { Color = Color.Gray },
+            Outline = new Pen(Color.Black),
+        };
 }
 </code></pre>
 </div>
