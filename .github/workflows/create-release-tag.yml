@@ -1,0 +1,59 @@
+name: Create Release Tag
+
+# Creates a git tag on the selected branch. Use the "Use workflow from" branch
+# selector to choose which branch to tag (main for regular releases, a patch
+# branch for patch releases). After this succeeds, trigger "Release Nugets" and
+# then publish the GitHub Release manually.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag to create (e.g. 6.2.0). Check https://github.com/Mapsui/Mapsui/releases for the latest tag.'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: tree:0
+
+      - name: Show latest existing tag
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          LATEST=$(git describe --tags --abbrev=0 2>/dev/null || echo "(no tags yet)")
+          echo "Latest existing tag : $LATEST"
+          echo "New tag to create   : $VERSION"
+          echo "Branch              : ${{ github.ref_name }}"
+
+      - name: Validate tag does not already exist
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          if git tag -l "$VERSION" | grep -q .; then
+            echo "Error: tag $VERSION already exists."
+            exit 1
+          fi
+
+      - name: Create and push tag
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "$VERSION"
+          git push origin "$VERSION"
+
+      - name: Summary
+        env:
+          VERSION: ${{ inputs.version }}
+        run: echo "Tag $VERSION created on ${{ github.ref_name }}. Now trigger 'Release Nugets'."
