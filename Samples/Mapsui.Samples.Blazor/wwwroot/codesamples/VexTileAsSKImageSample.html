@@ -17,51 +17,81 @@
 <body>
 <div class="code-container">
     <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
-    <pre><code class="csharp">using Mapsui.Layers;
-using Mapsui.Rendering;
-using Mapsui.Rendering.Skia;
-using Mapsui.Samples.Common.DataBuilders;
-using Mapsui.Styles;
-using Mapsui.Tiling;
-using SkiaSharp;
+    <pre><code class="csharp">using Mapsui.Experimental.VectorTiles;
+using Mapsui.Experimental.VectorTiles.Tiling;
+using Mapsui.Samples.Common.Utilities;
+using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
+using VexTile.Common.Enums;
+using VexTile.Data.Sources;
+using Mapsui.Experimental.VectorTiles.VexTileCopies;
+using TileLayer = Mapsui.Experimental.VectorTiles.Tiling.TileLayer;
 
-namespace Mapsui.Samples.Common.Maps.Styles;
+namespace Mapsui.Samples.Common.Maps.Tiles;
 
-public class CustomPointStyleBasicSample : ISample
+/// <summary>
+/// Sample demonstrating the VexTileSource which fetches vector tile data
+/// and renders it using TwoStepVexTileStyleRenderer with caching.
+/// </summary>
+public sealed class VexTileAsSKImageSample : ISample, IDisposable
 {
-    public string Name => $"Basic";
-    public string Category => $"{nameof(CustomPointStyle)}";
+    private SqliteDataSource? _sqliteDataSource;
 
-    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+    static VexTileAsSKImageSample()
+    {
+        MbTilesDeployer.CopyEmbeddedResourceToFile("zurich.mbtiles");
+        SQLitePCL.Batteries.Init();
+    }
 
-    public static Map CreateMap()
+    public VexTileAsSKImageSample()
+    {
+        _sqliteDataSource = CreateSqliteDataSource();
+    }
+
+    public string Name => "VexTileAsSKImage";
+    public string Category => "ExperimentalVectorTiles";
+
+    public Task<Map> CreateMapAsync()
+    {
+        return Task.FromResult(CreateMap(_sqliteDataSource!));
+    }
+
+    public static Map CreateMap(SqliteDataSource sqliteDataSource)
     {
         var map = new Map();
-        map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new MemoryLayer($"{nameof(CustomPointStyle)}")
-        {
-            Features = CreateFeatures(map.Extent!, 32).ToList(),
-            Style = new CustomPointStyle { RendererName = "custom-style-basic" },
-        });
-        MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
-        // Also register for the experimental renderer (needed when running with LocalRendererConfig.cs).
-        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
+        map.Layers.Add(CreateLayer(sqliteDataSource));
         return map;
     }
 
-    private static void MyBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, RenderService renderService, float opacity)
+    private static TileLayer CreateLayer(SqliteDataSource sqliteDataSource)
     {
-        using var paint = new SKPaint { Color = new SKColor(79, 10, 107, 192), IsAntialias = true };
-        canvas.DrawCircle(0f, 0f, 10f, paint);
+        // Create the VexTile vector style (contains styling rules)
+        var vectorStyle = new VectorStyle(VectorStyleKind.Default);
+
+        // Create the tile source (fetches vector tile data)
+        var tileSource = new VexTileSource(sqliteDataSource);
+
+        return new TileLayer(tileSource)
+        {
+            Name = "VexTile",
+            Style = new VexTileStyle(vectorStyle),
+        };
     }
 
-    private static List<PointFeature> CreateFeatures(MRect envelope, int count) =>
-        RandomPointsBuilder.GenerateRandomPoints(envelope, count, new Random(934))
-            .Select(p => new PointFeature(p)).ToList();
+    private static SqliteDataSource CreateSqliteDataSource()
+    {
+        var path = Path.Combine(MbTilesDeployer.MbTilesLocation, "zurich.mbtiles");
+        var connectionString = new SQLiteConnectionString(path, SQLiteOpenFlags.ReadOnly, false);
+        return new SqliteDataSource(connectionString);
+    }
+
+    public void Dispose()
+    {
+        _sqliteDataSource?.Dispose();
+        _sqliteDataSource = null;
+    }
 }
 </code></pre>
 </div>

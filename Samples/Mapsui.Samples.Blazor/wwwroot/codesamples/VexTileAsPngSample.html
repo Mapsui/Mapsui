@@ -17,51 +17,73 @@
 <body>
 <div class="code-container">
     <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
-    <pre><code class="csharp">using Mapsui.Layers;
-using Mapsui.Rendering;
-using Mapsui.Rendering.Skia;
-using Mapsui.Samples.Common.DataBuilders;
-using Mapsui.Styles;
+    <pre><code class="csharp">using Mapsui.Experimental.VectorTiles;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling;
-using SkiaSharp;
+using Mapsui.Tiling.Fetcher;
+using Mapsui.Tiling.Layers;
+using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
+using VexTile.Data.Sources;
 
-namespace Mapsui.Samples.Common.Maps.Styles;
+namespace Mapsui.Samples.Common.Maps.Tiles;
 
-public class CustomPointStyleBasicSample : ISample
+public sealed class VexTileAsPngSample : ISample, IDisposable
 {
-    public string Name => $"Basic";
-    public string Category => $"{nameof(CustomPointStyle)}";
+    SqliteDataSource _sqliteDataSource;
 
-    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+    static VexTileAsPngSample()
+    {
+        MbTilesDeployer.CopyEmbeddedResourceToFile("zurich.mbtiles");
+        SQLitePCL.Batteries.Init();
+    }
 
-    public static Map CreateMap()
+    public VexTileAsPngSample()
+    {
+        _sqliteDataSource = CreateSqliteDataSource();
+    }
+
+    public string Name => "VexTileAsPng";
+    public string Category => "ExperimentalVectorTiles";
+
+    public Task<Map> CreateMapAsync()
+    {
+        return Task.FromResult(CreateMap(_sqliteDataSource));
+    }
+
+    public static Map CreateMap(SqliteDataSource sqliteDataSource)
     {
         var map = new Map();
+
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new MemoryLayer($"{nameof(CustomPointStyle)}")
-        {
-            Features = CreateFeatures(map.Extent!, 32).ToList(),
-            Style = new CustomPointStyle { RendererName = "custom-style-basic" },
-        });
-        MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
-        // Also register for the experimental renderer (needed when running with LocalRendererConfig.cs).
-        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-basic", MyBasicCustomStyleRenderer);
+        map.Layers.Add(CreateLayer(sqliteDataSource));
+
         return map;
     }
 
-    private static void MyBasicCustomStyleRenderer(SKCanvas canvas, IPointStyle style, RenderService renderService, float opacity)
+    private static TileLayer CreateLayer(SqliteDataSource sqliteDataSource)
     {
-        using var paint = new SKPaint { Color = new SKColor(79, 10, 107, 192), IsAntialias = true };
-        canvas.DrawCircle(0f, 0f, 10f, paint);
+
+        var tileSource = new RasterizedVectorTileSource(sqliteDataSource);
+        return new TileLayer(tileSource, dataFetchStrategy: new MinimalDataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
+        {
+            Name = "VexTile.TileSource.Mvt",
+        };
     }
 
-    private static List<PointFeature> CreateFeatures(MRect envelope, int count) =>
-        RandomPointsBuilder.GenerateRandomPoints(envelope, count, new Random(934))
-            .Select(p => new PointFeature(p)).ToList();
+    private static SqliteDataSource CreateSqliteDataSource()
+    {
+        var path = Path.Combine(MbTilesDeployer.MbTilesLocation, "zurich.mbtiles");
+        SQLiteConnectionString val = new SQLiteConnectionString(path, (SQLiteOpenFlags)1, false);
+        return new SqliteDataSource(val);
+    }
+
+    void IDisposable.Dispose()
+    {
+        _sqliteDataSource.Dispose();
+    }
 }
 </code></pre>
 </div>

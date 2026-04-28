@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps.Special;
 
 public class GridLayerSample : ISample
 {
-    public string Name => "Grid Layer";
+    public string Name => "GridLayer";
     public string Category => "Special";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
