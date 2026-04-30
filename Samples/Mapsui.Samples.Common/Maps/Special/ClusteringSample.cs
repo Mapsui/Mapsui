@@ -101,7 +101,6 @@ public class ClusteringProvider : IProvider
     private readonly IDictionary<int, BruTile.Resolution> _resolutions;
     private readonly Dictionary<int, Task<List<IFeature>>> _cache = [];
     private readonly SemaphoreSlim _cacheLock = new(1, 1);
-    private int _dataVersion;
 
     public ClusteringProvider(IProvider innerProvider, double clusterCellPixels = 40, IDictionary<int, BruTile.Resolution>? resolutions = null)
     {
@@ -123,7 +122,6 @@ public class ClusteringProvider : IProvider
     /// </summary>
     public void InvalidateCache()
     {
-        Interlocked.Increment(ref _dataVersion);
         _cacheLock.Wait();
         try { _cache.Clear(); }
         finally { _cacheLock.Release(); }
@@ -147,19 +145,34 @@ public class ClusteringProvider : IProvider
 
     private async Task<List<IFeature>> GetOrBuildClustersAsync(int level, FetchInfo fetchInfo, double cellSize)
     {
+        // Hold the lock only while reading/writing the dictionary, not during the actual build.
+        // This allows concurrent builds for different zoom levels.
+        Task<List<IFeature>> task;
         await _cacheLock.WaitAsync();
         try
         {
-            if (!_cache.TryGetValue(level, out var task))
+            if (!_cache.TryGetValue(level, out task!))
             {
                 task = BuildClustersAsync(fetchInfo, cellSize);
                 _cache[level] = task;
             }
-            return await task;
         }
         finally
         {
             _cacheLock.Release();
+        }
+
+        try
+        {
+            return await task;
+        }
+        catch
+        {
+            // Don't cache failures — remove so the next request retries.
+            await _cacheLock.WaitAsync();
+            try { _cache.Remove(level); }
+            finally { _cacheLock.Release(); }
+            throw;
         }
     }
 
