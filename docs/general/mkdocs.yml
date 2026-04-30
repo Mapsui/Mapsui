@@ -46,6 +46,7 @@ nav:
 
   - Contributing to Mapsui:
     - 'contributors-guidelines.md'
+    - 'working-with-samples.md'
     - 'rendering-tests.md'
     - 'documentation.md'
     - 'touch-and-mouse-handling.md'
