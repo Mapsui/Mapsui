@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <PackageId>Mapsui.Avalonia12</PackageId>
+    <Description>Avalonia 12 map components based on the Mapsui library</Description>
+    <PackageTags>$(PackageTags) avalonia</PackageTags>
+    <IsPackable>true</IsPackable>
+    <RootNamespace>Mapsui.UI.Avalonia</RootNamespace>
+    <AssemblyName>Mapsui.UI.Avalonia</AssemblyName>
+    <DefineConstants>__AVALONIA__;__AVALONIA12__</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Mapsui.UI.Avalonia\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
+    <Compile Include="..\Mapsui.UI.Avalonia\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
+    <Compile Include="..\Mapsui.UI.Avalonia\MapControl.cs" Link="MapControl.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BruTile" />
+    <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="Avalonia" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Skia" VersionOverride="$(Avalonia12Version)" />
+  </ItemGroup>
+
+  <!-- Avalonia 12 requires newer SkiaSharp and HarfBuzz than the central catalog pins.
+       These VersionOverrides isolate the impact to this project only. -->
+  <ItemGroup>
+    <PackageReference Include="HarfBuzzSharp" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+    <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+
+</Project>
