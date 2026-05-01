@@ -241,16 +241,6 @@
       <BuildType Solution="AppStore|*" Project="Debug" />
     </Project>
   </Folder>
-  <Folder Name="/Samples/Avalonia12/">
-    <Project Path="Samples/Avalonia12/Mapsui.Samples.Avalonia12/Mapsui.Samples.Avalonia12.csproj">
-      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
-      <BuildType Solution="AppStore|*" Project="Debug" />
-    </Project>
-    <Project Path="Samples/Avalonia12/Mapsui.Samples.Avalonia12.Desktop/Mapsui.Samples.Avalonia12.Desktop.csproj">
-      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
-      <BuildType Solution="AppStore|*" Project="Debug" />
-    </Project>
-  </Folder>
   <Folder Name="/Samples/Mapsui.Samples.Uno.WinUI/">
     <File Path="Samples/Mapsui.Samples.Uno.WinUI/Directory.Build.props" />
     <Project Path="Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.csproj">
