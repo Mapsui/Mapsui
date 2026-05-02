@@ -1,0 +1,77 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Mapsui.Samples.Avalonia12.ViewModels"
+             xmlns:avalonia="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="750"
+             x:Class="Mapsui.Samples.Avalonia12.Views.MainView"
+             x:DataType="vm:MainViewModel">
+
+    <DockPanel>
+        <!-- Top bar -->
+        <Border DockPanel.Dock="Top"
+                MinHeight="52"
+                BoxShadow="0 4 20 0 #AA000000">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#0D0D0D" Offset="0" />
+                    <GradientStop Color="#505050" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <WrapPanel Orientation="Horizontal"
+                       HorizontalAlignment="Stretch"
+                       Margin="16,8">
+
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Spacing="12"
+                            Margin="0,4,12,4">
+                    <TextBlock Text="Mapsui Samples"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Foreground="White"
+                               VerticalAlignment="Center" />
+                    <Border Width="1"
+                            Height="24"
+                            Background="White"
+                            Opacity="0.4"
+                            VerticalAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Spacing="6"
+                            Margin="0,4,12,4">
+                    <TextBlock Text="Category:"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               FontSize="13" />
+                    <ComboBox x:Name="CategoryComboBox"
+                              MinWidth="160"
+                              VerticalAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Spacing="6"
+                            Margin="0,4,0,4">
+                    <TextBlock Text="Sample:"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               FontSize="13" />
+                    <ComboBox x:Name="SampleComboBox"
+                              MinWidth="200"
+                              VerticalAlignment="Center" />
+                </StackPanel>
+
+            </WrapPanel>
+        </Border>
+
+        <!-- Map fills the rest -->
+        <avalonia:MapControl x:Name="MapControl"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch" />
+    </DockPanel>
+
+</UserControl>
