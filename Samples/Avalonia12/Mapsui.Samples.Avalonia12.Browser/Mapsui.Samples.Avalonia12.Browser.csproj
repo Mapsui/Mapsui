@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <!--
+    Avalonia 12 Browser support requires .NET 10 (net10.0-browser TFM).
+    This project intentionally targets net10.0-browser and has a local global.json
+    pinning the SDK to .NET 10. It is excluded from Mapsui.slnx and Mapsui.Avalonia.slnf
+    because the repo's root global.json pins the SDK to .NET 9.
+    Build from this directory directly: dotnet build
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-browser</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Browser" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Skia" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Fonts.Inter" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="HarfBuzzSharp" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
+    <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Samples.Avalonia12\Mapsui.Samples.Avalonia12.csproj" />
+  </ItemGroup>
+
+</Project>

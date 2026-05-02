@@ -4,8 +4,10 @@ These instructions guide GitHub Copilot (and Copilot Chat) when helping in this 
 
 ## Critical: Do not make changes without explicit request
 - **Never start editing code, creating files unless the user explicitly asks you to do so.**
+- **Never run `git commit`, `git push`, or any destructive git command unless the user explicitly asks.**
 - When the user asks a question, discusses architecture, or explores options — respond with analysis, explanations, or plans only.
 - Wait for clear instructions like "implement this", "make this change", "create this file", or "update the code" before touching any files.
+- Wait for clear instructions like "commit this", "push", or "create a PR" before running any git commands.
 - If unsure whether the user wants changes made, ask first.
 
 ## Project overview

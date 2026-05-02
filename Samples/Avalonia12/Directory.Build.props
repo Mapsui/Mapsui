@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+    <!--
+      Mirror the version properties from the root Directory.Build.props.
+      This file shadows the root one (MSBuild stops traversing once it finds the first Directory.Build.props),
+      so we must re-declare the Avalonia 12 version properties here for all projects under this folder.
+    -->
+    <Avalonia12Version>12.0.2</Avalonia12Version>
+    <Avalonia12SkiaSharpVersion>3.119.4-preview.1.1</Avalonia12SkiaSharpVersion>
+    <Avalonia12HarfBuzzSharpVersion>8.3.1.3</Avalonia12HarfBuzzSharpVersion>
+  </PropertyGroup>
+</Project>

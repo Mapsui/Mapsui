@@ -1,0 +1,9 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:Mapsui.Samples.Avalonia12.Views"
+        x:Class="Mapsui.Samples.Avalonia12.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Mapsui.UI.Avalonia12"
+        Width="1200" Height="750">
+    <views:MainView />
+</Window>
