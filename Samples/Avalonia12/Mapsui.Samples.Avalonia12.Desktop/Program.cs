@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using Avalonia;
 using ReactiveUI.Avalonia;
 
@@ -20,12 +19,12 @@ class Program
             .UsePlatformDetect()
             .With(new Win32PlatformOptions
             {
-                RenderingMode = new ReadOnlyCollection<Win32RenderingMode>(new[] {
+                RenderingMode = [
                     Win32RenderingMode.Vulkan,    // Try Vulkan first (fastest if supported)
                     Win32RenderingMode.AngleEgl,  // Try ANGLE (uses DirectX)
                     Win32RenderingMode.Wgl,       // Then try native OpenGL
                     Win32RenderingMode.Software   // Fall back to software if needed
-                }),
+                ],
             })
             .LogToTrace()
             .WithInterFont()
