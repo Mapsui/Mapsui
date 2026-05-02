@@ -26,6 +26,12 @@
     <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
     <MauiVersion>9.0.50</MauiVersion>
     <Maui8Version>8.0.100</Maui8Version>
+    <Avalonia12Version>12.0.2</Avalonia12Version>
+    <!-- Avalonia 12.0.2 requires SkiaSharp 3.119.4-preview.1.1 and HarfBuzzSharp 8.3.1.3 -->
+    <Avalonia12SkiaSharpVersion>3.119.4-preview.1.1</Avalonia12SkiaSharpVersion>
+    <Avalonia12HarfBuzzSharpVersion>8.3.1.3</Avalonia12HarfBuzzSharpVersion>
+    <!-- In Avalonia 12, Avalonia.ReactiveUI was replaced by ReactiveUI.Avalonia -->
+    <Avalonia12ReactiveUIVersion>12.0.1</Avalonia12ReactiveUIVersion>
   </PropertyGroup>
 
   <!--Package Icon Include -->
