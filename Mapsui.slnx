@@ -243,19 +243,10 @@
   </Folder>
   <Folder Name="/Samples/Avalonia12/">
     <File Path="Samples/Avalonia12/Directory.Build.props" />
-    <Project Path="Samples/Avalonia12/Mapsui.Samples.Avalonia12.Android/Mapsui.Samples.Avalonia12.Android.csproj">
-      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
-      <BuildType Solution="AppStore|*" Project="Debug" />
-      <Deploy />
-    </Project>
+    <!-- Android and iOS excluded: Avalonia.Android/iOS 12.0.2 requires net10.0. Build from project directory directly. -->
     <Project Path="Samples/Avalonia12/Mapsui.Samples.Avalonia12.Desktop/Mapsui.Samples.Avalonia12.Desktop.csproj">
       <BuildType Solution="Ad-Hoc|*" Project="Debug" />
       <BuildType Solution="AppStore|*" Project="Debug" />
-    </Project>
-    <Project Path="Samples/Avalonia12/Mapsui.Samples.Avalonia12.iOS/Mapsui.Samples.Avalonia12.iOS.csproj">
-      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
-      <BuildType Solution="AppStore|*" Project="Debug" />
-      <Deploy />
     </Project>
     <Project Path="Samples/Avalonia12/Mapsui.Samples.Avalonia12/Mapsui.Samples.Avalonia12.csproj">
       <BuildType Solution="Ad-Hoc|*" Project="Debug" />
