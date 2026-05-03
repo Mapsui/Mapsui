@@ -1,0 +1,35 @@
+<Page x:Class="Mapsui.Samples.Uno.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:winui="using:Mapsui.UI.WinUI"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Border Grid.Row="0" Background="#2D2D2D" Padding="12">
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <TextBlock Text="Mapsui Samples" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="0,0,16,0" />
+
+        <TextBlock Text="Category:" Foreground="White" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <ComboBox x:Name="CategoryComboBox"
+                  Width="170"
+                  Margin="0,0,16,0"
+                  SelectionChanged="CategoryComboBox_SelectionChanged" />
+
+        <TextBlock Text="Sample:" Foreground="White" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <ComboBox x:Name="SampleComboBox"
+                  Width="220"
+                  SelectionChanged="SampleComboBox_SelectionChanged" />
+      </StackPanel>
+    </Border>
+
+    <winui:MapControl x:Name="MapControl"
+                      Grid.Row="1"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch" />
+  </Grid>
+</Page>
+
