@@ -1,0 +1,61 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <!--
+      Temporary: keep this sample runnable while the repository is pinned to .NET 9.
+      Android (and the rest of the net10 TFMs) should be re-enabled when Mapsui 6
+      moves the repository to .NET 10.
+
+      Re-enable with:
+      <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+    -->
+    <TargetFrameworks>net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Mapsui.Samples.Uno5</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.companyname.mapsui-samples-uno5</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Mapsui.Samples.Uno5</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Mapsui.Samples.Uno5 powered by Uno Platform.</Description>
+
+    <!--
+      UnoFeatures are used to quickly add and manage features enabled for your app.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+
+    <UnoDisableHotDesign>true</UnoDisableHotDesign>
+    <UnoDisableMCPSupport>true</UnoDisableMCPSupport>
+
+    <!--
+      Suppress Uno/NuGet warnings that are not actionable in this project:
+      NU1507: multiple package sources without CPM source mapping
+      NETSDK1201: RID-specific build won't produce self-contained app
+      PRI257: default language (en) not in the included resources list (e.g. en-us)
+    -->
+    <NoWarn>$(NoWarn);NU1507;NETSDK1201;PRI257</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Experimental.Rendering.Skia\Mapsui.Experimental.Rendering.Skia.csproj" />
+    <ProjectReference Include="..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
+    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+  </ItemGroup>
+
+  <Target Name="MapsuiUno5DisableDevServer" BeforeTargets="UnoImplicitPackages">
+    <ItemGroup>
+      <_UnoProjectSystemPackageReference Remove="@(_UnoProjectSystemPackageReference)" Condition="'%(Identity)' == 'Uno.Settings.DevServer'" />
+      <_UnoProjectSystemPackageReference Remove="@(_UnoProjectSystemPackageReference)" Condition="'%(Identity)' == 'Uno.WinUI.DevServer'" />
+    </ItemGroup>
+  </Target>
+
+</Project>

@@ -27,6 +27,8 @@ Only use dependencies when you need them. If you can make changes with a couple 
 
 We use [.editorconfig](https://editorconfig.org) in our repository, and the code should conform to it.
 
+Use explicit `using` directives. Do not enable `<ImplicitUsings>enable</ImplicitUsings>` in project files. If shared imports are needed, add them deliberately in a `GlobalUsings.cs` file.
+
 In Visual Studio, you can check for compliance via the context menu in Solution Explorer by selecting `Analyze and Code Cleanup` and then `Run Code Analysis`. The results will show up in the `Error List` with `Build and IntelliSense` selected.
 
 Alternatively, you can use the [`dotnet format`](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format) command.
