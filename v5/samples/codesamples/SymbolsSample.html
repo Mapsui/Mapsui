@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Mapsui.Widgets.InfoWidgets;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Styles;
+
+public class SymbolsSample : ISample
+{
+    public string Name => "Symbols";
+    public string Category => "Styles";
+
+    public Task<Map> CreateMapAsync()
+    {
+        var map = new Map();
+
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateStylesLayer(map.Extent));
+
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Styles Layer"));
+
+        return Task.FromResult(map);
+    }
+
+    private static ILayer CreateStylesLayer(MRect? envelope) => new MemoryLayer
+    {
+        Name = "Styles Layer",
+        Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
+        Style = null,
+    };
+
+    private static IEnumerable<IFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
+    {
+        var features = new List<IFeature>();
+        var counter = 0;
+        var styles = CreateDiverseStyles().ToList();
+        foreach (var point in randomPoints)
+        {
+            var feature = new PointFeature(point)
+            {
+                ["Label"] = counter.ToString()
+            };
+
+            feature.Styles.Add(styles[counter]);
+            feature.Styles.Add(CreateSmallDotStyle());
+            features.Add(feature);
+            counter++;
+            if (counter == styles.Count) counter = 0;
+
+        }
+        features.Add(CreatePointWithStackedStyles());
+        return features;
+    }
+
+    private static SymbolStyle CreateSmallDotStyle() =>
+        new() { SymbolScale = 0.2, Fill = new Brush(new Color(40, 40, 40)) };
+
+    private static IEnumerable<IStyle> CreateDiverseStyles()
+    {
+        const int radius = 16;
+        return
+        [
+            new SymbolStyle
+            {
+                SymbolScale = 0.8,
+                Offset = new Offset(0, 0),
+                SymbolType = SymbolType.Rectangle,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.6,
+                Offset = new Offset(radius, radius),
+                SymbolType = SymbolType.Rectangle,
+                Fill = new Brush(Color.Red),
+                Outline = new Pen(Color.Gray, 1f),
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1,
+                Offset = new Offset(radius, -radius),
+                SymbolType = SymbolType.Rectangle,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1,
+                Offset = new Offset(-radius, -radius),
+                SymbolType = SymbolType.Rectangle,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.8,
+                Offset = new Offset(0, 0),
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1.2,
+                Offset = new Offset(radius, 0),
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1,
+                Offset = new Offset(0, radius),
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1,
+                Offset = new Offset(radius, radius),
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.7),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.8),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.9),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 1.0),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Pin.svg", 0.7),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Pin.svg", 0.8),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.1),
+        ];
+    }
+
+    private static ImageStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
+    {
+        return new ImageStyle { Image = embeddedResourcePath, SymbolScale = scale, Offset = new Offset(0, 32) };
+    }
+
+    private static ImageStyle CreateSvgStyle(string embeddedResourcePath, double scale)
+    {
+        return new ImageStyle { Image = embeddedResourcePath, SymbolScale = scale, RelativeOffset = new RelativeOffset(0.0, 0.5) };
+    }
+
+    private static PointFeature CreatePointWithStackedStyles() => new(new MPoint(5000000, -5000000))
+    {
+        Styles =
+        [
+            new SymbolStyle
+            {
+                SymbolScale = 2.0f,
+                Fill = null,
+                Outline = new Pen(Color.Yellow),
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.8f,
+                Fill = new Brush(Color.Red),
+                Outline = new Pen(Color.Gray, 1f)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.5f,
+                Fill = new Brush (Color.Black),
+                Outline = new Pen(Color.Gray, 1f)
+            },
+            new LabelStyle
+            {
+                Text = "Stacked Styles",
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left
+            }
+        ]
+    };
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
