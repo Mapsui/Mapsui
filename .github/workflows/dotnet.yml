@@ -144,10 +144,12 @@ jobs:
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --skip dotnetworkloads-10.0.101 --dotnet 9.0.305
     - name: Restore dependencies Mapsui.Mac
-      run: dotnet restore Mapsui.Mac.slnf       
+      run: dotnet restore Mapsui.Mac.slnf -p:MapsuiSkipUnoMacCatalyst=true       
     # Build        
     - name: Build Samples and Tests
-      run: dotnet build --no-restore --configuration Debug Mapsui.Mac.slnf   
+      # TEMP WORKAROUND: Skip net9.0-maccatalyst only for the Uno sample because Uno.icu-ios links iOS-only static libs on macCatalyst.
+      # Revert this when the upstream Uno ICU package/tooling issue is fixed.
+      run: dotnet build --no-restore --configuration Debug Mapsui.Mac.slnf -p:MapsuiSkipUnoMacCatalyst=true   
     # Run Tests   
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net9.0/Mapsui.Tests.dll --blame-hang-timeout:60s
