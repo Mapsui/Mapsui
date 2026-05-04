@@ -15,6 +15,7 @@
       "Mapsui\\Mapsui.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
       "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.csproj",
+      "Samples\\Mapsui.Samples.Uno5\\Mapsui.Samples.Uno5.csproj",
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.csproj",
       "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
