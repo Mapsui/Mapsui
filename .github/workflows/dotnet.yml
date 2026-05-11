@@ -102,8 +102,7 @@ jobs:
         path: Artifacts/*.nupkg
   
   macBuild:  
-    # macos-15 is currently macos-13
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
     - uses: actions/checkout@v4
       with:
@@ -125,7 +124,7 @@ jobs:
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '26.3'          
+        xcode-version: '26.4'          
     # .Net 9 update     
     - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
@@ -141,6 +140,10 @@ jobs:
       run: dotnet tool install --global Uno.Check --version 1.34.1
     - name: install Android SDK
       run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --skip dotnetworkloads-10.0.101 --dotnet 9.0.305
+    - name: Install Android API 34
+      # macos-26 runner ships Android 35+ only; net8.0-android targets API 34 so install it explicitly.
+      # Use find to locate sdkmanager regardless of cmdline-tools version; pipe yes for license acceptance.
+      run: yes | $(find $ANDROID_HOME/cmdline-tools -name sdkmanager -type f | sort | tail -1) "platforms;android-34"
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --skip dotnetworkloads-10.0.101 --dotnet 9.0.305
     - name: Restore dependencies Mapsui.Mac
