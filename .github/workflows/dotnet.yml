@@ -140,6 +140,9 @@ jobs:
       run: dotnet tool install --global Uno.Check --version 1.34.1
     - name: install Android SDK
       run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --skip dotnetworkloads-10.0.101 --dotnet 9.0.305
+    - name: Install Android API 34
+      # macos-26 runner ships Android 35+ only; net8.0-android targets API 34 so install it explicitly
+      run: $ANDROID_HOME/cmdline-tools/16.0/bin/sdkmanager "platforms;android-34"
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --skip dotnetworkloads-10.0.101 --dotnet 9.0.305
     - name: Restore dependencies Mapsui.Mac
