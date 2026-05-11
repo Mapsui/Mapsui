@@ -6,6 +6,7 @@
     <Description>Avalonia 12 map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) avalonia</PackageTags>
     <IsPackable>true</IsPackable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RootNamespace>Mapsui.UI.Avalonia</RootNamespace>
     <AssemblyName>Mapsui.UI.Avalonia</AssemblyName>
     <DefineConstants>__AVALONIA__;__AVALONIA12__</DefineConstants>
@@ -15,6 +16,7 @@
     <Compile Include="..\Mapsui.UI.Avalonia\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
     <Compile Include="..\Mapsui.UI.Avalonia\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
     <Compile Include="..\Mapsui.UI.Avalonia\MapControl.cs" Link="MapControl.cs" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
