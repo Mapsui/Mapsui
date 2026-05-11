@@ -9,6 +9,7 @@ using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -158,36 +159,61 @@ public sealed class RenderController : IDisposable
         }
     }
 
-    public void Render(object canvas)
+    /// <summary>
+    /// Renders the map to the given canvas, applying the supplied pixel density scaling first.
+    /// If <paramref name="pixelDensity"/> is <see langword="null"/> the view is not yet laid out;
+    /// the render is skipped but the invalidation loop is still unblocked so it can retry later.
+    /// </summary>
+    public void Render(object canvas, float? pixelDensity)
     {
-        if (_mapRenderer is null)
-            return;
-        if (_getMap() is not Map map)
-            return;
-        if (!map.Navigator.Viewport.HasSize())
-            return;
-
-        if (_firstDraw)
+        try
         {
-            _firstDraw = false;
-            Logger.Log(LogLevel.Information, $"First Render cycle.");
-            Logger.Log(LogLevel.Information, $"{nameof(LoggingWidget)}.{nameof(LoggingWidget.ShowLoggingInMap)} is set to '{nameof(ActiveMode)}.{LoggingWidget.ShowLoggingInMap}'.");
-            Logger.Log(LogLevel.Information, $"If you need to remove it in debug mode set: {nameof(LoggingWidget)}.{nameof(LoggingWidget.ShowLoggingInMap)} = {nameof(ActiveMode)}.{ActiveMode.No}.");
+            if (pixelDensity is null)
+                return;
+            if (_mapRenderer is null)
+                return;
+            if (_getMap() is not Map map)
+                return;
+            if (!map.Navigator.Viewport.HasSize())
+                return;
+
+            if (_firstDraw)
+            {
+                _firstDraw = false;
+                Logger.Log(LogLevel.Information, $"First Render cycle.");
+                Logger.Log(LogLevel.Information, $"{nameof(LoggingWidget)}.{nameof(LoggingWidget.ShowLoggingInMap)} is set to '{nameof(ActiveMode)}.{LoggingWidget.ShowLoggingInMap}'.");
+                Logger.Log(LogLevel.Information, $"If you need to remove it in debug mode set: {nameof(LoggingWidget)}.{nameof(LoggingWidget.ShowLoggingInMap)} = {nameof(ActiveMode)}.{ActiveMode.No}.");
+            }
+
+            // Start stopwatch before updating animations and drawing control
+            _stopwatch.Restart();
+            _timestampStartDraw = GetTimestampInMilliseconds();
+
+            ((SKCanvas)canvas).Scale(pixelDensity.Value, pixelDensity.Value);
+
+            var pending = TakePendingRefresh();
+            _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor, pending?.DirtyRect, pending?.CoordinateSpace ?? CoordinateSpace.World);
+
+            _stopwatch.Stop();
+
+            // If we are interested in performance measurements, we save the new drawing time
+            map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
         }
-
-        // Start stopwatch before updating animations and drawing control
-        _stopwatch.Restart();
-        _timestampStartDraw = GetTimestampInMilliseconds();
-
-        var pending = TakePendingRefresh();
-        _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor, pending?.DirtyRect, pending?.CoordinateSpace ?? CoordinateSpace.World);
-
-        _isDrawingDone.Set();
-        _stopwatch.Stop();
-
-        // If we are interested in performance measurements, we save the new drawing time
-        map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
+        finally
+        {
+            // Always unblock the invalidation loop, even when rendering was skipped.
+            // Without this, a skipped paint event (e.g. view not yet laid out) permanently
+            // stalls the loop because it waits for _isDrawingDone which would never be set.
+            _isDrawingDone.Set();
+        }
     }
+
+    /// <summary>
+    /// Renders the map to the given canvas without applying any pixel density scaling.
+    /// Use this overload from platforms that apply DPI scaling before providing the canvas
+    /// (e.g. Avalonia), or from callers that have already scaled the canvas.
+    /// </summary>
+    public void Render(object canvas) => Render(canvas, 1f);
 
     private static int GetTimestampInMilliseconds()
     {

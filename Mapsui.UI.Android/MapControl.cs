@@ -57,16 +57,7 @@ public partial class MapControl : ViewGroup, IMapControl
     }
 
     private void CanvasOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
-    {
-        if (GetPixelDensity() is not float pixelDensity)
-            return;
-
-        var canvas = args.Surface.Canvas;
-
-        canvas.Scale(pixelDensity, pixelDensity);
-
-        _renderController?.Render(canvas);
-    }
+        => _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
 
     public SkiaRenderMode RenderMode
     {
@@ -116,17 +107,9 @@ public partial class MapControl : ViewGroup, IMapControl
 
     private void CanvasOnPaintSurfaceGL(object? sender, SKPaintGLSurfaceEventArgs args)
     {
-        if (GetPixelDensity() is not float pixelDensity)
-            return;
-
         // Keep the GPU context current so the renderer can create GPU-backed surfaces.
         Map.RenderService.GpuContext = args.Surface.Context;
-
-        var canvas = args.Surface.Canvas;
-
-        canvas.Scale(pixelDensity, pixelDensity);
-
-        _renderController?.Render(canvas);
+        _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
     }
 
     public void MapControl_Touch(object? sender, TouchEventArgs args)
