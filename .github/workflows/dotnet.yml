@@ -125,7 +125,7 @@ jobs:
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '26.4'          
+        xcode-version: '26.3'          
     # .Net 9 update     
     - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
@@ -142,7 +142,7 @@ jobs:
     - name: install Android SDK
       run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --skip dotnetworkloads-10.0.101 --dotnet 9.0.305
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --skip dotnetworkloads-10.0.101 --dotnet 9.0.305
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --skip dotnetworkloads-10.0.101 --skip dotnetworkloads-9.0.305 --dotnet 9.0.305
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf -p:MapsuiSkipUnoMacCatalyst=true       
     # Build        
