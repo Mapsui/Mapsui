@@ -1,7 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
-using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using System.Diagnostics;
 
@@ -87,6 +86,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         {
             // Could this be null before Home is called? If so we should change the logic.
             Logger.Log(LogLevel.Warning, "Refresh can not be called because GRContext is null");
+            _renderController?.Render(args.Surface.Canvas, null); // unblock the invalidation loop
             return;
         }
 
@@ -94,23 +94,13 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         Map.RenderService.GpuContext = _glView.GRContext;
 
         // Called on UI thread
-        PaintSurface(args.Surface.Canvas);
+        _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
     }
 
     private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
     {
         // Called on UI thread
-        PaintSurface(args.Surface.Canvas);
-    }
-
-    private void PaintSurface(SKCanvas canvas)
-    {
-        if (GetPixelDensity() is not float pixelDensity)
-            return;
-
-        canvas.Scale(pixelDensity, pixelDensity);
-
-        _renderController?.Render(canvas);
+        _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
     }
 
     private void MapControlMouseDown(object? sender, MouseEventArgs e)

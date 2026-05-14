@@ -112,26 +112,13 @@ public partial class MapControl : UIView, IMapControl
 
     private void OnPaintSurface(object? sender, SKPaintMetalSurfaceEventArgs args)
     {
-        if (GetPixelDensity() is not float pixelDensity)
-            return;
-
         // Keep the GPU context current so the renderer can create GPU-backed surfaces.
         Map.RenderService.GpuContext = args.Surface.Context;
-
-        var canvas = args.Surface.Canvas;
-        canvas.Scale(pixelDensity, pixelDensity);
-        _renderController?.Render(canvas);
+        _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
     }
 
     private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
-    {
-        if (GetPixelDensity() is not float pixelDensity)
-            return;
-
-        var canvas = args.Surface.Canvas;
-        canvas.Scale(pixelDensity, pixelDensity);
-        _renderController?.Render(canvas);
-    }
+        => _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
 
     public override void TouchesBegan(NSSet touches, UIEvent? e)
     {

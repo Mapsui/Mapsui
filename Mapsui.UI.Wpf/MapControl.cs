@@ -198,14 +198,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationCompleted(object? sender, ManipulationCompletedEventArgs e) => Refresh();
 
     private void SKElementOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
-    {
-        if (GetPixelDensity() is not float pixelDensity)
-            return;
-
-        var canvas = args.Surface.Canvas;
-        canvas.Scale(pixelDensity, pixelDensity);
-        _renderController?.Render(canvas);
-    }
+        => _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
 
     public float? GetPixelDensity()
     {

@@ -61,12 +61,10 @@ partial class SKXamlCanvasRenderControl : RenderControl
 
     private void SKXamlCanvasOnPaintSurface(object? sender, SKPaintSurfaceEventArgs e)
     {
+        var canvas = e.Surface.Canvas;
         if (GetPixelDensity() is { } pixelDensity)
-        {
-            var canvas = e.Surface.Canvas;
             canvas.Scale(pixelDensity, pixelDensity);
-            RenderCallback(canvas);
-        }
+        RenderCallback(canvas);
     }
 
     public override void InvalidateRender() => _skXamlCanvas.Invalidate();
@@ -105,12 +103,10 @@ partial class SKSwapChainPanelRenderControl : RenderControl
         // Keep the GPU context current so the renderer can create GPU-backed surfaces.
         Owner.Map.RenderService.GpuContext = e.Surface.Context;
 
+        var canvas = e.Surface.Canvas;
         if (GetPixelDensity() is { } pixelDensity)
-        {
-            var canvas = e.Surface.Canvas;
             canvas.Scale(pixelDensity, pixelDensity);
-            RenderCallback(canvas);
-        }
+        RenderCallback(canvas);
     }
 
     public override void InvalidateRender() => _swapChainPanel.Invalidate();
