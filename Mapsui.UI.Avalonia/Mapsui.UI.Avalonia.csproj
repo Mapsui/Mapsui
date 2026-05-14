@@ -5,7 +5,8 @@
     <PackageId>Mapsui.Avalonia</PackageId>
     <Description>Avalonia map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) avalonia</PackageTags>
-		<IsPackable>true</IsPackable>
+    <IsPackable>true</IsPackable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -18,6 +19,7 @@
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
