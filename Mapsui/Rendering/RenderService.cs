@@ -115,6 +115,18 @@ public sealed class RenderService : IDisposable
         }
     }
 
+    /// <summary>
+    /// Drains the deferred-disposal queues of all layer drawable caches.
+    /// Call this at the start of each render pass (on the render thread) before drawing begins,
+    /// so that drawables evicted by background threads are disposed on the thread that owns
+    /// the GPU context.
+    /// </summary>
+    public void DrainAllPendingDisposals()
+    {
+        foreach (var cache in _layerDrawableCaches.Values)
+            cache.DrainPendingDisposals();
+    }
+
     public void Dispose()
     {
         DrawableImageCache.Dispose();
