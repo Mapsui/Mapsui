@@ -23,6 +23,7 @@
 
 *.orig
 *.rej
+*.tmp
 
 Mapsui.Rendering.Android/obj/
 
