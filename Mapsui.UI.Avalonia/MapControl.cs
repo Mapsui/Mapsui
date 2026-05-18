@@ -157,6 +157,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
             int delta = Math.Sign(_mouseWheelPos);
             _mouseWheelPos -= delta;
+            // Clamp residual to ±1 to prevent runaway accumulation when Delta.Y > 1 (e.g. browser/WASM wheel events).
+            // Without this, prolonged scrolling in one direction builds up a large residual that makes reversing
+            // direction feel stuck.
+            _mouseWheelPos = Math.Clamp(_mouseWheelPos, -1.0, 1.0);
 
             Map.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToScreenPosition());
         }
