@@ -104,6 +104,7 @@ Before opening a pull request, load the done-checklist skill (`.github/skills/do
 | Skill | When to load |
 |---|---|
 | `.github/skills/done-checklist/SKILL.md` | Before opening any PR — runs the full pre-PR checklist |
+| `.github/skills/create-pr/SKILL.md` | When opening a pull request — covers title prefix conventions, PR type label selection, and the correct tool to use |
 | `.github/skills/regression-tests/SKILL.md` | When working with rendering regression tests: running, updating references, diagnosing failures, or adding experimental-renderer samples |
 | `.github/skills/richtextkit/SKILL.md` | When implementing text rendering features involving word wrap, BiDi/RTL, emoji, font fallback, or multi-style text blocks |
 
