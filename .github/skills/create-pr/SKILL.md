@@ -9,6 +9,29 @@ Use this skill when you are ready to open a pull request. It covers the title fo
 
 ---
 
+## 0 — Verify the branch is ready (do this first)
+
+> **Committing and pushing is always the user's responsibility.** Per the Copilot instructions: *never run `git commit`, `git push`, or any destructive git command unless the user explicitly asks.*
+
+Before calling `mcp_github_create_pull_request`, verify that the expected changes are actually on the remote branch. Run:
+
+```ps
+git log origin/<branch> --oneline -10
+```
+
+and compare with what was implemented in this session. **If the branch on the remote does not contain the expected commits, stop and ask the user to push before continuing.**
+
+### Warning signs that the user may not have pushed yet
+
+- The most recent commit on the remote branch belongs to a completely different topic (e.g., work in this session was a bug fix, but the top commit on the remote is an old refactoring).
+- The user just said something like "I created a new branch" — they may have created it locally without pushing.
+- `git status` shows "Your branch is ahead of 'origin/…' by N commits".
+- The remote branch does not exist at all (`git ls-remote --heads origin <branch>` returns nothing).
+
+When in doubt, ask: *"Have you pushed your changes to the remote branch?"*
+
+---
+
 ## 1 — Tool to use
 
 Always create pull requests via **`mcp_github_create_pull_request`**.  
