@@ -92,12 +92,13 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
                     return;
 
                 _currentSection = _fetchInfo.Section;
-
-                using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewport(_currentSection),
+                var innerViewport = ToViewport(_currentSection);
+                using var bitmapStream = _rasterizer.RenderToBitmapStream(innerViewport,
                     [_sourceLayer], _renderService, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
 
                 _cache.Clear();
-                var rasterFeature = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
+                var bitmapBytes = bitmapStream.ToArray();
+                var rasterFeature = new RasterFeature(new MRaster(bitmapBytes, _currentSection.Extent));
                 _cache.PushRange([rasterFeature]);
                 OnDataChanged(new DataChangedEventArgs(Name));
             }
@@ -142,13 +143,19 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
 
     public FetchJob[] GetFetchJobs(int activeFetchCount, int availableFetchSlots)
     {
+        // Prevent duplicate concurrent fetches for this layer, matching the same guard in Layer.GetFetchJobs.
+        // Without this, DataFetcher.ViewportChangedAsync could start a second task that calls RasterizeAsync
+        // on an empty cache while the first task is still loading data, producing a white image.
+        if (activeFetchCount > 0)
+            return [];
+
         if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
             _fetchInfo = fetchInfo;
 
             if (_sourceLayer is IFetchableSource fetchableSource)
                 return [
-                    new FetchJob(_sourceLayer.Id, async () =>
+                    new FetchJob(Id, async () =>
                     {
                         var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
                         foreach (var fetchJob in fetchJobs)
@@ -159,7 +166,7 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
                     })
                 ];
             else
-                return [new FetchJob(_sourceLayer.Id, RasterizeAsync)];
+                return [new FetchJob(Id, RasterizeAsync)];
         }
         return [];
     }

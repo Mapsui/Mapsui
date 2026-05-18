@@ -1,17 +1,13 @@
 // TestConfiguration runs once before any test in this assembly (NUnit SetUpFixture).
-// It reads config files in priority order:
-//   1. config.local.json in the test binary directory   — per-machine override, git-ignored
-//   2. config.json in the test binary directory         — project-level default (experimentalRenderer: false)
-//   3. config.local.json at the repository root         — per-machine override, git-ignored
-//   4. config.json at the repository root               — repo-wide default
+// It reads config files at the repository root in priority order:
+//   1. config.local.json at the repository root  — per-machine override, git-ignored
+//   2. config.json at the repository root         — repo-wide default (experimentalRenderer: false)
 //
 // The repository root is located by walking up from the test binary directory until
 // a directory containing Mapsui.slnx is found.
 //
 // To switch to the experimental renderer locally:
-//   - Create config.local.json at the repository root with { "experimentalRenderer": true }, or
-//   - Create config.local.json next to the .csproj with { "experimentalRenderer": true }
-//     and rebuild — the file is copied to the output directory automatically.
+//   Create config.local.json at the repository root with { "experimentalRenderer": true }
 
 using Mapsui.Experimental.Rendering.Skia;
 using Mapsui.Rendering.Skia.Tests;
@@ -37,15 +33,10 @@ public class TestConfiguration
         var dir = System.IO.Path.GetDirectoryName(typeof(TestConfiguration).Assembly.Location)
                   ?? System.AppDomain.CurrentDomain.BaseDirectory;
 
-        // Binary-dir configs take priority (allow per-project overrides).
-        var cfg = ReadConfig(System.IO.Path.Combine(dir, "config.local.json"))
-                  ?? ReadConfig(System.IO.Path.Combine(dir, "config.json"));
-        if (cfg != null) return cfg.ExperimentalRenderer;
-
-        // Fall back to the repository-root config.
         var root = FindRepoRoot(dir);
-        if (root != null)
-            cfg = ReadConfig(System.IO.Path.Combine(root, "config.local.json"))
+        if (root == null) return false;
+
+        var cfg = ReadConfig(System.IO.Path.Combine(root, "config.local.json"))
                   ?? ReadConfig(System.IO.Path.Combine(root, "config.json"));
         return cfg?.ExperimentalRenderer == true;
     }

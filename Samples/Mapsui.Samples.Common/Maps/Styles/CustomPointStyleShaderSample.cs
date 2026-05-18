@@ -35,6 +35,7 @@ public class CustomPointStyleShaderSample : ISample
         map.Widgets.Add(new MapInfoWidget(map, [map.Layers.Last()]));
 
         MapRenderer.RegisterPointStyleRenderer("custom-style-shader", MyBasicCustomStyleRenderer);
+        Mapsui.Experimental.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer("custom-style-shader", MyBasicCustomStyleRenderer);
         return map;
     }
 

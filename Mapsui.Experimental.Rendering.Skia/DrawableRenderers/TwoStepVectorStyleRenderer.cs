@@ -23,9 +23,17 @@ namespace Mapsui.Experimental.Rendering.Skia.DrawableRenderers;
 ///   <item><description><see cref="DrawDrawable"/>: Transforms and draws a single pre-created drawable
 ///         (fast, render thread).</description></item>
 /// </list>
+/// Also implements <see cref="ISkiaStyleRenderer"/> as a fallback for cache misses
+/// (e.g. when a <c>ThemeStyle</c> creates a new style instance on every call).
 /// </summary>
-public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer
+public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer, ISkiaStyleRenderer
 {
+    private readonly Mapsui.Experimental.Rendering.Skia.VectorStyleRenderer _fallbackRenderer = new();
+
+    /// <inheritdoc />
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style,
+        Mapsui.Rendering.RenderService renderService, long iteration)
+        => _fallbackRenderer.Draw(canvas, viewport, layer, feature, style, renderService, iteration);
     /// <inheritdoc />
     public IDrawableCache CreateCache() => new DrawableCache();
 
