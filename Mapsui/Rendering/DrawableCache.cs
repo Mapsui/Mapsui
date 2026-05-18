@@ -13,6 +13,7 @@ namespace Mapsui.Rendering;
 public sealed class DrawableCache : IDrawableCache
 {
     private readonly ConcurrentDictionary<DrawableCacheKey, CacheEntry> _cache = new();
+    private readonly ConcurrentQueue<IDrawable> _pendingDisposal = new();
     private readonly HashSet<DrawableCacheKey> _inProgress = [];
     private readonly object _inProgressLock = new();
 
@@ -54,12 +55,19 @@ public sealed class DrawableCache : IDrawableCache
             if (_cache.TryGetValue(key, out var entry) && entry.Iteration != currentIteration)
             {
                 if (_cache.TryRemove(key, out var removed))
-                {
-#pragma warning disable IDISP007 // Don't dispose injected - cache owns these drawables
-                    removed.Drawable.Dispose();
-#pragma warning restore IDISP007
-                }
+                    _pendingDisposal.Enqueue(removed.Drawable);
             }
+        }
+    }
+
+    /// <inheritdoc />
+    public void DrainPendingDisposals()
+    {
+        while (_pendingDisposal.TryDequeue(out var drawable))
+        {
+#pragma warning disable IDISP007 // Don't dispose injected - cache owns these drawables
+            drawable.Dispose();
+#pragma warning restore IDISP007
         }
     }
 
@@ -104,6 +112,7 @@ public sealed class DrawableCache : IDrawableCache
 
     public void Dispose()
     {
+        DrainPendingDisposals();
         Clear();
     }
 

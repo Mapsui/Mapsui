@@ -422,6 +422,11 @@ public sealed class MapRenderer : IMapRenderer
     {
         try
         {
+            // Dispose drawables evicted by background threads during previous render passes.
+            // Must run on the render thread so GPU-backed SKObjects are released on the thread
+            // that owns the GRContext.
+            renderService.DrainAllPendingDisposals();
+
             // Ensure drawables are up to date for all two-step layers. This covers:
             // 1. Layers that already have features but missed the DataChanged event
             //    (e.g. MemoryLayer features set before the layer was added to the map).

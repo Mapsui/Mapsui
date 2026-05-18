@@ -15,6 +15,7 @@ public sealed class TileDrawableCache : IDrawableCache
     private const int _minimumTilesToKeep = 64;
 
     private readonly ConcurrentDictionary<DrawableCacheKey, CacheEntry> _cache = new();
+    private readonly ConcurrentQueue<IDrawable> _pendingDisposal = new();
     private readonly HashSet<DrawableCacheKey> _inProgress = [];
     private readonly object _inProgressLock = new();
 
@@ -99,7 +100,19 @@ public sealed class TileDrawableCache : IDrawableCache
 
     public void Dispose()
     {
+        DrainPendingDisposals();
         Clear();
+    }
+
+    /// <inheritdoc />
+    public void DrainPendingDisposals()
+    {
+        while (_pendingDisposal.TryDequeue(out var drawable))
+        {
+#pragma warning disable IDISP007 // Don't dispose injected - cache owns these drawables
+            drawable.Dispose();
+#pragma warning restore IDISP007
+        }
     }
 
     private void RemoveOldest(int numberToRemove)
@@ -115,9 +128,7 @@ public sealed class TileDrawableCache : IDrawableCache
         {
             if (counter >= numberToRemove) break;
             if (!_cache.TryRemove(key, out var entry)) continue;
-#pragma warning disable IDISP007 // Don't dispose injected - cache owns these drawables
-            entry.Drawable.Dispose();
-#pragma warning restore IDISP007
+            _pendingDisposal.Enqueue(entry.Drawable);
             counter++;
         }
     }

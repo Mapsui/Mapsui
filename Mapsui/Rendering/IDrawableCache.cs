@@ -60,4 +60,11 @@ public interface IDrawableCache : IDisposable
     /// </summary>
     /// <param name="key">The composite key to release.</param>
     void ReleaseReservation(DrawableCacheKey key);
+
+    /// <summary>
+    /// Disposes drawables that were evicted by a background thread but deferred so that
+    /// the render thread (which may still be drawing them) can safely call Dispose.
+    /// Call this at the start of each render pass, before drawing begins.
+    /// </summary>
+    void DrainPendingDisposals();
 }
