@@ -19,15 +19,18 @@ changelog:
     - title: "⚡Performance"
       labels:
         - "PR type:⚡Performance"
-    - title: "🛠️ Maintenance"
+    - title: "🛠️ Chore"
       labels:
-        - "PR type: 🛠️ Maintenance"
+        - "PR type: 🛠️ Chore"
     - title: "⚙️ Infrastructure"
       labels:
         - "PR type: ⚙️ Infrastructure"
     - title: "🧪 Samples"
       labels:
         - "PR type: 🧪 Sample"
+    - title: "✅ Tests"
+      labels:
+        - "PR type: ✅ Tests"
     - title: "📝 Documentation"
       labels:
         - "PR type: 📝 Documentation"
