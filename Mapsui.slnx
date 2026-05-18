@@ -305,10 +305,6 @@
       <BuildType Solution="Ad-Hoc|*" Project="Debug" />
       <BuildType Solution="AppStore|*" Project="Debug" />
     </Project>
-    <Project Path="Tests/Mapsui.Experimental.VectorTiles.Tests/Mapsui.Experimental.VectorTiles.Tests.csproj">
-      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
-      <BuildType Solution="AppStore|*" Project="Debug" />
-    </Project>
     <Project Path="Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj">
       <BuildType Solution="Ad-Hoc|*" Project="Debug" />
       <BuildType Solution="AppStore|*" Project="Debug" />
