@@ -1,0 +1,124 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Mapsui.Tools.ImageComparison.ViewModels"
+        x:Class="Mapsui.Tools.ImageComparison.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="Regression Image Comparison — Mapsui"
+        Width="1400" Height="900"
+        Background="#1E1E1E">
+
+    <DockPanel>
+
+        <!-- Top bar -->
+        <Border DockPanel.Dock="Top" Background="#2D2D2D" Padding="10,6">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock VerticalAlignment="Center" Text="Root:" Foreground="#AAAAAA" FontSize="12" />
+                <TextBlock VerticalAlignment="Center" Text="{Binding RootPath}" Foreground="White" FontSize="12" />
+                <Button Content="Change…" Command="{Binding PickRootCommand}" Padding="8,3" />
+                <Button Content="Refresh" Command="{Binding RefreshCommand}" Padding="8,3" />
+            </StackPanel>
+        </Border>
+
+        <!-- Bottom status bar -->
+        <Border DockPanel.Dock="Bottom" Background="#2D2D2D" Padding="10,4">
+            <TextBlock Text="{Binding StatusMessage}" Foreground="#CCCCCC" FontSize="12" />
+        </Border>
+
+        <!-- Toolbar: view-mode selector and diff colour picker -->
+        <Border DockPanel.Dock="Bottom" Background="#252526" Padding="10,6"
+                BorderBrush="#3C3C3C" BorderThickness="0,1,0,0">
+            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                <TextBlock Text="Right panel:" VerticalAlignment="Center"
+                           Foreground="#AAAAAA" FontSize="12" />
+                <ComboBox SelectedIndex="{Binding SelectedDiffMode}" Width="200" VerticalAlignment="Center">
+                    <ComboBoxItem>Generated</ComboBoxItem>
+                    <ComboBoxItem>Generated + Diff</ComboBoxItem>
+                    <ComboBoxItem>Diff Only</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Text="Diff colour:" VerticalAlignment="Center"
+                           Foreground="#AAAAAA" FontSize="12" Margin="12,0,0,0" />
+                <ComboBox ItemsSource="{Binding DiffColorPalette}"
+                          SelectedItem="{Binding SelectedDiffColorOption}"
+                          Width="120" VerticalAlignment="Center">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <Border Width="14" Height="14" Background="{Binding Brush}"
+                                        CornerRadius="2" VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </Border>
+
+        <!-- Left panel: thumbnail filmstrip -->
+        <Border DockPanel.Dock="Left" Width="170"
+                Background="#252526"
+                BorderBrush="#3C3C3C" BorderThickness="0,0,1,0">
+            <DockPanel>
+                <Border DockPanel.Dock="Top" Background="#2D2D2D" Padding="8,4">
+                    <TextBlock Text="Test Images" Foreground="#AAAAAA" FontSize="11" FontWeight="SemiBold" />
+                </Border>
+                <ListBox ItemsSource="{Binding TestEntries}"
+                         SelectedItem="{Binding SelectedEntry}"
+                         Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Padding" Value="4" />
+                        </Style>
+                    </ListBox.Styles>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="vm:TestEntryViewModel">
+                            <StackPanel Spacing="3">
+                                <Border Background="#1A1A1A" Height="90" ClipToBounds="True">
+                                    <Image Source="{Binding Thumbnail}" Stretch="Uniform" />
+                                </Border>
+                                <TextBlock Text="{Binding Name}"
+                                           TextWrapping="Wrap" FontSize="10"
+                                           Foreground="#CCCCCC" MaxLines="2" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
+
+        <!-- Main comparison area: Original | Generated (with optional diff overlay) -->
+        <Grid ColumnDefinitions="*,*">
+
+            <!-- Original -->
+            <DockPanel Grid.Column="0" Margin="0,0,1,0">
+                <Border DockPanel.Dock="Top" Background="#2D2D2D" Padding="4,4">
+                    <TextBlock Text="Original" HorizontalAlignment="Center"
+                               Foreground="#CCCCCC" FontSize="12" FontWeight="SemiBold" />
+                </Border>
+                <Image Source="{Binding OriginalBitmap}" Stretch="Uniform" />
+            </DockPanel>
+
+            <!-- Generated with overlay -->
+            <DockPanel Grid.Column="1">
+                <Border DockPanel.Dock="Top" Background="#2D2D2D" Padding="4,4">
+                    <TextBlock Text="Generated" HorizontalAlignment="Center"
+                               Foreground="#CCCCCC" FontSize="12" FontWeight="SemiBold" />
+                </Border>
+                <Panel>
+                    <!-- Generated image — hidden in DiffOnly mode -->
+                    <Image IsVisible="{Binding ShowGeneratedImage}"
+                           Source="{Binding GeneratedBitmap}" Stretch="Uniform" />
+                    <!-- Diff overlay — hidden in GeneratedOnly mode -->
+                    <Image IsVisible="{Binding ShowDiffOverlay}"
+                           Source="{Binding DiffOverlayBitmap}" Stretch="Uniform" />
+                    <!-- Placeholder when no generated image exists yet -->
+                    <TextBlock IsVisible="{Binding !HasGenerated}"
+                               Text="Run tests to see generated image"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Foreground="#555555" FontSize="13" />
+                </Panel>
+            </DockPanel>
+
+        </Grid>
+    </DockPanel>
+</Window>
