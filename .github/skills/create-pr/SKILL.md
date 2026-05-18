@@ -34,8 +34,15 @@ When in doubt, ask: *"Have you pushed your changes to the remote branch?"*
 
 ## 1 — Tool to use
 
-Always create pull requests via **`mcp_github_create_pull_request`**.  
+Always create pull requests via **`github-pull-request_create_pull_request`** (the VS Code GitHub Pull Requests extension tool).  
 Do **not** use `gh pr create` or any other CLI command.
+
+> `mcp_github_create_pull_request` (the GitHub MCP server tool) may fail with "Permission Denied" depending on the token scope. If it does, fall back to `github-pull-request_create_pull_request` and tell the user which tool was actually used.
+
+After creating the PR, add the PR type label via the `gh` CLI:
+```ps
+gh pr edit <number> --repo Mapsui/Mapsui --add-label "<label>"
+```
 
 ---
 
