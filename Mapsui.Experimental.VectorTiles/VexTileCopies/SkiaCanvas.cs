@@ -269,7 +269,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
                 return;
             geometry = _clipBufferText;
         }
-        string text = TransformText(style.Text, style);
+        // DrawTextOnPath is single-line: the path-length guard below skips labels that
+        // are too long, so word-wrapping is unnecessary here. Only apply case transforms.
+        string text = TransformText(style.Text, style, wordWrap: false);
         if (CheckPathSqueezing(geometry))
             return;
 
@@ -435,7 +437,7 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         };
     }
 
-    private string TransformText(string text, Brush style)
+    internal string TransformText(string text, Brush style, bool wordWrap = true)
     {
         if (text.Length == 0)
             return string.Empty;
@@ -445,8 +447,12 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         else if (style.Paint.TextTransform == TextTransform.Lowercase)
             text = text.ToLower();
 
-        using var font = CreateTextFont(style);
-        text = BreakText(text, font, style, _breakPaint);
+        if (wordWrap)
+        {
+            using var font = CreateTextFont(style);
+            text = BreakText(text, font, style, _breakPaint);
+        }
+
         return text;
     }
 
