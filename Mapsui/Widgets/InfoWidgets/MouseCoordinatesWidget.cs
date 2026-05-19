@@ -19,7 +19,9 @@ public class MouseCoordinatesWidget : TextBoxWidget
     public override void OnPointerMoved(WidgetEventArgs e)
     {
         var worldPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
-        // update the Mouse position
         Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
+        // Trigger a redraw so the updated coordinates are visible immediately on mouse move.
+        // Without this the display only refreshes when something else (e.g. a pan or zoom) causes a repaint.
+        e.Map.RefreshGraphics();
     }
 }
