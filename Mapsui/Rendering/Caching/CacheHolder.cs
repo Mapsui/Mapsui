@@ -16,8 +16,8 @@ public sealed class CacheHolder<T> : ICacheHolder, IDisposable
 
     public void Dispose()
     {
-        _instance.DisposeIfDisposable();
-        _instance = default;
+        var instance = Interlocked.Exchange(ref _instance, null);
+        instance.DisposeIfDisposable();
     }
 
     public CacheTracker<TResult>? Get<TResult>()
@@ -28,7 +28,7 @@ public sealed class CacheHolder<T> : ICacheHolder, IDisposable
             var temp = Interlocked.Exchange(ref _instance, null);
             if (temp != null)
             {
-                return new CacheTracker<TResult>((TResult)temp);
+                return new CacheTracker<TResult>(this, (TResult)temp);
             }
         }
 
