@@ -52,9 +52,9 @@ public static class VisibleFeatureIterator
         var features = layer.SortFeatures(layer.GetFeatures(extent, viewport.Resolution)).ToList();
 
         // Part 1. Styles on the layer
-        var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);
+        var layerStylesList = layer.Style.GetStylesToApply(viewport.Resolution).ToList();
 
-        foreach (var layerStyle in layerStyles)
+        foreach (var layerStyle in layerStylesList)
         {
             foreach (var feature in features)
             {
@@ -66,8 +66,7 @@ public static class VisibleFeatureIterator
                 // }
                 if (layerStyle is IThemeStyle themeStyle)
                 {
-                    var stylesFromThemeStyle = themeStyle.GetStyle(feature, viewport).GetStylesToApply(viewport.Resolution);
-                    foreach (var styleFromThemeStyle in stylesFromThemeStyle)
+                    foreach (var styleFromThemeStyle in themeStyle.GetStyle(feature, viewport).GetStylesToApply(viewport.Resolution))
                     {
                         callback(viewport, layer, styleFromThemeStyle, feature, (float)layer.Opacity, iteration);
                     }

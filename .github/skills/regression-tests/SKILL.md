@@ -40,6 +40,10 @@ Image paths:
 
 ## Updating reference images after intentional changes
 
+> **Only run this script when you have made a deliberate functional rendering change** (e.g. fixing a visual bug, changing a style default, adding a new rendering feature).
+> Do **not** run it to "fix" failures caused by renderer differences — if the experimental renderer produces different output for a standard sample, that is a bug to be fixed in the renderer, not papered over with new reference images.
+> There is only **one** set of reference images. The experimental renderer is expected to produce pixel-identical output to the standard renderer for all samples that are not in `ExperimentalOnlySamples`.
+
 ```powershell
 .\Scripts\CopyGeneratedImagesOverOriginalImages.ps1
 ```
@@ -56,20 +60,18 @@ Copy-Item "Tests\Mapsui.Rendering.Skia.Tests\bin\Debug\net9.0\Resources\Images\G
 
 ## Standard vs. experimental renderer
 
-The test suite can run with **either** renderer. The active renderer is determined by config files, searched in priority order:
+The test suite can run with **either** renderer. The active renderer is determined by config files at the **repository root**, searched in priority order:
 
-1. `config.local.json` in the test binary output dir (created by copying the project-level file)
-2. `config.json` in the test binary output dir (committed — default `experimentalRenderer: false`)
-3. `config.local.json` at the repository root (git-ignored, per-machine)
-4. `config.json` at the repository root
+1. `config.local.json` at the repository root (git-ignored, per-machine override)
+2. `config.json` at the repository root (committed — default `experimentalRenderer: false`)
 
 **CI always runs with the standard renderer** (`experimentalRenderer: false`). Do not assume CI uses the experimental renderer.
 
-To run locally with the experimental renderer, create `Tests/Mapsui.Rendering.Skia.Tests/config.local.json`:
+To run locally with the experimental renderer, create `config.local.json` at the **repository root**:
 ```json
 { "experimentalRenderer": true }
 ```
-This file is git-ignored and automatically copied to the binary output dir at build time.
+This file is git-ignored.
 
 ---
 
@@ -130,7 +132,7 @@ The project `.csproj` must have a matching `<EmbeddedResource>` entry. Mismatch 
 1. **Check which renderer is active**: read `Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/config.local.json` and `config.json`.
 2. **Visually compare** the generated image against the reference image — the failure message prints both paths.
 3. **Font issues**: if text is boxes, the typeface is null. Check: (a) TTF magic bytes, (b) `FetchAllFontDataAsync` was awaited, (c) `Font.FontSource` URI matches the embedded resource name, (d) renderer is experimental.
-4. **Pre-existing failures**: when running with the experimental renderer, some non-related samples may fail because their reference images were generated with the standard renderer. Only fix failures in samples you changed.
+4. **Experimental renderer failures**: the experimental renderer must produce pixel-identical output to the standard renderer for all samples **not** in `ExperimentalOnlySamples`. If a sample fails only with the experimental renderer, that is a bug in the experimental renderer — investigate and fix it. Common causes: a custom style renderer registered only on `Mapsui.Rendering.Skia.MapRenderer` but not on `Mapsui.Experimental.Rendering.Skia.MapRenderer` (fix: add the registration call for both); or a genuine rendering difference in a two-step drawable renderer.
 
 ---
 
