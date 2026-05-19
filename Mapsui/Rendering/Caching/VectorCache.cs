@@ -5,7 +5,7 @@ namespace Mapsui.Rendering.Caching;
 
 public sealed class VectorCache(RenderService renderService, int capacity) : IDisposable
 {
-    private readonly LruCache<object, ICacheHolder> _cache = new(Math.Min(capacity, 1));
+    private readonly LruCache<object, ICacheHolder> _cache = new(Math.Max(capacity, 1));
 
     public bool Enabled { get; set; } = true;
 

@@ -28,7 +28,7 @@ public sealed class CacheHolder<T> : ICacheHolder, IDisposable
             var temp = Interlocked.Exchange(ref _instance, null);
             if (temp != null)
             {
-                return new CacheTracker<TResult>((TResult)temp);
+                return new CacheTracker<TResult>(this, (TResult)temp);
             }
         }
 
