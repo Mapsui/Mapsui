@@ -22,6 +22,7 @@ nav:
   - 'faq.md'
   - 'nuget-of-latest-build.md'
   - 'mapsui-components.md'
+  - 'working-with-layers.md'
   - 'async-fetching.md'
   - 'static-image-generation.md'
   - 'resolution.md'
