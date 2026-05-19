@@ -334,6 +334,12 @@
       <BuildType Solution="AppStore|*" Project="Debug" />
     </Project>
   </Folder>
+  <Folder Name="/Tools/">
+    <Project Path="Tools/Mapsui.Tools.ImageComparison/Mapsui.Tools.ImageComparison.csproj">
+      <BuildType Solution="Ad-Hoc|*" Project="Debug" />
+      <BuildType Solution="AppStore|*" Project="Debug" />
+    </Project>
+  </Folder>
   <Project Path="Mapsui.ArcGIS/Mapsui.ArcGIS.csproj">
     <BuildType Solution="Ad-Hoc|*" Project="Debug" />
     <BuildType Solution="AppStore|*" Project="Debug" />

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Desktop" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Skia" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.Fonts.Inter" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="ReactiveUI.Avalonia" VersionOverride="12.0.1" />
+    <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="HarfBuzzSharp" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
+  </ItemGroup>
+</Project>
