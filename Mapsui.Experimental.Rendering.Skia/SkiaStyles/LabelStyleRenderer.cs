@@ -268,7 +268,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (style.Halo != null)
         {
             using var paintHaloHolder = renderService.VectorCache.GetOrCreate((style, style.Halo), CreateHaloPaintHolder);
-            using var paintHalo = paintHaloHolder.Instance;
+            var paintHalo = paintHaloHolder.Instance;
 
             if (lines != null)
             {
