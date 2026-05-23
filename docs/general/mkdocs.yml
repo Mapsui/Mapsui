@@ -46,7 +46,9 @@ nav:
     - 'v6.0-upgrade-guide.md'
 
   - Contributing to Mapsui:
-    - 'contributors-guidelines.md'
+    - 'open-source-contributor-guidelines.md'
+    - 'code-quality-standards.md'
+    - 'mapsui-architecture-principles.md'
     - 'working-with-samples.md'
     - 'rendering-tests.md'
     - 'documentation.md'
