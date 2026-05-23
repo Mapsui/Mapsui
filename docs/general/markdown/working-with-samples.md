@@ -1,3 +1,8 @@
+---
+title: Working with Samples
+description: How the Mapsui sample system works: finding samples, running them locally, and adding new sample classes.
+---
+
 # Working with Samples
 
 This page explains how the Mapsui sample system works, both for users who want to find a sample and for contributors who want to add one.

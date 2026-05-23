@@ -1,3 +1,8 @@
+---
+title: Mapsui Architecture Principles
+description: Mapsui-specific architectural decisions: lon/lat ordering, separating rendering from drawing, coordinate system flexibility, and the RenderService pattern for disposable Skia resources.
+---
+
 # Mapsui Architecture Principles
 
 ## Ordering of lon/lat

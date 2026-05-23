@@ -1,3 +1,8 @@
+---
+title: Experimental Renderer
+description: The experimental Skia renderer rewrite featuring partial rendering and other new capabilities, and how to enable it.
+---
+
 # Experimental Renderer
 
 `Mapsui.Experimental.Rendering.Skia` is a rewrite of the Skia-based renderer. See [experimental-packages.md](experimental-packages.md) for background on the experimental packages approach.

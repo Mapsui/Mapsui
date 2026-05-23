@@ -1,3 +1,8 @@
+---
+title: Open Source Contributor Guidelines
+description: Guidelines for external contributors to Mapsui: signing the CLA, submitting issues first, creating focused PRs, and writing good PR titles.
+---
+
 # Open Source Contributor Guidelines
 
 ## Sign the CLA

@@ -1,3 +1,8 @@
+---
+title: Working with Layers
+description: How the Mapsui layer system works, including LayerCollection, layer types, and how layers are rendered in order.
+---
+
 # Working with Layers
 
 A Mapsui map is built up out of layers. The map holds a `LayerCollection` (`map.Layers`) and the renderer draws those layers one by one. Understanding how the layer list works is the key to controlling what your map looks like.

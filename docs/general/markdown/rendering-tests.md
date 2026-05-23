@@ -1,3 +1,8 @@
+---
+title: Rendering Tests
+description: How Mapsui's pixel-comparison rendering regression tests work, how to run them, and how to update reference images after intentional rendering changes.
+---
+
 # Rendering Tests
 
 Mapsui has rendering tests where images are generated and compared to reference images that are stored as file in the repository. They are regression tests but executed by our unit test framework. The images are compared pixel by pixel. If there are too many differences the test will fail. 

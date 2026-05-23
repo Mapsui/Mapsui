@@ -1,3 +1,8 @@
+---
+title: Documentation
+description: How the Mapsui documentation is structured, built with MkDocs and DocFX, and automatically published to mapsui.com via GitHub Actions.
+---
+
 # Documentation
 
 ## Documentation setup

@@ -1,3 +1,8 @@
+---
+title: NuGet of Latest Build
+description: How to download and use NuGet packages from Mapsui's latest CI build artifacts on GitHub Actions.
+---
+
 # NuGet of Latest Build
 
 Mapsui's 'Build' GitHub action creates nugets and stores them as artifacts. You can use them in your local build.

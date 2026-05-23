@@ -1,3 +1,8 @@
+---
+title: Code Quality Standards
+description: Generic coding principles for any repository covering architecture, code style, comments, naming conventions, and the quality bar. Suitable as agent input.
+---
+
 # Code Quality Standards
 
 ## Keep core code simple

@@ -1,3 +1,8 @@
+---
+title: Projects That Use Mapsui
+description: A showcase of real-world applications and products built with Mapsui.
+---
+
 # Projects That Use Mapsui
 
 ### Breath Companion

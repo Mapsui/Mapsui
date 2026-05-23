@@ -1,3 +1,8 @@
+---
+title: Performance Widget
+description: How to enable and use the built-in performance widget that displays draw timing metrics overlaid on the map.
+---
+
 # PerformanceWidget
 
 ## Summary

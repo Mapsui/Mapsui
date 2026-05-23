@@ -1,3 +1,8 @@
+---
+title: Frequently Asked Questions
+description: Quick answers to common Mapsui questions and issues, such as default styles, tile layer problems, and coordinate handling.
+---
+
 # Frequently Asked Questions
 
 ### How can I get rid of the white dots? (or black lines)

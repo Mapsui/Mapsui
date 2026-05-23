@@ -1,3 +1,8 @@
+---
+title: Resolution
+description: What resolution means in Mapsui, how it relates to the Viewport and coordinate system, and how it maps to zoom levels.
+---
+
 # Resolution
 
 In Mapsui the resolution is a value that indicates to what degree the map is zoomed in or zoomed out. A large value means you are zoomed out (see the whole world), a small value means you are zoomed in (looking at the details). The resolution of a viewport is its size in map coordinates (of the coordinate system used) divided by its size in pixels. If you use the OpenStreetMap background layer (or another layer in that coordinates system) the resolution is meters / pixel at the equator.

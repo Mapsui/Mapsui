@@ -1,3 +1,8 @@
+---
+title: Custom Style Renderers
+description: How to create a custom IStyle and associate it with a custom renderer for full freedom in how features are visually rendered.
+---
+
 # Custom Style Renderers
 
 ## Summary

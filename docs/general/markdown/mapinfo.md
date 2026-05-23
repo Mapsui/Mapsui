@@ -1,3 +1,8 @@
+---
+title: MapInfo
+description: How to use MapInfo to query which features and layers are visible at a specific map location, including changes from v4 to v5.
+---
+
 # MapInfo
 
 The `MapInfo` class contains information about what is visible on a specific location on the map. You can get `MapInfo` by calling the `GetMapInfo` function on the EventArgs of manipulation event handlers (like `Info`, `Tapped`, `PointerPressed`, `PointerReleased`, `PointerMoved`). GetMapInfo takes a parameter to specify which layers to include in the MapInfo. The MapInfo class always contains the ScreenPosition and WorldPosition, but these are also directly available on all EventArgs.

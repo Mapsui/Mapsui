@@ -1,3 +1,8 @@
+---
+title: Custom Fonts
+description: How to load custom fonts in the experimental renderer using the FontSource URI property on the Font class.
+---
+
 # Custom Fonts
 
 In the experimental renderer, the `FontSource` property on the `Font` class lets you load a custom font from an external source. This works the same way as `ImageSource` for images: assign a URI string to `Font.FontSource` and Mapsui fetches and caches the font bytes automatically.

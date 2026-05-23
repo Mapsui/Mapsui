@@ -58,6 +58,7 @@ nav:
 repo_url: https://github.com/Mapsui/Mapsui/
 edit_uri: blob/master/docs/general/markdown
 plugins:
+  - meta
   - glightbox
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'  

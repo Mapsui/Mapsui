@@ -1,3 +1,8 @@
+---
+title: Generating Static Images
+description: How to generate static map images programmatically without a UI, including how to handle async data loading before rendering.
+---
+
 # Generating Static Images
 
 A common use case for Mapsui is generating static map images programmatically — for example, to embed a map in a PDF report, attach a map thumbnail to an email, or produce a batch of map exports without running a UI application.

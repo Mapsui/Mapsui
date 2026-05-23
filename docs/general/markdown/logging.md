@@ -1,3 +1,8 @@
+---
+title: Logging
+description: How to hook into Mapsui's static logging system to receive errors and warnings in your own logger.
+---
+
 # Logging
 Sooner or later there comes a time when you are struggling with a bug. You can save yourself some time by writing the Mapsui log events to your own log from the start of your project. In Mapsui, errors and warnings are logged to a static class which has an event handler you can listen to. You can paste the code below anywhere in your app to start receiving log messages.
 

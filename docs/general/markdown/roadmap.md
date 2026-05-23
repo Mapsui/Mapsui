@@ -1,3 +1,8 @@
+---
+title: Roadmap
+description: Mapsui's development roadmap: completed milestones, the current stable version, and planned future work.
+---
+
 # Roadmap 
 *Updated January 2024*
 

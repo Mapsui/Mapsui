@@ -1,3 +1,8 @@
+---
+title: Releasing
+description: Step-by-step release procedure for Mapsui maintainers, covering versioning, NuGet publishing, and post-release tasks.
+---
+
 # Releasing
 
 This page describes the release procedure for Mapsui maintainers.
