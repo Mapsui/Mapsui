@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using Mapsui.Extensions;
+using Mapsui.Samples.Common.Maps.Basic;
+using Mapsui.UI;
+using Mapsui.UI.Maui;
+
+namespace Mapsui.Samples.Maui;
+
+public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
+{
+    private readonly PeriodicTimer _timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+    private Position _newLocation;
+    private UI.Maui.MapView? _mapView;
+
+    public string Name => "Animated MyLocation Sample";
+
+    public string Category => "MapView";
+
+    public void Setup(IMapControl mapControl)
+    {
+        // 54°54′24″N 25°19′12″E Center of Europe
+        _newLocation = new Position(54.5424, 25.1912);
+
+        _mapView = (UI.Maui.MapView)mapControl;
+        var map = OpenStreetMapSample.CreateMap();
+        map.Navigator.CenterOnAndZoomTo(_newLocation.ToMapsui(), map.Navigator.Resolutions[14]);
+        mapControl.Map = map;
+
+        _mapView.MyLocationLayer.IsMoving = true;
+        _mapView.MyLocationEnabled = true;
+        _mapView.MyLocationFollow = true;
+
+        _mapView.MyLocationLayer.UpdateMyLocation(_newLocation);
+        _mapView.Map.Navigator.CenterOn(_newLocation.ToMapsui());
+
+        Catch.TaskRun(RunTimerAsync);
+    }
+
+    public bool UpdateLocation => false;
+    public bool OnTap(object? s, MapClickedEventArgs e)
+    {
+        return true;
+    }
+
+    private async Task RunTimerAsync()
+    {
+        while (true)
+        {
+            await _timer.WaitForNextTickAsync();
+
+            _newLocation = new(_newLocation.Latitude + 0.00005, _newLocation.Longitude + 0.00005);
+
+            _mapView?.MyLocationLayer.UpdateMyLocation(_newLocation, true);
+            _mapView?.MyLocationLayer.UpdateMyDirection(_mapView.MyLocationLayer.Direction + 10, 0, true);
+            _mapView?.MyLocationLayer.UpdateMyViewDirection(_mapView.MyLocationLayer.ViewingDirection + 10, 0, true);
+        }
+    }
+
+    public void Dispose()
+    {
+        _timer.Dispose();
+    }
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
