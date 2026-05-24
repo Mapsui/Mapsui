@@ -1,3 +1,8 @@
+---
+title: Documentation of v4
+description: Links to the archived general documentation, API documentation, and online samples for Mapsui v4.
+---
+
 # Documentation of v4
 
 If you are looking for documentation for **Mapsui v4**, you can find it here:

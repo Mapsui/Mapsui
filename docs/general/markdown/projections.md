@@ -1,3 +1,8 @@
+---
+title: Projections
+description: How coordinate system projections work in Mapsui, how to configure Map.CRS and DataSource.CRS, and background on geospatial transformations.
+---
+
 # Projections
 
 A geospatial projection involves converting coordinates from one coordinate system to another. If all your data is within a single coordinate system, projection is unnecessary. In the context of Mapsui, *projection* refers specifically to geospatial transformations, not to the conversion of spatial coordinates to pixel positions on a screen, even though both can be considered transformations.

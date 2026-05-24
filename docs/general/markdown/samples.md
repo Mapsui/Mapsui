@@ -1,3 +1,8 @@
+---
+title: Samples
+description: How to find, run, and understand the Mapsui sample projects, including the live Blazor demo and how to locate sample source code.
+---
+
 # Samples
 
 After going through the quickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). Each sample has an accompanying 'source code' tab you can use to build your own version. 

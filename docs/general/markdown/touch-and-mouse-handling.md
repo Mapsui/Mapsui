@@ -1,3 +1,8 @@
+---
+title: Touch and Mouse Handling
+description: How touch and mouse input is handled in Mapsui v5 across UI frameworks, including shared event types and widget interaction.
+---
+
 # Touch and mouse handling
 
 In Mapsui v5 most of the touch and mouse handling code is now shared over UI frameworks. There are many differences between the frameworks so we need some non-shared code but we try to convert it early to shared methods and components.

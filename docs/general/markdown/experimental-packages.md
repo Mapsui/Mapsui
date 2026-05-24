@@ -1,3 +1,8 @@
+---
+title: Experimental Packages
+description: What Mapsui's experimental NuGet packages are, why they exist, and how to use them alongside the stable packages.
+---
+
 # Experimental Packages
 
 With the release of Mapsui v5, we will introduce experimental NuGet packages. These packages will contain new functionality that is compatible with the v5 stable packages. These experimental packages could contain breaking changes on patch releases and will have more bugs.

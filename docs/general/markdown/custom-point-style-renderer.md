@@ -1,3 +1,8 @@
+---
+title: Custom Point Style Renderer
+description: How to implement a custom renderer for individual point features, letting you draw symbols at (0,0) while Mapsui handles positioning and rotation.
+---
+
 # Custom Point Style Renderer
 
 Renders individual point features with your own drawing code. The framework handles positioning, scaling, and rotation — you draw at (0, 0) and the symbol appears at the correct map location.

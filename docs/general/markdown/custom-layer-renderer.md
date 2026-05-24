@@ -1,3 +1,8 @@
+---
+title: Custom Layer Renderer
+description: How to implement a custom layer renderer that gives you full control over how an entire layer is drawn onto the canvas.
+---
+
 # Custom Layer Renderer
 
 Gives you complete control over how an entire layer is drawn. You receive the canvas, viewport, and layer — draw whatever you want. All coordinate transforms are your responsibility.

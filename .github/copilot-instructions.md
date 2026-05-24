@@ -113,6 +113,20 @@ Before opening a pull request, load the done-checklist skill (`.github/skills/do
 - Keep commit messages and PR descriptions concise and informative (what/why/impact).
 - AI-generated design documents (architecture analyses, stage plans, etc.) live in [docs/ai-generated/](../docs/ai-generated/). Add new ones there. This includes design notes, proposals, working documents, and any file generated during a chat session for reference. When Copilot produces a document that is not user-facing documentation or source code — such as a design analysis, a proposal, an upgrade plan, or a discussion summary — it must be placed in `docs/ai-generated/` rather than in the project root or any other location.
 
+### Finding the right documentation file
+
+Every Markdown file under `docs/general/markdown/` has a YAML front matter block at the top with a `title` and a `description` field. To discover what is available and where, read the front matter of all files in that folder. The `description` field is a one-sentence summary of the page's content — use it to decide which file to read in full or to link to.
+
+Example front matter:
+```yaml
+---
+title: Code Quality Standards
+description: Generic coding principles for any repository covering architecture, code style, comments, naming conventions, and the quality bar.
+---
+```
+
+When adding a new documentation file, always include this front matter block with a concise `description`.
+
 ## Pull requests
 - Keep PRs small and focused; link to any related issues.
 - Include before/after context when changing behavior or performance.
@@ -124,7 +138,11 @@ Before opening a pull request, load the done-checklist skill (`.github/skills/do
 
 ## Contributor guidelines summary
 
-Full guidelines: [docs/general/markdown/contributors-guidelines.md](../docs/general/markdown/contributors-guidelines.md)
+The contributor guidelines are split into three focused documents:
+
+- [Code Quality Standards](../docs/general/markdown/code-quality-standards.md) — generic coding principles (architecture, style, comments, quality bar)
+- [Mapsui Architecture Principles](../docs/general/markdown/mapsui-architecture-principles.md) — Mapsui-specific decisions (lon/lat, rendering loop, coordinate systems, RenderService)
+- [Open Source Contributor Guidelines](../docs/general/markdown/open-source-contributor-guidelines.md) — PR workflow, issue-first policy, PR titles
 
 ### Move problematic code toward the root
 In the Mapsui hierarchy (`DataSource → Fetcher → Layer → Map → MapControl`), keep the core clean. Push `IDisposable`, `async/await`, nullable fields, and exception-throwing code toward the root (surface projects / `MapControl`), not into the core. The core should be simple, predictable, and free of these concerns.

@@ -1,3 +1,8 @@
+---
+title: Asynchronous Data Fetching
+description: How Mapsui fetches layer data on a background thread for smooth panning and zooming, including ChangeType and fetch strategies.
+---
+
 # Asynchronous Data Fetching
 
 ## Some background

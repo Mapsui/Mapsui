@@ -1,3 +1,8 @@
+---
+title: VectorStyle
+description: How to use VectorStyle to render point, line, and polygon geometries with Fill, Line, and Outline properties.
+---
+
 # VectorStyle
 
 `VectorStyle` is the standard style for rendering vector geometries. It has three properties — `Fill`, `Line`, and `Outline` — but which ones are relevant depends on the geometry type being drawn. `Point`, `LineString`, and `Polygon` are NetTopologySuite (NTS) types from the `Mapsui.Nts` package. Mapsui's own `MPoint` renders identically to the NTS `Point`.
