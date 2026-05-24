@@ -13,6 +13,7 @@
         "Mapsui\\Mapsui.csproj",
         "Mapsui.UI.Android\\Mapsui.UI.Android.csproj",
         "Mapsui.UI.Avalonia\\Mapsui.UI.Avalonia.csproj",
+        "Mapsui.UI.Avalonia12\\Mapsui.UI.Avalonia12.csproj",
         "Mapsui.UI.Blazor\\Mapsui.UI.Blazor.csproj",
         "Mapsui.UI.Eto\\Mapsui.UI.Eto.csproj",
         "Mapsui.UI.iOS\\Mapsui.UI.iOS.csproj",
