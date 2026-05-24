@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        pre { margin: 0; }
+        .code-container { position: relative; }
+        .copy-button { position: absolute; top: 12px; right: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 6px 10px; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; color: #495057; transition: all 0.2s ease; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .copy-button:hover { background: #e9ecef; border-color: #adb5bd; color: #212529; }
+        .copy-button.copied { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .copy-button:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<div class="code-container">
+    <button class="copy-button" onclick="copyCode(this)" title="Copy code to clipboard">Copy</button>
+    <pre><code class="csharp">using System.Linq;
+using System.Threading.Tasks;
+using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Nts;
+using Mapsui.Nts.Editing;
+using Mapsui.Nts.Widgets;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Tiling;
+using Mapsui.Widgets;
+using Mapsui.Widgets.BoxWidgets;
+using Mapsui.Widgets.ButtonWidgets;
+using Mapsui.Widgets.InfoWidgets;
+using NetTopologySuite.IO;
+
+namespace Mapsui.Samples.Common.Maps.Editing;
+
+public class EditingSample : ISample
+{
+    private EditingWidget? _editingWidget;
+    private WritableLayer? _targetLayer;
+    private IFeature[]? _tempFeatures;
+
+    public string Name => "Editing";
+    public string Category => "Editing";
+
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    private Map CreateMap()
+    {
+        var map = CreateMap(EditMode.Modify);
+        _editingWidget = map.Widgets.OfType<EditingWidget>().Single();
+        InitEditWidgets(map);
+        return map;
+    }
+
+    public static void InitEditMode(EditMode editMode, Map map)
+    {
+        var editManager = new EditManager
+        {
+            Layer = (WritableLayer)map.Layers.First(l => l.Name == "EditLayer")
+        };
+        var targetLayer = (WritableLayer)map.Layers.First(l => l.Name == "Layer 3");
+
+        // Load the polygon layer on startup so you can start modifying right away
+        editManager.Layer.AddRange(targetLayer.GetFeatures().Copy());
+        targetLayer.Clear();
+
+        editManager.EditMode = editMode;
+
+        map.Widgets.Add(new EditingWidget(editManager));
+    }
+
+    private void InitEditWidgets(Map map)
+    {
+        _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
+
+        map.Widgets.Add(CreateBoxForEditWidgets());
+        map.Widgets.Add(CreateSelectLayerToEditButton());
+        map.Widgets.Add(CreateSelectLayer1Button(map));
+        map.Widgets.Add(CreateSelectLayer2Button(map));
+        map.Widgets.Add(CreateSelectLayer3Button(map));
+        map.Widgets.Add(CreateSaveButton());
+        map.Widgets.Add(CreateLoadButton());
+        map.Widgets.Add(CreateCancelButton());
+        map.Widgets.Add(CreateEditModesTextBox());
+        map.Widgets.Add(CreateAddPointButton());
+        map.Widgets.Add(CreateAddLineButton());
+        map.Widgets.Add(CreateAddPolygonButton());
+        map.Widgets.Add(CreateModifyButton());
+        map.Widgets.Add(CreateRotateButton());
+        map.Widgets.Add(CreateScaleButton());
+        map.Widgets.Add(CreateNoneButton());
+        map.Widgets.Add(CreateSelectButton());
+        map.Widgets.Add(CreateDeleteButton());
+        map.Widgets.Add(new MouseCoordinatesWidget());
+    }
+
+    private static BoxWidget CreateBoxForEditWidgets() => new BoxWidget
+    {
+        Width = 130,
+        Height = 370,
+        Position = new MPoint(2, 0),
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+    };
+
+    private static TextBoxWidget CreateSelectLayerToEditButton() => new TextBoxWidget
+    {
+        Position = new MPoint(0, 5),
+        Width = 120,
+        Height = 18,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Select Layer To Edit:",
+        BackColor = Color.Transparent,
+    };
+
+    private ButtonWidget CreateDeleteButton() => new()
+    {
+        Position = new MPoint(5, 340),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Delete",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            if (_editingWidget?.SelectMode == true)
+            {
+                var selectedFeatures = _editingWidget.Layer?.GetFeatures().Where(f => (bool?)f["Selected"] == true) ?? [];
+                foreach (var selectedFeature in selectedFeatures)
+                    _editingWidget.Layer?.TryRemove(selectedFeature);
+                e.Map.RefreshGraphics();
+            }
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateSelectButton() => new()
+    {
+        Position = new MPoint(5, 320),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Select (for delete)",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            _editingWidget!.SelectMode = !_editingWidget.SelectMode;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateNoneButton() => new()
+    {
+        Position = new MPoint(5, 290),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "None",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (s, e) =>
+        {
+            _editingWidget!.EditMode = EditMode.None;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateScaleButton() => new()
+    {
+        Position = new MPoint(5, 270),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Scale",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            _editingWidget!.EditMode = EditMode.Scale;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateRotateButton() => new()
+    {
+        Position = new MPoint(5, 250),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Rotate",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            _editingWidget!.EditMode = EditMode.Rotate;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateModifyButton() => new()
+    {
+        Position = new MPoint(5, 230),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Modify",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            _editingWidget!.EditMode = EditMode.Modify;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateAddPolygonButton() => new()
+    {
+        Position = new MPoint(5, 210),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Add Polygon",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            var features = _targetLayer?.GetFeatures().Copy() ?? [];
+            foreach (var feature in features)
+                feature.Modified();
+            _tempFeatures = features.ToArray();
+            _editingWidget!.EditMode = EditMode.AddPolygon;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateAddLineButton() => new()
+    {
+        Position = new MPoint(5, 190),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Add Line",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            var features = _targetLayer?.GetFeatures().Copy() ?? [];
+            foreach (var feature in features)
+                feature.Modified();
+            _tempFeatures = features.ToArray();
+            _editingWidget!.EditMode = EditMode.AddLine;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateAddPointButton() => new()
+    {
+        Position = new MPoint(5, 170),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Add Point",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            var features = _targetLayer?.GetFeatures().Copy() ?? [];
+            foreach (var feature in features)
+                feature.Modified();
+            _tempFeatures = features.ToArray();
+            _editingWidget!.EditMode = EditMode.AddPoint;
+            e.Handled = true;
+        }
+    };
+
+    private static TextBoxWidget CreateEditModesTextBox() => new()
+    {
+        Position = new MPoint(5, 150),
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Editing Modes:",
+        BackColor = Color.Transparent,
+    };
+
+    private ButtonWidget CreateCancelButton() => new()
+    {
+        Position = new MPoint(5, 120),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Cancel",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            if (_targetLayer != null && _tempFeatures != null)
+            {
+                _targetLayer.Clear();
+                _targetLayer.AddRange(_tempFeatures.Copy());
+                _targetLayer.DataHasChanged();
+                e.Map.RefreshGraphics();
+            }
+
+            _editingWidget!.Layer?.Clear();
+            e.Map.RefreshGraphics();
+            _editingWidget.EditMode = EditMode.None;
+            _tempFeatures = null;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateLoadButton() => new()
+    {
+        Position = new MPoint(5, 100),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Load",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            var features = _targetLayer?.GetFeatures().Copy() ?? [];
+
+            foreach (var feature in features)
+                feature.Modified();
+
+            _tempFeatures = features.ToArray();
+
+            _editingWidget!.Layer?.AddRange(features);
+            _targetLayer?.Clear();
+
+            e.Map.RefreshGraphics();
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateSaveButton() => new()
+    {
+        Position = new MPoint(5, 80),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Save",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            _targetLayer?.AddRange(_editingWidget!.Layer?.GetFeatures().Copy() ?? []);
+            _editingWidget!.Layer?.Clear();
+
+            e.Map.RefreshGraphics();
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateSelectLayer3Button(Map map) => new()
+    {
+        Position = new MPoint(5, 60),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Layer 3",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateSelectLayer2Button(Map map) => new()
+    {
+        Position = new MPoint(5, 40),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Layer 2",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 2") as WritableLayer;
+            e.Handled = true;
+        }
+    };
+
+    private ButtonWidget CreateSelectLayer1Button(Map map) => new()
+    {
+        Position = new MPoint(5, 20),
+        Height = 18,
+        Width = 120,
+        CornerRadius = 2,
+        HorizontalAlignment = HorizontalAlignment.Absolute,
+        VerticalAlignment = VerticalAlignment.Absolute,
+        Text = "Layer 1",
+        BackColor = Color.LightGray,
+        WithTappedEvent = (_, e) =>
+        {
+            _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 1") as WritableLayer;
+            e.Handled = true;
+        }
+    };
+
+    public static Map CreateMap(EditMode editMode)
+    {
+        var map = new Map();
+
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreatePointLayer());
+        map.Layers.Add(CreateLineLayer());
+        map.Layers.Add(CreatePolygonLayer());
+        var editLayer = CreateEditLayer();
+        map.Layers.Add(editLayer);
+        InitEditMode(editMode, map);
+        map.Navigator.ZoomToBox(GetGrownExtent(editLayer));
+
+        return map;
+    }
+
+    private static WritableLayer CreateEditLayer() => new()
+    {
+        Name = "EditLayer",
+        Style = CreateEditLayerStyle(),
+    };
+
+    // The edit layer has two styles. That is why it needs to use a StyleCollection.
+    // In a future version of Mapsui the ILayer will have a Styles collections just
+    // as the GeometryFeature has right now.
+    // The first style is the basic style of the features in edit mode.
+    // The second style is the way to show a feature is selected.
+    private static StyleCollection CreateEditLayerStyle() => new()
+    {
+        Styles =
+        {
+            CreateEditLayerBasicStyle(),
+            CreateSelectedStyle(),
+            CreateStyleToShowTheVertices(),
+        }
+    };
+
+    private static SymbolStyle CreateStyleToShowTheVertices() => new()
+    {
+        Outline = new Pen(Color.Gray, 1f),
+        Fill = new Brush(Color.White),
+        SymbolScale = 0.5
+    };
+
+    private static VectorStyle CreateEditLayerBasicStyle() => new()
+    {
+        Fill = new Brush(_editModeColor),
+        Line = new Pen(_editModeColor, 3),
+        Outline = new Pen(_editModeColor, 3)
+    };
+
+    private static readonly Color _editModeColor = new(124, 22, 111, 180);
+    private static readonly Color _pointLayerColor = new(240, 240, 240, 240);
+    private static readonly Color _lineLayerColor = new(150, 150, 150, 240);
+    private static readonly Color _polygonLayerColor = new(20, 20, 20, 240);
+
+    private static readonly SymbolStyle? _selectedStyle = new()
+    {
+        Fill = null,
+        Outline = new Pen(Color.Red, 3),
+        Line = new Pen(Color.Red, 3)
+    };
+
+    private static readonly SymbolStyle? _disableStyle = new() { Enabled = false };
+
+    // To show the selected style a ThemeStyle is used which switches on and off the SelectedStyle
+    // depending on a "Selected" attribute.
+    private static ThemeStyle CreateSelectedStyle()
+        => new(f => (bool?)f["Selected"] == true ? _selectedStyle : _disableStyle);
+
+    private static WritableLayer CreatePointLayer() => new()
+    {
+        Name = "Layer 1",
+        Style = CreatePointStyle()
+    };
+
+    private static WritableLayer CreateLineLayer()
+    {
+        var lineLayer = new WritableLayer
+        {
+            Name = "Layer 2",
+            Style = CreateLineStyle()
+        };
+
+        // todo: add data
+
+        return lineLayer;
+    }
+
+    private static WritableLayer CreatePolygonLayer()
+    {
+        var polygonLayer = new WritableLayer
+        {
+            Name = "Layer 3",
+            Style = CreatePolygonStyle()
+        };
+
+        var wkt = "POLYGON ((1261416.17275404 5360656.05714234, 1261367.50386493 5360614.2556425, 1261353.47050427 5360599.62511755, 1261338.83997932 5360576.03712836, 1261337.34706862 5360570.6626498, 1261375.8641649 5360511.2448036, 1261383.92588273 5360483.17808227, 1261391.98760055 5360485.56673941, 1261393.48051126 5360480.490843, 1261411.99260405 5360487.6568144, 1261430.50469684 5360496.9128608, 1261450.21111819 5360507.06465361, 1261472.00761454 5360525.5767464, 1261488.13105019 5360544.98458561, 1261488.1310502 5360545.28316775, 1261481.26366093 5360549.76189988, 1261489.6239609 5360560.21227484, 1261495.59560374 5360555.13637843, 1261512.91336796 5360573.05130694, 1261535.00844645 5360598.43078898, 1261540.08434286 5360619.03295677, 1261535.90419287 5360621.12303176, 1261526.64814648 5360623.21310675, 1261489.32537876 5360644.41243881, 1261458.27283602 5360661.73020303, 1261438.26783253 5360662.02878517, 1261427.22029328 5360660.23729232, 1261416.17275404 5360656.05714234))";
+        var polygon = new WKTReader().Read(wkt);
+        IFeature feature = new GeometryFeature { Geometry = polygon };
+        polygonLayer.Add(feature);
+
+        return polygonLayer;
+    }
+
+    private static VectorStyle CreatePointStyle()
+    {
+        return new VectorStyle
+        {
+            Fill = new Brush(_pointLayerColor),
+            Line = new Pen(_pointLayerColor, 3),
+            Outline = new Pen(Color.Gray, 2)
+        };
+    }
+
+    private static VectorStyle CreateLineStyle()
+    {
+        return new VectorStyle
+        {
+            Fill = new Brush(_lineLayerColor),
+            Line = new Pen(_lineLayerColor, 3),
+            Outline = new Pen(_lineLayerColor, 3)
+        };
+    }
+
+    private static VectorStyle CreatePolygonStyle()
+    {
+        return new VectorStyle
+        {
+            Fill = new Brush(new Color(_polygonLayerColor)),
+            Line = new Pen(_polygonLayerColor, 3),
+            Outline = new Pen(_polygonLayerColor, 3)
+        };
+    }
+
+    private static MRect? GetGrownExtent(ILayer? layer) => layer?.Extent?.Grow(layer.Extent.Width * 0.2) ?? null;
+}
+</code></pre>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        hljs.highlightAll();
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage('highlightjs-highlight', '*');
+        }
+    });
+    function copyCode(button) {
+        try {
+            const codeElement = button.parentElement.querySelector('code');
+            const codeText = codeElement.textContent || codeElement.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(codeText, button);
+                });
+            } else {
+                fallbackCopy(codeText, button);
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+            showCopyError(button);
+        }
+    }
+    function fallbackCopy(text, button) {
+        try {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showCopySuccess(button);
+        } catch (error) {
+            showCopyError(button);
+        }
+    }
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    function showCopyError(button) {
+        const originalText = button.textContent;
+        button.textContent = 'Failed';
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 2000);
+    }
+</script>
+</body>
+</html>
