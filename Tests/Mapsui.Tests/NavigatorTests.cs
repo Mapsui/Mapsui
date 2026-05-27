@@ -1,6 +1,7 @@
 ﻿using Mapsui.Animations;
 using Mapsui.Extensions;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using Mapsui.Manipulations;
 
@@ -101,6 +102,78 @@ public class NavigatorTests
         Assert.That(previousViewport, Is.EqualTo(previous));
         Assert.That(currentViewport, Is.EqualTo(navigator.Viewport));
         Assert.That(previousViewport, Is.Not.EqualTo(currentViewport));
+    }
+
+    [Test]
+    public void MouseWheelZoom_ContinuousMode_PositiveDelta_DecreasesResolution()
+    {
+        // Arrange
+        var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        navigator.OverridePanBounds = new MRect(-1000, -1000, 1000, 1000);
+        navigator.CenterOnAndZoomTo(new MPoint(0, 0), 1.0);
+        navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom = true;
+        navigator.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize = 0.1;
+
+        // Act
+        navigator.MouseWheelZoom(1, new ScreenPosition(50, 50));
+
+        // Assert — positive delta means zoom in, resolution decreases by factor 2^-0.1
+        Assert.That(navigator.Viewport.Resolution, Is.EqualTo(Math.Pow(2, -0.1)).Within(1e-10));
+    }
+
+    [Test]
+    public void MouseWheelZoom_ContinuousMode_NegativeDelta_IncreasesResolution()
+    {
+        // Arrange
+        var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        navigator.OverridePanBounds = new MRect(-1000, -1000, 1000, 1000);
+        navigator.CenterOnAndZoomTo(new MPoint(0, 0), 1.0);
+        navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom = true;
+        navigator.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize = 0.1;
+
+        // Act
+        navigator.MouseWheelZoom(-1, new ScreenPosition(50, 50));
+
+        // Assert — negative delta means zoom out, resolution increases by factor 2^0.1
+        Assert.That(navigator.Viewport.Resolution, Is.EqualTo(Math.Pow(2, 0.1)).Within(1e-10));
+    }
+
+    [Test]
+    public void MouseWheelZoom_ContinuousMode_ZoomLock_DoesNotChangeResolution()
+    {
+        // Arrange
+        var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        navigator.OverridePanBounds = new MRect(-1000, -1000, 1000, 1000);
+        navigator.CenterOnAndZoomTo(new MPoint(0, 0), 1.0);
+        navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom = true;
+        navigator.ZoomLock = true;
+
+        // Act
+        navigator.MouseWheelZoom(1, new ScreenPosition(50, 50));
+
+        // Assert — ZoomLock prevents any resolution change
+        Assert.That(navigator.Viewport.Resolution, Is.EqualTo(1.0));
+    }
+
+    [Test]
+    public void MouseWheelZoom_ContinuousMode_CustomStepSize_ScalesResolutionCorrectly()
+    {
+        // Arrange
+        var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        navigator.OverridePanBounds = new MRect(-1000, -1000, 1000, 1000);
+        navigator.CenterOnAndZoomTo(new MPoint(0, 0), 1.0);
+        navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom = true;
+        navigator.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize = 0.5;
+
+        // Act
+        navigator.MouseWheelZoom(1, new ScreenPosition(50, 50));
+
+        // Assert — step of 0.5 means resolution scales by 2^-0.5 ≈ 0.707 per event
+        Assert.That(navigator.Viewport.Resolution, Is.EqualTo(Math.Pow(2, -0.5)).Within(1e-10));
     }
 
     [Test]

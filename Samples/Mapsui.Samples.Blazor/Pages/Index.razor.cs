@@ -122,7 +122,7 @@ public sealed partial class Index : IDisposable
             if (_mapControl != null)
             {
                 // Enabled to try experimental renderer: _mapControl.SetMapRenderer(new Mapsui.Experimental.Rendering.Skia.MapRenderer());
-                _mapControl.UseContinuousMouseWheelZoom = true;
+                _mapControl.Map.Navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom = true;
             }
         }
     }

@@ -125,7 +125,7 @@ public partial class Page1 : ComponentBase
             FillMap();
             if (_mapControl != null)
             {
-                _mapControl.UseContinuousMouseWheelZoom = true;
+                _mapControl.Map.Navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom = true;
             }
         }
     }

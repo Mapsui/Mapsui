@@ -205,6 +205,17 @@ public class Navigator
         if (PanLock) // Avoid pan by zooming on center
             centerOfZoom = Viewport.WorldToScreen(Viewport.CenterX, Viewport.CenterY);
 
+        if (MouseWheelAnimation.UseContinuousMouseWheelZoom)
+        {
+            // Each event scales the resolution by a fixed small factor. No snapping or animation —
+            // the steps are intentionally small so the motion already feels smooth.
+            var stepSize = MouseWheelAnimation.ContinuousMouseWheelZoomStepSize;
+            // mouseWheelDelta > 0 means zoom in → resolution decreases → exponent is negative.
+            var scaleFactor = Math.Pow(2, mouseWheelDelta > 0 ? -stepSize : stepSize);
+            MouseWheelZoomContinuous(scaleFactor, centerOfZoom);
+            return;
+        }
+
         // It is unexpected that this method uses the MouseWheelAnimation.Animation and Easing. 
         // At the moment this solution allows the user to change these fields, so I don't want
         // them to become hardcoded values in the MapControl. There should be a more general
