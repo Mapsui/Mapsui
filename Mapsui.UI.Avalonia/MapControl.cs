@@ -54,19 +54,30 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         RunOnUIThread(InvalidateVisual);
     }
 
-    /// <summary>
-    /// This enables an alternative mouse wheel method where the step size on each mouse wheel event can be configured
-    /// by setting the ContinuousMouseWheelZoomStepSize.
-    /// </summary>
-    public bool UseContinuousMouseWheelZoom { get; set; } = false;
-    /// <summary>
-    /// The size of the mouse wheel steps used when UseContinuousMouseWheelZoom = true. The default is 0.1. A step 
-    /// size of 1 would doubling or halving the scale of the map on each event.    
-    /// </summary>
-    public double ContinuousMouseWheelZoomStepSize { get; set; } = 0.1;
-
     public static readonly DirectProperty<MapControl, Map> MapProperty =
         AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
+
+    /// <summary>
+    /// When true, each wheel event zooms by a small continuous step instead of snapping to the next
+    /// predefined resolution. Prefer using <see cref="Mapsui.Animations.MouseWheelAnimation.UseContinuousMouseWheelZoom"/>
+    /// via <c>Map.Navigator.MouseWheelAnimation</c> directly. This shortcut will be removed in the next version.
+    /// </summary>
+    public bool UseContinuousMouseWheelZoom
+    {
+        get => Map.Navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom;
+        set => Map.Navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom = value;
+    }
+
+    /// <summary>
+    /// The zoom step per wheel event when <see cref="UseContinuousMouseWheelZoom"/> is true.
+    /// Prefer using <see cref="Mapsui.Animations.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize"/>
+    /// via <c>Map.Navigator.MouseWheelAnimation</c> directly. This shortcut will be removed in the next version.
+    /// </summary>
+    public double ContinuousMouseWheelZoomStepSize
+    {
+        get => Map.Navigator.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize;
+        set => Map.Navigator.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize = value;
+    }
 
     /// <summary> Clears the Touch State. Should only be called if the touch state seems out of sync 
     /// in a certain situation.</summary>
@@ -142,28 +153,29 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
     {
-        if (UseContinuousMouseWheelZoom)
-        {
-            var stepSize = ContinuousMouseWheelZoomStepSize;
-            var scaleFactor = Math.Pow(2, e.Delta.Y > 0 ? -stepSize : stepSize);
-            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.GetPosition(this).ToScreenPosition());
-        }
-        else
-        {
-            // In Avalonia the touchpad can trigger the mouse wheel event. In that case there are more events and the Delta.Y is a double value, 
-            // which is usually smaller than 1.0. In the code below the deltas are accumulated until they are larger than 1.0. Only then 
-            // MouseWheelZoom is called.
-            _mouseWheelPos += e.Delta.Y;
-            if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
-            int delta = Math.Sign(_mouseWheelPos);
-            _mouseWheelPos -= delta;
-            // Clamp residual to ±1 to prevent runaway accumulation when Delta.Y > 1 (e.g. browser/WASM wheel events).
-            // Without this, prolonged scrolling in one direction builds up a large residual that makes reversing
-            // direction feel stuck.
-            _mouseWheelPos = Math.Clamp(_mouseWheelPos, -1.0, 1.0);
+        var pos = e.GetPosition(this).ToScreenPosition();
 
-            Map.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToScreenPosition());
+        if (Map.Navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom)
+        {
+            // Use the actual delta magnitude so trackpad gesture velocity influences zoom speed.
+            // Delta.Y > 0 means scroll up (zoom in) → resolution decreases, hence the negative sign.
+            var stepSize = Map.Navigator.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize;
+            var scaleFactor = Math.Pow(2, e.Delta.Y * -stepSize);
+            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, pos);
+            return;
         }
+
+        // In Avalonia the touchpad can trigger the mouse wheel event. In that case there are more events and the Delta.Y is a double value,
+        // which is usually smaller than 1.0. In the code below the deltas are accumulated until they are larger than 1.0. Only then
+        // MouseWheelZoom is called. This prevents trackpad from triggering dozens of full zoom-level jumps per gesture.
+        _mouseWheelPos += e.Delta.Y;
+        if (Math.Abs(_mouseWheelPos) < 1.0) return;
+        int delta = Math.Sign(_mouseWheelPos);
+        _mouseWheelPos -= delta;
+        // Todo: Consider clamping _mouseWheelPos to ±1 here to prevent runaway accumulation
+        // when Delta.Y > 1 (e.g. fast prolonged scrolling). Not yet confirmed to be necessary.
+
+        Map.Navigator.MouseWheelZoom(delta, pos);
     }
 
     private void MapControl_PointerExited(object? sender, PointerEventArgs e)

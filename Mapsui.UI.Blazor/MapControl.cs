@@ -54,15 +54,26 @@ public partial class MapControl : ComponentBase, IMapControl
     }
 
     /// <summary>
-    /// This enables an alternative mouse wheel method where the step size on each mouse wheel event can be configured
-    /// by setting the ContinuousMouseWheelZoomStepSize.
+    /// When true, each wheel event zooms by a small continuous step instead of snapping to the next
+    /// predefined resolution. Prefer using <see cref="Mapsui.Animations.MouseWheelAnimation.UseContinuousMouseWheelZoom"/>
+    /// via <c>Map.Navigator.MouseWheelAnimation</c> directly. This shortcut will be removed in the next version.
     /// </summary>
-    public bool UseContinuousMouseWheelZoom { get; set; } = false;
+    public bool UseContinuousMouseWheelZoom
+    {
+        get => Map.Navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom;
+        set => Map.Navigator.MouseWheelAnimation.UseContinuousMouseWheelZoom = value;
+    }
+
     /// <summary>
-    /// The size of the mouse wheel steps used when UseContinuousMouseWheelZoom = true. The default is 0.1. A step 
-    /// size of 1 would doubling or halving the scale of the map on each event.    
+    /// The zoom step per wheel event when <see cref="UseContinuousMouseWheelZoom"/> is true.
+    /// Prefer using <see cref="Mapsui.Animations.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize"/>
+    /// via <c>Map.Navigator.MouseWheelAnimation</c> directly. This shortcut will be removed in the next version.
     /// </summary>
-    public double ContinuousMouseWheelZoomStepSize { get; set; } = 0.1;
+    public double ContinuousMouseWheelZoomStepSize
+    {
+        get => Map.Navigator.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize;
+        set => Map.Navigator.MouseWheelAnimation.ContinuousMouseWheelZoomStepSize = value;
+    }
 
     protected override void OnInitialized()
     {
@@ -108,18 +119,9 @@ public partial class MapControl : ComponentBase, IMapControl
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
-        if (UseContinuousMouseWheelZoom)
-        {
-            var stepSize = ContinuousMouseWheelZoomStepSize;
-            var scaleFactor = Math.Pow(2, e.DeltaY > 0 ? stepSize : -stepSize);
-            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToScreenPosition());
-        }
-        else
-        {
-            var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-            var mousePosition = e.ToScreenPosition();
-            Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
-        }
+        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+        var mousePosition = e.ToScreenPosition();
+        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
