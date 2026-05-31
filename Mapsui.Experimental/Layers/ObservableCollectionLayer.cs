@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Mapsui.Extensions;
-using Mapsui.Styles;
 using Mapsui.Utilities;
 using System.Collections.Generic;
 using Mapsui.Layers;
@@ -135,9 +134,7 @@ public class ObservableCollectionLayer<T> : BaseLayer
         if (rect == null)
             yield break;
 
-        var biggerRect = rect.Grow(
-                SymbolStyle.DefaultWidth * 2 * resolution,
-                SymbolStyle.DefaultHeight * 2 * resolution);
+        var biggerRect = rect.Grow(VisibilityMargin * resolution);
         foreach (var feature in _shadowCollection.Select(i => i.Feature).ToArray())
         {
             if (feature?.Extent?.Intersects(biggerRect) == true)

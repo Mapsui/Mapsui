@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
-using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
@@ -19,9 +18,7 @@ public class GenericCollectionLayer<T> : BaseLayer where T : IEnumerable<IFeatur
         // Safeguard in case BoundingBox is null, most likely due to no features in layer
         if (rect == null) { return new List<IFeature>(); }
 
-        var biggerRect = rect.Grow(
-                SymbolStyle.DefaultWidth * 2 * resolution,
-                SymbolStyle.DefaultHeight * 2 * resolution);
+        var biggerRect = rect.Grow(VisibilityMargin * resolution);
 
         return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
     }
