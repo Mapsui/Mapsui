@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Styles;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers;
@@ -15,7 +14,7 @@ public class WritableLayer : BaseLayer
         // Safeguard in case MRect is null, most likely due to no features in layer
         if (box == null) return new List<IFeature>();
         var cache = _cache;
-        var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
+        var biggerBox = box.Grow(VisibilityMargin * resolution);
         var result = cache.Where(f => biggerBox.Intersects(f.Extent));
         return result;
     }

@@ -177,6 +177,14 @@ public abstract class BaseLayer : ILayer
     /// <inheritdoc />
     public HyperlinkWidget Attribution { get; set; } = new();
 
+    /// <summary>
+    /// The extra margin in pixels added around the viewport extent when querying and fetching features.
+    /// Increase this when the layer's style renders visually larger than the feature's geometry
+    /// (e.g. wide lines, large symbols, labels, or custom renderers that overflow the geometry bounds).
+    /// This prevents features from disappearing at the edge of the screen.
+    /// </summary>
+    public double VisibilityMargin { get; set; } = SymbolStyle.DefaultWidth * 2;
+
     /// <inheritdoc />
     public virtual IReadOnlyList<double> Resolutions { get; } = [];
 

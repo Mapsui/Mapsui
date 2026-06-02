@@ -59,6 +59,7 @@ Every layer exposes a few properties that control whether and how it is drawn:
 - **`Opacity`** — value between 0 and 1.
 - **`MinVisible` / `MaxVisible`** — resolution range in which the layer is drawn. Useful to only show detail layers when zoomed in.
 - **`Style`** — the default style applied to all features in the layer. Set to `null` if you only want per-feature styles.
+- **`VisibilityMargin`** — extra margin in pixels added around the viewport extent when querying and fetching features. The default is 64 px. Increase it when your layer's style renders visually larger than the feature's geometry — for example wide strokes, large point symbols, labels, or custom renderers that overflow the geometry bounds. Without a large enough margin, features near the viewport edge can disappear before their rendered symbol leaves the screen.
 - **`Name`** — used for lookups (`FindLayer`) and for display in things like a legend.
 
 ## Layer groups

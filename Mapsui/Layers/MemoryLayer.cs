@@ -1,5 +1,4 @@
 using Mapsui.Extensions;
-using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,9 +47,7 @@ public class MemoryLayer(string layerName) : BaseLayer(layerName)
         if (rect == null)
             yield break;
 
-        var biggerRect = rect.Grow(
-                SymbolStyle.DefaultWidth * 2 * resolution,
-                SymbolStyle.DefaultHeight * 2 * resolution);
+        var biggerRect = rect.Grow(VisibilityMargin * resolution);
         foreach (var feature in _localFeatures)
         {
             if (feature?.Extent?.Intersects(biggerRect) == true)

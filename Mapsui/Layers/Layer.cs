@@ -12,7 +12,6 @@ using Mapsui.Fetcher;
 using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Logging;
 using Mapsui.Providers;
-using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
@@ -135,7 +134,8 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
     {
         try
         {
-            fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
+            var grownExtent = fetchInfo.Extent.Grow(VisibilityMargin * fetchInfo.Resolution);
+            fetchInfo = new FetchInfo(new MSection(grownExtent, fetchInfo.Resolution), fetchInfo.CRS, fetchInfo.ChangeType);
             var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : [];
             _cache = features.ToArray();
             _hasAnimatedFeatures = _cache.Any(f => f is IAnimatedFeature);
