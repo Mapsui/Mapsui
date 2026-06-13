@@ -64,6 +64,16 @@ public class EditManager
             if (polygon == null) return false;
 
             _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove the last vertex, because it is the hover vertex
+
+            if (_addInfo.Vertices.Count < 3) // A polygon ring needs at least 3 distinct points, otherwise LinearRing throws.
+            {
+                // And reset it back to the previous state.
+                Layer?.TryRemove(_addInfo.Feature);
+                _addInfo.Reset();
+                EditMode = EditMode.AddPolygon;
+                return false;
+            }
+
             var linearRing = _addInfo.Vertices.ToList();
             linearRing.Add(linearRing[0].Copy()); // Add first coordinate at end to close the ring.
             _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
