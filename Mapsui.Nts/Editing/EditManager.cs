@@ -45,10 +45,7 @@ public class EditManager
 
             if (_addInfo.Vertices.Count < 2) // If there are not enough vertices, do not add the feature
             {
-                // And reset it back to the previous state.
-                Layer?.TryRemove(_addInfo.Feature);
-                _addInfo.Reset();
-                EditMode = EditMode.AddLine;
+                CancelAdd(EditMode.AddLine);
                 return false;
             }
 
@@ -67,10 +64,7 @@ public class EditManager
 
             if (_addInfo.Vertices.Count < 3) // A polygon ring needs at least 3 distinct points, otherwise LinearRing throws.
             {
-                // And reset it back to the previous state.
-                Layer?.TryRemove(_addInfo.Feature);
-                _addInfo.Reset();
-                EditMode = EditMode.AddPolygon;
+                CancelAdd(EditMode.AddPolygon);
                 return false;
             }
 
@@ -86,6 +80,16 @@ public class EditManager
         }
 
         return false;
+    }
+
+    private void CancelAdd(EditMode nextMode)
+    {
+        if (_addInfo.Feature != null)
+            Layer?.TryRemove(_addInfo.Feature);
+
+        _addInfo.Reset();
+        EditMode = nextMode;
+        Layer?.DataHasChanged();
     }
 
     public void HoveringVertex(MapInfo mapInfo)

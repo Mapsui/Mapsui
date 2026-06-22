@@ -1,5 +1,5 @@
 ---
-name: create-pr
+name: create-pull-request
 description: Create a GitHub Pull Request for Mapsui — covering title prefix conventions, PR type label selection, and the correct tool to use. Load this skill when you are ready to open a pull request.
 ---
 
