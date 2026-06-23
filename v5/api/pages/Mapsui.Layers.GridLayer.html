@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class GridLayer </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class GridLayer ">
+    
+    <meta name="description" content="A layer that renders a reference grid in the map&#39;s native coordinate system (). Useful as a background when no tile layer is present — the grid gives visual feedback when panning or zooming because the lines scroll and spread with the map. No projection is performed; grid intervals are computed directly from  and world units.">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Layers.GridLayer">
+
+
+
+  <h1 id="Mapsui_Layers_GridLayer" data-uid="Mapsui.Layers.GridLayer" class="text-break">Class GridLayer</h1>
+  <div class="markdown level0 summary"><p>A layer that renders a reference grid in the map's native coordinate system (<a class="xref" href="Mapsui.Map.html#Mapsui_Map_CRS">CRS</a>).
+Useful as a background when no tile layer is present — the grid gives visual feedback when panning
+or zooming because the lines scroll and spread with the map. No projection is performed; grid
+intervals are computed directly from <a class="xref" href="Mapsui.Viewport.html#Mapsui_Viewport_Resolution">Resolution</a> and world units.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Mapsui.Layers.BaseLayer.html">BaseLayer</a></div>
+    <div class="level2"><span class="xref">GridLayer</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></div>
+    <div><a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_NextId">BaseLayer.NextId()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_PropertyChanged">BaseLayer.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataChanged">BaseLayer.DataChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Id">BaseLayer.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Tag">BaseLayer.Tag</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MinVisible">BaseLayer.MinVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MaxVisible">BaseLayer.MaxVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Enabled">BaseLayer.Enabled</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Name">BaseLayer.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Opacity">BaseLayer.Opacity</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Busy">BaseLayer.Busy</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Style">BaseLayer.Style</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution">BaseLayer.Attribution</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_VisibilityMargin">BaseLayer.VisibilityMargin</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Resolutions">BaseLayer.Resolutions</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_SortFeatures">BaseLayer.SortFeatures</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_CustomLayerRendererName">BaseLayer.CustomLayerRendererName</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged">BaseLayer.DataHasChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString">BaseLayer.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnPropertyChanged_System_String_">BaseLayer.OnPropertyChanged(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnDataChanged_Mapsui_Fetcher_DataChangedEventArgs_">BaseLayer.OnDataChanged(DataChangedEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose_System_Boolean_">BaseLayer.Dispose(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose">BaseLayer.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_UpdateAnimations">BaseLayer.UpdateAnimations()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Layers.html">Layers</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.dll</h6>
+  <h5 id="Mapsui_Layers_GridLayer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GridLayer : BaseLayer, ILayer, IAnimatable, INotifyPropertyChanged, IDisposable</code></pre>
+  </div>
+  <h5 id="Mapsui_Layers_GridLayer_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The grid covers the entire viewport at all zoom levels. Use <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MinVisible">MinVisible</a> and
+<a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MaxVisible">MaxVisible</a> to restrict the resolution range where the grid is visible.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer__ctor.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L28">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer__ctor_" data-uid="Mapsui.Layers.GridLayer.#ctor*"></a>
+  <h4 id="Mapsui_Layers_GridLayer__ctor" data-uid="Mapsui.Layers.GridLayer.#ctor">GridLayer()</h4>
+  <div class="markdown level1 summary"><p>Creates a grid layer with the default name &quot;Grid&quot;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GridLayer()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer__ctor_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.%23ctor(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L31">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer__ctor_" data-uid="Mapsui.Layers.GridLayer.#ctor*"></a>
+  <h4 id="Mapsui_Layers_GridLayer__ctor_System_String_" data-uid="Mapsui.Layers.GridLayer.#ctor(System.String)">GridLayer(string)</h4>
+  <div class="markdown level1 summary"><p>Creates a grid layer with the given <code class="paramref">name</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GridLayer(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_LayerRendererName.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.LayerRendererName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L19">View Source</a>
+  </span>
+  <h4 id="Mapsui_Layers_GridLayer_LayerRendererName" data-uid="Mapsui.Layers.GridLayer.LayerRendererName">LayerRendererName</h4>
+  <div class="markdown level1 summary"><p>Name used to register the grid renderer with <code>MapRenderer.RegisterLayerRenderer</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string LayerRendererName = &quot;grid-layer&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_Extent.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.Extent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L25">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_Extent_" data-uid="Mapsui.Layers.GridLayer.Extent*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_Extent" data-uid="Mapsui.Layers.GridLayer.Extent">Extent</h4>
+  <div class="markdown level1 summary"><p>Returns the envelope of all available data in the layer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override MRect? Extent { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Extent">BaseLayer.Extent</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_LabelColor.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.LabelColor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L52">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_LabelColor_" data-uid="Mapsui.Layers.GridLayer.LabelColor*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_LabelColor" data-uid="Mapsui.Layers.GridLayer.LabelColor">LabelColor</h4>
+  <div class="markdown level1 summary"><p>Color of the coordinate labels. Default: semi-transparent dark grey.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color LabelColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_LabelFont.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.LabelFont%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L62">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_LabelFont_" data-uid="Mapsui.Layers.GridLayer.LabelFont*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_LabelFont" data-uid="Mapsui.Layers.GridLayer.LabelFont">LabelFont</h4>
+  <div class="markdown level1 summary"><p>Optional font to use for coordinate labels. When set, <a class="xref" href="Mapsui.Styles.Font.html#Mapsui_Styles_Font_Size">Size</a> overrides
+<a class="xref" href="Mapsui.Layers.GridLayer.html#Mapsui_Layers_GridLayer_LabelSize">LabelSize</a> and <a class="xref" href="Mapsui.Styles.Font.html#Mapsui_Styles_Font_FontSource">FontSource</a> allows loading a custom typeface.
+When null, the renderer falls back to <a class="xref" href="Mapsui.Layers.GridLayer.html#Mapsui_Layers_GridLayer_LabelSize">LabelSize</a> with the system default typeface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Font? LabelFont { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Font.html">Font</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_LabelSize.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.LabelSize%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L55">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_LabelSize_" data-uid="Mapsui.Layers.GridLayer.LabelSize*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_LabelSize" data-uid="Mapsui.Layers.GridLayer.LabelSize">LabelSize</h4>
+  <div class="markdown level1 summary"><p>Font size of the coordinate labels in screen pixels. Default: 12.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float LabelSize { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_LineColor.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.LineColor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L39">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_LineColor_" data-uid="Mapsui.Layers.GridLayer.LineColor*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_LineColor" data-uid="Mapsui.Layers.GridLayer.LineColor">LineColor</h4>
+  <div class="markdown level1 summary"><p>Color of the grid lines. Default: semi-transparent grey.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color LineColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_LineWidth.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.LineWidth%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L42">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_LineWidth_" data-uid="Mapsui.Layers.GridLayer.LineWidth*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_LineWidth" data-uid="Mapsui.Layers.GridLayer.LineWidth">LineWidth</h4>
+  <div class="markdown level1 summary"><p>Width of the grid lines in screen pixels. Default: 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float LineWidth { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_ShowCoordinateLabels.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.ShowCoordinateLabels%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L49">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_ShowCoordinateLabels_" data-uid="Mapsui.Layers.GridLayer.ShowCoordinateLabels*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_ShowCoordinateLabels" data-uid="Mapsui.Layers.GridLayer.ShowCoordinateLabels">ShowCoordinateLabels</h4>
+  <div class="markdown level1 summary"><p>Whether to draw coordinate labels alongside the grid lines. Default: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+Labels show raw world coordinates in the map's CRS (e.g. EPSG:3857 metres by default),
+not longitude/latitude. Keep this in mind when the map uses a projected coordinate system.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowCoordinateLabels { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_TargetLineCount.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.TargetLineCount%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L69">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_TargetLineCount_" data-uid="Mapsui.Layers.GridLayer.TargetLineCount*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_TargetLineCount" data-uid="Mapsui.Layers.GridLayer.TargetLineCount">TargetLineCount</h4>
+  <div class="markdown level1 summary"><p>Target number of grid lines to show across the wider viewport dimension.
+The actual count will vary because intervals snap to &quot;nice&quot; values (1, 2, 5 × 10^n).
+Default: 6.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int TargetLineCount { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer_GetFeatures_Mapsui_MRect_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer.GetFeatures(Mapsui.MRect%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L22">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_GridLayer_GetFeatures_" data-uid="Mapsui.Layers.GridLayer.GetFeatures*"></a>
+  <h4 id="Mapsui_Layers_GridLayer_GetFeatures_Mapsui_MRect_System_Double_" data-uid="Mapsui.Layers.GridLayer.GetFeatures(Mapsui.MRect,System.Double)">GetFeatures(MRect?, double)</h4>
+  <div class="markdown level1 summary"><p>Get all features in a given MRect for a given resolution</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IEnumerable&lt;IFeature&gt; GetFeatures(MRect? rect, double resolution)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
+        <td><span class="parametername">rect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">resolution</span></td>
+        <td><p>Resolution of viewport</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_">BaseLayer.GetFeatures(MRect, double)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_">LayerExtensions.WaitForLoadingAsync(ILayer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/3374/merge/apiSpec/new?filename=Mapsui_Layers_GridLayer.md&amp;value=---%0Auid%3A%20Mapsui.Layers.GridLayer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/3374/merge/Mapsui/Layers/GridLayer.cs/#L16" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
