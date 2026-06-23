@@ -3,6 +3,8 @@ docs_dir: markdown
 site_dir: _site
 theme:
   name: 'material'
+  logo: images/logo.svg
+  favicon: images/favicon.ico
   features:
     - content.action.edit
     - content.tabs.link
@@ -58,7 +60,7 @@ nav:
 repo_url: https://github.com/Mapsui/Mapsui/
 edit_uri: blob/master/docs/general/markdown
 plugins:
-  - meta
+  - material/meta
   - glightbox
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'  
@@ -83,4 +85,3 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-
