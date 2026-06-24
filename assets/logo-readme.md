@@ -80,12 +80,15 @@ Use these specific placements when updating Mapsui branding:
 - GitHub organization avatar: upload `logo-1024.png`; GitHub will resize it.
 - GitHub repository README logo image: use the SVG directly when possible, otherwise use
   `logo-512.png`.
-- DocFX API documentation logo: keep `docs/api/images/logo.svg` in sync with
-  `assets/logo.svg` because `docs/api/metadata.json` references that docs-local path.
-- MkDocs general documentation logo and favicon: keep
-  `docs/general/markdown/images/logo.svg` and
-  `docs/general/markdown/images/favicon.ico` in sync with the canonical assets because
-  `docs/general/mkdocs.yml` references those docs-local paths.
+- DocFX API documentation logo: use
+  `docs/api/images/logo-white-background.png`, copied from
+  `assets/generated-white-background/logo/logo-64.png`, because
+  `docs/api/metadata.json` references that docs-local path.
+- MkDocs general documentation logo: use
+  `docs/general/markdown/images/logo-white-background.png`, copied from
+  `assets/generated-white-background/logo/logo-64.png`, because the Material top bar
+  is blue and needs the logo's white background for contrast. Keep
+  `docs/general/markdown/images/favicon.ico` in sync with the canonical assets.
 - NuGet package icon: include `assets/generated-no-margin/logo/logo-128.png` in
   the package as `logo-128.png` and reference it with the package `icon` metadata.
 - Sample application icons: keep platform-specific icon files inside each sample

@@ -3,7 +3,7 @@ docs_dir: markdown
 site_dir: _site
 theme:
   name: 'material'
-  logo: images/logo.svg
+  logo: images/logo-white-background.png
   favicon: images/favicon.ico
   features:
     - content.action.edit
