@@ -16,7 +16,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
     <PackageTags>map maps mapping geo gis osm</PackageTags>
-    <PackageIcon>icon.png</PackageIcon>
+    <PackageIcon>logo-128.png</PackageIcon>
     <IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
     <!--Disable Run Api Compat Task causes Build failure on github actions with visual studio 2022 17.5 and .net Compilers Toolset 4.6-->
     <RunApiCompat>false</RunApiCompat>
@@ -36,7 +36,7 @@
 
   <!--Package Icon Include -->
   <ItemGroup>
-    <None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
+    <None Include="..\assets\generated-no-margin\logo\logo-128.png" Pack="true" PackagePath="\"/>
     <None Include="..\LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
 

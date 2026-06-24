@@ -86,8 +86,11 @@ Use these specific placements when updating Mapsui branding:
   `docs/general/markdown/images/logo.svg` and
   `docs/general/markdown/images/favicon.ico` in sync with the canonical assets because
   `docs/general/mkdocs.yml` references those docs-local paths.
-- NuGet package icon: include `logo-128.png` in the package and reference it
-  with the package `icon` metadata.
+- NuGet package icon: include `assets/generated-no-margin/logo/logo-128.png` in
+  the package as `logo-128.png` and reference it with the package `icon` metadata.
+- Sample application icons: keep platform-specific icon files inside each sample
+  project, but regenerate them from `assets/logo.svg` so platform packaging tools do
+  not depend on paths outside the app project.
 - Website favicon: use `logo-32.png` and optionally package `16`, `32`, and
   `48` pixel versions into a single `.ico`.
 - Apple home-screen bookmark icon: use `logo-180.png`.
