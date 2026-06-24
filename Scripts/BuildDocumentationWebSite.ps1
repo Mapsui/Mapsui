@@ -1,14 +1,27 @@
 # Install .NET 6 SDK using winget (uncomment if needed)
 # Currently mkdocs needs to be installed manually. Perhaps it is better to install it in this script.
 
+$ErrorActionPreference = "Stop"
+
+function Assert-LastExitCode {
+    param([string]$CommandName)
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "$CommandName failed with exit code $LASTEXITCODE"
+    }
+}
+
 Write-Output "Create general documentation with mkdocs in 'docs/general/_site'"
 mkdocs build -f docs/general/mkdocs.yml
+Assert-LastExitCode "mkdocs"
 
 Write-Output "Installing DocFX"
 dotnet tool update -g docfx --version 2.78
+Assert-LastExitCode "dotnet tool update docfx"
 
 Write-Output "Create api documentation with docfx in 'docs/api/_site'"
 docfx docs/api/docfx.json
+Assert-LastExitCode "docfx"
 
 Write-Output "Deleting existing 'website'' folder and contents"
 Remove-Item -Path "website" -Recurse -Force -ErrorAction SilentlyContinue
