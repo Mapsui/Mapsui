@@ -30,11 +30,11 @@ jobs:
       uses: NuGet/setup-nuget@v2
 
     - name: Setup .NET 9 SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
            9.0.305
-           8.0.407
+           8.0.x
 
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag

@@ -48,11 +48,11 @@ jobs:
         fetch-depth: 0         
         filter: tree:0 
     - name: Setup .NET 9 SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
            9.0.305
-           8.0.407
+           8.0.x
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 
     - name: Run DocFx
@@ -87,4 +87,3 @@ jobs:
         publish_dir: ./website
         destination_dir: .
         keep_files: true
-

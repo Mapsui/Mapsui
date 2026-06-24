@@ -46,7 +46,7 @@
             <uap:ShowOn Tile="wide310x150Logo"/>
           </uap:ShowNameOnTiles>
         </uap:DefaultTile >
-        <uap:SplashScreen Image="appiconfgSplashScreen.png" />
+        <uap:SplashScreen Image="appiconSplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
