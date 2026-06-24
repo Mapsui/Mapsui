@@ -3,7 +3,7 @@ docs_dir: markdown
 site_dir: _site
 theme:
   name: 'material'
-  logo: images/logo-white-background.png
+  logo: images/logo.svg
   favicon: images/favicon.ico
   features:
     - content.action.edit
@@ -59,6 +59,8 @@ nav:
 
 repo_url: https://github.com/Mapsui/Mapsui/
 edit_uri: blob/master/docs/general/markdown
+extra_css:
+  - stylesheets/extra.css
 plugins:
   - material/meta
   - glightbox
