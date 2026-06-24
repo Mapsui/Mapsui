@@ -22,11 +22,11 @@ jobs:
             ${{ runner.os }}-nuget22-
     # .Net 9 update     
     - name: Setup .NET 9 SDK 
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
            9.0.305
-           8.0.407
+           8.0.x
     # Java Sdk install 11
     - name: Install Open JDK 11
       uses: actions/setup-java@v4

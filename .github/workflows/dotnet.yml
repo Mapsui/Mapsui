@@ -59,11 +59,11 @@ jobs:
       with:
         nuget-version: latest    
     - name: Setup .NET 9 SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
            9.0.305
-           8.0.407
+           8.0.x
     # Open JDK
     - name: Install Open JDK 17
       uses: actions/setup-java@v4
@@ -127,11 +127,11 @@ jobs:
         xcode-version: '26.5'
     # .Net 9 update     
     - name: Setup .NET 9 SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
            9.0.305
-           8.0.407
+           8.0.x
     - name: Set MSBuildEnableWorkloadResolver
       run: echo "MSBuildEnableWorkloadResolver=true" >> $GITHUB_ENV
     - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net8
@@ -205,11 +205,11 @@ jobs:
             ${{ runner.os }}-nuget22-
     # .Net 8 update     
     - name: Setup .NET 9 SDK 
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
            9.0.305
-           8.0.407
+           8.0.x
     # Java Sdk install 17
     - name: Install Open JDK 17
       uses: actions/setup-java@v4
