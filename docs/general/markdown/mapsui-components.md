@@ -1,6 +1,6 @@
 ---
 title: Mapsui Components
-description: Overview of Mapsui's core components: MapControl, Map, Navigator, and Viewport, and how they relate to each other.
+description: Overview of Mapsui's core components like MapControl, Map, Navigator, and Viewport, and how they relate to each other.
 ---
 
 # Mapsui components
