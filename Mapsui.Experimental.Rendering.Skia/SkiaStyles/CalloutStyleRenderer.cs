@@ -13,6 +13,7 @@ namespace Mapsui.Experimental.Rendering.Skia;
 
 public class CalloutStyleRenderer : ISkiaStyleRenderer
 {
+    private static readonly SKSamplingOptions _defaultSamplingOptions = new(SKFilterMode.Linear, SKMipmapMode.None);
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style,
         Mapsui.Rendering.RenderService renderService, long iteration)
     {
@@ -95,7 +96,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, image.Width, image.Height));
             using var paint = new SKPaint();
             if (image is BitmapDrawableImage bitmapImage)
-                canvas.DrawImage(bitmapImage.Image, 0, 0, paint);
+                canvas.DrawImage(bitmapImage.Image, 0, 0, _defaultSamplingOptions, paint);
             else if (image is SvgDrawableImage svgImage)
                 canvas.DrawPicture(svgImage.Picture, paint);
             return recorder.EndRecording();

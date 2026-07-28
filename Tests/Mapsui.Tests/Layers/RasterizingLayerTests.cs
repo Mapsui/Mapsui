@@ -11,6 +11,7 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Tiling.Extensions;
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
+using SkiaSharp;
 
 namespace Mapsui.Tests.Layers;
 
@@ -45,7 +46,28 @@ public class RasterizingLayerTests
         Assert.That(features.Count(), Is.EqualTo(1));
         Assert.That(features.First(), Is.TypeOf<RasterFeature>());
         var rasterFeature = features.OfType<RasterFeature>().First();
-        Assert.That(rasterFeature.Raster!.Data.Length, Is.EqualTo(5354));
+
+        // Assert on the decoded image rather than on the length of the encoded bytes. The encoded
+        // size depends on the PNG encoder shipped with the current Skia build, so it changes on a
+        // SkiaSharp upgrade even though nothing is wrong with the rendering.
+        using var bitmap = SKBitmap.Decode(rasterFeature.Raster!.Data);
+        Assert.That(bitmap, Is.Not.Null, "The raster data could not be decoded as an image.");
+        Assert.Multiple(() =>
+        {
+            Assert.That(bitmap.Width, Is.EqualTo(256));
+            Assert.That(bitmap.Height, Is.EqualTo(256));
+        });
+        Assert.That(CountDrawnPixels(bitmap), Is.GreaterThan(0), "The rasterized tile is empty.");
+    }
+
+    private static int CountDrawnPixels(SKBitmap bitmap)
+    {
+        var count = 0;
+        for (var x = 0; x < bitmap.Width; x++)
+            for (var y = 0; y < bitmap.Height; y++)
+                if (bitmap.GetPixel(x, y).Alpha != 0)
+                    count++;
+        return count;
     }
 
     private static Layer CreatePointLayer()
