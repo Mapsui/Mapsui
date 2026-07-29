@@ -30,7 +30,6 @@ namespace Mapsui.Experimental.Rendering.Skia;
 /// </summary>
 public sealed class MapRenderer : IMapRenderer
 {
-    private static readonly SKSamplingOptions _defaultSamplingOptions = new(SKFilterMode.Linear, SKMipmapMode.None);
     private static readonly Dictionary<Type, ISkiaWidgetRenderer> _widgetRenderers = [];
     private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
 
@@ -125,7 +124,7 @@ public sealed class MapRenderer : IMapRenderer
 
         surface.SKSurface.Canvas.Flush();
         using var snapshot = surface.SKSurface.Snapshot();
-        targetCanvas.DrawImage(snapshot, 0, 0, _defaultSamplingOptions);
+        targetCanvas.DrawImage(snapshot, 0, 0, SKSamplingOptions.Default);
     }
 
     // Threshold above which a "partial" update is treated as a full update to avoid the overhead

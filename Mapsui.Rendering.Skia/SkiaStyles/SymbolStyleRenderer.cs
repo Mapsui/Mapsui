@@ -74,7 +74,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 TrianglePath(skPath, 0, 0, width);
                 break;
             default: // Invalid value
-                throw new ArgumentException($"Unknown {nameof(SymbolType)} '{nameof(symbolType)}'");
+                throw new ArgumentException($"Unknown {nameof(SymbolType)} '{symbolType}'");
         }
 
         return skPath;
