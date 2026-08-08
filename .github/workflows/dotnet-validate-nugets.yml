@@ -46,15 +46,26 @@ jobs:
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.slnx  
     # Release Build
+    # Forks have no release tags, so `git describe --tags` yields an empty version and the pack step
+    # fails with MSB4044. Fall back to a placeholder so this is runnable on a fork; upstream, where
+    # the tags exist, it resolves to the real version exactly as before. This job runs on Windows,
+    # so the step is PowerShell rather than the bash form used in dotnet.yml.
+    - name: Determine package version
+      shell: pwsh
+      run: |
+        $version = git describe --tags 2>$null
+        if ([string]::IsNullOrWhiteSpace($version)) { $version = '0.0.1-fork' }
+        "PACKAGE_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
+        $LASTEXITCODE = 0
     - name: Build nuget packages
-      run: dotnet pack Mapsui.slnx --configuration Release /p:Version=$(git describe --tags) -o Artifacts
+      run: dotnet pack Mapsui.slnx --configuration Release /p:Version=$env:PACKAGE_VERSION -o Artifacts
     - name: Cleanup
       run: git clean -fx -d -e Artifacts
     # Change Project References to nuget package references in samples    
     - name: nuget ProjectReferences to PackageReferences
       shell: pwsh
       run: |
-       ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
+       ./Scripts/SamplesMapsuiNugetReferences.ps1 $env:PACKAGE_VERSION
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.slnx  
     # Samples Build 

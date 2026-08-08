@@ -1,0 +1,19 @@
+# Vendored copies of upstream VexTile (https://github.com/bertt/VexTile).
+#
+# These files are deliberately kept as close to upstream as possible so they can be re-synced,
+# so their pre-existing nullable-reference debt is not treated as an error here. The project
+# enables TreatWarningsAsErrors, and Mapsui's own code in this project is held to that full bar -
+# this relaxation applies only to the vendored files in this folder.
+#
+# Note: this is scoped via .editorconfig rather than <NoWarn> because NoWarn is an assembly-level
+# compiler switch and cannot be applied to a subset of files.
+
+[*.cs]
+dotnet_diagnostic.CS8600.severity = none  # Converting null literal or possible null value to non-nullable type
+dotnet_diagnostic.CS8601.severity = none  # Possible null reference assignment
+dotnet_diagnostic.CS8602.severity = none  # Dereference of a possibly null reference
+dotnet_diagnostic.CS8603.severity = none  # Possible null reference return
+dotnet_diagnostic.CS8604.severity = none  # Possible null reference argument
+dotnet_diagnostic.CS8605.severity = none  # Unboxing a possibly null value
+dotnet_diagnostic.CS8618.severity = none  # Non-nullable field must contain a non-null value when exiting constructor
+dotnet_diagnostic.CS8625.severity = none  # Cannot convert null literal to non-nullable reference type
