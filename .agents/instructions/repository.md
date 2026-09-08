@@ -4,10 +4,10 @@ These instructions guide any coding agent working in this repository.
 
 ## Critical: Do not make changes without explicit request
 - **Never start editing code, creating files unless the user explicitly asks you to do so.**
-- **Never run `git commit`, `git push`, or any destructive git command unless the user explicitly asks.**
+- **Never create or switch branches, run `git commit` or `git push`, or run any destructive Git command unless the user explicitly requests that specific action.**
 - When the user asks a question, discusses architecture, or explores options — respond with analysis, explanations, or plans only.
 - Wait for clear instructions like "implement this", "make this change", "create this file", or "update the code" before touching any files.
-- Wait for clear instructions like "commit this", "push", or "create a PR" before running any git commands.
+- Wait for clear instructions like "create this branch", "switch to this branch", "commit this", "push", or "create a PR" before performing the corresponding Git action. Permission for one action does not authorize another.
 - **This rule applies even when investigating CI/build failures.** Diagnosing a build problem means reporting findings and proposing a fix — never applying the fix, committing, or pushing without explicit instruction.
 - If unsure whether the user wants changes made, ask first.
 

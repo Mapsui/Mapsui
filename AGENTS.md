@@ -20,7 +20,7 @@ Documentation-only and agent-tooling-only changes normally need relevant structu
 
 ## Working agreement
 
-- Do not edit files, commit, push, or create a pull request unless the user explicitly requests that action.
+- Do not edit files, create or switch branches, commit, push, or create a pull request unless the user explicitly requests that specific action. A request to create a pull request authorizes only pull-request creation; it does not authorize any of the preceding Git actions.
 - Keep changes focused, respect `.editorconfig`, and run the validation that is appropriate to the change.
 - Treat `docs/` as the source of truth for product and architecture details; agent material should link to it rather than duplicate it.
 
