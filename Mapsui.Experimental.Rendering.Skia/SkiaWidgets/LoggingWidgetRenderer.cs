@@ -54,7 +54,8 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
             (float)(rect.Right - loggingWidget.Padding.Right),
             (float)(rect.Bottom - loggingWidget.Padding.Bottom));
 
-        using var font = SkiaTextLayoutHelper.CreateSkFont(loggingWidget.Font, (float)loggingWidget.TextSize, renderService);
+        using var fontHolder = SkiaFontCache.GetOrCreate(loggingWidget.Font, (float)loggingWidget.TextSize, renderService);
+        var font = fontHolder.Instance;
         var line = 0;
         var effectiveTextSize = font.Size;
 
