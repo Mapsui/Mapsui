@@ -138,7 +138,7 @@ The project `.csproj` must have a matching `<EmbeddedResource>` entry. Mismatch 
 
 ## Adding a new sample with a regression test
 
-1. Implement the sample (see copilot-instructions for auto-registration via source generator).
+1. Implement the sample (see `.agents/instructions/repository.md` for auto-registration via source generator).
 2. Run `dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "FullyQualifiedName~MySample"`.
 3. Result should be **Inconclusive** (no reference yet).
 4. **Visually inspect** the generated image in `GeneratedRegression/`.
