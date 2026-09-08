@@ -9,13 +9,15 @@ Use only the `gh` CLI for GitHub operations in this workflow. Do not use an MCP 
 
 ## Preconditions
 
-The user must explicitly request creation of the pull request. A PR requires its commits on a remote branch; committing and pushing remain separate actions that also require explicit authorization.
+The user must explicitly request creation of the pull request. That request authorizes only pull-request creation. Do not create or switch branches, commit, or push unless the user separately and explicitly requests the specific action.
+
+Expect the user to have committed and pushed the intended changes to the current remote branch before invoking this skill. Verify that state; do not alter Git history or the local or remote branch to prepare it for the PR.
 
 Before creating the PR:
 
 1. Run `gh auth status` and stop with a clear explanation if authentication is unavailable.
 2. Determine the current branch and verify that the corresponding remote branch exists.
-3. Compare `git log origin/<branch> --oneline -10` with the intended changes. If the remote branch does not contain them, ask the user to authorize or perform the missing commit or push.
+3. Compare `git log origin/<branch> --oneline -10` with the intended changes. If the remote branch does not contain them, stop and ask the user to commit or push the changes themselves. Do not offer to perform those actions as part of PR creation.
 4. Check whether a PR already exists with `gh pr view --json number,url,state,title`.
 
 ## Title and label
