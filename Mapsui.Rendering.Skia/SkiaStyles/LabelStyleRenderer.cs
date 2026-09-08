@@ -77,7 +77,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         var style = valueTuple.Style;
         var layerOpacity = valueTuple.LayerOpacity;
-        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, CreateFont);
+        using var fontHolder = SkiaFontCache.GetOrCreate(style.Font, renderService);
         using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
@@ -106,7 +106,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private static void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, RenderService renderService)
     {
-        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, CreateFont);
+        using var fontHolder = SkiaFontCache.GetOrCreate(style.Font, renderService);
         using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
@@ -352,27 +352,6 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return paint;
     }
 
-    private static SKFont CreateFont(Font font)
-    {
-        var typeface = SKTypeface.FromFamilyName(font.FontFamily,
-            font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
-            SKFontStyleWidth.Normal,
-            font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
-
-        SKFont skFont = new()
-        {
-            Embolden = false,
-            //EmbeddedBitmaps = true,
-            Size = (float)font.Size,
-            Typeface = typeface,
-            //Subpixel = true,
-            //Hinting = SKFontHinting.None,
-            //Edging = SKFontEdging.Antialias,
-        };
-
-        return skFont;
-    }
-
     private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style)
     {
         var paint = CreatePaint((style.ForeColor, style.LayerOpacity));
@@ -462,7 +441,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return 0;
 
         // for measuring the text size the opacity can be set to 1try
-        using var fontHolder = renderService.VectorCache.GetOrCreate(labelStyle.Font, CreateFont);
+        using var fontHolder = SkiaFontCache.GetOrCreate(labelStyle.Font, renderService);
         using var paintHolder = labelStyle.Halo != null
             ? renderService.VectorCache.GetOrCreate((labelStyle, labelStyle.Halo), CreateHaloPaintHolder)
             : renderService.VectorCache.GetOrCreate((labelStyle.ForeColor, 1f), CreatePaint);

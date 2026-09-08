@@ -78,7 +78,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         var style = valueTuple.Style;
         var layerOpacity = valueTuple.LayerOpacity;
-        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, SkiaTextLayoutHelper.CreateSkFont);
+        using var fontHolder = SkiaFontCache.GetOrCreate(style.Font, renderService);
         using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
@@ -113,7 +113,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (style.Font.FontSource != null && renderService.FontSourceCache.Get(style.Font.FontSource) == null)
             return;
 
-        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, SkiaTextLayoutHelper.CreateSkFont);
+        using var fontHolder = SkiaFontCache.GetOrCreate(style.Font, renderService);
         using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
@@ -413,7 +413,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return labelStyle.Font.Size * (text?.Length ?? 1);
 
         // for measuring the text size the opacity can be set to 1
-        using var fontHolder = renderService.VectorCache.GetOrCreate(labelStyle.Font, SkiaTextLayoutHelper.CreateSkFont);
+        using var fontHolder = SkiaFontCache.GetOrCreate(labelStyle.Font, renderService);
         using var paintHolder = labelStyle.Halo != null
             ? renderService.VectorCache.GetOrCreate((labelStyle, labelStyle.Halo), CreateHaloPaintHolder)
             : renderService.VectorCache.GetOrCreate((labelStyle.ForeColor, 1f), CreatePaint);
