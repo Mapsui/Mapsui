@@ -64,7 +64,8 @@ internal static class GridLayerRenderer
         var decimals = (int)Math.Max(0, Math.Ceiling(-Math.Log10(step)));
         var format = $"F{decimals}";
 
-        using var font = SkiaTextLayoutHelper.CreateSkFont(gridLayer.LabelFont, gridLayer.LabelSize, renderService);
+        using var fontHolder = SkiaFontCache.GetOrCreate(gridLayer.LabelFont, gridLayer.LabelSize, renderService);
+        var font = fontHolder.Instance;
         var labelMargin = font.Size * 0.5f;
         using var textPaint = new SKPaint { Color = gridLayer.LabelColor.ToSkia(opacity), IsAntialias = true };
 

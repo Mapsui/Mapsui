@@ -233,11 +233,6 @@ public static class SkiaTextLayoutHelper
             var bytes = renderService.FontSourceCache.Get(fontSource);
             if (bytes != null)
             {
-                // Performance note: SKTypeface.FromStream is called on every draw frame for custom
-                // fonts because there is no typeface cache. A cache keyed by FontSource.SourceId
-                // would eliminate this cost. Caching is deferred because SKTypeface is Skia-specific
-                // while the natural cache owner (FontSourceCache) is platform-independent —
-                // ownership is non-trivial to resolve across that boundary.
                 using var stream = new MemoryStream(bytes);
                 return SKTypeface.FromStream(stream);
             }
