@@ -59,6 +59,16 @@
 		<PackageReference Include="CommunityToolkit.Maui.Markup" />
 		<PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
+		<!-- Validate the consumer bridge: Mapsui targets SkiaSharp 3.119.4 while the MAUI app resolves v4. -->
+		<PackageReference Include="SkiaSharp" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
+		<PackageReference Include="SkiaSharp.Views" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
+		<PackageReference Include="SkiaSharp.HarfBuzz" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
+		<PackageReference Include="HarfBuzzSharp" VersionOverride="$(HarfBuzzSharp4CompatibilityVersion)" />
+		<PackageReference Include="SkiaSharp.Views.WinUI" VersionOverride="$(SkiaSharp4CompatibilityVersion)"
+		                  Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<PackageReference Include="SkiaSharp.NativeAssets.iOS" VersionOverride="$(SkiaSharp4CompatibilityVersion)"
+		                  Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'" />
 	</ItemGroup>
 
 	<ItemGroup>

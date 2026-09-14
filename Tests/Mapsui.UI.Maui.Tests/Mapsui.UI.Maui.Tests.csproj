@@ -3,16 +3,27 @@
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-windows10.0.19041.0</TargetFrameworks>
 		<UseMaui>true</UseMaui>
+		<!-- A package consumer should use dependencies from the packed Mapsui.Maui nuspec, not the repository's development pins. -->
+		<CentralPackageTransitivePinningEnabled Condition="'$(MapsuiPackageVersion)' != ''">false</CentralPackageTransitivePinningEnabled>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Mapsui.UI.Maui\Mapsui.UI.Maui.csproj" />
+		<ProjectReference Include="..\..\Mapsui.UI.Maui\Mapsui.UI.Maui.csproj"
+		                  Condition="'$(MapsuiPackageVersion)' == ''" />
+		<PackageReference Include="Mapsui.Maui" VersionOverride="$(MapsuiPackageVersion)"
+		                  Condition="'$(MapsuiPackageVersion)' != ''" />
 	</ItemGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="NUnit" />
 		<PackageReference Include="NUnit3TestAdapter" />
+		<PackageReference Include="SkiaSharp" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
+		<PackageReference Include="SkiaSharp.Views" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
+		<PackageReference Include="SkiaSharp.HarfBuzz" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
+		<PackageReference Include="HarfBuzzSharp" VersionOverride="$(HarfBuzzSharp4CompatibilityVersion)" />
+		<PackageReference Include="SkiaSharp.Views.WinUI" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
 	</ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@
     <PackageReference Include="Avalonia.Skia" VersionOverride="$(Avalonia12Version)" />
     <PackageReference Include="Avalonia.Themes.Fluent" VersionOverride="$(Avalonia12Version)" />
     <PackageReference Include="Avalonia.Fonts.Inter" VersionOverride="$(Avalonia12Version)" />
-    <PackageReference Include="ReactiveUI.Avalonia" VersionOverride="12.0.1" />
+    <PackageReference Include="ReactiveUI.Avalonia" VersionOverride="$(Avalonia12ReactiveUIVersion)" />
     <!-- SkiaSharp and HarfBuzz must match the Avalonia 12 versions -->
     <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />

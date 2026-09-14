@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Reactive;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Mapsui.Tools.ImageComparison.Services;
 using ReactiveUI;
+using ReactiveUI.Primitives;
 using SkiaSharp;
 
 namespace Mapsui.Tools.ImageComparison.ViewModels;
@@ -137,8 +137,8 @@ sealed class MainViewModel : ReactiveObject, IDisposable
         private set => this.RaiseAndSetIfChanged(ref _statusMessage, value);
     }
 
-    public ReactiveCommand<Unit, Unit> PickRootCommand { get; }
-    public ReactiveCommand<Unit, Unit> RefreshCommand { get; }
+    public ReactiveCommand<RxVoid, RxVoid> PickRootCommand { get; }
+    public ReactiveCommand<RxVoid, RxVoid> RefreshCommand { get; }
 
     async Task PickRootAsync()
     {
