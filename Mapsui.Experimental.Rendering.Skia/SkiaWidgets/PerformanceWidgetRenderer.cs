@@ -18,7 +18,8 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
 
         var textSize = performanceWidget.TextSize;
 
-        using var font = SkiaTextLayoutHelper.CreateSkFont(performanceWidget.Font, (float)textSize, renderService);
+        using var fontHolder = SkiaFontCache.GetOrCreate(performanceWidget.Font, (float)textSize, renderService);
+        var font = fontHolder.Instance;
         // Use the actual font size for layout so Font.Size overrides TextSize correctly.
         var effectiveTextSize = font.Size;
         using var textPaint = new SKPaint { Color = performanceWidget.TextColor.ToSkia() };

@@ -19,7 +19,8 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 
         if (string.IsNullOrEmpty(textBox.Text)) return;
 
-        using var skFont = SkiaTextLayoutHelper.CreateSkFont(textBox.Font, (float)textBox.TextSize, renderService);
+        using var fontHolder = SkiaFontCache.GetOrCreate(textBox.Font, (float)textBox.TextSize, renderService);
+        var skFont = fontHolder.Instance;
         using var textPaint = new SKPaint { Color = textBox.TextColor.ToSkia(layerOpacity), IsAntialias = true };
         using var backPaint = new SKPaint { Color = textBox.BackColor.ToSkia(layerOpacity), IsAntialias = true };
         // The textRect has an offset which can be confusing. 
