@@ -95,7 +95,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, image.Width, image.Height));
             using var paint = new SKPaint();
             if (image is BitmapDrawableImage bitmapImage)
-                canvas.DrawImage(bitmapImage.Image, 0, 0, paint);
+                canvas.DrawImage(bitmapImage.Image, 0, 0, SKSamplingOptions.Default, paint);
             else if (image is SvgDrawableImage svgImage)
                 canvas.DrawPicture(svgImage.Picture, paint);
             return recorder.EndRecording();

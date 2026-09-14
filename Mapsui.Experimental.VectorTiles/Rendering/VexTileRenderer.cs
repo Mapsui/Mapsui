@@ -111,10 +111,16 @@ public static class VexTileRenderer
 
         foreach (var tileLayer in vectorTile.Layers)
         {
-            if (!categorizedVectorLayers.TryGetValue(tileLayer.Name, out var layerList))
+            // A layer without a name can never be matched against a style layer, and indexing the
+            // dictionary with null would throw.
+            var layerName = tileLayer.Name;
+            if (layerName is null)
+                continue;
+
+            if (!categorizedVectorLayers.TryGetValue(layerName, out var layerList))
             {
                 layerList = new List<VectorTileLayer>();
-                categorizedVectorLayers[tileLayer.Name] = layerList;
+                categorizedVectorLayers[layerName] = layerList;
             }
             layerList.Add(tileLayer);
         }
@@ -147,9 +153,14 @@ public static class VexTileRenderer
                         {
                             attributes.Clear();
                             foreach (var kvp in feature.Attributes)
-                                attributes[kvp.Key] = kvp.Value;
-                            attributes["$type"] = feature.GeometryType;
-                            attributes["$id"] = layer.ID;
+                            {
+                                // The attribute dictionary the style filters read from does not
+                                // accept nulls; a missing key and a null value mean the same here.
+                                if (kvp.Value is not null)
+                                    attributes[kvp.Key] = kvp.Value;
+                            }
+                            attributes["$type"] = feature.GeometryType ?? string.Empty;
+                            attributes["$id"] = layer.ID ?? string.Empty;
                             attributes["$zoom"] = actualZoom;
 
                             if (style.ValidateLayer(layer, actualZoom, attributes))
@@ -168,7 +179,7 @@ public static class VexTileRenderer
                                     VectorTileFeature = feature,
                                     Geometry = feature.Geometry,
                                     Brush = brush,
-                                    LayerId = layer.ID,
+                                    LayerId = layer.ID ?? string.Empty,
                                     SourceName = layer.SourceName,
                                     SourceLayer = layer.SourceLayer,
                                     InsertionOrder = visualLayers.Count,
@@ -272,7 +283,8 @@ public static class VexTileRenderer
             }
             else if (layer.Type == VisualLayerType.Raster)
             {
-                canvas.DrawImage(layer.RasterData, layer.Brush);
+                if (layer.RasterData is not null)
+                    canvas.DrawImage(layer.RasterData, layer.Brush);
             }
         }
 

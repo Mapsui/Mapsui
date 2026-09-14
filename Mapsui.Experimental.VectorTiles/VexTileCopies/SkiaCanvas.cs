@@ -530,13 +530,17 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     private static SKTypeface QualifyTypeface(Brush style, SKTypeface typeface)
     {
         // CountGlyphs returns an int directly — no array allocation needed.
-        int glyphCount = typeface.CountGlyphs(style.Text);
+        // Called on SKFont rather than SKTypeface: SkiaSharp 4 obsoletes SKTypeface.CountGlyphs,
+        // and SKFont.CountGlyphs exists in both 3.x and 4.x, so this stays valid on either major.
+        using var font = new SKFont(typeface);
+        int glyphCount = font.CountGlyphs(style.Text);
         if (glyphCount >= style.Text.Length)
             return typeface;
 
         SKFontManager sKFontManager = SKFontManager.Default;
         using var fallbackTypeface = sKFontManager.MatchCharacter(style.Text[glyphCount]);
-        int fallbackGlyphCount = fallbackTypeface.CountGlyphs(style.Text);
+        using var fallbackFont = new SKFont(fallbackTypeface);
+        int fallbackGlyphCount = fallbackFont.CountGlyphs(style.Text);
         if (fallbackGlyphCount < style.Text.Length)
             style.Text = style.Text[..fallbackGlyphCount];
         return typeface;

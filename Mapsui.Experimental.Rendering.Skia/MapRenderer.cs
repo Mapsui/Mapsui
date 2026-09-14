@@ -124,7 +124,7 @@ public sealed class MapRenderer : IMapRenderer
 
         surface.SKSurface.Canvas.Flush();
         using var snapshot = surface.SKSurface.Snapshot();
-        targetCanvas.DrawImage(snapshot, 0, 0);
+        targetCanvas.DrawImage(snapshot, 0, 0, SKSamplingOptions.Default);
     }
 
     // Threshold above which a "partial" update is treated as a full update to avoid the overhead

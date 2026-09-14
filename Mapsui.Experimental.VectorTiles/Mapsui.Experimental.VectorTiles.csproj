@@ -7,8 +7,9 @@
     <IsPackable>true</IsPackable>
     <Nullable>enable</Nullable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- For experimental projects suppress: A stable release of a package should not have a prerelease dependency. -->
-    <NoWarn>NU5104</NoWarn>
+    <NoWarn>$(NoWarn);NU5104</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

@@ -45,8 +45,16 @@
   </ItemGroup>
  
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
+    <!-- SkiaSharp dropped its net8.0 assets in 3.119.4, so this net8.0-only head stays on 3.119.2,
+         the last version that still ships them. Both are assembly version 3.119.0.0, so the shared
+         Mapsui.Rendering.Skia binary (built against the central version) loads against either. -->
+    <PackageReference Include="SkiaSharp" VersionOverride="$(Maui8SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" VersionOverride="$(Maui8SkiaSharpVersion)" />
+    <!-- Pulled in transitively by SkiaSharp.Views.Maui.Controls. Central package transitive pinning
+         would otherwise force it to the central version, which has no net8.0 assets. Only the
+         android head actually resolves a platform asset for it. -->
+    <PackageReference Include="SkiaSharp.Views" VersionOverride="$(Maui8SkiaSharpVersion)"
+                      Condition="$(TargetFramework.Contains('android'))" />
   </ItemGroup>
 
   <ItemGroup>
