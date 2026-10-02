@@ -25,8 +25,12 @@ public sealed class DataFetcher : IDisposable
     public DataFetcher(Func<IEnumerable<IFetchableSource>> getFetchableSources) // The constructor accepts a function so that it works for changes to the layer list.
     {
         _getFetchableSources = getFetchableSources;
-        _consumerTask = Task.Run(() => AddConsumerAsync(_channel, _cancellationTokenSource.Token));
+        // Get the token before Task.Run. Accessing it inside the delegate throws if Dispose runs before the task starts.
+        var cancellationToken = _cancellationTokenSource.Token;
+        _consumerTask = Task.Run(() => AddConsumerAsync(_channel, cancellationToken));
     }
+
+    internal Task ConsumerTask => _consumerTask;
 
     public void ViewportChanged(FetchInfo fetchInfo)
     {
