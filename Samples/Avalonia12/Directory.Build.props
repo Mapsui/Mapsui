@@ -8,8 +8,14 @@
       so we must re-declare the Avalonia 12 version properties here for all projects under this folder.
     -->
     <Avalonia12Version>12.1.2</Avalonia12Version>
-    <Avalonia12SkiaSharpVersion>3.119.4</Avalonia12SkiaSharpVersion>
-    <Avalonia12HarfBuzzSharpVersion>8.3.1.5</Avalonia12HarfBuzzSharpVersion>
+    <!--
+      Mapsui.UI.Avalonia12 is compiled against SkiaSharp 3.119.4 (the version Avalonia 12 depends on),
+      but Avalonia 12.1 also supports SkiaSharp 4 when an app references it explicitly. The samples opt in
+      to SkiaSharp 4 to demonstrate that combination; keep it in sync with SkiaSharp4CompatibilityVersion
+      and HarfBuzzSharp4CompatibilityVersion in the root Directory.Build.props.
+    -->
+    <Avalonia12SkiaSharpVersion>4.151.2</Avalonia12SkiaSharpVersion>
+    <Avalonia12HarfBuzzSharpVersion>14.2.1.102</Avalonia12HarfBuzzSharpVersion>
     <Avalonia12ReactiveUIVersion>12.1.2</Avalonia12ReactiveUIVersion>
   </PropertyGroup>
 </Project>

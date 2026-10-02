@@ -21,6 +21,7 @@
     <PackageReference Include="HarfBuzzSharp" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
     <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
   </ItemGroup>

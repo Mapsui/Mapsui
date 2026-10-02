@@ -14,8 +14,9 @@
     <PackageReference Include="Avalonia.Themes.Fluent" VersionOverride="$(Avalonia12Version)" />
     <PackageReference Include="Avalonia.Fonts.Inter" VersionOverride="$(Avalonia12Version)" />
     <PackageReference Include="ReactiveUI.Avalonia" VersionOverride="$(Avalonia12ReactiveUIVersion)" />
-    <!-- SkiaSharp and HarfBuzz must match the Avalonia 12 versions -->
+    <!-- Repeated here because central transitive pinning would otherwise pull the app back to the catalog versions -->
     <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="HarfBuzzSharp" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
