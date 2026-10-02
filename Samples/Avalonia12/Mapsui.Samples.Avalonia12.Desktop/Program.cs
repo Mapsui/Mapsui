@@ -19,9 +19,10 @@ class Program
             .UsePlatformDetect()
             .With(new Win32PlatformOptions
             {
+                // No Vulkan: this sample runs on SkiaSharp 4, and Avalonia 12.1's Vulkan backend crashes
+                // with SkiaSharp 4 (access violation in VulkanDevice.Create). Restore it once Avalonia fixes that.
                 RenderingMode = [
-                    Win32RenderingMode.Vulkan,    // Try Vulkan first (fastest if supported)
-                    Win32RenderingMode.AngleEgl,  // Try ANGLE (uses DirectX)
+                    Win32RenderingMode.AngleEgl,  // Try ANGLE first (uses DirectX)
                     Win32RenderingMode.Wgl,       // Then try native OpenGL
                     Win32RenderingMode.Software   // Fall back to software if needed
                 ],

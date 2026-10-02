@@ -75,6 +75,7 @@ jobs:
       uses: android-actions/setup-android@v3
       with:
          cmdline-tools-version: '8512546'
+         packages: 'platform-tools'
     - name: Install workloads android wasm-tools wasm-tools-net8 maui-android
       run: dotnet workload install android wasm-tools wasm-tools-net8 maui-android
     - name: Install Uno Check

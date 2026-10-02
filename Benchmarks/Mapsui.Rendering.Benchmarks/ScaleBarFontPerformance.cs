@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Benchmarks;
 [SimpleJob(RunStrategy.Throughput)]
 [MemoryDiagnoser]
 [MinColumn, MaxColumn, MeanColumn, MedianColumn]
-public sealed class ScaleBarFontPerformance : IDisposable
+public class ScaleBarFontPerformance : IDisposable
 {
     private readonly Map _map = new() { CRS = "EPSG:3857" };
     private readonly MapRenderer _renderer = new();
@@ -41,7 +41,7 @@ public sealed class ScaleBarFontPerformance : IDisposable
             _map.RenderService);
     }
 
-    public void Dispose()
+    public virtual void Dispose()
     {
         _surface.Dispose();
         _renderServiceWithoutCache.Dispose();
