@@ -3,8 +3,8 @@
 namespace Mapsui.Rendering.Benchmarks;
 public class Program
 {
-    public static void Main()
+    public static void Main(string[] args)
     {
-        _ = BenchmarkRunner.Run(typeof(Program).Assembly);
+        _ = BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
     }
 }

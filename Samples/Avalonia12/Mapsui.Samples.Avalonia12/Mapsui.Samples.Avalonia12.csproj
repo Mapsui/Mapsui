@@ -15,13 +15,16 @@
     <PackageReference Include="Avalonia" VersionOverride="$(Avalonia12Version)" />
     <PackageReference Include="Avalonia.Themes.Fluent" VersionOverride="$(Avalonia12Version)" />
     <PackageReference Include="Avalonia.Fonts.Inter" VersionOverride="$(Avalonia12Version)" />
-    <PackageReference Include="ReactiveUI.Avalonia" VersionOverride="12.0.1" />
-    <!-- SkiaSharp and HarfBuzz must match what Avalonia 12 requires -->
+    <PackageReference Include="ReactiveUI.Avalonia" VersionOverride="$(Avalonia12ReactiveUIVersion)" />
+    <!-- SkiaSharp and HarfBuzz packages must all be on one release train, see Samples/Avalonia12/Directory.Build.props -->
     <PackageReference Include="Avalonia.Skia" VersionOverride="$(Avalonia12Version)" />
     <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
     <PackageReference Include="HarfBuzzSharp" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
+    <!-- Avalonia.HarfBuzz pulls in the 8.x Linux native asset, which does not match the 14.x managed HarfBuzzSharp -->
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
   </ItemGroup>
 

@@ -73,6 +73,8 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Mapsui.WithoutMaui.slnf
     - name: Mapsui Samples MAUI
       run: dotnet build --no-restore --configuration Debug Mapsui.Maui.slnf
+    - name: Test packaged MAUI consumer with SkiaSharp 4
+      run: dotnet test Tests/Mapsui.UI.Maui.Tests/Mapsui.UI.Maui.Tests.csproj --configuration Debug /p:MapsuiPackageVersion=$env:PACKAGE_VERSION
     # Publishing  
     - name: Upload packages
       uses: actions/upload-artifact@v4
