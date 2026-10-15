@@ -13,6 +13,7 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private bool _canvasInitialized;
     private readonly ManipulationTracker _manipulationTracker = new();
+    private readonly List<UITouch> _activeTouches = []; // In the order in which the fingers touched down.
     public static bool UseGPU { get; set; } = true;
 
     public MapControl(CGRect frame)
@@ -125,7 +126,9 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesBegan(touches, e);
-            var positions = GetScreenPositions(e, this);
+            RemoveTouchesNotIn(e);
+            AddTouches(touches);
+            var positions = GetScreenPositions();
 
             if (positions.Length == 1)
                 _manipulationTracker.Restart(positions);
@@ -140,7 +143,7 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesMoved(touches, e);
-            var positions = GetScreenPositions(e, this);
+            var positions = GetScreenPositions();
 
             if (OnPointerMoved(positions, false))
                 return;
@@ -154,17 +157,67 @@ public partial class MapControl : UIView, IMapControl
         Catch.Exceptions(() =>
         {
             base.TouchesEnded(touches, e);
-            var positions = GetScreenPositions(e, this);
+            // The lifted touches are still included here because OnPointerReleased only handles
+            // the release of the last finger, which it recognizes by a single position.
+            var positions = GetScreenPositions();
+            RemoveTouches(touches);
             OnPointerReleased(positions);
         });
     }
 
-    private static ReadOnlySpan<ScreenPosition> GetScreenPositions(UIEvent? uiEvent, UIView uiView)
+    public override void TouchesCancelled(NSSet touches, UIEvent? e)
     {
-        if (uiEvent is null)
-            return [];
-        return uiEvent?.AllTouches?.Select(t => ((UITouch)t).LocationInView(uiView)).Select(p => new ScreenPosition(p.X, p.Y)).ToArray() ?? [];
+        Catch.Exceptions(() =>
+        {
+            base.TouchesCancelled(touches, e);
+            // No OnPointerReleased call, because a cancelled touch, for instance by an incoming call,
+            // should not result in a tap or fling.
+            RemoveTouches(touches);
+        });
     }
+
+    private ScreenPosition[] GetScreenPositions()
+    {
+        // The positions are taken from _activeTouches instead of UIEvent.AllTouches because AllTouches is an
+        // unordered NSSet. The ManipulationTracker derives the rotation from the first two positions, so if
+        // two fingers swap places between events the map rotates 180 degrees. See issue #2738.
+        var positions = new ScreenPosition[_activeTouches.Count];
+        for (var i = 0; i < _activeTouches.Count; i++)
+        {
+            var location = _activeTouches[i].LocationInView(this);
+            positions[i] = new ScreenPosition(location.X, location.Y);
+        }
+        return positions;
+    }
+
+    private void AddTouches(NSSet touches)
+    {
+        // UIKit reuses the same UITouch instance for a finger during the entire gesture,
+        // so it can be used to identify that finger.
+        foreach (var touch in touches.OfType<UITouch>())
+            if (IndexOfTouch(touch) < 0)
+                _activeTouches.Add(touch);
+    }
+
+    private void RemoveTouches(NSSet touches)
+    {
+        foreach (var touch in touches.OfType<UITouch>())
+        {
+            var index = IndexOfTouch(touch);
+            if (index >= 0)
+                _activeTouches.RemoveAt(index);
+        }
+    }
+
+    private void RemoveTouchesNotIn(UIEvent? e)
+    {
+        // Safeguard against touches that never received an ended or cancelled callback,
+        // for instance because the view was removed from the window during a gesture.
+        var allTouches = e?.AllTouches?.OfType<UITouch>().Select(t => t.Handle).ToHashSet() ?? [];
+        _activeTouches.RemoveAll(t => !allTouches.Contains(t.Handle));
+    }
+
+    private int IndexOfTouch(UITouch touch) => _activeTouches.FindIndex(t => t.Handle == touch.Handle);
 
     private static void RunOnUIThread(Action action)
     {
