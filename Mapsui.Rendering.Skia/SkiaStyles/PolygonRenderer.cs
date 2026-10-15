@@ -20,7 +20,7 @@ internal static class PolygonRenderer
         Polygon polygon, float opacity, VectorCache vectorCache, int position)
     {
         // polygon - relevant for GeometryCollection children
-        SKPath ToPath((long featureId, int position, MRect extent, double rotation, float lineWidth) valueTuple)
+        SKPath ToPath((long featureGenerationId, int position, MRect extent, double rotation, float lineWidth) valueTuple)
         {
             var result = polygon.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
             return result;
@@ -33,7 +33,7 @@ internal static class PolygonRenderer
         var rotation = viewport.Rotation;
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
 
-        using var path = vectorCache.GetOrCreate((feature.Id, position, extent, rotation, lineWidth), ToPath);
+        using var path = vectorCache.GetOrCreate((feature.GenerationId, position, extent, rotation, lineWidth), ToPath);
         if (vectorStyle.Fill.IsVisible())
         {
             using var fillPaint = vectorCache.GetOrCreate((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
