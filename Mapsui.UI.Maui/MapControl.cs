@@ -43,6 +43,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private readonly Action _invalidateDrawingView;
     private bool _disposed;
     private readonly ConcurrentDictionary<long, PointerRecording> _positions = new();
+    private long _nextPressOrder;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
 
@@ -178,11 +179,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
-                _positions[e.Id] = new PointerRecording(position, Environment.TickCount64);
-                if (_positions.Count == 1) // Not sure if this check is necessary.
-                    _manipulationTracker.Restart(_positions.Values.Select(p => p.ScreenPosition).ToArray());
+                _positions[e.Id] = new PointerRecording(position, Environment.TickCount64, _nextPressOrder++);
+                var positions = GetScreenPositions();
+                if (positions.Length == 1) // Not sure if this check is necessary.
+                    _manipulationTracker.Restart(positions);
 
-                if (OnPointerPressed(_positions.Values.Select(p => p.ScreenPosition).ToArray()))
+                if (OnPointerPressed(positions))
                     return;
             }
             else if (e.ActionType == SKTouchAction.Moved)
@@ -197,12 +199,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 }
                 else
                 {
-                    _positions[e.Id] = new PointerRecording(position, Environment.TickCount64);
+                    var pressOrder = _positions.TryGetValue(e.Id, out var previous) ? previous.PressOrder : _nextPressOrder++;
+                    _positions[e.Id] = new PointerRecording(position, Environment.TickCount64, pressOrder);
+                    var positions = GetScreenPositions();
 
-                    if (OnPointerMoved(_positions.Values.Select(p => p.ScreenPosition).ToArray(), isHovering))
+                    if (OnPointerMoved(positions, isHovering))
                         return;
 
-                    _manipulationTracker.Manipulate(_positions.Values.Select(p => p.ScreenPosition).ToArray(), Map.Navigator.Manipulate);
+                    _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 }
             }
             else if (e.ActionType == SKTouchAction.Released)
@@ -229,6 +233,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 OnZoomInOrOut(e.WheelDelta, position);
             }
         });
+    }
+
+    private ScreenPosition[] GetScreenPositions()
+    {
+        // Sorted explicitly because the enumeration order of a ConcurrentDictionary is not defined. The
+        // ManipulationTracker derives the rotation from the first two positions, so if two fingers swapped places
+        // between events the map would rotate 180 degrees. This happened on iOS with UIEvent.AllTouches, see #2738.
+        return _positions.Values.OrderBy(p => p.PressOrder).Select(p => p.ScreenPosition).ToArray();
     }
 
     private static void RemoveStale(ConcurrentDictionary<long, PointerRecording> positions, double totalMilliseconds)
@@ -355,7 +367,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202
 
-    private record struct PointerRecording(ScreenPosition ScreenPosition, long Timestamp)
+    private record struct PointerRecording(ScreenPosition ScreenPosition, long Timestamp, long PressOrder)
     {
     }
 
