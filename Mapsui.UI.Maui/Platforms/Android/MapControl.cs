@@ -57,7 +57,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void AttachToOnAppearing()
     {
-        if (UseGPU && Parent != null)
+        if (ActiveBackend == RenderBackend.Gpu && Parent != null)
         {
             _page = GetPage(Parent);
             if (_page != null)
@@ -119,7 +119,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// </summary>
     public void FixInvisible()
     {
-        var handler = _glView?.Handler as SKGLViewHandler;
+        if (_disposed || ActiveBackend != RenderBackend.Gpu)
+            return;
+        var handler = _drawingView.View.Handler as SKGLViewHandler;
         if (handler is not null)
         {
             SkiaSharp.Views.Android.GLTextureView glTextureView = handler.PlatformView;

@@ -36,12 +36,16 @@
     <Compile Include="..\Mapsui.UI.Maui\Extensions\TextAlignmentExtensions.cs" Link="Extensions\TextAlignmentExtensions.cs" />
     <Compile Include="..\Mapsui.UI.Maui\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
     <Compile Include="..\Mapsui.UI.Maui\MapControl.cs" Link="MapControl.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\RenderBackend.cs" Link="RenderBackend.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\Drawing\*.cs" Link="Drawing\%(Filename)%(Extension)" />
     <Compile Include="..\Mapsui.UI.Maui\Utils\KnownColor.cs" Link="Utils\KnownColor.cs" />
   </ItemGroup>
 
   <!-- Android -->
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <Compile Include="..\Mapsui.UI.Maui\Platforms\Android\MapControl.cs" Link="Platforms\Android\MapControl.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\Platforms\Android\AndroidMapSurfaceView.cs" Link="Platforms\Android\AndroidMapSurfaceView.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\Platforms\Android\AndroidSurfaceMapDrawingView.cs" Link="Platforms\Android\AndroidSurfaceMapDrawingView.cs" />
   </ItemGroup>
  
   <ItemGroup>

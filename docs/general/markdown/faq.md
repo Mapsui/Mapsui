@@ -5,6 +5,10 @@ description: Quick answers to common Mapsui questions and issues, such as defaul
 
 # Frequently Asked Questions
 
+### Why is the map slower in MAUI on Android than in native Android?
+
+The applications may use different SkiaSharp versions, build configurations, map data, or GPU host views. MAUI defaults to TextureView, while native Android uses SurfaceView. The MAUI sample lets you compare host views with the same local map. See [rendering options](rendering-options.md#compare-backends-in-the-maui-sample) for the workflow and measurement limits. A different host view is a possible cause, not a confirmed diagnosis or a guaranteed speed improvement.
+
 ### How can I get rid of the white dots? (or black lines)
 Set `Layer.Style = null`. In Mapsui a Style can be assigned to a ILayer and a Feature. A Layer is created with a default style which is rendered as a white dot for a `Point`, a black line for a `LineString` and a black outline for a `Polygon`. The `Layer.Style` applies to all features in the layer. If you work with a style on a feature the layer style is still drawn underneath.  
 

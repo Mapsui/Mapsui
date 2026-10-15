@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="..\..\Samples\Mapsui.Samples.Maui\Model\SampleSwitchCoordinator.cs" Link="SampleSwitchCoordinator.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\Mapsui.UI.Maui\Mapsui.UI.Maui.csproj"
 		                  Condition="'$(MapsuiPackageVersion)' == ''" />
 		<PackageReference Include="Mapsui.Maui" VersionOverride="$(MapsuiPackageVersion)"
