@@ -24,7 +24,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 {
     private MapsuiCustomDrawOperation? _drawOperation;
     private double _mouseWheelPos = 0.0;
-    private readonly ConcurrentDictionary<long, ScreenPosition> _positions = new();
+    private readonly ConcurrentDictionary<long, PointerRecording> _positions = new();
+    private long _nextPressOrder;
     private bool _shiftPressed;
     private readonly ManipulationTracker _manipulationTracker = new();
 
@@ -106,12 +107,13 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             return;
 
         var position = e.GetPosition(this).ToScreenPosition();
-        _positions[e.Pointer.Id] = position;
+        _positions[e.Pointer.Id] = new PointerRecording(position, _nextPressOrder++);
+        var positions = GetScreenPositions();
 
-        if (_positions.Count == 1) // Not sure if this check is necessary.
-            _manipulationTracker.Restart(_positions.Values.ToArray());
+        if (positions.Length == 1) // Not sure if this check is necessary.
+            _manipulationTracker.Restart(positions);
 
-        if (OnPointerPressed(_positions.Values.ToArray()))
+        if (OnPointerPressed(positions))
             return;
 
         e.Pointer.Capture(this);
@@ -129,10 +131,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         }
         else
         {
-            _positions[e.Pointer.Id] = position;
-            if (OnPointerMoved(_positions.Values.ToArray(), isHovering))
+            var pressOrder = _positions.TryGetValue(e.Pointer.Id, out var previous) ? previous.PressOrder : _nextPressOrder++;
+            _positions[e.Pointer.Id] = new PointerRecording(position, pressOrder);
+            var positions = GetScreenPositions();
+            if (OnPointerMoved(positions, isHovering))
                 return;
-            _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
         }
     }
 
@@ -144,6 +148,14 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         OnPointerReleased([position]);
 
         e.Pointer.Capture(null);
+    }
+
+    private ScreenPosition[] GetScreenPositions()
+    {
+        // Sorted explicitly because the enumeration order of a ConcurrentDictionary is not defined. The
+        // ManipulationTracker derives the rotation from the first two positions, so if two fingers swapped places
+        // between events the map would rotate 180 degrees. This happened on iOS with UIEvent.AllTouches, see #2738.
+        return _positions.Values.OrderBy(p => p.PressOrder).Select(p => p.ScreenPosition).ToArray();
     }
 
     private bool IsHovering(PointerEventArgs e)
@@ -283,4 +295,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     }
 
     private bool GetShiftPressed() => _shiftPressed;
+
+    private record struct PointerRecording(ScreenPosition ScreenPosition, long PressOrder);
 }
