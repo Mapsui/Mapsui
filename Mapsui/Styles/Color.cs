@@ -352,7 +352,9 @@ public readonly record struct Color
     /// <returns>Converted Mapsui Color</returns>
     public static Color FromString(string from)
     {
-        from = from.Trim().ToLower();
+        // Invariant, because a culture-sensitive ToLower() turns 'I' into a dotless 'ı' under Turkish culture.
+        // See https://github.com/Mapsui/Mapsui/issues/3383
+        from = from.Trim().ToLowerInvariant();
 
         if (from.StartsWith('#'))
         {
@@ -373,7 +375,7 @@ public readonly record struct Color
             }
             throw new ArgumentException("The color # format should contain 3 or 6 hex numbers");
         }
-        else if (from.StartsWith("rgba"))
+        else if (from.StartsWith("rgba", StringComparison.Ordinal))
         {
             var split = from[(from.IndexOf('(') + 1)..].TrimEnd(')').Split(',');
 
@@ -387,7 +389,7 @@ public readonly record struct Color
 
             return new Color(r, g, b, (int)(a * 255));
         }
-        else if (from.StartsWith("rgb"))
+        else if (from.StartsWith("rgb", StringComparison.Ordinal))
         {
             var split = from[(from.IndexOf('(') + 1)..].TrimEnd(')').Split(',');
 
@@ -400,7 +402,7 @@ public readonly record struct Color
 
             return new Color(r, g, b);
         }
-        else if (from.StartsWith("hsla"))
+        else if (from.StartsWith("hsla", StringComparison.Ordinal))
         {
             var split = from[(from.IndexOf('(') + 1)..].TrimEnd(')').Split(',');
 
@@ -414,7 +416,7 @@ public readonly record struct Color
 
             return FromHsl(h / 360.0f, s / 100.0f, l / 100.0f, (int)(a * 255));
         }
-        else if (from.StartsWith("hsl"))
+        else if (from.StartsWith("hsl", StringComparison.Ordinal))
         {
             var split = from[(from.IndexOf('(') + 1)..].TrimEnd(')').Split(',');
 

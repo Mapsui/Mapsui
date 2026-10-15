@@ -42,13 +42,19 @@ public static class ImageFetcher
     {
         try
         {
+            // Known limitation: the index is built once, from the assemblies loaded at the first embedded fetch.
+            // Resources in assemblies loaded later are not found. Concurrent first fetches may also build the
+            // index more than once, which is harmless but wasteful.
             if (_embeddedResources is null)
                 _embeddedResources = LoadEmbeddedResourcePaths();
 
             if (_embeddedResources.TryGetValue(imageSource.Host, out var assembly))
             {
+                // Known limitation: the dictionary lookup already matched the name, but we scan the assembly again
+                // to get the original casing for GetManifestResourceStream. Storing the original name as part of the
+                // dictionary value would avoid this.
                 string[] resourceNames = assembly.GetManifestResourceNames();
-                var matchingResourceName = resourceNames.FirstOrDefault(r => r.Equals(imageSource.Host, StringComparison.InvariantCultureIgnoreCase));
+                var matchingResourceName = resourceNames.FirstOrDefault(r => r.Equals(imageSource.Host, StringComparison.OrdinalIgnoreCase));
                 if (matchingResourceName != null)
                 {
                     using var stream = assembly.GetManifestResourceStream(matchingResourceName)
@@ -68,9 +74,12 @@ public static class ImageFetcher
         }
     }
 
-    private static ConcurrentDictionary<string, Assembly> LoadEmbeddedResourcePaths()
+    internal static ConcurrentDictionary<string, Assembly> LoadEmbeddedResourcePaths()
     {
-        var result = new ConcurrentDictionary<string, Assembly>();
+        // Uri.Host is always lowercased, so the lookup must ignore case. Use an ordinal comparer rather than
+        // lowercasing the keys: a culture-sensitive ToLower() turns 'I' into a dotless 'ı' under Turkish
+        // culture, so the keys would never match. See https://github.com/Mapsui/Mapsui/issues/3383
+        var result = new ConcurrentDictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
         var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic);
 
         foreach (var assembly in assemblies)
@@ -79,8 +88,8 @@ public static class ImageFetcher
 
             foreach (var resourceName in resourceNames)
             {
-                if (!resourceName.EndsWith(".resources"))
-                    result.AddOrUpdate(resourceName.ToLower(), (r) => assembly, (r, a) => assembly);
+                if (!resourceName.EndsWith(".resources", StringComparison.Ordinal))
+                    result.AddOrUpdate(resourceName, (r) => assembly, (r, a) => assembly);
             }
         }
         return result;

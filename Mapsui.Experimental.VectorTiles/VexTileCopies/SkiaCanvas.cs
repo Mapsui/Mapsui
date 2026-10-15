@@ -443,9 +443,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
             return string.Empty;
 
         if (style.Paint.TextTransform == TextTransform.Uppercase)
-            text = text.ToUpper();
+            text = text.ToUpperInvariant();
         else if (style.Paint.TextTransform == TextTransform.Lowercase)
-            text = text.ToLower();
+            text = text.ToLowerInvariant();
 
         if (wordWrap)
         {

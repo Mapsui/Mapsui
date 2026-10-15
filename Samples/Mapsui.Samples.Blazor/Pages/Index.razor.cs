@@ -194,10 +194,10 @@ public sealed partial class Index : IDisposable
         var u = new Uri(uri);
         var hash = u.Fragment; // includes leading '#'
         if (string.IsNullOrEmpty(hash)) return false;
-        if (!hash.StartsWith("#")) return false;
+        if (!hash.StartsWith('#')) return false;
         var path = hash.Length > 1 ? hash.Substring(1) : string.Empty; // remove '#'
         // Support both '#/Category/Name' and '#Category/Name'
-        if (path.StartsWith("/")) path = path.Substring(1);
+        if (path.StartsWith('/')) path = path.Substring(1);
         if (string.IsNullOrEmpty(path)) return false;
         var parts = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length >= 1) category = Uri.UnescapeDataString(parts[0]);

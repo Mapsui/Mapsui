@@ -561,7 +561,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     public bool? IsCrsSupported(string crs)
     {
         if (_wmsClient == null) return null;
-        return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
+        return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.OrdinalIgnoreCase)) != null;
     }
 
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
@@ -588,7 +588,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
             }
         }
 
-        using var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);
+        using var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpperInvariant() ?? "GET"), url);
         using var response = await client.SendAsync(req).ConfigureAwait(false);
 
         if (!response.IsSuccessStatusCode)
@@ -596,7 +596,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
             throw new Exception($"Unexpected WMS response code: {response.StatusCode}");
         }
 
-        if (response.Content.Headers.ContentType?.MediaType?.ToLower() != _mimeType)
+        if (!string.Equals(response.Content.Headers.ContentType?.MediaType, _mimeType, StringComparison.OrdinalIgnoreCase))
         {
             throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType?.MediaType}");
         }

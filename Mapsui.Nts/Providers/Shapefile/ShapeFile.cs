@@ -500,7 +500,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     {
         if (!File.Exists(filename))
             throw new FileNotFoundException($"Could not find file \"{filename}\"");
-        if (!filename.ToLower().EndsWith(".shp"))
+        if (!filename.EndsWith(".shp", StringComparison.OrdinalIgnoreCase))
             throw new Exception("Invalid shapefile filename: " + filename);
 
         LoadSpatialIndex(fileBasedIndex); //Load spatial index			

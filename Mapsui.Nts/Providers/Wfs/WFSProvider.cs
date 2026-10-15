@@ -924,7 +924,7 @@ public class WFSProvider : IProvider, IDisposable
                     node.MoveToAttribute("type", string.Empty);
                     var type = node.Value;
 
-                    if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
+                    if (type.StartsWith("gml:", StringComparison.Ordinal)) // we skip geometry element cause we already found it
                         continue;
 
                     node.MoveToParent();

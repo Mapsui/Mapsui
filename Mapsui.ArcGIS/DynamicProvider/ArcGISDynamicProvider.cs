@@ -241,8 +241,8 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         if (crs == null)
             throw new Exception("crs type not supported");
 
-        if (crs.StartsWith(CrsHelper.EsriStringPrefix)) return "{\"wkt\":\"" + crs[CrsHelper.EsriStringPrefix.Length..].Replace("\"", "\\\"") + "\"}";
-        if (crs.StartsWith(CrsHelper.EpsgPrefix)) return CrsHelper.ToEpsgCode(crs).ToString();
+        if (crs.StartsWith(CrsHelper.EsriStringPrefix, StringComparison.Ordinal)) return "{\"wkt\":\"" + crs[CrsHelper.EsriStringPrefix.Length..].Replace("\"", "\\\"") + "\"}";
+        if (crs.StartsWith(CrsHelper.EpsgPrefix, StringComparison.Ordinal)) return CrsHelper.ToEpsgCode(crs).ToString();
         throw new Exception("crs type not supported");
     }
 
@@ -252,7 +252,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         if (arcGisDynamicCapabilities.supportedImageFormatTypes == null)//Not all services return supported types, use png
             return "png";
 
-        var supportedTypes = arcGisDynamicCapabilities.supportedImageFormatTypes.ToLower();
+        var supportedTypes = arcGisDynamicCapabilities.supportedImageFormatTypes.ToLowerInvariant();
 
         if (supportedTypes.Contains("png32"))
             return "png32";

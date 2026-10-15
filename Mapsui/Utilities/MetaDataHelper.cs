@@ -21,7 +21,7 @@ public class MetaDataHelper
             if (gt > 1)
             {
                 // Local function pattern: <Outer>g__LocalName|0_1
-                var gIndex = name.IndexOf("g__", gt + 1);
+                var gIndex = name.IndexOf("g__", gt + 1, StringComparison.Ordinal);
                 if (gIndex >= 0)
                 {
                     var pipe = name.IndexOf('|', gIndex + 3);

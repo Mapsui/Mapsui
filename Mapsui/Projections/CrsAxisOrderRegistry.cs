@@ -251,7 +251,7 @@ public class CrsAxisOrderRegistry
             const int
                 maxSrid = 32767; // PDD: I don't know where this number comes from. I based it on the comment below.
 
-            switch (identifier.Authority.ToUpper())
+            switch (identifier.Authority.ToUpperInvariant())
             {
                 //case "OGC":
                 default:

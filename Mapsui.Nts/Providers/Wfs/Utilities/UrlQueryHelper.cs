@@ -9,7 +9,7 @@ public static class UrlQueryHelper
     public static string AppendQuery(this string url, string query)
     {
         // remove lending /
-        if (url.EndsWith(@"/"))
+        if (url.EndsWith('/'))
         {
             url = url[..^1];
         }

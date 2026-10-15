@@ -48,7 +48,8 @@ public static class EmbeddedResourceLoader
         }
 
         // Give feedback if there are resources with similar names
-        var similarNames = resourceNames.Where(name => path.ToLower().Split('.')
+        var pathParts = path.Split('.');
+        var similarNames = resourceNames.Where(name => pathParts
             .Any(s => name.Contains(s, StringComparison.OrdinalIgnoreCase))).ToArray();
         if (similarNames.Length <= 0) return stringBuilder.ToString();
         var nameLength = assembly.GetAssemblyName()?.Length ?? 0;

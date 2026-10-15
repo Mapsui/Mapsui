@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using NLog;
@@ -13,7 +14,7 @@ public static class VectorStyleReader
 
     public static string GetStyle(VectorStyleKind styleKind)
     {
-        var text = styleKind.ToString().ToLower();
+        var text = styleKind.ToString().ToLowerInvariant();
         // Read from the AliFlux assembly which contains the embedded style resources
         var aliFluxAssembly = typeof(VexTile.Renderer.Mvt.AliFlux.IVectorStyle).Assembly;
         var name = aliFluxAssembly.GetName().Name;
@@ -36,7 +37,7 @@ public static class VectorStyleReader
             var resourceName = name2 + ".Styles.fonts." + name;
             if (names == null)
                 names = aliFluxAssembly.GetManifestResourceNames();
-            var text = names?.FirstOrDefault(x => x.StartsWith(resourceName));
+            var text = names?.FirstOrDefault(x => x.StartsWith(resourceName, StringComparison.Ordinal));
             if (!string.IsNullOrWhiteSpace(text))
             {
                 using var stream2 = aliFluxAssembly.GetManifestResourceStream(text);
