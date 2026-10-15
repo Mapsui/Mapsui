@@ -39,3 +39,5 @@ Defines what part of the map is visible on the screen. It is a simple immutable 
 
 ### MapRenderer
 A member of the MapControl. Draws the map on the MapControl when RefreshGraphics is called.
+
+The renderer is distinct from the software/GPU backend and native host view; see [rendering options](rendering-options.md) for these choices.

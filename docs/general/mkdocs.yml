@@ -32,6 +32,7 @@ nav:
   - 'projections.md'
   - 'wms.md'
   - 'vector-style.md'
+  - 'rendering-options.md'
   - 'custom-style-renders.md'
   - 'custom-point-style-renderer.md'
   - 'custom-layer-renderer.md'

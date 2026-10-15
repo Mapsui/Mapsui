@@ -3,7 +3,7 @@ using Mapsui.Logging;
 using Mapsui.Manipulations;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
+using Mapsui.UI.Maui.Drawing;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -19,10 +19,29 @@ namespace Mapsui.UI.Maui;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
-    public static bool UseGPU { get; set; } = true;
+    /// <summary>Default backend for new parameterless controls. Read once during construction.</summary>
+    public static RenderBackend Backend { get; set; } = RenderBackend.Gpu;
 
-    private readonly SKGLView? _glView;
-    private readonly SKCanvasView? _canvasView;
+    /// <summary>
+    /// Compatibility setting for <see cref="Backend"/>. Setting true selects <see cref="RenderBackend.Gpu"/>;
+    /// setting false selects <see cref="RenderBackend.Software"/>. Existing controls are unaffected.
+    /// </summary>
+    public static bool UseGPU
+    {
+        get => Backend != RenderBackend.Software;
+        set => Backend = value ? RenderBackend.Gpu : RenderBackend.Software;
+    }
+
+    /// <summary>
+    /// The backend selected for this instance. AndroidSurfaceView maps to Gpu on other platforms.
+    /// Changing the static default does not change this control or its lifecycle behavior.
+    /// Native initialization errors are reported as errors, without substituting a different backend.
+    /// </summary>
+    public RenderBackend ActiveBackend { get; }
+
+    private readonly IMapDrawingView _drawingView;
+    private readonly Action _invalidateDrawingView;
+    private bool _disposed;
     private readonly ConcurrentDictionary<long, PointerRecording> _positions = new();
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
@@ -35,51 +54,43 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// period of dangling ghost touches. You might want to tweak this value to your needs.
     /// </summary>
     public TimeSpan IsStaleTimeSpan { get; set; } = TimeSpan.FromMilliseconds(500); // Even with a value of 100 I never see removal of a valid event, so I assume 500 is save. And perhaps it could be set even lower because if a valid event is removed sometimes I don't notice any change in the UI.
-    public MapControl()
-    {
-        View view;
+    /// <summary>Constructs a control using the current <see cref="Backend"/> default (Gpu initially).</summary>
+    public MapControl() : this(Backend) { }
 
+    /// <summary>Constructs a control with a fixed backend, independently of the static default.</summary>
+    /// <param name="backend">The backend to use. AndroidSurfaceView maps to Gpu on non-Android platforms.</param>
+    public MapControl(RenderBackend backend)
+    {
+        (ActiveBackend, _drawingView) = MapDrawingViewFactory.Create(backend);
+        _invalidateDrawingView = InvalidateDrawingView;
         BackgroundColor = KnownColor.White;
         InitTouchesReset(this);
-
-        if (UseGPU)
-        {
-            // Use GPU backend
-            _glView = new SKGLView
-            {
-                HasRenderLoop = false,
-                EnableTouchEvents = true,
-            };
-            // Events
-            _glView.Touch += OnTouch;
-            _glView.PaintSurface += OnGLPaintSurface;
-            view = _glView;
-        }
-        else
-        {
-            // Use CPU backend
-            _canvasView = new SKCanvasView
-            {
-                EnableTouchEvents = true,
-            };
-            // Events
-            _canvasView.Touch += OnTouch;
-            _canvasView.PaintSurface += OnPaintSurface;
-            view = _canvasView;
-        }
-        view.SizeChanged += View_SizeChanged;
-        Content = view;
+        _drawingView.Touch += OnTouch;
+        _drawingView.Paint += OnPaint;
+        _drawingView.SizeChanged += View_SizeChanged;
+        Content = _drawingView.View;
         SharedConstructor();
         Mapsui.Utilities.PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowserStatic);
     }
+
+    protected override void OnHandlerChanging(HandlerChangingEventArgs args)
+    {
+        // Connect the dedicated host before the parent's handler maps Content to a native view.
+        if (!_disposed && args.NewHandler?.MauiContext is { } context)
+            _drawingView.Connect(context);
+        base.OnHandlerChanging(args);
+    }
+
     public void InvalidateCanvas()
     {
-        if (_glView is SKGLView glView)
-            RunOnUIThread(glView.InvalidateSurface);
-        else if (_canvasView is SKCanvasView canvasView)
-            RunOnUIThread(canvasView.InvalidateSurface);
-        else
-            throw new InvalidOperationException("Neither SKGLView nor SKCanvasView is initialized.");
+        if (!_disposed)
+            RunOnUIThread(_invalidateDrawingView);
+    }
+
+    private void InvalidateDrawingView()
+    {
+        if (!_disposed)
+            _drawingView.Invalidate();
     }
 
     private static bool IsMaui9()
@@ -202,9 +213,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
-                if (!e.InContact)
-                    return;
-
                 _positions.Clear();
                 Refresh();
             }
@@ -235,33 +243,28 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
     }
 
-    private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
+    private void OnPaint(SKCanvas canvas, object? context)
     {
-        if (_glView?.GRContext is null)
+        if (_disposed)
+            return;
+        if (ActiveBackend != RenderBackend.Software && context is null)
         {
-            // Could this be null before Home is called? If so we should change the logic.
-            Logger.Log(LogLevel.Warning, "Refresh can not be called because GRContext is null");
-            _renderController?.Render(args.Surface.Canvas, null); // unblock the invalidation loop
+            _renderController?.Render(canvas, null); // Complete invalidation even before a GPU context exists.
             return;
         }
 
-        // Keep the GPU context current so the renderer can create GPU-backed surfaces.
-        Map.RenderService.GpuContext = _glView.GRContext;
-
-        // Called on UI thread
-        _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
+        // A replacement GL context invalidates the persistent surface owned by RenderService.
+        if (!ReferenceEquals(Map.RenderService.GpuContext, context))
+            _renderController?.RefreshGraphics();
+        Map.RenderService.GpuContext = context;
+        _renderController?.Render(canvas, GetPixelDensity());
     }
 
-    private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
-    {
-        // Called on UI thread
-        _renderController?.Render(args.Surface.Canvas, GetPixelDensity());
-    }
     private static void OpenInBrowserStatic(string url)
     {
         Catch.TaskRun(() => _ = Launcher.OpenAsync(new Uri(url)));
     }
-    private ScreenPosition GetScreenPosition(SKPoint point, float pixelDensity) =>
+    internal static ScreenPosition GetScreenPosition(SKPoint point, float pixelDensity) =>
         new(point.X / pixelDensity, point.Y / pixelDensity);
 
     private void OnZoomInOrOut(int mouseWheelDelta, ScreenPosition currentMousePosition)
@@ -289,30 +292,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Dispatcher.Dispatch(() => Catch.Exceptions(action));
     }
 
-    private void DetachSkiaViewHandlers()
-    {
-        if (_glView != null)
-        {
-            _glView.Touch -= OnTouch;
-            _glView.PaintSurface -= OnGLPaintSurface;
-            _glView.SizeChanged -= View_SizeChanged;
-            _glView.Handler?.DisconnectHandler();
-        }
-
-        if (_canvasView != null)
-        {
-            _canvasView.Touch -= OnTouch;
-            _canvasView.PaintSurface -= OnPaintSurface;
-            _canvasView.SizeChanged -= View_SizeChanged;
-            _canvasView.Handler?.DisconnectHandler();
-        }
-
-        if (Content != null)
-        {
-            Content.SizeChanged -= View_SizeChanged;
-        }
-    }
-
     public void Dispose()
     {
         Dispose(true);
@@ -320,15 +299,20 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     }
     protected virtual void Dispose(bool disposing)
     {
-        if (disposing)
+        if (disposing && !_disposed)
         {
+            _disposed = true;
             var weakReference = _listeners?.FirstOrDefault(f => f.TryGetTarget(out var control) && control == this);
             if (weakReference != null)
             {
                 _listeners?.Remove(weakReference);
             }
 
-            DetachSkiaViewHandlers();
+            _drawingView.Touch -= OnTouch;
+            _drawingView.Paint -= OnPaint;
+            _drawingView.SizeChanged -= View_SizeChanged;
+            _drawingView.Dispose();
+            ClearTouchState();
             Map?.Dispose();
 
 #if ANDROID
@@ -366,7 +350,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private double GetCanvasWidth()
     {
-        return _glView?.CanvasSize.Width ?? _canvasView!.CanvasSize.Width;
+        return _drawingView.CanvasSize.Width;
     }
 
     private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202

@@ -9,6 +9,8 @@ description: How to enable and use the built-in performance widget that displays
 
 Mapsui supports a widget that shows the main performance values for drawing the map.
 
+For backend and Android host-view choices, see [rendering options](rendering-options.md).
+
 ## How it works
 
 The `PerformanceWidget`, `Performance` object, tapped-to-clear behavior, and widget renderer are all set up automatically as part of the `Map`. Nothing needs to be created or registered manually.
@@ -37,6 +39,8 @@ The mean value is the mean of the last x draws. x is the number, you provide whe
 ### Frames per second
 
 This is the number of frames that could be drawn with the actual mean drawing time.
+
+This is an estimate derived from renderer-call duration, not measured display FPS. It does not measure when frames are presented on screen, or the cadence of native paint callbacks.
 
 ### Minimum
 

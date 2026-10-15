@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.UI.Maui;
 
@@ -23,14 +21,13 @@ public partial class MainViewModel : ObservableObject
         selectedCategory = Categories.First();
         PopulateSamples(selectedCategory);
         selectedSample = Samples.First();
-        Map = new Map();
     }
 
     [ObservableProperty]
     string selectedCategory;
 
     [ObservableProperty]
-    ISampleBase selectedSample;
+    ISampleBase? selectedSample;
 
     [ObservableProperty]
     Map? map;
@@ -43,7 +40,9 @@ public partial class MainViewModel : ObservableObject
 
     public void Picker_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        var selection = SelectedSample;
         PopulateSamples(SelectedCategory);
+        SelectedSample = selection?.Category == SelectedCategory ? selection : Samples.FirstOrDefault();
     }
 
     private void PopulateSamples(string selectedCategory)
@@ -56,24 +55,11 @@ public partial class MainViewModel : ObservableObject
         }
     }
 
-    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
-    public async void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        try
-        {
-            if (SelectedSample is null)
-                return;
+    public event EventHandler? SampleChanged;
 
-            if (SelectedSample is ISample sample)
-#pragma warning disable IDISP003 // Dispose previous before re-assigning
-                Map = await sample.CreateMapAsync();
-#pragma warning restore IDISP003 // Dispose previous before re-assigning
-            else if (SelectedSample is IMapControlSample mapControlSample && MapControl != null)
-                mapControlSample.Setup(MapControl);
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
+    public void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (SelectedSample != null)
+            SampleChanged?.Invoke(this, EventArgs.Empty);
     }
 }
