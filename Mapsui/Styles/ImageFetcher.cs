@@ -95,16 +95,21 @@ public static class ImageFetcher
         return result;
     }
 
-    private async static Task<byte[]> LoadFromUrlAsync(Uri imageSource)
+    private static Task<byte[]> LoadFromUrlAsync(Uri imageSource)
+    {
+        return LoadFromUrlAsync(imageSource, new HttpClientHandler { AllowAutoRedirect = true });
+    }
+
+    internal async static Task<byte[]> LoadFromUrlAsync(Uri imageSource, HttpMessageHandler handler)
     {
         try
         {
-            using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
             using var httpClient = new HttpClient(handler);
-            using HttpResponseMessage response = await httpClient.GetAsync(imageSource, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            using HttpResponseMessage response = await httpClient.GetAsync(imageSource).ConfigureAwait(false);
             response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
-            await using var tempStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            return tempStream.ToBytes();
+            // Read asynchronously. In Blazor WebAssembly the response stream is backed by the browser's Fetch API
+            // and throws on synchronous reads. See https://github.com/Mapsui/Mapsui/issues/3381
+            return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
         {
