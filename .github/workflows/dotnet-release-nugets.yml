@@ -8,6 +8,10 @@ on:
         required: true
         type: boolean 
 
+permissions:
+  contents: read
+  id-token: write # Required for NuGet Trusted Publishing (OIDC token exchange).
+
 jobs:
   build:
 
@@ -62,6 +66,15 @@ jobs:
         name: packages
         path: nugets/*.nupkg
 
+    # Trusted Publishing: exchanges a GitHub OIDC token for a short-lived
+    # nuget.org API key, using the trust policy configured on nuget.org.
+    - name: NuGet login (Trusted Publishing)
+      if: ${{ inputs.release_nugets }}
+      uses: NuGet/login@v1
+      id: nuget-login
+      with:
+        user: pauldendulk
+
     - name: Release NuGets
-      if: ${{ inputs.release_nugets }} 
-      run: dotnet nuget push "nugets\**\*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{secrets.NUGET_APIKEY}}
+      if: ${{ inputs.release_nugets }}
+      run: dotnet nuget push "nugets\**\*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
