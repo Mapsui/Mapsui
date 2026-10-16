@@ -15,7 +15,7 @@ public static class LineStringRenderer
             return;
 
         // lineString - relevant for GeometryCollection children
-        SKPath ToPath((long featureId, int position, MRect extent, double rotation, float lineWidth) valueTuple)
+        SKPath ToPath((long featureGenerationId, int position, MRect extent, double rotation, float lineWidth) valueTuple)
         {
             var result = lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
             _ = result.Bounds;
@@ -29,7 +29,7 @@ public static class LineStringRenderer
 
         if (vectorStyle.Line.IsVisible())
         {
-            using var path = renderService.VectorCache.GetOrCreate((feature.Id, position, extent, rotation, lineWidth), ToPath);
+            using var path = renderService.VectorCache.GetOrCreate((feature.GenerationId, position, extent, rotation, lineWidth), ToPath);
 
             // If the Outline property is set and has a width greater than 0, draw the outline first.
             if (vectorStyle.Outline?.Width > 0)
