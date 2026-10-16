@@ -24,3 +24,11 @@ description: A showcase of real-world applications and products built with Mapsu
 ### Rutas Tarija
 
 [![Rutas Tarija](images/rutas-tarija.png)](https://play.google.com/store/apps/details?id=com.eliandev.rtarija)
+
+### Track Explorer
+
+[![Track Explorer](images/track-explorer.png)](https://www.trackexplorer.app/)
+
+### Meissner Nordic
+
+[![Meissner Nordic](images/meissner-nordic.png)](https://meissnernordic.app/)
