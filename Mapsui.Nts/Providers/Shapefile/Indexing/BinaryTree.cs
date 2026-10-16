@@ -162,7 +162,7 @@ public class BinaryTree<T, TU> where T : IComparable<T?>
     /// <returns>Enumerator</returns>
     public IEnumerable<ItemValue> StartsWith(string str)
     {
-        return ScanString(str.ToUpper(), _root.RightNode);
+        return ScanString(str.ToUpperInvariant(), _root.RightNode);
     }
 
     /// <summary>
@@ -199,19 +199,19 @@ public class BinaryTree<T, TU> where T : IComparable<T?>
     {
         if (root == null)
             yield break;
-        if (string.Compare(root.Item.Value?.ToString()?[..val.Length].ToUpper(),
+        if (string.Compare(root.Item.Value?.ToString()?[..val.Length].ToUpperInvariant(),
                 val, StringComparison.Ordinal) > 0)
             if (root.LeftNode != null)
-                if (root.LeftNode.Item.Value?.ToString()?.ToUpper().StartsWith(val) ?? false)
+                if (root.LeftNode.Item.Value?.ToString()?.ToUpperInvariant().StartsWith(val, StringComparison.Ordinal) ?? false)
                     foreach (var item in ScanString(val, root.LeftNode))
                         yield return item;
 
-        if (root.Item.Value?.ToString()?.ToUpper().StartsWith(val) ?? false)
+        if (root.Item.Value?.ToString()?.ToUpperInvariant().StartsWith(val, StringComparison.Ordinal) ?? false)
             yield return root.Item;
 
         if (string.Compare(root.Item.Value?.ToString(), val, StringComparison.Ordinal) < 0)
             if (root.RightNode != null)
-                if (string.Compare(root.RightNode.Item.Value?.ToString()?[..val.Length].ToUpper(), val, StringComparison.Ordinal) > 0)
+                if (string.Compare(root.RightNode.Item.Value?.ToString()?[..val.Length].ToUpperInvariant(), val, StringComparison.Ordinal) > 0)
                     foreach (var item in ScanString(val, root.RightNode))
                         yield return item;
     }

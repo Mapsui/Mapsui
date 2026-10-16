@@ -1,6 +1,7 @@
 ﻿using System;
-using NLog;
+using System.Globalization;
 using System.Threading.Tasks;
+using NLog;
 using VexTile.Common.Data;
 using VexTile.Common.Sources;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
@@ -40,17 +41,17 @@ public sealed class VectorTilesSource : IVectorTileSource, IBaseTileSource
         {
             foreach (IMetaData metaDatum in _sharedDataSource.GetMetaData())
             {
-                switch (metaDatum.Name.ToLower())
+                switch (metaDatum.Name.ToLowerInvariant())
                 {
                     case "bounds":
                         {
                             string[] array = metaDatum.Value.Split(',');
                             Bounds = new GeoExtent
                             {
-                                West = Convert.ToDouble(array[0]),
-                                South = Convert.ToDouble(array[1]),
-                                East = Convert.ToDouble(array[2]),
-                                North = Convert.ToDouble(array[3])
+                                West = Convert.ToDouble(array[0], CultureInfo.InvariantCulture),
+                                South = Convert.ToDouble(array[1], CultureInfo.InvariantCulture),
+                                East = Convert.ToDouble(array[2], CultureInfo.InvariantCulture),
+                                North = Convert.ToDouble(array[3], CultureInfo.InvariantCulture)
                             };
                             break;
                         }
@@ -59,16 +60,16 @@ public sealed class VectorTilesSource : IVectorTileSource, IBaseTileSource
                             string[] array = metaDatum.Value.Split(',');
                             Center = new CoordinatePair
                             {
-                                X = Convert.ToDouble(array[0]),
-                                Y = Convert.ToDouble(array[1])
+                                X = Convert.ToDouble(array[0], CultureInfo.InvariantCulture),
+                                Y = Convert.ToDouble(array[1], CultureInfo.InvariantCulture)
                             };
                             break;
                         }
                     case "minzoom":
-                        MinZoom = Convert.ToInt32(metaDatum.Value);
+                        MinZoom = Convert.ToInt32(metaDatum.Value, CultureInfo.InvariantCulture);
                         break;
                     case "maxzoom":
-                        MaxZoom = Convert.ToInt32(metaDatum.Value);
+                        MaxZoom = Convert.ToInt32(metaDatum.Value, CultureInfo.InvariantCulture);
                         break;
                     case "name":
                         Name = metaDatum.Value;

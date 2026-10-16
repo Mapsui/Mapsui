@@ -76,10 +76,10 @@ public class GeoJsonProvider(string geoJson) : IProvider, IProviderExtended
         if (string.IsNullOrWhiteSpace(_geoJson))
             return false;
 
-        return (_geoJson.Contains('{', StringComparison.CurrentCulture)
-            && _geoJson.Contains('}', StringComparison.CurrentCulture))
-            || (_geoJson.Contains('[', StringComparison.CurrentCulture)
-            && _geoJson.Contains(']', StringComparison.CurrentCulture));
+        return (_geoJson.Contains('{')
+            && _geoJson.Contains('}'))
+            || (_geoJson.Contains('[')
+            && _geoJson.Contains(']'));
     }
 
     public FeatureKeyCreator<string> FeatureKeyCreator

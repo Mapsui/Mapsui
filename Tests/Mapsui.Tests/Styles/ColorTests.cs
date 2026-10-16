@@ -47,6 +47,21 @@ public static class ColorTests
         Assert.That(color.R == Color.Yellow.R && color.G == Color.Yellow.G && color.B == Color.Yellow.B, Is.True);
     }
 
+    // Turkish lowercases 'I' to the dotless 'ı', which made names with a capital 'I' unrecognizable.
+    // See https://github.com/Mapsui/Mapsui/issues/3383
+    [TestCase("Indigo")]
+    [TestCase("INDIGO")]
+    [TestCase("indigo")]
+    [SetCulture("tr-TR")]
+    public static void ColorFromKnownColorUnderTurkishCulture(string name)
+    {
+        // Act
+        var color = Color.FromString(name);
+
+        // Assert
+        Assert.That(color, Is.EqualTo(Color.Indigo));
+    }
+
     [Test]
     public static void ColorFromRgbString()
     {

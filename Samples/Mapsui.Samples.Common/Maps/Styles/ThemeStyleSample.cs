@@ -93,7 +93,7 @@ public class ThemeStyleSample : ISample
                 if (geometryFeature.Geometry is Point)
                     return null;
 
-            return f["NAME"]?.ToString()?.ToLower() switch
+            return f["NAME"]?.ToString()?.ToLowerInvariant() switch
             {
                 "brazil" => brazilStyle,
                 "united states" => usaStyle,

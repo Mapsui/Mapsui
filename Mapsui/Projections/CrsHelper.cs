@@ -39,9 +39,9 @@ public static class CrsHelper
     {
         ArgumentNullException.ThrowIfNull(crs);
 
-        if (crs.StartsWith(EpsgPrefix)) return CrsType.Epgs;
-        if (crs.StartsWith(EsriStringPrefix)) return CrsType.EsriString;
-        if (crs.StartsWith(Proj4StringPrefix)) return CrsType.Proj4String;
+        if (crs.StartsWith(EpsgPrefix, StringComparison.Ordinal)) return CrsType.Epgs;
+        if (crs.StartsWith(EsriStringPrefix, StringComparison.Ordinal)) return CrsType.EsriString;
+        if (crs.StartsWith(Proj4StringPrefix, StringComparison.Ordinal)) return CrsType.Proj4String;
         throw new Exception($"crs not recognized: '{crs}'");
     }
 

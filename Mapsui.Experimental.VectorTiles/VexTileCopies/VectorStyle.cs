@@ -397,7 +397,7 @@ public class VectorStyle : IVectorStyle
 
     private SKColor ParseColor(object iColor)
     {
-        var provider = new CultureInfo("en-US", useUserOverride: true);
+        var provider = CultureInfo.InvariantCulture;
         if (iColor is Color color)
             return SKColorFactory.MakeColor(color.R, color.G, color.B, color.A);
         if (iColor is SKColor color2)
@@ -405,7 +405,7 @@ public class VectorStyle : IVectorStyle
         var text = (string)iColor;
         if (text[0] == '#')
             return SKColorFactory.LogColor(SKColor.Parse(text));
-        if (text.StartsWith("hsl("))
+        if (text.StartsWith("hsl(", StringComparison.Ordinal))
         {
             var array = text.Replace('%', '\0').Split(new char[] { ',', '(', ')' });
             var th = double.Parse(array[1], provider);
@@ -413,7 +413,7 @@ public class VectorStyle : IVectorStyle
             var tl = double.Parse(array[3], provider);
             return HslaToColor(255.0, th, ts, tl);
         }
-        if (text.StartsWith("hsla("))
+        if (text.StartsWith("hsla(", StringComparison.Ordinal))
         {
             var array2 = text.Replace('%', '\0').Split(new char[] { ',', '(', ')' });
             return HslaToColor(
@@ -422,7 +422,7 @@ public class VectorStyle : IVectorStyle
                 ts: double.Parse(array2[2], provider),
                 tl: double.Parse(array2[3], provider));
         }
-        if (text.StartsWith("rgba("))
+        if (text.StartsWith("rgba(", StringComparison.Ordinal))
         {
             var array3 = text.Replace('%', '\0').Split(new char[] { ',', '(', ')' });
             var num = double.Parse(array3[1], provider);
@@ -431,7 +431,7 @@ public class VectorStyle : IVectorStyle
             var num4 = double.Parse(array3[4], provider) * 255.0;
             return SKColorFactory.MakeColor((byte)num, (byte)num2, (byte)num3, (byte)num4);
         }
-        if (text.StartsWith("rgb("))
+        if (text.StartsWith("rgb(", StringComparison.Ordinal))
         {
             var array4 = text.Replace('%', '\0').Split(new char[] { ',', '(', ')' });
             var num5 = double.Parse(array4[1], provider);

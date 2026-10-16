@@ -65,7 +65,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
             if (value[^1].Equals('/'))
                 _url = value.Remove(value.Length - 1);
 
-            if (!_url.ToLower().Contains(@"exportimage"))
+            if (!_url.Contains("exportimage", StringComparison.OrdinalIgnoreCase))
                 _url += @"/ExportImage";
         }
     }
