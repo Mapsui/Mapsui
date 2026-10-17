@@ -32,12 +32,56 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
 .tile { cursor: pointer; font: inherit; color: inherit; text-align: center; }
 .tile.is-selected { border-color: #4257E3 !important;
   box-shadow: 0 0 0 2px #4257E333, 0 6px 18px rgba(30,32,70,0.08); }
-.pkgbar code { overflow-x: auto; }
+.pkgbar code { white-space: nowrap; overflow-x: auto; }
 .pkgcopy { cursor: pointer; font: inherit; }
 .pkgcopy:hover { border-color: #4257E3; color: #4257E3; }
 
+/* Grids: the designed column count on desktop, fewer columns on narrow
+   screens so the tiles keep a usable width instead of being squeezed. */
+.grid { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); }
+.grid-platforms { --cols: 5; }
+.grid-stats { --cols: 4; }
+.grid-cards { --cols: 3; }
+.grid-support { --cols: 2; }
+@media (max-width: 1000px) {
+  .grid-platforms { --cols: 4; }
+}
+@media (max-width: 900px) {
+  .grid-cards { --cols: 2; }
+}
+@media (max-width: 760px) {
+  .grid-platforms { --cols: 3; }
+  .grid-stats { --cols: 2; }
+  .grid-support { --cols: 1; }
+}
+@media (max-width: 620px) {
+  .grid-cards { --cols: 1; }
+}
+@media (max-width: 520px) {
+  .grid-platforms { --cols: 2; }
+}
+
+/* The hero's generous padding is for wide screens only */
+.hero { padding-block: 116px 92px; }
+@media (max-width: 620px) {
+  .hero { padding-block: 64px 56px; }
+}
+
 /* The install panel keeps one width and stays centred */
 .pkgrow { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px 18px; }
+.pkgrow > * { min-width: 0; }
+/* One fixed width on wide screens, so the panel does not resize when a
+   framework with a longer package name is picked. Below the one-column
+   breakpoint it fills the row instead: a fixed width is wider than a phone
+   viewport, and border-box keeps the padding inside it either way. */
+.pkgbar { box-sizing: border-box; width: 420px; max-width: 100%; }
+@media (max-width: 820px) {
+  .pkgbar { width: 100%; }
+}
+/* Too narrow to scroll a command comfortably: wrap it instead of clipping it. */
+@media (max-width: 520px) {
+  .pkgbar code { white-space: normal; word-break: break-word; }
+}
 .pkgrow > .pkgsite { justify-self: start; }
 @media (max-width: 820px) {
   .pkgrow { grid-template-columns: 1fr; justify-items: center; }
@@ -82,7 +126,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
 
   <!-- hero -->
   <section id="top" style="background-image: linear-gradient(180deg, rgba(252,252,254,0.18) 0%, rgba(252,252,254,0.46) 58%, #FCFCFE 100%), url('assets/map-randstad.jpg'); background-size: cover, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat">
-    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 116px 92px; display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center">
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center" class="hero">
       <svg viewBox="0 0 512 512" width="172" height="172" role="img" aria-label="Mapsui logo" style="max-width: 100%">
         <defs>
           <linearGradient id="g1b" x1="36" y1="36" x2="476" y2="476" gradientUnits="userSpaceOnUse">
@@ -119,7 +163,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
         <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Works with every major .NET UI framework</h2>
         <p style="margin: 0; max-width: 60ch; font-size: 17px; line-height: 1.6; color: #51536E">Only the map control is platform-specific. The map, its layers and styles are the same code on all of them.</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px">
+      <div class="grid grid-platforms" style="gap: 16px">
 
         <button type="button" class="tile" data-fw="maui" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/dotnet-bot.svg" alt="dotnet-bot, the .NET mascot" style="width: 40px; height: 44px; object-fit: contain">
@@ -184,8 +228,8 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
       </div>
       <div class="pkgrow">
         <span class="pkgspacer" aria-hidden="true"></span>
-        <div class="pkgbar" style="display: flex; flex-wrap: nowrap; gap: 12px 14px; align-items: center; border: 1px solid #E9EAF3; background: #FFFFFF; border-radius: 14px; padding: 16px 18px; width: 420px; max-width: 100%">
-          <code id="pkg-cmd" style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #1C1B2E; white-space: nowrap; flex: 1 1 auto; min-width: 0">dotnet add package Mapsui.Maui</code>
+        <div class="pkgbar" style="display: flex; flex-wrap: nowrap; gap: 12px 14px; align-items: center; border: 1px solid #E9EAF3; background: #FFFFFF; border-radius: 14px; padding: 16px 18px">
+          <code id="pkg-cmd" style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #1C1B2E; flex: 1 1 auto; min-width: 0">dotnet add package Mapsui.Maui</code>
           <button type="button" class="pkgcopy" id="pkg-copy" style="flex: none; margin-left: auto; border: 1px solid #D5D8EE; background: #FFFFFF; color: #6E7090; border-radius: 8px; padding: 8px 14px; font-size: 13.5px; font-weight: 600; min-height: 36px">Copy</button>
         </div>
         <a id="pkg-site" class="pkgsite" href="https://dotnet.microsoft.com/apps/maui" style="font-size: 14.5px; font-weight: 600">.NET MAUI website →</a>
@@ -199,7 +243,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
     <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px; display: flex; flex-direction: column; gap: 30px">
       <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Dependable</h2>
       <p style="margin: -16px 0 0; font-size: 19px; line-height: 1.6; color: #51536E; max-width: 60ch">Developed in the open since 2012, and still actively maintained.</p>
-      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div class="grid grid-stats" style="gap: 20px">
         <div style="min-width: 0; background: #EEF1FE; border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; gap: 7px">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-weight: 700; font-size: 42px; font-variant-numeric: tabular-nums; line-height: 1.05; color: #4257E3">2012</strong>
           <span style="font-size: 15px; line-height: 1.5; color: #51536E">First commit, carried over from the original SVN repository</span>
@@ -225,7 +269,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
   <section style="border-top: 1px solid #E9EAF3; background: #F6F7FD">
     <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 60px; display: flex; flex-direction: column; gap: 26px">
       <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Built on libraries you already trust</h2>
-      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+      <div class="grid grid-cards" style="gap: 20px">
         <div style="min-width: 0; background: #FFFFFF; border: 1px solid #E9EAF3; border-radius: 14px; padding: 24px; display: flex; gap: 16px; align-items: flex-start">
           <img src="assets/skiasharp.png" alt="SkiaSharp logo" style="width: 38px; height: 38px; object-fit: contain; flex: none; border-radius: 8px">
           <a class="builton" href="https://github.com/mono/SkiaSharp" style="min-width: 0; display: flex; flex-direction: column; gap: 6px">
@@ -258,7 +302,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
         <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Examples of apps that use Mapsui</h2>
         <a href="https://mapsui.com/v5/projects-that-use-mapsui.html" style="font-size: 15.5px; font-weight: 600">See the full list</a>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px">
+      <div class="grid grid-cards" style="gap: 18px">
         <a href="https://droniq.de/en/droniq-maps/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Droniq Maps</strong>
           <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Drone flight planning and airspace</span>
@@ -297,7 +341,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
   <section style="border-top: 1px solid #E9EAF3; background: #F6F7FD">
     <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px 72px; display: flex; flex-direction: column; gap: 28px">
       <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Two ways to keep this going</h2>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+      <div class="grid grid-support" style="gap: 24px">
         <div style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
           <h3 style="margin: 0; font-size: 20px; font-weight: 600">Sponsor Mapsui</h3>
           <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #51536E">Mapsui is free and stays free. Sponsorship pays for the maintenance that keeps it current with every new .NET and framework release.</p>
