@@ -52,6 +52,9 @@
     <None Update="Resources\Cache\BingHybrid.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Cache\BKGTopPlusGrey.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Cache\Michelin.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -5,6 +5,7 @@
 using Mapsui.Providers.Wfs;
 using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common.Maps.DataFormats;
+using Mapsui.Samples.Common.Maps.Styles;
 using Mapsui.Samples.Common.Maps.WMTS;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Tiling;
@@ -24,6 +25,7 @@ internal static class CacheHelper
         TmsSample.DefaultCache ??= File.ReadFromCacheFolder("TmsSample");
         WmtsSample.DefaultCache ??= File.ReadFromCacheFolder("WmtsSample");
         WmtsZurichSample.DefaultCache ??= File.ReadFromCacheFolder("WmtsZurichSample");
+        CustomPointStyleShaderSample.DefaultCache ??= File.ReadFromCacheFolder("BKGTopPlusGrey");
 
         // Url Cache
         WmsProvider.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
@@ -43,6 +45,7 @@ internal static class CacheHelper
         TiledWmsSample.DefaultCache = null;
         TmsSample.DefaultCache = null;
         WmtsZurichSample.DefaultCache = null;
+        CustomPointStyleShaderSample.DefaultCache = null;
 
         // Url Cache
         WmsProvider.DefaultCache = null;
