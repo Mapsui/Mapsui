@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapsui — a map for your .NET app</title>
+<meta name="description" content="Mapsui is an open source map component for .NET. It works with MAUI, Avalonia UI, Uno Platform, Blazor, WPF, WinUI, Windows Forms, Eto, Android and iOS, with the same API on every one of them.">
+<link rel="canonical" href="https://mapsui.com/">
+<link rel="icon" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mapsui">
+<meta property="og:title" content="Mapsui — a map for your .NET app">
+<meta property="og:description" content="An open source map component for .NET, working with every major .NET UI framework. Maintained in the open since 2012.">
+<meta property="og:url" content="https://mapsui.com/">
+<meta property="og:image" content="https://mapsui.com/assets/map-randstad.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+body { margin: 0; background: #FCFCFE; color: #1C1B2E; font-family: "Nunito Sans", "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: #4257E3; text-decoration: none; }
+a:hover { color: #2F3FB8; text-decoration: underline; }
+h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wrap: balance; }
+
+/* Tiles and cards are links */
+.tile, .builton { text-decoration: none; color: inherit;
+  transition: border-color .12s ease, transform .12s ease, box-shadow .12s ease; }
+.tile:hover, .builton:hover { text-decoration: none; border-color: #4257E3; transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(30,32,70,0.08); }
+.tile:focus-visible, .builton:focus-visible { outline: 2px solid #4257E3; outline-offset: 2px; }
+
+/* Framework picker */
+.tile { cursor: pointer; font: inherit; color: inherit; text-align: center; }
+.tile.is-selected { border-color: #4257E3 !important;
+  box-shadow: 0 0 0 2px #4257E333, 0 6px 18px rgba(30,32,70,0.08); }
+.pkgbar code { overflow-x: auto; }
+.pkgcopy { cursor: pointer; font: inherit; }
+.pkgcopy:hover { border-color: #4257E3; color: #4257E3; }
+
+/* The install panel keeps one width and stays centred */
+.pkgrow { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px 18px; }
+.pkgrow > .pkgsite { justify-self: start; }
+@media (max-width: 820px) {
+  .pkgrow { grid-template-columns: 1fr; justify-items: center; }
+  .pkgrow > .pkgspacer { display: none; }
+  .pkgrow > .pkgsite { justify-self: center; }
+}
+</style>
+</head>
+<body>
+
+<div style="width: 100%; min-height: 100%; background: #FCFCFE; color: #1C1B2E">
+
+  <header style="border-bottom: 1px solid #E9EAF3">
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 18px; display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center">
+      <a href="#top" style="display: flex; align-items: center; gap: 10px; color: #1C1B2E; text-decoration: none">
+        <svg viewBox="0 0 512 512" width="26" height="26" role="img" aria-label="Mapsui logo">
+          <defs>
+            <linearGradient id="g1a" x1="36" y1="36" x2="476" y2="476" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#4D84F2"></stop><stop offset="40%" stop-color="#595AB4"></stop><stop offset="70%" stop-color="#473C6E"></stop><stop offset="100%" stop-color="#332548"></stop>
+            </linearGradient>
+            <mask id="m1a">
+              <rect width="512" height="512" fill="#000000"></rect>
+              <circle cx="256" cy="256" r="220" fill="#ffffff"></circle>
+              <rect x="168" y="256" width="176" height="256" fill="#000000"></rect>
+              <path d="M168 182.18079 L256 256 L344 182.18079 V256 H168 Z" fill="#000000"></path>
+              <path d="M168 0 V54.366598 L256 128.185808 L344 54.366598 V0 Z" fill="#000000"></path>
+            </mask>
+          </defs>
+          <rect width="512" height="512" fill="url(#g1a)" mask="url(#m1a)"></rect>
+        </svg>
+        <span style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 18px; font-weight: 600; letter-spacing: -0.015em">Mapsui</span>
+      </a>
+      <nav style="margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px 26px; align-items: center; font-size: 15px; font-weight: 500">
+        <a href="https://mapsui.com/v5/" style="color: #51536E">Documentation</a>
+        <a href="https://mapsui.com/v5/samples/" style="color: #51536E">Samples</a>
+        <a href="https://mapsui.com/v5/projects-that-use-mapsui.html" style="color: #51536E">Showcase</a>
+        <a href="https://github.com/Mapsui/Mapsui" style="color: #51536E">GitHub</a>
+        <a href="https://github.com/sponsors/pauldendulk" style="background: #EEF0FD; border-radius: 10px; padding: 8px 16px; color: #4257E3; font-weight: 600">Sponsor</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <section id="top" style="background-image: linear-gradient(180deg, rgba(252,252,254,0.18) 0%, rgba(252,252,254,0.46) 58%, #FCFCFE 100%), url('assets/map-randstad.jpg'); background-size: cover, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat">
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 116px 92px; display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center">
+      <svg viewBox="0 0 512 512" width="172" height="172" role="img" aria-label="Mapsui logo" style="max-width: 100%">
+        <defs>
+          <linearGradient id="g1b" x1="36" y1="36" x2="476" y2="476" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#4D84F2"></stop><stop offset="10%" stop-color="#4F79E4"></stop><stop offset="20%" stop-color="#526ED5"></stop><stop offset="30%" stop-color="#5664C5"></stop><stop offset="40%" stop-color="#595AB4"></stop><stop offset="50%" stop-color="#575094"></stop><stop offset="60%" stop-color="#4F457F"></stop><stop offset="70%" stop-color="#473C6E"></stop><stop offset="80%" stop-color="#40335F"></stop><stop offset="90%" stop-color="#392C53"></stop><stop offset="100%" stop-color="#332548"></stop>
+          </linearGradient>
+          <mask id="m1b">
+            <rect width="512" height="512" fill="#000000"></rect>
+            <circle cx="256" cy="256" r="220" fill="#ffffff"></circle>
+            <rect x="168" y="256" width="176" height="256" fill="#000000"></rect>
+            <path d="M168 182.18079 L256 256 L344 182.18079 V256 H168 Z" fill="#000000"></path>
+            <path d="M168 0 V54.366598 L256 128.185808 L344 54.366598 V0 Z" fill="#000000"></path>
+          </mask>
+        </defs>
+        <rect width="512" height="512" fill="url(#g1b)" mask="url(#m1b)"></rect>
+      </svg>
+
+      <h1 style="margin: 0; font-weight: 700; font-size: clamp(42px, 5.6vw, 72px); line-height: 1.02; letter-spacing: -0.015em; max-width: 14ch">A map in your .NET app</h1>
+
+      <p style="margin: 0; max-width: 56ch; font-size: 19.5px; line-height: 1.58; color: #51536E">An open source map component for .NET. Tile layers, vector styling, projections and touch handling, with the same API on every UI framework it supports.</p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 6px">
+        <a href="https://mapsui.com/v5/" style="background: #4257E3; color: #FFFFFF; border-radius: 11px; padding: 15px 28px; font-weight: 600; font-size: 16px; text-decoration: none">Quickstart</a>
+        <a href="https://mapsui.com/v5/samples/" style="border: 1.5px solid #D5D8EE; color: #1C1B2E; border-radius: 11px; padding: 15px 28px; font-weight: 600; font-size: 16px; text-decoration: none">Live samples</a>
+        <a href="https://mapsui.com/v5/" style="border: 1.5px solid #D5D8EE; color: #1C1B2E; border-radius: 11px; padding: 15px 28px; font-weight: 600; font-size: 16px; text-decoration: none">Documentation</a>
+      </div>
+      <p style="margin: 10px 0 0; font-size: 13px; color: #85879F">Background rendered by Mapsui at reduced opacity. Map data © OpenStreetMap contributors.</p>
+    </div>
+  </section>
+
+  <!-- platforms -->
+  <section>
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 24px 72px; display: flex; flex-direction: column; gap: 26px">
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center">
+        <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Works with every major .NET UI framework</h2>
+        <p style="margin: 0; max-width: 60ch; font-size: 17px; line-height: 1.6; color: #51536E">Only the map control is platform-specific. The map, its layers and styles are the same code on all of them.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px">
+
+        <button type="button" class="tile" data-fw="maui" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/dotnet-bot.svg" alt="dotnet-bot, the .NET mascot" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">.NET MAUI</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Maui</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="avalonia" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/avalonia.png" alt="Avalonia UI logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Avalonia UI</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Avalonia12</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="uno" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/uno.png" alt="Uno Platform logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Uno Platform</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Uno.WinUI</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="blazor" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/blazor.svg" alt="Blazor logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Blazor</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Blazor</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="wpf" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/dotnet.svg" alt=".NET logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">WPF</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Wpf</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="winui" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/winui.svg" alt="WinUI logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">WinUI</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.WinUI</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="winforms" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/dotnet.svg" alt=".NET logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Windows Forms</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.WindowsForms</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="eto" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/eto.png" alt="Eto Forms logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Eto Forms</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Eto</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="android" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/android.svg" alt="Android logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">.NET for Android</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Android</code>
+        </button>
+
+        <button type="button" class="tile" data-fw="ios" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+          <img src="assets/apple.svg" alt="Apple logo" style="width: 40px; height: 44px; object-fit: contain">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">.NET for iOS</strong>
+          <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.iOS</code>
+        </button>
+
+      </div>
+      <div class="pkgrow">
+        <span class="pkgspacer" aria-hidden="true"></span>
+        <div class="pkgbar" style="display: flex; flex-wrap: nowrap; gap: 12px 14px; align-items: center; border: 1px solid #E9EAF3; background: #FFFFFF; border-radius: 14px; padding: 16px 18px; width: 420px; max-width: 100%">
+          <code id="pkg-cmd" style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #1C1B2E; white-space: nowrap; flex: 1 1 auto; min-width: 0">dotnet add package Mapsui.Maui</code>
+          <button type="button" class="pkgcopy" id="pkg-copy" style="flex: none; margin-left: auto; border: 1px solid #D5D8EE; background: #FFFFFF; color: #6E7090; border-radius: 8px; padding: 8px 14px; font-size: 13.5px; font-weight: 600; min-height: 36px">Copy</button>
+        </div>
+        <a id="pkg-site" class="pkgsite" href="https://dotnet.microsoft.com/apps/maui" style="font-size: 14.5px; font-weight: 600">.NET MAUI website →</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- maintenance -->
+  <section>
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px; display: flex; flex-direction: column; gap: 30px">
+      <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Dependable</h2>
+      <p style="margin: -16px 0 0; font-size: 19px; line-height: 1.6; color: #51536E; max-width: 60ch">Developed in the open since 2012, and still actively maintained.</p>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+        <div style="min-width: 0; background: #EEF1FE; border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; gap: 7px">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-weight: 700; font-size: 42px; font-variant-numeric: tabular-nums; line-height: 1.05; color: #4257E3">2012</strong>
+          <span style="font-size: 15px; line-height: 1.5; color: #51536E">First commit, carried over from the original SVN repository</span>
+        </div>
+        <div style="min-width: 0; background: #F5F4FC; border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; gap: 7px">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-weight: 700; font-size: 42px; font-variant-numeric: tabular-nums; line-height: 1.05; color: #5B4E96">98</strong>
+          <span style="font-size: 15px; line-height: 1.5; color: #51536E">People have contributed code</span>
+        </div>
+        <div style="min-width: 0; background: #F5F4FC; border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; gap: 7px">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-weight: 700; font-size: 42px; font-variant-numeric: tabular-nums; line-height: 1.05; color: #5B4E96">4,000</strong>
+          <span style="font-size: 15px; line-height: 1.5; color: #51536E">Downloads of the core package every day</span>
+        </div>
+        <div style="min-width: 0; background: #F5F4FC; border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; gap: 7px">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-weight: 700; font-size: 42px; font-variant-numeric: tabular-nums; line-height: 1.05; color: #5B4E96">6.4M</strong>
+          <span style="font-size: 15px; line-height: 1.5; color: #51536E">Downloads across all 29 Mapsui packages</span>
+        </div>
+      </div>
+      <p style="margin: 0; max-width: 68ch; font-size: 17px; line-height: 1.65; color: #51536E">Every major version comes with a written upgrade guide, and the v4 documentation stays online. Breaking changes are announced in the roadmap before they land.</p>
+    </div>
+  </section>
+
+  <!-- built on -->
+  <section style="border-top: 1px solid #E9EAF3; background: #F6F7FD">
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 60px; display: flex; flex-direction: column; gap: 26px">
+      <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Built on libraries you already trust</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+        <div style="min-width: 0; background: #FFFFFF; border: 1px solid #E9EAF3; border-radius: 14px; padding: 24px; display: flex; gap: 16px; align-items: flex-start">
+          <img src="assets/skiasharp.png" alt="SkiaSharp logo" style="width: 38px; height: 38px; object-fit: contain; flex: none; border-radius: 8px">
+          <a class="builton" href="https://github.com/mono/SkiaSharp" style="min-width: 0; display: flex; flex-direction: column; gap: 6px">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">SkiaSharp</strong>
+            <span style="font-size: 14.5px; line-height: 1.55; color: #51536E">All drawing goes through Skia, so a map looks the same on every platform.</span>
+          </a>
+        </div>
+        <div style="min-width: 0; background: #FFFFFF; border: 1px solid #E9EAF3; border-radius: 14px; padding: 24px; display: flex; gap: 16px; align-items: flex-start">
+          <img src="assets/brutile.png" alt="BruTile logo" style="width: 38px; height: 38px; object-fit: contain; flex: none; border-radius: 8px">
+          <a class="builton" href="https://github.com/BruTile/BruTile" style="min-width: 0; display: flex; flex-direction: column; gap: 6px">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">BruTile</strong>
+            <span style="font-size: 14.5px; line-height: 1.55; color: #51536E">Tile sources, caching, WMTS and OpenStreetMap out of the box.</span>
+          </a>
+        </div>
+        <div style="min-width: 0; background: #FFFFFF; border: 1px solid #E9EAF3; border-radius: 14px; padding: 24px; display: flex; gap: 16px; align-items: flex-start">
+          <img src="assets/nts.png" alt="NetTopologySuite logo" style="width: 38px; height: 38px; object-fit: contain; flex: none; border-radius: 8px">
+          <a class="builton" href="https://github.com/NetTopologySuite/NetTopologySuite" style="min-width: 0; display: flex; flex-direction: column; gap: 6px">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">NetTopologySuite</strong>
+            <span style="font-size: 14.5px; line-height: 1.55; color: #51536E">Real geometry: WKT, GeoJSON and spatial predicates, through Mapsui.Nts.</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- example apps -->
+  <section style="border-top: 1px solid #E9EAF3">
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px; display: flex; flex-direction: column; gap: 28px">
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; justify-content: space-between">
+        <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Examples of apps that use Mapsui</h2>
+        <a href="https://mapsui.com/v5/projects-that-use-mapsui.html" style="font-size: 15.5px; font-weight: 600">See the full list</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px">
+        <a href="https://droniq.de/en/droniq-maps/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Droniq Maps</strong>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Drone flight planning and airspace</span>
+          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">droniq.de →</span>
+        </a>
+        <a href="https://www.trackexplorer.app/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Track Explorer</strong>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">GPS track library for hiking and cycling</span>
+          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">trackexplorer.app →</span>
+        </a>
+        <a href="https://github.com/NeilMacMullen/kusto-loco" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">LokqlDx</strong>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">KQL data explorer with map output</span>
+          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">github.com →</span>
+        </a>
+        <a href="https://meissnernordic.app/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Meissner Nordic</strong>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Cross-country ski trail conditions</span>
+          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">meissnernordic.app →</span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.eliandev.rtarija" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Rutas Tarija</strong>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">City bus routes in Tarija, Bolivia</span>
+          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">play.google.com →</span>
+        </a>
+        <a href="https://software-notion.de/apps/breath-companion" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
+          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Breath Companion</strong>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Freediving logbook and dive sites</span>
+          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">software-notion.de →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- support -->
+  <section style="border-top: 1px solid #E9EAF3; background: #F6F7FD">
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px 72px; display: flex; flex-direction: column; gap: 28px">
+      <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Two ways to keep this going</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+        <div style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
+          <h3 style="margin: 0; font-size: 20px; font-weight: 600">Sponsor Mapsui</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #51536E">Mapsui is free and stays free. Sponsorship pays for the maintenance that keeps it current with every new .NET and framework release.</p>
+          <a href="https://github.com/sponsors/pauldendulk" style="margin-top: 4px; background: #4257E3; color: #FFFFFF; border-radius: 11px; padding: 13px 24px; font-weight: 600; font-size: 15.5px; text-decoration: none">Become a sponsor</a>
+        </div>
+        <div style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
+          <h3 style="margin: 0; font-size: 20px; font-weight: 600">Work with the maintainer</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #51536E">Paul den Dulk maintains Mapsui and takes on consulting work: getting a map into your app, custom layers and styling, performance, or a feature you need upstream.</p>
+          <a href="mailto:info.mapsui@gmail.com" style="margin-top: 4px; border: 1.5px solid #D5D8EE; color: #1C1B2E; border-radius: 11px; padding: 13px 24px; font-weight: 600; font-size: 15.5px; text-decoration: none">info.mapsui@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #E9EAF3">
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 40px; display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: center; font-size: 14.5px; color: #6E7090">
+      <span>Mapsui — pronounced map-su-wii. MIT licensed.</span>
+      <span style="margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px 22px">
+        <a href="https://github.com/Mapsui/Mapsui" style="color: #6E7090">GitHub</a>
+        <a href="https://github.com/Mapsui/Mapsui/discussions" style="color: #6E7090">Discussions</a>
+        <a href="https://bsky.app/profile/mapsui.bsky.social" style="color: #6E7090">Bluesky</a>
+        <a href="https://mapsui.com/v5/" style="color: #6E7090">Docs v5</a>
+      </span>
+      <span style="width: 100%; font-size: 13.5px; color: #85879F">Map data © OpenStreetMap contributors. Platform names and logos belong to their respective owners.</span>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var DATA = {"maui": {"name": ".NET MAUI", "pkg": "Mapsui.Maui", "url": "https://dotnet.microsoft.com/apps/maui"}, "avalonia": {"name": "Avalonia UI", "pkg": "Mapsui.Avalonia12", "url": "https://avaloniaui.net/"}, "uno": {"name": "Uno Platform", "pkg": "Mapsui.Uno.WinUI", "url": "https://platform.uno/"}, "blazor": {"name": "Blazor", "pkg": "Mapsui.Blazor", "url": "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor"}, "wpf": {"name": "WPF", "pkg": "Mapsui.Wpf", "url": "https://learn.microsoft.com/dotnet/desktop/wpf/"}, "winui": {"name": "WinUI", "pkg": "Mapsui.WinUI", "url": "https://learn.microsoft.com/windows/apps/winui/"}, "winforms": {"name": "Windows Forms", "pkg": "Mapsui.WindowsForms", "url": "https://learn.microsoft.com/dotnet/desktop/winforms/"}, "eto": {"name": "Eto Forms", "pkg": "Mapsui.Eto", "url": "https://github.com/picoe/Eto"}, "android": {"name": ".NET for Android", "pkg": "Mapsui.Android", "url": "https://learn.microsoft.com/dotnet/android/"}, "ios": {"name": ".NET for iOS", "pkg": "Mapsui.iOS", "url": "https://learn.microsoft.com/dotnet/ios/"}};
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile[data-fw]'));
+  var cmd = document.getElementById('pkg-cmd');
+  var site = document.getElementById('pkg-site');
+  var copy = document.getElementById('pkg-copy');
+  var timer;
+
+  function select(id) {
+    var d = DATA[id];
+    if (!d) return;
+    cmd.textContent = 'dotnet add package ' + d.pkg;
+    site.href = d.url;
+    site.textContent = d.name + ' website →';
+    tiles.forEach(function (t) {
+      var on = t.getAttribute('data-fw') === id;
+      t.classList.toggle('is-selected', on);
+      t.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  tiles.forEach(function (t) {
+    t.addEventListener('click', function () { select(t.getAttribute('data-fw')); });
+  });
+
+  copy.addEventListener('click', function () {
+    var text = cmd.textContent;
+    function done() {
+      copy.textContent = 'Copied';
+      clearTimeout(timer);
+      timer = setTimeout(function () { copy.textContent = 'Copy'; }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else {
+      fallback();
+    }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  });
+
+  select('maui');
+})();
+</script>
+</body>
+</html>
