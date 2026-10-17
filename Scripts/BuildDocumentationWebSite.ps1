@@ -40,6 +40,6 @@ Copy-Item -Path "docs/general/_site/*" -Destination "website/v5" -Recurse -Force
 Write-Output "Copying api '_site' to 'website'"
 Copy-Item -Path "docs/api/_site/*" -Destination "website/v5/api" -Recurse -Force
 
-Write-Output "Copying main ''docs/index.html' to 'website/index.html'"
-Copy-Item -Path "docs/index.html" -Destination "website/index.html" -Recurse -Force
+Write-Output "Copying the landing page in 'docs/landing' to the root of 'website'"
+Copy-Item -Path "docs/landing/*" -Destination "website" -Recurse -Force
 

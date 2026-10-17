@@ -1,4 +1,5 @@
-﻿using BruTile.Predefined;
+﻿using BruTile.Cache;
+using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Rendering;
@@ -20,6 +21,7 @@ public class CustomPointStyleShaderSample : ISample
 {
     public string Name => $"Shader";
     public string Category => $"{nameof(CustomPointStyle)}";
+    public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
@@ -60,7 +62,7 @@ public class CustomPointStyleShaderSample : ISample
 
     private static TileLayer CreateLayer()
     {
-        var tileSource = KnownTileSources.Create(KnownTileSource.BKGTopPlusGrey);
+        var tileSource = KnownTileSources.Create(KnownTileSource.BKGTopPlusGrey, persistentCache: DefaultCache);
         return new TileLayer(tileSource, dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
         {
             Name = "BKG Top Plus Grey",

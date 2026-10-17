@@ -18,6 +18,17 @@ For every code change, choose one validation level before editing and reassess i
 
 Documentation-only and agent-tooling-only changes normally need relevant structural checks rather than the checklist skill. State the chosen level, why it is sufficient, and the checks actually run.
 
+## Mockups
+
+Design mockups — landing pages, UI concepts, visual explorations — belong in the `mockups/` folder in the repository root. Do not build them in a cloud workspace, a scratch directory, or an embedded preview: they are reviewed by opening the file locally in a browser.
+
+- One standalone HTML file per mockup, at the root of `mockups/`, opening directly from disk with no build step and no local server.
+- Images and other assets go in `mockups/assets/`, referenced by relative paths.
+- Add each new mockup to `mockups/index.html`.
+- Mockups are not published; `docs/` is what gets deployed to mapsui.com.
+
+See `mockups/README.md` for the current set and the conventions in full.
+
 ## Working agreement
 
 - Do not edit files, create or switch branches, commit, push, or create a pull request unless the user explicitly requests that specific action. A request to create a pull request authorizes only pull-request creation; it does not authorize any of the preceding Git actions.
