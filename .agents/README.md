@@ -12,3 +12,5 @@ Keep durable project knowledge in `docs/`, and link to it from here. Do not add 
 ## Ownership
 
 Update the relevant file here when a convention or workflow changes. Update a provider compatibility file only if that provider requires a particular file name or format to find `AGENTS.md`.
+
+Each skill here has a pointer stub at `.claude/skills/<name>/SKILL.md` so Claude Code can discover it natively; Claude Code scans only `.claude/skills/`. A stub carries the skill's `name` and `description` and nothing else, and its body refers back to the canonical file here. Adding, renaming or re-describing a skill means updating its stub in the same change. This is a discovery shim, not a second set of rules.
