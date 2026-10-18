@@ -29,39 +29,15 @@
       <stop offset="90%" stop-color="#392C53" />
       <stop offset="100%" stop-color="#332548" />
     </linearGradient>
-    <mask id="circle-cutout-mask">
-      <rect
-        width="512"
-        height="512"
-        fill="#000000"
-      />
-      <circle
-        cx="256"
-        cy="256"
-        r="220"
-        fill="#ffffff"
-      />
-      <rect
-        x="168"
-        y="256"
-        width="176"
-        height="256"
-        fill="#000000"
-      />
-      <path
-        d="M168 182.18079 L256 256 L344 182.18079 V256 H168 Z"
-        fill="#000000"
-      />
-      <path
-        d="M168 0 V54.366598 L256 128.185808 L344 54.366598 V0 Z"
-        fill="#000000"
-      />
-    </mask>
   </defs>
-  <rect
-    width="512"
-    height="512"
+  <!--
+    One closed outline: circle arcs for the rim, straight segments for the top
+    notch and the M cutout. Cutouts used to be separate shapes knocked out
+    through a mask; where two of those shapes met edge to edge, antialiasing
+    left a faint seam across the logo.
+  -->
+  <path
     fill="url(#logo-fill-gradient)"
-    mask="url(#circle-cutout-mask)"
+    d="M168 54.366598 A220 220 0 0 0 168 457.633402 L168 182.18079 L256 256 L344 182.18079 L344 457.633402 A220 220 0 0 0 344 54.366598 L256 128.185808 Z"
   />
 </svg>
