@@ -94,15 +94,22 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
 .pkgcopy:hover { background: #2F3FB8; color: #FFFFFF; }
 /* Three links, each with its own icon, aligned under the command. The row,
    not just the text, is the target. */
-.pkgres { display: flex; align-items: center; gap: 11px; margin: 1px -9px 0; padding: 6px 9px;
-  border-radius: 9px; font-size: 14px; font-weight: 600; color: #4257E3; }
+.pkgres { display: flex; align-items: center; gap: 11px; margin: 1px -9px 0; padding: 7px 9px;
+  border-radius: 9px; font-size: 14px; font-weight: 600; color: #1C1B2E;
+  transition: background-color .12s ease; }
 .pkglabel + .pkgres { margin-top: 7px; }
-.pkgres:hover { background: #F4F5FD; text-decoration: none; }
+.pkgres:hover { background: #F1F2F9; color: #1C1B2E; text-decoration: none; }
 .pkgres:focus-visible { outline: 2px solid #4257E3; outline-offset: -2px; }
 .pkgicon { flex: none; width: 26px; height: 26px; border-radius: 8px; background: #F1F2F9;
-  color: #6E7090; display: flex; align-items: center; justify-content: center; }
-.pkgres:hover .pkgicon { background: #E4E7FA; color: #4257E3; }
+  color: #6E7090; display: flex; align-items: center; justify-content: center;
+  transition: background-color .12s ease, color .12s ease; }
+.pkgres:hover .pkgicon { background: #E2E5F6; color: #4257E3; }
 .pkgicon svg { width: 15px; height: 15px; }
+/* The chevron carries the "goes somewhere" meaning that the blue used to. */
+.pkgchev { flex: none; margin-left: auto; display: flex; color: #B7B9CC;
+  transition: transform .12s ease, color .12s ease; }
+.pkgchev svg { width: 15px; height: 15px; }
+.pkgres:hover .pkgchev { color: #4257E3; transform: translateX(2px); }
 /* Too narrow to scroll a command comfortably: wrap it instead of clipping it. */
 @media (max-width: 520px) {
   .pkgbar code { white-space: normal; word-break: break-word; }
@@ -259,14 +266,17 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
           <a class="pkgres" id="pkg-quickstart" href="https://mapsui.com/v5/#__tabbed_1_1">
             <span class="pkgicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"></rect><path d="M8 8.5h8M8 12.5h8M8 16.5h5"></path></svg></span>
             <span>Quickstart for <span id="pkg-quickstart-name">.NET MAUI</span></span>
+            <span class="pkgchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></span>
           </a>
           <a class="pkgres" id="pkg-site" href="https://dotnet.microsoft.com/apps/maui" target="_blank" rel="noopener">
             <span class="pkgicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse></svg></span>
             <span>Official <span id="pkg-site-name">.NET MAUI</span> website</span>
+            <span class="pkgchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></span>
           </a>
           <a class="pkgres" id="pkg-issues" href="https://github.com/dotnet/maui/issues" target="_blank" rel="noopener">
             <span class="pkgicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.75" fill="currentColor" stroke="none"></circle></svg></span>
             <span><span id="pkg-issues-name">.NET MAUI</span> issues on GitHub</span>
+            <span class="pkgchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></span>
           </a>
         </div>
       </div>
