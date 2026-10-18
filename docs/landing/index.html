@@ -110,6 +110,22 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
   transition: transform .12s ease, color .12s ease; }
 .pkgchev svg { width: 15px; height: 15px; }
 .pkgres:hover .pkgchev { color: #4257E3; transform: translateX(2px); }
+/* Sponsors: a pill per sponsor, current ones in full colour and weight,
+   earlier ones lighter and smaller. */
+.sponsorgroup { display: flex; flex-direction: column; gap: 11px; }
+.sponsorrow { display: flex; flex-wrap: wrap; gap: 10px; }
+.sponsor { display: flex; align-items: center; gap: 10px; padding: 6px 17px 6px 6px;
+  border: 1px solid #E9EAF3; background: #FFFFFF; border-radius: 999px;
+  font-size: 14.5px; font-weight: 600; color: #1C1B2E; text-decoration: none;
+  transition: border-color .12s ease, transform .12s ease, box-shadow .12s ease; }
+.sponsor:hover { border-color: #4257E3; color: #1C1B2E; text-decoration: none;
+  transform: translateY(-1px); box-shadow: 0 6px 18px rgba(30,32,70,0.08); }
+.sponsor:focus-visible { outline: 2px solid #4257E3; outline-offset: 2px; }
+.sponsor img { width: 32px; height: 32px; border-radius: 50%; background: #F1F2F9; }
+.sponsor img.is-org { border-radius: 9px; }
+.sponsor.is-past { padding: 4px 15px 4px 4px; font-size: 13.5px; color: #51536E;
+  background: transparent; border-color: #EDEEF6; }
+.sponsor.is-past img { width: 26px; height: 26px; }
 /* Too narrow to scroll a command comfortably: wrap it instead of clipping it. */
 @media (max-width: 520px) {
   .pkgbar code { white-space: normal; word-break: break-word; }
@@ -151,7 +167,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
   </header>
 
   <!-- hero -->
-  <section id="top" style="background-image: linear-gradient(180deg, rgba(252,252,254,0.18) 0%, rgba(252,252,254,0.46) 58%, #FCFCFE 100%), url('assets/map-randstad.jpg'); background-size: cover, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat">
+  <section id="top" style="background-image: linear-gradient(180deg, rgba(246,247,253,0.18) 0%, rgba(246,247,253,0.46) 58%, #F6F7FD 100%), url('assets/map-randstad.jpg'); background-size: cover, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat">
     <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center" class="hero">
       <svg viewBox="0 0 512 512" width="172" height="172" role="img" aria-label="Mapsui logo" style="max-width: 100%">
         <defs>
@@ -182,7 +198,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
   </section>
 
   <!-- platforms -->
-  <section>
+  <section style="background: #F6F7FD">
     <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 24px 72px; display: flex; flex-direction: column; gap: 26px">
       <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center">
         <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Works with every major .NET UI framework</h2>
@@ -285,7 +301,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
 
 
   <!-- maintenance -->
-  <section>
+  <section style="border-top: 1px solid #E9EAF3">
     <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px; display: flex; flex-direction: column; gap: 30px">
       <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Dependable</h2>
       <p style="margin: -16px 0 0; font-size: 19px; line-height: 1.6; color: #51536E; max-width: 60ch">Developed in the open since 2012, and still actively maintained.</p>
@@ -383,9 +399,27 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
     </div>
   </section>
 
+  <!-- sponsors -->
+  <section id="sponsors" style="border-top: 1px solid #E9EAF3; background: #F6F7FD" hidden>
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px 56px; display: flex; flex-direction: column; gap: 28px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Sponsored by</h2>
+        <p style="margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.6; color: #51536E">Sponsorship pays for the maintenance. These are the sponsors who chose to be listed publicly on GitHub.</p>
+      </div>
+      <div class="sponsorgroup" id="sponsors-current-group" hidden>
+        <span class="pkglabel">Now</span>
+        <div class="sponsorrow" id="sponsors-current"></div>
+      </div>
+      <div class="sponsorgroup" id="sponsors-past-group" hidden>
+        <span class="pkglabel">Previously</span>
+        <div class="sponsorrow" id="sponsors-past"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- support -->
-  <section style="border-top: 1px solid #E9EAF3; background: #F6F7FD">
-    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px 72px; display: flex; flex-direction: column; gap: 28px">
+  <section style="border-top: 1px solid #E4E7F6; background: #EEF1FE">
+    <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 56px 72px; display: flex; flex-direction: column; gap: 28px">
       <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Two ways to keep this going</h2>
       <div class="grid grid-support" style="gap: 24px">
         <div style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
@@ -488,6 +522,58 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
   });
 
   select('maui');
+})();
+</script>
+<!-- sponsors:start -->
+<script type="application/json" id="sponsors-data">
+{
+  "current": [
+    { "login": "jamesmontemagno", "name": "James Montemagno" }
+  ],
+  "past": [
+    { "login": "unoplatform", "name": "Uno Platform", "org": true },
+    { "login": "Sebastian1989101", "name": "Sebastian Kruse" },
+    { "login": "P33tr", "name": "Peter Marshall" },
+    { "login": "winkmichael", "name": "Michael" },
+    { "login": "blwhttngtn", "name": "blk" },
+    { "login": "Oblimbo", "name": "Oblimbo" }
+  ]
+}
+</script>
+<!-- sponsors:end -->
+<script>
+(function () {
+  var data = document.getElementById('sponsors-data');
+  if (!data) return;
+  try { data = JSON.parse(data.textContent); } catch (e) { return; }
+
+  function fill(id, list, past) {
+    var row = document.getElementById(id);
+    if (!row || !list || !list.length) return false;
+    list.forEach(function (s) {
+      var a = document.createElement('a');
+      a.className = past ? 'sponsor is-past' : 'sponsor';
+      a.href = 'https://github.com/' + s.login;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      var img = document.createElement('img');
+      img.src = 'https://github.com/' + s.login + '.png?size=96';
+      img.alt = '';
+      img.loading = 'lazy';
+      if (s.org) img.className = 'is-org';
+      var name = document.createElement('span');
+      name.textContent = s.name || s.login;
+      a.appendChild(img);
+      a.appendChild(name);
+      row.appendChild(a);
+    });
+    document.getElementById(id + '-group').hidden = false;
+    return true;
+  }
+
+  var any = fill('sponsors-current', data.current, false);
+  any = fill('sponsors-past', data.past, true) || any;
+  if (any) document.getElementById('sponsors').hidden = false;
 })();
 </script>
 </body>
