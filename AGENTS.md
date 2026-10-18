@@ -7,6 +7,7 @@
 1. Read `.agents/instructions/repository.md` before analysing or changing the project.
 2. Before making code changes, assess validation using the policy below. Load the `checklist` skill only when the assessment selects a partial or full checklist.
 3. For changes in either Skia renderer, also read `.agents/instructions/richtextkit.instructions.md`.
+4. Before opening a pull request, read `.agents/skills/create-pull-request/SKILL.md`. It owns the title prefix, the matching `PR type:` label, and the tool to use.
 
 ## Validation assessment
 
