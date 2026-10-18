@@ -32,9 +32,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
 .tile { cursor: pointer; font: inherit; color: inherit; text-align: center; }
 .tile.is-selected { border-color: #4257E3 !important;
   box-shadow: 0 0 0 2px #4257E333, 0 6px 18px rgba(30,32,70,0.08); }
-.pkgbar code { white-space: nowrap; overflow-x: auto; }
 .pkgcopy { cursor: pointer; font: inherit; }
-.pkgcopy:hover { border-color: #4257E3; color: #4257E3; }
 
 /* Grids: the designed column count on desktop, fewer columns on narrow
    screens so the tiles keep a usable width instead of being squeezed. */
@@ -67,26 +65,47 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
   .hero { padding-block: 64px 56px; }
 }
 
-/* The install panel keeps one width and stays centred */
-.pkgrow { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px 18px; }
-.pkgrow > * { min-width: 0; }
-/* One fixed width on wide screens, so the panel does not resize when a
-   framework with a longer package name is picked. Below the one-column
-   breakpoint it fills the row instead: a fixed width is wider than a phone
-   viewport, and border-box keeps the padding inside it either way. */
-.pkgbar { box-sizing: border-box; width: 420px; max-width: 100%; }
-@media (max-width: 820px) {
-  .pkgbar { width: 100%; }
-}
+/* Install card: the three things the chosen framework needs -- the package,
+   its quickstart and the framework itself -- stacked in one panel, so picking
+   a tile answers "what now?" in one place. The card keeps one width on wide
+   screens, so it does not resize when a longer package name is picked, and
+   border-box keeps the padding inside that width. */
+.pkgcard { box-sizing: border-box; width: 520px; max-width: 100%; margin: 30px auto 0;
+  border: 1px solid #E9EAF3; background: #FFFFFF; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 14px 36px rgba(30,32,70,0.07); text-align: left; }
+/* Title left, the framework's own logo on the far right, like a nameplate. */
+.pkghead { display: flex; align-items: center; gap: 14px; padding: 17px 20px 0;
+  font-family: 'Baloo 2', system-ui, sans-serif; font-size: 17.5px; font-weight: 600; }
+.pkghead img { flex: none; margin-left: auto; width: 26px; height: 26px; object-fit: contain; }
+/* The card body: one column, everything on the same left edge. */
+.pkgbody { display: flex; flex-direction: column; padding: 13px 20px 16px; }
+/* Small muted labels: structure, kept out of the way of the content. */
+.pkglabel { font-size: 11.5px; font-weight: 700; letter-spacing: 0.085em;
+  text-transform: uppercase; color: #8A8CA6; }
+/* The command is the point of the card, so the package name is the darkest
+   text in it: the dimmed prefix never changes, only the name does. */
+.pkgbar { display: flex; align-items: center; gap: 10px; margin: 7px 0 16px;
+  border: 1px solid #E2E4F0; background: #F1F2F9; border-radius: 11px; padding: 9px 9px 9px 15px; }
+.pkgbar code { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
+  color: #1C1B2E; flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow-x: auto; }
+.pkgbar .pkgdim { font-weight: 400; color: #7A7C9B; }
+.pkgcopy { flex: none; min-width: 78px; border: 0; background: #4257E3; color: #FFFFFF;
+  border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; min-height: 34px; }
+.pkgcopy:hover { background: #2F3FB8; color: #FFFFFF; }
+/* Three links, each with its own icon, aligned under the command. The row,
+   not just the text, is the target. */
+.pkgres { display: flex; align-items: center; gap: 11px; margin: 1px -9px 0; padding: 6px 9px;
+  border-radius: 9px; font-size: 14px; font-weight: 600; color: #4257E3; }
+.pkglabel + .pkgres { margin-top: 7px; }
+.pkgres:hover { background: #F4F5FD; text-decoration: none; }
+.pkgres:focus-visible { outline: 2px solid #4257E3; outline-offset: -2px; }
+.pkgicon { flex: none; width: 26px; height: 26px; border-radius: 8px; background: #F1F2F9;
+  color: #6E7090; display: flex; align-items: center; justify-content: center; }
+.pkgres:hover .pkgicon { background: #E4E7FA; color: #4257E3; }
+.pkgicon svg { width: 15px; height: 15px; }
 /* Too narrow to scroll a command comfortably: wrap it instead of clipping it. */
 @media (max-width: 520px) {
   .pkgbar code { white-space: normal; word-break: break-word; }
-}
-.pkgrow > .pkgsite { justify-self: start; }
-@media (max-width: 820px) {
-  .pkgrow { grid-template-columns: 1fr; justify-items: center; }
-  .pkgrow > .pkgspacer { display: none; }
-  .pkgrow > .pkgsite { justify-self: center; }
 }
 </style>
 </head>
@@ -117,7 +136,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
       <nav style="margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px 26px; align-items: center; font-size: 15px; font-weight: 500">
         <a href="https://mapsui.com/v5/" style="color: #51536E">Documentation</a>
         <a href="https://mapsui.com/v5/samples/" style="color: #51536E">Samples</a>
-        <a href="https://mapsui.com/v5/projects-that-use-mapsui.html" style="color: #51536E">Showcase</a>
+        <a href="https://mapsui.com/v5/projects-that-use-mapsui/" style="color: #51536E">Showcase</a>
         <a href="https://github.com/Mapsui/Mapsui" style="color: #51536E">GitHub</a>
         <a href="https://github.com/sponsors/pauldendulk" style="background: #EEF0FD; border-radius: 10px; padding: 8px 16px; color: #4257E3; font-weight: 600">Sponsor</a>
       </nav>
@@ -148,8 +167,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
       <p style="margin: 0; max-width: 56ch; font-size: 19.5px; line-height: 1.58; color: #51536E">An open source map component for .NET. Tile layers, vector styling, projections and touch handling, with the same API on every UI framework it supports.</p>
 
       <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 6px">
-        <a href="https://mapsui.com/v5/" style="background: #4257E3; color: #FFFFFF; border-radius: 11px; padding: 15px 28px; font-weight: 600; font-size: 16px; text-decoration: none">Quickstart</a>
-        <a href="https://mapsui.com/v5/samples/" style="border: 1.5px solid #D5D8EE; color: #1C1B2E; border-radius: 11px; padding: 15px 28px; font-weight: 600; font-size: 16px; text-decoration: none">Live samples</a>
+        <a href="https://mapsui.com/v5/samples/" style="background: #4257E3; color: #FFFFFF; border-radius: 11px; padding: 15px 28px; font-weight: 600; font-size: 16px; text-decoration: none">Live samples</a>
         <a href="https://mapsui.com/v5/" style="border: 1.5px solid #D5D8EE; color: #1C1B2E; border-radius: 11px; padding: 15px 28px; font-weight: 600; font-size: 16px; text-decoration: none">Documentation</a>
       </div>
       <p style="margin: 10px 0 0; font-size: 13px; color: #85879F">Background rendered by Mapsui at reduced opacity. Map data © OpenStreetMap contributors.</p>
@@ -165,74 +183,92 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
       </div>
       <div class="grid grid-platforms" style="gap: 16px">
 
-        <button type="button" class="tile" data-fw="maui" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="maui" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/dotnet-bot.svg" alt="dotnet-bot, the .NET mascot" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">.NET MAUI</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Maui</code>
         </button>
 
-        <button type="button" class="tile" data-fw="avalonia" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="avalonia" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/avalonia.png" alt="Avalonia UI logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Avalonia UI</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Avalonia12</code>
         </button>
 
-        <button type="button" class="tile" data-fw="uno" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="uno" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/uno.png" alt="Uno Platform logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Uno Platform</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Uno.WinUI</code>
         </button>
 
-        <button type="button" class="tile" data-fw="blazor" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="blazor" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/blazor.svg" alt="Blazor logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Blazor</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Blazor</code>
         </button>
 
-        <button type="button" class="tile" data-fw="wpf" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="wpf" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/dotnet.svg" alt=".NET logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">WPF</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Wpf</code>
         </button>
 
-        <button type="button" class="tile" data-fw="winui" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="winui" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/winui.svg" alt="WinUI logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">WinUI</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.WinUI</code>
         </button>
 
-        <button type="button" class="tile" data-fw="winforms" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="winforms" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/dotnet.svg" alt=".NET logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Windows Forms</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.WindowsForms</code>
         </button>
 
-        <button type="button" class="tile" data-fw="eto" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="eto" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/eto.png" alt="Eto Forms logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">Eto Forms</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Eto</code>
         </button>
 
-        <button type="button" class="tile" data-fw="android" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="android" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/android.svg" alt="Android logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">.NET for Android</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.Android</code>
         </button>
 
-        <button type="button" class="tile" data-fw="ios" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <button type="button" class="tile" aria-controls="pkg-card" data-fw="ios" aria-pressed="false" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 24px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
           <img src="assets/apple.svg" alt="Apple logo" style="width: 40px; height: 44px; object-fit: contain">
           <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 15.5px; font-weight: 600">.NET for iOS</strong>
           <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6E7090; word-break: break-word">Mapsui.iOS</code>
         </button>
 
       </div>
-      <div class="pkgrow">
-        <span class="pkgspacer" aria-hidden="true"></span>
-        <div class="pkgbar" style="display: flex; flex-wrap: nowrap; gap: 12px 14px; align-items: center; border: 1px solid #E9EAF3; background: #FFFFFF; border-radius: 14px; padding: 16px 18px">
-          <code id="pkg-cmd" style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #1C1B2E; flex: 1 1 auto; min-width: 0">dotnet add package Mapsui.Maui</code>
-          <button type="button" class="pkgcopy" id="pkg-copy" style="flex: none; margin-left: auto; border: 1px solid #D5D8EE; background: #FFFFFF; color: #6E7090; border-radius: 8px; padding: 8px 14px; font-size: 13.5px; font-weight: 600; min-height: 36px">Copy</button>
+      <div class="pkgcard" id="pkg-card">
+        <h3 class="pkghead" style="margin: 0">
+          <span>Get started with <span id="pkg-head-name">.NET MAUI</span></span>
+          <img id="pkg-head-logo" src="assets/dotnet-bot.svg" alt="">
+        </h3>
+        <div class="pkgbody">
+          <span class="pkglabel">Add the package</span>
+          <div class="pkgbar">
+            <code id="pkg-cmd"><span class="pkgdim">dotnet add package</span> <span id="pkg-cmd-pkg">Mapsui.Maui</span></code>
+            <button type="button" class="pkgcopy" id="pkg-copy">Copy</button>
+          </div>
+          <span class="pkglabel">Useful resources</span>
+          <a class="pkgres" id="pkg-quickstart" href="https://mapsui.com/v5/#__tabbed_1_1">
+            <span class="pkgicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"></rect><path d="M8 8.5h8M8 12.5h8M8 16.5h5"></path></svg></span>
+            <span>Quickstart for <span id="pkg-quickstart-name">.NET MAUI</span></span>
+          </a>
+          <a class="pkgres" id="pkg-site" href="https://dotnet.microsoft.com/apps/maui" target="_blank" rel="noopener">
+            <span class="pkgicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse></svg></span>
+            <span>Official <span id="pkg-site-name">.NET MAUI</span> website</span>
+          </a>
+          <a class="pkgres" id="pkg-issues" href="https://github.com/dotnet/maui/issues" target="_blank" rel="noopener">
+            <span class="pkgicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.75" fill="currentColor" stroke="none"></circle></svg></span>
+            <span><span id="pkg-issues-name">.NET MAUI</span> issues on GitHub</span>
+          </a>
         </div>
-        <a id="pkg-site" class="pkgsite" href="https://dotnet.microsoft.com/apps/maui" style="font-size: 14.5px; font-weight: 600">.NET MAUI website →</a>
       </div>
     </div>
   </section>
@@ -300,7 +336,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
     <div style="max-width: 1120px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); padding-block: 64px; display: flex; flex-direction: column; gap: 28px">
       <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; justify-content: space-between">
         <h2 style="margin: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.012em">Examples of apps that use Mapsui</h2>
-        <a href="https://mapsui.com/v5/projects-that-use-mapsui.html" style="font-size: 15.5px; font-weight: 600">See the full list</a>
+        <a href="https://mapsui.com/v5/projects-that-use-mapsui/" style="font-size: 15.5px; font-weight: 600">See the full list</a>
       </div>
       <div class="grid grid-cards" style="gap: 18px">
         <a href="https://droniq.de/en/droniq-maps/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
@@ -372,23 +408,43 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
 </div>
 <script>
 (function () {
-  var DATA = {"maui": {"name": ".NET MAUI", "pkg": "Mapsui.Maui", "url": "https://dotnet.microsoft.com/apps/maui"}, "avalonia": {"name": "Avalonia UI", "pkg": "Mapsui.Avalonia12", "url": "https://avaloniaui.net/"}, "uno": {"name": "Uno Platform", "pkg": "Mapsui.Uno.WinUI", "url": "https://platform.uno/"}, "blazor": {"name": "Blazor", "pkg": "Mapsui.Blazor", "url": "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor"}, "wpf": {"name": "WPF", "pkg": "Mapsui.Wpf", "url": "https://learn.microsoft.com/dotnet/desktop/wpf/"}, "winui": {"name": "WinUI", "pkg": "Mapsui.WinUI", "url": "https://learn.microsoft.com/windows/apps/winui/"}, "winforms": {"name": "Windows Forms", "pkg": "Mapsui.WindowsForms", "url": "https://learn.microsoft.com/dotnet/desktop/winforms/"}, "eto": {"name": "Eto Forms", "pkg": "Mapsui.Eto", "url": "https://github.com/picoe/Eto"}, "android": {"name": ".NET for Android", "pkg": "Mapsui.Android", "url": "https://learn.microsoft.com/dotnet/android/"}, "ios": {"name": ".NET for iOS", "pkg": "Mapsui.iOS", "url": "https://learn.microsoft.com/dotnet/ios/"}};
+  // 'tab' is the framework's position in the quickstart tab set on the docs
+  // home page: Material for MkDocs names those anchors __tabbed_1_<n>, and
+  // opening one selects that tab.
+  var DATA = {"maui": {"name": ".NET MAUI", "pkg": "Mapsui.Maui", "url": "https://dotnet.microsoft.com/apps/maui", "issues": "https://github.com/dotnet/maui/issues", "tab": 1}, "avalonia": {"name": "Avalonia UI", "pkg": "Mapsui.Avalonia12", "url": "https://avaloniaui.net/", "issues": "https://github.com/AvaloniaUI/Avalonia/issues", "tab": 2}, "uno": {"name": "Uno Platform", "pkg": "Mapsui.Uno.WinUI", "url": "https://platform.uno/", "issues": "https://github.com/unoplatform/uno/issues", "tab": 3}, "blazor": {"name": "Blazor", "pkg": "Mapsui.Blazor", "url": "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor", "issues": "https://github.com/dotnet/aspnetcore/issues", "tab": 4}, "wpf": {"name": "WPF", "pkg": "Mapsui.Wpf", "url": "https://learn.microsoft.com/dotnet/desktop/wpf/", "issues": "https://github.com/dotnet/wpf/issues", "tab": 5}, "winui": {"name": "WinUI", "pkg": "Mapsui.WinUI", "url": "https://learn.microsoft.com/windows/apps/winui/", "issues": "https://github.com/microsoft/microsoft-ui-xaml/issues", "tab": 6}, "winforms": {"name": "Windows Forms", "pkg": "Mapsui.WindowsForms", "url": "https://learn.microsoft.com/dotnet/desktop/winforms/", "issues": "https://github.com/dotnet/winforms/issues", "tab": 7}, "eto": {"name": "Eto Forms", "pkg": "Mapsui.Eto", "url": "https://github.com/picoe/Eto", "issues": "https://github.com/picoe/Eto/issues", "tab": 8}, "android": {"name": ".NET for Android", "pkg": "Mapsui.Android", "url": "https://learn.microsoft.com/dotnet/android/", "issues": "https://github.com/dotnet/android/issues", "tab": 9}, "ios": {"name": ".NET for iOS", "pkg": "Mapsui.iOS", "url": "https://learn.microsoft.com/dotnet/ios/", "issues": "https://github.com/dotnet/macios/issues", "tab": 10}};
   var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile[data-fw]'));
+  var headName = document.getElementById('pkg-head-name');
+  var headLogo = document.getElementById('pkg-head-logo');
   var cmd = document.getElementById('pkg-cmd');
+  var cmdPkg = document.getElementById('pkg-cmd-pkg');
+  var quickstart = document.getElementById('pkg-quickstart');
+  var quickstartName = document.getElementById('pkg-quickstart-name');
   var site = document.getElementById('pkg-site');
+  var siteName = document.getElementById('pkg-site-name');
+  var issues = document.getElementById('pkg-issues');
+  var issuesName = document.getElementById('pkg-issues-name');
   var copy = document.getElementById('pkg-copy');
   var timer;
 
   function select(id) {
     var d = DATA[id];
     if (!d) return;
-    cmd.textContent = 'dotnet add package ' + d.pkg;
+    headName.textContent = d.name;
+    quickstartName.textContent = d.name;
+    siteName.textContent = d.name;
+    issuesName.textContent = d.name;
+    cmdPkg.textContent = d.pkg;
+    quickstart.href = 'https://mapsui.com/v5/#__tabbed_1_' + d.tab;
     site.href = d.url;
-    site.textContent = d.name + ' website →';
+    issues.href = d.issues;
     tiles.forEach(function (t) {
       var on = t.getAttribute('data-fw') === id;
       t.classList.toggle('is-selected', on);
       t.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (on) {
+        var logo = t.querySelector('img');
+        if (logo) headLogo.src = logo.getAttribute('src');
+      }
     });
   }
 
