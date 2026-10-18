@@ -303,9 +303,11 @@ public class VectorStyle : IVectorStyle
                 paint2.TextMaxWidth = Convert.ToDouble(GetValue(value24, attributes)) * scale;
             if (layout.TryGetValue("text-offset", out var value25))
             {
+                // In ems: SkiaCanvas multiplies it by the text size, which already includes the
+                // scale. Multiplying by the scale here too moved the text scale times too far.
                 var array = (object[])GetValue(value25, attributes);
                 paint2.TextOffset = new VexTile.Renderer.Mvt.AliFlux.Drawing.Point(
-                    Convert.ToDouble(array[0]) * scale, Convert.ToDouble(array[1]) * scale);
+                    Convert.ToDouble(array[0], CultureInfo.InvariantCulture), Convert.ToDouble(array[1], CultureInfo.InvariantCulture));
             }
             if (layout.TryGetValue("text-optional", out var value26))
                 paint2.TextOptional = (bool)GetValue(value26, attributes);
@@ -572,7 +574,7 @@ public class VectorStyle : IVectorStyle
                         return false;
                     foreach (var item4 in filterArray.Skip(2))
                     {
-                        if (GetValue(item4, attributes).Equals(value2))
+                        if (ValuesEqual(GetValue(item4, attributes), value2))
                             return true;
                     }
                     return false;
@@ -584,7 +586,7 @@ public class VectorStyle : IVectorStyle
                         return true;
                     foreach (var item5 in filterArray.Skip(2))
                     {
-                        if (GetValue(item5, attributes).Equals(value))
+                        if (ValuesEqual(GetValue(item5, attributes), value))
                             return false;
                     }
                     return true;
@@ -654,6 +656,11 @@ public class VectorStyle : IVectorStyle
 
         return token;
     }
+
+    // Numbers of different types compare by value: a tile integer (long) must match the style's
+    // 2.0 (double), as "==" already does.
+    internal static bool ValuesEqual(object a, object b) =>
+        IsNumber(a) && IsNumber(b) ? Convert.ToDouble(a, CultureInfo.InvariantCulture).Equals(Convert.ToDouble(b, CultureInfo.InvariantCulture)) : a.Equals(b);
 
     private static bool IsNumber(object value) =>
         value is sbyte or byte or short or ushort or int or uint or long or ulong or float or double or decimal;

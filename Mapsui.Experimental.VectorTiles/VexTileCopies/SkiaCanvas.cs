@@ -74,6 +74,8 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     // Reusable buffer for LineClipper output — avoids List<Point> allocation per clip call
     private readonly List<Point> _clipBuffer = new();
     private readonly List<Point> _clipBufferText = new();
+    // Where each further piece of a clipped line starts (see LineClipper.ClipPolyline).
+    private readonly List<int> _clipPartStarts = new();
 
     // Cache for dash array conversions - avoids repeated float[] allocation for shared style objects
     private IEnumerable<double>? _lastDashArray;
@@ -105,21 +107,22 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     {
         var allocBefore = AllocProfile.Enabled ? GC.GetAllocatedBytesForCurrentThread() : 0;
 
+        _path.Reset();
         if (ClipOverflow)
         {
-            if (!LineClipper.ClipPolyline(geometry, _clipRectangle, _clipBuffer))
+            if (!LineClipper.ClipPolyline(geometry, _clipRectangle, _clipBuffer, _clipPartStarts))
                 return;
-            geometry = _clipBuffer;
+            BuildPathParts(_path, _clipBuffer, _clipPartStarts);
         }
-
-        if (geometry.Count == 0) return;
+        else
+        {
+            BuildPath(_path, geometry);
+        }
+        if (_path.IsEmpty) return;
 
         SKColor lineColor = style.Paint.LineColor;
         var color = SKColorFactory.MakeColor(lineColor.Red, lineColor.Green, lineColor.Blue,
             (byte)Clamp(lineColor.Alpha * style.Paint.LineOpacity, 0.0, 255.0));
-
-        _path.Reset();
-        BuildPath(_path, geometry);
 
         _strokePaint.Reset();
         _strokePaint.IsAntialias = true;
@@ -265,9 +268,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
         if (ClipOverflow)
         {
-            if (!LineClipper.ClipPolyline(geometry, _clipRectangle, _clipBufferText))
+            if (!LineClipper.ClipPolyline(geometry, _clipRectangle, _clipBufferText, _clipPartStarts))
                 return;
-            geometry = _clipBufferText;
+            geometry = LongestPart(_clipBufferText, _clipPartStarts);
         }
         // DrawTextOnPath is single-line: the path-length guard below skips labels that
         // are too long, so word-wrapping is unnecessary here. Only apply case transforms.
@@ -361,6 +364,45 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
     private static double Clamp(double number, double min = 0.0, double max = 1.0)
     {
         return Math.Max(min, Math.Min(max, number));
+    }
+
+    // The pieces of a clipped line as separate subpaths, never joined by a straight line.
+    private static void BuildPathParts(SKPath path, List<Point> points, List<int> partStarts)
+    {
+        var start = 0;
+        foreach (var next in partStarts)
+        {
+            BuildPath(path, points.GetRange(start, next - start));
+            start = next;
+        }
+        BuildPath(path, points.GetRange(start, points.Count - start));
+    }
+
+    // Text goes on one piece of a clipped line: the longest.
+    internal static List<Point> LongestPart(List<Point> points, List<int> partStarts)
+    {
+        if (partStarts.Count == 0) return points;
+        int bestStart = 0, bestEnd = 0, start = 0;
+        var bestLength = -1.0;
+        for (var p = 0; p <= partStarts.Count; p++)
+        {
+            var end = p < partStarts.Count ? partStarts[p] : points.Count;
+            var length = 0.0;
+            for (var i = start + 1; i < end; i++)
+            {
+                var dx = points[i].X - points[i - 1].X;
+                var dy = points[i].Y - points[i - 1].Y;
+                length += Math.Sqrt(dx * dx + dy * dy);
+            }
+            if (length > bestLength)
+            {
+                bestLength = length;
+                bestStart = start;
+                bestEnd = end;
+            }
+            start = end;
+        }
+        return points.GetRange(bestStart, bestEnd - bestStart);
     }
 
     private static void BuildPath(SKPath path, List<Point> geometry, bool reverse = false)
@@ -463,7 +505,9 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
         do
         {
             long num = font.BreakText(text, (float)(style.Paint.TextMaxWidth * style.Paint.TextSize), paint);
-            if (num == text.Length)
+            // Not even one character fits (text-max-width 0, or a very wide first glyph): no wrap.
+            // LastIndexOf below would get start index -1 and throw.
+            if (num <= 0 || num == text.Length)
             {
                 sb.Append(text.Trim());
                 break;
