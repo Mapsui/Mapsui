@@ -28,6 +28,18 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
   box-shadow: 0 6px 18px rgba(30,32,70,0.08); }
 .tile:focus-visible, .builton:focus-visible { outline: 2px solid #4257E3; outline-offset: 2px; }
 
+/* App example cards: the app's own icon beside its name, laid out like the
+   cards in "Built on libraries you already trust". Screenshots were too loud
+   for this section; they live on the projects page, which is a gallery. */
+.appcard { display: flex; gap: 16px; align-items: flex-start; padding: 24px;
+  text-decoration: none; color: inherit;
+  transition: border-color .12s ease, transform .12s ease, box-shadow .12s ease; }
+.appcard:hover { text-decoration: none; border-color: #4257E3; transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(30,32,70,0.08); }
+.appcard:focus-visible { outline: 2px solid #4257E3; outline-offset: 2px; }
+.appicon { width: 38px; height: 38px; object-fit: contain; flex: none; border-radius: 8px; }
+.appcaption { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+
 /* Framework picker */
 .tile { cursor: pointer; font: inherit; color: inherit; text-align: center; }
 .tile.is-selected { border-color: #4257E3 !important;
@@ -309,7 +321,7 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
           <span style="font-size: 15px; line-height: 1.5; color: #51536E">Downloads across all 29 Mapsui packages</span>
         </div>
       </div>
-      <p style="margin: 0; max-width: 68ch; font-size: 17px; line-height: 1.65; color: #51536E">Every major version comes with a written upgrade guide, and the v4 documentation stays online. Breaking changes are announced in the roadmap before they land.</p>
+      <p style="margin: 0; max-width: 68ch; font-size: 17px; line-height: 1.65; color: #51536E">Every major version comes with a written upgrade guide. Breaking changes are announced in the roadmap before they land.</p>
     </div>
   </section>
 
@@ -351,35 +363,53 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
         <a href="https://mapsui.com/v5/projects-that-use-mapsui/" style="font-size: 15.5px; font-weight: 600">See the full list</a>
       </div>
       <div class="grid grid-cards" style="gap: 18px">
-        <a href="https://droniq.de/en/droniq-maps/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
-          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Droniq Maps</strong>
-          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Drone flight planning and airspace</span>
-          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">droniq.de →</span>
+        <a class="appcard" href="https://droniq.de/en/droniq-maps/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; color: #1C1B2E; background: #FFFFFF">
+          <img class="appicon" src="assets/apps/droniq-maps-icon.png" alt="Droniq Maps icon" loading="lazy" decoding="async">
+          <span class="appcaption">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Droniq Maps</strong>
+            <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Drone flight planning and airspace</span>
+            <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">droniq.de →</span>
+          </span>
         </a>
-        <a href="https://www.trackexplorer.app/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
-          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Track Explorer</strong>
-          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">GPS track library for hiking and cycling</span>
-          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">trackexplorer.app →</span>
+        <a class="appcard" href="https://quintham.com/products/watchfulapp" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; color: #1C1B2E; background: #FFFFFF">
+          <img class="appicon" src="assets/apps/watchful-icon.png" alt="Watchful icon" loading="lazy" decoding="async">
+          <span class="appcaption">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Watchful</strong>
+            <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Vessel operations, trips and crew planning</span>
+            <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">quintham.com →</span>
+          </span>
         </a>
-        <a href="https://github.com/NeilMacMullen/kusto-loco" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
-          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">LokqlDx</strong>
-          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">KQL data explorer with map output</span>
-          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">github.com →</span>
+        <a class="appcard" href="https://play.google.com/store/apps/details?id=com.SoftwareNotion.TearsCompanion" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; color: #1C1B2E; background: #FFFFFF">
+          <img class="appicon" src="assets/apps/tears-companion-icon.png" alt="Tears Companion icon" loading="lazy" decoding="async">
+          <span class="appcaption">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Tears Companion</strong>
+            <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Offline Zelda: Tears of the Kingdom map</span>
+            <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">play.google.com →</span>
+          </span>
         </a>
-        <a href="https://meissnernordic.app/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
-          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Meissner Nordic</strong>
-          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Cross-country ski trail conditions</span>
-          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">meissnernordic.app →</span>
+        <a class="appcard" href="https://meissnernordic.app/" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; color: #1C1B2E; background: #FFFFFF">
+          <img class="appicon" src="assets/apps/meissner-nordic-icon.png" alt="Meissner Nordic icon" loading="lazy" decoding="async">
+          <span class="appcaption">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Meissner Nordic</strong>
+            <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Cross-country ski trail conditions</span>
+            <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">meissnernordic.app →</span>
+          </span>
         </a>
-        <a href="https://play.google.com/store/apps/details?id=com.eliandev.rtarija" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
-          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Rutas Tarija</strong>
-          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">City bus routes in Tarija, Bolivia</span>
-          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">play.google.com →</span>
+        <a class="appcard" href="https://software-notion.de/apps/breath-companion" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; color: #1C1B2E; background: #FFFFFF">
+          <img class="appicon" src="assets/apps/breath-companion-icon.png" alt="Breath Companion icon" loading="lazy" decoding="async">
+          <span class="appcaption">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Breath Companion</strong>
+            <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Offline Zelda: Breath of the Wild map</span>
+            <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">software-notion.de →</span>
+          </span>
         </a>
-        <a href="https://software-notion.de/apps/breath-companion" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1C1B2E; background: #FFFFFF">
-          <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Breath Companion</strong>
-          <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">Freediving logbook and dive sites</span>
-          <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">software-notion.de →</span>
+        <a class="appcard" href="https://play.google.com/store/apps/details?id=com.eliandev.rtarija" style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; color: #1C1B2E; background: #FFFFFF">
+          <img class="appicon" src="assets/apps/rutas-tarija-icon.png" alt="Rutas Tarija icon" loading="lazy" decoding="async">
+          <span class="appcaption">
+            <strong style="font-family: 'Baloo 2', system-ui, sans-serif; font-size: 16.5px; font-weight: 600">Rutas Tarija</strong>
+            <span style="font-size: 14.5px; line-height: 1.5; color: #51536E">City bus routes in Tarija, Bolivia</span>
+            <span style="margin-top: 4px; font-size: 13px; color: #4257E3; font-weight: 500">play.google.com →</span>
+          </span>
         </a>
       </div>
     </div>
@@ -411,12 +441,12 @@ h1, h2, h3 { font-family: "Baloo 2", "Segoe UI", system-ui, sans-serif; text-wra
         <div style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
           <h3 style="margin: 0; font-size: 20px; font-weight: 600">Sponsor Mapsui</h3>
           <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #51536E">Mapsui is free and stays free. Sponsorship pays for the maintenance that keeps it current with every new .NET and framework release.</p>
-          <a href="https://github.com/sponsors/pauldendulk" style="margin-top: 4px; background: #4257E3; color: #FFFFFF; border-radius: 11px; padding: 13px 24px; font-weight: 600; font-size: 15.5px; text-decoration: none">Become a sponsor</a>
+          <a href="https://github.com/sponsors/pauldendulk" style="margin-top: auto; background: #4257E3; color: #FFFFFF; border-radius: 11px; padding: 13px 24px; font-weight: 600; font-size: 15.5px; text-decoration: none">Become a sponsor</a>
         </div>
         <div style="min-width: 0; border: 1px solid #E9EAF3; border-radius: 14px; background: #FFFFFF; padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
           <h3 style="margin: 0; font-size: 20px; font-weight: 600">Work with the maintainer</h3>
           <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #51536E">Paul den Dulk maintains Mapsui and takes on consulting work: getting a map into your app, custom layers and styling, performance, or a feature you need upstream.</p>
-          <a href="mailto:info.mapsui@gmail.com" style="margin-top: 4px; border: 1.5px solid #D5D8EE; color: #1C1B2E; border-radius: 11px; padding: 13px 24px; font-weight: 600; font-size: 15.5px; text-decoration: none">info.mapsui@gmail.com</a>
+          <a href="mailto:support@mapsui.com" style="margin-top: auto; background: #4257E3; color: #FFFFFF; border-radius: 11px; padding: 13px 24px; font-weight: 600; font-size: 15.5px; text-decoration: none">support@mapsui.com</a>
         </div>
       </div>
     </div>

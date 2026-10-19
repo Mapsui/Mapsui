@@ -2,6 +2,10 @@ site_name: Mapsui Documentation
 site_url: https://mapsui.com/v5/
 docs_dir: markdown
 site_dir: _site
+# Port for 'mkdocs serve'. Uncommon enough not to collide with the default 8000
+# that many dev servers use, but below 49152: Windows reserves ranges inside the
+# dynamic port range for Hyper-V, and binding one of those fails with WinError 10013.
+dev_addr: 127.0.0.1:9756
 theme:
   name: 'material'
   logo: images/logo.svg
