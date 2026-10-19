@@ -32,3 +32,11 @@ description: A showcase of real-world applications and products built with Mapsu
 ### Meissner Nordic
 
 [![Meissner Nordic](images/meissner-nordic.png)](https://meissnernordic.app/)
+
+### Tears Companion
+
+[![Tears Companion](images/tears-companion.png)](https://play.google.com/store/apps/details?id=com.SoftwareNotion.TearsCompanion)
+
+### Watchful
+
+[![Watchful](images/watchful.png)](https://quintham.com/products/watchfulapp)
