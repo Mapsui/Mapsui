@@ -33,11 +33,11 @@ jobs:
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v2
 
-    - name: Setup .NET 9 SDK
+    - name: Setup .NET 10 SDK
       uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
-           9.0.305
+           10.0.x
            8.0.x
 
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
