@@ -1,8 +1,6 @@
 using Android.App;
-using Android.Content.PM;
 using Android.OS;
 using Android.Views;
-using Android.Widget;
 
 namespace Mapsui.Samples.Uno5.Droid;
 
@@ -11,7 +9,7 @@ namespace Mapsui.Samples.Uno5.Droid;
     ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
     WindowSoftInputMode = SoftInput.AdjustNothing | SoftInput.StateHidden
 )]
-public class MainActivity : Microsoft.UI.Xaml.ApplicationActivity
+public class MainActivity : global::Uno.UI.Runtime.Android.ApplicationActivity
 {
     protected override void OnCreate(Bundle? savedInstanceState)
     {

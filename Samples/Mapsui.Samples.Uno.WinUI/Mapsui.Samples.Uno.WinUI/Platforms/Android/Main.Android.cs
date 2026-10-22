@@ -1,5 +1,7 @@
 using Android.Runtime;
 
+using Uno.UI.Hosting;
+
 namespace Mapsui.Samples.Uno.WinUI.Droid;
 
 [global::Android.App.ApplicationAttribute(
@@ -9,11 +11,17 @@ namespace Mapsui.Samples.Uno.WinUI.Droid;
     HardwareAccelerated = true,
     Theme = "@style/AppTheme"
 )]
-public class Application : Microsoft.UI.Xaml.NativeApplication
+public class Application : global::Uno.UI.Runtime.Android.NativeApplication
 {
     public Application(IntPtr javaReference, JniHandleOwnership transfer)
-        : base(() => new App(), javaReference, transfer)
+        : base(javaReference, transfer)
     {
     }
+
+    protected override UnoPlatformHost CreateHost() =>
+        UnoPlatformHostBuilder.Create()
+            .App(() => new App())
+            .UseAndroid()
+            .Build();
 }
 
