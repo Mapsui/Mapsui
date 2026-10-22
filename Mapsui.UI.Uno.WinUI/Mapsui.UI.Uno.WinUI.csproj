@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net9.0-ios;net9.0-maccatalyst;net9.0-android;net9.0-windows10.0.19041</TargetFrameworks>
+    <!--
+      Uno Platform 7 renders every head with Skia, so the net10.0 build serves desktop, browser,
+      Android and iOS apps alike; a native-renderer -android/-ios build would now be deployed to them.
+    -->
+    <TargetFrameworks>net10.0;net10.0-windows10.0.19041</TargetFrameworks>
     <UnoSingleProject>true</UnoSingleProject>
     <OutputType>Library</OutputType>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
@@ -22,6 +26,12 @@
       Skia;
     </UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!--
+      Uno Platform 7 brings SkiaSharp 4 and HarfBuzzSharp 14, so the central v3 pins would downgrade them (NU1109).
+      Without transitive pinning, Uno sets those versions and the package does not list the pinned
+      transitive packages (such as SkiaSharp.HarfBuzz 3.x) as its own dependencies.
+    -->
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
 	</PropertyGroup>
 
 
@@ -40,20 +50,10 @@
     <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.28" /> -->
   </ItemGroup>
 
-  <!--Harfbuzz Sharp references Workaround for this issue-->
-  <!--https://github.com/mono/SkiaSharp/issues/1725-->
-  <ItemGroup Condition="$(TargetFramework.Contains('browserwasm'))">
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="SkiaSharp.Views.WinUI" />
-  </ItemGroup>
+  <!--
+    The Skia feature references SKCanvasElement (Uno.WinUI.Graphics2DSK) and, on Windows,
+    SkiaSharp.Views.WinUI, at the SkiaSharp 4 versions pinned by the Uno.Sdk.
+  -->
 
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
