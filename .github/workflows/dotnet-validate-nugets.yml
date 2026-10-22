@@ -21,11 +21,11 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget22-
     # .Net 9 update     
-    - name: Setup .NET 9 SDK 
+    - name: Setup .NET 10 SDK 
       uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
-           9.0.305
+           10.0.x
            8.0.x
     # Java Sdk install 11
     - name: Install Open JDK 11
@@ -42,7 +42,7 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check --version 1.32.17
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.305
+      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.slnx  
     # Release Build

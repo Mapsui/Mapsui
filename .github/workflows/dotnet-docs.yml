@@ -56,11 +56,11 @@ jobs:
       with:
         fetch-depth: 0         
         filter: tree:0 
-    - name: Setup .NET 9 SDK
+    - name: Setup .NET 10 SDK
       uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
-           9.0.305
+           10.0.x
            8.0.x
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 

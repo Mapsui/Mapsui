@@ -2,6 +2,7 @@
 using Mapsui.Cache;
 
 namespace Mapsui.Features;
+
 public class FeatureKeyCreator<T> where T : notnull
 {
     private readonly LruCache<T, uint> _keys;
