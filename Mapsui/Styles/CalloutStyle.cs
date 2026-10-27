@@ -67,8 +67,10 @@ public class CalloutStyle : ImageStyle, IHasImage
     private Alignment _subtitleTextAlignment;
     private double _spacing;
     private double _maxWidth;
-    private Color? _titleFontColor;
-    private Color? _subtitleFontColor;
+    // A null font color renders fully transparent text, which is never what a caller wants for a title or subtitle
+    // they have set. Default to black so an unset color cannot silently hide the text.
+    private Color? _titleFontColor = Color.Black;
+    private Color? _subtitleFontColor = Color.Black;
     private Font _titleFont = new();
     private Font _subtitleFont = new();
     private CalloutBalloonDefinition _balloonDefinition = new();
@@ -128,7 +130,8 @@ public class CalloutStyle : ImageStyle, IHasImage
     }
 
     /// <summary>
-    /// Font color to render title
+    /// Font color to render title. Defaults to <see cref="Color.Black"/>. Setting it to null renders the title
+    /// fully transparent; use a color with an alpha of zero if that is intended.
     /// </summary>
     public Color? TitleFontColor
     {
@@ -173,7 +176,8 @@ public class CalloutStyle : ImageStyle, IHasImage
     }
 
     /// <summary>
-    /// Font color to render subtitle
+    /// Font color to render subtitle. Defaults to <see cref="Color.Black"/>. Setting it to null renders the
+    /// subtitle fully transparent; use a color with an alpha of zero if that is intended.
     /// </summary>
     public Color? SubtitleFontColor
     {
