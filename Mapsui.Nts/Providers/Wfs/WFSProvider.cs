@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -708,6 +709,16 @@ public class WFSProvider : IProvider, IDisposable
             _featureTypeInfo.BBox.MaxLat);
     }
 
+    /// <summary>
+    /// Gets or sets the coordinate reference system to request the features in.
+    /// </summary>
+    /// <remarks>
+    /// Accepted are the 'EPSG:3857' notation and the URN notation that WFS 2.0 capabilities use,
+    /// like 'urn:ogc:def:crs:EPSG::3857'. The getter always returns the 'EPSG:3857' notation.
+    /// </remarks>
+    /// <exception cref="ArgumentException">
+    /// Thrown when the value is not a recognized EPSG notation.
+    /// </exception>
     public string? CRS
     {
         get
@@ -717,12 +728,31 @@ public class WFSProvider : IProvider, IDisposable
         }
         set
         {
-            if (_featureTypeInfo != null && value != null)
-                _sridOverride = _featureTypeInfo.SRID = value[CrsHelper.EpsgPrefix.Length..];
+            var srid = value == null ? null : ToSrid(value);
+            if (_featureTypeInfo != null && srid != null)
+                _sridOverride = _featureTypeInfo.SRID = srid;
             else
-                _sridOverride = value?[CrsHelper.EpsgPrefix.Length..];
+                _sridOverride = srid;
             _initialized = false;
         }
+    }
+
+    /// <summary>
+    /// Reduces an EPSG notation to the bare SRID. Without this check a URN like
+    /// 'urn:ogc:def:crs:EPSG::3857' would silently become the SRID 'ogc:def:crs:EPSG::3857'.
+    /// </summary>
+    private static string ToSrid(string crs)
+    {
+        var code = crs.StartsWith(CrsHelper.EpsgPrefix, StringComparison.OrdinalIgnoreCase)
+            ? crs[CrsHelper.EpsgPrefix.Length..]
+            : crs[(crs.LastIndexOf(':') + 1)..];
+
+        if (code.Length == 0 || !code.All(char.IsDigit))
+            throw new ArgumentException(
+                $"CRS '{crs}' is not recognized. Use the 'EPSG:3857' or 'urn:ogc:def:crs:EPSG::3857' notation.",
+                nameof(crs));
+
+        return code;
     }
 
     public void Dispose()
