@@ -111,6 +111,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
                 styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
                 styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
                 styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
+                WarnIfFontColorIsNull(callout.SubtitleFontColor, callout.Subtitle, nameof(CalloutStyle.SubtitleFontColor));
                 styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
 
                 textBlockSubtitle.AddText(callout.Subtitle, styleSubtitle);
@@ -120,6 +121,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             styleTitle.FontSize = (float)callout.TitleFont.Size;
             styleTitle.FontItalic = callout.TitleFont.Italic;
             styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
+            WarnIfFontColorIsNull(callout.TitleFontColor, callout.Title, nameof(CalloutStyle.TitleFontColor));
             styleTitle.TextColor = callout.TitleFontColor.ToSkia();
 
             textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
@@ -145,5 +147,15 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
                 textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
             return recorder.EndRecording();
         }
+    }
+
+    /// <summary>
+    /// Warn when text was set but its color was explicitly cleared, because that renders fully transparent text.
+    /// <see cref="CalloutStyle"/> defaults these colors to black, so null only occurs when a caller assigns it.
+    /// </summary>
+    private static void WarnIfFontColorIsNull(Color? fontColor, string? text, string propertyName)
+    {
+        if (fontColor is null && !string.IsNullOrEmpty(text))
+            Logger.Log(LogLevel.Warning, $"{nameof(CalloutStyle)}.{propertyName} is null, so the text is drawn fully transparent. Use a color with an alpha of zero if that is intended.");
     }
 }

@@ -76,11 +76,12 @@ public static class SkiaTextLayoutHelper
         // Set a custom FontMapper so RTK measures line-break positions using the
         // same typeface that will be used for drawing (important for custom fonts).
         var textBlock = new TextBlock();
-        if (font.Typeface != null)
-            textBlock.FontMapper = new MapsuiFontMapper(font.Typeface);
+        var typeface = ResolveTypeface(font);
+        if (typeface != null)
+            textBlock.FontMapper = new MapsuiFontMapper(typeface);
         textBlock.AddText(line, new Style
         {
-            FontFamily = font.Typeface?.FamilyName ?? "Arial",
+            FontFamily = typeface?.FamilyName ?? "Arial",
             FontSize = font.Size,
         });
         textBlock.MaxWidth = maxWidth;
@@ -171,15 +172,16 @@ public static class SkiaTextLayoutHelper
         SKColor textColor, float maxWidth = 0)
     {
         var textBlock = new TextBlock();
-        if (font.Typeface != null)
-            textBlock.FontMapper = new MapsuiFontMapper(font.Typeface);
+        var typeface = ResolveTypeface(font);
+        if (typeface != null)
+            textBlock.FontMapper = new MapsuiFontMapper(typeface);
 
         textBlock.AddText(text ?? "", new Style
         {
-            FontFamily = font.Typeface?.FamilyName ?? "Arial",
+            FontFamily = typeface?.FamilyName ?? "Arial",
             FontSize = font.Size,
-            FontWeight = font.Typeface?.IsBold == true ? 700 : 400,
-            FontItalic = font.Typeface?.IsItalic ?? false,
+            FontWeight = typeface?.IsBold == true ? 700 : 400,
+            FontItalic = typeface?.IsItalic ?? false,
             TextColor = textColor,
         });
 
@@ -220,13 +222,18 @@ public static class SkiaTextLayoutHelper
     /// </summary>
     public static SKFont CreateSkFont(Mapsui.Styles.Font? font, float fallbackSize, RenderService renderService)
     {
-        var typeface = font != null
-            ? CreateTypeface(font.FontSource, font.FontFamily, font.Bold, font.Italic, renderService)
-            : null;
+        var typeface = CreateTypeface(font?.FontSource, font?.FontFamily, font?.Bold == true, font?.Italic == true, renderService);
         return new SKFont { Size = font?.Size > 0 ? (float)font.Size : fallbackSize, Typeface = typeface };
     }
 
-    private static SKTypeface? CreateTypeface(Mapsui.Styles.FontSource? fontSource, string? fontFamily, bool bold, bool italic, RenderService renderService)
+    /// <summary>
+    /// Return the font's typeface, or null when it carries no usable one. SkiaSharp 4 reports an unset typeface as
+    /// <c>SKTypeface.Empty</c> rather than null, so a glyph count of zero is what "no typeface" looks like there.
+    /// </summary>
+    private static SKTypeface? ResolveTypeface(SKFont font)
+        => font.Typeface is { GlyphCount: > 0 } typeface ? typeface : null;
+
+    private static SKTypeface CreateTypeface(Mapsui.Styles.FontSource? fontSource, string? fontFamily, bool bold, bool italic, RenderService renderService)
     {
         if (fontSource != null)
         {
@@ -238,12 +245,13 @@ public static class SkiaTextLayoutHelper
             }
         }
 
-        if (fontFamily != null)
-            return SKTypeface.FromFamilyName(fontFamily,
-                bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
-                SKFontStyleWidth.Normal,
-                italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
-
-        return null;
+        // Pass a null fontFamily straight to FromFamilyName instead of returning null. On SkiaSharp 3 a null typeface
+        // resolved to the platform default at draw time, but SkiaSharp 4 stores SKTypeface.Empty, which has no glyphs,
+        // so every string measures zero width and nothing is drawn. FromFamilyName falls back to SKTypeface.Default
+        // itself, and also honours Bold and Italic for the default family.
+        return SKTypeface.FromFamilyName(fontFamily,
+            bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+            SKFontStyleWidth.Normal,
+            italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
     }
 }
