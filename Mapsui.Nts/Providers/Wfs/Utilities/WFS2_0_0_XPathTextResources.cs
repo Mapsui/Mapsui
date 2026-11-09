@@ -33,7 +33,7 @@ public class WFS_2_0_0_XPathTextResources : WFS_XPathTextResourcesBase
         "/wfs:WFS_Capabilities/ows:OperationsMetadata/ows:Operation[@name='GetFeature']/ows:DCP/ows:HTTP/ows:Post/@xlink:href";
 
     private static readonly string _XPATH_SRS =
-        "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:DefaultSRS";
+        "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:DefaultCRS";
 
     private const string _NSGML = "http://www.opengis.net/gml/3.2";
 
@@ -41,11 +41,19 @@ public class WFS_2_0_0_XPathTextResources : WFS_XPathTextResourcesBase
 
     private const string _NSOWS = "http://www.opengis.net/ows/1.1";
 
+    private const string _NSFES = "http://www.opengis.net/fes/2.0";
+
     public override string NSWFS => _NSWFS;
 
     public override string NSOWS => _NSOWS;
 
     public override string NSGML => _NSGML;
+
+    /// <summary>
+    /// Filter Encoding 2.0 namespace URI. WFS 2.0 requires FES 2.0 filters, not the
+    /// Filter Encoding 1.1 filters that <see cref="WFS_XPathTextResourcesBase.NSOGC"/> stands for.
+    /// </summary>
+    public string NSFES => _NSFES;
 
     /// <summary>
     /// Gets an XPath string addressing the SRID of a featuretype in 'GetCapabilities'.

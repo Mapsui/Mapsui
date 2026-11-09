@@ -281,9 +281,13 @@ internal abstract class GeometryFactory : IDisposable
         // ServiceExceptions without ogc prefix are returned by Deegree. PDD.
         IPathNode exceptionTextNode = new PathNode("http://www.opengis.net/ows", "ExceptionText",
             (NameTable)XmlReader.NameTable);
+        IPathNode ows11ExceptionTextNode = new PathNode("http://www.opengis.net/ows/1.1", "ExceptionText",
+            (NameTable)XmlReader.NameTable);
+        // WFS 2.0 servers report their errors in OWS 1.1. Without this node such a response is
+        // parsed as a feature collection without features, which hides the error.
         CoordinatesNode = new AlternativePathNodesCollection(coordinatesNode, posListNode, posNode);
         ServiceExceptionNode = new AlternativePathNodesCollection(ogcServiceExceptionNode, exceptionTextNode,
-            serviceExceptionNode);
+            ows11ExceptionTextNode, serviceExceptionNode);
         FeatureNode = new PathNode(FeatureTypeInfo.FeatureTypeNamespace, FeatureTypeInfo.Name,
             (NameTable)XmlReader.NameTable);
     }

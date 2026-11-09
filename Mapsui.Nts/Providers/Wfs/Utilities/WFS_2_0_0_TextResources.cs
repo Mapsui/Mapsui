@@ -109,7 +109,7 @@ public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextRe
                                                  featureTypeInfo.FeatureTypeNamespace);
                 //added by PDD to get it to work for degree default sample
                 xWriter.WriteStartElement("Query", NSWFS);
-                xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
+                xWriter.WriteAttributeString("typeNames", qualification + featureTypeInfo.Name);
                 xWriter.WriteAttributeString("srsName", CrsHelper.EpsgPrefix + featureTypeInfo.SRID);
                 xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
                 if (labelProperties != null)
@@ -132,18 +132,28 @@ public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextRe
     private void AppendGml3Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, MRect? boundingBox,
         IFilter? filter, string qualification)
     {
-        xWriter.WriteStartElement("Filter", NSOGC);
+        // WFS 2.0 expects a Filter Encoding 2.0 filter: the fes namespace instead of ogc, and
+        // 'ValueReference' instead of 'PropertyName'. Writing fes as the default namespace also
+        // puts the elements of a user supplied filter in the right namespace.
+        xWriter.WriteStartElement("Filter", NSFES);
+        // The prefix of the property name has to be declared on the filter itself. In a POST
+        // request it is already declared on 'GetFeature', but a GET request sends the filter as a
+        // stand-alone document, so there is nothing to inherit the declaration from.
+        if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
+            !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
+            xWriter.WriteAttributeString("xmlns:" + featureTypeInfo.Prefix,
+                featureTypeInfo.FeatureTypeNamespace);
         if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");
         if (boundingBox != null)
         {
             xWriter.WriteStartElement("BBOX");
             if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
                 !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
-                xWriter.WriteElementString("PropertyName",
+                xWriter.WriteElementString("ValueReference",
                     qualification + featureTypeInfo.Geometry.GeometryName);
             //added qualification to get it to work for degree default sample
             else
-                xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
+                xWriter.WriteElementString("ValueReference", featureTypeInfo.Geometry.GeometryName);
             xWriter.WriteStartElement("gml", "Envelope", NSGML);
             xWriter.WriteAttributeString("srsName",
                 "EPSG:" + featureTypeInfo.SRID);
