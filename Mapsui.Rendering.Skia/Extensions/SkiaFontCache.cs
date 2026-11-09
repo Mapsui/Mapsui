@@ -24,12 +24,14 @@ internal static class SkiaFontCache
 
     private static SKFont CreateFont(FontCacheKey key)
     {
-        var typeface = key.FontFamily is null
-            ? null
-            : SKTypeface.FromFamilyName(key.FontFamily,
-                key.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
-                SKFontStyleWidth.Normal,
-                key.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
+        // Pass a null FontFamily straight to FromFamilyName instead of leaving the typeface null. On SkiaSharp 3 a
+        // null typeface resolved to the platform default at draw time, but SkiaSharp 4 stores SKTypeface.Empty, which
+        // has no glyphs, so every string measures zero width and nothing is drawn. FromFamilyName falls back to
+        // SKTypeface.Default itself, and also honours Bold and Italic for the default family.
+        var typeface = SKTypeface.FromFamilyName(key.FontFamily,
+            key.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+            SKFontStyleWidth.Normal,
+            key.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
 
         var font = new SKFont
         {

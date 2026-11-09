@@ -102,6 +102,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
         else
         {
+            WarnIfFontColorIsNull(callout.TitleFontColor, callout.Title, nameof(CalloutStyle.TitleFontColor));
             using var titleFont = SkiaTextLayoutHelper.CreateSkFont(callout.TitleFont, renderService);
             var titleTextBlock = SkiaTextLayoutHelper.CreateTextBlock(
                 callout.Title, titleFont, callout.TitleTextAlignment, callout.TitleFontColor.ToSkia(), (float)callout.MaxWidth);
@@ -111,6 +112,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
             if (callout.Type == CalloutType.Detail)
             {
+                WarnIfFontColorIsNull(callout.SubtitleFontColor, callout.Subtitle, nameof(CalloutStyle.SubtitleFontColor));
                 subtitleFont = SkiaTextLayoutHelper.CreateSkFont(callout.SubtitleFont, renderService);
                 subtitleTextBlock = SkiaTextLayoutHelper.CreateTextBlock(
                     callout.Subtitle, subtitleFont, callout.SubtitleTextAlignment, callout.SubtitleFontColor.ToSkia(), (float)callout.MaxWidth);
@@ -142,4 +144,13 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
     }
 
+    /// <summary>
+    /// Warn when text was set but its color was explicitly cleared, because that renders fully transparent text.
+    /// <see cref="CalloutStyle"/> defaults these colors to black, so null only occurs when a caller assigns it.
+    /// </summary>
+    private static void WarnIfFontColorIsNull(Color? fontColor, string? text, string propertyName)
+    {
+        if (fontColor is null && !string.IsNullOrEmpty(text))
+            Logger.Log(LogLevel.Warning, $"{nameof(CalloutStyle)}.{propertyName} is null, so the text is drawn fully transparent. Use a color with an alpha of zero if that is intended.");
+    }
 }
