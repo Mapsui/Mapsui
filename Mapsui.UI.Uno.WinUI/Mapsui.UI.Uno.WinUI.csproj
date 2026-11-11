@@ -25,6 +25,8 @@
     <UnoFeatures>
       Skia;
     </UnoFeatures>
+    <!-- The Windows build draws through SkiaSharp.Views.WinUI, which Uno 7 only adds with this opt-in. -->
+    <UnoEnableSkiaOnWinAppSdk>true</UnoEnableSkiaOnWinAppSdk>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!--
       Uno Platform 7 brings SkiaSharp 4 and HarfBuzzSharp 14, so the central v3 pins would downgrade them (NU1109).
