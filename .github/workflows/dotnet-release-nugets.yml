@@ -37,7 +37,7 @@ jobs:
       uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
-           10.0.x
+           10.0.4xx
            8.0.x
 
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
@@ -47,7 +47,7 @@ jobs:
         echo $VERSION_OF_RELEASE
 
     - name: install workloads
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net9 wasm-tools-net8
 
     - name: Build
       run: dotnet build ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
