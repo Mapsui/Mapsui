@@ -461,10 +461,6 @@
     <BuildType Solution="Ad-Hoc|*" Project="Debug" />
     <BuildType Solution="AppStore|*" Project="Debug" />
   </Project>
-  <Project Path="Mapsui.UI.Maui8/Mapsui.UI.Maui8.csproj">
-    <BuildType Solution="Ad-Hoc|*" Project="Release" />
-    <BuildType Solution="AppStore|*" Project="Release" />
-  </Project>
   <Project Path="Mapsui.UI.Shared/Mapsui.UI.Shared.shproj" />
   <Project Path="Mapsui.UI.Uno.WinUI/Mapsui.UI.Uno.WinUI.csproj">
     <BuildType Solution="Ad-Hoc|*" Project="Debug" />
