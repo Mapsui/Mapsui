@@ -17,6 +17,8 @@ jobs:
 
     env:
       SOLUTION: 'Mapsui.Release.slnf'
+      # C: has ~26 GB free on Windows runners, less than the workloads plus the NuGet cache need; D: has ~200 GB.
+      NUGET_PACKAGES: D:/nuget/packages
 
     runs-on: windows-latest
 

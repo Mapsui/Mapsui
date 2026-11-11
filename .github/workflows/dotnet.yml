@@ -206,6 +206,9 @@ jobs:
   
   winBuild:
     runs-on: windows-latest
+    # C: has ~26 GB free on Windows runners, less than the workloads plus the NuGet cache need; D: has ~200 GB.
+    env:
+      NUGET_PACKAGES: D:/nuget/packages
     steps:
     - uses: actions/checkout@v4
       with:
@@ -215,8 +218,8 @@ jobs:
     - uses: actions/cache@v4
       with:
         path: |
-           ~/.nuget/packages/*
-           !/.nuget/packages/Mapsui*
+           D:/nuget/packages/*
+           !D:/nuget/packages/mapsui*
         key: ${{ runner.os }}-nuget22-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget22-
