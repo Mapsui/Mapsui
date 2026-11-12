@@ -148,8 +148,18 @@ public static class LineClipper
     /// </summary>
     /// <returns>true if any visible segments remain; false if the line is fully outside.</returns>
     public static bool ClipPolyline(List<Point> polyLine, Rect bounds, List<Point> result)
+        => ClipPolyline(polyLine, bounds, result, null);
+
+    /// <summary>
+    /// Clips the line to <paramref name="bounds"/>. A line that leaves the bounds and comes back
+    /// gives several pieces: <paramref name="partStarts"/> (when given) receives the index in
+    /// <paramref name="result"/> where each piece after the first starts. Without it the pieces
+    /// are joined by a straight line that is not part of the input.
+    /// </summary>
+    public static bool ClipPolyline(List<Point> polyLine, Rect bounds, List<Point> result, List<int>? partStarts)
     {
         result.Clear();
+        partStarts?.Clear();
 
         Rect lineRect = GetLineRect(polyLine);
         if (!bounds.IntersectsWith(lineRect))
@@ -174,6 +184,7 @@ public static class LineClipper
                 }
                 else
                 {
+                    partStarts?.Add(result.Count);
                     result.Add(seg1);
                     result.Add(seg2);
                 }
