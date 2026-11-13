@@ -137,7 +137,7 @@ jobs:
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '26.5'
+        xcode-version: '26.6'
     # .Net 9 update     
     - name: Setup .NET 10 SDK
       uses: actions/setup-dotnet@v5
@@ -148,7 +148,7 @@ jobs:
     - name: Set MSBuildEnableWorkloadResolver
       run: echo "MSBuildEnableWorkloadResolver=true" >> $GITHUB_ENV
     - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net9 wasm-tools-net8
-      # Workload set 10.0.401 is the last one whose iOS SDK (26.5) builds with Xcode 26.5; newer ones require Xcode 27.
+      # Workload set 10.0.401 is the last one with the iOS 26.5 packs; later sets bring iOS 27 packs, which require Xcode 27.
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net9 wasm-tools-net8 --version 10.0.401
     - name: install Uno.Check 
       run: dotnet tool install --global Uno.Check --version 1.34.1
@@ -164,7 +164,9 @@ jobs:
       run: dotnet restore Mapsui.Mac.slnf
     # Build        
     - name: Build Samples and Tests
-      run: dotnet build --no-restore --configuration Debug Mapsui.Mac.slnf
+      # In that workload set the net9.0-ios apps expect Xcode 26.5 and the net10.0-ios Uno sample expects Xcode 26.6,
+      # and an app build fails unless Xcode matches exactly. Build all of them with Xcode 26.6 and skip that check.
+      run: dotnet build --no-restore --configuration Debug Mapsui.Mac.slnf -p:ValidateXcodeVersion=false
     # Run Tests   
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net9.0/Mapsui.Tests.dll --blame-hang-timeout:60s
