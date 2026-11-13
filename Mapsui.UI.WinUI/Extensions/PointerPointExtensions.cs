@@ -2,6 +2,7 @@
 using Microsoft.UI.Input;
 
 namespace Mapsui.UI.WinUI.Extensions;
+
 public static class PointerPointExtensions
 {
     public static ScreenPosition ToScreenPosition(this PointerPoint pointerPoint)

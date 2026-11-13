@@ -17,6 +17,8 @@ jobs:
 
     env:
       SOLUTION: 'Mapsui.Release.slnf'
+      # C: has ~26 GB free on Windows runners, less than the workloads plus the NuGet cache need; D: has ~200 GB.
+      NUGET_PACKAGES: D:/nuget/packages
 
     runs-on: windows-latest
 
@@ -33,11 +35,12 @@ jobs:
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v2
 
-    - name: Setup .NET 9 SDK
+    - name: Setup .NET 10 SDK
       uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
-           9.0.305
+           10.0.4xx
+           9.0.3xx
            8.0.x
 
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
@@ -47,7 +50,7 @@ jobs:
         echo $VERSION_OF_RELEASE
 
     - name: install workloads
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net9 wasm-tools-net8
 
     - name: Build
       run: dotnet build ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
@@ -58,6 +61,13 @@ jobs:
     - name: Pack
       # The version argument overrides the version in the Directory.Build.props.
       run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets
+
+    - name: Pack Mapsui.UI.Maui8
+      # The .NET 10 SDK can't build net8.0-android, so this project uses the SDK 9 pinned by its own global.json.
+      working-directory: Mapsui.UI.Maui8
+      run: |
+        dotnet workload install maui android
+        dotnet pack --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o ../nugets
 
     - name: Upload nugets
       uses: actions/upload-artifact@v4

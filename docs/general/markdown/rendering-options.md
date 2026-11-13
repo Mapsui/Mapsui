@@ -28,7 +28,7 @@ Most applications should start with their framework's default. GPU drawing can h
 | WinUI on Windows | Software drawing through `SKXamlCanvas`; no Mapsui backend selector. |
 | Avalonia | Uses Avalonia's Skia drawing context, including its GPU context when available. Backend configuration belongs to Avalonia. |
 | Eto | Uses Eto's `SkiaDrawable` host; no Mapsui backend selector. |
-| Uno | Uses `SKCanvasElement` where supported; otherwise selects a GPU host on Android/browser and a software host elsewhere. No Mapsui backend selector. |
+| Uno | Uses `SKCanvasElement` on every Uno Platform target; the Windows App SDK target draws through `SKXamlCanvas`. No Mapsui backend selector. |
 
 ### MAUI configuration
 

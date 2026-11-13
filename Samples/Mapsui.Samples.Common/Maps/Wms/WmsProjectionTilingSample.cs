@@ -12,6 +12,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 
 namespace Mapsui.Samples.Common.Maps.WMS;
+
 public class WmsProjectionTilingSample : ISample
 {
     static WmsProjectionTilingSample()

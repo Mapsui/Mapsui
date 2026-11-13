@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Mapsui.UI.Blazor.Extensions;
+
 public static class TouchPointExtensions
 {
     public static ScreenPosition ToScreenPosition(this TouchPoint touchPoint, BoundingClientRect clientRect)

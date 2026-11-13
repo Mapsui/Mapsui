@@ -1,14 +1,8 @@
 <Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <!--
-      Temporary: keep this sample runnable while the repository is pinned to .NET 9.
-      Android (and the rest of the net10 TFMs) should be re-enabled when Mapsui 6
-      moves the repository to .NET 10.
-
-      Re-enable with:
-      <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
-    -->
-    <TargetFrameworks>net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+    <!-- Uno Platform 7 brings SkiaSharp 4 and HarfBuzzSharp 14; the central v3 pins would downgrade them (NU1109). -->
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
