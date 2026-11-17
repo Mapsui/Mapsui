@@ -11,7 +11,7 @@ description: The experimental Skia renderer rewrite featuring partial rendering 
 
 > **Requires the experimental renderer.** Partial rendering is only implemented in `Mapsui.Experimental.Rendering.Skia`. The standard renderer always redraws the full screen. To enable it, install the `Mapsui.Experimental.Rendering.Skia` NuGet package and set it on your `MapControl`:
 >
-> ```cs
+> ```csharp
 > MapControl.SetMapRenderer(new Mapsui.Experimental.Rendering.Skia.MapRenderer());
 > ```
 >
@@ -23,7 +23,7 @@ By default the map redraws the entire screen on every refresh. Partial rendering
 
 Call `RefreshGraphics` with a rectangle in world coordinates (the same coordinate system your map uses):
 
-```cs
+```csharp
 map.RefreshGraphics(new MRect(minX, minY, maxX, maxY));
 ```
 
@@ -39,7 +39,7 @@ If you write a custom widget renderer by implementing `ISkiaWidgetRenderer`, the
 
 The canvas is already clipped to the dirty area, so drawing outside it has no effect. But if your widget does expensive work before drawing — like fetching data or building paths — you can use this parameter to skip that work when the widget is outside the refreshed area:
 
-```cs
+```csharp
 public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget,
                  RenderService renderService, float layerOpacity,
                  SKRect? dirtyScreenRect)

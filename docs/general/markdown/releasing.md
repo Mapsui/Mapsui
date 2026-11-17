@@ -5,17 +5,11 @@ description: Step-by-step release procedure for Mapsui maintainers, covering ver
 
 # Releasing
 
-This page describes the release procedure for Mapsui maintainers.
+This page describes the release procedure for Mapsui maintainers. A release consists of three steps:
 
-## Overview
-
-A release consists of three steps:
-
-1. **Create the version tag** — triggers the build and NuGet publish
-2. **Verify** — confirm the NuGet packages are live
+1. **Create the version tag** — creates and pushes the tag the release is built from
+2. **Release NuGets** — builds and publishes the NuGet packages
 3. **Publish the GitHub Release** — notifies users and documents the changes
-
-Separating steps 1–2 from step 3 means users are only notified after NuGets are confirmed live. If the build fails, fix it and re-run before anyone is notified.
 
 ---
 

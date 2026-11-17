@@ -1,3 +1,8 @@
+---
+title: Images
+description: How to assign images to styles and widgets using the Image class, its supported source schemes, bitmap regions, and custom SVG colors.
+---
+
 # Images
 
 In Mapsui v5 the Image class was added which simplifies the process of working with images. Previously, in v4, you had to load the image in your code, register it, and then assign the image ID returned from the registration to the symbol. Now all you have to do is assign the image source to the `Image` field of the style, either directly as a string (using the implicit conversion) or by creating an `Image` object.
@@ -6,7 +11,7 @@ In Mapsui v5 the Image class was added which simplifies the process of working w
 
 Mapsui supports five types of schemes for specifying image paths: 
 
-- **http(s)://**, for pointing images on a remote server.
+- **http(s)://**, for pointing to images on a remote server.
 - **file://**, for pointing to images on the local file system.
 - **embedded://**, for pointing to images in the dotnet embedded resources.
 - **svg-content://**, for strings that contain the SVG xml itself.
@@ -16,7 +21,7 @@ Here are some examples:
 
 ```csharp
 myStyle.Image = "https://mapsui.com/v5/images/logo.svg";
-myStyle.Image = $"file://{Environment.SpecialFolder.LocalApplicationData}/example.png";
+myStyle.Image = $"file://{Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "example.png")}";
 myStyle.Image = "embedded://Mapsui.Resources.Images.Pin.svg";
 myStyle.Image = "svg-content://<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"56\"><path d=\"M18 .34C8.325.34.5 8.168.5 17.81c0 3.339.962 6.441 2.594 9.094H3l7.82 15.117L18 55.903l7.187-13.895L33 26.903h-.063c1.632-2.653 2.594-5.755 2.594-9.094C35.531 8.169 27.675.34 18 .34zm0 9.438a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13z\" fill=\"#ffffff\" stroke=\"#000000\"/></svg>";
 myStyle.Image = "base64-content://PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSI1NiI+PHBhdGggZD0iTTE4IC4zNEM4LjMyNS4zNC41IDguMTY4LjUgMTcuODFjMCAzLjMzOS45NjIgNi40NDEgMi41OTQgOS4wOTRIM2w3LjgyIDE1LjExN0wxOCA1NS45MDNsNy4xODctMTMuODk1TDMzIDI2LjkwM2gtLjA2M2MxLjYzMi0yLjY1MyAyLjU5NC01Ljc1NSAyLjU5NC05LjA5NEMzNS41MzEgOC4xNjkgMjcuNjc1LjM0IDE4IC4zNHptMCA5LjQzOGE2LjUgNi41IDAgMSAxIDAgMTMgNi41IDYuNSAwIDAgMSAwLTEzeiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMDAwMDAwIi8+PC9zdmc+";
@@ -51,4 +56,4 @@ This feature offers great flexibility — for instance, you can indicate differe
 
 !!! warning
 
-    Note that a new instance of the SVG object needs to be stored in memory for every different color. So you need to keep some restraint on the number of colors used. An example where this could cause trouble is if you use a float value in a calculation to determine the color, for instance if you let the speed of a vehicle determine the color. To circumvent this you could use categories. Many SVG object instances can also impact performance. If a single color suffices you could use BlendColorMode as an alternative to SvgFillColor/SvgStrokeColor. 
+    Note that a new instance of the SVG object needs to be stored in memory for every different color. So you need to keep some restraint on the number of colors used. An example where this could cause trouble is if you use a float value in a calculation to determine the color, for instance if you let the speed of a vehicle determine the color. To circumvent this you could use categories. Many SVG object instances can also impact performance. If a single color suffices you could use BlendModeColor as an alternative to SvgFillColor/SvgStrokeColor. 

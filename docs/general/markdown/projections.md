@@ -11,7 +11,7 @@ A geospatial projection involves converting coordinates from one coordinate syst
 
 Geospatial projections are complex, and explaining them can be challenging due to the varied backgrounds of Mapsui users. Some are experienced GIS professionals, while many are app developers needing a map for their application. Watching [this video](https://www.youtube.com/watch?v=kIID5FDi2JQ) is a good introduction to map projections.
 
-## Spatial Reference System (CRS)
+## Coordinate Reference System (CRS)
 
 In geospatial contexts, coordinate systems are referred to by their Coordinate Reference System (CRS). In Mapsui, both the `Map` and the `IProvider` have a CRS field to specify their coordinate systems.
 
@@ -50,7 +50,7 @@ var memoryProvider = new MemoryProvider(features) { CRS = "EPSG:4326" };
 var dataSource = new ProjectingProvider(memoryProvider) { CRS = "EPSG:3857" };
 ```
 
-The `ProjectingProvider` will handle the projection for you. Alternatively, you can manually project the data using `Mapsui.SphericalMercator.FromLonLat` and `ToLonLat` before adding it to a `MemoryLayer`, in which case no CRS fields need to be set.
+The `ProjectingProvider` will handle the projection for you. Alternatively, you can manually project the data using `Mapsui.Projections.SphericalMercator.FromLonLat` and `ToLonLat` before adding it to a `MemoryLayer`, in which case no CRS fields need to be set.
 
 ## Remarks
 
@@ -58,4 +58,65 @@ The `ProjectingProvider` will handle the projection for you. Alternatively, you 
 
 ## Sample
 
-[!code-csharp[Main](../../Samples/Mapsui.Samples.Common/Maps/Projection/PointProjectionSample.cs#projectionsample "Projection Sample")]
+This code comes from [PointProjectionSample.cs](https://github.com/Mapsui/Mapsui/blob/main/Samples/Mapsui.Samples.Common/Maps/Projection/PointProjectionSample.cs).
+
+```csharp
+public Task<Map> CreateMapAsync()
+{
+    // For Projections to work three things need to be set:
+    // 1) The CRS on the Map to know what to project to.
+    // 2) The CRS on the DataSource to know what to project from.
+    // 3) The projection to project from the DataSource CRS to
+    // the Map CRS.
+
+    using var geometryLayer = CreateWorldCitiesLayer();
+    var extent = geometryLayer.Extent!.Grow(10000);
+    var map = new Map
+    {
+        CRS = "EPSG:3857", // The Map CRS needs to be set
+        BackColor = Color.Gray
+    };
+    map.Layers.Add(OpenStreetMap.CreateTileLayer());
+    map.Layers.Add(geometryLayer);
+    map.Navigator.ZoomToBox(extent);
+
+    map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Cities"));
+
+    return Task.FromResult(map);
+}
+
+public static Layer CreateWorldCitiesLayer()
+{
+    var features = WorldCitiesFeaturesBuilder.CreateTop100Cities();
+
+    var memoryProvider = new MemoryProvider(features)
+    {
+        CRS = "EPSG:4326" // The DataSource CRS needs to be set
+    };
+
+    var dataSource = new ProjectingProvider(memoryProvider)
+    {
+        CRS = "EPSG:3857"
+    };
+
+    return new Layer
+    {
+        DataSource = dataSource,
+        Name = "Cities",
+        Style = CreateCityStyle(),
+    };
+}
+
+private static ImageStyle CreateCityStyle()
+{
+    var imageSource = "embedded://Mapsui.Samples.Common.Images.location.png";
+
+    return new ImageStyle
+    {
+        Image = imageSource,
+        Offset = new Offset { Y = 64 },
+        SymbolScale = 0.25,
+        Opacity = 0.5f
+    };
+}
+```

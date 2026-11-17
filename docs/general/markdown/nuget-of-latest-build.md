@@ -5,7 +5,7 @@ description: How to download and use NuGet packages from Mapsui's latest CI buil
 
 # NuGet of Latest Build
 
-Mapsui's 'Build' GitHub action creates nugets and stores them as artifacts. You can use them in your local build.
+Mapsui's 'Build' GitHub action creates NuGet packages and stores them as artifacts. You can use them in your local build.
 
 - Go to [actions](https://github.com/Mapsui/Mapsui/actions).
 - Select the 'Build' workflow on the left.
@@ -13,5 +13,5 @@ Mapsui's 'Build' GitHub action creates nugets and stores them as artifacts. You 
 - Scroll to the bottom to 'Artifacts' and download the artifacts of your OS.
 - Extract the artifacts and place the .nupkg file in a folder, e.g., C:\LocalNuGets.
 - Run `dotnet nuget add source "C:\LocalNuGets" --name LocalNuGet` in your sln folder to add the source to the nuget.config.
-- You may need to specify the specific version of the nuget in the csproj or Directory.Package.props.
+- You may need to specify the specific version of the NuGet package in the csproj or Directory.Packages.props.
   - Note, the version will have a build postfix and could look like '5.0.0-beta.7-37-g6bac058'.

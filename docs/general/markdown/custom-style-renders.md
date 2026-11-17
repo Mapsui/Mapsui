@@ -29,12 +29,12 @@ public interface ISkiaStyleRenderer : IStyleRenderer
 }
 ```
 
-The IFeature has a Geometry field. The renderer is responsible to cast the IFeature.Geometry to the type it intends to render. The IStyle is the custom style the user defined. It can contain extra style information not present in the default style classes. The user will need to cast that IStyle to the custom style to use this extra information.
+The IFeature interface has no geometry of its own. The renderer is responsible for casting the IFeature to the concrete feature type it intends to render, for instance a `PointFeature` (with its `Point`) or a `GeometryFeature` (with its `Geometry`). The IStyle is the custom style the user defined. It can contain extra style information not present in the default style classes. The user will need to cast that IStyle to the custom style to use this extra information.
 
 ## Code sample
 See the [CustomStyle sample](https://mapsui.com/v5/samples/#/Styles/CustomStyle) for a working example.
 
-![custom stye renderer](images/special.gif)
+![custom style renderer](images/special.gif)
 
 In this sample the custom style contains no extra information, it is just an indication to use the associated custom renderer. It would be possible to add extra fields like EarColor and NoseSize to the custom style which the renderer can use.
 

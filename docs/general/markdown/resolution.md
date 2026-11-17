@@ -5,10 +5,10 @@ description: What resolution means in Mapsui, how it relates to the Viewport and
 
 # Resolution
 
-In Mapsui the resolution is a value that indicates to what degree the map is zoomed in or zoomed out. A large value means you are zoomed out (see the whole world), a small value means you are zoomed in (looking at the details). The resolution of a viewport is its size in map coordinates (of the coordinate system used) divided by its size in pixels. If you use the OpenStreetMap background layer (or another layer in that coordinates system) the resolution is meters / pixel at the equator.
+In Mapsui the resolution is a value that indicates to what degree the map is zoomed in or zoomed out. A large value means you are zoomed out (see the whole world), a small value means you are zoomed in (looking at the details). The resolution of a viewport is its size in map coordinates (of the coordinate system used) divided by its size in pixels. If you use the OpenStreetMap background layer (or another layer in that coordinate system) the resolution is meters / pixel at the equator.
 
 ### The resolution of the Mapsui viewport
-The Viewport is an important class in Mapsui. It has a Resolution field. Its value can be directly derived from the coordinate extent and the size in pixels. So Viewport.Resolution will always be equal to Viewport.Extent.Width / Viewport.Width. The Viewport.Extent is in the units of the coordinate system (different apps can use different coordinate systems) and the Viewport.Width/Height is in pixels.
+The Viewport is an important class in Mapsui. It has a Resolution field. Its value can be directly derived from the coordinate extent and the size in pixels. So Viewport.Resolution will always be equal to `Viewport.ToExtent().Width / Viewport.Width`. The extent is in the units of the coordinate system (different apps can use different coordinate systems) and the Viewport.Width/Height is in pixels.
 
 ### The resolution in OpenStreetMap
 Mapsui's resolution concept is derived from the value for zoom levels used in OpenStreetMap [tile schema](https://wiki.openstreetmap.org/wiki/Zoom_levels). OpenStreetMap uses the EPSG:3857 coordinate system (called SphericalMercator within Mapsui). The full width of that coordinate system is 40075017 units. The top level tile in OpenStreetMap is 256x256 pixels. So the top level tile has a resolution of 40075017 / 256 = 156543 if it is shown unscaled.
@@ -31,6 +31,6 @@ Modern devices have a very high resolution. If something is drawn onto the canva
 
 ### Density Independent Pixels in SkiaSharp
 
-The scale in skia has caused some confusion in the past and bugs as a consequence. So here is some extra information on this topic. This is mainly targeted at contributors, users of the Mapsui nugets do not need to know about this.
+The scale in Skia has caused some confusion in the past and bugs as a consequence. So here is some extra information on this topic. This is mainly targeted at contributors, users of the Mapsui NuGet packages do not need to know about this.
 
 Most (all?) views in SkiaSharp use pixels as coordinates by default but for our purposes we need to use density independent pixels, so we need to correct for this. We do this by setting the scale of skia's SKCanvas. This needs to be done in the render loop because it is the only place where we have access to the SKCanvas. Also the size of the map needs to be adjusted at that point, otherwise we would draw outside the screen. In later versions of SkiaSharp it is possible to use IgnorePixelScaling=true instead of scaling.

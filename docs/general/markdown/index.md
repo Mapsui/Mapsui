@@ -27,9 +27,9 @@ Try the quick-start for your favorite framework below.
 
     === "MAUI"
 
-        **Step 1:** Create a new .NET 7.0 MAUI application in Visual Studio.
+        **Step 1:** Create a new .NET 9 MAUI application in Visual Studio.
 
-        **Step 2:** Add the Mapsui.Maui nuget package:
+        **Step 2:** Add the Mapsui.Maui NuGet package:
 
         ```console
         dotnet add package Mapsui.Maui
@@ -50,10 +50,10 @@ Try the quick-start for your favorite framework below.
         using SkiaSharp.Views.Maui.Controls.Hosting;
         ```
 
-        This is because Mapsui depends on SkiaSharp which needs this call. We hope that this will not be necessary in a future version of Mapsui.Maui. Without this line the app will crash with this exception: `Catastrophic failure (0x8000FFFF (E_UNEXPECTED))` on Windows and with `Microsoft.Mapsui.Platform.HandlerNotFoundException has been thrown` on Mac.
+        This is because Mapsui depends on SkiaSharp which needs this call. We hope that this will not be necessary in a future version of Mapsui.Maui. Without this line the app will crash with this exception: `Catastrophic failure (0x8000FFFF (E_UNEXPECTED))` on Windows and with `Microsoft.Maui.Platform.HandlerNotFoundException has been thrown` on Mac.
 
         **Step 4:**
-        In MainPage.xaml.cs replace the constuctor with this code:
+        In MainPage.xaml.cs replace the constructor with this code:
 
         ```csharp
         public MainPage()
@@ -83,7 +83,7 @@ Try the quick-start for your favorite framework below.
         dotnet new avalonia.app -o MyApp
         ```
 
-        **Step 2:** Add the Mapsui.Avalonia nuget package:
+        **Step 2:** Add the Mapsui.Avalonia NuGet package:
 
         !!! note "Avalonia 12 users"
             If your project uses **Avalonia 12**, install `Mapsui.Avalonia12` instead:
@@ -144,7 +144,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create new 'Uno Platform App' in Visual Studio
 
-        **Step 2:** Add the Mapsui.Uno.WinUI nuget package:
+        **Step 2:** Add the Mapsui.Uno.WinUI NuGet package:
 
         ```console
         dotnet add package Mapsui.Uno.WinUI
@@ -155,7 +155,7 @@ Try the quick-start for your favorite framework below.
         **Step 3:** Open MainPage.xaml and add namespace:
 
         ```xml
-        xmlns:mapsui="clr-namespace:Mapsui.UI.WinUI;assembly=Mapsui.UI.Uno.WinUI"
+        xmlns:mapsui="using:Mapsui.UI.WinUI"
         ```
 
         Add MapControl to the Grid:
@@ -169,7 +169,7 @@ Try the quick-start for your favorite framework below.
         In MainPage.xaml.cs, add namespace:
 
         ```csharp
-        using Mapsui.Utilities;
+        using Mapsui.Tiling;
         ```
 
         Add code to the constructor:
@@ -184,35 +184,11 @@ Try the quick-start for your favorite framework below.
 
         **Step 4:** Run it and you should see a map of the world.
 
-        **Troubleshooting:**
-
-        - Unable to resolve the .NET SDK version as specified in the global.json.
-        global.json (change the version to "6.0.400" or what is installed on the Computer)
-
-        - Duplicate Attribute errors:
-        Add following line to the ...Wpf.csproj.
-
-        ```xml
-            <!-- Work around https://github.com/dotnet/wpf/issues/6792 -->
-            <ItemGroup>
-            <FilteredAnalyzer Include="@(Analyzer->Distinct())" />
-            <Analyzer Remove="@(Analyzer)" />
-            <Analyzer Include="@(FilteredAnalyzer)" />
-            </ItemGroup>
-        </Target>
-        ```
-        
-        - System.MissingMethodException: Method not found:
-        See for solution here
-        https://github.com/unoplatform/uno/issues/9297
-        
-        Upgrading to the latest Uno.UI Dev Version should help too.
-
     === "Blazor"
     
         **Step 1:** Create a new Blazor WebAssembly Application in your IDE and select .NET 8.0 or later as Framework.
 
-        **Step 2:** Add the Mapsui.Blazor nuget package:
+        **Step 2:** Add the Mapsui.Blazor NuGet package:
 
         ```console
         dotnet add package Mapsui.Blazor
@@ -259,18 +235,6 @@ Try the quick-start for your favorite framework below.
         ```
 
         **Step 4:** Run it and you should see a map of the world.
-
-        **Troubleshooting:**
-
-        - Text is not displayed
-        Add Following to the Blazor project, is a workaround that text is rendered.
-
-        ```xml
-        <ItemGroup>
-            <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.3" GeneratePathProperty="true" />
-            <NativeFileReference Include="$(PKGHarfBuzzSharp_NativeAssets_WebAssembly)\build\netstandard1.0\libHarfBuzzSharp.a\3.1.12\libHarfBuzzSharp.a" />
-        </ItemGroup>
-        ```	
 
     === "WPF"
         
@@ -341,7 +305,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create new 'Blank App. Packaged (WinUI 3 in Desktop)' in Visual Studio
 
-        **Step 2:** Add the Mapsui.WinUI nuget package:
+        **Step 2:** Add the Mapsui.WinUI NuGet package:
         
         ```console
         dotnet add package Mapsui.WinUI
@@ -364,7 +328,7 @@ Try the quick-start for your favorite framework below.
         In MainPage.xaml.cs, add namespace:
 
         ```csharp
-        using Mapsui.Utilities;
+        using Mapsui.Tiling;
         ```
 
         Add code to the constructor:
@@ -383,7 +347,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Start a new Windows Forms App in Visual Studio.
 
-        **Step 2:** Add the Mapsui.WindowsForms nuget package:
+        **Step 2:** Add the Mapsui.WindowsForms NuGet package:
 
         ```console
         dotnet add package Mapsui.WindowsForms
@@ -403,7 +367,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Start a new [Eto.Forms](https://github.com/picoe/Eto/wiki/Quick-Start) application in Visual Studio.
 
-        **Step 2:** Update the target framework in the main project's .csproj file from `netstandard2.0` to `net9.0` (Mapsui.Eto requires .NET 9.0 or later):
+        **Step 2:** Update the target framework in the main project's .csproj file from `netstandard2.0` to `net9.0` (Mapsui.Eto requires .NET 8.0 or later):
 
         ```xml
         <PropertyGroup>
@@ -411,7 +375,7 @@ Try the quick-start for your favorite framework below.
         </PropertyGroup>
         ```
 
-        **Step 3:** Add the Mapsui.Eto nuget package:
+        **Step 3:** Add the Mapsui.Eto NuGet package:
 
         ```console
         dotnet add package Mapsui.Eto
@@ -431,7 +395,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create 'Blank App (Android)' in Visual Studio
 
-        **Step 2:** Add the Mapsui.Android nuget package:
+        **Step 2:** Add the Mapsui.Android NuGet package:
 
         ```console
         dotnet add package Mapsui.Android
@@ -473,7 +437,7 @@ Try the quick-start for your favorite framework below.
 
         ```csharp
         using Mapsui;
-        using Mapsui.Utilities;
+        using Mapsui.Tiling;
         using Mapsui.UI.Android;
         ```
 
@@ -483,7 +447,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 1:** Create new 'Single View App' in Visual Studio
 
-        **Step 2:** Add the Mapsui.iOS nuget package:
+        **Step 2:** Add the Mapsui.iOS NuGet package:
 
         ```console
         dotnet add package Mapsui.iOS
@@ -494,7 +458,7 @@ Try the quick-start for your favorite framework below.
         ```csharp
         using Mapsui;
         using Mapsui.UI.iOS;
-        using Mapsui.Utilities;
+        using Mapsui.Tiling;
         ```
 
         add code to ViewDidLoad() method:
@@ -515,11 +479,11 @@ Try the quick-start for your favorite framework below.
         **Step 4:** Run it and you should see a map of the world.
 
 ## Functionality
-- Points, Lines and Polygons using [NTS](https://github.com/NetTopologySuite/NetTopologySuite), a mature library which support all kinds of geometric operations. 
+- Points, Lines and Polygons using [NTS](https://github.com/NetTopologySuite/NetTopologySuite), a mature library which supports all kinds of geometric operations. 
 - OpenStreetMap tiles based on [BruTile library](https://github.com/BruTile/BruTile) and almost all other tile sources.
 - OGC standards with data providers for WMS, WFS and WMTS.
 - Offline maps are possible using MBTiles implemented with [BruTile.MBTiles](https://www.nuget.org/packages/BruTile.MbTiles). This stores map tiles in a sqlite file.
-- Generates static map images to could be embedded in PDFs. 
+- Generates static map images that can be embedded in PDFs. 
 
 ## Other resources:
 - [API documentation Mapsui](https://mapsui.com/v5/api)
@@ -528,4 +492,4 @@ Try the quick-start for your favorite framework below.
 
 ## Support
 
-For paid support in the form of contract work or consulting mail: [info.mapsui@gmail.com](mailto:info.mapsui@gmail.com).
+For paid support in the form of contract work or consulting mail: [support@mapsui.com](mailto:support@mapsui.com).

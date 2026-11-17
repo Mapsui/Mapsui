@@ -9,11 +9,7 @@ This page explains how the Mapsui sample system works, both for users who want t
 
 ## Finding and running samples
 
-All samples are available as a live Blazor demo at [mapsui.com/v5/samples](https://mapsui.com/v5/samples/). Each sample there has a **Source code** tab showing the relevant code.
-
-To run samples locally, clone the repository and open the `.slnf` for your preferred UI framework (e.g. `Mapsui.Wpf.slnf`). Set `Mapsui.Samples.<YourFramework>` as the startup project and run it. The sample app lets you pick a category and then a specific sample.
-
-Every sample in the app corresponds to a single C# class. To find the class for a particular sample, search the codebase for the displayed name in quotes — for example, searching for `"Points"` leads to `PointsSample.cs`.
+See [Samples](samples.md) for the live Blazor demo, how to run the samples locally, and how to find the class behind a sample.
 
 ## How the sample system is structured
 
@@ -41,7 +37,7 @@ The `Category` property on the sample class controls which group it appears in a
 
 Existing categories:
 
-`Basic` · `DataFormats` · `Editing` · `FeatureAnimations` · `Geometries` · `MapBuilders` · `MapInfo` · `Navigation` · `Performance` · `Projection` · `Special` · `Styles` · `Tests` · `Tiles` · `ViewportAnimations` · `WFS` · `Widgets` · `Wms` · `WMTS`
+`Basic` · `CustomLayerRenderer` · `CustomPointStyle` · `DataFormats` · `Demo` · `Editing` · `ExperimentalVectorTiles` · `FeatureAnimations` · `Geometries` · `Labels` · `MapBuilders` · `MapInfo` · `MapView` · `Navigation` · `Performance` · `Projection` · `Special` · `Styles` · `Tests` · `ViewportAnimations` · `WFS` · `Widgets` · `WMS` · `WMTS`
 
 ## Adding a new sample
 
@@ -74,27 +70,17 @@ The source generator picks it up automatically on the next build.
 
 A sample file should contain everything needed to understand and use it. If the sample relies on a helper class (a custom provider, a data generator, etc.), put that class in the **same `.cs` file** rather than a separate one. This is an intentional exception to the one-class-per-file convention used elsewhere in the codebase. The goal is that someone reading the sample on the website, or copy-pasting it into their own project, gets all the code they need without having to hunt for additional files.
 
-### 2. Add the code-sample doc page
-
-Every sample should have a matching one-line file in `docs/codesamples/` so the website can show the source on the **Source code** tab:
-
-```markdown
-[!code-csharp[Main](../../Samples/Mapsui.Samples.Common/Maps/Special/MyFeatureSample.cs "MyFeatureSample")]
-```
-
-Save it as `docs/codesamples/MyFeatureSample.md`.
-
-### 3. Run the rendering regression test
+### 2. Run the rendering regression test
 
 Every sample is automatically picked up by the rendering regression tests in `Tests/Mapsui.Rendering.Skia.Tests`. Run the test for the new sample:
 
-```ps
+```powershell
 dotnet test Tests/Mapsui.Rendering.Skia.Tests --filter "FullyQualifiedName~MyFeatureSample"
 ```
 
 The first run will be **Inconclusive** because no reference image exists yet — the test generates one in `GeneratedRegression/`. Copy it to `OriginalRegression/` using the helper script:
 
-```ps
+```powershell
 .\Scripts\CopyGeneratedImagesOverOriginalImages.ps1
 ```
 

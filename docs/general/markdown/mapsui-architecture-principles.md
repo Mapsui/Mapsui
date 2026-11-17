@@ -27,7 +27,7 @@ Mapsui strives for optimal performance: in the rendering loop, objects should be
 
 ## Mapsui should not be limited to a single coordinate system
 
-The `Map` can operate in any coordinate system. If no coordinate system is specified on `Map` or `Layers`, they are assumed to share the same system and only a world-to-screen transform is applied. A full coordinate transformation pipeline can be configured via `Map.CRS`, `DataSource.CRS`, and `Map.Transformation`.
+The `Map` can operate in any coordinate system. If no coordinate system is specified on `Map` or `Layers`, they are assumed to share the same system and only a world-to-screen transform is applied. A full coordinate transformation pipeline can be configured via `Map.CRS`, `DataSource.CRS`, and `ProjectionDefaults.Projection` (see [Projections](projections.md)).
 
 ## Disposable resources belong in RenderService, not in the renderer
 

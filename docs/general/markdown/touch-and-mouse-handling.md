@@ -3,7 +3,7 @@ title: Touch and Mouse Handling
 description: How touch and mouse input is handled in Mapsui v5 across UI frameworks, including shared event types and widget interaction.
 ---
 
-# Touch and mouse handling
+# Touch and Mouse Handling
 
 In Mapsui v5 most of the touch and mouse handling code is now shared over UI frameworks. There are many differences between the frameworks so we need some non-shared code but we try to convert it early to shared methods and components.
 
@@ -18,13 +18,13 @@ In v5 we have four event types:
 The names were taken from Uno/WinUI and Avalonia. Perhaps we will need other pointer event types in the future. We still have the Info event type, but this could now be replaced by the other event types because they also can be used to get the MapInfo through a `MapEventArgs.GetMapInfo()` call.
 
 ## Components
-- ManipulationTracker: This component is called from the MapControl with an array of pointer positions (could be mouse or touch, or multitouch) and based on that calculates a new manipulation state (translate, scale, rotate). It is used for both drag and pinch, the difference being that while dragging the scale and rotate fields will have neutral values. The ManipulationTracker is also responsible for rotation snapping (snap out of rotation lock only when the rotation is bigger than some theshold, and snap back in when rotation is close to zero). Rotation snap was previously implemented on only a few platforms.
-- TapTracker: This component detects a tap, a double tap and a long press. Previously there were many differences in how this was implemented.
+- ManipulationTracker: This component is called from the MapControl with an array of pointer positions (could be mouse or touch, or multitouch) and based on that calculates a new manipulation state (translate, scale, rotate). It is used for both drag and pinch, the difference being that while dragging the scale and rotate fields will have neutral values. The ManipulationTracker is also responsible for rotation snapping (snap out of rotation lock only when the rotation is bigger than some threshold, and snap back in when rotation is close to zero). Rotation snap was previously implemented on only a few platforms.
+- TapGestureTracker: This component detects a tap, a double tap and a long press. Previously there were many differences in how this was implemented.
 - FlingTracker: This is an old component that was previously used on just two UI frameworks and is now used on all.
 
 ## Testing touch and mouse handling
 
-Testing is hard. In v5 we support nine different UI frameworks and a single framework can run on different devices/platforms, like Windows, Mac, Linux, Android, iOS and WASM. With hard work you could test those once, but we are continuously making changes, and it is impossible to test all those UI frameworks on every change. You could help us by testing your own favorite UI framework. Below is checklist we used on some occasions. We are open to suggestions to expand the list:
+Testing is hard. In v5 we support ten different UI frameworks and a single framework can run on different devices/platforms, like Windows, Mac, Linux, Android, iOS and WASM. With hard work you could test those once, but we are continuously making changes, and it is impossible to test all those UI frameworks on every change. You could help us by testing your own favorite UI framework. Below is a checklist we used on some occasions. We are open to suggestions to expand the list:
 
 ### Touch test checklist for our samples:
 - [ ] In Widgets|Button: Tap on 'Tap me' button goes up by one.
@@ -33,7 +33,7 @@ Testing is hard. In v5 we support nine different UI frameworks and a single fram
 - [ ] In Widgets|Button: Double Tap should increase the tap count by one.
 - [ ] In Widgets|Hyperlink: Tap on hyperlink should open a browser page.
 - [ ] In Demo|MapInfo: MapInfo should show on the bottom left in the map.
-- [ ] In Info|SingleCallout: Callout should show on tap on symbol, should disappear on a second tap on either symbol or callout.
+- [ ] In MapInfo|SingleCallout: Callout should show on tap on symbol, should disappear on a second tap on either symbol or callout.
 - [ ] In Info|CustomCallout: Callout should not toggle the callout but only show info bottom left.
 - [ ] In Widgets|PerformanceWidget: Tap on widget should reset the values in the widget.
 - [ ] In Widgets|MouseCoordinatesWidget: The mouse coordinates should change while hovering.

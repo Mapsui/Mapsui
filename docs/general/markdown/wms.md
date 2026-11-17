@@ -1,11 +1,11 @@
 ---
 title: WMS
-description: How to add a WMS (Web Map Service) layer to a Mapsui map using WmsProvider from the Mapsui.Extensions package.
+description: How to add a WMS (Web Map Service) layer to a Mapsui map using WmsProvider from the core Mapsui package.
 ---
 
 # WMS
 
-WMS (Web Map Service) is an OGC standard for serving geo-referenced map images over HTTP. Mapsui supports WMS through the `WmsProvider` class in the `Mapsui.Extensions` package.
+WMS (Web Map Service) is an OGC standard for serving geo-referenced map images over HTTP. Mapsui supports WMS through the `WmsProvider` class (namespace `Mapsui.Providers.Wms`) in the core `Mapsui` package.
 
 ## Creating a WMS layer
 
