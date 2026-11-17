@@ -1,5 +1,6 @@
 using Mapsui.Experimental.VectorTiles.VexTileCopies;
 using NUnit.Framework;
+using SkiaSharp;
 using VexTile.Renderer.Mvt.AliFlux.Drawing;
 using VexTile.Renderer.Mvt.AliFlux.Enums;
 
@@ -74,6 +75,23 @@ public class SkiaCanvasTests
         var result = canvas.TransformText("Hello World", brush, wordWrap: true);
 
         Assert.That(result, Is.EqualTo("Hello World"));
+    }
+
+    [Test]
+    public void DrawPolygon_WithLineColor_StrokesTheOutline()
+    {
+        using var canvas = new SkiaCanvas(64, 64);
+        var brush = CreateBrush();
+        brush.Paint.FillColor = SKColors.Transparent;   // only the outline shows
+        brush.Paint.LineColor = SKColors.Red;           // fill-outline-color
+        brush.Paint.LineWidth = 2.0;
+
+        canvas.DrawPolygon([new(10, 10), new(50, 10), new(50, 50), new(10, 50), new(10, 10)], brush);
+
+        using var image = canvas.ToSKImage();
+        using var bitmap = SKBitmap.FromImage(image);
+        Assert.That(bitmap.GetPixel(30, 10).Red, Is.GreaterThan(200));   // on the edge
+        Assert.That(bitmap.GetPixel(30, 30).Alpha, Is.EqualTo(0));       // inside stays empty
     }
 
     private static Brush CreateBrush(TextTransform transform = TextTransform.None, double textMaxWidth = 10.0) =>
