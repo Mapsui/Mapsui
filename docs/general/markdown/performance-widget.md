@@ -3,7 +3,7 @@ title: Performance Widget
 description: How to enable and use the built-in performance widget that displays draw timing metrics overlaid on the map.
 ---
 
-# PerformanceWidget
+# Performance Widget
 
 ## Summary
 
@@ -34,7 +34,7 @@ Time for drawing of the last screen. Be careful: because the widget is drawn tog
 
 ### Mean
 
-The mean value is the mean of the last x draws. x is the number, you provide when creating the Performance object.
+The mean value is the mean of the last x draws. x is the number you provide when creating the Performance object.
 
 ### Frames per second
 
@@ -60,4 +60,4 @@ How often the screen isn't invalidated, because a drawing is still in progress.
 
 ## Remarks
 
-The Performance object contains the times between start and end of a drawing process. This must not be the real drawing time. It could be, that other tasks running in between the drawing process.
+The Performance object contains the times between start and end of a drawing process. This is not necessarily the real drawing time; other tasks may run in between.

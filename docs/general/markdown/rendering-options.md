@@ -3,7 +3,7 @@ title: Rendering Options
 description: Choose a drawing backend, compare Android GPU host views in MAUI, and understand how these choices differ from the map renderer.
 ---
 
-# Rendering options
+# Rendering Options
 
 Mapsui has three distinct rendering choices:
 

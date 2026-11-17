@@ -64,7 +64,7 @@ nav:
     - 'releasing.md'
 
 repo_url: https://github.com/Mapsui/Mapsui/
-edit_uri: blob/master/docs/general/markdown
+edit_uri: blob/main/docs/general/markdown
 extra_css:
   - stylesheets/extra.css
 plugins:

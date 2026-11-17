@@ -5,28 +5,24 @@ description: What Mapsui's experimental NuGet packages are, why they exist, and 
 
 # Experimental Packages
 
-With the release of Mapsui v5, we will introduce experimental NuGet packages. These packages will contain new functionality that is compatible with the v5 stable packages. These experimental packages could contain breaking changes on patch releases and will have more bugs.
+Next to the stable packages, Mapsui publishes experimental NuGet packages. They contain new functionality that is compatible with the stable packages of the same version. Experimental packages can contain breaking changes in patch releases and will have more bugs.
 
 ## Why Experimental Packages?
 
-During the development of v5, there was a big gap between the stable release and the new developments in the betas. It was only possible to use the new functionality by fully migrating to v5. This was not always possible and was only done by a few early adopters. By releasing experimental packages, this gap will be smaller. It will be possible to start using some experimental parts while primarily depending on the stable package. So, there is no need for a big migration, and reverting from an experiment would also not be hard. With this setup, we also hope to receive earlier feedback on our new functionality.
+During the development of v5, there was a big gap between the stable release and the new developments in the betas. It was only possible to use the new functionality by fully migrating to v5. This was not always possible and was only done by a few early adopters. Experimental packages make this gap smaller. You can start using some experimental parts while primarily depending on the stable packages. So, there is no need for a big migration, and reverting from an experiment is also not hard. With this setup, we also hope to receive earlier feedback on our new functionality.
 
 ## How is this organized?
 
-We will keep all development in the main branch. Stable projects will remain mostly unchanged except for bug fixes. New experimental projects will be added to the main branch and will be published in their own NuGet packages. At the moment of writing, we have these experimental packages:
+All development happens in the main branch, both for the stable and the experimental packages. Stable projects remain mostly unchanged except for bug fixes. Experimental projects live next to them in the main branch and are published in their own NuGet packages. At the moment of writing, we have these experimental packages:
 
 - `Mapsui.Experimental` – Code that belongs in the Mapsui core project but is in an experimental stage.
 - `Mapsui.Experimental.VectorTiles` – Implementation of vector tile rendering which is currently in an experimental stage.
-- `Mapsui.Experimental.Rendering.Skia` – In this package we will do a substantial rewrite of the rendering.
+- `Mapsui.Experimental.Rendering.Skia` – A substantial rewrite of the rendering.
 
 ## Use Mapsui.Experimental.Rendering.Skia
 
 To use the experimental renderer you need to set it on the MapControl used in your project.
-```cs
+```csharp
 MapControl.SetMapRenderer(new Mapsui.Experimental.Rendering.Skia.MapRenderer());
 ```
-From the MapRenderer all other rendering implementations are called, so this is usually the only thing you need to change to use all experimental renderers. If you use custom renderer then you need to make sure to register them on the experimental MapRenderer instead of the default MapRenderer (look for method calls to RegisterStyleRenderer and RegisterWidgetRenderer).
-
-## Branching before the next release
-
-At some point before the release of v6, we will need to introduce breaking changes in the main Mapsui projects. At that point, we will need to branch the stable version off to develop/5.0. We will try to postpone this for a while and will try to keep the period between branching and releasing short.
+From the MapRenderer all other rendering implementations are called, so this is usually the only thing you need to change to use all experimental renderers. If you use custom renderers then you need to make sure to register them on the experimental MapRenderer instead of the default MapRenderer (look for method calls to RegisterStyleRenderer and RegisterWidgetRenderer).
