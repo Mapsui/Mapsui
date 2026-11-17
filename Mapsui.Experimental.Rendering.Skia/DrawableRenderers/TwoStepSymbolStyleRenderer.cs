@@ -99,7 +99,7 @@ public class TwoStepSymbolStyleRenderer : ITwoStepStyleRenderer, ISkiaStyleRende
 
         // Resolve relative offset
         var relativeOffset = symbolStyle.RelativeOffset.GetAbsoluteOffset(
-            SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
+            SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
 
         return new SymbolStyleDrawable(
             worldX: worldX,

@@ -32,7 +32,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             canvas.Save();
 
-            var offset = symbolStyle.RelativeOffset.GetAbsoluteOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
+            var offset = symbolStyle.RelativeOffset.GetAbsoluteOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
             canvas.Translate((float)offset.X, (float)-offset.Y);
 
             using var path = renderService.VectorCache.GetOrCreate(symbolStyle.SymbolType, CreatePath);
