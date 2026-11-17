@@ -2,6 +2,7 @@
 using System.IO;
 
 namespace Mapsui.Experimental.Rendering.Skia.Extensions;
+
 public static class ByteExtensions
 {
 

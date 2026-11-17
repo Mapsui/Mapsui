@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 #endif
 
 namespace Mapsui.Extensions;
+
 public static class CancellationTokenSourceExtensions
 {
 #if !NET8_0_OR_GREATER

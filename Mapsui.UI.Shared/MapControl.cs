@@ -24,6 +24,7 @@ using LogLevel = Mapsui.Logging.LogLevel;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
+
 #elif __UWP__
 namespace Mapsui.UI.Uwp;
 #elif __ANDROID__ && !HAS_UNO_WINUI

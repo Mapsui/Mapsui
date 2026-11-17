@@ -16,7 +16,7 @@ mkdocs build -f docs/general/mkdocs.yml
 Assert-LastExitCode "mkdocs"
 
 Write-Output "Installing DocFX"
-dotnet tool update -g docfx --version 2.78
+dotnet tool update -g docfx --version 2.78.6
 Assert-LastExitCode "dotnet tool update docfx"
 
 Write-Output "Create api documentation with docfx in 'docs/api/_site'"

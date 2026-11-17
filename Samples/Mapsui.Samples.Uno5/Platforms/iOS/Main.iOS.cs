@@ -1,4 +1,3 @@
-using UIKit;
 using Uno.UI.Hosting;
 
 namespace Mapsui.Samples.Uno5.iOS;
