@@ -64,6 +64,18 @@ public class SkiaCanvasTests
         Assert.That(result, Is.Empty);
     }
 
+    [Test]
+    public void TransformText_WordWrapWithMaxWidthZero_DoesNotThrow()
+    {
+        using var canvas = new SkiaCanvas(256, 256);
+        // text-max-width 0: not even one character fits, BreakText used to throw.
+        var brush = CreateBrush(textMaxWidth: 0.0);
+
+        var result = canvas.TransformText("Hello World", brush, wordWrap: true);
+
+        Assert.That(result, Is.EqualTo("Hello World"));
+    }
+
     private static Brush CreateBrush(TextTransform transform = TextTransform.None, double textMaxWidth = 10.0) =>
         new Brush
         {
