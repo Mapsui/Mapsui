@@ -196,6 +196,20 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
         _surface.Canvas.DrawPath(_path, _fillPaint);
 
+        // fill-outline-color (e.g. building outlines): stroked over the fill
+        var outline = style.Paint.LineColor;
+        if (outline.Alpha > 0)
+        {
+            _strokePaint.Reset();
+            _strokePaint.IsAntialias = true;
+            _strokePaint.Style = SKPaintStyle.Stroke;
+            _strokePaint.StrokeWidth = (float)style.Paint.LineWidth;
+            // fill-opacity applies to the outline too, as in the style spec
+            _strokePaint.Color = SKColorFactory.MakeColor(outline.Red, outline.Green, outline.Blue,
+                (byte)Clamp(outline.Alpha * style.Paint.FillOpacity, 0.0, 255.0));
+            _surface.Canvas.DrawPath(_path, _strokePaint);
+        }
+
         if (AllocProfile.Enabled)
             AllocProfile.Record("DrawPolygon", GC.GetAllocatedBytesForCurrentThread() - allocBefore);
     }
