@@ -6,6 +6,9 @@ on:
 jobs:
   validateNugets:
     runs-on: windows-latest
+    # C: has ~26 GB free on Windows runners, less than the workloads plus the NuGet cache need; D: has ~200 GB.
+    env:
+      NUGET_PACKAGES: D:/nuget/packages
     steps:
     - uses: actions/checkout@v4
       with:
@@ -15,17 +18,18 @@ jobs:
     - uses: actions/cache@v4
       with:
         path: |
-           ~/.nuget/packages/*
-           !/.nuget/packages/Mapsui*
+           D:/nuget/packages/*
+           !D:/nuget/packages/mapsui*
         key: ${{ runner.os }}-nuget22-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget22-
     # .Net 9 update     
-    - name: Setup .NET 9 SDK 
+    - name: Setup .NET 10 SDK 
       uses: actions/setup-dotnet@v5
       with:
          dotnet-version: |
-           9.0.305
+           10.0.4xx
+           9.0.3xx
            8.0.x
     # Java Sdk install 11
     - name: Install Open JDK 11
@@ -37,12 +41,12 @@ jobs:
       uses: NuGet/setup-nuget@v2
       with:
         nuget-version: latest
-    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
+    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net9 wasm-tools-net8
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net9 wasm-tools-net8
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check --version 1.32.17
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.305
+      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.slnx  
     # Release Build
@@ -59,6 +63,12 @@ jobs:
         $LASTEXITCODE = 0
     - name: Build nuget packages
       run: dotnet pack Mapsui.slnx --configuration Release /p:Version=$env:PACKAGE_VERSION -o Artifacts
+    - name: Build Mapsui.UI.Maui8 nuget package
+      # The .NET 10 SDK can't build net8.0-android, so this project uses the SDK 9 pinned by its own global.json.
+      working-directory: Mapsui.UI.Maui8
+      run: |
+        dotnet workload install maui android
+        dotnet pack --configuration Release /p:Version=$env:PACKAGE_VERSION -o ../Artifacts
     - name: Cleanup
       run: git clean -fx -d -e Artifacts
     # Change Project References to nuget package references in samples    

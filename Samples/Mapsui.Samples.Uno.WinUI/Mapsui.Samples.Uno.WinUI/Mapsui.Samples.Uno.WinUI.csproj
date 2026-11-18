@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android;net9.0-desktop;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.19041</TargetFrameworks>
-    <!-- Temporary CI workaround for Uno.icu-ios macCatalyst linker failure.
-         Revert this once upstream Uno ICU packages include a macCatalyst-compatible native library. -->
-    <TargetFrameworks Condition="'$(MapsuiSkipUnoMacCatalyst)' == 'true'">net9.0-android;net9.0-desktop;net9.0-ios;net9.0-windows10.0.19041</TargetFrameworks>
+    <TargetFrameworks>net10.0-android;net10.0-desktop;net10.0-ios;net10.0-windows10.0.19041</TargetFrameworks>
+    <!-- Uno Platform 7 brings SkiaSharp 4 and HarfBuzzSharp 14; the central v3 pins would downgrade them (NU1109). -->
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
@@ -36,14 +35,6 @@
 		</UnoFeatures>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="SkiaSharp.Views.WinUI" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />
-  </ItemGroup>
-
   <!--https://github.com/dotnet/runtime/issues/109289#issuecomment-2448960065-->
   <Target Name="Issue109289_Workaround" AfterTargets="_BrowserWasmWriteRspForLinking" Condition="'$(TargetFramework)' == 'net9.0-browserwasm'">
     <ItemGroup>
@@ -66,26 +57,6 @@
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
     <ProjectReference Include="..\..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$(TargetFramework.Contains('windows')) and $(UnoFeatures.Contains('SkiaRenderer'))">
-    <!-- The UndefineProperties and SetTargetFramework properties below are necessary to force
-       this TFM of the projects below to be net9.0 even when the TFM of this project is net9.0-<platform>.
-       This is only necessary when SkiaRenderer is set and only for this sample app that uses ProjectReferences.
-       For user apps that use the Mapsui.UI.Uno.WinUI package (with PackageReferences), the logic below is unnecessary
-       and selecting the correct TFM is handled by Uno.Sdk  -->
-    <ProjectReference Update="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj">
-      <UndefineProperties>RuntimeIdentifier</UndefineProperties>
-      <SetTargetFramework>TargetFramework=net9.0</SetTargetFramework>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
-      <UndefineProperties>RuntimeIdentifier</UndefineProperties>
-      <SetTargetFramework>TargetFramework=net9.0</SetTargetFramework>
-    </ProjectReference>
-    <ProjectReference Update="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
-      <UndefineProperties>RuntimeIdentifier</UndefineProperties>
-      <SetTargetFramework>TargetFramework=net9.0</SetTargetFramework>
-    </ProjectReference>
   </ItemGroup>
 
 </Project>

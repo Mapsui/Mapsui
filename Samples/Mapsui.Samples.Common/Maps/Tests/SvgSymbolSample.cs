@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Tests;
+
 public class SvgSymbolSample : ISample
 {
     public string Name => "SvgSymbol";

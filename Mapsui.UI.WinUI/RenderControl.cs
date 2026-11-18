@@ -1,9 +1,10 @@
-using Microsoft.UI;
 using SkiaSharp;
 
 #if __UNO_WINUI__
 using Uno.WinUI.Graphics2DSK;
 using Windows.Foundation;
+#else
+using Microsoft.UI;
 #endif
 
 namespace Mapsui.UI.WinUI;
@@ -22,19 +23,15 @@ abstract partial class RenderControl : Microsoft.UI.Xaml.Controls.UserControl
     public static RenderControl CreateControl(MapControl owner, System.Action<SKCanvas> renderCallback)
     {
 #if __UNO_WINUI__
-        if (SKCanvasElement.IsSupportedOnCurrentPlatform())
-        {
-            return new SKCanvasElementRenderControl(owner, renderCallback);
-        }
-        else
+        // Uno Platform 7 renders every head with Skia, so SKCanvasElement is always available.
+        return new SKCanvasElementRenderControl(owner, renderCallback);
+#else
+        // GPU does not work currently on Windows
+        bool useGPU = System.OperatingSystem.IsBrowser() || System.OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
+        return useGPU
+            ? new SKSwapChainPanelRenderControl(owner, renderCallback)
+            : new SKXamlCanvasRenderControl(owner, renderCallback);
 #endif
-        {
-            // GPU does not work currently on Windows
-            bool useGPU = System.OperatingSystem.IsBrowser() || System.OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
-            return useGPU
-                ? new SKSwapChainPanelRenderControl(owner, renderCallback)
-                : new SKXamlCanvasRenderControl(owner, renderCallback);
-        }
     }
 
     public abstract void InvalidateRender();
@@ -42,6 +39,7 @@ abstract partial class RenderControl : Microsoft.UI.Xaml.Controls.UserControl
     public abstract float? GetPixelDensity();
 }
 
+#if !__UNO_WINUI__
 partial class SKXamlCanvasRenderControl : RenderControl
 {
 #pragma warning disable IDISP006
@@ -123,7 +121,7 @@ partial class SKSwapChainPanelRenderControl : RenderControl
     }
 }
 
-#if __UNO_WINUI__
+#else
 partial class SKCanvasElementRenderControl : RenderControl
 {
 #pragma warning disable IDISP006
