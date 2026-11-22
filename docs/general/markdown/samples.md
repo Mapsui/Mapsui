@@ -1,11 +1,11 @@
 ---
 title: Samples
-description: How to find, run, and understand the Mapsui sample projects, including the live Blazor demo and how to locate sample source code.
+description: How to find, run, and understand the Mapsui sample projects, including the live Blazor and Uno demos and how to locate sample source code.
 ---
 
 # Samples
 
-After going through the quickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/v5/samples/). Each sample has an accompanying 'source code' tab you can use to build your own version.
+After going through the quickstart you should look into the samples. All samples work the same on all platforms. You can view the online samples in [Blazor](https://mapsui.com/v5/samples/) or in [Uno Platform](https://mapsui.com/v5/samples-uno/). Each sample in the Blazor version has an accompanying 'source code' tab you can use to build your own version.
 
 ## Download samples if you have to
 Currently the source code of the samples does not always contain all needed code. In that case you may need to [clone the project](https://github.com/mapsui/mapsui) and open the .slnf of your favorite UI framework. Then set Mapsui.Samples.'YourFavoriteUIFramework'.csproj as startup project. If you run any of the samples you will see there is a way to select a category and within that category several specific samples. All these samples correspond to a specific sample class that is derived from ISample (or IMapControlSample). The easiest way to find them is to search for the name of the sample that is displayed including quotes. For instance, searching for `"Points"` will lead you to the file PointsSample.cs. 
