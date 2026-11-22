@@ -1,5 +1,6 @@
 ﻿using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using System;
@@ -23,9 +24,15 @@ public class MyLocationLayer : BaseLayer, IDisposable
     private readonly ImageStyle _dirStyle;  // style for the view-direction indicator
     private readonly CalloutStyle _coStyle;  // style for the callout
 
-    private static readonly string _movingImageSource = "embedded://Mapsui.Resources.Images.MyLocationMoving.svg";
-    private static readonly string _stillImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg";
-    private static readonly string _directionImageSource = "embedded://Mapsui.Resources.Images.MyLocationDir.svg";
+    private const string _movingImageSource = "embedded://Mapsui.Resources.Images.MyLocationMoving.svg";
+    private const string _stillImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg";
+    private const string _directionImageSource = "embedded://Mapsui.Resources.Images.MyLocationDir.svg";
+
+    // Each layer gets its own Image instances because Image is mutable (SvgFillColor etc.), so changing
+    // one layer's image must not affect another layer.
+    private Image _stillImage = _stillImageSource;
+    private Image _movingImage = _movingImageSource;
+    private Image _directionImage = _directionImageSource;
 
     private MPoint? _animationStart;
     private MPoint? _animationEnd;
@@ -49,7 +56,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.Image = _isMoving ? _movingImageSource : _stillImageSource;
+                _locStyle.Image = _isMoving ? _movingImage : _stillImage;
             }
         }
     }
@@ -92,10 +99,85 @@ public class MyLocationLayer : BaseLayer, IDisposable
     public double ViewingDirection { get; private set; } = -1.0;
 
     /// <summary>
-    /// Scale of symbol
+    /// Scale of the location symbol (the <see cref="StillImage"/> or <see cref="MovingImage"/>).
     /// </summary>
     /// <value>Scale of symbol</value>
-    public double Scale { get; set; } = 1.0;
+    public double Scale
+    {
+        get => _locStyle.SymbolScale;
+        set
+        {
+            _locStyle.SymbolScale = value;
+            _map.RefreshGraphics(); // The symbol size changes, so the old extent is unknown to a partial refresh.
+        }
+    }
+
+    /// <summary>
+    /// Scale of the viewing direction symbol (the <see cref="DirectionImage"/>). The default image is large
+    /// (400 pixels), so the default scale is 0.2. Adjust this when using a custom <see cref="DirectionImage"/>.
+    /// </summary>
+    public double DirectionScale
+    {
+        get => _dirStyle.SymbolScale;
+        set
+        {
+            _dirStyle.SymbolScale = value;
+            _map.RefreshGraphics();
+        }
+    }
+
+    /// <summary>
+    /// Image of the location symbol when the location does not change (<see cref="IsMoving"/> is false).
+    /// Like the <see cref="MovingImage"/> it is rotated to the movement <see cref="Direction"/>, so the image
+    /// should point up (north) when not rotated. The default is a blue circle. Use <see cref="Scale"/> to change its size.
+    /// </summary>
+    /// <remarks>
+    /// Changing a property of the assigned image, such as <see cref="Image.SvgFillColor"/>, does not redraw the map.
+    /// Assign a new image instead.
+    /// </remarks>
+    public Image StillImage
+    {
+        get => _stillImage;
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            _stillImage = value;
+            if (!_isMoving) SetLocationImage(value);
+        }
+    }
+
+    /// <summary>
+    /// Image of the location symbol when the location changes (<see cref="IsMoving"/> is true). It is rotated
+    /// to the movement <see cref="Direction"/>, so the image should point up (north) when not rotated.
+    /// The default is a blue arrow. Use <see cref="Scale"/> to change its size.
+    /// </summary>
+    public Image MovingImage
+    {
+        get => _movingImage;
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            _movingImage = value;
+            if (_isMoving) SetLocationImage(value);
+        }
+    }
+
+    /// <summary>
+    /// Image of the viewing direction indicator, drawn below the location symbol and rotated to the
+    /// <see cref="ViewingDirection"/>, so the image should point up (north) when not rotated.
+    /// The default is a blue cone. Use <see cref="DirectionScale"/> to change its size.
+    /// </summary>
+    public Image DirectionImage
+    {
+        get => _directionImage;
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            _directionImage = value;
+            _dirStyle.Image = value;
+            _map.RefreshGraphics();
+        }
+    }
 
     /// <summary>
     /// The text that is displayed in the MyLocation callout
@@ -161,8 +243,8 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _locStyle = new ImageStyle
         {
             Enabled = true,
-            Image = _stillImageSource,
-            SymbolScale = Scale,
+            Image = _stillImage,
+            SymbolScale = 1.0,
             SymbolRotation = Direction,
             Offset = new Offset(0, 0),
             Opacity = 1,
@@ -171,7 +253,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _dirStyle = new ImageStyle
         {
             Enabled = false,
-            Image = _directionImageSource,
+            Image = _directionImage,
             SymbolScale = 0.2,
             SymbolRotation = 0,
             Offset = new Offset(0, 0),
@@ -364,22 +446,16 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// <param name="newSpeed">New speed</param>
     public void UpdateMySpeed(double newSpeed)
     {
-        var modified = false;
+        var isMoving = newSpeed > 0;
+        if (isMoving == IsMoving) return;
 
-        if (newSpeed > 0 && !IsMoving)
-        {
-            IsMoving = true;
-            modified = true;
-        }
-
-        if (newSpeed <= 0 && IsMoving)
-        {
-            IsMoving = false;
-            modified = true;
-        }
-
-        if (modified)
-            _map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
+        // The still and moving images can differ in size, so clear the extent of the old image as well.
+        var oldDirtyRect = DirtyRectForSymbol(_myLocation);
+        IsMoving = isMoving;
+        if (IsImageCached(_locStyle))
+            _map.RefreshGraphics(oldDirtyRect.Join(DirtyRectForSymbol(_myLocation)));
+        else
+            _map.RefreshGraphics(); // The new image's size is unknown until it is drawn.
     }
 
     /// <summary>
@@ -396,8 +472,12 @@ public class MyLocationLayer : BaseLayer, IDisposable
 
         if (newRotation == -1.0)
         {
-            // disable bitmap
-            _dirStyle.Enabled = false;
+            if (_dirStyle.Enabled)
+            {
+                _dirStyle.Enabled = false;
+                // A partial refresh would no longer include the direction image, so it would stay on screen.
+                _map.RefreshGraphics();
+            }
         }
         else if (newRotation != oldRotation)
         {
@@ -409,7 +489,13 @@ public class MyLocationLayer : BaseLayer, IDisposable
                 _animationMyViewDirection = null;
             }
 
-            _dirStyle.Enabled = true;
+            if (!_dirStyle.Enabled)
+            {
+                _dirStyle.Enabled = true;
+                // The direction image is not drawn while disabled, so its size may be unknown to a partial refresh.
+                _map.RefreshGraphics();
+            }
+
             ViewingDirection = newDirection;
 
             if (newRotation < 90 && oldRotation > 270)
@@ -491,13 +577,37 @@ public class MyLocationLayer : BaseLayer, IDisposable
         return DirtyRectForSymbol(oldLocation).Join(DirtyRectForSymbol(newLocation));
     }
 
+    private void SetLocationImage(Image image)
+    {
+        _locStyle.Image = image;
+        _map.RefreshGraphics(); // The new image may differ in size, so the old extent is unknown to a partial refresh.
+    }
+
     private MRect DirtyRectForSymbol(MPoint location)
     {
-        // Full symbol width used as the half-extent on each side — a conservative world-space bound
-        // that covers the rendered pixel footprint regardless of sub-pixel offsets or anti-aliasing.
-        var halfWorld = SymbolStyle.DefaultWidth * _locStyle.SymbolScale * _map.Navigator.Viewport.Resolution;
+        // Full symbol size used as the half-extent on each side — a conservative world-space bound
+        // that covers the rendered pixel footprint at any rotation, regardless of sub-pixel offsets or anti-aliasing.
+        var symbolSize = GetSymbolSize(_locStyle);
+        if (_dirStyle.Enabled)
+            symbolSize = Math.Max(symbolSize, GetSymbolSize(_dirStyle));
+        var halfWorld = symbolSize * _map.Navigator.Viewport.Resolution;
         return new MRect(location.X - halfWorld, location.Y - halfWorld, location.X + halfWorld, location.Y + halfWorld);
     }
+
+    private double GetSymbolSize(ImageStyle style)
+    {
+        // Custom images can be any size, so use the size of the image the renderer has already drawn.
+        // This lookup never creates an image; rendering belongs in the renderer. An image that is not drawn
+        // yet falls back to the default size, so code that shows a new image requests a full refresh instead.
+        var image = GetCachedImage(style);
+        var size = image is null ? SymbolStyle.DefaultWidth : Math.Max(image.Width, image.Height);
+        return size * style.SymbolScale;
+    }
+
+    private bool IsImageCached(ImageStyle style) => GetCachedImage(style) is not null;
+
+    private IDrawableImage? GetCachedImage(ImageStyle style) =>
+        style.Image is null ? null : _map.RenderService.DrawableImageCache.GetIfCreated(style.Image.SourceId);
 
     private void MapTapped(object? s, MapEventArgs e)
     {
