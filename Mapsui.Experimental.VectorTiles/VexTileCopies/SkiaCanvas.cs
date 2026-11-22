@@ -196,9 +196,11 @@ public sealed class SkiaCanvas : ICanvas, IDisposable
 
         _surface.Canvas.DrawPath(_path, _fillPaint);
 
-        // fill-outline-color (e.g. building outlines): stroked over the fill
+        // fill-outline-color (e.g. building outlines): stroked over the fill.
+        // Only for fill layers: line layers on polygon features also end up here, and
+        // their LineColor comes from line-color, which this stroke does not render correctly.
         var outline = style.Paint.LineColor;
-        if (outline.Alpha > 0)
+        if (style.Layer?.Type == "fill" && outline.Alpha > 0)
         {
             _strokePaint.Reset();
             _strokePaint.IsAntialias = true;
