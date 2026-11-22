@@ -1,6 +1,7 @@
 ---
 title: MAUI Backend Comparison Harness
 description: Follow-up plan for a repeatable backend comparison with measured draw timing, paint cadence and a locally copyable report.
+status: deferred
 ---
 
 # MAUI backend comparison harness
@@ -8,7 +9,7 @@ description: Follow-up plan for a repeatable backend comparison with measured dr
 Date: 2026-10-12
 Status: Deferred; separate deliverable from the implemented manual backend selector.
 
-This carries step 6 of the [surface selection plan](maui-android-surface-selection-plan.md). The existing sample already selects a backend, recreates its scene and preserves the camera. This follow-up adds repeatable measurements without changing library defaults or claiming a faster backend in advance.
+This carries step 6 of the [surface selection plan](../done/maui-android-surface-selection-plan.md). The existing sample already selects a backend, recreates its scene and preserves the camera. This follow-up adds repeatable measurements without changing library defaults or claiming a faster backend in advance.
 
 ## Implementation
 

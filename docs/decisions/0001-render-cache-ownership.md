@@ -1,6 +1,11 @@
-# Render cache ownership decision
+---
+title: "0001: Render cache ownership"
+status: accepted
+---
 
-Status: proposed for approval as part of implementing `plans/render-cache-architecture.md`.
+# 0001: Render cache ownership
+
+Status: accepted. Originally proposed while implementing the render cache architecture.
 
 ## Decision
 

@@ -1,3 +1,9 @@
+---
+title: Custom font support: design analysis
+status: done
+date: 2026-04-25
+---
+
 # Custom Font Support — Design Analysis
 
 **Date:** 2026-03-12 (updated 2026-04-25)  
@@ -49,7 +55,7 @@ Mapsui currently resolves fonts exclusively by system font family name (`SKTypef
 
 ## Current Architecture
 
-### The `Font` class ([Mapsui/Styles/Font.cs](../../../Mapsui/Styles/Font.cs))
+### The `Font` class ([Mapsui/Styles/Font.cs](../../Mapsui/Styles/Font.cs))
 
 Simple data class with four properties:
 - `FontFamily` (string?) — resolved as a system font family name

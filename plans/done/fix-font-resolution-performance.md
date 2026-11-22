@@ -1,3 +1,8 @@
+---
+title: Fix Font Resolution Performance
+status: done
+---
+
 # Fix Font Resolution Performance
 
 **Implementation status:** Done. The implementation, automated tests, and best-effort Windows benchmark are complete. A Linux/fontconfig run remains optional future confirmation.
