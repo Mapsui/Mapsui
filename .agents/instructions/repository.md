@@ -62,6 +62,7 @@ Run `dotnet format` to apply these rules automatically.
 - Prefer unit tests near the affected assemblies.
 - Use existing test patterns and helpers found in the repo.
 - Ensure tests are deterministic and fast; no live network or external service calls unless explicitly mocked.
+- Test projects run IDisposableAnalyzers with errors. `Map`, layers and most Mapsui objects are `IDisposable`, so declare them with `using var` in tests; an `IDisposable` returned by a cache needs a `#pragma warning disable IDISP004` with a reason.
 
 ### Rendering regression tests — important validation step
 Any change that affects rendering (styles, renderers, callouts, widgets, etc.) **must** be validated against the rendering regression tests in `Tests/Mapsui.Rendering.Skia.Tests`. These tests render every sample and compare the output pixel-by-pixel against a stored reference image.
@@ -155,6 +156,9 @@ In the Mapsui hierarchy (`DataSource → Fetcher → Layer → Map → MapContro
 
 ### No rendering in the draw/paint loop
 Separate *rendering* (creating platform resources, e.g. `SKPath path = ToSKPath(...)`) from *drawing* (using them on the canvas, e.g. `canvas.DrawPath(...)`). Resources should be prepared before the paint loop, not inside it.
+
+### Threading: the render pipeline owns mutable layer state
+A layer's public members may be called from any thread, so they never touch styles, features or animations directly. They publish an immutable state record through `StateHandover<T>` and request a redraw; `UpdateAnimations()` applies the latest record on the render pipeline. `MyLocationLayer` is the worked example. Do not add locks around render state. See the threading section in [Mapsui Architecture Principles](../../docs/general/markdown/mapsui-architecture-principles.md). `Mapsui.UI.MapView` is legacy and is out of scope for this rule.
 
 ### lon/lat ordering
 Always use **lon, lat** order (consistent with x, y). Example: `SphericalMercator.FromLonLat(lon, lat)`. Prefer named properties (`Longitude`, `Latitude`) when ordering would be ambiguous.
