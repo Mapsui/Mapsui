@@ -81,7 +81,7 @@ public class SkiaCanvasTests
     public void DrawPolygon_WithLineColor_StrokesTheOutline()
     {
         using var canvas = new SkiaCanvas(64, 64);
-        var brush = CreateBrush();
+        var brush = CreateBrush(layerType: "fill");
         brush.Paint.FillColor = SKColors.Transparent;   // only the outline shows
         brush.Paint.LineColor = SKColors.Red;           // fill-outline-color
         brush.Paint.LineWidth = 2.0;
@@ -98,7 +98,7 @@ public class SkiaCanvasTests
     public void DrawPolygon_WithFillOpacity_AppliesItToTheOutline()
     {
         using var canvas = new SkiaCanvas(64, 64);
-        var brush = CreateBrush();
+        var brush = CreateBrush(layerType: "fill");
         brush.Paint.FillColor = SKColors.Transparent;
         brush.Paint.FillOpacity = 0.5;
         brush.Paint.LineColor = SKColors.Red;
@@ -111,10 +111,30 @@ public class SkiaCanvasTests
         Assert.That(bitmap.GetPixel(30, 10).Alpha, Is.InRange(100, 155));   // about half
     }
 
-    private static Brush CreateBrush(TextTransform transform = TextTransform.None, double textMaxWidth = 10.0) =>
+    [Test]
+    public void DrawPolygon_LineLayerOnPolygonFeature_DoesNotStrokeTheOutline()
+    {
+        // Line layers on polygon features (e.g. a dashed park outline) are drawn through
+        // DrawPolygon too. Their LineColor comes from line-color, not fill-outline-color.
+        using var canvas = new SkiaCanvas(64, 64);
+        var brush = CreateBrush(layerType: "line");
+        brush.Paint.FillColor = SKColors.Transparent;
+        brush.Paint.LineColor = SKColors.Red;
+        brush.Paint.LineWidth = 2.0;
+
+        canvas.DrawPolygon([new(10, 10), new(50, 10), new(50, 50), new(10, 50), new(10, 10)], brush);
+
+        using var image = canvas.ToSKImage();
+        using var bitmap = SKBitmap.FromImage(image);
+        Assert.That(bitmap.GetPixel(30, 10).Alpha, Is.EqualTo(0));
+    }
+
+    private static Brush CreateBrush(TextTransform transform = TextTransform.None, double textMaxWidth = 10.0,
+        string? layerType = null) =>
         new Brush
         {
             Text = string.Empty,
+            Layer = layerType is null ? null : new Layer { Type = layerType },
             Paint = new Paint
             {
                 TextFont = ["Arial", "Arial Unicode MS Regular"],
