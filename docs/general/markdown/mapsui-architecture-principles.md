@@ -1,6 +1,6 @@
 ---
 title: Mapsui Architecture Principles
-description: Mapsui-specific architectural decisions: lon/lat ordering, separating rendering from drawing, coordinate system flexibility, and the RenderService pattern for disposable Skia resources.
+description: Mapsui-specific architectural decisions: lon/lat ordering, separating rendering from drawing, coordinate system flexibility, the RenderService pattern for disposable Skia resources, and the threading rule for layer state.
 ---
 
 # Mapsui Architecture Principles
@@ -32,3 +32,19 @@ The `Map` can operate in any coordinate system. If no coordinate system is speci
 ## Disposable resources belong in RenderService, not in the renderer
 
 Skia objects such as `SKSurface`, `SKPaint`, and `SKPath` are `IDisposable`. Renderers that create these objects must not become disposable themselves — that would propagate `IDisposable` up through `IMapRenderer` and into `MapControl`. Instead, renderer-owned resources with a lifetime tied to the map should be stored in `RenderService`, which is already disposable and is owned by `Map`. Use `RenderService.GetPersistentRenderSurface(...)` as the pattern; `RenderService.Dispose()` handles cleanup.
+
+## Threading: the render pipeline owns mutable layer state
+
+Mapsui apps call into layers from many threads: a GPS callback, a timer, a background task. At the same time the render pipeline reads the layer's styles and features on every frame. Locks are not the answer: they make the renderer wait, and the more of them there are, the harder it is to see what can block what.
+
+The rule is **one owner, messages in**:
+
+- The **render pipeline** is the only code that touches a layer's mutable render state: styles, features, animations. The pipeline is the invalidate loop and the draw that follows it. They run one after the other, never at the same time, but not necessarily on the same thread, so a thread-identity check does not describe the owner.
+- **Public members** of a layer that change what is shown never touch that state directly. They describe the requested state in an **immutable record** and publish it with `StateHandover<T>.Update`, then ask for a redraw with `Map.RefreshGraphics` (which is thread-safe). Writes collapse: when several updates arrive between two frames, the pipeline sees only the last one.
+- The pipeline applies the latest record at the start of `UpdateAnimations()`, which `Map` calls on every layer once per frame, through `StateHandover<T>.TryTake`. It diffs the applied and the latest record and changes only what differs. Animation ticks keep running in `UpdateAnimations` and may request further redraws.
+- Keep running animations in an `AnimationList<T>`. `Animation.UpdateAnimations` never removes a finished entry, and a finished entry left in a plain list runs its final step on every frame; `AnimationList<T>.Update` removes finished entries itself.
+- **Getters return the latest requested state**, not the applied one, so a caller that sets a value and reads it back sees its own value immediately, on any thread. What the screen shows catches up on the next frame.
+
+`Mapsui.Layers.MyLocationLayer` is the worked example. Its `State` record holds everything a caller can ask for; `Publish` is the only writer; `Apply` is the only code that touches `_locStyle`, `_dirStyle`, `_coStyle` and the feature. When writing or reviewing a layer that is updated from outside the render pipeline, follow the same shape: a record, a `StateHandover<T>`, `Publish` in the public members, `Apply` in `UpdateAnimations`.
+
+What this rule does not cover yet: the fetch pipeline (`DataChanged`, feature caches), `Map.Layers` changes and widgets. They have their own, older synchronisation. `Mapsui.UI.MapView` is legacy and is deliberately left out.

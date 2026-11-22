@@ -5,7 +5,6 @@ using Mapsui.Styles;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
-using Animation = Mapsui.Animations.Animation;
 
 namespace Mapsui.Layers;
 
@@ -15,88 +14,99 @@ namespace Mapsui.Layers;
 /// <remarks>
 /// There are two different symbols for own location: one is used when there isn't a change in position (still),
 /// and one is used, if the position changes (moving).
+/// <para>
+/// The members that change what is shown can be called from any thread, for example from a GPS callback. They
+/// describe the requested state in an immutable record, and the render pipeline applies it in
+/// <see cref="UpdateAnimations"/>, which is the only code that changes the styles and the feature. See the
+/// threading section in docs/general/markdown/mapsui-architecture-principles.md.
+/// </para>
 /// </remarks>
 public class MyLocationLayer : BaseLayer, IDisposable
 {
+    private const string _movingImageSource = "embedded://Mapsui.Resources.Images.MyLocationMoving.svg";
+    private const string _stillImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg";
+    private const string _directionImageSource = "embedded://Mapsui.Resources.Images.MyLocationDir.svg";
+    private const long _animationDuration = 1000;
+
+    /// <summary>
+    /// Everything a caller can request. A negative <see cref="ViewingDirection"/> hides the direction image.
+    /// </summary>
+    private sealed record State(
+        MPoint Location,
+        bool AnimateLocation,
+        double Direction,
+        double DirectionViewportRotation,
+        bool AnimateDirection,
+        double ViewingDirection,
+        double ViewingDirectionViewportRotation,
+        bool AnimateViewingDirection,
+        bool IsMoving,
+        bool IsCentered,
+        Image StillImage,
+        Image MovingImage,
+        Image DirectionImage,
+        double Scale,
+        double DirectionScale,
+        string CalloutText,
+        bool ShowCallout)
+    {
+        public Image LocationImage => IsMoving ? MovingImage : StillImage;
+        public bool ShowDirection => ViewingDirection >= 0;
+        // The symbol rotation is relative to the viewport; the animation code compares whole degrees.
+        public int LocationRotation => (int)(Direction - DirectionViewportRotation);
+        public int DirectionRotation => (int)(ViewingDirection - ViewingDirectionViewportRotation);
+    }
+
     private readonly Map _map;
     private readonly PointFeature _feature;
     private readonly ImageStyle _locStyle;  // style for the location indicator
     private readonly ImageStyle _dirStyle;  // style for the view-direction indicator
     private readonly CalloutStyle _coStyle;  // style for the callout
-
-    private const string _movingImageSource = "embedded://Mapsui.Resources.Images.MyLocationMoving.svg";
-    private const string _stillImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg";
-    private const string _directionImageSource = "embedded://Mapsui.Resources.Images.MyLocationDir.svg";
-
-    // Each layer gets its own Image instances because Image is mutable (SvgFillColor etc.), so changing
-    // one layer's image must not affect another layer.
-    private Image _stillImage = _stillImageSource;
-    private Image _movingImage = _movingImageSource;
-    private Image _directionImage = _directionImageSource;
-
-    private MPoint? _animationStart;
-    private MPoint? _animationEnd;
-
-    private readonly ConcurrentHashSet<AnimationEntry<Map>> _animations = [];
     private readonly List<IFeature> _features;
+    private readonly StateHandover<State> _state;
+
+    // Everything below is owned by the render pipeline and only touched from UpdateAnimations.
+    private readonly AnimationList<Map> _animations = new();
     private AnimationEntry<Map>? _animationMyDirection;
     private AnimationEntry<Map>? _animationMyViewDirection;
     private AnimationEntry<Map>? _animationMyLocation;
-
-    private bool _isMoving;
+    private bool _hasLocation; // False until a location was set; the first location is never animated from (0, 0).
 
     /// <summary>
     /// Should be moving arrow or round circle displayed
     /// </summary>
     public bool IsMoving
     {
-        get => _isMoving;
-        set
-        {
-            if (_isMoving != value)
-            {
-                _isMoving = value;
-                _locStyle.Image = _isMoving ? _movingImage : _stillImage;
-            }
-        }
+        get => _state.Latest.IsMoving;
+        set => Publish(s => s.IsMoving == value ? s : s with { IsMoving = value });
     }
-
-    private bool _isCentered = true;
 
     /// <summary>
     /// MyLocation is always in the center of the map
     /// </summary>
     public bool IsCentered
     {
-        get => _isCentered;
-        set
-        {
-            if (_isCentered != value)
-            {
-                _isCentered = value;
-            }
-        }
+        get => _state.Latest.IsCentered;
+        set => Publish(s => s.IsCentered == value ? s : s with { IsCentered = value });
     }
-
-    private MPoint _myLocation = new(0, 0);
 
     /// <summary>
     /// Position of location, that is displayed
     /// </summary>
     /// <value>Position of location</value>
-    public MPoint MyLocation => _myLocation;
+    public MPoint MyLocation => new(_state.Latest.Location); // A copy, so a caller cannot change the published state.
 
     /// <summary>
     /// Movement direction of device at location
     /// </summary>
     /// <value>Direction at location</value>
-    public double Direction { get; private set; } = 0.0;
+    public double Direction => _state.Latest.Direction;
 
     /// <summary>
-    /// Viewing direction of device (in degrees wrt. north direction)
+    /// Viewing direction of device (in degrees wrt. north direction). Negative when not shown.
     /// </summary>
-    /// <value>Direction at location</value>
-    public double ViewingDirection { get; private set; } = -1.0;
+    /// <value>Viewing direction, or -1 when the direction image is hidden</value>
+    public double ViewingDirection => _state.Latest.ViewingDirection;
 
     /// <summary>
     /// Scale of the location symbol (the <see cref="StillImage"/> or <see cref="MovingImage"/>).
@@ -104,12 +114,8 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// <value>Scale of symbol</value>
     public double Scale
     {
-        get => _locStyle.SymbolScale;
-        set
-        {
-            _locStyle.SymbolScale = value;
-            _map.RefreshGraphics(); // The symbol size changes, so the old extent is unknown to a partial refresh.
-        }
+        get => _state.Latest.Scale;
+        set => Publish(s => s.Scale == value ? s : s with { Scale = value });
     }
 
     /// <summary>
@@ -118,12 +124,8 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// </summary>
     public double DirectionScale
     {
-        get => _dirStyle.SymbolScale;
-        set
-        {
-            _dirStyle.SymbolScale = value;
-            _map.RefreshGraphics();
-        }
+        get => _state.Latest.DirectionScale;
+        set => Publish(s => s.DirectionScale == value ? s : s with { DirectionScale = value });
     }
 
     /// <summary>
@@ -137,12 +139,11 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// </remarks>
     public Image StillImage
     {
-        get => _stillImage;
+        get => _state.Latest.StillImage;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            _stillImage = value;
-            if (!_isMoving) SetLocationImage(value);
+            Publish(s => s.StillImage == value ? s : s with { StillImage = value });
         }
     }
 
@@ -153,12 +154,11 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// </summary>
     public Image MovingImage
     {
-        get => _movingImage;
+        get => _state.Latest.MovingImage;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            _movingImage = value;
-            if (_isMoving) SetLocationImage(value);
+            Publish(s => s.MovingImage == value ? s : s with { MovingImage = value });
         }
     }
 
@@ -169,13 +169,11 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// </summary>
     public Image DirectionImage
     {
-        get => _directionImage;
+        get => _state.Latest.DirectionImage;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            _directionImage = value;
-            _dirStyle.Image = value;
-            _map.RefreshGraphics();
+            Publish(s => s.DirectionImage == value ? s : s with { DirectionImage = value });
         }
     }
 
@@ -185,11 +183,11 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// </summary>
     public string CalloutText
     {
-        get => _coStyle.Title ?? "";
+        get => _state.Latest.CalloutText;
         set
         {
-            _coStyle.Title = value;
-            _map.RefreshGraphics(); // Callout size is variable so full refresh is needed.
+            var text = value ?? "";
+            Publish(s => s.CalloutText == text ? s : s with { CalloutText = text });
         }
     }
 
@@ -198,12 +196,8 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// </summary>
     public bool ShowCallout
     {
-        get => _coStyle.Enabled;
-        set
-        {
-            _coStyle.Enabled = value;
-            _map.RefreshGraphics(); // Callout size is variable so full refresh is needed.
-        }
+        get => _state.Latest.ShowCallout;
+        set => Publish(s => s.ShowCallout == value ? s : s with { ShowCallout = value });
     }
 
     /// <summary>
@@ -212,30 +206,56 @@ public class MyLocationLayer : BaseLayer, IDisposable
     public event EventHandler<MapEventArgs>? Tapped;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:Mapsui.Layers.MyLocationLayer"/> class
-    /// with a starting location.
-    /// </summary>
-    /// <param name="map">MapView, to which this layer belongs</param>
-    /// <param name="location">Location, where to start</param>
-    public MyLocationLayer(Map map, MPoint location) : this(map)
-    {
-        _myLocation = location;
-    }
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="T:Mapsui.Layers.MyLocationLayer"/> class.
     /// </summary>
     /// <param name="map">Map, to which this layer belongs</param>
-    public MyLocationLayer(Map map)
+    public MyLocationLayer(Map map) : this(map, new MPoint(0, 0))
+    {
+        _hasLocation = false; // (0, 0) is a placeholder, not a location to animate from.
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:Mapsui.Layers.MyLocationLayer"/> class
+    /// with a starting location.
+    /// </summary>
+    /// <param name="map">Map, to which this layer belongs</param>
+    /// <param name="location">Location, where to start</param>
+    public MyLocationLayer(Map map, MPoint location)
     {
         ArgumentNullException.ThrowIfNull(map);
+        ArgumentNullException.ThrowIfNull(location);
+        location = new MPoint(location); // Copy so that a caller mutating its point later does not change the state.
+        _hasLocation = true;
 
         _map = map;
         _map.Tapped += MapTapped;
 
         Enabled = true;
 
-        _feature = new PointFeature(_myLocation)
+        // Each layer gets its own Image instances because Image is mutable (SvgFillColor etc.), so changing
+        // one layer's image must not affect another layer.
+        var initial = new State(
+            Location: location,
+            AnimateLocation: false,
+            Direction: 0,
+            DirectionViewportRotation: 0,
+            AnimateDirection: false,
+            ViewingDirection: -1,
+            ViewingDirectionViewportRotation: 0,
+            AnimateViewingDirection: false,
+            IsMoving: false,
+            IsCentered: true,
+            StillImage: _stillImageSource,
+            MovingImage: _movingImageSource,
+            DirectionImage: _directionImageSource,
+            Scale: 1.0,
+            DirectionScale: 0.2,
+            CalloutText: "",
+            ShowCallout: false);
+        _state = new StateHandover<State>(initial);
+
+        // The feature gets its own point because the render pipeline moves it during animations.
+        _feature = new PointFeature(new MPoint(location))
         {
             ["Label"] = "MyLocation",
         };
@@ -243,9 +263,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _locStyle = new ImageStyle
         {
             Enabled = true,
-            Image = _stillImage,
-            SymbolScale = 1.0,
-            SymbolRotation = Direction,
+            Image = initial.StillImage,
+            SymbolScale = initial.Scale,
+            SymbolRotation = 0,
             Offset = new Offset(0, 0),
             Opacity = 1,
         };
@@ -253,8 +273,8 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _dirStyle = new ImageStyle
         {
             Enabled = false,
-            Image = _directionImage,
-            SymbolScale = 0.2,
+            Image = initial.DirectionImage,
+            SymbolScale = initial.DirectionScale,
             SymbolRotation = 0,
             Offset = new Offset(0, 0),
             Opacity = 1,
@@ -293,76 +313,15 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// Updates own location
     /// </summary>
     /// <param name="newLocation">New location</param>
+    /// <param name="animated">true if animated</param>
     public void UpdateMyLocation(MPoint newLocation, bool animated = false)
     {
-        if (!MyLocation.Equals(newLocation))
-        {
-            // We have a location update, so abort last animation
-            if (_animationMyLocation != null)
-            {
-                Animation.Stop(_map, _animationMyLocation, callFinal: true);
-                _animations.TryRemove(_animationMyLocation);
-                _animationMyLocation = null;
-            }
-
-            if (animated)
-            {
-                // Save values for new animation
-                _animationStart = MyLocation;
-                _animationEnd = newLocation;
-                var deltaX = _animationEnd.X - _animationStart.X;
-                var deltaY = _animationEnd.Y - _animationStart.Y;
-
-                if (_map.Navigator.Viewport.ToExtent() is not null)
-                {
-                    // Refresh the end viewport at the start of the animation so it has time to load.
-                    var endViewport = _map.Navigator.Viewport with { CenterX = _animationEnd.X, CenterY = _animationEnd.Y };
-                    _map.RefreshData(endViewport);
-
-                    _animationMyLocation = new AnimationEntry<Map>(
-                        MyLocation,
-                        newLocation,
-                        animationStart: 0,
-                        animationEnd: 1,
-                        tick: (map, entry, v) =>
-                        {
-                            var dirtyRect = InternalUpdateMyLocation(new MPoint(_animationStart.X + deltaX * v, _animationStart.Y + deltaY * v));
-                            if (dirtyRect is not null) map.RefreshGraphics(dirtyRect);
-                            return new AnimationResult<Map>(map, true);
-                        },
-                        final: (map, entry) =>
-                        {
-                            if (!MyLocation.Equals(_animationEnd))
-                            {
-                                var dirtyRect = InternalUpdateMyLocation(_animationEnd);
-                                if (dirtyRect is not null) map.RefreshGraphics(dirtyRect);
-                            }
-
-                            return new AnimationResult<Map>(map, false);
-                        });
-
-                    Animation.Start(_animationMyLocation, 1000);
-                    _animations.Add(_animationMyLocation);
-
-                    // Update viewport
-                    if (_isCentered)
-                    {
-                        _map?.Navigator.CenterOn(_animationEnd, 1000, Easing.Linear);
-                    }
-                }
-            }
-            else
-            {
-                var dirtyRect = InternalUpdateMyLocation(newLocation);
-                if (dirtyRect is not null) _map.RefreshGraphics(dirtyRect);
-
-                // Update viewport
-                if (_isCentered)
-                {
-                    _map?.Navigator.CenterOn(_myLocation);
-                }
-            }
-        }
+        ArgumentNullException.ThrowIfNull(newLocation);
+        var location = new MPoint(newLocation); // Copy so that a caller mutating its point later does not change the state.
+        // A non-animated request for the current target still has an effect: it snaps a running animation to its end.
+        Publish(s => s.Location.Equals(location) && s.AnimateLocation == animated
+            ? s
+            : s with { Location = location, AnimateLocation = animated });
     }
 
     /// <summary>
@@ -373,191 +332,39 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// <param name="animated">true if animated</param>
     public void UpdateMyDirection(double newDirection, double newViewportRotation, bool animated = false)
     {
-        var newRotation = (int)(newDirection - newViewportRotation);
-        var oldRotation = (int)_locStyle.SymbolRotation;
-        var diffRotation = newDirection - oldRotation;
-
-        if (newRotation != oldRotation)
-        {
-            Direction = newDirection;
-
-            // We have a direction update, so abort last animation
-            if (_animationMyDirection != null)
-            {
-                Animation.Stop(_map, _animationMyDirection, callFinal: true);
-                _animations.TryRemove(_animationMyDirection);
-                _animationMyDirection = null;
-            }
-
-            if (newRotation < 90 && oldRotation > 270)
-            {
-                newRotation += 360;
-            }
-            else if (newRotation > 270 && oldRotation < 90)
-            {
-                oldRotation += 360;
-            }
-
-            var endRotation = newRotation % 360;
-
-            if (animated)
-            {
-                _animationMyDirection = new AnimationEntry<Map>(
-                    oldRotation,
-                    newRotation,
-                    animationStart: 0,
-                    animationEnd: 1,
-                    tick: (map, entry, v) =>
-                    {
-                        var symbolRotation = (oldRotation + (int)(v * diffRotation)) % 360;
-                        if ((int)symbolRotation != (int)_locStyle.SymbolRotation)
-                        {
-                            _locStyle.SymbolRotation = symbolRotation;
-                            map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
-                        }
-
-                        return new AnimationResult<Map>(map, true);
-                    },
-                    final: (map, v) =>
-                    {
-                        if ((int)_locStyle.SymbolRotation != (int)endRotation)
-                        {
-                            _locStyle.SymbolRotation = endRotation;
-                            map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
-                        }
-
-                        return new AnimationResult<Map>(map, false);
-                    });
-
-                Animation.Start(_animationMyDirection, 1000);
-                _animations.Add(_animationMyDirection);
-            }
-            else
-            {
-                _locStyle.SymbolRotation = endRotation;
-                _map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
-            }
-        }
+        Publish(s => s.Direction == newDirection && s.DirectionViewportRotation == newViewportRotation && s.AnimateDirection == animated
+            ? s
+            : s with { Direction = newDirection, DirectionViewportRotation = newViewportRotation, AnimateDirection = animated });
     }
 
     /// <summary>
     /// Updates my speed
     /// </summary>
     /// <param name="newSpeed">New speed</param>
-    public void UpdateMySpeed(double newSpeed)
-    {
-        var isMoving = newSpeed > 0;
-        if (isMoving == IsMoving) return;
-
-        // The still and moving images can differ in size, so clear the extent of the old image as well.
-        var oldDirtyRect = DirtyRectForSymbol(_myLocation);
-        IsMoving = isMoving;
-        if (IsImageCached(_locStyle))
-            _map.RefreshGraphics(oldDirtyRect.Join(DirtyRectForSymbol(_myLocation)));
-        else
-            _map.RefreshGraphics(); // The new image's size is unknown until it is drawn.
-    }
+    public void UpdateMySpeed(double newSpeed) => IsMoving = newSpeed > 0;
 
     /// <summary>
-    /// Updates my view direction
+    /// Updates my view direction. A negative direction hides the direction image.
     /// </summary>
     /// <param name="newDirection">New direction</param>
     /// <param name="newViewportRotation">New viewport rotation</param>
     /// <param name="animated">true if animated</param>
     public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = false)
     {
-        var newRotation = (int)(newDirection - newViewportRotation);
-        var oldRotation = (int)_dirStyle.SymbolRotation;
-        var diffRotation = newDirection - oldRotation;
-
-        if (newRotation == -1.0)
-        {
-            if (_dirStyle.Enabled)
-            {
-                _dirStyle.Enabled = false;
-                // A partial refresh would no longer include the direction image, so it would stay on screen.
-                _map.RefreshGraphics();
-            }
-        }
-        else if (newRotation != oldRotation)
-        {
-            // We have a direction update, so abort last animation
-            if (_animationMyViewDirection != null)
-            {
-                Animation.Stop(_map, _animationMyViewDirection, callFinal: true);
-                _animations.TryRemove(_animationMyViewDirection);
-                _animationMyViewDirection = null;
-            }
-
-            if (!_dirStyle.Enabled)
-            {
-                _dirStyle.Enabled = true;
-                // The direction image is not drawn while disabled, so its size may be unknown to a partial refresh.
-                _map.RefreshGraphics();
-            }
-
-            ViewingDirection = newDirection;
-
-            if (newRotation < 90 && oldRotation > 270)
-            {
-                newRotation += 360;
-            }
-            else if (newRotation > 270 && oldRotation < 90)
-            {
-                oldRotation += 360;
-            }
-
-            var endRotation = newRotation % 360;
-
-            if (animated)
-            {
-                _animationMyViewDirection = new AnimationEntry<Map>(
-                    oldRotation,
-                    newRotation,
-                    animationStart: 0,
-                    animationEnd: 1,
-                    tick: (map, entry, v) =>
-                    {
-                        var symbolRotation = (oldRotation + (int)(v * diffRotation)) % 360;
-                        if ((int)symbolRotation != (int)_dirStyle.SymbolRotation)
-                        {
-                            _dirStyle.SymbolRotation = symbolRotation;
-                            map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
-                        }
-
-                        return new AnimationResult<Map>(map, true);
-                    },
-                    final: (map, v) =>
-                    {
-                        if ((int)_dirStyle.SymbolRotation != endRotation)
-                        {
-                            _dirStyle.SymbolRotation = endRotation;
-                            map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
-                        }
-
-                        return new AnimationResult<Map>(map, false);
-                    });
-
-                Animation.Start(_animationMyViewDirection, 1000);
-                _animations.Add(_animationMyViewDirection);
-            }
-            else
-            {
-                _dirStyle.SymbolRotation = endRotation;
-                _map.RefreshGraphics(DirtyRectForSymbol(_myLocation));
-            }
-        }
+        Publish(s => s.ViewingDirection == newDirection && s.ViewingDirectionViewportRotation == newViewportRotation && s.AnimateViewingDirection == animated
+            ? s
+            : s with { ViewingDirection = newDirection, ViewingDirectionViewportRotation = newViewportRotation, AnimateViewingDirection = animated });
     }
 
+    /// <summary>
+    /// Applies the requested state and advances the animations. Called by the render pipeline once per frame.
+    /// </summary>
     public override bool UpdateAnimations()
     {
-        if (_animations.Count > 0)
-        {
-            var animation = Animation.UpdateAnimations(_map, _animations);
-            return animation.IsRunning;
-        }
+        if (_state.TryTake(out var previous, out var latest))
+            Apply(previous, latest);
 
-        return base.UpdateAnimations();
+        return _animations.Update(_map);
     }
 
     public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
@@ -565,49 +372,230 @@ public class MyLocationLayer : BaseLayer, IDisposable
         return _features;
     }
 
-    private MRect? InternalUpdateMyLocation(MPoint newLocation)
+    protected override void Dispose(bool disposing)
     {
-        if (_myLocation.Equals(newLocation)) return null;
-        var oldLocation = _myLocation;
-        _myLocation = newLocation;
+        if (disposing)
+            _map.Tapped -= MapTapped;
+        base.Dispose(disposing);
+    }
+
+    /// <summary>
+    /// Publishes a change to the requested state and asks for a redraw of what the change affects.
+    /// Safe to call from any thread.
+    /// </summary>
+    private void Publish(Func<State, State> change)
+    {
+        var (previous, latest) = _state.Update(change);
+        if (ReferenceEquals(previous, latest)) return;
+
+        if (NeedsFullRefresh(previous, latest))
+            _map.RefreshGraphics();
+        else
+            _map.RefreshGraphics(DirtyRectForSymbol(previous).Join(DirtyRectForSymbol(latest)));
+    }
+
+    private bool NeedsFullRefresh(State previous, State latest)
+    {
+        // The callout size depends on the text, and a symbol that changes size leaves an unknown old extent.
+        if (previous.CalloutText != latest.CalloutText || previous.ShowCallout != latest.ShowCallout) return true;
+        if (previous.Scale != latest.Scale || previous.DirectionScale != latest.DirectionScale) return true;
+        if (previous.StillImage != latest.StillImage || previous.MovingImage != latest.MovingImage) return true;
+        if (previous.DirectionImage != latest.DirectionImage) return true;
+        if (previous.ShowDirection != latest.ShowDirection) return true;
+        // An image that was not drawn yet has an unknown size.
+        if (previous.IsMoving != latest.IsMoving && !IsImageCached(latest.LocationImage)) return true;
+        return false;
+    }
+
+    /// <summary>
+    /// Applies the difference between two states to the styles and feature. Runs on the render pipeline.
+    /// </summary>
+    private void Apply(State previous, State latest)
+    {
+        // While a location animation runs the feature is between two locations. Publish only knew the targets,
+        // so clear the symbol at its current position with its previous size before anything changes.
+        if (_animationMyLocation is not null && SymbolSizeChanged(previous, latest))
+            _map.RefreshGraphics(DirtyRectForSymbol(previous, _feature.Point));
+
+        _locStyle.Image = latest.LocationImage;
+        _locStyle.SymbolScale = latest.Scale;
+        _dirStyle.Image = latest.DirectionImage;
+        _dirStyle.SymbolScale = latest.DirectionScale;
+        _dirStyle.Enabled = latest.ShowDirection;
+        _coStyle.Title = latest.CalloutText;
+        _coStyle.Enabled = latest.ShowCallout;
+
+        // A non-animated request while an animation runs snaps the animation to its end.
+        if (!previous.Location.Equals(latest.Location) || (!latest.AnimateLocation && _animationMyLocation is not null))
+            ApplyLocation(latest);
+
+        if (previous.LocationRotation != latest.LocationRotation || (!latest.AnimateDirection && _animationMyDirection is not null))
+            ApplyRotation(_locStyle, latest.LocationRotation, latest.AnimateDirection, ref _animationMyDirection);
+
+        if (!latest.ShowDirection)
+            StopAnimation(ref _animationMyViewDirection);
+        else if (previous.DirectionRotation != latest.DirectionRotation || !previous.ShowDirection || (!latest.AnimateViewingDirection && _animationMyViewDirection is not null))
+            ApplyRotation(_dirStyle, latest.DirectionRotation, latest.AnimateViewingDirection && previous.ShowDirection, ref _animationMyViewDirection);
+    }
+
+    private static bool SymbolSizeChanged(State previous, State latest) =>
+        previous.LocationImage != latest.LocationImage
+        || previous.Scale != latest.Scale
+        || previous.ShowDirection != latest.ShowDirection
+        || previous.DirectionImage != latest.DirectionImage
+        || previous.DirectionScale != latest.DirectionScale;
+
+    private void ApplyLocation(State latest)
+    {
+        // A new location aborts the running animation. The final jumps to its end and redraws that path.
+        StopAnimation(ref _animationMyLocation);
+
+        var start = new MPoint(_feature.Point);
+        var end = latest.Location;
+        var animate = latest.AnimateLocation && _hasLocation && _map.Navigator.Viewport.ToExtent() is not null;
+        _hasLocation = true;
+
+        if (animate)
+        {
+            var deltaX = end.X - start.X;
+            var deltaY = end.Y - start.Y;
+
+            // Refresh the end viewport at the start of the animation so it has time to load.
+            var endViewport = _map.Navigator.Viewport with { CenterX = end.X, CenterY = end.Y };
+            _map.RefreshData(endViewport);
+
+            _animationMyLocation = new AnimationEntry<Map>(
+                start,
+                end,
+                animationStart: 0,
+                animationEnd: 1,
+                tick: (map, entry, v) =>
+                {
+                    var dirtyRect = MoveFeature(new MPoint(start.X + deltaX * v, start.Y + deltaY * v));
+                    if (dirtyRect is not null) map.RefreshGraphics(dirtyRect);
+                    return new AnimationResult<Map>(map, true);
+                },
+                final: (map, entry) =>
+                {
+                    var dirtyRect = MoveFeature(end);
+                    if (dirtyRect is not null) map.RefreshGraphics(dirtyRect);
+                    return new AnimationResult<Map>(map, false);
+                });
+
+            _animations.Start(_animationMyLocation, _animationDuration);
+
+            if (latest.IsCentered)
+                _map.Navigator.CenterOn(end, _animationDuration, Easing.Linear);
+        }
+        else
+        {
+            MoveFeature(end); // The redraw was requested by Publish, which knows the previous and new location.
+
+            if (latest.IsCentered)
+                _map.Navigator.CenterOn(end);
+        }
+    }
+
+    private void ApplyRotation(ImageStyle style, int newRotation, bool animated, ref AnimationEntry<Map>? animation)
+    {
+        StopAnimation(ref animation);
+
+        var oldRotation = (int)style.SymbolRotation;
+        if (newRotation == oldRotation) return;
+
+        // Rotate the short way round across north.
+        if (newRotation < 90 && oldRotation > 270)
+            newRotation += 360;
+        else if (newRotation > 270 && oldRotation < 90)
+            oldRotation += 360;
+
+        var endRotation = newRotation % 360;
+
+        if (!animated)
+        {
+            style.SymbolRotation = endRotation; // The redraw was requested by Publish.
+            return;
+        }
+
+        var diffRotation = newRotation - oldRotation;
+
+        animation = new AnimationEntry<Map>(
+            oldRotation,
+            newRotation,
+            animationStart: 0,
+            animationEnd: 1,
+            tick: (map, entry, v) =>
+            {
+                var symbolRotation = (oldRotation + (int)(v * diffRotation)) % 360;
+                if (symbolRotation != (int)style.SymbolRotation)
+                {
+                    style.SymbolRotation = symbolRotation;
+                    map.RefreshGraphics(DirtyRectForSymbol(_state.Applied, _feature.Point));
+                }
+
+                return new AnimationResult<Map>(map, true);
+            },
+            final: (map, entry) =>
+            {
+                if ((int)style.SymbolRotation != endRotation)
+                {
+                    style.SymbolRotation = endRotation;
+                    map.RefreshGraphics(DirtyRectForSymbol(_state.Applied, _feature.Point));
+                }
+
+                return new AnimationResult<Map>(map, false);
+            });
+
+        _animations.Start(animation, _animationDuration);
+    }
+
+    private void StopAnimation(ref AnimationEntry<Map>? animation)
+    {
+        _animations.Stop(_map, animation, callFinal: true);
+        animation = null;
+    }
+
+    /// <summary>
+    /// Moves the feature and returns the area that needs a redraw, or null when it did not move.
+    /// </summary>
+    private MRect? MoveFeature(MPoint newLocation)
+    {
+        if (_feature.Point.Equals(newLocation)) return null;
+        var state = _state.Applied;
+        var oldRect = DirtyRectForSymbol(state, _feature.Point);
+        _feature.Point.X = newLocation.X;
+        _feature.Point.Y = newLocation.Y;
         _feature.Modified();
-        _feature.Point.X = _myLocation.X;
-        _feature.Point.Y = _myLocation.Y;
         // Union old and new symbol extents so the old symbol position is also cleared.
-        return DirtyRectForSymbol(oldLocation).Join(DirtyRectForSymbol(newLocation));
+        return oldRect.Join(DirtyRectForSymbol(state, newLocation));
     }
 
-    private void SetLocationImage(Image image)
-    {
-        _locStyle.Image = image;
-        _map.RefreshGraphics(); // The new image may differ in size, so the old extent is unknown to a partial refresh.
-    }
+    private MRect DirtyRectForSymbol(State state) => DirtyRectForSymbol(state, state.Location);
 
-    private MRect DirtyRectForSymbol(MPoint location)
+    private MRect DirtyRectForSymbol(State state, MPoint location)
     {
         // Full symbol size used as the half-extent on each side — a conservative world-space bound
         // that covers the rendered pixel footprint at any rotation, regardless of sub-pixel offsets or anti-aliasing.
-        var symbolSize = GetSymbolSize(_locStyle);
-        if (_dirStyle.Enabled)
-            symbolSize = Math.Max(symbolSize, GetSymbolSize(_dirStyle));
+        var symbolSize = GetSymbolSize(state.LocationImage, state.Scale);
+        if (state.ShowDirection)
+            symbolSize = Math.Max(symbolSize, GetSymbolSize(state.DirectionImage, state.DirectionScale));
         var halfWorld = symbolSize * _map.Navigator.Viewport.Resolution;
         return new MRect(location.X - halfWorld, location.Y - halfWorld, location.X + halfWorld, location.Y + halfWorld);
     }
 
-    private double GetSymbolSize(ImageStyle style)
+    private double GetSymbolSize(Image image, double scale)
     {
         // Custom images can be any size, so use the size of the image the renderer has already drawn.
         // This lookup never creates an image; rendering belongs in the renderer. An image that is not drawn
-        // yet falls back to the default size, so code that shows a new image requests a full refresh instead.
-        var image = GetCachedImage(style);
-        var size = image is null ? SymbolStyle.DefaultWidth : Math.Max(image.Width, image.Height);
-        return size * style.SymbolScale;
+        // yet falls back to the default size, so a change that shows a new image requests a full refresh instead.
+        var drawn = GetCachedImage(image);
+        var size = drawn is null ? SymbolStyle.DefaultWidth : Math.Max(drawn.Width, drawn.Height);
+        return size * scale;
     }
 
-    private bool IsImageCached(ImageStyle style) => GetCachedImage(style) is not null;
+    private bool IsImageCached(Image image) => GetCachedImage(image) is not null;
 
-    private IDrawableImage? GetCachedImage(ImageStyle style) =>
-        style.Image is null ? null : _map.RenderService.DrawableImageCache.GetIfCreated(style.Image.SourceId);
+    private IDrawableImage? GetCachedImage(Image image) => _map.RenderService.DrawableImageCache.GetIfCreated(image.SourceId);
 
     private void MapTapped(object? s, MapEventArgs e)
     {

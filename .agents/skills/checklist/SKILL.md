@@ -105,4 +105,5 @@ Known traps on developer machines. Add to this list when *Process improvements* 
 
 - **SDK version.** `global.json` pins an exact feature band with `latestPatch` roll-forward. If it is not installed, install it at user level with Microsoft's `dotnet-install` script into `~/.dotnet` rather than changing `global.json`.
 - **Test host cannot find a runtime.** A user-level SDK in `~/.dotnet` may lack the older runtimes the test projects target (for example `net9.0`). Run the user-level `dotnet` executable with `DOTNET_ROOT` pointing at the system install (`C:\Program Files\dotnet`) so the test host finds them.
+- **Multi-line scripted edits.** A large Python or shell payload inside a bash heredoc can fail on quoting. Write the script to the scratchpad directory and run it from there.
 - **Line endings.** `.editorconfig` and `.gitattributes` require LF. Files written by agent tools or scripts on Windows often get CRLF, which `dotnet format whitespace` reports as `ENDOFLINE`. Normalize new files to LF. `ENDOFLINE` reports on files you did not touch come from the local checkout, not from your change. Judge only the changed files, and say so in the report.
