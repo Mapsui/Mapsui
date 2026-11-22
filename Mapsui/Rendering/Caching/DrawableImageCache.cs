@@ -28,6 +28,12 @@ public sealed class DrawableImageCache : IDisposable
         return value;
     }
 
+    /// <summary>
+    /// Returns the image for the key if it has already been created, without creating it.
+    /// </summary>
+    public IDrawableImage? GetIfCreated(string key) =>
+        _cache.TryGetValue(key, out var lazy) && lazy.IsValueCreated ? lazy.Value : null;
+
     public void Dispose()
     {
         foreach (var key in _cache.Keys)
