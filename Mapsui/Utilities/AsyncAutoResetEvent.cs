@@ -28,6 +28,16 @@ public class AsyncAutoResetEvent(bool initialState = false)
         }
     }
 
+    /// <summary>
+    /// Forgets a pending <see cref="Set"/> that no one has waited for yet. A waiter that is already queued
+    /// is not affected.
+    /// </summary>
+    public void Reset()
+    {
+        lock (_waits)
+            _letThrough = false;
+    }
+
     public void Set()
     {
         TaskCompletionSource<bool>? toRelease = null;

@@ -3,6 +3,7 @@ using Mapsui.Extensions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Mapsui.Manipulations;
 
 namespace Mapsui.Tests;
@@ -29,6 +30,28 @@ public class NavigatorTests
         Assert.That(navigator.Viewport.CenterY, Is.EqualTo(20));
         Assert.That(navigatedCounter, Is.EqualTo(1), "Navigated is called");
         Assert.That(navigator.GetAnimationsCount, Is.EqualTo(0), "Animations are cleared");
+    }
+
+    [Test]
+    public void FinishedAnimationIsClearedAndFetchesInTheSameUpdateCall()
+    {
+        // Arrange
+        var navigator = new Navigator();
+        navigator.SetSize(100, 100);
+        var discreteFetches = 0;
+        navigator.FetchRequested += (s, e) => { if (e.ChangeType == ChangeType.Discrete) discreteFetches++; };
+        navigator.CenterOn(10, 20, duration: 50);
+        Thread.Sleep(120); // Let the animation run past its end.
+
+        // Act: the render pipeline does not call again when nothing is running, so one call must finish it all.
+        var isRunning = navigator.UpdateAnimations();
+
+        // Assert
+        Assert.That(isRunning, Is.False);
+        Assert.That(navigator.Viewport.CenterX, Is.EqualTo(10));
+        Assert.That(navigator.Viewport.CenterY, Is.EqualTo(20));
+        Assert.That(navigator.GetAnimationsCount, Is.EqualTo(0), "Animations are cleared in the same call");
+        Assert.That(discreteFetches, Is.EqualTo(1), "The destination's data is fetched in the same call");
     }
 
     private static List<AnimationEntry<Viewport>> CreateAnimation()

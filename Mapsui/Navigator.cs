@@ -630,6 +630,14 @@ public class Navigator
             return false; // Not running
         }
 
+        if (!animationResult.IsRunning && _animations.All(a => a.Done))
+        {
+            // Finish in the same call. The render pipeline does not draw another frame when nothing is running,
+            // so waiting for the next call would leave the destination's data unfetched.
+            ClearAnimations();
+            OnFetchRequested(ChangeType.Discrete);
+        }
+
         return animationResult.IsRunning;
     }
 

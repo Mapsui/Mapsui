@@ -380,18 +380,26 @@ public class MyLocationLayer : BaseLayer, IDisposable
     }
 
     /// <summary>
-    /// Publishes a change to the requested state and asks for a redraw of what the change affects.
-    /// Safe to call from any thread.
+    /// Publishes a change to the requested state and wakes the render pipeline. Safe to call from any thread.
     /// </summary>
     private void Publish(Func<State, State> change)
     {
         var (previous, latest) = _state.Update(change);
         if (ReferenceEquals(previous, latest)) return;
 
+        // The redraw area requested here is a best effort from the caller's thread: it does not know where
+        // the feature is during an animation, and the viewport it reads may be mid-update. Apply requests the
+        // authoritative area on the pipeline, in the same frame; the two are accumulated. What matters here
+        // is that a request is made at all, because that is what wakes the pipeline.
+        RequestRefresh(previous, latest, DirtyRectForSymbol(previous).Join(DirtyRectForSymbol(latest)));
+    }
+
+    private void RequestRefresh(State previous, State latest, MRect dirtyRect)
+    {
         if (NeedsFullRefresh(previous, latest))
             _map.RefreshGraphics();
         else
-            _map.RefreshGraphics(DirtyRectForSymbol(previous).Join(DirtyRectForSymbol(latest)));
+            _map.RefreshGraphics(dirtyRect);
     }
 
     private bool NeedsFullRefresh(State previous, State latest)
@@ -412,10 +420,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// </summary>
     private void Apply(State previous, State latest)
     {
-        // While a location animation runs the feature is between two locations. Publish only knew the targets,
-        // so clear the symbol at its current position with its previous size before anything changes.
-        if (_animationMyLocation is not null && SymbolSizeChanged(previous, latest))
-            _map.RefreshGraphics(DirtyRectForSymbol(previous, _feature.Point));
+        // The symbol as it is drawn now: at the feature's current position, which during an animation is between
+        // two locations, with the previous images and scales.
+        var before = DirtyRectForSymbol(previous, _feature.Point);
 
         _locStyle.Image = latest.LocationImage;
         _locStyle.SymbolScale = latest.Scale;
@@ -436,14 +443,11 @@ public class MyLocationLayer : BaseLayer, IDisposable
             StopAnimation(ref _animationMyViewDirection);
         else if (previous.DirectionRotation != latest.DirectionRotation || !previous.ShowDirection || (!latest.AnimateViewingDirection && _animationMyViewDirection is not null))
             ApplyRotation(_dirStyle, latest.DirectionRotation, latest.AnimateViewingDirection && previous.ShowDirection, ref _animationMyViewDirection);
-    }
 
-    private static bool SymbolSizeChanged(State previous, State latest) =>
-        previous.LocationImage != latest.LocationImage
-        || previous.Scale != latest.Scale
-        || previous.ShowDirection != latest.ShowDirection
-        || previous.DirectionImage != latest.DirectionImage
-        || previous.DirectionScale != latest.DirectionScale;
+        // Redraw the symbol where it was and where it is now. This runs before the pipeline takes the pending
+        // refresh, so it is part of the frame being drawn. Animation ticks request their own areas later.
+        RequestRefresh(previous, latest, before.Join(DirtyRectForSymbol(latest, _feature.Point)));
+    }
 
     private void ApplyLocation(State latest)
     {
@@ -489,7 +493,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         }
         else
         {
-            MoveFeature(end); // The redraw was requested by Publish, which knows the previous and new location.
+            MoveFeature(end); // Apply requests the redraw of the old and new position.
 
             if (latest.IsCentered)
                 _map.Navigator.CenterOn(end);
@@ -513,7 +517,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
 
         if (!animated)
         {
-            style.SymbolRotation = endRotation; // The redraw was requested by Publish.
+            style.SymbolRotation = endRotation; // Apply requests the redraw.
             return;
         }
 

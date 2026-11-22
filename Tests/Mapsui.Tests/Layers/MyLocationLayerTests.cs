@@ -126,7 +126,7 @@ public class MyLocationLayerTests
         // Assert
         Assert.That(GetLocationStyle(layer).SymbolScale, Is.EqualTo(2.5));
         Assert.That(layer.Scale, Is.EqualTo(2.5));
-        Assert.That(requests, Is.EqualTo(new[] { RefreshRequest.Full }));
+        Assert.That(Accumulated(requests), Is.EqualTo(RefreshRequest.Full));
     }
 
     [Test]
@@ -143,7 +143,7 @@ public class MyLocationLayerTests
 
         // Assert
         Assert.That(GetDirectionStyle(layer).SymbolScale, Is.EqualTo(0.5));
-        Assert.That(requests, Is.EqualTo(new[] { RefreshRequest.Full }));
+        Assert.That(Accumulated(requests), Is.EqualTo(RefreshRequest.Full));
     }
 
     [Test]
@@ -162,9 +162,8 @@ public class MyLocationLayerTests
         layer.UpdateAnimations();
 
         // Assert
-        Assert.That(requests, Has.Count.EqualTo(1));
         // The largest image dimension is used as the half-extent so the rect covers the image at any rotation.
-        Assert.That(requests[0].DirtyRect!.Width, Is.EqualTo(2 * 100 * map.Navigator.Viewport.Resolution).Within(1e-9));
+        Assert.That(Accumulated(requests).DirtyRect!.Width, Is.EqualTo(2 * 100 * map.Navigator.Viewport.Resolution).Within(1e-9));
         Assert.That(GetLocationStyle(layer).SymbolRotation, Is.EqualTo(45));
     }
 
@@ -176,6 +175,7 @@ public class MyLocationLayerTests
         using var layer = new MyLocationLayer(map) { StillImage = _customStill, MovingImage = _customMoving };
         SimulateDrawnImage(map, layer.StillImage, 100, 100);
         SimulateDrawnImage(map, layer.MovingImage, 40, 40);
+        layer.UpdateAnimations(); // Apply the custom images first, so only the switch is recorded.
         var requests = RecordRefreshRequests(map);
 
         // Act
@@ -183,8 +183,7 @@ public class MyLocationLayerTests
         layer.UpdateAnimations();
 
         // Assert
-        Assert.That(requests, Has.Count.EqualTo(1));
-        Assert.That(requests[0].DirtyRect!.Width, Is.EqualTo(2 * 100 * map.Navigator.Viewport.Resolution).Within(1e-9));
+        Assert.That(Accumulated(requests).DirtyRect!.Width, Is.EqualTo(2 * 100 * map.Navigator.Viewport.Resolution).Within(1e-9));
     }
 
     [Test]
@@ -194,6 +193,7 @@ public class MyLocationLayerTests
         using var map = CreateMap();
         using var layer = new MyLocationLayer(map) { StillImage = _customStill, MovingImage = _customMoving };
         SimulateDrawnImage(map, layer.StillImage, 100, 100);
+        layer.UpdateAnimations(); // Apply the custom images first, so only the switch is recorded.
         var requests = RecordRefreshRequests(map);
 
         // Act
@@ -201,7 +201,7 @@ public class MyLocationLayerTests
         layer.UpdateAnimations();
 
         // Assert
-        Assert.That(requests, Is.EqualTo(new[] { RefreshRequest.Full }));
+        Assert.That(Accumulated(requests), Is.EqualTo(RefreshRequest.Full));
     }
 
     [Test]
@@ -217,13 +217,13 @@ public class MyLocationLayerTests
         layer.UpdateAnimations();
         Assert.That(GetDirectionStyle(layer).Enabled, Is.True);
         Assert.That(GetDirectionStyle(layer).SymbolRotation, Is.EqualTo(90));
-        Assert.That(requests, Is.EqualTo(new[] { RefreshRequest.Full }));
+        Assert.That(Accumulated(requests), Is.EqualTo(RefreshRequest.Full));
 
         requests.Clear();
         layer.UpdateMyViewDirection(-1, 0);
         layer.UpdateAnimations();
         Assert.That(GetDirectionStyle(layer).Enabled, Is.False);
-        Assert.That(requests, Is.EqualTo(new[] { RefreshRequest.Full }));
+        Assert.That(Accumulated(requests), Is.EqualTo(RefreshRequest.Full));
     }
 
     [Test]
@@ -241,9 +241,8 @@ public class MyLocationLayerTests
         // Assert
         Assert.That(layer.MyLocation, Is.EqualTo(new MPoint(1000, 0)));
         Assert.That(GetFeature(layer).Point, Is.EqualTo(new MPoint(1000, 0)));
-        Assert.That(requests, Has.Count.EqualTo(1));
-        Assert.That(requests[0].DirtyRect!.Left, Is.LessThan(0));
-        Assert.That(requests[0].DirtyRect!.Right, Is.GreaterThan(1000));
+        Assert.That(Accumulated(requests).DirtyRect!.Left, Is.LessThan(0));
+        Assert.That(Accumulated(requests).DirtyRect!.Right, Is.GreaterThan(1000));
     }
 
     [Test]
@@ -467,6 +466,10 @@ public class MyLocationLayerTests
         map.RenderService.DrawableImageCache.GetOrCreate(image.SourceId, () => new FakeDrawableImage(width, height));
 #pragma warning restore IDISP004
     }
+
+    // The render controller accumulates all requests made before a frame into one, so tests assert on that.
+    private static RefreshRequest Accumulated(List<RefreshRequest> requests) =>
+        requests.Aggregate((accumulated, next) => accumulated.Accumulate(next));
 
     private static List<RefreshRequest> RecordRefreshRequests(Map map)
     {
