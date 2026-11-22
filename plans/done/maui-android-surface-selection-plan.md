@@ -1,6 +1,7 @@
 ---
 title: MAUI Android Surface Selection and Comparison Plan
 description: Add an optional Android GPU SurfaceView host to the MAUI MapControl behind a single backend enum, and let users compare backends in the sample app.
+status: done
 ---
 
 # MAUI Android surface selection and comparison
@@ -152,11 +153,11 @@ Handler setup is local to the dedicated view, before the parent maps its Content
 
 API inspection covered the [SkiaSharp 3.119.4 handler](https://github.com/mono/SkiaSharp/blob/v3.119.4/source/SkiaSharp.Views.Maui/SkiaSharp.Views.Maui.Core/Handlers/SKGLView/SKGLViewHandler.Android.cs), [4.151.2 handler](https://github.com/mono/SkiaSharp/blob/v4.151.2/source/SkiaSharp.Views.Maui/SkiaSharp.Views.Maui.Core/Handlers/SKGLView/SKGLViewHandler.Android.cs), and [native renderer lifecycle](https://github.com/mono/SkiaSharp/blob/v3.119.4/source/SkiaSharp.Views/SkiaSharp.Views/Platform/Android/SKGLSurfaceViewRenderer.cs). Native drawing pauses on detach, visibility loss and window stop, and resumes with an explicit redraw. Disconnect stops callbacks and waits for the GL frame before map disposal. A changed GPU context requests a complete repaint through existing RenderService ownership. The TextureView reflection workaround remains exclusive to `Gpu` instances.
 
-The sample keeps its generic first-category startup. For a local comparison, select `ExperimentalVectorTiles / VexTileAsSKImage`, which uses Zurich MBTiles without an online basemap. Each switch constructs a fresh sample, map, sources and control; preserves the camera for the same scenario; and cancels/serializes superseded requests. See [Rendering options](../general/markdown/rendering-options.md) for API examples and the manual comparison workflow.
+The sample keeps its generic first-category startup. For a local comparison, select `ExperimentalVectorTiles / VexTileAsSKImage`, which uses Zurich MBTiles without an online basemap. Each switch constructs a fresh sample, map, sources and control; preserves the camera for the same scenario; and cancels/serializes superseded requests. See [Rendering options](../../docs/general/markdown/rendering-options.md) for API examples and the manual comparison workflow.
 
 **Device and numbers:** no Android device is attached (`adb devices -l` returned an empty list). Renderer-call durations and paint cadence have **not been measured**. Paint threading, first paint, touch, navigation, background/resume, context recreation, rotation, clipping and composition still require device verification. No performance advantage or tested-device composition behavior is claimed.
 
-**Decision:** proceed to review without Android manual testing. Steps 1–2 retain their unchecked runtime/measurement tasks below. Step 6 is tracked in the [separate comparison harness plan](maui-backend-comparison-harness-plan.md).
+**Decision:** proceed to review without Android manual testing. Steps 1–2 retain their unchecked runtime/measurement tasks below. Step 6 is tracked in the [separate comparison harness plan](../todo/maui-backend-comparison-harness-plan.md).
 
 ### Automated validation
 
@@ -242,8 +243,8 @@ Additional coverage for this feature:
 ### State before implementation
 
 - No user documentation page mentions `UseGPU` or the Software/GPU choice today, so even the existing option is undocumented.
-- Renderer topics exist but are scattered: [Mapsui components](../general/markdown/mapsui-components.md) has a short MapRenderer section, and there are separate pages for the experimental renderer and three custom renderer pages.
-- The navigation in [mkdocs.yml](../general/mkdocs.yml) is one flat list of about 24 pages that mixes getting started, concepts, how-to guides, extensibility and project information.
+- Renderer topics exist but are scattered: [Mapsui components](../../docs/general/markdown/mapsui-components.md) has a short MapRenderer section, and there are separate pages for the experimental renderer and three custom renderer pages.
+- The navigation in [mkdocs.yml](../../docs/general/mkdocs.yml) is one flat list of about 24 pages that mixes getting started, concepts, how-to guides, extensibility and project information.
 
 ### New page: Rendering options
 
@@ -294,6 +295,6 @@ Expected implementation areas: `Mapsui.UI.Maui/MapControl.cs`, a new `RenderBack
 
 - Marking `UseGPU` obsolete once the enum has been available for a release.
 - Live surface swapping, automatic backend selection, renderer/provider comparison matrices, changes to SQLite behavior, and changing the default host view.
-- The repeatable comparison harness (step 6), tracked in [its own plan](maui-backend-comparison-harness-plan.md).
+- The repeatable comparison harness (step 6), tracked in [its own plan](../todo/maui-backend-comparison-harness-plan.md).
 
 Comparing SurfaceView and TextureView within MAUI tests the surface hypothesis; it does not measure all overhead differences between a complete native Android application and a MAUI application.

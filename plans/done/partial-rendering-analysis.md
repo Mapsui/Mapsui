@@ -1,3 +1,8 @@
+---
+title: Partial viewport rendering: architectural analysis
+status: done
+---
+
 # Partial Viewport Rendering: Architectural Analysis
 
 ## Problem Statement

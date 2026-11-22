@@ -1,3 +1,8 @@
+---
+title: Render cache architecture
+status: proposed
+---
+
 # Render Cache Architecture
 
 ## Purpose

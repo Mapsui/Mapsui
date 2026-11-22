@@ -50,7 +50,7 @@ Run `dotnet format` to apply these rules automatically.
 - Clear, small changes with strong rationale.
 - Tests when fixing bugs or adding non-trivial behavior.
 - Meaningful comments that explain *why* (see Comments section above).
-- Performance awareness in hot paths; avoid allocations and unnecessary LINQ in tight loops.
+- Performance awareness in hot paths; avoid allocations and unnecessary LINQ in tight loops. For anything that renders, read [Performance](../../docs/general/markdown/performance.md) first: it says what must be measured and reported.
 
 ## What to avoid
 - Introducing dependencies without discussion.
@@ -112,7 +112,7 @@ Before making code changes, use the validation assessment in `AGENTS.md`. Load t
 ## Documentation
 - Update README or docs when behavior changes or new features are added.
 - Keep commit messages and PR descriptions concise and informative (what/why/impact).
-- AI-generated design documents (architecture analyses, stage plans, etc.) live in [docs/ai-generated/](../../docs/ai-generated/). Add new ones there. This includes design notes, proposals, working documents, and any file generated during a chat session for reference. When an agent produces a document that is not user-facing documentation or source code — such as a design analysis, a proposal, an upgrade plan, or a discussion summary — it must be placed in `docs/ai-generated/` rather than in the project root or any other location.
+- Plans, analyses, designs and other working documents live in [plans/](../../plans/) (`todo/` and `done/`, see its README for the front matter and lifecycle). Decisions live in [docs/decisions/](../../docs/decisions/) as numbered records. Product and architecture documentation lives in `docs/general/markdown/`. A document an agent produces that is not source code or user-facing documentation goes into `plans/todo/`, never into the project root or another location. When a plan finishes, its decisions move to `docs/decisions/` or the architecture principles before the plan moves to `plans/done/`.
 
 ### Finding the right documentation file
 

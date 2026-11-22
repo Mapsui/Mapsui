@@ -1,3 +1,8 @@
+---
+title: SkiaSharp Upgrade Follow-up
+status: done
+---
+
 # SkiaSharp Upgrade Follow-up
 
 **Implementation status:** Done. The primary compatibility bridge is implemented and its pre-PR validation results are recorded below.

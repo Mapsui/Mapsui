@@ -1,3 +1,9 @@
+---
+title: Global experimental renderer switching: design
+status: done
+date: 2026-03-23
+---
+
 # Global Experimental Renderer Switching — Design
 
 **Date:** 2026-03-23  
