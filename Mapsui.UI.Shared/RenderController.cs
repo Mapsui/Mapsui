@@ -150,12 +150,9 @@ public sealed class RenderController : IDisposable
             Thread.Sleep(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
             await _needsRefresh.WaitAsync().ConfigureAwait(false); // Wait if there was no call to _needsRefresh.Set() yet.
 
-            var isAnimating = UpdateAnimations(_getMap());
-
+            // Animations are updated in Render, on the draw thread, so that the whole render pipeline runs on
+            // one thread. See the threading section in docs/general/markdown/mapsui-architecture-principles.md.
             _invalidateCanvas?.Invoke();
-
-            if (isAnimating)
-                _needsRefresh.Set(); // While still animating trigger another loop. 
         }
     }
 
@@ -191,6 +188,16 @@ public sealed class RenderController : IDisposable
 
             ((SKCanvas)canvas).Scale(pixelDensity.Value, pixelDensity.Value);
 
+            // Apply pending layer state and advance animations before taking the pending refresh, so that a
+            // redraw they request is part of this frame. Their RefreshGraphics calls also signalled the loop;
+            // forget that signal when the loop is not already released by it, otherwise the loop would draw one
+            // extra frame with nothing pending, which is a full redraw. A request that arrives after
+            // TakePendingRefresh signals again and gets its own frame.
+            var isAnimating = UpdateAnimations(map);
+            _needsRefresh.Reset();
+            if (!_isRunning)
+                _needsRefresh.Set(); // Dispose signalled the loop to exit while this frame ran; do not swallow that.
+
             var pending = TakePendingRefresh();
             _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor, pending?.DirtyRect, pending?.CoordinateSpace ?? CoordinateSpace.World);
 
@@ -198,6 +205,9 @@ public sealed class RenderController : IDisposable
 
             // If we are interested in performance measurements, we save the new drawing time
             map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
+
+            if (isAnimating)
+                _needsRefresh.Set(); // While still animating trigger another frame.
         }
         finally
         {
@@ -227,17 +237,24 @@ public sealed class RenderController : IDisposable
         return additionalTimeToDelay;
     }
 
-    private static bool UpdateAnimations(Map? map)
+    private static bool UpdateAnimations(Map map)
     {
-        var isAnimating = false;
-        if (map is Map localMap)
+        // This runs inside the platform's paint callback. An exception from an animation callback or a
+        // viewport-changed handler must not take the application down with it, so log it and draw the frame.
+        try
         {
-            if (localMap.UpdateAnimations()) // Update animations on the Map
+            var isAnimating = false;
+            if (map.UpdateAnimations()) // Update animations on the Map
                 isAnimating = true;
-            if (localMap.Navigator.UpdateAnimations()) // Update animations on the Navigator
+            if (map.Navigator.UpdateAnimations()) // Update animations on the Navigator
                 isAnimating = true;
+            return isAnimating; // Returns true if there are active animations.
         }
-        return isAnimating; // Returns true if there are active animations.
+        catch (Exception e)
+        {
+            Logger.Log(LogLevel.Error, $"Exception while updating animations: {e.Message}", e);
+            return false;
+        }
     }
 
 }
