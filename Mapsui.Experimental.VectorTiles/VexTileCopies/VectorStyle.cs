@@ -152,6 +152,9 @@ public class VectorStyle : IVectorStyle
     /// cache-miss resolution. Treat as immutable.
     /// </summary>
 
+    // fill-outline-color is a 1 pixel line in the style spec (device-independent pixels here).
+    private const double OutlineWidth = 1.0;
+
     private static Paint CreateDefaultPaint() => new Paint
     {
         BackgroundOpacity = 1.0,
@@ -228,6 +231,13 @@ public class VectorStyle : IVectorStyle
         {
             if (paint.TryGetValue("fill-color", out var value))
                 paint2.FillColor = ParseColor(GetValue(value, attributes));
+            // Fill layers have no line properties, so the outline reuses LineColor/LineWidth.
+            // SkiaCanvas.DrawPolygon strokes the outline when LineColor is not transparent.
+            if (paint.TryGetValue("fill-outline-color", out var outline))
+            {
+                paint2.LineColor = ParseColor(GetValue(outline, attributes));
+                paint2.LineWidth = OutlineWidth * scale;
+            }
             if (paint.TryGetValue("background-color", out var value2))
                 paint2.BackgroundColor = ParseColor(GetValue(value2, attributes));
             if (paint.TryGetValue("text-color", out var value3))
