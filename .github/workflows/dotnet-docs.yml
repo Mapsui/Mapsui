@@ -14,9 +14,19 @@ on:
       - 'AGENTS.md'
       - 'CLAUDE.md'
       - 'GEMINI.md'
-  # Pull requests keep a path filter because the website build is slow (the Uno sample is AOT
-  # compiled). The Build workflow already compiles library and sample changes; this one checks
-  # the website itself and the web sample projects it publishes.
+  # The Uno sample is only AOT compiled (about 25 minutes extra) in the nightly run and, by default, in
+  # a manual run. Pushes deploy right away with the interpreted Uno sample; the next nightly or manual
+  # run puts the AOT version back.
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      aot:
+        description: 'AOT compile the Uno sample (about 25 minutes extra, much faster map rendering)'
+        type: boolean
+        default: true
+  # Pull requests keep a path filter. The Build workflow already compiles library and sample changes;
+  # this one checks the website itself and the web sample projects it publishes.
   pull_request:
     branches:
       - main
@@ -32,8 +42,9 @@ on:
 permissions:
   contents: read
 
+# AOT runs get their own group, so a push during a long AOT build doesn't cancel it.
 concurrency:
-  group: mapsui-pages-${{ github.ref }}
+  group: mapsui-pages-${{ github.ref }}-${{ (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.aot)) && 'aot' || 'quick' }}
   cancel-in-progress: true
 
 jobs:
@@ -41,6 +52,7 @@ jobs:
     runs-on: windows-latest
     env:
       PYTHONUTF8: 1
+      UNO_AOT: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.aot) }}
     steps:
         
 #Begin install mkdocs        
@@ -78,7 +90,7 @@ jobs:
       # build the Blazor and Uno samples into website/v5/
     - name: Build Blazor and Uno website samples
       shell: pwsh
-      run: ./Scripts/BuildSamplesWebsite.ps1
+      run: ./Scripts/BuildSamplesWebsite.ps1 -Aot:($env:UNO_AOT -eq 'true')
     - name: Download frozen v4 website
       shell: pwsh
       env:
@@ -103,8 +115,9 @@ jobs:
       with:
         path: ./website
 
+  # Push, nightly and manual runs on main deploy, as long as main's latest commit came in through a pull request.
   verify-deployment-source:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     outputs:
       should_deploy: ${{ steps.merged-pull-request.outputs.should_deploy }}
@@ -132,6 +145,10 @@ jobs:
       - build-website
       - verify-deployment-source
     runs-on: ubuntu-latest
+    # Quick and AOT builds can overlap; their deployments must not.
+    concurrency:
+      group: mapsui-pages-deploy
+      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write
