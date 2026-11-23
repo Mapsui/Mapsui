@@ -67,8 +67,8 @@ jobs:
     - name: Run DocFx
       shell: pwsh
       run: ./Scripts/BuildDocumentationWebSite.ps1
-      # build blazor samples to website/samples/
-    - name: Build Blazor Website Sample
+      # build the Blazor and Uno samples into website/v5/
+    - name: Build Blazor and Uno website samples
       shell: pwsh
       run: ./Scripts/BuildSamplesWebsite.ps1
     - name: Download frozen v4 website

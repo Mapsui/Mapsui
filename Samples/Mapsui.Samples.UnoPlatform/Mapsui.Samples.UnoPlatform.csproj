@@ -39,6 +39,15 @@
     <NoWarn>$(NoWarn);NU1507;NETSDK1201;PRI257</NoWarn>
   </PropertyGroup>
 
+  <!--
+    The Release browser build is the one published to mapsui.com. The interpreter alone is too slow for
+    smooth map rendering, so compile ahead of time; this makes the download larger and the build slower.
+    Debug builds keep the interpreter so they stay fast to build.
+  -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-browserwasm' and '$(Configuration)' == 'Release'">
+    <WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Experimental.Rendering.Skia\Mapsui.Experimental.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
