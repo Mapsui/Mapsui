@@ -1,0 +1,15 @@
+<Project>
+
+  <!--
+    Set MapsuiSkipAndroid=true (as an MSBuild property or an environment variable) to drop the Android
+    target frameworks from multi-targeted projects. The macOS CI job uses it: the Linux job already
+    builds every Android target, so building them again on macOS only costs time and the Android
+    workload. Projects that target only Android must be left out of the build instead, because they
+    would be left without a target framework.
+  -->
+  <PropertyGroup Condition="'$(MapsuiSkipAndroid)' == 'true' and '$(TargetFrameworks)' != ''">
+    <TargetFrameworks>$([System.Text.RegularExpressions.Regex]::Replace('$(TargetFrameworks)', 'net[0-9.]+-android[0-9.]*', ''))</TargetFrameworks>
+    <TargetFrameworks>$([System.Text.RegularExpressions.Regex]::Replace('$(TargetFrameworks)', ';+', ';').Trim(';'))</TargetFrameworks>
+  </PropertyGroup>
+
+</Project>
