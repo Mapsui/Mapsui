@@ -2,6 +2,11 @@ using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+#if DEBUG
+// Logging is only configured in Debug builds (see InitializeLogging), so a global using would be
+// reported as unnecessary (IDE0005) in Release.
+using Microsoft.Extensions.Logging;
+#endif
 
 namespace Mapsui.Samples.Uno;
 

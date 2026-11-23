@@ -10,7 +10,7 @@ internal static class HashNavigation
     internal static (string? category, string? sample) Read()
     {
 #if __WASM__
-        var hash = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.hash");
+        var hash = global::Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.hash");
         if (string.IsNullOrEmpty(hash))
             return (null, null);
 
@@ -39,7 +39,7 @@ internal static class HashNavigation
     {
 #if __WASM__
         var encoded = $"#category={System.Uri.EscapeDataString(category)}&sample={System.Uri.EscapeDataString(sample)}";
-        Uno.Foundation.WebAssemblyRuntime.InvokeJS($"window.history.replaceState(null, '', '{encoded}')");
+        global::Uno.Foundation.WebAssemblyRuntime.InvokeJS($"window.history.replaceState(null, '', '{encoded}')");
 #endif
     }
 }
