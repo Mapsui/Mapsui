@@ -30,7 +30,7 @@
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
       "Samples\\Mapsui.Samples.Droid\\Mapsui.Samples.Droid.csproj",
       "Samples\\Mapsui.Samples.Eto\\Mapsui.Samples.Eto.csproj",
-      "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.csproj",
+      "Samples\\Mapsui.Samples.UnoPlatform\\Mapsui.Samples.UnoPlatform.csproj",
       "Samples\\Mapsui.Samples.WinUI\\Mapsui.Samples.WinUI\\Mapsui.Samples.WinUI.csproj",
       "Samples\\Mapsui.Samples.WindowsForms\\Mapsui.Samples.WindowsForms.csproj",
       "Samples\\Mapsui.Samples.Wpf\\Mapsui.Samples.Wpf.csproj",

@@ -253,8 +253,8 @@
       <BuildType Solution="AppStore|*" Project="Debug" />
     </Project>
   </Folder>
-  <Folder Name="/Samples/Mapsui.Samples.Uno/">
-    <Project Path="Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.csproj">
+  <Folder Name="/Samples/Mapsui.Samples.UnoPlatform/">
+    <Project Path="Samples/Mapsui.Samples.UnoPlatform/Mapsui.Samples.UnoPlatform.csproj">
       <BuildType Solution="Ad-Hoc|*" Project="Debug" />
       <BuildType Solution="AppStore|*" Project="Debug" />
       <Deploy Solution="Debug|AnyCPU" />

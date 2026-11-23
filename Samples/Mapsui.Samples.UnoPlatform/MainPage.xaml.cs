@@ -6,7 +6,7 @@ using Mapsui.Samples.Common.Extensions;
 using Mapsui.Tiling;
 using Microsoft.UI.Xaml.Controls;
 
-namespace Mapsui.Samples.Uno;
+namespace Mapsui.Samples.UnoPlatform;
 
 public sealed partial class MainPage : Page
 {

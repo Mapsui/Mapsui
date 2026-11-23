@@ -2,7 +2,7 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 
-namespace Mapsui.Samples.Uno.Droid;
+namespace Mapsui.Samples.UnoPlatform.Droid;
 
 [Activity(
     MainLauncher = true,

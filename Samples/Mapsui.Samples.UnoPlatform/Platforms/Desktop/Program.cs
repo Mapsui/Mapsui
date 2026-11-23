@@ -1,17 +1,21 @@
+using System;
 using Uno.UI.Hosting;
 
-namespace Mapsui.Samples.Uno.iOS;
+namespace Mapsui.Samples.UnoPlatform;
 
-public class EntryPoint
+internal class Program
 {
-    // This is the main entry point of the application.
+    [STAThread]
     public static void Main(string[] args)
     {
         App.InitializeLogging();
 
         var host = UnoPlatformHostBuilder.Create()
             .App(() => new App())
-            .UseAppleUIKit()
+            .UseX11()
+            .UseLinuxFrameBuffer()
+            .UseMacOS()
+            .UseWin32()
             .Build();
 
         host.Run();

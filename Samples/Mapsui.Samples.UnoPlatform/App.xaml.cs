@@ -8,7 +8,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Extensions.Logging;
 #endif
 
-namespace Mapsui.Samples.Uno;
+namespace Mapsui.Samples.UnoPlatform;
 
 public partial class App : Application
 {

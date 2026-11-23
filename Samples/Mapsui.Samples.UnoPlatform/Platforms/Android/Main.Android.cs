@@ -2,7 +2,7 @@ using System;
 using Android.Runtime;
 using Uno.UI.Hosting;
 
-namespace Mapsui.Samples.Uno.Droid;
+namespace Mapsui.Samples.UnoPlatform.Droid;
 
 [global::Android.App.ApplicationAttribute(
     Label = "@string/ApplicationName",

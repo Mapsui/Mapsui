@@ -1,5 +1,5 @@
 <linker>
-  <assembly fullname="Mapsui.Samples.Uno" />
+  <assembly fullname="Mapsui.Samples.UnoPlatform" />
 
   <!--
   Uncomment this section when using JSON.NET

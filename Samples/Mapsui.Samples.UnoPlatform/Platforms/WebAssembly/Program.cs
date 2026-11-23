@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Uno.UI.Hosting;
 
-namespace Mapsui.Samples.Uno;
+namespace Mapsui.Samples.UnoPlatform;
 
 public class Program
 {
