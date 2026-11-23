@@ -6,10 +6,12 @@
     builds every Android target, so building them again on macOS only costs time and the Android
     workload. Projects that target only Android must be left out of the build instead, because they
     would be left without a target framework.
+    MSBuild escapes the ';' in a property function's result, which would turn the list into a single
+    target framework, so the final value is unescaped.
   -->
   <PropertyGroup Condition="'$(MapsuiSkipAndroid)' == 'true' and '$(TargetFrameworks)' != ''">
     <TargetFrameworks>$([System.Text.RegularExpressions.Regex]::Replace('$(TargetFrameworks)', 'net[0-9.]+-android[0-9.]*', ''))</TargetFrameworks>
-    <TargetFrameworks>$([System.Text.RegularExpressions.Regex]::Replace('$(TargetFrameworks)', ';+', ';').Trim(';'))</TargetFrameworks>
+    <TargetFrameworks>$([MSBuild]::Unescape($([System.Text.RegularExpressions.Regex]::Replace('$(TargetFrameworks)', ';+', ';').Trim(';'))))</TargetFrameworks>
   </PropertyGroup>
 
 </Project>
