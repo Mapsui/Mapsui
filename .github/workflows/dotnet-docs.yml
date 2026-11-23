@@ -1,21 +1,29 @@
 name: Build Website
 
 on:
+  # The API reference and the online samples are built from the library and sample code, so any
+  # code change on main must republish the site. Only skip files that never end up on it.
   push:
     branches:
       - main
-    paths:
-      - 'docs/**'
-      - 'Scripts/BuildDocumentationWebSite.ps1'
-      - 'Scripts/BuildSamplesWebsite.ps1'
-      - 'Scripts/AddFrozenV4Website.ps1'
-      - '.github/pages-v4-snapshot.*'
-      - '.github/workflows/dotnet-docs.yml'
+    paths-ignore:
+      - 'README.md'
+      - 'plans/**'
+      - '.agents/**'
+      - '.claude/**'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
+  # Pull requests keep a path filter because the website build is slow (the Uno sample is AOT
+  # compiled). The Build workflow already compiles library and sample changes; this one checks
+  # the website itself and the web sample projects it publishes.
   pull_request:
     branches:
       - main
     paths:
       - 'docs/**'
+      - 'Samples/Mapsui.Samples.Blazor/**'
+      - 'Samples/Mapsui.Samples.Uno/**'
       - 'Scripts/BuildDocumentationWebSite.ps1'
       - 'Scripts/BuildSamplesWebsite.ps1'
       - 'Scripts/AddFrozenV4Website.ps1'
