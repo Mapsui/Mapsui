@@ -12,11 +12,16 @@ New-Item -Path "website/v5/samples" -ItemType Directory -Force
 Copy-Item -Path "release/wwwroot/*" -Destination "website/v5/samples" -Recurse -Force
 
 # build the Uno WebAssembly sample. The Release browserwasm build is AOT compiled (see the csproj).
-dotnet publish -c Release -f net10.0-browserwasm Samples\Mapsui.Samples.UnoPlatform\Mapsui.Samples.UnoPlatform.csproj -o release-uno --nologo
+# Uno.Sdk defaults WasmShellWebAppBasePath to "/", which makes index.html load its scripts from the
+# site root. Like the Blazor base href above, it must match the deployed subfolder exactly.
+$unoBasePath = "/v5/samples-uno/"
+dotnet publish -c Release -f net10.0-browserwasm Samples\Mapsui.Samples.UnoPlatform\Mapsui.Samples.UnoPlatform.csproj -o release-uno --nologo -p:WasmShellWebAppBasePath=$unoBasePath
 if ($LASTEXITCODE -ne 0) { throw 'Could not publish the Uno sample.' }
 if (-not (Test-Path "release-uno/wwwroot/index.html")) { throw 'The Uno publish output has no wwwroot/index.html.' }
-# The Uno bootstrapper derives its base path from the location of its own script at runtime,
-# so unlike Blazor no <base href> rewrite is needed to serve it from a subfolder. It also selects
-# samples through the URL hash, so it needs no 404.html fallback for deep links.
+# A wrong base path still builds but gives a blank page, so fail the build instead.
+if (-not (Select-String -Path "release-uno/wwwroot/index.html" -Pattern "src=`"$unoBasePath" -SimpleMatch -Quiet)) {
+    throw "The Uno index.html does not load its scripts from $unoBasePath."
+}
+# The Uno sample selects samples through the URL hash, so it needs no 404.html fallback for deep links.
 New-Item -Path "website/v5/samples-uno" -ItemType Directory -Force
 Copy-Item -Path "release-uno/wwwroot/*" -Destination "website/v5/samples-uno" -Recurse -Force
