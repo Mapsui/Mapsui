@@ -12,7 +12,7 @@ New-Item -Path "website/v5/samples" -ItemType Directory -Force
 Copy-Item -Path "release/wwwroot/*" -Destination "website/v5/samples" -Recurse -Force
 
 # build the Uno WebAssembly sample. The Release browserwasm build is AOT compiled (see the csproj).
-dotnet publish -c Release -f net10.0-browserwasm Samples\Mapsui.Samples.Uno\Mapsui.Samples.Uno.csproj -o release-uno --nologo
+dotnet publish -c Release -f net10.0-browserwasm Samples\Mapsui.Samples.UnoPlatform\Mapsui.Samples.UnoPlatform.csproj -o release-uno --nologo
 if ($LASTEXITCODE -ne 0) { throw 'Could not publish the Uno sample.' }
 if (-not (Test-Path "release-uno/wwwroot/index.html")) { throw 'The Uno publish output has no wwwroot/index.html.' }
 # The Uno bootstrapper derives its base path from the location of its own script at runtime,
