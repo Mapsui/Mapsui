@@ -132,6 +132,11 @@ public static class VexTileRenderer
         // it does not capture the dict reference, so reuse is safe.
         var attributes = new Dictionary<string, object>();
 
+        // Most style layers filter on "class" or "subclass" (e.g. one transportation layer per
+        // road type). Each source layer's features are indexed on that key once per render, so
+        // a style layer only visits the features it can match.
+        var classIndexes = new Dictionary<(VectorTileLayer Layer, string Key), Dictionary<string, List<int>>>();
+
         // Apply styling
         foreach (var layer in style.Layers)
         {
@@ -143,14 +148,25 @@ public static class VexTileRenderer
                 continue;
             }
 
+            // Skip layers outside their zoom range before touching any feature. ValidateLayer
+            // checks the same, but only after the attributes of every feature have been copied.
+            if ((layer.MinZoom.HasValue && actualZoom < layer.MinZoom.Value) ||
+                (layer.MaxZoom.HasValue && actualZoom > layer.MaxZoom.Value))
+            {
+                continue;
+            }
+
             if (!string.IsNullOrEmpty(layer.SourceName))
             {
                 if (categorizedVectorLayers.TryGetValue(layer.SourceLayer, out var tileLayers))
                 {
                     foreach (var tileLayer in tileLayers)
                     {
-                        foreach (var feature in tileLayer.Features)
+                        var candidates = GetCandidateFeatures(layer, tileLayer, classIndexes);
+                        var candidateCount = candidates?.Count ?? tileLayer.Features.Count;
+                        for (var i = 0; i < candidateCount; i++)
                         {
+                            var feature = tileLayer.Features[candidates?[i] ?? i];
                             attributes.Clear();
                             foreach (var kvp in feature.Attributes)
                             {
@@ -209,6 +225,72 @@ public static class VexTileRenderer
 
         RenderVisualLayers(canvas, visualLayers);
         ReturnBrushes(visualLayers);
+    }
+
+    /// <summary>
+    /// Indices (ascending) of the features that can pass the layer's "class" or "subclass"
+    /// filter, or null when the filter does not restrict those keys and every feature has to
+    /// be checked. The full filter still runs on each candidate.
+    /// </summary>
+    private static List<int>? GetCandidateFeatures(Layer layer, VectorTileLayer tileLayer,
+        Dictionary<(VectorTileLayer Layer, string Key), Dictionary<string, List<int>>> classIndexes)
+    {
+        if (GetFilterClasses(layer.Filter) is not (string key, List<string> classes))
+            return null;
+
+        if (!classIndexes.TryGetValue((tileLayer, key), out var index))
+        {
+            index = new Dictionary<string, List<int>>();
+            for (var i = 0; i < tileLayer.Features.Count; i++)
+            {
+                if (!tileLayer.Features[i].Attributes.TryGetValue(key, out var value) || value is not string cls)
+                    continue;
+                if (!index.TryGetValue(cls, out var list))
+                    index[cls] = list = new List<int>();
+                list.Add(i);
+            }
+            classIndexes[(tileLayer, key)] = index;
+        }
+
+        if (classes.Count == 1)
+            return index.TryGetValue(classes[0], out var single) ? single : [];
+
+        var result = new List<int>();
+        foreach (var cls in classes)
+            if (index.TryGetValue(cls, out var list))
+                result.AddRange(list);
+        result.Sort(); // Keep the feature order, it decides the drawing order within the layer.
+        return result;
+    }
+
+    // Values allowed by ["in", key, ...] or ["==", key, value] on "class" or "subclass",
+    // also inside ["all", ...]. Null when the filter cannot be answered from the index.
+    private static (string Key, List<string> Values)? GetFilterClasses(object[]? filter)
+    {
+        if (filter == null || filter.Length < 3 || filter[0] is not string op)
+            return null;
+        if (op == "all")
+        {
+            for (var i = 1; i < filter.Length; i++)
+                if (GetFilterClasses(filter[i] as object[]) is { } nested)
+                    return nested;
+            return null;
+        }
+        if ((op == "in" || (op == "==" && filter.Length == 3)) &&
+            filter[1] is string key && (key == "class" || key == "subclass"))
+        {
+            var classes = new List<string>(filter.Length - 2);
+            for (var i = 2; i < filter.Length; i++)
+            {
+                // The index only holds string values. Numbers and "$..." references
+                // (resolved by the filter) need the full filter.
+                if (filter[i] is not string cls || cls.StartsWith('$'))
+                    return null;
+                classes.Add(cls);
+            }
+            return (key, classes);
+        }
+        return null;
     }
 
     private static void RenderVisualLayers(ICanvas canvas, List<VisualLayer> visualLayers)
