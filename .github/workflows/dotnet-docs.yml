@@ -23,7 +23,7 @@ on:
     paths:
       - 'docs/**'
       - 'Samples/Mapsui.Samples.Blazor/**'
-      - 'Samples/Mapsui.Samples.Uno/**'
+      - 'Samples/Mapsui.Samples.UnoPlatform/**'
       - 'Scripts/BuildDocumentationWebSite.ps1'
       - 'Scripts/BuildSamplesWebsite.ps1'
       - 'Scripts/AddFrozenV4Website.ps1'
