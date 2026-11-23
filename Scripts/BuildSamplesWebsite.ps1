@@ -1,3 +1,6 @@
+# -Aot compiles the Uno sample ahead of time: much faster map rendering, but about 25 minutes more build time.
+param([switch]$Aot)
+
 # build Samples website to release folder
 dotnet publish -c Release Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.csproj -o release --nologo
 # change base url (must match the deployed subfolder exactly, including casing)
@@ -11,11 +14,13 @@ New-Item -Path "website/v5/samples" -ItemType Directory -Force
 # copy it to website/samples
 Copy-Item -Path "release/wwwroot/*" -Destination "website/v5/samples" -Recurse -Force
 
-# build the Uno WebAssembly sample. The Release browserwasm build is AOT compiled (see the csproj).
+# build the Uno WebAssembly sample, AOT compiled only with -Aot (see the csproj).
 # Uno.Sdk defaults WasmShellWebAppBasePath to "/", which makes index.html load its scripts from the
 # site root. Like the Blazor base href above, it must match the deployed subfolder exactly.
 $unoBasePath = "/v5/samples-uno/"
-dotnet publish -c Release -f net10.0-browserwasm Samples\Mapsui.Samples.UnoPlatform\Mapsui.Samples.UnoPlatform.csproj -o release-uno --nologo -p:WasmShellWebAppBasePath=$unoBasePath
+$unoAot = if ($Aot) { 'true' } else { 'false' }
+Write-Host "Publishing the Uno sample with AOT: $unoAot"
+dotnet publish -c Release -f net10.0-browserwasm Samples\Mapsui.Samples.UnoPlatform\Mapsui.Samples.UnoPlatform.csproj -o release-uno --nologo -p:WasmShellWebAppBasePath=$unoBasePath -p:MapsuiUnoAot=$unoAot
 if ($LASTEXITCODE -ne 0) { throw 'Could not publish the Uno sample.' }
 if (-not (Test-Path "release-uno/wwwroot/index.html")) { throw 'The Uno publish output has no wwwroot/index.html.' }
 # A wrong base path still builds but gives a blank page, so fail the build instead.
