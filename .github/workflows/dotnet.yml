@@ -6,11 +6,23 @@ on:
     paths-ignore:
       - 'README.md'
       - 'docs/**'
+      - 'plans/**'
+      - '.agents/**'
+      - '.claude/**'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
   pull_request:
     branches: [ '**' ]
     paths-ignore:
       - 'README.md'
       - 'docs/**'
+      - 'plans/**'
+      - '.agents/**'
+      - '.claude/**'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'GEMINI.md'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
