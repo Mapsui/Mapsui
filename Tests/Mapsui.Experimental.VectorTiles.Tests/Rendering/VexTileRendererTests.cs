@@ -28,6 +28,7 @@ public class VexTileRendererTests
     [TestCase("[\"all\", [\"==\", \"$type\", \"LineString\"], [\"in\", \"class\", \"primary\", \"motorway\"]]", new[] { 0, 1, 2 })]
     [TestCase("[\"==\", \"subclass\", \"footway\"]", new[] { 5 })]
     [TestCase("[\"in\", \"class\", \"bridge\"]", new int[0])]
+    [TestCase("[\"in\", \"class\", \"motorway\", \"primary\", \"motorway\"]", new[] { 0, 1, 2 })]
     [TestCase("[\"in\", \"class\", 5]", new[] { 4 })]
     [TestCase("[\"any\", [\"==\", \"class\", \"primary\"], [\"!has\", \"class\"]]", new[] { 1, 3 })]
     public void Render_WithClassFilter_DrawsTheMatchingFeaturesInOrder(string filter, int[] expected)

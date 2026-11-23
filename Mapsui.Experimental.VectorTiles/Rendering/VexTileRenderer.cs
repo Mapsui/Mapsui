@@ -286,7 +286,9 @@ public static class VexTileRenderer
                 // (resolved by the filter) need the full filter.
                 if (filter[i] is not string cls || cls.StartsWith('$'))
                     return null;
-                classes.Add(cls);
+                // A repeated value would add its features twice and draw them twice.
+                if (!classes.Contains(cls))
+                    classes.Add(cls);
             }
             return (key, classes);
         }
