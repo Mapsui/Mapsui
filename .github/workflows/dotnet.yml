@@ -190,8 +190,36 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: nupkg.mac
-        path: Artifacts/*.nupkg     
-  
+        path: Artifacts/*.nupkg
+
+  # GitHub sometimes has no free macOS runner. The Mac job is then cancelled after waiting about 15
+  # minutes, without any log, and the failure email only says it was cancelled. This job fails under a
+  # name that says what happened, so the cause shows up in the failure email and the checks list.
+  # It only runs when the Mac job did not succeed, and it passes when the Mac job did get a runner
+  # (a real build failure, whose cause is in the Mac job's own log).
+  macRunnerUnavailable:
+    name: macOS runner unavailable (GitHub capacity) - re-run the failed jobs
+    needs: macBuild
+    if: always() && needs.macBuild.result != 'success' && needs.macBuild.result != 'skipped'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    steps:
+    - name: Check whether the Mac job got a runner
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        job="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs" \
+          --jq '.jobs[] | select(.name == "macBuild") | {runner: (.runner_name // ""), steps: (.steps | length)}')"
+        echo "Mac job: $job"
+        runner="$(jq -r '.runner' <<< "$job")"
+        steps="$(jq -r '.steps' <<< "$job")"
+        if [[ -z "$runner" && "$steps" == "0" ]]; then
+          echo "::error title=macOS runner unavailable::GitHub had no free macOS runner, so the Mac job never started. This is a GitHub capacity problem, not a build failure. Re-run the failed jobs."
+          exit 1
+        fi
+        echo "The Mac job did get a runner, so its failure is a real build failure. See the Mac job's log."
+
   winBuild:
     runs-on: windows-latest
     # C: has ~26 GB free on Windows runners, less than the workloads plus the NuGet packages need; D: has ~200 GB.

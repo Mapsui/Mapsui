@@ -14,11 +14,13 @@ on:
       - 'AGENTS.md'
       - 'CLAUDE.md'
       - 'GEMINI.md'
-  # The Uno sample is only AOT compiled (about 25 minutes extra) in the nightly run and, by default, in
+  # The Uno sample is only AOT compiled (about 15 minutes extra) in the nightly run and, by default, in
   # a manual run. Pushes deploy right away with the interpreted Uno sample; the next nightly or manual
   # run puts the AOT version back.
   schedule:
-    - cron: '0 2 * * *'
+    # Daily at 03:41 UTC. GitHub delays or drops scheduled runs under load, and the start of every hour
+    # is its busiest moment; the run planned for 02:00 never happened. An odd minute avoids that.
+    - cron: '41 3 * * *'
   workflow_dispatch:
     inputs:
       aot:
