@@ -63,12 +63,6 @@ jobs:
         $LASTEXITCODE = 0
     - name: Build nuget packages
       run: dotnet pack Mapsui.slnx --configuration Release /p:Version=$env:PACKAGE_VERSION -o Artifacts
-    - name: Build Mapsui.UI.Maui8 nuget package
-      # The .NET 10 SDK can't build net8.0-android, so this project uses the SDK 9 pinned by its own global.json.
-      working-directory: Mapsui.UI.Maui8
-      run: |
-        dotnet workload install maui android
-        dotnet pack --configuration Release /p:Version=$env:PACKAGE_VERSION -o ../Artifacts
     - name: Cleanup
       run: git clean -fx -d -e Artifacts
     # Change Project References to nuget package references in samples    

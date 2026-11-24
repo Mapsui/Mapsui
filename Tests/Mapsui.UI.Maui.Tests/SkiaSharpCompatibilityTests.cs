@@ -37,11 +37,12 @@ public class SkiaSharpCompatibilityTests
     [Test]
     public void RichTextKitCalloutRunsWithSkiaSharp4AndMatchingHarfBuzz()
     {
+        // SkiaSharp 4 needs the HarfBuzzSharp 14 release train; RichTextKit itself still declares the 2.x one.
         var harfBuzzVersion = typeof(HarfBuzzSharp.Buffer).Assembly
             .GetCustomAttribute<System.Reflection.AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
         Assert.That(harfBuzzVersion, Is.Not.Null);
-        Assert.That(harfBuzzVersion, Does.StartWith("14.2.1.102"));
+        Assert.That(harfBuzzVersion, Does.StartWith("14."));
 
         using var renderService = new RenderService();
         using var picture = CalloutStyleRenderer.CreateCalloutContent(new CalloutStyle

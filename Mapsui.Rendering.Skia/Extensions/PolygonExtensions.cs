@@ -16,10 +16,10 @@ internal static class PolygonExtensions
     /// <returns></returns>
     public static SKPath ToSkiaPath(this Polygon polygon, Viewport viewport, SKRect clipRect, float strokeWidth)
     {
-        var path = new SKPath();
+        using var builder = new SKPathBuilder();
 
         if (polygon.ExteriorRing is null)
-            return path;
+            return builder.Detach();
 
         // Bring outer ring in CCW direction
         var outerRing = (polygon.ExteriorRing.IsRing && ((LinearRing)polygon.ExteriorRing).IsCCW) ? polygon.ExteriorRing : (LineString)((Geometry)polygon.ExteriorRing).Reverse();
@@ -29,16 +29,16 @@ internal static class PolygonExtensions
         var exterior = ClippingFunctions.ReducePointsToClipRect(outerRing?.Coordinates, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
 
         if (exterior.Count == 0)
-            return path;
+            return builder.Detach();
 
         // Draw exterior path
-        path.MoveTo(exterior[0]);
+        builder.MoveTo(exterior[0]);
 
         for (var i = 1; i < exterior.Count; i++)
-            path.LineTo(exterior[i]);
+            builder.LineTo(exterior[i]);
 
         // Close exterior path
-        path.Close();
+        builder.Close();
 
         foreach (var interiorRing in polygon.InteriorRings)
         {
@@ -60,15 +60,15 @@ internal static class PolygonExtensions
                 continue;
 
             // Draw interior paths
-            path.MoveTo(interior[0]);
+            builder.MoveTo(interior[0]);
 
             for (var i = 1; i < interior.Count; i++)
-                path.LineTo(interior[i]);
+                builder.LineTo(interior[i]);
         }
 
         // Close interior paths
-        path.Close();
+        builder.Close();
 
-        return path;
+        return builder.Detach();
     }
 }

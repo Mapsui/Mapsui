@@ -21,7 +21,7 @@ internal static class LineStringExtensions
         // First convert List<Points> to screen coordinates
         var vertices = ClippingFunctions.WorldToScreen(viewport, coordinates);
 
-        var path = new SKPath();
+        using var builder = new SKPathBuilder();
         var lastPoint = SKPoint.Empty;
 
         for (var i = 1; i < vertices.Count; i++)
@@ -34,14 +34,14 @@ internal static class LineStringExtensions
                 // If the last point isn't the same as actual starting point ...
                 if (lastPoint.IsEmpty || !lastPoint.Equals(intersectionPoint1))
                     // ... than move to this point
-                    path.MoveTo(intersectionPoint1);
+                    builder.MoveTo(intersectionPoint1);
                 // Draw line
-                path.LineTo(intersectionPoint2);
+                builder.LineTo(intersectionPoint2);
 
                 // Save last end point for later use
                 lastPoint = intersectionPoint2;
             }
         }
-        return path;
+        return builder.Detach();
     }
 }

@@ -50,23 +50,9 @@ public class RenderSkCanvasPerformance : IDisposable
             Color = SKColors.Green,
         };
 
-        _path = new SKPath();
-        for (int i = 0; i < 1000; i++)
-        {
-            _path.MoveTo(i, i);
-        }
-
-        _pathOffCanvas = new SKPath();
-        for (int i = -5000; i < 6000; i++)
-        {
-            _pathOffCanvas.MoveTo(i, i);
-        }
-
-        _pathLessPoints = new SKPath();
-        for (int i = 0; i < 1000; i += 10)
-        {
-            _pathLessPoints.MoveTo(i, i);
-        }
+        _path = CreateDiagonalPath(0, 1000, 1);
+        _pathOffCanvas = CreateDiagonalPath(-5000, 6000, 1);
+        _pathLessPoints = CreateDiagonalPath(0, 1000, 10);
 
         _scaleMatrix = SKMatrix.CreateScale(10, 10);
         _translationMatrix = SKMatrix.CreateTranslation(1000, 1000);
@@ -138,6 +124,14 @@ public class RenderSkCanvasPerformance : IDisposable
     public void RenderOffCanvas()
     {
         _canvas.DrawPath(_pathOffCanvas, _paint);
+    }
+
+    private static SKPath CreateDiagonalPath(int from, int to, int step)
+    {
+        using var builder = new SKPathBuilder();
+        for (var i = from; i < to; i += step)
+            builder.MoveTo(i, i);
+        return builder.Detach();
     }
 
     public virtual void Dispose()

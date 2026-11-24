@@ -380,7 +380,7 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer, ISkiaStyleRende
             paint.StrokeWidth = 1;
             paint.Style = SKPaintStyle.Stroke;
             paint.Color = fillColor.ToSkia(opacity);
-            using var fillPath = new SKPath();
+            using var fillPath = new SKPathBuilder();
             var matrix = SKMatrix.CreateScale(scale, scale);
 
             switch (brush.FillStyle)
@@ -390,39 +390,39 @@ public class TwoStepVectorStyleRenderer : ITwoStepStyleRenderer, ISkiaStyleRende
                     fillPath.LineTo(0, 0);
                     fillPath.MoveTo(0, scale * 0.8f);
                     fillPath.LineTo(scale * 0.8f, 0);
-                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    paint.PathEffect = fillPath.ToPathEffect(matrix);
                     break;
                 case FillStyle.DiagonalCross:
                     fillPath.MoveTo(scale, scale);
                     fillPath.LineTo(0, 0);
                     fillPath.MoveTo(0, scale);
                     fillPath.LineTo(scale, 0);
-                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    paint.PathEffect = fillPath.ToPathEffect(matrix);
                     break;
                 case FillStyle.BackwardDiagonal:
                     fillPath.MoveTo(0, scale);
                     fillPath.LineTo(scale, 0);
-                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    paint.PathEffect = fillPath.ToPathEffect(matrix);
                     break;
                 case FillStyle.ForwardDiagonal:
                     fillPath.MoveTo(scale, scale);
                     fillPath.LineTo(0, 0);
-                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    paint.PathEffect = fillPath.ToPathEffect(matrix);
                     break;
                 case FillStyle.Dotted:
                     paint.Style = SKPaintStyle.StrokeAndFill;
                     fillPath.AddCircle(scale * 0.5f, scale * 0.5f, scale * 0.35f);
-                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    paint.PathEffect = fillPath.ToPathEffect(matrix);
                     break;
                 case FillStyle.Horizontal:
                     fillPath.MoveTo(0, scale * 0.5f);
                     fillPath.LineTo(scale, scale * 0.5f);
-                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    paint.PathEffect = fillPath.ToPathEffect(matrix);
                     break;
                 case FillStyle.Vertical:
                     fillPath.MoveTo(scale * 0.5f, 0);
                     fillPath.LineTo(scale * 0.5f, scale);
-                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                    paint.PathEffect = fillPath.ToPathEffect(matrix);
                     break;
             }
         }

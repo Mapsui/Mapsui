@@ -15,8 +15,9 @@ class Program
             .UsePlatformDetect()
             .With(new Win32PlatformOptions
             {
+                // No Vulkan: Avalonia 12.1's Vulkan backend crashes with SkiaSharp 4 (access violation in
+                // VulkanDevice.Create). Restore it once Avalonia fixes that.
                 RenderingMode = [
-                    Win32RenderingMode.Vulkan,
                     Win32RenderingMode.AngleEgl,
                     Win32RenderingMode.Wgl,
                     Win32RenderingMode.Software,

@@ -15,10 +15,10 @@ internal static class PolygonExtensions
     /// <returns></returns>
     public static SKPath ToSkiaPath(this Polygon polygon, Viewport viewport)
     {
-        var path = new SKPath();
+        using var builder = new SKPathBuilder();
 
         if (polygon.ExteriorRing is null)
-            return path;
+            return builder.Detach();
 
         // Bring outer ring in CCW direction
         var outerRing = (polygon.ExteriorRing.IsRing && ((LinearRing)polygon.ExteriorRing).IsCCW) ? polygon.ExteriorRing : (LineString)((Geometry)polygon.ExteriorRing).Reverse();
@@ -26,16 +26,16 @@ internal static class PolygonExtensions
         var exterior = WorldToScreen(viewport, outerRing?.Coordinates);
 
         if (exterior.Count == 0)
-            return path;
+            return builder.Detach();
 
         // Draw exterior path
-        path.MoveTo(exterior[0]);
+        builder.MoveTo(exterior[0]);
 
         for (var i = 1; i < exterior.Count; i++)
-            path.LineTo(exterior[i]);
+            builder.LineTo(exterior[i]);
 
         // Close exterior path
-        path.Close();
+        builder.Close();
 
         foreach (var interiorRing in polygon.InteriorRings)
         {
@@ -56,16 +56,16 @@ internal static class PolygonExtensions
                 continue;
 
             // Draw interior paths
-            path.MoveTo(interior[0]);
+            builder.MoveTo(interior[0]);
 
             for (var i = 1; i < interior.Count; i++)
-                path.LineTo(interior[i]);
+                builder.LineTo(interior[i]);
         }
 
         // Close interior paths
-        path.Close();
+        builder.Close();
 
-        return path;
+        return builder.Detach();
     }
 
     private static List<SKPoint> WorldToScreen(Viewport viewport, IEnumerable<Coordinate>? coordinates)
@@ -95,23 +95,23 @@ internal static class PolygonExtensions
     /// <returns>SKPath in relative world coordinates (centered around origin)</returns>
     public static SKPath ToWorldPath(this Polygon polygon, double referenceX, double referenceY)
     {
-        var path = new SKPath();
+        using var builder = new SKPathBuilder();
 
         if (polygon.ExteriorRing is null)
-            return path;
+            return builder.Detach();
 
         // Bring outer ring in CCW direction
         var outerRing = (polygon.ExteriorRing.IsRing && ((LinearRing)polygon.ExteriorRing).IsCCW) ? polygon.ExteriorRing : (LineString)((Geometry)polygon.ExteriorRing).Reverse();
 
         var coords = outerRing?.Coordinates;
         if (coords == null || coords.Length == 0)
-            return path;
+            return builder.Detach();
 
         // Subtract reference point to keep float values small and preserve precision
-        path.MoveTo((float)(coords[0].X - referenceX), (float)(coords[0].Y - referenceY));
+        builder.MoveTo((float)(coords[0].X - referenceX), (float)(coords[0].Y - referenceY));
         for (var i = 1; i < coords.Length; i++)
-            path.LineTo((float)(coords[i].X - referenceX), (float)(coords[i].Y - referenceY));
-        path.Close();
+            builder.LineTo((float)(coords[i].X - referenceX), (float)(coords[i].Y - referenceY));
+        builder.Close();
 
         foreach (var interiorRing in polygon.InteriorRings)
         {
@@ -130,13 +130,13 @@ internal static class PolygonExtensions
             if (innerCoords == null || innerCoords.Length == 0)
                 continue;
 
-            path.MoveTo((float)(innerCoords[0].X - referenceX), (float)(innerCoords[0].Y - referenceY));
+            builder.MoveTo((float)(innerCoords[0].X - referenceX), (float)(innerCoords[0].Y - referenceY));
             for (var i = 1; i < innerCoords.Length; i++)
-                path.LineTo((float)(innerCoords[i].X - referenceX), (float)(innerCoords[i].Y - referenceY));
+                builder.LineTo((float)(innerCoords[i].X - referenceX), (float)(innerCoords[i].Y - referenceY));
         }
 
-        path.Close();
+        builder.Close();
 
-        return path;
+        return builder.Detach();
     }
 }

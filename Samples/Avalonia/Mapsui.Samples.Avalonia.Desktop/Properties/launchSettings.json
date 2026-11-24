@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Mapsui.Samples.Avalonia.Desktop": {
-      "commandName": "Project",
-      "nativeDebugging": true
-    }
-  }
-}

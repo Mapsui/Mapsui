@@ -13,17 +13,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" VersionOverride="$(Avalonia12Version)" />
-    <PackageReference Include="Avalonia.Browser" VersionOverride="$(Avalonia12Version)" />
-    <PackageReference Include="Avalonia.Skia" VersionOverride="$(Avalonia12Version)" />
-    <PackageReference Include="Avalonia.Themes.Fluent" VersionOverride="$(Avalonia12Version)" />
-    <PackageReference Include="Avalonia.Fonts.Inter" VersionOverride="$(Avalonia12Version)" />
-    <PackageReference Include="HarfBuzzSharp" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
-    <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Browser" />
+    <PackageReference Include="Avalonia.Skia" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+    <PackageReference Include="HarfBuzzSharp" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
   <ItemGroup>

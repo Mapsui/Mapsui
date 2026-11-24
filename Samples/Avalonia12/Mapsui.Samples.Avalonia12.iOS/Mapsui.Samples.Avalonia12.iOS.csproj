@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia.iOS" VersionOverride="$(Avalonia12Version)" />
+    <PackageReference Include="Avalonia.iOS" />
   </ItemGroup>
 
   <ItemGroup>

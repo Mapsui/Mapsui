@@ -11,8 +11,8 @@ public static class MRectExtensions
 
     public static SKPath ToSkiaPath(this MRect rect)
     {
-        var path = new SKPath();
-        path.AddRect(rect.ToSkia());
-        return path;
+        using var builder = new SKPathBuilder();
+        builder.AddRect(rect.ToSkia());
+        return builder.Detach();
     }
 }

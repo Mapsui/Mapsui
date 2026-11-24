@@ -65,7 +65,7 @@ static class ImageDiffService
         using var padded = new SKBitmap(w, h);
         using var canvas = new SKCanvas(padded);
         canvas.Clear(SKColors.Transparent);
-        canvas.DrawBitmap(src, 0, 0);
+        canvas.DrawBitmap(src, 0, 0, SKSamplingOptions.Default, null);
         return padded.Pixels;
     }
 }

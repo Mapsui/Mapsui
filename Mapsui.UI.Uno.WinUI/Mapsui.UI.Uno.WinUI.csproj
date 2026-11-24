@@ -29,9 +29,10 @@
     <UnoEnableSkiaOnWinAppSdk>true</UnoEnableSkiaOnWinAppSdk>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!--
-      Uno Platform 7 brings SkiaSharp 4 and HarfBuzzSharp 14, so the central v3 pins would downgrade them (NU1109).
-      Without transitive pinning, Uno sets those versions and the package does not list the pinned
-      transitive packages (such as SkiaSharp.HarfBuzz 3.x) as its own dependencies.
+      The Uno.Sdk sets its own SkiaSharp and HarfBuzzSharp versions, which can be newer than the central
+      pins (Uno.Sdk 7.0.5 brings HarfBuzzSharp 14.4.0), so transitive pinning would downgrade them (NU1109).
+      Without it, Uno sets those versions and the package does not list the pinned transitive packages as
+      its own dependencies.
     -->
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
 	</PropertyGroup>
