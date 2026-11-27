@@ -12,6 +12,12 @@ using Mapsui.Providers.Wfs.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.WFS;
 
+// Flaky in the rendering regression tests on the Windows CI runner. On 2026-11-25 the test host hung
+// on this sample until the 60 second blame timeout killed the run:
+// https://github.com/Mapsui/Mapsui/actions/runs/45560860066/attempts/1 (job winBuild). Re-running the
+// same commit passed. The hang is not caused by the network: every request this sample makes is served
+// from the test cache (WfsSample.sqlite). The cause is unknown and needs a proper fix; the hang dump
+// attached to that run is the place to start.
 public class WfsOgcFilterSample : ISample
 {
     public string Name => "WfsOgcFilter";
