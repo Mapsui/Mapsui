@@ -17,3 +17,6 @@ dotnet_diagnostic.CS8604.severity = none  # Possible null reference argument
 dotnet_diagnostic.CS8605.severity = none  # Unboxing a possibly null value
 dotnet_diagnostic.CS8618.severity = none  # Non-nullable field must contain a non-null value when exiting constructor
 dotnet_diagnostic.CS8625.severity = none  # Cannot convert null literal to non-nullable reference type
+# Upstream is written against SkiaSharp 3. The SKPath methods and the DrawBitmap overload it uses are
+# obsolete in SkiaSharp 4 but still work; migrating them here would make re-syncing harder.
+dotnet_diagnostic.CS0618.severity = none  # Member is obsolete

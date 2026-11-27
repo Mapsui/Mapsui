@@ -56,7 +56,6 @@ Include every item below. A missing local prerequisite is setup work, not a reas
    - `Mapsui.UI.Android/Mapsui.UI.Android.csproj`
    - `Mapsui.UI.Maui/Mapsui.UI.Maui.csproj` for `net9.0-android`
    - `Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj`
-   - `Samples/Avalonia/Mapsui.Samples.Avalonia.Android/Mapsui.Samples.Avalonia.Android.csproj`
    - `Samples/Mapsui.Samples.Maui/Mapsui.Samples.Maui.csproj` for `net9.0-android`
    - `Samples/Mapsui.Samples.Maui.MapView/Mapsui.Samples.Maui.MapView.csproj` for `net9.0-android`
    Do not include the Avalonia 12 Android sample until its project is moved to its required .NET 10 target and restored to the solution.

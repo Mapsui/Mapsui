@@ -88,12 +88,6 @@ jobs:
       run: dotnet restore Mapsui.Linux.slnf
     - name: Build Mapsui.Linux.slnf
       run: dotnet build --no-restore --configuration Debug Mapsui.Linux.slnf
-    - name: Build Mapsui.UI.Maui8
-      # The .NET 10 SDK can't build net8.0-android, so this project uses the SDK 9 pinned by its own global.json.
-      working-directory: Mapsui.UI.Maui8
-      run: |
-        dotnet workload install maui-android
-        dotnet build --configuration Debug
    # Run Tests
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net9.0/Mapsui.Tests.dll --blame-hang-timeout:60s

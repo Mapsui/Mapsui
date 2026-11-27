@@ -171,56 +171,55 @@ public static class CalloutBalloonDefinitionExtensions
     {
         var balloonBounds = balloonDefinition.GetBalloonBounds(contentSize);
 
-        // Create path
-        var path = new SKPath();
+        using var builder = new SKPathBuilder();
 
         // Move to start point at left/top
-        path.MoveTo((float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)balloonBounds.Top);
+        builder.MoveTo((float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)balloonBounds.Top);
 
         // Top horizontal line
         if (balloonDefinition.TailAlignment == TailAlignment.Top)
-            DrawTrail(path, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
+            DrawTrail(builder, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
 
         // Top right arc
-        path.ArcTo(new SKRect((float)(balloonBounds.Right - balloonDefinition.RectRadius), (float)balloonBounds.Top, (float)balloonBounds.Right, (float)(balloonBounds.Top + balloonDefinition.RectRadius)), 270, 90, false);
+        builder.ArcTo(new SKRect((float)(balloonBounds.Right - balloonDefinition.RectRadius), (float)balloonBounds.Top, (float)balloonBounds.Right, (float)(balloonBounds.Top + balloonDefinition.RectRadius)), 270, 90, false);
 
         // Right vertical line
         if (balloonDefinition.TailAlignment == TailAlignment.Right)
-            DrawTrail(path, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
+            DrawTrail(builder, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
 
         // Bottom right arc
-        path.ArcTo(new SKRect((float)(balloonBounds.Right - balloonDefinition.RectRadius), (float)(balloonBounds.Bottom - balloonDefinition.RectRadius), (float)balloonBounds.Right, (float)balloonBounds.Bottom), 0, 90, false);
+        builder.ArcTo(new SKRect((float)(balloonBounds.Right - balloonDefinition.RectRadius), (float)(balloonBounds.Bottom - balloonDefinition.RectRadius), (float)balloonBounds.Right, (float)balloonBounds.Bottom), 0, 90, false);
 
         // Bottom horizontal line
         if (balloonDefinition.TailAlignment == TailAlignment.Bottom)
-            DrawTrail(path, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
+            DrawTrail(builder, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
 
         // Bottom left arc
-        path.ArcTo(new SKRect((float)balloonBounds.Left, (float)(balloonBounds.Bottom - balloonDefinition.RectRadius), (float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)balloonBounds.Bottom), 90, 90, false);
+        builder.ArcTo(new SKRect((float)balloonBounds.Left, (float)(balloonBounds.Bottom - balloonDefinition.RectRadius), (float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)balloonBounds.Bottom), 90, 90, false);
 
         // Left vertical line
         if (balloonDefinition.TailAlignment == TailAlignment.Left)
-            DrawTrail(path, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
+            DrawTrail(builder, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
 
         // Top left arc
-        path.ArcTo(new SKRect((float)balloonBounds.Left, (float)balloonBounds.Top, (float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)(balloonBounds.Top + balloonDefinition.RectRadius)), 180, 90, false);
+        builder.ArcTo(new SKRect((float)balloonBounds.Left, (float)balloonBounds.Top, (float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)(balloonBounds.Top + balloonDefinition.RectRadius)), 180, 90, false);
 
-        path.Close();
+        builder.Close();
 
-        return path;
+        return builder.Detach();
     }
 
     /// <summary>
     /// Draw tail to path
     /// </summary>
-    /// <param name="path">The tail path</param>
+    /// <param name="builder">The builder of the balloon outline</param>
     /// <param name="start">Start of tail at bubble</param>
     /// <param name="center">Center of tail</param>
     /// <param name="end">End of tail at bubble</param>
-    private static void DrawTrail(SKPath path, SKPoint start, SKPoint center, SKPoint end)
+    private static void DrawTrail(SKPathBuilder builder, SKPoint start, SKPoint center, SKPoint end)
     {
-        path.LineTo(start);
-        path.LineTo(center);
-        path.LineTo(end);
+        builder.LineTo(start);
+        builder.LineTo(center);
+        builder.LineTo(end);
     }
 }

@@ -59,24 +59,24 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var width = (float)SymbolStyle.DefaultWidth;
         var halfWidth = width / 2;
         var halfHeight = (float)SymbolStyle.DefaultHeight / 2;
-        var skPath = new SKPath();
+        using var builder = new SKPathBuilder();
 
         switch (symbolType)
         {
             case SymbolType.Ellipse:
-                skPath.AddCircle(0, 0, halfWidth);
+                builder.AddCircle(0, 0, halfWidth);
                 break;
             case SymbolType.Rectangle:
-                skPath.AddRect(new SKRect(-halfWidth, -halfHeight, halfWidth, halfHeight));
+                builder.AddRect(new SKRect(-halfWidth, -halfHeight, halfWidth, halfHeight));
                 break;
             case SymbolType.Triangle:
-                TrianglePath(skPath, 0, 0, width);
+                TrianglePath(builder, 0, 0, width);
                 break;
             default: // Invalid value
                 throw new ArgumentException($"Unknown {nameof(SymbolType)} '{symbolType}'");
         }
 
-        return skPath;
+        return builder.Detach();
     }
 
     internal static SKPaint CreateLinePaint((Pen outline, float opacity) valueTuple)
@@ -109,7 +109,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
     /// Triangle of side 'sideLength', centered on the same point as if a circle of diameter 'sideLength' was there
-    private static void TrianglePath(SKPath path, float x, float y, float sideLength)
+    private static void TrianglePath(SKPathBuilder builder, float x, float y, float sideLength)
     {
         var altitude = Math.Sqrt(3) / 2.0 * sideLength;
         var inradius = altitude / 3.0;
@@ -122,10 +122,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var rightX = x + sideLength * 0.5;
         var rightY = y + inradius;
 
-        path.MoveTo(topX, (float)topY);
-        path.LineTo((float)leftX, (float)leftY);
-        path.LineTo((float)rightX, (float)rightY);
-        path.Close();
+        builder.MoveTo(topX, (float)topY);
+        builder.LineTo((float)leftX, (float)leftY);
+        builder.LineTo((float)rightX, (float)rightY);
+        builder.Close();
     }
 
     bool IFeatureSize.NeedsFeature => false;

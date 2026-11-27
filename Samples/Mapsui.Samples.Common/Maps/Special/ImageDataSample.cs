@@ -131,15 +131,16 @@ public class ImageDataSample : ISample
                 var innerRect = new SKRect(center.X - radius, center.Y - radius, center.X + radius, center.Y + radius);
                 var outerRect = new SKRect(center.X - outerRadius, center.Y - outerRadius, center.X + outerRadius, center.Y + outerRadius);
 
-                using var path = new SKPath();
                 using var paint = new SKPaint { IsStroke = false, StrokeWidth = 2 };
                 var startPoint = ConvertPolarToCartesian(radius, angle - stepAngle / 2) + center;
 
                 // Fill path
-                path.MoveTo(startPoint);
-                path.ArcTo(outerRect, angle - stepAngle / 2, stepAngle, false);
-                path.ArcTo(innerRect, angle + stepAngle / 2, -stepAngle, false);
-                path.Close();
+                using var builder = new SKPathBuilder();
+                builder.MoveTo(startPoint);
+                builder.ArcTo(outerRect, angle - stepAngle / 2, stepAngle, false);
+                builder.ArcTo(innerRect, angle + stepAngle / 2, -stepAngle, false);
+                builder.Close();
+                using var path = builder.Detach();
 
                 paint.IsStroke = false;
                 paint.Color = getColorForDataPoint(radius, angle);

@@ -9,7 +9,6 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks.
 | UI Framework | NuGet  |
 | ---------------|-------------:|
 | MAUI | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Maui.svg?style=flat&logo=nuget&label=Mapsui.Maui)](https://www.nuget.org/packages/Mapsui.Maui/) |
-| Avalonia 11 | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg?style=flat&logo=nuget&label=Mapsui.Avalonia)](https://www.nuget.org/packages/Mapsui.Avalonia/) |
 | Avalonia 12 | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Avalonia12.svg?style=flat&logo=nuget&label=Mapsui.Avalonia12)](https://www.nuget.org/packages/Mapsui.Avalonia12/) |
 | Uno Platform | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg?style=flat&logo=nuget&label=Mapsui.Uno.WinUI)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |
 | Blazor | [![NuGet Status](https://img.shields.io/nuget/dt/Mapsui.Blazor.svg?style=flat&logo=nuget&label=Mapsui.Blazor)](https://www.nuget.org/packages/Mapsui.Blazor/) |
@@ -83,18 +82,11 @@ Try the quick-start for your favorite framework below.
         dotnet new avalonia.app -o MyApp
         ```
 
-        **Step 2:** Add the Mapsui.Avalonia NuGet package:
-
-        !!! note "Avalonia 12 users"
-            If your project uses **Avalonia 12**, install `Mapsui.Avalonia12` instead:
-            ```console
-            dotnet add package Mapsui.Avalonia12
-            ```
-            The rest of the steps are identical — XAML and C# code do not change.
+        **Step 2:** Add the Mapsui.Avalonia12 NuGet package (Mapsui supports Avalonia 12):
 
         ```console
         cd MyApp
-        dotnet add package Mapsui.Avalonia
+        dotnet add package Mapsui.Avalonia12
         ```
 
         **Step 3:** Update MainWindow.axaml to add the Mapsui namespace and MapControl:

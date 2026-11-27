@@ -63,20 +63,14 @@ public class CustomPointStyleAdvancedSample : ISample
         var offset = style.RelativeOffset.GetAbsoluteOffset(width, height);
         canvas.Translate((float)offset.X, -(float)offset.Y);
 
-        using var path = new SKPath();
-        path.AddRect(new SKRect(-halfWidth, -halfHeight, -halfWidth * 0.5f, halfHeight));
         using var paint = new SKPaint { Color = _color1.ToSkia(), IsAntialias = true, Style = SKPaintStyle.StrokeAndFill, StrokeWidth = 0.5f };
-        canvas.DrawPath(path, paint);
+        canvas.DrawRect(new SKRect(-halfWidth, -halfHeight, -halfWidth * 0.5f, halfHeight), paint);
 
-        using var path2 = new SKPath();
-        path2.AddRect(new SKRect(-halfWidth * 0.5f, -halfHeight, halfWidth * 0.5f, halfHeight));
         using var paint2 = new SKPaint { Color = _color2.ToSkia(), IsAntialias = true, Style = SKPaintStyle.StrokeAndFill, StrokeWidth = 0.5f };
-        canvas.DrawPath(path2, paint2);
+        canvas.DrawRect(new SKRect(-halfWidth * 0.5f, -halfHeight, halfWidth * 0.5f, halfHeight), paint2);
 
-        using var path3 = new SKPath();
-        path3.AddRect(new SKRect(halfWidth * 0.5f, -halfHeight, halfWidth, halfHeight));
         using var paint3 = new SKPaint { Color = _color3.ToSkia(), IsAntialias = true, Style = SKPaintStyle.StrokeAndFill, StrokeWidth = 0.5f };
-        canvas.DrawPath(path3, paint3);
+        canvas.DrawRect(new SKRect(halfWidth * 0.5f, -halfHeight, halfWidth, halfHeight), paint3);
     }
 
     private static ThemeStyle CreateCustomRendererStyle()

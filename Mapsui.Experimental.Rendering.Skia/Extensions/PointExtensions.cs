@@ -19,9 +19,9 @@ public static class PointExtensions
         var halfWidth = width / 2;
         var (screenX, screenY) = viewport.WorldToScreenXY(point.X, point.Y);
 
-        var skPath = new SKPath();
-        skPath.AddCircle((float)screenX, (float)screenY, halfWidth);
+        using var builder = new SKPathBuilder();
+        builder.AddCircle((float)screenX, (float)screenY, halfWidth);
 
-        return skPath;
+        return builder.Detach();
     }
 }

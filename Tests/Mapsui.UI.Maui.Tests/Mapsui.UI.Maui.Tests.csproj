@@ -22,12 +22,6 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="NUnit" />
 		<PackageReference Include="NUnit3TestAdapter" />
-		<PackageReference Include="SkiaSharp" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
-		<PackageReference Include="SkiaSharp.Views" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Controls" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
-		<PackageReference Include="SkiaSharp.HarfBuzz" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
-		<PackageReference Include="HarfBuzzSharp" VersionOverride="$(HarfBuzzSharp4CompatibilityVersion)" />
-		<PackageReference Include="SkiaSharp.Views.WinUI" VersionOverride="$(SkiaSharp4CompatibilityVersion)" />
 	</ItemGroup>
 
 </Project>

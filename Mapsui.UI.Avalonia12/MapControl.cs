@@ -2,9 +2,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
-#if !__AVALONIA12__
-using Avalonia.Platform;
-#endif
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
@@ -233,12 +230,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     public float? GetPixelDensity()
     {
-#if __AVALONIA12__
         // VisualRoot no longer exposes RenderScaling in Avalonia 12; use TopLevel instead.
         return (float?)TopLevel.GetTopLevel(this)?.RenderScaling;
-#else
-        return (float?)VisualRoot?.RenderScaling;
-#endif
     }
 
     private sealed class MapsuiCustomDrawOperation(Rect bounds, RenderController? renderController, Action<object?> setGpuContext) : ICustomDrawOperation

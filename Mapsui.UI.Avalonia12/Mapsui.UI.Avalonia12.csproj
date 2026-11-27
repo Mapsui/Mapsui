@@ -9,30 +9,18 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RootNamespace>Mapsui.UI.Avalonia</RootNamespace>
     <AssemblyName>Mapsui.UI.Avalonia</AssemblyName>
-    <DefineConstants>__AVALONIA__;__AVALONIA12__</DefineConstants>
+    <DefineConstants>__AVALONIA__</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\Mapsui.UI.Avalonia\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
-    <Compile Include="..\Mapsui.UI.Avalonia\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
-    <Compile Include="..\Mapsui.UI.Avalonia\MapControl.cs" Link="MapControl.cs" />
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BruTile" />
-    <PackageReference Include="SkiaSharp" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
-    <PackageReference Include="Avalonia" VersionOverride="$(Avalonia12Version)" />
-    <PackageReference Include="Avalonia.Skia" VersionOverride="$(Avalonia12Version)" />
-  </ItemGroup>
-
-  <!-- Avalonia 12 requires newer SkiaSharp and HarfBuzz than the central catalog pins.
-       These VersionOverrides isolate the impact to this project only. -->
-  <ItemGroup>
-    <PackageReference Include="HarfBuzzSharp" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12HarfBuzzSharpVersion)" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" VersionOverride="$(Avalonia12SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Skia" />
   </ItemGroup>
 
   <ItemGroup>

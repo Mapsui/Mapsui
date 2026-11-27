@@ -92,8 +92,9 @@ public class CustomStyleSample : ISample
             canvas.DrawCircle(8, -8, 2, black);
             canvas.DrawCircle(-8, -8, 2, black);
 
-            using var path = new SKPath();
-            path.ArcTo(new SKRect(-8, 2, 8, 10), 25, 135, true);
+            using var builder = new SKPathBuilder();
+            builder.ArcTo(new SKRect(-8, 2, 8, 10), 25, 135, true);
+            using var path = builder.Detach();
             using var skPaint = new SKPaint { Style = SKPaintStyle.Stroke, Color = SKColors.Black, IsAntialias = true };
             canvas.DrawPath(path, skPaint);
 
