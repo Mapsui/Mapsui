@@ -345,6 +345,20 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             GetRemoteMapInfoAsync));
     }
 
+    protected override bool OnMapPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
+    {
+        if (base.OnMapPointerMoved(screenPosition, worldPosition, gestureType))
+            return true;
+
+        // When the user pans the map, stop following the location. This way the next
+        // tap on the MyLocation button sets MyLocationFollow from false to true again,
+        // which centers the map. This was the behavior in Mapsui 4.
+        if (gestureType == GestureType.Drag && !PanLock && MyLocationFollow)
+            RunOnUIThread(() => MyLocationFollow = false);
+
+        return false;
+    }
+
     protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         base.OnPropertyChanged(propertyName);
